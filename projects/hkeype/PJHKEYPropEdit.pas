@@ -1,55 +1,14 @@
-{ ##
-  @PROJECT_NAME             HKEY Property Editor
-  @PROJECT_DESC             Property editor for properties of type HKEY: i.e.
-                            registry root keys. Provides a drop down list of all
-                            root keys for which Delphi provides constants in
-                            Windows.pas.
-  @FILE                     PJHKEYPropEdit.pas
-  @COMMENTS                 Property editor source code.
-  @AUTHOR                   Peter Johnson, LLANARTH, Ceredigion, Wales, UK
-  @EMAIL                    peter.johnson@openlink.org
-  @WEBSITE                  http://www.delphidabbler.com/
-  @COPYRIGHT                © Peter D Johnson, 2000-2003.
-  @LEGAL_NOTICE             This property editor and its source code are placed
-                            in the public domain. They may be freely copied and
-                            circulated on a not for profit basis providing that
-                            the code is unmodified and this notice and
-                            information about the author and his copyright
-                            remains attached to the source code.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 28/09/2000
-      @COMMENTS             Original version.
-    )
-    @REVISION(
-      @VERSION              1.0.1
-      @DATE                 08/10/2000
-      @COMMENTS             Fixed bug which was allowing user to enter an
-                            unknown root key by name (or to delete current
-                            value). This was causing a root key of 0 to be used.
-                            Now whenever an invalid value is entered it is
-                            replaced by HKEY_CURRENT_USER.
-    )
-    @REVISION(
-      @VERSION              1.0.2
-      @DATE                 30/10/2003
-      @COMMENTS             Added conditional compilation to allow for changes
-                            to unit names for units defining property editor
-                            classes and associated types from Delphi 6.
-    )
-    @REVISION(
-      @VERSION              1.0.3
-      @DATE                 16/12/2005
-      @COMMENTS             Fixed error where DELPHI6ANDUP compiler define was
-                            not defined on Delphi 2005 and later leading to
-                            compilation failure.
-    )
-  )
-}
-
-
-{
+{ 
+ * PJHKeyPropEdit.pas
+ *
+ * Property editor for properties of type HKEY: i.e. registry root keys.
+ * Provides a drop down list of all root keys for which Delphi provides
+ * constants in Windows.pas.
+ *
+ * $Rev$
+ * $Date$
+ *
+ *
  * ***** BEGIN LICENSE BLOCK *****
  * 
  * Version: MPL 1.1
@@ -62,12 +21,12 @@
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
  * the specific language governing rights and limitations under the License.
  * 
- * The Original Code is PJHKEYPropEdit.pas.
+ * The Original Code is PJHKeyPropEdit.pas.
  * 
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  * 
- * Portions created by the Initial Developer are Copyright (C) 2000-2005 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2000-2009 Peter
  * Johnson. All Rights Reserved.
  * 
  * ***** END LICENSE BLOCK *****
