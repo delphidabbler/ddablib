@@ -1,0 +1,441 @@
+================================================================================
+
+Window State Components: Historical update information from v1.0 to v5.3
+
+================================================================================
+
+This file records known changes to files in the 32 bit version of the Window
+State Components  from v1.0 to v5.3 before the project was placed was placed
+under version control with Subversion.
+
+There are two sections:
+
+  1: Releases: Lists all the releases of the project and notes which files were
+     added, updated or deleted in each release.
+
+  2: Files: Lists all source code and development tools and provides details of
+     changes to these files.
+
+
+================================================================================
+1: RELEASES
+================================================================================
+
+This section lists all releases of the project from the first version (1.0) to 
+release 5.3. For each release the following is noted:
+
+  + Version and date
+  + List of new, updated and deleted files.
+  
+For details of changes to each release see ChangeLog.txt
+
+--------------------------------------------------------------------------------
+v1.0 of 15 Aug 1999
+--------------------------------------------------------------------------------
+New     - WdwState.pas 1.0
+New     - 16\WdwState.dcr 15 Aug 1999
+New     - 32\WdwState.dcr 15 Aug 1999
+New     - Help\WdwState.hpj 1.0
+New     - Help\WdwState.hta 15 Aug 1999
+New     - Help\WdwState.kwf 15 Aug 1999
+
+--------------------------------------------------------------------------------
+v2.0 of 19 Oct 1999
+--------------------------------------------------------------------------------
+Updated - WdwState.pas 2.0
+Updated - 32\WdwState.dcr 18 Oct 1999
+Updated - Help\WdwState.hta 19 Oct 1999
+Updated - Help\WdwState.kwf 19 Oct 1999
+Updated - Help\WdwStatR.hpj 1.0
+New     - Help\WdwStatR.hta 19 Oct 1999
+New     - Help\WdwStatR.kwf 19 Oct 1999
+
+--------------------------------------------------------------------------------
+v2.1 of 29 Nov 1999
+--------------------------------------------------------------------------------
+Updated - WdwState.pas 2.1
+
+--------------------------------------------------------------------------------
+v3.0 of 05 Apr 2000
+--------------------------------------------------------------------------------
+Removed - 16\WdwState.dcr
+Updated - WdwState.pas 3.0
+Updated - Help\WdwState.hta 05 Apr 2000
+Updated - Help\WdwStatR.hta 05 Apr 2000
+Updated - Help\WdwState.kwf 05 Apr 2000
+Updated - Help\WdwStatR.kwf 05 Apr 2000
+Updated - WdwState.dcr 18 Oct 1999 (renamed from 32/WdwState.dcr)
+
+--------------------------------------------------------------------------------
+v3.1 of 29 Apr 2000
+--------------------------------------------------------------------------------
+Updated - WdwState.pas 3.1
+
+--------------------------------------------------------------------------------
+v4.0 of 17 Mar 2002
+--------------------------------------------------------------------------------
+Removed - Help\WdwState.kwf
+Removed - Help\WdwStatR.hta
+Removed - Help\WdwStatR.kwf
+Removed - Help\WdwStatR.hpj
+Updated - PJWdwState.pas 4.0 (renamed from WdwState.pas)
+Updated - PJWdwState.dcr 18 Oct 1999 (renamed from WdwState.dcr)
+Updated - Help\PJWdwState.hap 17 Mar 2002 (renamed from Help\WdwState.hta)
+Updated - Help\PJWdwState.hpj 2.0 (renamed from Help\WdwState.hpj)
+
+--------------------------------------------------------------------------------
+v4.1 of 07 Aug 2002
+--------------------------------------------------------------------------------
+Updated - PJWdwState.pas 4.1
+Updated - Help\PJWdwState.hap 07 Aug 2002
+
+--------------------------------------------------------------------------------
+v4.2 of 30 Oct 2003
+--------------------------------------------------------------------------------
+Updated - PJWdwState.pas 4.2
+Updated - Help\PJWdwState.hap 30 Oct 2003
+Updated - Help\PJWdwState.hpj 2.1
+
+--------------------------------------------------------------------------------
+v4.3 of 04 Sep 2005
+--------------------------------------------------------------------------------
+Updated - PJWdwState.pas 4.3
+Updated - Help\PJWdwState.hap 04 Sep 2005
+Updated - Help\PJWdwState.hpj 2.2
+New     - Demos\1\StandardDemo.dpr 1.0
+New     - Demos\1\FmDemo.pas 1.0
+New     - Demos\1\FmDemoDlg.pas 1.0
+New     - Demos\2\StandAloneDemo.dpr 1.0
+New     - Demos\2\FmMain.pas 1.0
+
+--------------------------------------------------------------------------------
+v4.3.1 of 18 Dec 2005
+--------------------------------------------------------------------------------
+Updated - PJWdwState.pas 4.4
+New     - Help\PJWdwState.als 16 Dec 2005
+Updated - Demos\1\FmDemo.pas 1.1
+Updated - Demos\1\FmDemoDlg.pas 1.1
+Updated - Demos\2\FmMain.pas 1.1
+
+--------------------------------------------------------------------------------
+v5.0 of 15 Oct 2006
+--------------------------------------------------------------------------------
+Updated - PJWdwState.pas 5.0
+Updated - Help\PJWdwState.als 15 Oct 2006
+Updated - Help\PJWdwState.hap 15 Oct 2006
+Updated - Help\PJWdwState.hpj 2.3
+New     - Demos\3\UserDemo.dpr 1.0
+New     - Demos\3\FmUserDemo.pas 1.0
+
+--------------------------------------------------------------------------------
+v5.1 of 28 Jan 2007
+--------------------------------------------------------------------------------
+Updated - PJWdwState.pas 5.1
+Updated - Help\PJWdwState.als 28 Jan 2007
+Updated - Help\PJWdwState.hap 28 Jan 2007
+Updated - Help\PJWdwState.hpj 2.4
+Updated - Demos\1\FmDemo.pas 1.2
+
+--------------------------------------------------------------------------------
+5.2 of 19 Sep 2007
+--------------------------------------------------------------------------------
+Updated - PJWdwState.pas 5.2
+Updated - Help\PJWdwState.hap 19 Sep 2007
+Updated - Help\PJWdwState.als 19 Sep 2007
+
+--------------------------------------------------------------------------------
+v5.3 of 27 Sep 2007
+--------------------------------------------------------------------------------
+Updated - PJWdwState.pas 5.3
+New     - Demos\4\MDIDemo.dpr 1.0
+New     - Demos\4\FmMDIChild.pas 1.0
+New     - Demos\4\FmMDIMain.pas 1.0
+Updated - Help\PJWdwState.hap 27 Sep 2007
+Updated - Help\PJWdwState.als 27 Sep 2007
+
+
+================================================================================
+2: FILES
+================================================================================
+
+This section lists all files for which an update history is known between v1 and
+and v5.3, inclusive.
+
+--------------------------------------------------------------------------------
+PJWdwState.pas
+--------------------------------------------------------------------------------
+v1.0 of 15 Aug 1999   - Original version named WdwState.pas. Contained single
+                        TPJWdwState component that stores window state
+                        information in ini files.
+v2.0 of 18 Oct 1999   - Re-write which added TPJRegWdwState component that
+                        stores window state information in registry.
+                      - Extracted common functionality of TPJWdwState and
+                        TPJRegWdwState into new abstract base class
+                        TPJCustomWdwState.
+                      - TPJWdwState presents same interface and functionality as
+                        version 1.
+                      - TRegWdwState does not compile under Delphi 1.
+v2.1 of 29 Noc 1999   - Renamed ReadState and SaveState methods to ReadWdwState
+                        and SaveWdwState respectively since ReadState was
+                        masking a method inherited from TComponent.
+v3.0 of 05 Apr 2000   - New version that is not compatible with Delphi 1.
+                      - Added AutoSaveRestore property
+                      - Modified window restoration code to avoid task bars in
+                        positions other than bottom of screen.
+                      - Prevented forms being restored as minimized from
+                        flashing on screen (by cheating!).
+v3.1 of 29 Apr 2000   - Bug fix curing problem of incorrect maximisation (had
+                        been using window size when "maximising" rather than
+                        maximising to full screen),
+v4.0 of 17 Apr 2002   - Replaced WinTypes and WinProcs units with Windows unit.
+                      - Made use ParamStr(0) for default name of ini file and
+                        registry key instead of Application.ExeName.
+                      - Changed name of default registry sub key and ini file
+                        section from Main Window' to 'Window\<Form Name>' and
+                        'Window_<Form Name>' respectively. This enables use of
+                        multiple forms that save their state to registry or ini
+                        file without overriting each other's data.
+                      - Replaced ReadInt and WriteInt methods of TPJRegWdwState
+                        with simple ReadRegInt and WriteRegInt routines.
+                      - Rewrote method of auto saving and restoring windows to
+                        stop having to manipulate the owning form's OnCreate and
+                        OnDestroy event handlers. Now uses a hook class to hook
+                        into owning form's messages and pass them to window
+                        state components.
+                      - The window now always momentarily appears in normal
+                        state before being maximized or minimized as required.
+                      - Added new MinimizeDelay property to control how long the
+                        normal window appears before being minimized.
+                      - Added OnGetIniData event to TPJWdwState and OnGetRegData
+                        event to TPJRegWdwState to allow user to override
+                        property values for reading / writing ini file and
+                        registry.
+                      - Made so that now only one instance of a window state
+                        component can be placed on a form.
+                      - Removed Section ID handling code from base
+                        TPJCustomWdwState class and added dedicated property
+                        setters and initialisation for TPJWdwState's
+                        IniFileName and TPJRegWdwState's SubKey properties which
+                        had relied on the SectioncID code from root class.
+                      - Changed component palette from 'PJ Stuff' to 'PJSoft'.
+                      - Changed unit name to PJWdwState.
+v4.1 of 07 Aug 2002   - Added new Options property to permit user to specify
+                        various window display options: to ignore stored window
+                        size and/or to ignore stored state (IgnoreState property
+                        now deprecated).
+                      - Added new OnReadWdwState event that enables user to
+                        modify the values read from storage before window is
+                        displayed.
+v4.2 of 30 Oct 2003   - Added new woFitWorkArea option to ensure window is not
+                        displayed out of current work area.
+                      - When TPJRegWdwState reads/writes the registry we now
+                        check that the required key can be opened before reading
+                        or writing. Reading no longer creates missing keys.
+                      - Rearranged decision logic in
+                        TPJCustomWdwState.SetParentComponent method.
+                      - Changed component palette to 'DelphiDabbler' from
+                        'PJSoft'.
+v4.3 of 04 Sep 2005   - Added new CreateStandAlone constructor to be used when
+                        dynamically creating an instance of TPJWdwState or
+                        TPJRegWdwState.
+                      - Prevented "Unsafe code" warnings in Delphi 6/7.
+v4.4 of 16 Dec 2005   - Fixed error introduced in v4.3 where code that switches
+                        off "unsafe code" warnings causes unit not to compile on
+                        compilers below Delphi 7.
+v5.0 of 15 Oct 2006   - Added new TPJUserWdwState component that gets user to
+                        provide implementation of reading and writing persistent
+                        storage by handling events.
+                      - Changed TPJCustomWdwState.OnReadWdwState to protected
+                        and exposed in TPJWdwState and TPJRegWdwState - not used
+                        in TPJUserWdwState.
+v5.1 of 28 Jan 2007   - Implemented changes coded by Bruce J Miller (BJM):
+                        - Added new OnGettingRegData and OnPuttingRegData events
+                          that enable additional data to be read from and
+                          written to registry.
+                        - Implemented support for saving and loading position
+                          and size of MDI child forms.
+v5.2 of 19 Sep 2007   - Implemented changes based on multi-monitor support coded
+                        by Craig Symons (CS). Modified TPJCustomWdwState.Restore
+                        to automatically adjust size and position for correct
+                        monitor if woFitWorkArea in Options.
+                      - Removed unused compiler defines.
+v5.3 of 27 Sep 2007   - Completely re-implemented buggy code that supports
+                        fitting MDI child form in parent client workspace.
+                      - Bug fix in multi-monitor code by Craig Symons
+                      - Pause before minimization of form now uses a busy wait
+                        rather than call to Sleep.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+PJWdwState.dcr
+--------------------------------------------------------------------------------
+        15 Aug 1999   - New 32 bit compiler glyph (named 32\WdwState.dcr)
+        18 Oct 1999   - Added new glyph for new TPJRegWdwState component.
+        05 Apr 2000   - Renamed from 32/WdwState.dcr to WdwState.dcr.
+        17 Mar 2002   - Renamed from WdwState.scr to PJWdwState.dcr.        
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+16\WdwState.dcr
+--------------------------------------------------------------------------------
+        15 Aug 1999   - New 16 bit compiler glyph (named 32\WdwState.dcr)
+        05 Apr 2000   - DELETED.
+
+--------------------------------------------------------------------------------
+Demos\1\FmDemo.pas
+--------------------------------------------------------------------------------
+v1.0 of 03 Sep 2005   - Original version.
+v1.1 of 16 Dec 2005   - Removed properties from form that were not supported in
+                        earlier Delphis.
+v1.2 of 28 Jan 2007   - Added additional memo, splitter and event handlers to
+                        demonstrate new OnGettingRegData and OnPuttingRegData
+                        event handlers of TPJRegWdwState added in v5.1.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\1\FmDemoDlg.pas
+--------------------------------------------------------------------------------
+v1.0 of 03 Sep 2005   - Original version.
+v1.1 of 16 Dec 2005   - Removed properties from form that were not supported in
+                        earlier Delphis.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\1\StandardDemo.dpr
+--------------------------------------------------------------------------------
+v1.0 of 03 Sep 2005   - Original version
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\2\FmMain.pas
+--------------------------------------------------------------------------------
+v1.0 of 03 Sep 2005   - Original version.
+v1.1 of 16 Dec 2005   - Removed properties from form that were not supported in
+                        earlier Delphis.
+                      - Removed "Variants" unit from uses clause.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\2\StandAloneDemo.dpr
+--------------------------------------------------------------------------------
+v1.0 of 03 Sep 2005   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\3\FmUserDemo.pas
+--------------------------------------------------------------------------------
+v1.0 of 15 Oct 2006   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\3\UserDemo.pas
+--------------------------------------------------------------------------------
+v1.0 of 15 Oct 2006   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\4\FmMDIChild.pas
+--------------------------------------------------------------------------------
+v1.0 of 27 Sep 2007   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\4\FmMDIMain.pas
+--------------------------------------------------------------------------------
+v1.0 of 27 Sep 2007   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\4\MDIDemo.dpr
+--------------------------------------------------------------------------------
+v1.0 of 27 Sep 2007   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+DevTools\Release.bat
+--------------------------------------------------------------------------------
+v1.0 of 19 Sep 2007   - First version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJWdwState.als
+--------------------------------------------------------------------------------
+        16 Dec 2005   - New A-link keyword file
+        15 Oct 2006   - Updated re new topics and keywords in help file.
+        28 Jan 2007   - Updated re new keywords in help file.
+        19 Jan 2007   - Regenerated following changes to help file.
+        27 Sep 2007   - Regenerated following changes to help file.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJWdwState.hap
+--------------------------------------------------------------------------------
+        15 Aug 1999   - New Help Topic Author file for TPJWdwState component
+                        help. Named Help\WdwState.hta.
+        19 Oct 1999   - Udpated help topics for new version.
+        05 Apr 2000   - Updated with info about new property.
+        17 Mar 2002   - Rewrote help file to integrate with Delphi 3+ IDEs.
+                      - Added help topics for TPJRegWdwState and
+                        TPJCustomWdwState to topics for TPJWdwState.
+                      - Renamed as Help\PJWdwState.hap
+        07 Aug 2002   - Added topics for new OnReadWdwState event and Options
+                        property.
+        30 Oct 2003   - Updated Option property topic with details of new option
+                        to restore window within desktop workspace.
+                      - Revised some topics and corrected some errors.
+        04 Sep 2005   - Added TPJCustomWdwState.CreateStandAlone topic.
+        15 Oct 2006   - Added new topics re new TPJUserWdwState component.
+                      - Updated existing topics re new component.
+        28 Jan 2007   - Added new topics re new TPJRegWdwState OnGettingRegData
+                        and OnPuttingRegData events.
+                      - Updated existing topics re new events.
+        19 Sep 2007   - Added notes that component now recognises multiple
+                        monitors to relevant topics.
+        27 Sep 2007   - Modified various topics adding information about use
+                        with MDI child forms.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJWdwState.hpj
+--------------------------------------------------------------------------------
+v1.0 of 15 Aug 1999   - Original version. Named WdwState.hpj
+v2.0 of 17 Mar 2002   - Rewrote for new OpenHelp compatible help file used with
+                        release 4 of component.
+v2.1 of 30 Oct 2003   - Updated window title and copyright message.
+v2.2 if 04 Sep 2005   - Updated copyright date to include 2005.
+v2.3 of 15 Dec 2006   - Updated copyright date to include 2006.
+v2.4 of 28 Jan 2007   - Updated copyright date to include 2007.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\WdwState.kwf
+--------------------------------------------------------------------------------
+        15 Aug 1999   - New keyword file to integrate TPJWdwState help into
+                        Delphi 1/2.        
+        19 Oct 1999   - Regenerated for revised help file.
+        05 Apr 2000   - Regenerated for revised help file.
+        17 Mar 2002   - DELETED.
+
+--------------------------------------------------------------------------------
+Help\WdwStatR.hpj
+--------------------------------------------------------------------------------
+v1.0 of 19 Oct 1999   - Original verion.
+        17 Mar 2002   - DELETED.
+
+--------------------------------------------------------------------------------
+Help\WdwStatR.hta
+--------------------------------------------------------------------------------
+        19 Oct 1999   - New help Topic Author file for TPJRegWdwState component
+                        help.
+        05 Apr 2000   - Updated with info about new property.
+        17 Mar 2002   - DELETED.
+
+--------------------------------------------------------------------------------
+Help\WdwStatR.kwf
+--------------------------------------------------------------------------------
+        19 Oct 1999   - New keyword file to integrate TPJRegWdwState help into
+                        Delphi 1/2.
+        05 Apr 2000   - Regenerated for revised help file.
+        17 Mar 2002   - DELETED.
+
+--------------------------------------------------------------------------------

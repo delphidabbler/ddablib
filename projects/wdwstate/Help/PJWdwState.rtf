@@ -1,0 +1,1266 @@
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
+{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}{\f4\fnil \fcharset2 WingDings;}{\f5\fnil \fcharset0 Arial;}{\f6\fnil \fcharset0 Courier New;}}
+{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}
+#{\footnote {#}IDH_PJWDWSTATE}
+${\footnote {$}PJWdwState unit}
+K{\footnote {K}PJWdwState unit}
+@{\footnote {@}PJWdwState unit topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b PJWdwState unit\plain\f0\fs22\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This unit contains the implementation of the {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}\plain\f1\fs18\cf0 ,\plain\f0\fs18\cf0  {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE} \plain\f1\fs18\cf0 and {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE} \plain\f0\fs18\cf0 components, along with their common ancestor class {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Various event handler procedural\plain\f1\fs18\cf0  types, oridinal types and set types \plain\f0\fs18\cf0 are also defined.\plain\f0\fs18\cf0\b 
+\par \page 
+#{\footnote {#}IDH_TPJCUSTOMWDWSTATE}
+${\footnote {$}TPJCustomWdwState}
+K{\footnote {K}TPJCustomWdwState}
+A{\footnote {A}TPJCustomWdwState;TPJCustomWdwState_object}
+@{\footnote {@}TPJCustomWdwState class topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_CWS_HEIRACHY}          {\ul Properties}{\v IDH_CWS_PROPERTIES}          {\ul Methods}{\v IDH_CWS_METHODS}          {\ul Events}{\v IDH_CWS_EVENTS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Base class for {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}\plain\f1\fs18\cf0 ,\plain\f0\fs18\cf0  {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE} \plain\f1\fs18\cf0 and {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE} \plain\f0\fs18\cf0 components.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJWdwState}{\v IDH_PJWDWSTATE}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The component provides the common functionality and properties for the {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}\plain\f1\fs18\cf0 ,\plain\f0\fs18\cf0  {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE} \plain\f1\fs18\cf0 and {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE} \plain\f0\fs18\cf0 components. TPJWdwState\plain\f1\fs18\cf0 ,\plain\f0\fs18\cf0  TPJRegWdwState \plain\f1\fs18\cf0 and TPJUserWdwState \plain\f0\fs18\cf0 simply add the methods \plain\f1\fs18\cf0 and / or events \plain\f0\fs18\cf0 used to store and read window state information and any properties and events relevant to specifying the storage.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 TPJCustomWdwState can be used to derive further window state components that use other forms of storage. To derive a new component the abstract protected methods {\strike ReadWdwState}{\v IDH_CWS_READWDWSTATE} and {\strike SaveWdwState}{\v IDH_CWS_SAVEWDWSTATE} must be overidden to read and save window size, position and state information to the desired storage medium.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Instances of \plain\f1\fs18\cf0 this\plain\f0\fs18\cf0  class should not be constructed directly. 
+\par \page 
+#{\footnote {#}IDH_CWS_HEIRACHY}
+${\footnote {$}TPJCustomWdwState heirachy}
+@{\footnote {@}Inheritance heirachy for TPJCustomWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par     |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par     |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_CWS_PROPERTIES}
+${\footnote {$}TPJCustomWdwState properties}
+@{\footnote {@}Properties for TPJCustomWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE}
+\par \tab {\strike IgnoreState}{\v IDH_CWS_IGNORESTATE}
+\par \tab {\strike MinimizeDelay}{\v IDH_CWS_MINIMIZEDELAY}
+\par \tab {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \tab {\strike Options}{\v IDH_CWS_OPTIONS}
+\par \tab {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \page 
+#{\footnote {#}IDH_CWS_AUTOSAVERESTORE}
+${\footnote {$}TPJCustomWdwState.AutoSaveRestore}
+K{\footnote {K}TPJCustomWdwState,AutoSaveRestore;AutoSaveRestore,TPJCustomWdwState;AutoSaveRestore}
+A{\footnote {A}TPJCustomWdwState_AutoSaveRestore;AutoSaveRestore_property;AutoSaveRestore}
+@{\footnote {@}TPJCustomWdwState.AutoSaveRestore property topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.AutoSaveRestore
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}          {\strike See also}{\v !AL(TPJCustomWdwState_Restore;TPJCustomWdwState_Save)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Determines whether the window's size, position and state is automatically restored on creation and stored on destruction.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  AutoSaveRestore: Boolean;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The AutoSaveRestore property, when set to true, causes the component to automatically restore the owning containing window's size, position and state when the window is created and to save the information when the window is destroyed. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The property is normally set at design time. Setting the property at run time has no effect on whether the window's state is restored, since the window will already be created. However, if the property is changed at run time whether the window's display attributes are saved on exit depends on the value of the property (and on whether the {\strike Save}{\v IDH_CWS_SAVE} method is called\plain\f1\fs18\cf0  from code\plain\f0\fs18\cf0 ).
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The effect of the property is equivalent to placing a call to {\strike Restore}{\v IDH_CWS_RESTORE} in the form's OnCreate event handler and to a call to {\strike Save}{\v IDH_CWS_SAVE} in the OnDestroy event handler.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value of this property is False.
+\par \page 
+#{\footnote {#}IDH_CWS_IGNORESTATE}
+${\footnote {$}TPJCustomWdwState.IgnoreState}
+K{\footnote {K}TPJCustomWdwState,IgnoreState;IgnoreState,TPJCustomWdwState;IgnoreState}
+A{\footnote {A}TPJCustomWdwState_IgnoreState;IgnoreState_property;IgnoreState}
+@{\footnote {@}TPJCustomWdwState.IgnoreState property topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.IgnoreState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}          {\strike See also}{\v !AL(TPJCustomWdwState_Options)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Determines whether the window's saved state (maximised, normal or minimised) is applied on restoration. \plain\f0\fs18\cf0\b This property is deprecated\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  IgnoreState: Boolean;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The IgnoreState property determines the saved state (minimised, maximised or normal) of the window is applied when the window is restored. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When the property is true the saved state of the window is ignored and leaves current state unchanged while still setting size and position. When false window restoration also sets the window state to that saved.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value of this property is False.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The {\strike Save}{\v IDH_CWS_SAVE} method always records the window state, regardless of the value of IgnoreState.
+\par 
+\par \plain\f0\fs18\cf0\b Note\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 IgnoreState is now deprecated\plain\f0\fs18\cf0\i . \plain\f0\fs18\cf0 This property has the same function as the \plain\f0\fs18\cf0\i woIngoreState\plain\f0\fs18\cf0  value in the {\strike Options}{\v IDH_CWS_OPTIONS} property. The Options property should be used in preference. IgnoreState is provide\plain\f1\fs18\cf0 d\plain\f0\fs18\cf0  for backwards compatibility.
+\par \page 
+#{\footnote {#}IDH_CWS_MINIMIZEDELAY}
+${\footnote {$}TPJCustomWdwState.MinimizeDelay}
+K{\footnote {K}TPJCustomWdwState,MinimizeDelay;MinimizeDelay,TPJCustomWdwState;MinimizeDelay}
+A{\footnote {A}TPJCustomWdwState_MinimizeDelay;MinimizeDelay_property;MinimizeDelay}
+@{\footnote {@}TPJCustomWdwState.MinimizeDelay property topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.MinimizeDelay
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Sets the delay between displaying a normalised form on screen and minimising it if required.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  MinimizeDelay: Integer;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When a form is to be restored to the minimized state the form will flash on screen in its normal state before being minimised. This property determines the delay (in ms) between displaying the normalised form on screen and it being minimised.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value is 100.
+\par \page 
+#{\footnote {#}IDH_CWS_OPTIONS}
+${\footnote {$}TPJCustomWdwState.Options}
+K{\footnote {K}TPJCustomWdwState,Options;Options,TPJCustomWdwState;Options}
+A{\footnote {A}TPJCustomWdwState_Options;Options_property;Options}
+@{\footnote {@}TPJCustomWdwState.Options property topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.Options
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}          {\strike See also}{\v !AL(TPJCustomWdwState_IgnoreState;TPJCustomWdwState_OnReadWdwState)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Determines how the component interprets the window display data read from storage.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJWdwStateOptions = \plain\f2\fs18\cf0\b set of \plain\f2\fs18\cf0 (woIgnoreState, woIgnoreSize\plain\f3\fs18\cf0 , woFitWorkArea\plain\f2\fs18\cf0 );\plain\f2\fs18\cf0\b 
+\par \pard \plain\f2\fs8\cf0 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  Options: TPJWdwStateOptions;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Options property determines various display options used when displaying windows after reading display data from storage. The following values can be included in the Options set.
+\par \plain\f0\fs8\cf0 
+\par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf0\i woIgnoreState\plain\f0\fs18\cf0 \tab Determines the state applied to the window when when restored by the component: minimised, maximised or normal. By default the window is restored to the state read from storage. When this option is specified the stored state is ingored and the window is \plain\f1\fs18\cf0 always \plain\f0\fs18\cf0 displayed in the normal state. Including or excluding this value sets the\plain\f1\fs18\cf0  \plain\f1\fs18\cf0\i deprecated\plain\f0\fs18\cf0  {\strike IgnoreState}{\v IDH_CWS_IGNORESTATE} property to true or false respectively, and vice versa. This option should be used in preference to IgnoreState, which is deprecated.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i woIgnoreSize\plain\f0\fs18\cf0 \tab Determines the how the size of the stored window is set. By default the window's size is read from storage. When the option is set the stored size is ignored and the window is displayed using its default size: i.e. the size of the window's form as designed.\plain\f1\fs18\cf0  Additionally, setting this option prevents the \plain\f1\fs18\cf0\i woFitWorkArea\plain\f1\fs18\cf0  option from resizing the window.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i woFitWorkArea\plain\f1\fs18\cf0 \tab When the option is set the restored window appears wholy within the appropriate monitor's desktop work area (i.e. the area of the dektop not occupied by the task bar and any other Windows toolbars). This means that if any part of the restored window would appear outside the work area it is re-positioned to be completely contained in the work area. If the window is too wide or high to fit on the window the action taken depends on the \plain\f1\fs18\cf0\i woIgnoreSize\plain\f1\fs18\cf0  option as follows:
+\par \pard \fi-2000 \li2000 \tx1600 \tx2000 \tab \plain\f4\fs18\cf0 \'A7\plain\f5\fs18\cf0 \tab \plain\f5\fs18\cf0\i If woIgnoreSize\plain\f5\fs18\cf0  is not set the window is resized to fit the work area.
+\par \tab \plain\f4\fs18\cf0 \'A7\plain\f5\fs18\cf0 \tab if \plain\f5\fs18\cf0\i woIgnoreSize\plain\f5\fs18\cf0  is set then the window size is not changed. The window is aligned so that the top left corner is visible in order to give access to the system menu.
+\par \pard \fi-1600 \li1600 \tx1600 \plain\f1\fs18\cf0 \tab When used with MDI child forms this option treats the main MDI form's client area as the work area.
+\par \tab When this option is not set the window is not repositioned within the work area.
+\par \tab 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 By default the Options property has value [ ] - the empty set.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The {\strike Save}{\v IDH_CWS_SAVE} method always records the window state\plain\f1\fs18\cf0  and size\plain\f0\fs18\cf0 , regardless of the value of \plain\f1\fs18\cf0 the \plain\f0\fs18\cf0\i woIgnoreState\plain\f1\fs18\cf0  and \plain\f0\fs18\cf0\i woIgnoreSize\plain\f1\fs18\cf0  o\plain\f0\fs18\cf0 ption\plain\f1\fs18\cf0 s. The saved state and/or size is simply ignored when one or both of these option are set.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CWS_METHODS}
+${\footnote {$}TPJCustomWdwState methods}
+@{\footnote {@}Methods for TPJCustomWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods\plain\f0\fs18\cf0 
+\par \pard \tx400 
+\par \plain\f0\fs18\cf0\i Public:\plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike Create}{\v IDH_CWS_CREATE}
+\par \plain\f1\fs18\cf0 \tab {\strike CreateStandAlone}{\v IDH_CWS_CREATESTANDALONE}\plain\f0\fs18\cf0 
+\par \tab {\strike Restore}{\v IDH_CWS_RESTORE}
+\par \tab {\strike Save}{\v IDH_CWS_SAVE}
+\par \pard \tx400 \plain\f0\fs18\cf0\i Protected\plain\f1\fs18\cf0\i  abstract\plain\f0\fs18\cf0\i :\plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike ReadWdwState}{\v IDH_CWS_READWDWSTATE}
+\par \tab {\strike SaveWdwState}{\v IDH_CWS_SAVEWDWSTATE}
+\par \pard \tx400 
+\par \pard \tx200 TPJCustomWdwState also inherits methods from {\strike TComponent}{\v !AL(TComponent_object,1)}.
+\par \page 
+#{\footnote {#}IDH_CWS_CREATE}
+${\footnote {$}TPJCustomWdwState.Create}
+K{\footnote {K}TPJCustomWdwState,Create;Create,TPJCustomWdwState;Create}
+A{\footnote {A}TPJCustomWdwState_Create;Create_method;Create}
+@{\footnote {@}TPJCustomWdwState.Create constructor topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.Create
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}\plain\f1\fs18\cf0           {\strike See also}{\v !AL(TPJCustomWdwState_CreateStandAlone)}\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Class constructor that permits only one instance of the component to be placed on a form.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b constructor\plain\f2\fs18\cf0  Create(AOwner: {\strike TComponent}{\v !AL(TComponent_object,1)});
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The class constructor permits only one instance of a component derived from TPJCustomWdwState to be placed on a form at any one time. This restriction is enforced since it makes no sense to have more that one component restoring  the window's size, position and state.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0\b Note\plain\f1\fs18\cf0  that this constructor cannot be used to create components dynamically at run-time. Use the {\strike CreateStandAlone}{\v IDH_CWS_CREATESTANDALONE} constructor instead.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CWS_CREATESTANDALONE}
+${\footnote {$}TPJCustomWdwState.CreateStandAlone}
+K{\footnote {K}TPJCustomWdwState,CreateStandAlone;CreateStandAlone,TPJCustomWdwState;CreateStandAlone}
+A{\footnote {A}TPJCustomWdwState_CreateStandAlone;CreateStandAlone_method;CreateStandAlone}
+@{\footnote {@}TPJCustomWdwState.CreateStandAlone constructor topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.Create\plain\f1\fs22\cf2\b StandAlone\plain\f0\fs22\cf2\b 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}\plain\f1\fs18\cf0           {\strike See also}{\v !AL(TPJCustomWdwState_Create)}\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Class constructor \plain\f1\fs18\cf0 for use when creating components at run time\plain\f0\fs18\cf0 .
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b constructor\plain\f2\fs18\cf0  Create\plain\f3\fs18\cf0 StandAlone\plain\f2\fs18\cf0 (AOwner: {\strike TForm}{\v !AL(TForm_object,1)});
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This constructor is used when creating instances of components at run time. It allows \plain\f0\fs18\cf0 only one instance of a component derived from TPJCustomWdwState to be placed on a form at any one time.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The standard constructor will not work properly when called at run time. It depends on the Loaded method being called to complete instantiation of the component. CreateStandAlone performs all the required instantiation.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CWS_READWDWSTATE}
+${\footnote {$}TPJCustomWdwState.ReadWdwState}
+K{\footnote {K}TPJCustomWdwState,ReadWdwState;ReadWdwState,TPJCustomWdwState;ReadWdwState}
+A{\footnote {A}TPJCustomWdwState_ReadWdwState;ReadWdwState_method;ReadWdwState}
+@{\footnote {@}TPJCustomWdwState.ReadWdwState protected method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.ReadWdwState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}          {\strike See also}{\v !AL(TPJCustomWdwState_SaveWdwState)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Method used to read a window's size, position and state from storage.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  ReadWdwState(\plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0  Left, Top, Width, Height, State: Integer); \plain\f2\fs18\cf0\b virtual\plain\f2\fs18\cf0 ; \plain\f2\fs18\cf0\b abstract\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This v\plain\f0\fs18\cf0 irtual abstract protected method must be overridden by descendant components to read the Window's state, size and position information from \plain\f1\fs18\cf0 a\plain\f0\fs18\cf0  supported storage type. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The position of the window is returned in the Left and Top parameters, the size in the Width and Height parameters and the State in the State parameter. State should be the ordinal value of a member of the TWindowState enumeration: \plain\f0\fs18\cf0\i wsMinimized\plain\f0\fs18\cf0 , \plain\f0\fs18\cf0\i wsMaximized \plain\f0\fs18\cf0 or \plain\f0\fs18\cf0\i wsNormal\plain\f0\fs18\cf0 . The parameters are set to those currently existing for the associated window on calling the method. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method is called by the {\strike Restore}{\v IDH_CWS_RESTORE} method.
+\par \page 
+#{\footnote {#}IDH_CWS_RESTORE}
+${\footnote {$}TPJCustomWdwState.Restore}
+K{\footnote {K}TPJCustomWdwState,Restore;Restore,TPJCustomWdwState;Restore}
+A{\footnote {A}TPJCustomWdwState_Restore;Restore_method;Restore}
+@{\footnote {@}TPJCustomWdwState.Restore method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.Restore
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}          {\strike See also}{\v !AL(TPJCustomWdwState_Save;TPJCustomWdwState_Options;TPJCustomWdwState_AutoSaveRestore)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Restores the size, position and state of a window.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  Restore;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method restores the size\plain\f1\fs18\cf0 ,\plain\f0\fs18\cf0  position \plain\f1\fs18\cf0 and state \plain\f0\fs18\cf0 of the owning form's window according to saved values.\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 Various values of the {\strike Options}{\v IDH_CWS_OPTIONS} property may cause either the saved size or state to be ignored or for the window to be repositioned (and possibly resized) to fit within the appropriate monitor's desktop work area.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par 
+\par \plain\f0\fs18\cf0 If the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property is true this method is called automatically when the window is created.
+\par \page 
+#{\footnote {#}IDH_CWS_SAVE}
+${\footnote {$}TPJCustomWdwState.Save}
+K{\footnote {K}TPJCustomWdwState,Save;Save,TPJCustomWdwState;Save}
+A{\footnote {A}TPJCustomWdwState_Save;Save_method;Save}
+@{\footnote {@}TPJCustomWdwState.Save method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.Save
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}          {\strike See also}{\v !AL(TPJCustomWdwState_Restore;TPJCustomWdwState_AutoSaveRestore)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Saves the size, position and state of the window.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  Save;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method saves the state, size and position of the owning form's window.\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 For MDI child forms the window's top and left coordinates are relative to the MDI main form's client area. For other, top level, windows the coordinates are relative to the screen.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property is true then this method is called automatically when the window is destroyed.
+\par \page 
+#{\footnote {#}IDH_CWS_SAVEWDWSTATE}
+${\footnote {$}TPJCustomWdwState.SaveWdwState}
+K{\footnote {K}TPJCustomWdwState,SaveWdwState;SaveWdwState,TPJCustomWdwState;SaveWdwState}
+A{\footnote {A}TPJCustomWdwState_SaveWdwState;SaveWdwState_method;SaveWdwState}
+@{\footnote {@}TPJCustomWdwState.SaveWdwState protected method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.SaveWdwState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}          {\strike See also}{\v !AL(TPJCustomWdwState_ReadWdwState)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Method used to write a window's size, position and state to storage.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  SaveWdwState(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Left, Top, Width, Height, State: Integer); \plain\f2\fs18\cf0\b virtual\plain\f2\fs18\cf0 ; \plain\f2\fs18\cf0\b abstract\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This\plain\f0\fs18\cf0  virtual abstract protected method must be overridden by descendant components to save the Window's state, size and position information to \plain\f1\fs18\cf0 a \plain\f0\fs18\cf0 supported storage type.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The position of the window is given by the Left and Top parameters, the size by the Width and Height parameters and the State by the State parameter. State is the ordinal value of a member of the TWindowState enumeration: \plain\f0\fs18\cf0\i wsMinimized\plain\f0\fs18\cf0 , \plain\f0\fs18\cf0\i wsMaximized \plain\f0\fs18\cf0 or \plain\f0\fs18\cf0\i wsNormal\plain\f0\fs18\cf0 . The parameter values should be saved in a way that allows them to be identified \plain\f1\fs18\cf0 and associated with the window \plain\f0\fs18\cf0 when reading back in.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method is called by the {\strike Save}{\v IDH_CWS_SAVE} method.
+\par \page 
+#{\footnote {#}IDH_CWS_EVENTS}
+${\footnote {$}TPJCustomWdwState events}
+@{\footnote {@}Events for TPJCustomWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \plain\f0\fs18\cf0\i Protected\plain\f1\fs18\cf0\i :\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0\i \tab \plain\f0\fs18\cf0 {\strike OnReadWdwState}{\v IDH_CWS_ONREADWDWSTATE}
+\par \page 
+#{\footnote {#}IDH_CWS_ONREADWDWSTATE}
+${\footnote {$}TPJCustomWdwState.OnReadWdwState}
+K{\footnote {K}TPJCustomWdwState,OnReadWdwState;OnReadWdwState,TPJCustomWdwState;OnReadWdwState}
+A{\footnote {A}TPJCustomWdwState_OnReadWdwState;OnReadWdwState_event;OnReadWdwState}
+@{\footnote {@}TPJCustomWdwState.OnReadWdwState event topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.OnReadWdwState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Protected e\plain\f0\fs18\cf0 vent that allows user to change the window data read from storage before the window is displayed.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJWdwStateReadEvent = \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0 (Sender: TObject; \plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0  Left, Top\plain\f3\fs18\cf0 , \plain\f2\fs18\cf0 Width, Height, State: Integer) \plain\f2\fs18\cf0\b of object\plain\f2\fs18\cf0 ;
+\par \pard \plain\f2\fs8\cf0\b 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  OnReadWdwState: TPJWdwStateReadEvent;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered just after the window placement, size and state date are read from storage and before displaying the window. The various values can be changed in the event handler before the window is displayed, enabling the size, placement and state of the window to be changed.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Setting any of the parameters to MaxInt causes the default value for the parameter to be used. These default values come from the relevant properties of the related form.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If {\strike Options}{\v IDH_CWS_OPTIONS} property contains the \plain\f0\fs18\cf0\i woIgnoreState\plain\f0\fs18\cf0  value then any changes to the State parameter in the event handler are ignored. Similarly if Options contains \plain\f0\fs18\cf0\i woIgnoreSize\plain\f0\fs18\cf0  then changes to Width and Height are ignored and default values are used.\plain\f1\fs18\cf0  Finally, if Options contains \plain\f0\fs18\cf0\i woFitWorkArea\plain\f1\fs18\cf0  then the Top, Left, and (if \plain\f0\fs18\cf0\i woIgnoreSize\plain\f1\fs18\cf0  is not specified) Width and Height values may be altered to ensure the window fits in the workspace.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The event is protected in TPJCustomWdwState. It may be exposed by derived components.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_TPJWDWSTATE}
+${\footnote {$}TPJWdwState}
+K{\footnote {K}TPJWdwState}
+A{\footnote {A}TPJWdwState;TPJWdwState_object}
+@{\footnote {@}TPJWdwState class topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \{bmlt TPJWdwState.bmp\}\plain\f0\fs22\cf2\b  TPJWdwState\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_WS_HEIRACHY}          {\ul Properties}{\v IDH_WS_PROPERTIES}          {\ul Methods}{\v IDH_WS_METHODS}          {\ul Events}{\v IDH_WS_EVENTS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Non visual component that saves and restores window positions to and from an ini file.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJWdwState}{\v IDH_PJWDWSTATE}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This component enables the size, position and state of the form on which it is placed to be saved to and read from an ini file.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The {\strike Save}{\v IDH_WS_SAVE} method saves the window information to a section of an ini file and the {\strike Restore}{\v IDH_WS_RESTORE} reads information in and sets the owning form window's size, position and state.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The component's {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property governs whether window \plain\f1\fs18\cf0 sizes, \plain\f0\fs18\cf0 position\plain\f1\fs18\cf0 s\plain\f0\fs18\cf0  and states are automatically restored on opening and saved on closing or whether the user must explicitly call the Save and Restore methods. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The {\strike Options}{\v IDH_CWS_OPTIONS} property and the {\strike OnReadWdwState}{\v IDH_CWS_ONREADWDWSTATE} event can be used to customise how the stored data is interpreted and whether the window's saved state or size should be used or ignored.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The ini file to be used is specified using the {\strike IniFileName}{\v IDH_WS_INIFILENAME} property and the name of the section of the ini file to be used is given by the {\strike Section}{\v IDH_WS_SECTION} property. Alternatively the {\strike OnGetIniData}{\v IDH_WS_ONGETINIDATA} event can be handled and used to set the required ini file name and section.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 It is only possible to have one instance of a TPJWdwState component on any one form. Neither can a TPJWdwState component be dropped onto a form that already contains \plain\f1\fs18\cf0 either a \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE} \plain\f1\fs18\cf0 or a {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE} \plain\f0\fs18\cf0 component.
+\par \page 
+#{\footnote {#}IDH_WS_HEIRACHY}
+${\footnote {$}TPJWdwState heirachy}
+@{\footnote {@}Inheritance heirachy for TPJWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par     |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par     |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}
+\par     |
+\par {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}
+\par \page 
+#{\footnote {#}IDH_WS_PROPERTIES}
+${\footnote {$}TPJWdwState properties}
+@{\footnote {@}Properties for TPJWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE}
+\par \tab {\strike IgnoreState}{\v IDH_CWS_IGNORESTATE}
+\par \tab {\strike IniFileName}{\v IDH_WS_INIFILENAME}
+\par \tab {\strike MinimizeDelay}{\v IDH_CWS_MINIMIZEDELAY}
+\par \tab {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \tab {\strike Options}{\v IDH_CWS_OPTIONS}
+\par \tab {\strike Section}{\v IDH_WS_SECTION}
+\par \tab {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \page 
+#{\footnote {#}IDH_WS_INIFILENAME}
+${\footnote {$}TPJWdwState.IniFileName}
+K{\footnote {K}TPJWdwState,IniFileName;IniFileName,TPJWdwState;IniFileName}
+A{\footnote {A}TPJWdwState_IniFileName;IniFileName_property;IniFileName}
+@{\footnote {@}TPJWdwState.IniFileName property topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJWdwState.IniFileName
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}          {\strike See also}{\v !AL(TPJWdwState_Section)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Determines the name of the ini file used to record window information.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  IniFileName: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property contains the name of the ini file that will be used to record the window's size, position and state. The file is accessed by both the {\strike Restore}{\v IDH_WS_RESTORE} and {\strike Save}{\v IDH_WS_SAVE} methods.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The section to use in the ini file is set by the {\strike Section}{\v IDH_WS_SECTION} property.\plain\f0\fs8\cf0 
+\par 
+\par \plain\f0\fs18\cf0 If the property is set to the empty string ('') then the file name used has the same path and file name as the application except that the '.exe' extension is replaced by '.ini'. This is the default value.
+\par \page 
+#{\footnote {#}IDH_WS_SECTION}
+${\footnote {$}TPJWdwState.Section}
+K{\footnote {K}TPJWdwState,Section;Section,TPJWdwState;Section}
+A{\footnote {A}TPJWdwState_Section;Section_property;Section}
+@{\footnote {@}TPJWdwState.Section property topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJWdwState.Section
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}          {\strike See also}{\v !AL(TPJWdwState_IniFileName)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Specifies the name of the section within an ini file to be used to store window information.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  Section: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property names the section of the ini file (specified by the {\strike IniFileName}{\v IDH_WS_INIFILENAME} property) in which the window's size, position and state information is recorded.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Setting this property to the empty string causes a\plain\f0\fs18\cf0  default value \plain\f1\fs18\cf0 to be used. This value\plain\f0\fs18\cf0  is \plain\f2\fs18\cf0 'Window_' \plain\f0\fs18\cf0  followed by the name of the form (e.g. \plain\f2\fs18\cf0 'Window_Form1'\plain\f0\fs18\cf0 ).
+\par \page 
+#{\footnote {#}IDH_WS_METHODS}
+${\footnote {$}TPJWdwState methods}
+@{\footnote {@}Methods for TPJWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods\plain\f0\fs18\cf0 
+\par \pard \tx400 
+\par \plain\f0\fs18\cf0\i Public:\plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike Create}{\v IDH_WS_CREATE}
+\par \plain\f1\fs18\cf0 \tab {\strike CreateStandAlone}{\v IDH_CWS_CREATESTANDALONE} *\plain\f0\fs18\cf0 
+\par \tab {\strike Restore}{\v IDH_WS_RESTORE} *
+\par \tab {\strike Save}{\v IDH_WS_SAVE} *
+\par \pard \tx400 \plain\f0\fs18\cf0\i Protected\plain\f1\fs18\cf0\i  overridden\plain\f0\fs18\cf0\i :\plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike ReadWdwState}{\v IDH_WS_READWDWSTATE}
+\par \tab {\strike SaveWdwState}{\v IDH_WS_SAVEWDWSTATE}
+\par \pard \tx400 
+\par Methods marked * are inherited from {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE} unchanged. \plain\f1\fs18\cf0 The protected overridden\plain\f0\fs18\cf0  methods are overrides of \plain\f1\fs18\cf0 abstract \plain\f0\fs18\cf0 methods inherited from TPJCustomWdwState.
+\par \plain\f0\fs8\cf0 
+\par \pard \tx200 \plain\f0\fs18\cf0 TPJWdwState also inherits methods from {\strike TComponent}{\v !AL(TComponent_object,1)}.
+\par \page 
+#{\footnote {#}IDH_WS_CREATE}
+${\footnote {$}TPJWdwState.Create}
+K{\footnote {K}TPJWdwState,Create;Create,TPJWdwState;Create}
+A{\footnote {A}TPJWdwState_Create;Create_method;Create}
+@{\footnote {@}TPJWdwState.Create constructor topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJWdwState.Create
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Class constructor that permits only one instance of the component to be placed on a form.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b constructor\plain\f2\fs18\cf0  Create(AOwner: {\strike TComponent}{\v !AL(TComponent_object,1)});
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The class constructor permints an instance of a TPJWdwState component to be placed on a form only if there are no other instances of the component, no instances of {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE} and no instances of any other component derived from {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE} already placed on the form. This restriction is enforced since it makes no sense to have more that one component restoring  the window's size, position and state.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The constructor also initialises the default property va\plain\f1\fs18\cf0 l\plain\f0\fs18\cf0 ues for the component.
+\par \page 
+#{\footnote {#}IDH_WS_READWDWSTATE}
+${\footnote {$}TPJWdwState.ReadWdwState}
+K{\footnote {K}TPJWdwState,ReadWdwState;ReadWdwState,TPJWdwState;ReadWdwState}
+A{\footnote {A}TPJWdwState_ReadWdwState;ReadWdwState_method;ReadWdwState}
+@{\footnote {@}TPJWdwState.ReadWdwState protected method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJWdwState.ReadWdwState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}          {\strike See also}{\v !AL(TPJWdwState_SaveWdwState)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Method used to read a window's size, position and state from storage.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  ReadWdwState(\plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0  Left, Top, Width, Height, State: Integer); \plain\f2\fs18\cf0\b override\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This protected \plain\f1\fs18\cf0 method\plain\f0\fs18\cf0  is overrridden by TPJWdwState to read the Window's state, size and position information from an ini file. Before reading the ini file this method triggers the {\strike OnGetIniData}{\v IDH_WS_ONGETINIDATA} event to enable the user to change the name of the ini file and the section to use within it where the state data is read.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The position of the window is returned in the Left and Top parameters, the size in the Width and Height parameters and the State in the State parameter. State is the ordinal value of a member of the TWindowState enumeration: \plain\f0\fs18\cf0\i wsMinimized\plain\f0\fs18\cf0 , \plain\f0\fs18\cf0\i wsMaximized\plain\f0\fs18\cf0  or \plain\f0\fs18\cf0\i wsNormal\plain\f0\fs18\cf0 . The parameters are set to those currently existing for the associated window before calling the method. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method is called by the {\strike Restore}{\v IDH_WS_RESTORE} method.
+\par \page 
+#{\footnote {#}IDH_WS_RESTORE}
+${\footnote {$}TPJWdwState.Restore}
+K{\footnote {K}TPJWdwState,Restore;Restore,TPJWdwState;Restore}
+A{\footnote {A}TPJWdwState_Restore;Restore_method;Restore}
+@{\footnote {@}TPJWdwState.Restore method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJWdwState.Restore
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}          {\strike See also}{\v !AL(TPJWdwState_Save;TPJCustomWdwState_AutoSaveRestore;TPJCustomWdwState_Options)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Restores the size, position and state of a window from an ini file.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  Restore;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method restores the size and position of the owning form's window according to value saved in a specified section of an ini file. The ini file name is specified by the {\strike IniFileName}{\v IDH_WS_INIFILENAME} property and the section of the file where the data is recorded is given by the {\strike Section}{\v IDH_WS_SECTION} property. If the ini file or section do not exist then this method has no effect.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Various values of the {\strike Options}{\v IDH_CWS_OPTIONS} property may cause either the saved size or state to be ignored or for the window to be repositioned (and possibly resized) to fit within the desktop's work area.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property is true \plain\f1\fs18\cf0 Restore\plain\f0\fs18\cf0  is called automatically when the window is created.
+\par \page 
+#{\footnote {#}IDH_WS_SAVE}
+${\footnote {$}TPJWdwState.Save}
+K{\footnote {K}TPJWdwState,Save;Save,TPJWdwState;Save}
+A{\footnote {A}TPJWdwState_Save;Save_method;Save}
+@{\footnote {@}TPJWdwState.Save method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJWdwState.Save
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}          {\strike See also}{\v !AL(TPJWdwState_Restore;TPJCustomWdwState_AutoSaveRestore)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Saves the size, position and state of the window.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  Save;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method saves the state, size and position of the owning form's window in an ini file. The ini file name is specified by the {\strike IniFileName}{\v IDH_WS_INIFILENAME} property and the section of the file where the data is stored is given by the {\strike Section}{\v IDH_WS_SECTION} property.\plain\f1\fs18\cf0  If the ini file or section do not exist they are created. If it is not possible to create the file or section then the information is not saved.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 For MDI child forms the window's top and left coordinates are relative to the MDI main form's client area. For other, top level, windows the coordinates are relative to the screen.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property is true then this method is called automatically when the window is destroyed.
+\par \page 
+#{\footnote {#}IDH_WS_SAVEWDWSTATE}
+${\footnote {$}TPJWdwState.SaveWdwState}
+K{\footnote {K}TPJWdwState,SaveWdwState;SaveWdwState,TPJWdwState;SaveWdwState}
+A{\footnote {A}TPJWdwState_SaveWdwState;SaveWdwState_method;SaveWdwState}
+@{\footnote {@}TPJWdwState.SaveWdwState protected method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJWdwState.SaveWdwState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}          {\strike See also}{\v !AL(TPJWdwState_ReadWdwState)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Method used to write a window's size, position and state to storage.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  SaveWdwState(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Left, Top, Width, Height, State: Integer); \plain\f2\fs18\cf0\b override\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This protected \plain\f1\fs18\cf0 method\plain\f0\fs18\cf0  is overrridden by TPJWdwState to save the Window's state, size and position information to an in file. Before saving the data this method triggers the {\strike OnGetIniData}{\v IDH_WS_ONGETINIDATA} event to enable the user to change the name of the ini file and the section to use within it where the state data is saved.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The position of the window is given by the Left and Top parameters, the size by the Width and Height parameters and the State parameter is the ordinal value of a member of the TWindowState enumeration: \plain\f0\fs18\cf0\i wsMinimized\plain\f0\fs18\cf0 , \plain\f0\fs18\cf0\i wsMaximized \plain\f0\fs18\cf0 or \plain\f0\fs18\cf0\i wsNormal\plain\f0\fs18\cf0 . 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method is called by the {\strike Save}{\v IDH_WS_SAVE} method.
+\par \page 
+#{\footnote {#}IDH_WS_EVENTS}
+${\footnote {$}TPJWdwState events}
+@{\footnote {@}Events for TPJWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike OnGetIniData}{\v IDH_WS_ONGETINIDATA}
+\par \tab {\strike OnReadWdwState}{\v IDH_CWS_ONREADWDWSTATE}
+\par \page 
+#{\footnote {#}IDH_WS_ONGETINIDATA}
+${\footnote {$}TPJWdwState.OnGetIniData}
+K{\footnote {K}TPJWdwState,OnGetIniData;OnGetIniData,TPJWdwState;OnGetIniData}
+A{\footnote {A}TPJWdwState_OnGetIniData;OnGetIniData_event;OnGetIniData}
+@{\footnote {@}TPJWdwState.OnGetIniData event topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJWdwState.OnGetIniData
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Event that allows user to change the name of the ini file and the section within it where window information is stored.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJWdwStateGetIniData = \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0 (\plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0  IniFilename, Section: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ) \plain\f2\fs18\cf0\b of object\plain\f2\fs18\cf0 ;
+\par \pard \plain\f2\fs8\cf0\b 
+\par \pard \fi-200 \li200 \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  OnGetIniData: TPJWdwStateGetIniData;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered just before the ini file is read when restoring a window\plain\f1\fs18\cf0  and just before the ini file is written when saving window information\plain\f0\fs18\cf0 . The name of the ini file and the section within it are passed as var parameters to the event handler, allowing the user to change the values, and hence the location where the window data is recorded.  \plain\f1\fs18\cf0 The values passed to the event handler are those of the \plain\f0\fs18\cf0 {\strike IniFileName}{\v IDH_WS_INIFILENAME} and {\strike Section}{\v IDH_WS_SECTION} properties.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The purpose of the event is to enable the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property to be used without setting the IniFileName and Section properties at design time\plain\f1\fs18\cf0  - i.e. handling the event allows either or both of the default IniFileName and Section names to be overridden.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_TPJREGWDWSTATE}
+${\footnote {$}TPJRegWdwState}
+K{\footnote {K}TPJRegWdwState}
+A{\footnote {A}TPJRegWdwState;TPJRegWdwState_object}
+@{\footnote {@}TPJRegWdwState class topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \{bmlt TPJRegWdwState.bmp\}\plain\f0\fs22\cf2\b  TPJRegWdwState\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_RWS_HEIRACHY}          {\ul Properties}{\v IDH_RWS_PROPERTIES}          {\ul Methods}{\v IDH_RWS_METHODS}          {\ul Events}{\v IDH_RWS_EVENTS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Non visual component that saves and restores window positions to and from the registry.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJWdwState}{\v IDH_PJWDWSTATE}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This component enables the size, position and state of the form on which it is placed to be saved to and read from the registry.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The {\strike Save}{\v IDH_RWS_SAVE} method saves the window information to the registry and the {\strike Restore}{\v IDH_RWS_RESTORE} reads information in and sets the owning form window's size, position and state.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The component's {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property governs whether window \plain\f1\fs18\cf0 sizes, \plain\f0\fs18\cf0 positions and states are automatically restored on opening and saved on closing or whether the user must explicitly call the Save and Restore methods. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The {\strike Options}{\v IDH_CWS_OPTIONS} property and the {\strike OnReadWdwState}{\v IDH_CWS_ONREADWDWSTATE} event can be used to customise how the stored data is interpreted and whether the window's saved state or size should be used or ignored.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Application defined data can be read from and written to the registry by handling the {\strike OnGettingRegData}{\v IDH_RWS_ONGETTINGREGDATA} and {\strike OnPuttingRegData}{\v IDH_RWS_ONPUTTINGREGDATA} events that are triggered when the component reads and writes its data.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The root and sub key to be used in the registry \plain\f1\fs18\cf0 are\plain\f0\fs18\cf0  specified using the {\strike Rootkey}{\v IDH_RWS_ROOTKEY} and {\strike Subkey}{\v IDH_RWS_SUBKEY} properties\plain\f1\fs18\cf0  respectively\plain\f0\fs18\cf0 . Alternatively the {\strike OnGetRegData}{\v %IDH_RWS_ONGETREGDATA} event can be handled and used to set the root key and sub key to use.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 It is only possible to have one instance of a TPJRegWdwState component on any one form. Neither can a TPJRegWdwState component be dropped onto a form that already contains \plain\f1\fs18\cf0 either a \plain\f0\fs18\cf0 {\strike TPJWdwState}{\v IDH_TPJWDWSTATE} \plain\f1\fs18\cf0 or a {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE} \plain\f0\fs18\cf0 component.
+\par \page 
+#{\footnote {#}IDH_RWS_HEIRACHY}
+${\footnote {$}TPJRegWdwState heirachy}
+@{\footnote {@}Inheritance heirachy for TPJRegWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par     |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par     |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}
+\par     |
+\par {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}
+\par \page 
+#{\footnote {#}IDH_RWS_PROPERTIES}
+${\footnote {$}TPJRegWdwState properties}
+@{\footnote {@}Properties for TPJRegWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE}
+\par \tab {\strike IgnoreState}{\v IDH_CWS_IGNORESTATE}
+\par \tab {\strike MinimizeDelay}{\v IDH_CWS_MINIMIZEDELAY}
+\par \tab {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \tab {\strike Options}{\v IDH_CWS_OPTIONS}
+\par \tab {\strike RootKey}{\v IDH_RWS_ROOTKEY}
+\par \tab {\strike SubKey}{\v IDH_RWS_SUBKEY}
+\par \tab {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \page 
+#{\footnote {#}IDH_RWS_ROOTKEY}
+${\footnote {$}TPJRegWdwState.RootKey}
+K{\footnote {K}TPJRegWdwState,RootKey;RootKey,TPJRegWdwState;RootKey}
+A{\footnote {A}TPJRegWdwState_RootKey;RootKey_property;RootKey}
+@{\footnote {@}TPJRegWdwState.RootKey property topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.RootKey
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}          {\strike See also}{\v !AL(TPJRegWdwState_SubKey)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Determines the registry root key under which the window's size, position and state information is stored.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  RootKey: HKEY;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property allows the user to specify under which registry root key the window size, position and state information is recorded. The information is saved in a subkey of this root key. The sub key is determined by the {\strike SubKey}{\v IDH_RWS_SUBKEY} property. The user is responsible for setting the property to a valid HKEY value. Valid values are:
+\par \plain\f0\fs8\cf0 
+\par \pard \li400 \keep \plain\f2\fs18\cf0 HKEY_CLASSES_ROOT     = $80000000;
+\par HKEY_CURRENT_USER     = $80000001;
+\par HKEY_LOCAL_MACHINE    = $80000002;
+\par HKEY_USERS            = $80000003;
+\par HKEY_PERFORMANCE_DATA = $80000004;
+\par HKEY_CURRENT_CONFIG   = $80000005;
+\par HKEY_DYN_DATA         = $80000006;
+\par \pard \li400 \plain\f0\fs8\cf0 
+\par \pard \plain\f0\fs18\cf0 These values are defined in the Windows unit.\plain\f1\fs18\cf0  Note that an optional custom property editor is provided with the components that can display a list of valid HKEY values for this property.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The property defaults to HKEY_CURRENT_USER.
+\par \page 
+#{\footnote {#}IDH_RWS_SUBKEY}
+${\footnote {$}TPJRegWdwState.SubKey}
+K{\footnote {K}TPJRegWdwState,SubKey;SubKey,TPJRegWdwState;SubKey}
+A{\footnote {A}TPJRegWdwState_SubKey;SubKey_property;SubKey}
+@{\footnote {@}TPJRegWdwState.SubKey property topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.SubKey
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}          {\strike See also}{\v !AL(TPJRegWdwState_RootKey)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Determines the registry sub key under which the window's size, position and state information is stored.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  SubKey: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property defines the subkey under which the window's size, position and state information is stored in the registry. This subkey is stored under the root key defined by the {\strike RootKey}{\v IDH_RWS_ROOTKEY} property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 To ensure that the sub key is relative to the root and not the current key the subkey should begin with a '\\' character.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the property is set to the empty string then it becomes 
+\par \plain\f0\fs8\cf0 
+\par \pard \li200 \tx200 \keep \plain\f2\fs18\cf0 '\\Software\\<Program EXE filename>\\Window\\<Form Name>'\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 where <Program EXE filename> is the program's executable file name (without the path) and <Form Name> is the name of the form on which the TPJRegWdwState component is placed. For example, if your program is executed from \plain\f0\fs18\cf0\i C:\\MyStuff\\MyProg.exe\plain\f0\fs18\cf0  and the form is named \plain\f0\fs18\cf0\i Form1\plain\f0\fs18\cf0  then setting SubKey := '' causes the property's value to become 
+\par \plain\f0\fs8\cf0 
+\par \pard \tx200 \keep \plain\f2\fs18\cf0 \tab '\\Software\\MyProg.exe\\Window\\Form1'\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value of the property is the empty string.
+\par \page 
+#{\footnote {#}IDH_RWS_METHODS}
+${\footnote {$}TPJRegWdwState methods}
+@{\footnote {@}Methods for TPJRegWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods\plain\f0\fs18\cf0 
+\par \pard \tx400 
+\par \plain\f0\fs18\cf0\i Public:\plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike Create}{\v IDH_RWS_CREATE}
+\par \plain\f1\fs18\cf0 \tab {\strike CreateStandAlone}{\v IDH_CWS_CREATESTANDALONE} *\plain\f0\fs18\cf0 
+\par \tab {\strike Restore}{\v IDH_RWS_RESTORE} *
+\par \tab {\strike Save}{\v IDH_RWS_SAVE} *
+\par \pard \tx400 \plain\f0\fs18\cf0\i Protected\plain\f1\fs18\cf0\i  overridden\plain\f0\fs18\cf0\i :\plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike ReadWdwState}{\v IDH_RWS_READWDWSTATE}
+\par \tab {\strike SaveWdwState}{\v IDH_RWS_SAVEWDWSTATE}
+\par \pard \tx400 
+\par \pard \tx200 Methods marked * are inherited from {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE} unchanged.\plain\f1\fs18\cf0  The protected overridden\plain\f0\fs18\cf0  methods are overrides of \plain\f1\fs18\cf0 abstract \plain\f0\fs18\cf0 methods inherited from TPJCustomWdwState.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 TPJRegWdwState also inherits methods from {\strike TComponent}{\v !AL(TComponent_object,1)}.
+\par \page 
+#{\footnote {#}IDH_RWS_CREATE}
+${\footnote {$}TPJRegWdwState.Create}
+K{\footnote {K}TPJRegWdwState,Create;Create,TPJRegWdwState;Create}
+A{\footnote {A}TPJRegWdwState_Create;Create_method;Create}
+@{\footnote {@}TPJRegWdwState.Create constructor topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.Create
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Class constructor that permits only one instance of the component to be placed on a form.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b constructor\plain\f2\fs18\cf0  Create(AOwner: {\strike TComponent}{\v !AL(TComponent_object,1)});
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The class constructor permints an instance of a TPJRegWdwState component to be placed on a form only if there are no other instances of the component, no instances of {\strike TPJWdwState}{\v IDH_TPJWDWSTATE} and no instances of any other component derived from {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE} already placed on the form. This restriction is enforced since it makes no sense to have more that one component restoring  the window's size, position and state.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The constructor also initialises the default property va\plain\f1\fs18\cf0 l\plain\f0\fs18\cf0 ues for the component.
+\par \page 
+#{\footnote {#}IDH_RWS_READWDWSTATE}
+${\footnote {$}TPJRegWdwState.ReadWdwState}
+K{\footnote {K}TPJRegWdwState,ReadWdwState;ReadWdwState,TPJRegWdwState;ReadWdwState}
+A{\footnote {A}TPJRegWdwState_ReadWdwState;ReadWdwState_method;ReadWdwState}
+@{\footnote {@}TPJRegWdwState.ReadWdwState protected method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.ReadWdwState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}          {\strike See also}{\v !AL(TPJRegWdwState_SaveWdwState)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Method used to read a window's size, position and state from storage.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  ReadWdwState(\plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0  Left, Top, Width, Height,\plain\f3\fs18\cf0  \plain\f2\fs18\cf0 State: Integer); \plain\f2\fs18\cf0\b override\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This protected \plain\f1\fs18\cf0 method\plain\f0\fs18\cf0  is overrridden by TPJRegWdwState to read the Window's state, size and position information from the registry. Before reading the registry this method triggers the {\strike OnGetRegData}{\v IDH_RWS_ONGETREGDATA} event to enable the user to change the key from which the state data is to be read.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The position of the window is returned in the Left and Top parameters, the size in the Width and Height parameters and the State in the State parameter. State is the ordinal value of a member of the TWindowState enumeration: \plain\f0\fs18\cf0\i wsMinimized\plain\f0\fs18\cf0 , \plain\f0\fs18\cf0\i wsMaximized \plain\f0\fs18\cf0 or \plain\f0\fs18\cf0\i wsNormal\plain\f0\fs18\cf0 . The parameters are set to those currently existing for the associated window before calling the method. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method is called by the {\strike Restore}{\v IDH_RWS_RESTORE} method.
+\par \page 
+#{\footnote {#}IDH_RWS_RESTORE}
+${\footnote {$}TPJRegWdwState.Restore}
+K{\footnote {K}TPJRegWdwState,Restore;Restore,TPJRegWdwState;Restore}
+A{\footnote {A}TPJRegWdwState_Restore;Restore_method;Restore}
+@{\footnote {@}TPJRegWdwState.Restore method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.Restore
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}          {\strike See also}{\v !AL(TPJRegWdwState_Restore;TPJCustomWdwState_AutoSaveRestore;TPJCustomWdwState_Options)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Restores the size, position and state of a window from the registry.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  Restore;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method restores the size and position of the owning form's window according to value saved in a specified part of the Windows registry. The root and sub keys of the registry where the information is stored are specfied by the {\strike RootKey}{\v IDH_RWS_ROOTKEY} and {\strike SubKey}{\v IDH_RWS_SUBKEY} properties. If the key does not exist in the registry then this method has no effect.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Various values of the {\strike Options}{\v IDH_CWS_OPTIONS} property may cause either the saved size or state to be ignored or for the window to be repositioned (and possibly resized) to fit within the desktop's work area.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property is true \plain\f1\fs18\cf0 Restore\plain\f0\fs18\cf0  is called automatically when the window is created.
+\par \page 
+#{\footnote {#}IDH_RWS_SAVE}
+${\footnote {$}TPJRegWdwState.Save}
+K{\footnote {K}TPJRegWdwState,Save;Save,TPJRegWdwState;Save}
+A{\footnote {A}TPJRegWdwState_Save;Save_method;Save}
+@{\footnote {@}TPJRegWdwState.Save method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.Save
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}          {\strike See also}{\v !AL(TPJRegWdwState_Restore;TPJCustomWdwState_AutoSaveRestore)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Saves the size, position and state of the window.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  Save;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method saves the state, size and position of the owning form's window in the registry. The root and sub keys of the registry where the information is saved are specfied by the {\strike RootKey}{\v IDH_RWS_ROOTKEY} and {\strike SubKey}{\v IDH_RWS_SUBKEY} properties.\plain\f1\fs18\cf0  If the registry key does not exist it is created. If it is not possible to create the key then the information is not saved.\plain\f0\fs8\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 For MDI child forms the window's top and left coordinates are relative to the MDI main form's client area. For other, top level, windows the coordinates are relative to the screen.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property is true then this method is called automatically when the window is destroyed.
+\par \page 
+#{\footnote {#}IDH_RWS_SAVEWDWSTATE}
+${\footnote {$}TPJRegWdwState.SaveWdwState}
+K{\footnote {K}TPJRegWdwState,SaveWdwState;SaveWdwState,TPJRegWdwState;SaveWdwState}
+A{\footnote {A}TPJRegWdwState_SaveWdwState;SaveWdwState_method;SaveWdwState}
+@{\footnote {@}TPJRegWdwState.SaveWdwState protected method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.SaveWdwState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}          {\strike See also}{\v !AL(TPJRegWdwState_ReadWdwState)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Method used to write a window's size, position and state to storage.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  SaveWdwState(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Left, Top, Width, Height, State: Integer); \plain\f2\fs18\cf0\b override\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This protected \plain\f1\fs18\cf0 method\plain\f0\fs18\cf0  is overrridden by TPJRegWdwState to save the Window's state, size and position information in the registry. Before saving the data this method triggers the {\strike OnGetRegData}{\v IDH_RWS_ONGETREGDATA} event to enable the user to change the registry key to use to save the state data.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The position of the window is given by the Left and Top parameters, the size by the Width and Height parameters and the State parameter is the ordinal value of a member of the TWindowState enumeration: \plain\f0\fs18\cf0\i wsMinimized\plain\f0\fs18\cf0 , \plain\f0\fs18\cf0\i wsMaximized \plain\f0\fs18\cf0 or \plain\f0\fs18\cf0\i wsNormal\plain\f0\fs18\cf0 . 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method is called by the {\strike Save}{\v IDH_RWS_SAVE} method.
+\par \page 
+#{\footnote {#}IDH_RWS_EVENTS}
+${\footnote {$}TPJRegWdwState events}
+@{\footnote {@}Events for TPJRegWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike OnGetRegData}{\v IDH_RWS_ONGETREGDATA}
+\par \plain\f1\fs18\cf0 \tab {\strike OnGettingRegData}{\v IDH_RWS_ONGETTINGREGDATA}
+\par \tab {\strike OnPuttingRegData}{\v IDH_RWS_ONPUTTINGREGDATA}\plain\f0\fs18\cf0 
+\par \tab {\strike OnReadWdwState}{\v IDH_CWS_ONREADWDWSTATE}
+\par \page 
+#{\footnote {#}IDH_RWS_ONGETREGDATA}
+${\footnote {$}TPJRegWdwState.OnGetRegData}
+K{\footnote {K}TPJRegWdwState,OnGetRegData;OnGetRegData,TPJRegWdwState;OnGetRegData}
+A{\footnote {A}TPJRegWdwState_OnGetRegData;OnGetRegData_event;OnGetRegData}
+@{\footnote {@}TPJRegWdwState.OnGetRegData event topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.OnGetRegData
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Event that allows user to change the registry key where window information is stored.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0 TPJWdwStateGetRegData = \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0 (\plain\f2\fs18\cf0\b var \plain\f2\fs18\cf0 RootKey: HKEY;\plain\f3\fs18\cf0  \plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0  SubKey: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 )\plain\f2\fs18\cf0\b  of object;
+\par \pard \plain\f2\fs8\cf0\b 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  OnGetRegData: TPJWdwStateGetRegData;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered just before the registry is read when restoring and saving a window. The \plain\f1\fs18\cf0 current values of the {\strike RootKey}{\v IDH_RWS_ROOTKEY} and {\strike SubKey}{\v IDH_RWS_SUBKEY} properties \plain\f0\fs18\cf0 are passed as var parameters to the event handler, allowing the user to change the values, and hence the location within the registry where the window data is recorded.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The purpose of the event is to enable the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property to be used without setting the RootKey and SubKey properties at design time\plain\f1\fs18\cf0   - i.e. handling the event allows either or both of the default RootKey and SubKey values to be overridden.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_RWS_ONGETTINGREGDATA}
+${\footnote {$}TPJRegWdwState.OnGettingRegData}
+K{\footnote {K}TPJRegWdwState,OnGettingRegData;OnGettingRegData,TPJRegWdwState;OnGettingRegData}
+A{\footnote {A}TPJRegWdwState_OnGettingRegData;OnGettingRegData_event;OnGettingRegData}
+@{\footnote {@}TPJRegWdwState.OnGettingRegData event topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.OnGettingRegData
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}          {\strike See also}{\v !AL(TPJRegWdwState_OnPuttingRegData)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Event that allows user to \plain\f1\fs18\cf0 read additional \plain\f0\fs18\cf0 registry \plain\f1\fs18\cf0 data when the component reads \plain\f0\fs18\cf0 window \plain\f1\fs18\cf0 state information\plain\f0\fs18\cf0 .
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0 TPJWdwStateRegAccessEvent = \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0 (\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Reg: TRegistry)\plain\f2\fs18\cf0\b  of object;
+\par \pard \plain\f2\fs8\cf0\b 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  OnGettingRegData: TPJWdwStateRegAccessEvent;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered just \plain\f1\fs18\cf0 after the window's state information is read from the registry. The event makes available a reference to the {\strike TRegistry}{\v !AL(TRegistry_object)} object used to read the data. This object can be used to read any additional application defined information from the registry.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 For example, the size of some controls that appear on the main form may be read. Such data will have been written using the {\strike OnPuttingRegData}{\v IDH_RWS_ONPUTTINGREGDATA} event.
+\par \page 
+#{\footnote {#}IDH_RWS_ONPUTTINGREGDATA}
+${\footnote {$}TPJRegWdwState.OnPuttingRegData}
+K{\footnote {K}TPJRegWdwState,OnPuttingRegData;OnPuttingRegData,TPJRegWdwState;OnPuttingRegData}
+A{\footnote {A}TPJRegWdwState_OnPuttingRegData;OnPuttingRegData_event;OnPuttingRegData}
+@{\footnote {@}TPJRegWdwState.OnPuttingRegDataevent topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJRegWdwState.OnPuttingRegData
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}          {\strike See also}{\v !AL(TPJRegWdwState_OnGettingRegData)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Event that allows user to \plain\f1\fs18\cf0 write additional \plain\f0\fs18\cf0 registry \plain\f1\fs18\cf0 data when the component writes \plain\f0\fs18\cf0 window \plain\f1\fs18\cf0 state information
+\par \plain\f0\fs18\cf0 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0 TPJWdwStateRegAccessEvent = \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0 (\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Reg: TRegistry)\plain\f2\fs18\cf0\b  of object;
+\par \pard \plain\f2\fs8\cf0\b 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  OnPuttingRegData: TPJWdwStateRegAccessEvent;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered just \plain\f1\fs18\cf0 after the window's state information is written to the registry. The event makes available a reference to the {\strike TRegistry}{\v !AL(TRegistry_object)} object used to write the data. This object can be used to write any additional application defined information to the registry.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 For example, the size of some controls that appear on the main form may be written. Such data can be read again using the {\strike OnGettingRegData}{\v IDH_RWS_ONGETTINGREGDATA} event.
+\par \page 
+#{\footnote {#}IDH_TPJUSERWDWSTATE}
+${\footnote {$}TPJUserWdwState}
+K{\footnote {K}TPJUserWdwState}
+A{\footnote {A}TPJUserWdwState;TPJUserWdwState_object}
+@{\footnote {@}TPJUserWdwState class topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \{bmlt TPJUserWdwState.bmp\}\plain\f0\fs22\cf2\b  TPJ\plain\f1\fs22\cf2\b User\plain\f0\fs22\cf2\b WdwState\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_UWS_HEIRACHY}          {\ul Properties}{\v IDH_UWS_PROPERTIES}          {\ul Methods}{\v IDH_UWS_METHODS}          {\ul Events}{\v IDH_UWS_EVENTS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Non visual component that saves and restores window positions to \plain\f1\fs18\cf0 user-provided persistent storage\plain\f0\fs18\cf0 .
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJWdwState}{\v IDH_PJWDWSTATE}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This component enables the size, position and state of the form on which it is placed to be saved to and read \plain\f1\fs18\cf0 to any persistent storage\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  The user is responsible for loading and saving the data. This is done by handling the {\strike OnReadData}{\v IDH_UWS_ONREADDATA} and {\strike OnSaveData}{\v IDH_UWS_ONSAVEDATA} events. The component is provided in case the user wishes to save to storage other than the registry (use {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE}) or ini file (use {\strike TPJWdwState}{\v IDH_TPJWDWSTATE}).\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The {\strike Save}{\v IDH_UWS_SAVE} method saves the window information {\strike Restore}{\v IDH_UWS_RESTORE} reads information in and sets the owning form window's size, position and state.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The component's {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property governs whether window \plain\f1\fs18\cf0 sizes, \plain\f0\fs18\cf0 position\plain\f1\fs18\cf0 s\plain\f0\fs18\cf0  and states are automatically restored on opening and saved on closing or whether the user must explicitly call the Save and Restore methods. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The {\strike Options}{\v IDH_CWS_OPTIONS} property can be used to customise how the stored data is interpreted and whether the window's saved state or size should be used or ignored.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 It is only possible to have one instance of a TPJ\plain\f1\fs18\cf0 User\plain\f0\fs18\cf0 WdwState component on any one form. Neither can a TPJ\plain\f1\fs18\cf0 User\plain\f0\fs18\cf0 WdwState component be dropped onto a form that already contains \plain\f1\fs18\cf0 either a {\strike TPJWdwState}{\v IDH_TPJWDWSTATE} or a \plain\f0\fs18\cf0 {\strike TPJRegWdwState}{\v IDH_TPJREGWDWSTATE} component.
+\par \page 
+#{\footnote {#}IDH_UWS_HEIRACHY}
+${\footnote {$}TPJUserWdwState heirachy}
+@{\footnote {@}Inheritance heirachy for TPJUserWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par     |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par     |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}
+\par     |
+\par {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}
+\par \page 
+#{\footnote {#}IDH_UWS_PROPERTIES}
+${\footnote {$}TPJUserWdwState properties}
+@{\footnote {@}Properties for TPJUserWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE}
+\par \tab {\strike IgnoreState}{\v IDH_CWS_IGNORESTATE}
+\par \tab {\strike MinimizeDelay}{\v IDH_CWS_MINIMIZEDELAY}
+\par \tab {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \tab {\strike Options}{\v IDH_CWS_OPTIONS}
+\par \tab {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \page 
+#{\footnote {#}IDH_UWS_METHODS}
+${\footnote {$}TPJUserWdwState methods}
+@{\footnote {@}Methods for TPJUserWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods\plain\f0\fs18\cf0 
+\par \pard \tx400 
+\par \plain\f0\fs18\cf0\i Public:\plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike Create}{\v IDH_CWS_CREATE}\plain\f1\fs18\cf0  *
+\par \tab {\strike CreateStandAlone}{\v IDH_CWS_CREATESTANDALONE} *\plain\f0\fs18\cf0 
+\par \tab {\strike Restore}{\v IDH_UWS_RESTORE} *
+\par \tab {\strike Save}{\v IDH_UWS_SAVE} *
+\par \pard \tx400 \plain\f0\fs18\cf0\i Protected\plain\f1\fs18\cf0\i  overridden\plain\f0\fs18\cf0\i :\plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike ReadWdwState}{\v IDH_UWS_READWDWSTATE}
+\par \tab {\strike SaveWdwState}{\v IDH_UWS_SAVEWDWSTATE}
+\par \pard \tx400 
+\par Methods marked * are inherited from {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE} unchanged. \plain\f1\fs18\cf0 The protected overridden\plain\f0\fs18\cf0  methods are overrides of \plain\f1\fs18\cf0 abstract \plain\f0\fs18\cf0 methods inherited from TPJCustomWdwState.
+\par \plain\f0\fs8\cf0 
+\par \pard \tx200 \plain\f0\fs18\cf0 TPJ\plain\f1\fs18\cf0 User\plain\f0\fs18\cf0 WdwState also inherits methods from {\strike TComponent}{\v !AL(TComponent_object,1)}.
+\par \page 
+#{\footnote {#}IDH_UWS_READWDWSTATE}
+${\footnote {$}TPJUserWdwState.ReadWdwState}
+K{\footnote {K}TPJUserWdwState,ReadWdwState;ReadWdwState,TPJUserWdwState;ReadWdwState}
+A{\footnote {A}TPJUserWdwState_ReadWdwState;ReadWdwState_method;ReadWdwState}
+@{\footnote {@}TPJUserWdwState.ReadWdwState protected method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJUserWdwState.ReadWdwState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE}          {\strike See also}{\v !AL(TPJUserWdwState_SaveWdwState)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Method used to read a window's size, position and state from storage.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  ReadWdwState(\plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0  Left, Top, Width, Height,\plain\f3\fs18\cf0  \plain\f2\fs18\cf0 State: Integer); \plain\f2\fs18\cf0\b override\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This protected \plain\f1\fs18\cf0 method\plain\f0\fs18\cf0  is overrridden by TPJUserWdwState\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 to \plain\f1\fs18\cf0 trigger the {\strike OnReadData}{\v IDH_UWS_ONREADDATA} event that the user must handle to read the \plain\f0\fs18\cf0 Window's state, size and position information from \plain\f1\fs18\cf0 persistent storage\plain\f0\fs18\cf0 .
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The position of the window is returned in the Left and Top parameters, the size in the Width and Height parameters and the State in the State parameter. State is the ordinal value of a member of the TWindowState enumeration: \plain\f0\fs18\cf0\i wsMinimized\plain\f0\fs18\cf0 , \plain\f0\fs18\cf0\i wsMaximized \plain\f0\fs18\cf0 or \plain\f0\fs18\cf0\i wsNormal\plain\f0\fs18\cf0 . The parameters are set to those currently existing for the associated window before calling the method. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method is called by the \plain\f1\fs18\cf0 inherited \plain\f0\fs18\cf0 {\strike Restore}{\v IDH_UWS_RESTORE} method.
+\par \page 
+#{\footnote {#}IDH_UWS_RESTORE}
+${\footnote {$}TPJUserWdwState.Restore}
+K{\footnote {K}TPJUserWdwState,Restore;Restore,TPJUserWdwState;Restore}
+A{\footnote {A}TPJUserWdwState_Restore;Restore_method;Restore}
+@{\footnote {@}TPJUserWdwState.Restore method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJUserWdwState.Restore
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE}          {\strike See also}{\v !AL(TPJUserWdwState_Save;TPJCustomWdwState_AutoSaveRestore;TPJCustomWdwState_Options)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Restores the size, position and state of a window from \plain\f1\fs18\cf0 persistent storage\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  Restore;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method restores the size and position of the owning form's window according to value\plain\f1\fs18\cf0 s\plain\f0\fs18\cf0  saved in \plain\f1\fs18\cf0 persistent storage\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 The {\strike OnReadData}{\v IDH_UWS_ONREADDATA} event is triggered by this method. The user must handle the event by reading and passing back the required window state data.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Various values of the {\strike Options}{\v IDH_CWS_OPTIONS} property may cause either the saved size or state to be ignored or for the window to be repositioned (and possibly resized) to fit within the desktop's work area.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property is true \plain\f1\fs18\cf0 Restore\plain\f0\fs18\cf0  is called automatically when the window is created.
+\par \page 
+#{\footnote {#}IDH_UWS_SAVE}
+${\footnote {$}TPJUserWdwState.Save}
+K{\footnote {K}TPJUserWdwState,Save;Save,TPJUserWdwState;Save}
+A{\footnote {A}TPJUserWdwState_Save;Save_method;Save}
+@{\footnote {@}TPJUserWdwState.Save method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJUserWdwState.Save
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE}          {\strike See also}{\v !AL(TPJUserWdwState_Restore;TPJCustomWdwState_AutoSaveRestore)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Saves the size, position and state of the window.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  Save;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method saves the state, size and position of the owning form's window \plain\f1\fs18\cf0 to persistent storage\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 The {\strike OnSaveData}{\v IDH_UWS_ONSAVEDATA} event is triggered by this method. The user must handle the event by saving the provided window state data.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 For MDI child forms the window's top and left coordinates are relative to the MDI main form's client area. For other, top level, windows the coordinates are relative to the screen.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property is true then this method is called automatically when the window is destroyed.
+\par \page 
+#{\footnote {#}IDH_UWS_SAVEWDWSTATE}
+${\footnote {$}TPJUserWdwState.SaveWdwState}
+K{\footnote {K}TPJUserWdwState,SaveWdwState;SaveWdwState,TPJUserWdwState;SaveWdwState}
+A{\footnote {A}TPJUserWdwState_SaveWdwState;SaveWdwState_method;SaveWdwState}
+@{\footnote {@}TPJUserWdwState.SaveWdwState protected method topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJUserWdwState.SaveWdwState
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE}          {\strike See also}{\v !AL(TPJUserWdwState_ReadWdwState)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Method used to write a window's size, position and state to storage.
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  SaveWdwState(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Left, Top, Width, Height, State: Integer); \plain\f2\fs18\cf0\b override\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This protected \plain\f1\fs18\cf0 method\plain\f0\fs18\cf0  is overrridden by TPJUserWdwState to \plain\f1\fs18\cf0 trigger the {\strike OnSaveData}{\v IDH_UWS_ONSAVEDATA} event that the user must handle to save the \plain\f0\fs18\cf0 Window's state, size and position information \plain\f1\fs18\cf0 to\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 persistent storage\plain\f0\fs18\cf0 .
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The position of the window is given by the Left and Top parameters, the size by the Width and Height parameters and the State parameter is the ordinal value of a member of the TWindowState enumeration: \plain\f0\fs18\cf0\i wsMinimized\plain\f0\fs18\cf0 , \plain\f0\fs18\cf0\i wsMaximized \plain\f0\fs18\cf0 or \plain\f0\fs18\cf0\i wsNormal\plain\f0\fs18\cf0 . 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method is called by the \plain\f1\fs18\cf0 inherited \plain\f0\fs18\cf0 {\strike Save}{\v IDH_UWS_SAVE} method.
+\par \page 
+#{\footnote {#}IDH_UWS_EVENTS}
+${\footnote {$}TPJUserWdwState events}
+@{\footnote {@}Events for TPJUserWdwState.}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike OnReadData}{\v IDH_UWS_ONREADDATA}
+\par \tab {\strike OnSaveData}{\v IDH_UWS_ONSAVEDATA}
+\par \page 
+#{\footnote {#}IDH_UWS_ONREADDATA}
+${\footnote {$}TPJUserWdwState.OnReadData}
+K{\footnote {K}TPJUserWdwState,OnReadData;OnReadData,TPJUserWdwState;OnReadData}
+A{\footnote {A}TPJUserWdwState_OnReadData;OnReadData_event;OnReadData}
+@{\footnote {@}TPJUserWdwState.OnReadData event topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJUserWdwState.On\plain\f1\fs22\cf2\b Read\plain\f0\fs22\cf2\b Data
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Event \plain\f1\fs18\cf0 triggered when the component needs the user to read data from persistent storage\plain\f0\fs18\cf0 .
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0 TPJWdwStateReadData\plain\f3\fs18\cf0  \plain\f2\fs18\cf0 = \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0 (Sender: TObject; \plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0  Data: {\strike TPJWdwStateData}{\v IDH_TPJWDWSTATEDATA})\plain\f3\fs18\cf0  \plain\f2\fs18\cf0\b of object\plain\f2\fs18\cf0 ;\plain\f2\fs18\cf0\b 
+\par \pard \plain\f2\fs8\cf0\b 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  \plain\f3\fs18\cf0 OnReadData\plain\f2\fs18\cf0 : TPJWdwStateReadData\plain\f3\fs18\cf0 ;\plain\f2\fs18\cf0 
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered \plain\f1\fs18\cf0 when the component is about to restore the window's size, position and state and needs to retrieve saved window state data from persistent storage.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The user must handle this event by reading the required data from storage and storing the data in the fields in the Data parameter.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_UWS_ONSAVEDATA}
+${\footnote {$}TPJUserWdwState.OnSaveData}
+K{\footnote {K}TPJUserWdwState,OnSaveData;OnSaveData,TPJUserWdwState;OnSaveData}
+A{\footnote {A}TPJUserWdwState_OnSaveData;OnSaveData_event;OnSaveData}
+@{\footnote {@}TPJUserWdwState.OnSaveData event topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJUserWdwState.On\plain\f1\fs22\cf2\b Save\plain\f0\fs22\cf2\b Data
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Event \plain\f1\fs18\cf0 triggered when the component needs the user to save data to persistent storage\plain\f0\fs18\cf0 .
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0 TPJWdwStateSaveData\plain\f3\fs18\cf0  \plain\f2\fs18\cf0 = \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0 (Sender: TObject; \plain\f3\fs18\cf0\b const\plain\f2\fs18\cf0  Data: {\strike TPJWdwStateData}{\v IDH_TPJWDWSTATEDATA})\plain\f3\fs18\cf0  \plain\f2\fs18\cf0\b of object\plain\f2\fs18\cf0 ;\plain\f2\fs18\cf0\b 
+\par \pard \plain\f2\fs8\cf0\b 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  \plain\f3\fs18\cf0 OnSaveData\plain\f2\fs18\cf0 : TPJWdwStateSaveData\plain\f3\fs18\cf0 ;\plain\f2\fs18\cf0 
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered \plain\f1\fs18\cf0 when the component is saving the window's size, position and state and needs to store the information in persistent storage.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The user must handle this event by writing the data passed in the fields of the Data parameter to persistent storage.
+\par \page 
+#{\footnote {#}IDH_TPJWDWSTATEDATA}
+${\footnote {$}TPJWdwStateData}
+K{\footnote {K}TPJWdwStateData}
+A{\footnote {A}TPJWdwStateData}
+@{\footnote {@}TPJWdwStateData record.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f1\fs22\cf2\b TPJWdwStateData\plain\f0\fs22\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJWdwState}{\v IDH_PJWDWSTATE}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This record type collects together the window size, position and state data that must be saved to and read from persistent storage by the {\strike OnReadData}{\v IDH_UWS_ONREADDATA} and {\strike OnSaveData}{\v IDH_UWS_ONSAVEDATA} events of the {\strike TPJUserWdwState}{\v IDH_TPJUSERWDWSTATE} component. The type is declared as:
+\par \plain\f1\fs12\cf0 
+\par \pard \keep \plain\f6\fs18\cf0\b type\plain\f6\fs18\cf0 
+\par   TPJWdwStateData = \plain\f6\fs18\cf0\b record\plain\f6\fs18\cf0 
+\par     Left: Integer;
+\par     Top: Integer;\plain\f6\fs18\cf2\i 
+\par \plain\f6\fs18\cf0     Width: Integer;\plain\f6\fs18\cf2\i 
+\par \plain\f6\fs18\cf0     Height: Integer;\plain\f6\fs18\cf2\i 
+\par \plain\f6\fs18\cf0     State: Integer;\plain\f6\fs18\cf2\i 
+\par \plain\f6\fs18\cf0   \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;\plain\f1\fs18\cf0 
+\par \pard \plain\f0\fs12\cf0 
+\par \plain\f1\fs18\cf0 The fields are used as follows:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-1200 \li1200 \tx1200 \plain\f1\fs18\cf0\i Left\plain\f1\fs18\cf0 \tab Position of left hand side of window in screen coordinates
+\par \plain\f1\fs18\cf0\i Top\plain\f1\fs18\cf0 \tab Position of top of window in screen coordinates
+\par \plain\f1\fs18\cf0\i Width\plain\f1\fs18\cf0 \tab Width of window in pixels
+\par \plain\f1\fs18\cf0\i Height\plain\f1\fs18\cf0 \tab Height of window in pixels
+\par \plain\f1\fs18\cf0\i State\plain\f1\fs18\cf0 \tab State of window. This is the ordinal value of a TWindowState value.\plain\f0\fs18\cf0 
+\par \page 
+}

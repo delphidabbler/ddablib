@@ -1,0 +1,268 @@
+================================================================================
+
+Version Information Component (32bit): Historical update information from v1.0
+to v3.1.1
+
+================================================================================
+
+This file records known changes to files in the 32 bit version of the Versio
+Information Component from v1.0 to v3.1.1. before the project was placed was
+placed under version control with Subversion.
+
+There are two sections:
+
+  1: Releases: Lists all the releases of the project and notes which files were
+     added, updated or deleted in each release.
+
+  2: Files: Lists all source code and development tools and provides details of
+     changes to these files.
+
+
+================================================================================
+1: RELEASES
+================================================================================
+
+This section lists all releases of the project from the first version (1.0) to 
+release 3.1.1. For each release the following is noted:
+
+  + Version and date
+  + List of new, updated and deleted files.
+  
+For details of changes to each release see ChangeLog.txt
+
+--------------------------------------------------------------------------------
+v1.0 of 26 Apr 1998
+--------------------------------------------------------------------------------
+New     - VerInfo.pas 1.0
+New     - VerInfo.dcr 24 Apr 1998
+New     - VerInfo.hpj 1.0
+New     - VerInfo.rtf 26 Apr 1998
+New     - VerInfo.kwf 26 Apr 1998
+
+--------------------------------------------------------------------------------
+v2.0 of 06 Dec 1999
+--------------------------------------------------------------------------------
+Updated - VerInfo.pas 2.0
+Updated - VerInfo.dcr 06 Dec 1998
+
+--------------------------------------------------------------------------------
+v2.0.1 of 09 Apr 1999
+--------------------------------------------------------------------------------
+Updated - VerInfo.pas 2.0.1
+
+--------------------------------------------------------------------------------
+v2.1 of 28 Nov 1999
+--------------------------------------------------------------------------------
+Updated - VInfo.pas 2.1 (renamed from VerInfo.pas)
+Updated - VInfo.dcr 06 Dec 1998 (renamed from VerInfo.dcr)
+
+--------------------------------------------------------------------------------
+v3.0 of 17 Feb 2002
+--------------------------------------------------------------------------------
+Removed - VerInfo.kwf
+Removed - VerInfo.rtf
+Updated - PJVersionInfo.pas 3.0 (renamed from VInfo.pas)
+Updated - PJVersionInfo.dcr 06 Dec 1998 (renamed from VInfo.dcr)
+Updated - Help\PJVersionInfo.hpj 2.0 (renamed from VerInfo.hpj)
+New     - Help\PJVersionInfo.hap 17 Feb 2002
+New     - Demo\1\VIDemo.dpr 1.0
+New     - Demo\1\FmVIDemo.pas 1.0
+New     - Demo\2\HelpEgs.dpr 1.0
+New     - Demo\2\FmMain.pas 1.0
+New     - Demo\2\FmEg1.pas 1.0
+New     - Demo\2\FmEg2.pas 1.0
+New     - Demo\2\FmEg3.pas 1.0
+New     - Demo\2\FmEg4.pas 1.0
+New     - Demo\2\MultiVer.rc 1.0
+
+--------------------------------------------------------------------------------
+v3.0.1 of 08 Jul 2003
+--------------------------------------------------------------------------------
+Updated - PJVersionInfo.pas 3.0.1
+Updated - Help\PJVersionInfo.hpj 2.1
+
+--------------------------------------------------------------------------------
+v3.1 of 07 Sep 2003
+--------------------------------------------------------------------------------
+Updated - PJVersionInfo.pas 3.1
+
+--------------------------------------------------------------------------------
+v3.1.1 of 11 Dec 2005
+--------------------------------------------------------------------------------
+Updated - PJVersionInfo.pas 3.1.1
+Updated - Demo\1\FMVIDemo.pas 1.1
+Updated - Demo\2\FmEg1.pas 1.1
+Updated - Demo\2\FmEg2.pas 1.1
+Updated - Demo\2\FmEg3.pas 1.1
+Updated - Demo\2\FmEg4.pas 1.1
+Updated - Demo\2\FmMain.pas 1.1
+Updated - Demo\2\HelpEgs.dpr 1.1
+New     - Help\PJVersionInfo.als 10 Dec 2005
+Updated - Help\PJVersionInfo.hap 10 Dec 2005
+Updated - Help\PJVersionInfo.hpj 2.2
+      
+================================================================================
+2: FILES
+================================================================================
+
+This section lists all files for which an update history is known between v1 and
+and v3.1.1, inclusive.
+
+--------------------------------------------------------------------------------
+PjVersionInfo.pas
+--------------------------------------------------------------------------------
+v1.0 of 25 Apr 1998   - Original version - 16 bit only.
+v2.0 of 06 Dec 1998   - Revised for use with 32 bit Windows. Not compatible with
+                        v1.
+v2.0.1 of 09 Apr 1999 - Changed installation palette from "Own" to "PJ Stuff".
+v2.1 of 28 Nov 1999   - Changed unit name to VInfo from VerInfo to allow
+                        component to install under Delphi 3 & 4 (VerInfo clashes
+                        with an existing unit in these versions).
+                      - Removed superfluous conditional compilation directives.
+v3.0 of 17 Feb 2002   - Major update:
+                        - Added ability to access all "translations" stored in a
+                          file's version information, rather than just first
+                          one. This has been done so that code using earlier
+                          versions of this component should continue to work
+                          unchanged.
+                        - Added new property to expose fixed file information
+                          record.
+                        - Added new "string array" property to give access to
+                          string information by name: this property can access
+                          any custom string information if the name is known.
+                        - Added properties to return number of "translations"
+                          and to select index of "translation" to be used.
+                        - Added properites to return language and character set
+                          codes in addition to descriptive strings.
+                        - All string info, language and character set properties
+                          now return values from the currently selected
+                          translation (which defaults to the first translation
+                          maintaining backward compatibilty).
+                        - Empty file name string now accesses name of host
+                          application per command line rather than using
+                          Application.ExeName. This enables this code to work
+                          correctly even if user changes name of executable
+                          file.
+                        - CharSet property now returns '' for unknown value
+                          rather than 'Unknown'
+                        - Renamed unit to PJVersionInfo from VInfo.
+                        - Renamed TVersionNumber record to TPJVersionNumber.
+                        - Replaced Tvs_FixedFileInfo record with use of Windows
+                          unit defined type TVSFixedFileInfo.
+                        - Changed component palette from PJ Stuff to PJSoft.
+v3.0.1 of 08 Jul 2003 - Changed installation palette from "PJSoft" to
+                        "DelphiDabbler".
+v3.1 of 07 Sep 2003   - Fixed to be compatible with C++ Builder - direct
+                        access fields of TVSFixedFileInfo in property
+                        declarations was replaced by calls to an indexed
+                        property getter function.
+v3.1.1 of 11 Dec 2005 - Changed to Mozilla Public License. No functional
+                        changes.
+          02 Oct 2009 - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\1\FmVIDemo.pas
+--------------------------------------------------------------------------------
+v1.0 of 17 Feb 2002   - Original version.
+v1.1 of 10 Dec 2005   - Added switch to enable writeable consts in lvMouseMove
+                        method.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\1\VIDemo.dpr
+--------------------------------------------------------------------------------
+v1.0 of 17 Feb 2002   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\2\FmEg1.pas
+--------------------------------------------------------------------------------
+v1.0 of 17 Feb 2002   - Original version.
+v1.1 of 11 Dec 2005   - Added button that displays example's help topic.
+                      - Added brief description of e.g. to form's caption.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\2\FmEg2.pas
+--------------------------------------------------------------------------------
+v1.0 of 17 Feb 2002   - Original version.
+v1.1 of 11 Dec 2005   - Fixed problem finding Windows programs on some systems.
+                      - Added button that displays example's help topic.
+                      - Added brief description of e.g. to form's caption.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\2\FmEg3.pas
+--------------------------------------------------------------------------------
+v1.0 of 17 Feb 2002   - Original version.
+v1.1 of 11 Dec 2005   - Added button that displays example's help topic.
+                      - Added brief description of e.g. to form's caption.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\2\FmEg4.pas
+--------------------------------------------------------------------------------
+v1.0 of 17 Feb 2002   - Original version.
+v1.1 of 11 Dec 2005   - Added button that displays example's help topic.
+                      - Added brief description of e.g. to form's caption.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\2\FmMain.pas
+--------------------------------------------------------------------------------
+v1.0 of 17 Feb 2002   - Original version.
+v1.1 of 11 Dec 2005   - Added code to close down help window.
+                      - Added brief description to eg buttons.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\2\HelpEgs.dpr
+--------------------------------------------------------------------------------
+v1.0 of 17 Feb 2002   - Original version.
+v1.1 of 10 Dec 2005   - Mofified application title.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\2\MultiVer.rc
+--------------------------------------------------------------------------------
+v1.0 of 17 Feb 2002   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJVersionInfo.als
+--------------------------------------------------------------------------------
+        10 Dec 2005   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJVersionInfo.hap
+--------------------------------------------------------------------------------
+        17 Feb 2002   - Original version.
+        10 Dec 2005   - Updated example help topics and placed link to them on
+                        main component page.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJVersionInfo.hpj
+--------------------------------------------------------------------------------
+v1.0 of 26 Apr 1998   - Original version.
+v2.0 of 17 Feb 2002   - Rewrote for new OpenHelp compatible help file used with
+                        release 3 of component.
+v2.1 of 08 Jul 2003   - Updated copyright message.
+                      - Updated title string.
+v2.2 of 10 Dec 2005   - Updated copyright date.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\VerInfo.kwf
+--------------------------------------------------------------------------------
+        26 Apr 1998   - Original version.
+        17 Feb 2002   - DELETED.
+
+--------------------------------------------------------------------------------
+Help\VerInfo.rtf 
+--------------------------------------------------------------------------------
+        26 Apr 1998   - Original version.
+        17 Feb 2002   - DELETED.
+
+--------------------------------------------------------------------------------

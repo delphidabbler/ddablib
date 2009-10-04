@@ -1,0 +1,168 @@
+================================================================================
+
+Stream Extension Classes: Historical update information from v1.0 to v2.0.1
+
+================================================================================
+
+This file records known changes to files in the Stream Extension Classes from
+v1.0 to and v2.0.1. before the project was placed was placed under version
+control with Subversion.
+
+There are two sections:
+
+  1: Releases: Lists all the releases of the project and notes which files were
+     added, updated or deleted in each release.
+
+  2: Files: Lists all source code and development tools and provides details of
+     changes to these files.
+
+
+================================================================================
+1: RELEASES
+================================================================================
+
+This section lists all releases of the project from the first version (1.0) to 
+release 2.0.1. For each release the following is noted:
+
+  + Version and date
+  + List of new, updated and deleted files.
+  
+For details of changes to each release see ChangeLog.txt
+
+--------------------------------------------------------------------------------
+v1.0 - 26 Mar 2000
+--------------------------------------------------------------------------------
+New     - UStreamWrapper.pas 1.0
+New     - UResWriterStreams.pas 1.0
+
+--------------------------------------------------------------------------------
+v2.0 - 30 Sep 2001
+--------------------------------------------------------------------------------
+Updated - PJStreamWrapper.pas 1.1 (renamed from UStreamWrapper.pas)
+Updated - PJResWriterStreams.pas 1.1 (renamed from UResWriterStreams.pas)
+New     - PJIStreams.pas 1.0
+
+--------------------------------------------------------------------------------
+v2.0.1 - 22 Nov 2003
+--------------------------------------------------------------------------------
+Updated - PJIStreams.pas 1.1
+
+
+================================================================================
+2: FILES
+================================================================================
+
+This section lists all files for which an update history is known between v1 and
+and v2.0.1, inclusive.
+
+--------------------------------------------------------------------------------
+PJIStreams.pas
+--------------------------------------------------------------------------------
+v1.0 of 29 Sep 2001   - Original version.
+v1.1 of 22 Nov 2003   - Fixed error that was reserving too much memory when
+                        getting stream names in Stat method.
+                      - Fixed access violation bug when calling
+                        TPJHandleIStreamWrapper.Stat method with a nil statstg
+                        parameter.
+                      - Added new virtual GetStreamNameAsString method to
+                        return appropriate stream for each class. This is used
+                        instead of overriding the GetStreamName method to save
+                        replicating all memory allocation code.
+                      - Now call task allocator via API functions rather than 
+                        via a IMalloc interface.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+PJResWriterStreams.pas
+--------------------------------------------------------------------------------
+v1.0 of 26 Mar 2000   - Original version named UResWriterStreams.pas.
+v1.1 of 29 Sep 2001   - Unit and classes renamed per library standards:
+                        - Renamed unit PJResWriterStreams from
+                          UResWriterStreams.
+                        - Renamed classes by adding "PJ" after initial letter of
+                          class name.
+                      - Also changed literal error message to be a resource
+                        string.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+PJStreamWrapper.pas
+--------------------------------------------------------------------------------
+v1.0 of 25 Mar 2000   - Original version named UStreamWrapper.pas.
+v1.1 of 29 Sep 2001   - Unit and class renamed per library standards.
+                        - Renamed unit PJStreamWrapper from UStreamWrapper.
+                        - Renamed class TPJStreamWrapper from TStreamWrapper
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\IStreamWrapDemo\FmIStreamWrap.pas
+--------------------------------------------------------------------------------
+v1.0 of 30 Sep 2001   - Original version.
+v1.0a of 22 Nov 2003  - Updated some comments.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\IStreamWrapDemo\FmIStreamWrapHelp.pas
+--------------------------------------------------------------------------------
+v1.0 of 30 Sep 2001   - Original version.
+v1.0a of 22 Nov 2003  - Updated some comments.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\IStreamWrapDemo\IStreamWrap.dpr
+--------------------------------------------------------------------------------
+v1.0 of 30 Sep 2001   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\IStreamWrapDemo\Help.rtf
+--------------------------------------------------------------------------------
+        30 Sep 2001   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\RCDataDemo\FmRCDataCreator.pas
+--------------------------------------------------------------------------------
+v1.0 of 30 Sep 2001   - Original version.
+v1.0a of 22 Nov 2003  - Updated some comments.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\RCDataDemo\FmRCDataUser.pas
+--------------------------------------------------------------------------------
+v1.0 of 30 Sep 2001   - Original version.
+v1.0a of 22 Nov 2003  - Updated some comments.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\RCDataDemo\Hello.rtf
+--------------------------------------------------------------------------------
+        25 Mar 2000   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\RCDataDemo\RCDataCreator.dpr
+--------------------------------------------------------------------------------
+v1.0 of 30 Sep 2001   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\RCDataDemo\RCDataUser.dpr
+--------------------------------------------------------------------------------
+v1.0 of 30 Sep 2001   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\StreamWrapDemo\FmStreamWrap.pas
+--------------------------------------------------------------------------------
+v1.0 of 30 Sep 2001   - Original version.
+v1.0a of 22 Nov 2003  - Updated some comments.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Demos\StreamWrapDemo\StreamWrap.dpr
+--------------------------------------------------------------------------------
+v1.0 of 30 Sep 2001   - Original version.
+        02 Oct 2009   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------

@@ -1,0 +1,29 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = StreamWrap.exe IStreamWrap.exe RCDataCreator.exe RCDataUser.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+StreamWrap.exe: StreamWrapDemo\StreamWrap.dpr
+  $(DCC)
+
+RCDataCreator.exe: RCDataDemo\RCDataCreator.dpr
+  $(DCC)
+
+RCDataUser.exe: RCDataDemo\RCDataUser.dpr
+  $(DCC)
+
+IStreamWrap.exe: IStreamWrapDemo\IStreamWrap.dpr
+  $(DCC)
+
+

@@ -1,0 +1,1348 @@
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
+{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fswiss MS Sans Serif;}{\f3\froman \fcharset2 Symbol;}{\f4\fswiss \fcharset1 Arial;}{\f5\fswiss \fprq2 System;}{\f6\fmodern Courier New;}{\f7\fnil \fcharset1 WingDings;}{\f8\fmodern \fcharset1 Courier New;}{\f9\fmodern \fcharset0 Courier New;}}
+{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue128;}
+${\footnote {$}PJVersionInfo unit}
+#{\footnote {#}IDH_VI_UNIT}
+@{\footnote {@}Unit topic}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b PJVersionInfo unit
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 This unit contains the implementation of the {\strike TPJVersionInfo}{\v IDH_VI_CLASS} version information resource reader component. It also defines the {\strike TPJVersionNumber}{\v IDH_TPJVERSIONNUMBER}\plain\f0\fs20\cf0  record that stores version numbers as four discreet values.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo}
+#{\footnote {#}IDH_VI_CLASS}
+@{\footnote {@}TPJVersionInfo component topic}
+K{\footnote {K}TPJVersionInfo}
+A{\footnote {A}TPJVersionInfo;TPJVersionInfo_object}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \{bmlt PJVersionInfo.bmp\}\plain\f0\fs24\cf2\b  TPJVersionInfo
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_VI_HEIRACHY}          {\ul Properties}{\v IDH_VI_PROPERTIES}          {\ul Methods}{\v IDH_VI_METHODS}          {\ul Events}{\v IDH_VI_EVENTS}          {\strike Examples}{\v !AL(TPJVersionInfo_Example1;TPJVersionInfo_Example2;TPJVersionInfo_Example3;TPJVersionInfo_Example4)}\plain\f0\fs24\cf2\b 
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 This non-visual component exposes version resource information contained in a file.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJVersionInfo}{\v IDH_VI_UNIT}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The component reads information from the file's VERSIONINFO resource. If the file has no such resource then this component returns no information. Use the {\strike HaveInfo}{\v IDH_VI_HAVEINFO} property to find whether the component has been able to get version information from the file.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The file from which resource information is gleaned is determined by the {\strike FileName}{\v IDH_VI_FILENAME} property. The FileName property is the only new design-time property added by this component. Other properties are available at run time only and are used to manipulate and read the version information. The component  supports multi-lingual version resources which have different sets of string information for each language. Use the {\strike NumTranslations}{\v IDH_VI_NUMTRANSLATIONS} and {\strike CurrentTranslation}{\v IDH_VI_CURRENTTRANSLATION} properties to select the required translation.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 TPJVersionInfo introduces no new methods and it has no events.
+\par 
+\par \plain\f0\fs18\cf0\b Further information\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 For detailed information about file version information see the Windows API {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} help topic.
+\par \page 
+${\footnote {$}TPJVersionInfo Heirachy}
+#{\footnote {#}IDH_VI_HEIRACHY}
+@{\footnote {@}Heirachy diagram for TPJVersionInfo.}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_Object,1)}
+\par \plain\f4\fs18\cf0     |
+\par {\strike TPersistent}{\v !AL(TPersistent_Object,1)}
+\par     |
+\par {\strike TComponent}{\v !AL(TComponent_Object,1)}\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo Properties}
+#{\footnote {#}IDH_VI_PROPERTIES}
+@{\footnote {@}Properties for TPJVersionInfo.}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx400 \tx2400 \tx2800 >r\tab {\strike CharSet}{\v IDH_VI_CHARSET}\tab >r\tab {\strike CharSetCode}{\v IDH_VI_CHARSETCODE}
+\par >r\tab {\strike Comments}{\v IDH_VI_COMMENTS}\tab >r\tab {\strike CompanyName}{\v IDH_VI_COMPANYNAME}\tab 
+\par >\tab {\strike CurrentTranslation}{\v IDH_VI_CURRENTTRANSLATION}\tab >r\tab {\strike FileDescription}{\v IDH_VI_FILEDESCRIPTION}
+\par >r\tab {\strike FileFlags}{\v IDH_VI_FILEFLAGS}\tab >r\tab {\strike FileFlagsMask}{\v IDH_VI_FILEFLAGSMASK}
+\par \tab {\strike FileName}{\v IDH_VI_FILENAME}\tab >r\tab {\strike FileOS}{\v IDH_VI_FILEOS}\tab 
+\par >r\tab {\strike FileSubType}{\v IDH_VI_FILESUBTYPE}\tab >r\tab {\strike FileType}{\v IDH_VI_FILETYPE}
+\par >r\tab {\strike FileVersion}{\v IDH_VI_FILEVERSION}\tab >r\tab {\strike FileVersionNumber}{\v IDH_VI_FILEVERSIONNUMBER}
+\par >r\tab {\strike FixedFileInfo}{\v IDH_VI_FIXEDFILEINFO}\tab >r\tab {\strike HaveInfo}{\v IDH_VI_HAVEINFO}\tab 
+\par >r\tab {\strike InternalName}{\v IDH_VI_INTERNALNAME}\tab >r\tab {\strike Language}{\v IDH_VI_LANGUAGE}
+\par >r\tab {\strike LanguageCode}{\v IDH_VI_LANGUAGECODE}\tab >r\tab {\strike LegalCopyright}{\v IDH_VI_LEGALCOPYRIGHT}\tab 
+\par >r\tab {\strike LegalTrademarks}{\v IDH_VI_LEGALTRADEMARKS}\tab \tab {\strike Name}{\v !AL(TComponent_Name,1)}
+\par >r\tab {\strike NumTranslations}{\v IDH_VI_NUMTRANSLATIONS}\tab >r\tab {\strike OriginalFileName}{\v IDH_VI_ORIGINALFILENAME}
+\par >r\tab {\strike PrivateBuild}{\v IDH_VI_PRIVATEBUILD}\tab >r\tab {\strike ProductName}{\v IDH_VI_PRODUCTNAME}
+\par >r\tab {\strike ProductVersion}{\v IDH_VI_PRODUCTVERSION}\tab >r\tab {\strike ProductVersionNumber}{\v IDH_VI_PRODUCTVERSIONNUMBER}
+\par >r\tab {\strike SpecialBuild}{\v IDH_VI_SPECIALBUILD}\tab >r\tab {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO}
+\par \tab {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \pard \tx400 
+\par Key:
+\par >\tab Run time property
+\par r\tab Read-only property
+\par \page 
+${\footnote {$}TPJVersionInfo Methods}
+#{\footnote {#}IDH_VI_METHODS}
+@{\footnote {@}Methods for TPJVersionInfo - notes that no methods are added.}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods\plain\f0\fs18\cf0 
+\par \pard \tx400 
+\par \pard TPJVersionInfo adds no methods to those provided by {\strike TComponent}{\v !AL(TComponent_Object,1)}.
+\par \page 
+${\footnote {$}TPJVersionInfo Events}
+#{\footnote {#}IDH_VI_EVENTS}
+@{\footnote {@}Methods for TPJVersionInfo - notes that component has no events.}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par \pard \tx400 
+\par \pard TPJVersionInfo has no events.
+\par \page 
+${\footnote {$}TPJVersionInfo.CharSet}
+#{\footnote {#}IDH_VI_CHARSET}
+@{\footnote {@}CharSet property topic.}
+K{\footnote {K}CharSet,TPJVersionInfo;TPJVersionInfo,CharSet;CharSet}
+A{\footnote {A}TPJVersionInfo_CharSet;CharSet_property;CharSet}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.CharSet
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_CharSetCode;TPJVersionInfo_Language;TPJVersionInfo_CurrentTranslation)}          {\strike Example}{\v IDH_EG1}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns a description of the character set for the current translation.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  CharSet: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Run-time and read only. The property contains a string describing the character set whose code is specified by the current translation. If the code is unknown or there is no version information in the current file then the empty string is returned. To examine the actual character set code use the {\strike CharSetCode}{\v IDH_VI_CHARSETCODE} property instead.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 See the \plain\f0\fs18\cf0\i charsetID\plain\f0\fs18\cf0  section of the Windows API help {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} topic for information about these codes.
+\par \page 
+${\footnote {$}TPJVersionInfo.CharSetCode}
+#{\footnote {#}IDH_VI_CHARSETCODE}
+@{\footnote {@}CharSetCode property topic.}
+K{\footnote {K}CharSetCode,TPJVersionInfo;TPJVersionInfo,CharSetCode;CharSetCode}
+A{\footnote {A}TPJVersionInfo_CharSetCode;CharSetCode_property;CharSetCode}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.CharSetCode
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_CharSet;TPJVersionInfo_LanguageCode;TPJVersionInfo_CurrentTranslation)}          {\strike Example}{\v IDH_EG1}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the code of the character set used by the current translation.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  CharSetCode:\plain\f6\fs18\cf0\b  \plain\f6\fs18\cf0 WORD;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. The property specifies the character set code used by the current translation. If the current file has no version information then 0 is returned. To get a description of the character set in English use the {\strike CharSet}{\v IDH_VI_CHARSET} property instead.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 See the \plain\f4\fs18\cf0\i charsetID\plain\f4\fs18\cf0  section of the Windows API help {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} topic for information about these codes.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.Comments}
+#{\footnote {#}IDH_VI_COMMENTS}
+@{\footnote {@}Comments property topic.}
+K{\footnote {K}Comments,TPJVersionInfo;TPJVersionInfo,Comments;Comments}
+A{\footnote {A}TPJVersionInfo_Comments;Comments_property;Comments}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.Comments
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file information \plain\f0\fs18\cf0\i Comments\plain\f0\fs18\cf0  string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  Comments: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the \plain\f4\fs18\cf0\i Comments\plain\f4\fs18\cf0  string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of \plain\f4\fs18\cf0\i Comments\plain\f4\fs18\cf0  string by calling StringFileInfo['Comments'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.CompanyName}
+#{\footnote {#}IDH_VI_COMPANYNAME}
+@{\footnote {@}CompanyName property topic.}
+K{\footnote {K}CompanyName,TPJVersionInfo;TPJVersionInfo,CompanyName;CompanyName}
+A{\footnote {A}TPJVersionInfo_CompanyName;CompanyName_property;CompanyName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.CompanyName
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file CompanyName string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  CompanyName: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the \plain\f4\fs18\cf0\i CompanyName\plain\f4\fs18\cf0  string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of \plain\f4\fs18\cf0\i CompanyName\plain\f4\fs18\cf0  string by calling StringFileInfo['CompanyName'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.CurrentTranslation}
+#{\footnote {#}IDH_VI_CURRENTTRANSLATION}
+@{\footnote {@}CurrentTranslation property topic.}
+K{\footnote {K}CurrentTranslation,TPJVersionInfo;TPJVersionInfo,CurrentTranslation;CurrentTranslation}
+A{\footnote {A}TPJVersionInfo_CurrentTranslation;CurrentTranslation_property;CurrentTranslation}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.CurrentTranslation
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_NumTranslations)}          {\strike Example}{\v IDH_EG1}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Get or set the translation to be used by string, language and character set properties.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  CurrentTranslation: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run time only. Version information resources can contain variable information in more that one langauge / character set combination. TPJVersionInfo defines each of these combinations as a "Translation". This property is used to select the translation to be used by the string information, language and character set related properties.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Translations are specified by assigning a zero based index in the CurrentTranslation property. Valid values for CurrentTranslation are in the range0..{\strike NumTranslations}{\v IDH_VI_NUMTRANSLATIONS}-1. If an attempt is made to set CurrentTranslation outside this range then the property is given the value -1. CurrentTranslation is set to zero when a file is first accessed (i.e. when the FileName property is assigned or the component is first created) or -1 if there is no version information in a file.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 To learn more about the multi-lingual capabilities of version information resources read the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} topic in the Win32 help file.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.FileDescription}
+#{\footnote {#}IDH_VI_FILEDESCRIPTION}
+@{\footnote {@}FileDescription property topic.}
+K{\footnote {K}FileDescription,TPJVersionInfo;TPJVersionInfo,FileDescription;FileDescription}
+A{\footnote {A}TPJVersionInfo_FileDescription;FileDescription_property;FileDescription}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FileDescription
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file FileDescription string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FileDescription: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the FileDescriptionstring for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of FileDescriptionstring by calling StringFileInfo['FileDescription'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.FileFlags}
+#{\footnote {#}IDH_VI_FILEFLAGS}
+@{\footnote {@}FileFlags property topic.}
+K{\footnote {K}FileFlags,TPJVersionInfo;TPJVersionInfo,FileFlags;FileFlags}
+A{\footnote {A}TPJVersionInfo_FileFlags;FileFlags_property;FileFlags}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FileFlags
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_FixedFileInfo;TPJVersionInfo_FileFlagsMask)}          {\strike Example}{\v IDH_EG3}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Provides information about the release attributes of a file.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FileFlags: DWORD;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property holds the information (as a bit-set) about the attributes of the file as specified in the fixed file information part of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 File flags information is also provided by the dwFileFlags member of the {\strike VS_FIXEDFILEINFO}{\v !AL(VS_FIXEDFILEINFO,1)} structure which can be accessed using the {\strike FixedFileInfo}{\v IDH_VI_FIXEDFILEINFO} property. 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The bit set can contain any of the following values:
+\par \plain\f4\fs8\cf0 
+\par \pard \fi-2400 \li2800 \tx2800 \plain\f4\fs18\cf0\i Flag\tab Description\plain\f4\fs18\cf0 
+\par VS_FF_DEBUG\tab File contains debugging information.
+\par VS_FF_INFOINFERRED\tab Some of the members in this structure may be empty or incorrect. 
+\par VS_FF_PATCHED\tab The file is not identical to the original file with the same version number.
+\par VS_FF_PRERELEASE\tab The file is a development version.
+\par VS_FF_PRIVATEBUILD\tab The file is not a standard release. If this flag is set the {\strike PrivateBuild}{\v IDH_VI_PRIVATEBUILD} property should contain further information.
+\par VS_FF_SPECIALBUILD\tab The file is a variation of a standard release with the same version number. If this flag is set then the {\strike SpecialBuild}{\v IDH_VI_SPECIALBUILD} property should contain further information.
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f4\fs8\cf0 
+\par \pard \plain\f4\fs18\cf0 These flags are represented by constants which are defined in the Windows unit.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike FileFlagsMask}{\v IDH_VI_FILEFLAGSMASK} property determines which of the bits in this flag are valid.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.FileFlagsMask}
+#{\footnote {#}IDH_VI_FILEFLAGSMASK}
+@{\footnote {@}FileFlagsMask property topic.}
+K{\footnote {K}FileFlagsMask,TPJVersionInfo;TPJVersionInfo,FileFlagsMask;FileFlagsMask}
+A{\footnote {A}TPJVersionInfo_FileFlagsMask;FileFlagsMask_property;FileFlagsMask}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FileFlagsMask
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_FixedFileInfo;TPJVersionInfo_FileFlags)}          {\strike Example}{\v IDH_EG3}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines which bits of the FileFlags property are valid.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FileFlagsMask: DWORD;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property contains a bitmask which determines which bits in the FileFlags property are valid. Its value is specified in the fixed file information part of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource. See the {\strike FileFlags}{\v IDH_VI_FILEFLAGS} help topic for details of the available flags. 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The value of this this property is also provided by the dwFileFlagsMask field of the {\strike VS_FIXEDFILEINFO}{\v !AL(VS_FIXEDFILEINFO,1)} structure, which can be accessed using the {\strike FixedFileInfo}{\v IDH_VI_FIXEDFILEINFO} property.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.FileName}
+#{\footnote {#}IDH_VI_FILENAME}
+@{\footnote {@}FileName property topic.}
+K{\footnote {K}FileName,TPJVersionInfo;TPJVersionInfo,FileName;FileName}
+A{\footnote {A}TPJVersionInfo_FileName;FileName_property;FileName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FileName
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_HaveInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Specifies the file from which version information is to be read.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FileName: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property holds the name of the file from which version information is to be read. A full path name should be provided.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Assigning a file name to this property at run time causes the given file to be checked for version information. The {\strike HaveInfo}{\v IDH_VI_HAVEINFO} property indicates whether any information was found in the file. When a value is assigned to FileName at design time the component does not immediately check the file for version information - this occurs when the component is created at run-time.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If FileName is assigned the empty string ('') at run-time the component reads version information from the host program. The file name is that given by {\strike ParamStr}{\v !AL(ParamStr,1)}(0). The FileName property is then set to this name. When '' is assigned to FileName at design time it retains this value until run-time when the program name is substituted. This arrangement works well when the component is hosted in an application. When the component is part of a DLL then care should be taken to ensure the name of the file used is as expected.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value for FileName is the empty string. This enables the component to automatically read version information from its program file without the user setting any properties or intervening if the program's executable file name is changed.
+\par \page 
+${\footnote {$}TPJVersionInfo.FileOS}
+#{\footnote {#}IDH_VI_FILEOS}
+@{\footnote {@}FileOS property topic.}
+K{\footnote {K}FileOS,TPJVersionInfo;TPJVersionInfo,FileOS;FileOS}
+A{\footnote {A}TPJVersionInfo_FileOS;FileOS_property;FileOS}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FileOS
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_FixedFileInfo)}          {\strike Example}{\v IDH_EG3}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Provides information about the operating system for which the application was designed.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FileOS: DWORD;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Run-time and read only. This property holds information about the operating system for which the file was designed. The value is as specified in the fixed file information part of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource statement.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The value of this this property is also provided by the dwFileOS of the {\strike VS_FIXEDFILEINFO}{\v !AL(VS_FIXEDFILEINFO,1)} structure that is accessed using the {\strike FixedFileInfo}{\v IDH_VI_FIXEDFILEINFO} property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The value of FileOS is made up of a combination of values. We first specify the host operating system, which can be one of:
+\par \plain\f0\fs8\cf0 
+\par \pard \fi-2400 \li2800 \tx2800 \plain\f0\fs20\cf0\i Flag\tab Description\plain\f0\fs20\cf0 
+\par VOS_NT\tab Windows NT
+\par VOS_DOS\tab MS-DOS
+\par VOS_OS232\tab 32 bit OS2
+\par VOS_OS216\tab 16 bit OS2
+\par VOS_UNKNOWN\tab Any \plain\f0\fs18\cf0 (or unspecified) host operating system
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 We then specify a target operating system that is running on one of the targets above by combining (ORing) one of the above with one of the following values:
+\par \plain\f0\fs8\cf0 
+\par \pard \fi-2400 \li2800 \tx2800 \plain\f0\fs20\cf0\i Flag\tab Description\plain\f0\fs20\cf0 
+\par VOS__WINDOWS32\tab 32 bit Windows
+\par VOS__WINDOWS16\tab Windows 3.x
+\par VOS__PM32\tab Presentation Manager 32
+\par VOS__PM16\tab Presentation Manager 16
+\par VOS__BASE\tab Any, unknown or unspecified target operating system\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Some predefined combinations of the above flags are available. They are:
+\par \plain\f0\fs8\cf0 
+\par \pard \fi-2400 \li2800 \tx2800 \plain\f0\fs20\cf0\i Flag\tab Description
+\par \plain\f0\fs20\cf0 VOS_DOS_WINDOWS16\tab Windows 3.x running on MS-DOS
+\par VOS_DOS_WINDOWS32\tab 32 bit Windows runing on MS-DOS
+\par VOS_OS216_PM16\tab Presentation Manager 16 running on 16 bit OS2
+\par VOS_OS232_PM32\tab Presentation Manager 32 running on 32 bit OS2
+\par VOS_NT_WINDOWS32\tab 32 bit Windows running on Windows NT
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Symbolic constants for all the above flags are defined in the Windows unit.
+\par \page 
+${\footnote {$}TPJVersionInfo.FileSubType}
+#{\footnote {#}IDH_VI_FILESUBTYPE}
+@{\footnote {@}FileSubType property topic.}
+K{\footnote {K}FileSubType,TPJVersionInfo;TPJVersionInfo,FileSubType;FileSubType}
+A{\footnote {A}TPJVersionInfo_FileSubType;FileSubType_property;FileSubType}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FileSubType
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_FixedFileInfo;TPJVersionInfo_FileType)}          {\strike Example}{\v IDH_EG3}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Provides additional file type information for certain file types.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FileSubType: DWORD;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. For some file type this property provides additional information about the file type. The information is as specified in the fixed file information part of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource statement. 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The value of this property is also provided by the the dwFileSubType member of the {\strike VS_FIXEDFILEINFO}{\v !AL(VS_FIXEDFILEINFO,1)} structure accessed via the {\strike FixedFileInfo}{\v IDH_VI_FIXEDFILEINFO} property.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The value of FileSubType depends on the file type identified by the {\strike FileType}{\v IDH_VI_FILETYPE} property, as follows:
+\par \plain\f4\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab When FileType has value VFT_FONT (a font file) then valid values of FileSubType are:
+\par \pard \plain\f4\fs8\cf0 
+\par \pard \fi-2400 \li3200 \tx3200 \plain\f4\fs18\cf0\i Flag\tab Description\plain\f4\fs18\cf0 
+\par VFT2_UNKNOWN\tab Font type is unknown.
+\par VFT2_FONT_RASTER\tab A raster font.
+\par VFT2_FONT_VECTOR\tab A vector font.
+\par VFT2_FONT_TRUETYPE\tab A TrueType font.
+\par \pard \plain\f4\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab When FileType has value VFT_DRV (a device driver) then FileSubType can take one of the following values:
+\par \pard \plain\f4\fs8\cf0 
+\par \pard \fi-2400 \li3200 \tx3200 \plain\f4\fs18\cf0\i Flag\tab Description\plain\f4\fs18\cf0 
+\par VFT2_UNKNOWN\tab Driver type is unknown.
+\par VFT2_DRV_PRINTER\tab Printer driver.
+\par VFT2_DRV_KEYBOARD\tab Keyboard driver.
+\par VFT2_DRV_LANGUAGE\tab Language driver.
+\par VFT2_DRV_DISPLAY\tab Display driver.
+\par VFT2_DRV_MOUSE\tab Mouse driver.
+\par VFT2_DRV_NETWORK\tab Network driver.
+\par VFT2_DRV_SYSTEM\tab System driver.
+\par VFT2_DRV_INSTALLABLE\tab Installable driver.
+\par VFT2_DRV_SOUND\tab Sound driver.
+\par VFT2_DRV_COMM\tab Comm port driver(?)
+\par \pard \plain\f4\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab When FileType has value VFT_VXD (a virtual device driver) then FileSubType contains the virtual device identifier included in the virtual device control block.
+\par \pard \plain\f4\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab In all other cases, and when there is no version information available, FileSubType contains no information and should be zero.
+\par \pard \plain\f4\fs8\cf0 
+\par \plain\f0\fs18\cf0 Constants for all the values discussed above are defined in the Windows unit.
+\par \page 
+${\footnote {$}TPJVersionInfo.FileType}
+#{\footnote {#}IDH_VI_FILETYPE}
+@{\footnote {@}FileType property topic.}
+K{\footnote {K}FileType,TPJVersionInfo;TPJVersionInfo,FileType;FileType}
+A{\footnote {A}TPJVersionInfo_FileType;FileType_property;FileType}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FileType
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_FixedFileInfo;TPJVersionInfo_FileSubType)}          {\strike Example}{\v IDH_EG3}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Use this property to get information about the type of file - application, DLL etc.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FileType: DWORD;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property provides information about the type of file being examined. The information is as specified in the fixed file information part of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource statement.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The value of this property is also provided by the the dwFileType member of the {\strike VS_FIXEDFILEINFO}{\v !AL(VS_FIXEDFILEINFO,1)} structure that is accessed using the {\strike FixedFileInfo}{\v IDH_VI_FIXEDFILEINFO} property. 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 FileType can take one of the values given in the following table. For some types of file further information is provided by the {\strike FileSubType}{\v IDH_VI_FILESUBTYPE} property.
+\par \plain\f4\fs8\cf0 
+\par \pard \fi-2400 \li2800 \tx2800 \plain\f4\fs18\cf0\i Flag\tab Description\plain\f4\fs18\cf0 
+\par VFT_UNKNOWN\tab Unknown file type, or no version information is present.
+\par VFT_APP\tab Application.
+\par VFT_DLL\tab Dynamic-link library (DLL).
+\par VFT_DRV\tab Device driver. Further information is provided by the FileSubType property.
+\par VFT_FONT\tab Font file. Further information is provided by the FileSubType property.
+\par VFT_VXD\tab Virtual device driver. FileSubType contains the virtual device identifier included in the virtual device control block.
+\par VFT_STATIC_LIB\tab Static-link library.
+\par \pard \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Constants for the above values are defined in the Windows unit.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.FileVersion}
+#{\footnote {#}IDH_VI_FILEVERSION}
+@{\footnote {@}FileVersion property topic.}
+K{\footnote {K}FileVersion,TPJVersionInfo;TPJVersionInfo,FileVersion;FileVersion}
+A{\footnote {A}TPJVersionInfo_FileVersion;FileVersion_property;FileVersion}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FileVersion
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file FileVersion string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FileVersion: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the \plain\f4\fs18\cf0\i FileVersion\plain\f4\fs18\cf0  string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of \plain\f4\fs18\cf0\i FileVersion\plain\f4\fs18\cf0  string by calling StringFileInfo['FileVersion'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.FileVersionNumber}
+#{\footnote {#}IDH_VI_FILEVERSIONNUMBER}
+@{\footnote {@}FileVersionNumber property topic.}
+K{\footnote {K}FileVersionNumber,TPJVersionInfo;TPJVersionInfo,FileVersionNumber;FileVersionNumber}
+A{\footnote {A}TPJVersionInfo_FileVersionNumber;FileVersionNumber_property;FileVersionNumber}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FileVersionNumber
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_FixedFileInfo;TPJVersionInfo_ProductVersionNumber)}          {\strike Example}{\v IDH_EG3}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Use this property to get the version number of a file.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FileVersionNumber: {\strike TPJVersionNumber}{\v IDH_TPJVERSIONNUMBER};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property holds information about the version number of the file being examined. The version number is specified in the fixed file information part of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource statement.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The value of this property is derived from the dwFileVersionMS and dwFileVersionLS members of the {\strike VS_FIXEDFILEINFO}{\v !AL(VS_FIXEDFILEINFO,1)} structure that can be accessed using the FixedFileInfo property. The relationship between the fields of the TPJVersionNumber record returned by this property and dwFileVersionMS and dwFileVersionLS is as follows:
+\par \plain\f4\fs8\cf0 
+\par \pard \fi-2400 \li2800 \tx2800 \keep \plain\f4\fs18\cf0\i TPJVersionNumber field\tab VS_FIXEDFILEINFO field\plain\f4\fs18\cf0 
+\par \plain\f8\fs18\cf0 V1\tab HiWord(dwFileVersionMS)
+\par V2\tab LoWord(dwFileVersionMS)
+\par V3\tab HiWord(dwFileVersionLS)
+\par V4\tab LoWord(dwFiletVersionLS)\plain\f4\fs18\cf0 
+\par \pard \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The value of this property does not necessarily correspond to the string value given by the FileVersion property as this is separately defined in the VERSIONINFO resource statement.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.FixedFileInfo}
+#{\footnote {#}IDH_VI_FIXEDFILEINFO}
+@{\footnote {@}FixedFileInfo property topic.}
+K{\footnote {K}FixedFileInfo,TPJVersionInfo;TPJVersionInfo,FixedFileInfo;FixedFileInfo}
+A{\footnote {A}TPJVersionInfo_FixedFileInfo;FixedFileInfo_property;FixedFileInfo}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.FixedFileInfo
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_FileFlags;TPJVersionInfo_FileFlagsMask;TPJVersionInfo_FileOS;TPJVersionInfo_FileSubType;TPJVersionInfo_FileType;TPJVersionInfo_FileVersionNumber;TPJVersionInfo_ProductVersionNumber)}          {\strike Example}{\v IDH_EG4}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Provides access to the fixed file information record from the current file.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  FixedFileInfo: TVSFixedFileInfo;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run time and read only. This property exposes the TVSFixedFileInfo record for the current file. All members of the record are set to zeros if the current file contains no version information.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The TVSFixedFileInfo record is identical to the Windows {\strike VS_FIXEDFILEINFO}{\v !AL(VS_FIXEDFILEINFO,1)} structure, and the help topic for that structure in the Win32 help provides help on the purpose of the structure's fields.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 TPJVersionInfo provides properties that can be used to directly access information contained in most of the fields of TVSFixedFileInfo. See "see also" above for help on these properties.
+\par \page 
+${\footnote {$}TPJVersionInfo.HaveInfo}
+#{\footnote {#}IDH_VI_HAVEINFO}
+@{\footnote {@}HaveIInfo property topic.}
+K{\footnote {K}HaveInfo,TPJVersionInfo;TPJVersionInfo,HaveInfo;HaveInfo}
+A{\footnote {A}TPJVersionInfo_HaveInfo;HaveInfo_property;HaveInfo}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.HaveInfo
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_FileName)}          {\strike Example A}{\v IDH_EG1}          {\strike Example B}{\v IDH_EG3}          {\strike Example C}{\v IDH_EG4}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 HaveInfo informs if the current file contains version information.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  HaveInfo: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property has value True if the component has been able to read file version resource information from the file specified by the {\strike FileName}{\v IDH_VI_FILENAME} property. It has value False if there is no version resource information in the file or if an error has occurred reading the file.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.InternalName}
+#{\footnote {#}IDH_VI_INTERNALNAME}
+@{\footnote {@}InternalName property topic.}
+K{\footnote {K}InternalName,TPJVersionInfo;TPJVersionInfo,InternalName;InternalName}
+A{\footnote {A}TPJVersionInfo_InternalName;InternalName_property;InternalName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.InternalName
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file InternalName string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  InternalName: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the InternalNamestring for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of \plain\f4\fs18\cf0\i InternalName\plain\f4\fs18\cf0  string by calling StringFileInfo['InternalName'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.Language}
+#{\footnote {#}IDH_VI_LANGUAGE}
+@{\footnote {@}Language property topic.}
+K{\footnote {K}Language,TPJVersionInfo;TPJVersionInfo,Language;Language}
+A{\footnote {A}TPJVersionInfo_Language;Language_property;Language}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.Language
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_CharSet;TPJVersionInfo_LanguageCode;TPJVersionInfo_CurrentTranslation)}          {\strike Example}{\v IDH_EG1}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns a description of the character set for the current translation.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  Language: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. The property returns a string describing the language whose code is specified by the current translation. If the language code is unknown or there is no version information in the current file then the property returns the empty string. To examine the actual language code use the {\strike LanguageCode}{\v IDH_VI_LANGUAGECODE} property instead.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 See the \plain\f4\fs18\cf0\i langID\plain\f4\fs18\cf0  section of the Windows API help {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} topic for information about these codes.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.LanguageCode}
+#{\footnote {#}IDH_VI_LANGUAGECODE}
+@{\footnote {@}LanguageCode property topic.}
+K{\footnote {K}LanguageCode,TPJVersionInfo;TPJVersionInfo,LanguageCode;LanguageCode}
+A{\footnote {A}TPJVersionInfo_LanguageCode;LanguageCode_property;LanguageCode}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.LanguageCode
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_CharSetCode;TPJVersionInfo_Language;TPJVersionInfo_CurrentTranslation)}          {\strike Example}{\v IDH_EG1}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the language code associated with the current translation.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  LanguageCode: WORD;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. The property specifies the language code used by the current translation.  If the current file has no version information then 0 is returned. To get a description of the language use the {\strike Language}{\v IDH_VI_LANGUAGE} property instead.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 See the \plain\f4\fs18\cf0\i langID\plain\f4\fs18\cf0  section of the Windows API help {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} topic for information about these codes.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.LegalCopyright}
+#{\footnote {#}IDH_VI_LEGALCOPYRIGHT}
+@{\footnote {@}LegalCopyright property topic.}
+K{\footnote {K}LegalCopyright,TPJVersionInfo;TPJVersionInfo,LegalCopyright;LegalCopyright}
+A{\footnote {A}TPJVersionInfo_LegalCopyright;LegalCopyright_property;LegalCopyright}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.LegalCopyright
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file LegalCopyright string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  LegalCopyright: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the \plain\f4\fs18\cf0\i LegalCopyright\plain\f4\fs18\cf0  string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of \plain\f4\fs18\cf0\i LegalCopyright\plain\f4\fs18\cf0  string by calling StringFileInfo['LegalCopyright'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.LegalTrademarks}
+#{\footnote {#}IDH_VI_LEGALTRADEMARKS}
+@{\footnote {@}LegalTrademarks property topic.}
+K{\footnote {K}LegalTrademarks,TPJVersionInfo;TPJVersionInfo,LegalTrademarks;LegalTrademarks}
+A{\footnote {A}TPJVersionInfo_LegalTrademarks;LegalTrademarks_property;LegalTrademarks}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.LegalTrademarks
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file LegalTrademarks string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  LegalTrademarks: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the \plain\f4\fs18\cf0\i LegalTrademarks\plain\f4\fs18\cf0  string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of \plain\f4\fs18\cf0\i LegalTrademarks\plain\f4\fs18\cf0  string by calling StringFileInfo['LegalTrademarks'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.NumTranslations}
+#{\footnote {#}IDH_VI_NUMTRANSLATIONS}
+@{\footnote {@}NumTranslations property topic.}
+K{\footnote {K}NumTranslations,TPJVersionInfo;TPJVersionInfo,NumTranslations;NumTranslations}
+A{\footnote {A}TPJVersionInfo_NumTranslations;NumTranslations_property;NumTranslations}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.NumTranslations
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_CurrentTranslation)}          {\strike Example}{\v IDH_EG1}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Use this property to find the number of translations in a file's version information.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  NumTranslations: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run time and read only. Version information resources can contain variable information in more that one langauge / character set combination. TPJVersionInfo defines each of these combinations as a "Translation". This property shows how many translations are available in a file's version information. The property has value -1 if the file contains no translations or if the file has no version information.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 To learn more about the multi-lingual capabilities of version information resources read the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} topic in the Win32 help file.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.OriginalFileName}
+#{\footnote {#}IDH_VI_ORIGINALFILENAME}
+@{\footnote {@}OriginalFileName property topic.}
+K{\footnote {K}OriginalFileName,TPJVersionInfo;TPJVersionInfo,OriginalFileName;OriginalFileName}
+A{\footnote {A}TPJVersionInfo_OriginalFileName;OriginalFileName_property;OriginalFileName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.OriginalFileName
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file OriginalFileName string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  OriginalFileName: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the OriginalFileName string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of OriginalFileNamestring by calling StringFileInfo['OriginalFileName'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.PrivateBuild}
+#{\footnote {#}IDH_VI_PRIVATEBUILD}
+@{\footnote {@}PrivateBuild property topic.}
+K{\footnote {K}PrivateBuild,TPJVersionInfo;TPJVersionInfo,PrivateBuild;PrivateBuild}
+A{\footnote {A}TPJVersionInfo_PrivateBuild;PrivateBuild_property;PrivateBuild}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.PrivateBuild
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file PrivateBuild string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  PrivateBuild: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the \plain\f4\fs18\cf0\i PrivateBuild\plain\f4\fs18\cf0  string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The string should only be specified if the VS_FF_PRIVATEBUILD flag is valid and is present in the {\strike FileFlags}{\v IDH_VI_FILEFLAGS} property.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of \plain\f4\fs18\cf0\i PrivateBuild\plain\f4\fs18\cf0  string by calling StringFileInfo['PrivateBuild'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.ProductName}
+#{\footnote {#}IDH_VI_PRODUCTNAME}
+@{\footnote {@}ProductName property topic.}
+K{\footnote {K}ProductName,TPJVersionInfo;TPJVersionInfo,ProductName;ProductName}
+A{\footnote {A}TPJVersionInfo_ProductName;ProductName_property;ProductName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.ProductName
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file ProductName string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  ProductName: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the \plain\f4\fs18\cf0\i ProductName\plain\f4\fs18\cf0  string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of \plain\f4\fs18\cf0\i ProductName\plain\f4\fs18\cf0  string by calling StringFileInfo['ProductName'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.ProductVersion}
+#{\footnote {#}IDH_VI_PRODUCTVERSION}
+@{\footnote {@}ProductVersion property topic.}
+K{\footnote {K}ProductVersion,TPJVersionInfo;TPJVersionInfo,ProductVersion;ProductVersion}
+A{\footnote {A}TPJVersionInfo_ProductVersion;ProductVersion_property;ProductVersion}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.ProductVersion
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_SpecialBuild;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file ProductVersion string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  ProductVersion: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the \plain\f4\fs18\cf0\i ProductVersion\plain\f4\fs18\cf0  string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of ProductVersionstring by calling StringFileInfo['ProductVersion'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.ProductVersionNumber}
+#{\footnote {#}IDH_VI_PRODUCTVERSIONNUMBER}
+@{\footnote {@}ProductVersionNumber property topic.}
+K{\footnote {K}ProductVersionNumber,TPJVersionInfo;TPJVersionInfo,ProductVersionNumber;ProductVersionNumber}
+A{\footnote {A}TPJVersionInfo_ProductVersionNumber;ProductVersionNumber_property;ProductVersionNumber}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.ProductVersionNumber
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_FixedFileInfo;TPJVersionInfo_FileVersionNumber)}          {\strike Example}{\v IDH_EG3}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Use this property to get the version number of the product to which a file relates.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  ProductVersionNumber: {\strike TPJVersionNumber}{\v IDH_TPJVERSIONNUMBER};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property holds information about the version number of the product to which the file being examined belongs. The version number is specified in the fixed file information part of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource statement.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The value of this property is derived from the dwProductVersionMS and dwProductVersionLS members of the {\strike VS_FIXEDFILEINFO}{\v !AL(VS_FIXEDFILEINFO,1)} structure that can be accessed using the FixedFileInfo property. The relationship between the fields of the TPJVersionNumber record returned by this property and dwProductVersionMS and dwProductVersionLS is as follows:
+\par \plain\f4\fs8\cf0 
+\par \pard \fi-2400 \li2800 \tx2800 \keep \plain\f4\fs18\cf0\i TPJVersionNumber field\tab VS_FIXEDFILEINFO field\plain\f4\fs18\cf0 
+\par \plain\f8\fs18\cf0 V1\tab HiWord(dwProductVersionMS)
+\par V2\tab LoWord(dwProductVersionMS)
+\par V3\tab HiWord(dwProductVersionLS)
+\par V4\tab LoWord(dwProductVersionLS)\plain\f4\fs18\cf0 
+\par \pard \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The value of this property does not necessarily correspond to the string value given by the ProductVersion property as this is separately defined in the VERSIONINFO resource statement.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.SpecialBuild}
+#{\footnote {#}IDH_VI_SPECIALBUILD}
+@{\footnote {@}SpecialBuild property topic.}
+K{\footnote {K}SpecialBuild,TPJVersionInfo;TPJVersionInfo,SpecialBuild;SpecialBuild}
+A{\footnote {A}TPJVersionInfo_SpecialBuild;SpecialBuild_property;SpecialBuild}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.SpecialBuild
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_StringFileInfo)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the string file SpecialBuild string.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  SpecialBuild: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Run-time and read only. This property stores the value the \plain\f4\fs18\cf0\i SpecialBuild\plain\f4\fs18\cf0  string for the from the \plain\f4\fs18\cf0\i StringFileInfo\plain\f4\fs18\cf0  block of the {\strike VERSIONINFO}{\v !AL(VERSIONINFO,1)} resource that is associated with the current translation. If the current file contains no version information then the empty string is returnd.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The string should only be specified if the VS_FF_PRIVATEBUILD flag is valid and is present in the {\strike FileFlags}{\v IDH_VI_FILEFLAGS} property.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 The {\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO} property can also be used to access the value of SpecialBuild string by calling StringFileInfo['SpecialBuild'].\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionInfo.StringFileInfo}
+#{\footnote {#}IDH_VI_STRINGFILEINFO}
+@{\footnote {@}StringFileInfo property topic.}
+K{\footnote {K}StringFileInfo,TPJVersionInfo;TPJVersionInfo,StringFileInfo;StringFileInfo}
+A{\footnote {A}TPJVersionInfo_StringFileInfo;StringFileInfo_property;StringFileInfo}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionInfo.StringFileInfo
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJVersionInfo}{\v IDH_VI_CLASS}          {\strike See also}{\v !AL(TPJVersionInfo_Comments;TPJVersionInfo_CompanyName;TPJVersionInfo_FileDescription;TPJVersionInfo_FileVersion;TPJVersionInfo_InternalName;TPJVersionInfo_LegalCopyright;TPJVersionInfo_LegalTrademarks;TPJVersionInfo_OriginalFileName;TPJVersionInfo_PrivateBuild;TPJVersionInfo_ProductName;TPJVersionInfo_ProductVersion;TPJVersionInfo_SpecialBuild)}          {\strike Example}{\v IDH_EG2}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Returns the value of string information with the given name.
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b property\plain\f6\fs18\cf0  StringFileInfo[\plain\f6\fs18\cf0\b const\plain\f6\fs18\cf0  Name: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ]: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 Returns the value for string file info with given name for current translation. This property can return both standard and custom string info. If the current file has no version information, or there is no string information for the current name, then the empty string is returned.
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 For standard string information values either this property or the relevant dedicated property can be used. Standard string information values are:
+\par \plain\f4\fs8\cf0 
+\par \pard \fi-400 \li800 \tx800 \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab Comments
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab CompanyName
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab FileDescription
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab FileVersion
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab InternalName
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab LegalCopyright
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab LegalTrademarks
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab OriginalFileName
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab PrivateBuild
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab ProductName
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab ProductVersion
+\par \plain\f7\fs18\cf0 \'A7\plain\f4\fs18\cf0 \tab SpecialBuild
+\par \pard \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0 TPJVersionInfo provides a dedicated string property with the same name as each of the above.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJVersionNumber}
+#{\footnote {#}IDH_TPJVERSIONNUMBER}
+@{\footnote {@}TPJVersionNumber record type topic.}
+K{\footnote {K}TPJVersionNumber}
+A{\footnote {A}TPJVersionNumber}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJVersionNumber
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJVersionInfo}{\v IDH_VI_UNIT}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 TPJVersionNumber is a record that stores version numbers from version resources as four discrete values. The record is declared as follows:
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f6\fs18\cf0 TPJVersionNumber = \plain\f6\fs18\cf0\b record\plain\f6\fs18\cf0 
+\par   V1, V2, V3, V4: WORD;
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 V1 represents the most significant version number and V4 represents the least significant number.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 For example a version number written as 2.5.8.3 would be stored in a variable of type TVersionNumber with V1=2, V2=5, V3=8 and V4=3.
+\par \page 
+${\footnote {$}Example - Language and CharSets}
+#{\footnote {#}IDH_EG1}
+@{\footnote {@}Example 1 - example of using character set, translation and language properties.}
+A{\footnote {A}TPJVersionInfo_Example1}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b Example:
+\par \plain\f0\fs20\cf2\b Using translation, character set and language properties\plain\f0\fs24\cf2\b 
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 This example shows how to use the translation, character set and language properties of TPJVersionInfo to display details of the language and character set for all translations in a file's version info. The example assumes the application contains version information. If this is not the case then a message to that effect is displayed in the list box.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Drop a TListBox and a TPJVersionInfo component on a form and add the following form creation event handler:
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f6\fs18\cf0\b procedure\plain\f6\fs18\cf0  TEgForm1.FormCreate(Sender: TObject);
+\par \plain\f6\fs18\cf0\b var\plain\f6\fs18\cf0 
+\par   I: Integer;
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   ListBox1.Clear;
+\par   \plain\f6\fs18\cf3\i // loop thru all translations\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  PJVersionInfo1.{\strike HaveInfo}{\v IDH_VI_HAVEINFO} \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b for\plain\f6\fs18\cf0  I := 0 \plain\f6\fs18\cf0\b to\plain\f6\fs18\cf0  Pred(PJVersionInfo1.{\strike NumTranslations}{\v IDH_VI_NUMTRANSLATIONS}) \plain\f6\fs18\cf0\b do\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par       \plain\f6\fs18\cf3\i // make the current translation current\plain\f6\fs18\cf0 
+\par       PJVersionInfo1.{\strike CurrentTranslation}{\v IDH_VI_CURRENTTRANSLATION} := I;
+\par       \plain\f6\fs18\cf3\i // add language and char set info to the list box\plain\f6\fs18\cf0 
+\par       ListBox1.Items.Add(
+\par         Format(
+\par           'Language: %s (%0.4X) -- CharSet: %s (%0.4X)',
+\par           [PJVersionInfo1.{\strike Language}{\v IDH_VI_LANGUAGE}, PJVersionInfo1.{\strike LanguageCode}{\v IDH_VI_LANGUAGECODE},
+\par           PJVersionInfo1.{\strike CharSet}{\v IDH_VI_CHARSET}, PJVersionInfo1.{\strike CharSetCode}{\v IDH_VI_CHARSETCODE}]
+\par         )
+\par       );
+\par     \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b else\plain\f6\fs18\cf0 
+\par     ListBox1.Items.Add('NO VERSION INFO');
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par \pard \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 When the form is displayed details of languages and character sets for each translation are displayed in the list box.
+\par \page 
+${\footnote {$}Example - String Info}
+#{\footnote {#}IDH_EG2}
+@{\footnote {@}Example of using string information properties.}
+A{\footnote {A}TPJVersionInfo_Example2}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b Example:
+\par \plain\f0\fs20\cf2\b Using string information properties\plain\f0\fs24\cf2\b 
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 This example demostrates how to access string information from a version resource using TPJVersionInfo. It demonstrates two methods - the first using dedicated properties such as LegalCopyright and the second using the StringFileInfo property. The example also demonstrates the use of the FileName property to access information in other files.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Drop a TMemo, two TButton controls and a TPJVersionInfo component onto a form and add the following function and event handlers:
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  DirToPath(\plain\f6\fs18\cf0\b const \plain\f6\fs18\cf0 Dir: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par \plain\f9\fs18\cf0   \plain\f9\fs18\cf3\i // Ensures path end in '\\'\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b if \plain\f6\fs18\cf0 (Dir <> '') \plain\f6\fs18\cf0\b and \plain\f6\fs18\cf0 (Dir[Length(Dir)] <> '\\') \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     Result := Dir + '\\'
+\par   \plain\f6\fs18\cf0\b else\plain\f6\fs18\cf0 
+\par     Result := Dir;
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  WindowsDir: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf3\i // Returns Windows directory\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   SetLength(Result, MAX_PATH);
+\par   SetLength(Result, {\strike GetWindowsDirectory}{\v !AL(GetWindowsDirectory,1)}(PChar(Result), MAX_PATH));
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  SystemDir: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par \plain\f9\fs18\cf0   \plain\f9\fs18\cf3\i // Returns Windows System directory\plain\f6\fs18\cf3\i 
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   SetLength(Result, MAX_PATH);
+\par   SetLength(Result, {\strike GetSystemDirectory}{\v !AL(GetSystemDirectory,1)}(PChar(Result), MAX_PATH));
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  FindProg(\plain\f6\fs18\cf0\b const \plain\f6\fs18\cf0 ExeName: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par \plain\f9\fs18\cf0   \plain\f9\fs18\cf3\i // Finds program in Windows or System directory\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   Result := DirToPath(WindowsDir) + ExeName;
+\par   \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  {\strike FileExists}{\v !AL(FileExists,1)}(Result) \plain\f6\fs18\cf0\b then \plain\f6\fs18\cf0 Exit;
+\par   Result := DirToPath(SystemDir) + ExeName;
+\par   \plain\f6\fs18\cf0\b if not \plain\f6\fs18\cf0 FileExists(Result) \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b raise\plain\f6\fs18\cf0  Exception.{\strike CreateFmt}{\v !AL(Exception_CreateFmt,1)}(
+\par       'Can''t find %s in Windows or System folders', [ExeName]
+\par     );
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par \plain\f6\fs18\cf0\b 
+\par procedure\plain\f6\fs18\cf0  TEgForm2.Button1Click(Sender: TObject);
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf3\i // Get version info for Calc.exe
+\par \plain\f6\fs18\cf0   PJVersionInfo1.{\strike FileName}{\v IDH_VI_FILENAME} := FindProg('Calc.exe');
+\par   \plain\f6\fs18\cf0\b with\plain\f6\fs18\cf0  Memo1.Lines \plain\f6\fs18\cf0\b do\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf3\i // Clear the memo and write narrative\plain\f6\fs18\cf0 
+\par     Clear;
+\par     Add('String information block for Windows'
+\par       + ' Calculator (method 1)');
+\par     Add('');
+\par     \plain\f6\fs18\cf3\i // Add string information using dedicated properties\plain\f6\fs18\cf0 
+\par     Add('Comments: ' + PJVersionInfo1.{\strike Comments}{\v IDH_VI_COMMENTS});
+\par     Add('CompanyName: ' + PJVersionInfo1.{\strike CompanyName}{\v IDH_VI_COMPANYNAME});
+\par     Add('FileDescription: ' + PJVersionInfo1.{\strike FileDescription}{\v IDH_VI_FILEDESCRIPTION});
+\par     Add('FileVersion: ' + PJVersionInfo1.{\strike FileVersion}{\v IDH_VI_FILEVERSION});
+\par     Add('InternalName: ' + PJVersionInfo1.{\strike InternalName}{\v IDH_VI_INTERNALNAME});
+\par     Add('LegalCopyright: ' + PJVersionInfo1.{\strike LegalCopyright}{\v IDH_VI_LEGALCOPYRIGHT});
+\par     Add('LegalTrademarks: ' + PJVersionInfo1.{\strike LegalTrademarks}{\v IDH_VI_LEGALTRADEMARKS});
+\par     Add('OriginalFileName: ' + PJVersionInfo1.{\strike OriginalFileName}{\v IDH_VI_ORIGINALFILENAME});
+\par     Add('PrivateBuild: ' + PJVersionInfo1.{\strike PrivateBuild}{\v IDH_VI_PRIVATEBUILD});
+\par     Add('ProductName: ' + PJVersionInfo1.{\strike ProductName}{\v IDH_VI_PRODUCTNAME});
+\par     Add('ProductVersion: ' + PJVersionInfo1.{\strike ProductVersion}{\v IDH_VI_PRODUCTVERSION});
+\par     Add('SpecialBuild: ' + PJVersionInfo1.{\strike SpecialBuild}{\v IDH_VI_SPECIALBUILD});
+\par   \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par \plain\f6\fs8\cf0 
+\par \plain\f6\fs18\cf0\b procedure\plain\f6\fs18\cf0  TEgForm2.Button2Click(Sender: TObject);
+\par \plain\f6\fs8\cf0 
+\par \plain\f6\fs18\cf0   \plain\f6\fs18\cf0\b procedure\plain\f6\fs18\cf0  AddStrInfo(StrName: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 );
+\par     \plain\f6\fs18\cf3\i // Add string info to memo by name\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par     Memo1.Lines.Add(StrName + ': ' + 
+\par       PJVersionInfo1.{\strike StringFileInfo}{\v IDH_VI_STRINGFILEINFO}[StrName]);
+\par   \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par \plain\f6\fs8\cf0 
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf3\i // Get string info for Notepad\plain\f9\fs18\cf3\i .exe\plain\f6\fs18\cf0 
+\par   PJVersionInfo1.{\strike FileName}{\v IDH_VI_FILENAME} := FindProg('Notepad.exe');
+\par   \plain\f6\fs18\cf3\i // Clear memo and write narrative\plain\f6\fs18\cf0 
+\par   Memo1.Clear;
+\par   Memo1.Lines.Add('String information block for Windows'
+\par       + ' NotePad (method 2)');
+\par   Memo1.Lines.Add('');
+\par   \plain\f6\fs18\cf3\i // Add string info using string info names\plain\f6\fs18\cf0 
+\par   AddStrInfo('Comments');
+\par   AddStrInfo('CompanyName');
+\par   AddStrInfo('FileDescription');
+\par   AddStrInfo('FileVersion');
+\par   AddStrInfo('InternalName');
+\par   AddStrInfo('LegalCopyright');
+\par   AddStrInfo('LegalTrademarks');
+\par   AddStrInfo('OriginalFileName');
+\par   AddStrInfo('PrivateBuild');
+\par   AddStrInfo('ProductName');
+\par   AddStrInfo('ProductVersion');
+\par   AddStrInfo('SpecialBuild');
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b procedure\plain\f6\fs18\cf0  TEgForm2.FormShow(Sender: TObject);
+\par   \plain\f6\fs18\cf3\i // ensure the memo is clear\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   Memo1.Clear;
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 When the first button is clicked the memo is populated with string information extracted from the Windows Calculator program while clicking the second button uses a different method to extract and displays string information about the NotePad program.
+\par \page 
+${\footnote {$}Example - Fixed File Info (1)}
+#{\footnote {#}IDH_EG3}
+@{\footnote {@}Example of using fixed file information properties.}
+A{\footnote {A}TPJVersionInfo_Example3}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b Example:
+\par \plain\f0\fs20\cf2\b Using fixed file information properties\plain\f0\fs24\cf2\b 
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 This rather long example shows how to use the fixed file information properties. It displays descriptions of the properties in a memo. Most of the example is taken up with code that maps fixed file info codes onto descriptive names. The real meat of the example comes in the form creation event handler at the end of the code.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 A {\strike similar example}{\v IDH_EG4} shows how to achieve the same results using the {\strike FixedFileInfo}{\v IDH_VI_FIXEDFILEINFO} property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Drop a TMemo and a TPJVersionInfo component on to a form and enter the following code. The only form method is the form creation event handler.
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f6\fs18\cf0\b type\plain\f6\fs18\cf0 
+\par   TTableEntry = \plain\f6\fs18\cf0\b record
+\par \plain\f6\fs18\cf0     \plain\f6\fs18\cf3\i // maps codes to descriptions\plain\f6\fs18\cf0 
+\par     Code: DWORD;
+\par     Desc: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf0\b en\plain\f6\fs18\cf0 d;
+\par 
+\par \plain\f6\fs18\cf0\b const\plain\f6\fs18\cf0 
+\par   cFileType: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0 [0..6] \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0  TTableEntry =
+\par   (
+\par     (Code: VFT_APP; Desc: 'Application'),
+\par     (Code: VFT_DLL; Desc: 'DLL'),
+\par     (Code: VFT_DRV; Desc: 'Device driver'),
+\par     (Code: VFT_FONT; Desc: 'Font'),
+\par     (Code: VFT_STATIC_LIB; Desc: 'Static link library'),
+\par     (Code: VFT_VXD; Desc: 'Virtual device driver'),
+\par     (Code: VFT_UNKNOWN; Desc: 'Unknown')
+\par   );
+\par 
+\par   cFileOSBase: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0 [0..4] \plain\f6\fs18\cf0\b of \plain\f6\fs18\cf0 TTableEntry =
+\par   (
+\par     ( Code: VOS_NT; Desc: 'Windows NT' ),
+\par     ( Code: VOS_DOS; Desc: 'MS-DOS' ),
+\par     ( Code: VOS_OS232; Desc: 'OS2 32 bit' ),
+\par     ( Code: VOS_OS216; Desc: 'OS2 16 bit' ),
+\par     ( Code: VOS_UNKNOWN; Desc: 'Any' )
+\par   );
+\par 
+\par   cFileOSTarget: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0 [0..4] \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0  TTableEntry =
+\par   (
+\par     ( Code: VOS__WINDOWS32; Desc: '32 bit Windows' ),
+\par     ( Code: VOS__WINDOWS16; Desc: 'Windows 3.x' ),
+\par     ( Code: VOS__PM32; Desc: 'Presentation Manager 32' ),
+\par     ( Code: VOS__PM16; Desc: 'Presentation Manager 16' ),
+\par     ( Code: VOS__BASE; Desc: 'Unknown' )
+\par   );
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  CodeToDesc(Code: DWORD; 
+\par   Table: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0  \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0  TTableEntry): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf3\i // return description of code using table\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b var\plain\f6\fs18\cf0 
+\par   I: Integer;
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   Result := '';
+\par   \plain\f6\fs18\cf0\b for \plain\f6\fs18\cf0 I := Low(Table) \plain\f6\fs18\cf0\b to\plain\f6\fs18\cf0  High(Table) \plain\f6\fs18\cf0\b do\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  Table[I].Code = Code \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par       Result := Table[I].Desc;
+\par       Break;
+\par     \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  FileOSDesc(OS: DWORD): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf3\i // describe OS\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b var\plain\f6\fs18\cf0 
+\par   Target, Base: DWORD;
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf3\i // get target and base OS\plain\f6\fs18\cf0 
+\par   Target := OS \plain\f6\fs18\cf0\b and\plain\f6\fs18\cf0  $0000FFFF;
+\par   Base := OS \plain\f6\fs18\cf0\b and\plain\f6\fs18\cf0  $FFFF0000;
+\par   \plain\f6\fs18\cf3\i // build description\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  Base = VOS_UNKNOWN \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     Result := CodeToDesc(Target, cFileOSTarget)
+\par   \plain\f6\fs18\cf0\b else if\plain\f6\fs18\cf0  Target = VOS__BASE \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     Result := CodeToDesc(Base, cFileOSBase)
+\par   \plain\f6\fs18\cf0\b else\plain\f6\fs18\cf0 
+\par     Result := Format('%s on %s',
+\par       [CodeToDesc(Target, cFileOSTarget),
+\par       CodeToDesc(Base, cFileOSBase)]);
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  FileFlagsToStr(Flags: DWORD): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf3\i // build string of file flags\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b const\plain\f6\fs18\cf0 
+\par   cFileFlags: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0 [0..5] \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0  TTableEntry =
+\par   (
+\par     (Code: VS_FF_DEBUG;        Desc: 'Debug'),
+\par     (Code: VS_FF_PRERELEASE;   Desc: 'Pre-release'),
+\par     (Code: VS_FF_PATCHED;      Desc: 'Patched'),
+\par     (Code: VS_FF_PRIVATEBUILD; Desc: 'Private build'),
+\par     (Code: VS_FF_INFOINFERRED; Desc: 'Inferred'),
+\par     (Code: VS_FF_SPECIALBUILD; Desc: 'Special build')  );
+\par \plain\f6\fs18\cf0\b var\plain\f6\fs18\cf0 
+\par   I: Integer;
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   Result := '';
+\par   \plain\f6\fs18\cf0\b for\plain\f6\fs18\cf0  I := Low(cFileFlags) \plain\f6\fs18\cf0\b to\plain\f6\fs18\cf0  High(cFileFlags) \plain\f6\fs18\cf0\b do\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  Flags \plain\f6\fs18\cf0\b and\plain\f6\fs18\cf0  cFileFlags[I].Code = cFileFlags[I].Code \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par       Result := Result + #13#10'   ' + cFileFlags[I].Desc
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  VerToStr(Ver: TPJVersionNumber): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf3 // return ver number as string\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   Result := Format('%d.%d.%d.%d', 
+\par     [Ver.V1, Ver.V2, Ver.V3, Ver.V4]);
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b procedure\plain\f6\fs18\cf0  TEgForm3.FormCreate(Sender: TObject);
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf3\i // clear memo\plain\f6\fs18\cf0 
+\par   Memo1.Lines.Clear;
+\par   \plain\f6\fs18\cf3\i // check if we have version info\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  PJVersionInfo1.{\strike HaveInfo}{\v IDH_VI_HAVEINFO} \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf3\i // we have version info: display fixed file info\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b with\plain\f6\fs18\cf0  Memo1.Lines \plain\f6\fs18\cf0\b do\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par       Add('File Version:'#13#10'   '
+\par         + VerToStr(PJVersionInfo1.{\strike FileVersionNumber}{\v IDH_VI_FILEVERSIONNUMBER}));
+\par       Add('Product Version:'#13#10'   '
+\par         + VerToStr(PJVersionInfo1.{\strike ProductVersionNumber}{\v IDH_VI_PRODUCTVERSIONNUMBER}));
+\par       Add('File Flags Mask: '
+\par         + FileFlagsToStr(PJVersionInfo1.{\strike FileFlagsMask}{\v IDH_VI_FILEFLAGSMASK}));
+\par       Add('File Flags: '
+\par         + FileFlagsToStr(PJVersionInfo1.{\strike FileFlags}{\v IDH_VI_FILEFLAGS}));
+\par       Add('File Type:'#13#10'   '
+\par         + CodeToDesc(PJVersionInfo1.{\strike FileType}{\v IDH_VI_FILETYPE}, cFileType));
+\par       Add('File sub type:');
+\par       \plain\f6\fs18\cf0\b case\plain\f6\fs18\cf0  PJVersionInfo1.{\strike FileType}{\v IDH_VI_FILETYPE} \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0 
+\par         VFT_FONT, VFT_DRV, VFT_VXD:
+\par           Add(Format('   %0.8X', [PJVersionInfo1.{\strike FileSubType}{\v IDH_VI_FILESUBTYPE}]));
+\par         \plain\f6\fs18\cf0\b else\plain\f6\fs18\cf0  Add('   None');
+\par       \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par       Add('File OS:'#13#10'   '
+\par         + FileOSDesc(PJVersionInfo1.{\strike FileOS}{\v IDH_VI_FILEOS}));
+\par     \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b else\plain\f6\fs18\cf0 
+\par     Memo1.Lines.Add('NO VERSION INFO');
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par 
+\par 
+\par \page 
+${\footnote {$}Example - Fixed File Info (2)}
+#{\footnote {#}IDH_EG4}
+@{\footnote {@}Example of using the FixedFileInfo property.}
+A{\footnote {A}TPJVersionInfo_Example4}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b Example:
+\par \plain\f0\fs20\cf2\b Using the FixedFileInfo property\plain\f0\fs24\cf2\b 
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 This extended example shows how to use the {\strike FixedFileInfo}{\v IDH_VI_FIXEDFILEINFO} property. It displays descriptions of the values of some of the fields of the structure returned by the FixedFileInfo property in a memo. Most of the example is taken up with code that maps fixed file info codes onto descriptive names. The real meat of the example comes in the form creation event handler at the end of the code.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 A {\strike similar example}{\v IDH_EG3} shows how to achieve the same results using various specialised fixed file information properties.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Drop a TMemo and a TPJVersionInfo component on to a form and enter the following code. The only form method is the form creation event handler.
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f6\fs18\cf0\b type\plain\f6\fs18\cf0 
+\par   TTableEntry = \plain\f6\fs18\cf0\b record
+\par \plain\f6\fs18\cf0     \plain\f6\fs18\cf3\i // maps codes to descriptions\plain\f6\fs18\cf0 
+\par     Code: DWORD;
+\par     Desc: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf0\b en\plain\f6\fs18\cf0 d;
+\par 
+\par \plain\f6\fs18\cf0\b const\plain\f6\fs18\cf0 
+\par   cFileType: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0 [0..6] \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0  TTableEntry =
+\par   (
+\par     (Code: VFT_APP; Desc: 'Application'),
+\par     (Code: VFT_DLL; Desc: 'DLL'),
+\par     (Code: VFT_DRV; Desc: 'Device driver'),
+\par     (Code: VFT_FONT; Desc: 'Font'),
+\par     (Code: VFT_STATIC_LIB; Desc: 'Static link library'),
+\par     (Code: VFT_VXD; Desc: 'Virtual device driver'),
+\par     (Code: VFT_UNKNOWN; Desc: 'Unknown')
+\par   );
+\par 
+\par   cFileOSBase: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0 [0..4] \plain\f6\fs18\cf0\b of \plain\f6\fs18\cf0 TTableEntry =
+\par   (
+\par     ( Code: VOS_NT; Desc: 'Windows NT' ),
+\par     ( Code: VOS_DOS; Desc: 'MS-DOS' ),
+\par     ( Code: VOS_OS232; Desc: 'OS2 32 bit' ),
+\par     ( Code: VOS_OS216; Desc: 'OS2 16 bit' ),
+\par     ( Code: VOS_UNKNOWN; Desc: 'Any' )
+\par   );
+\par 
+\par   cFileOSTarget: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0 [0..4] \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0  TTableEntry =
+\par   (
+\par     ( Code: VOS__WINDOWS32; Desc: '32 bit Windows' ),
+\par     ( Code: VOS__WINDOWS16; Desc: 'Windows 3.x' ),
+\par     ( Code: VOS__PM32; Desc: 'Presentation Manager 32' ),
+\par     ( Code: VOS__PM16; Desc: 'Presentation Manager 16' ),
+\par     ( Code: VOS__BASE; Desc: 'Unknown' )
+\par   );
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  CodeToDesc(Code: DWORD; 
+\par   Table: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0  \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0  TTableEntry): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf3\i // return description of code using table\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b var\plain\f6\fs18\cf0 
+\par   I: Integer;
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   Result := '';
+\par   \plain\f6\fs18\cf0\b for \plain\f6\fs18\cf0 I := Low(Table) \plain\f6\fs18\cf0\b to\plain\f6\fs18\cf0  High(Table) \plain\f6\fs18\cf0\b do\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  Table[I].Code = Code \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par       Result := Table[I].Desc;
+\par       Break;
+\par     \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  FileOSDesc(OS: DWORD): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf3\i // describe OS\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b var\plain\f6\fs18\cf0 
+\par   Target, Base: DWORD;
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf3\i // get target and base OS\plain\f6\fs18\cf0 
+\par   Target := OS \plain\f6\fs18\cf0\b and\plain\f6\fs18\cf0  $0000FFFF;
+\par   Base := OS \plain\f6\fs18\cf0\b and\plain\f6\fs18\cf0  $FFFF0000;
+\par   \plain\f6\fs18\cf3\i // build description\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  Base = VOS_UNKNOWN \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     Result := CodeToDesc(Target, cFileOSTarget)
+\par   \plain\f6\fs18\cf0\b else if\plain\f6\fs18\cf0  Target = VOS__BASE \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par     Result := CodeToDesc(Base, cFileOSBase)
+\par   \plain\f6\fs18\cf0\b else\plain\f6\fs18\cf0 
+\par     Result := Format('%s on %s',
+\par       [CodeToDesc(Target, cFileOSTarget),
+\par       CodeToDesc(Base, cFileOSBase)]);
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  FileFlagsToStr(Flags: DWORD): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf3\i // build string of file flags\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b const\plain\f6\fs18\cf0 
+\par   cFileFlags: \plain\f6\fs18\cf0\b array\plain\f6\fs18\cf0 [0..5] \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0  TTableEntry =
+\par   (
+\par     (Code: VS_FF_DEBUG;        Desc: 'Debug'),
+\par     (Code: VS_FF_PRERELEASE;   Desc: 'Pre-release'),
+\par     (Code: VS_FF_PATCHED;      Desc: 'Patched'),
+\par     (Code: VS_FF_PRIVATEBUILD; Desc: 'Private build'),
+\par     (Code: VS_FF_INFOINFERRED; Desc: 'Inferred'),
+\par     (Code: VS_FF_SPECIALBUILD; Desc: 'Special build')  );
+\par \plain\f6\fs18\cf0\b var\plain\f6\fs18\cf0 
+\par   I: Integer;
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   Result := '';
+\par   \plain\f6\fs18\cf0\b for\plain\f6\fs18\cf0  I := Low(cFileFlags) \plain\f6\fs18\cf0\b to\plain\f6\fs18\cf0  High(cFileFlags) \plain\f6\fs18\cf0\b do\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  Flags \plain\f6\fs18\cf0\b and\plain\f6\fs18\cf0  cFileFlags[I].Code = cFileFlags[I].Code \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par       Result := Result + #13#10'   ' + cFileFlags[I].Desc
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par 
+\par \plain\f6\fs18\cf0\b function\plain\f6\fs18\cf0  VerToStr(MS, LS: DWORD): \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ;
+\par   \plain\f6\fs18\cf3\i // return ver number as string\plain\f6\fs18\cf0 
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   Result := Format('%d.%d.%d.%d',
+\par     [HiWord(MS), LoWord(MS), HiWord(LS), LoWord(LS)]);
+\par \plain\f6\fs18\cf0\b end;\plain\f6\fs18\cf0 
+\par 
+\par \plain\f6\fs18\cf0\b procedure\plain\f6\fs18\cf0  TEgForm3.FormCreate(Sender: TObject);
+\par \plain\f6\fs18\cf0\b var\plain\f6\fs18\cf0 
+\par   FFI: TVSFixedFileInfo;
+\par \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf3\i // clear memo\plain\f6\fs18\cf0 
+\par   Memo1.Lines.Clear;
+\par   \plain\f6\fs18\cf3\i // check if we have version info\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b if\plain\f6\fs18\cf0  PJVersionInfo1.{\strike HaveInfo}{\v IDH_VI_HAVEINFO} \plain\f6\fs18\cf0\b then\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf3\i // we have version info: display fixed file info\plain\f6\fs18\cf0 
+\par     FFI := PJVersionInfo1.{\strike FixedFileInfo}{\v IDH_VI_FIXEDFILEINFO};
+\par     \plain\f6\fs18\cf0\b with\plain\f6\fs18\cf0  Memo1.Lines \plain\f6\fs18\cf0\b do\plain\f6\fs18\cf0 
+\par     \plain\f6\fs18\cf0\b begin\plain\f6\fs18\cf0 
+\par       Clear;
+\par       Add('File Version:'#13#10'   '
+\par         + VerToStr(FFI.dwFileVersionMS, FFI.dwFileVersionLS));
+\par       Add('Product Version:'#13#10'   '
+\par         + VerToStr(FFI.dwProductVersionMS, FFI.dwProductVersionLS));
+\par       Add('File Flags Mask: '
+\par         + FileFlagsToStr(FFI.dwFileFlagsMask));
+\par       Add('File Flags: '
+\par         + FileFlagsToStr(FFI.dwFileFlags));
+\par       Add('File Type:'#13#10'   '
+\par         + CodeToDesc(FFI.dwFileType, cFileType));
+\par       Add('File sub type:');
+\par       \plain\f6\fs18\cf0\b case\plain\f6\fs18\cf0  FFI.dwFileType \plain\f6\fs18\cf0\b of\plain\f6\fs18\cf0 
+\par         VFT_FONT, VFT_DRV, VFT_VXD:
+\par           Add(Format('   %0.8X', [FFI.dwFileSubType]));
+\par         \plain\f6\fs18\cf0\b else\plain\f6\fs18\cf0  Add('   None');
+\par       \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;
+\par       Add('File OS:'#13#10'   '
+\par         + FileOSDesc(FFI.dwFileOS));
+\par     \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 
+\par   \plain\f6\fs18\cf0\b else\plain\f6\fs18\cf0 
+\par     Memo1.Lines.Add('NO VERSION INFO');
+\par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \page 
+}

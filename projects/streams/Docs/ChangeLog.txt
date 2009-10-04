@@ -1,0 +1,16 @@
+Release 2.0.1 of 23 November 2003
+v2.0.1 of 22 November 2003
++ Made changes in PJIStreams unit:
+  - Fixed some minor bugs.
+  - Added simplified method for getting stream name.
+  - Modified use of task allocator.
+
+Release 2.0 of 30 September 2001
+v2.0 of 30 September 2001
++ Added new unit providing classes that implement the IStream interface.
++ Renamed earlier units and classes in keeping with my library naming conventions.
++ Added some demo programs to the release.
+
+Release 1.0 of 02 July 2000
+v1.0 of 26 March 2000
++ Original version - stream wrapper base class and resource file encapsulation classes only.

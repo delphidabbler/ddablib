@@ -1,0 +1,58 @@
+/*
+ * MultiVer.rc
+ *
+ * Resource file containing version information with more than one translation
+ * for use in the the Version Information Component HelpEgs demo program.
+ *
+ * $Rev$
+ * $Date$
+ *
+ * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2002-2009.
+ * It may be used without restriction. This code distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ */
+
+#define VERINFO 1
+
+VERINFO VERSIONINFO
+FILEVERSION 1, 2, 3, 4
+PRODUCTVERSION 1, 0, 123, 2001
+FILEFLAGSMASK 0x3F
+FILEFLAGS VS_FF_DEBUG + VS_FF_PRIVATEBUILD
+FILEOS VOS_DOS_WINDOWS32
+FILETYPE VFT_APP
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "080904E4"
+  {
+   VALUE "Comments", "This is the English English realisation.\000"
+   VALUE "CompanyName", "PJSoft\000"
+   VALUE "FileDescription", "A demo application showing multi-lingual version info resources.\000"
+   VALUE "FileVersion", "1.0\000"
+   VALUE "InternalName", "MultiLingDemo\000"
+   VALUE "LegalCopyright", "No copyright\000"
+   VALUE "OriginalFileName", "MultiLingDemo.exe\000"
+   VALUE "PrivateBuild", "This is a UK private build\000"
+   VALUE "ProductName", "Multilingual Demo App\000"
+   VALUE "ProductVersion", "1.0\000"
+  }
+  BLOCK "040904B0"
+  {
+   VALUE "Comments", "This is the American English realization.\000"
+   VALUE "CompanyName", "PJSoft\000"
+   VALUE "FileDescription", "A demo application showing multi-lingual version info resources.\000"
+   VALUE "FileVersion", "1.0\000"
+   VALUE "InternalName", "MultiLingDemo\000"
+   VALUE "LegalCopyright", "No copyright\000"
+   VALUE "OriginalFileName", "MultiLingDemo.exe\000"
+   VALUE "PrivateBuild", "This is a US private build\000"
+   VALUE "ProductName", "Multilingual Demo App\000"
+   VALUE "ProductVersion", "1.0\000"
+  }
+ }
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x0809, 1252, 0x0409, 1200
+ }
+}
