@@ -1,0 +1,16 @@
+Release 1.0.3 of 16 December 2005
+PJHKeyPropEdit v1.0.3 of 16 December 2005
++ Fixed error in conditional compilation define that was causing compilation to fail in Delphi 2005 and later.
++ Changed to Mozilla Public License.
+
+Release 1.0.2 of 30 October 2003
+PJHKeyPropEdit v1.0.2 of 30 October 2003
++ Revised to compile under Delphi 6 and 7 by means of some conditional compilation.
+
+Release 1.0.1 of 08 October 2000
+PJHKeyPropEdit v1.0.1 of 08 October 2000
++ Fixed bug that was allowing invalid or empty values for an HKEY. An exception is now raised and existing value is retained.
+
+Unreleased
+PJHKeyPropEdit v1.0 of 28 September 2000
++ Original version.
