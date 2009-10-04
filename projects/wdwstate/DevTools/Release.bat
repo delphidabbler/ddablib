@@ -3,9 +3,10 @@
 @rem
 @rem Script used to create zip file containing release files.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007-2009
 @rem
-@rem v1.0 of 19 Sep 2007 - First version.
+@rem $Rev$
+@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 @echo off
