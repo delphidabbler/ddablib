@@ -44,22 +44,29 @@ uses
   // Delphi
   Classes, Windows, ActiveX;
 
+{$UNDEF SUPPORTS_STRICT}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+    {$WARN UNSAFE_CAST OFF}
+  {$IFEND}
+  {$IF CompilerVersion >= 18.0} // >= Delphi 2006
+    {$DEFINE SUPPORTS_STRICT}
+  {$IFEND}
+{$ENDIF}
 
 type
 
   {
   TPJIStreamWrapper:
     Class that implements the IStream interface for a wrapped TStream object.
-
-    Inheritance: TPJIStreamWrapper => [TInterfacedObject]
   }
   TPJIStreamWrapper = class(TInterfacedObject, IStream)
+  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   private
-    fCloseStream: Boolean;
-      {Flag that determines if wrapped stream is freed when this object is
-      destroyed}
-    fBaseStream: TStream;
-      {Reference to wrapped stream}
+    fCloseStream: Boolean; // Flags if wrapped stream is freed in destructor
+    fBaseStream: TStream;  // Reference to wrapped stream
+  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   protected
     function GetStreamNameAsString: string; virtual;
       {Gets the name of the stream as a Delphi string: used by the GetStreamName
@@ -75,7 +82,7 @@ type
       the name returned, override GetStreamNameAsString instead}
     property BaseStream: TStream read fBaseStream;
       {Reference to wrapped TStream object}
-  protected
+  protected // Do not make strict
     { IStream methods }
     function Read(pv: Pointer; cb: Longint; pcbRead: PLongint): HResult;
       virtual; stdcall;
@@ -138,19 +145,15 @@ type
       constructor was true}
   end;
 
-
   {
   TPJHandleIStreamWrapper:
     Class that implements an IStream interface for a wrapped THandleStream
     object (or descendant such as TFileStream). Acts in a similar way to
     TPJIStreamWrapper except that file date stamps are returned by the Stat
     method.
-
-    Inheritance: TPJHandleIStreamWrapper => TPJIStreamWrapper
-      => [TInterfacedObject]
   }
   TPJHandleIStreamWrapper = class(TPJIStreamWrapper, IStream)
-  protected
+  protected // Do not make strict
     function Stat(out statstg: TStatStg; grfStatFlag: Longint): HResult;
       override; stdcall;
       {Retrieves the STATSTG structure for this stream. grfStatFlag can be
@@ -165,18 +168,15 @@ type
       and is freed when this object is destroyed if CloseStream is true}
   end;
 
-
   {
   TPJFileIStream:
     Class that implements a IStream interface on a file.
-
-    Inheritance: TPJFileIStream => TPJHandleIStreamWrapper => TPJIStreamWrapper
-      => [TInterfacedObject]
   }
   TPJFileIStream = class(TPJHandleIStreamWrapper, IStream)
+  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   private
-    fFileName: string;
-      {Name of file accessed by this object}
+    fFileName: string;  // Name of file accessed by this object
+  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   protected
     function GetStreamNameAsString: string; override;
       {Returns the name of the underlying file as the stream name}
@@ -493,7 +493,6 @@ begin
     Result := STG_E_INVALIDPOINTER;
 end;
 
-
 { TPJHandleIStreamWrapper }
 
 constructor TPJHandleIStreamWrapper.Create(const Stream: THandleStream;
@@ -526,7 +525,6 @@ begin
     statstg.atime := FileInfo.ftLastAccessTime;
   end;
 end;
-
 
 { TPJFileIStream }
 
