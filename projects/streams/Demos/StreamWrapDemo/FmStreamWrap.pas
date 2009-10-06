@@ -19,6 +19,14 @@ uses
   // delphiDabbler Stream Library
   PJStreamWrapper;
 
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+    {$WARN UNSAFE_CAST OFF}
+    {$WARN UNSAFE_TYPE OFF}
+  {$IFEND}
+{$ENDIF}
+
 type
   {
   TStreamWrapForm:
@@ -125,7 +133,7 @@ begin
   ReadBuffer(Len, SizeOf(Integer));
   // Now get string
   SetLength(Result, Len);
-  ReadBuffer(PChar(Result)^, Len);
+  ReadBuffer(Pointer(Result)^, Len * SizeOf(Char));
 end;
 
 procedure TStrStream.WriteString(AString: string);
@@ -136,7 +144,7 @@ begin
   Len := Length(AString);
   WriteBuffer(Len, SizeOf(Integer));
   // Now write out the string's characters
-  WriteBuffer(PChar(AString)^, Len);
+  WriteBuffer(Pointer(AString)^, Len * SizeOf(Char));
 end;
 
 end.

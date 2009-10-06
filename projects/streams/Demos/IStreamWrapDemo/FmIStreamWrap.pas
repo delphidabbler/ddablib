@@ -17,6 +17,14 @@ uses
   // Delphi
   ComCtrls, Menus, Buttons, StdCtrls, Controls, Classes, Forms, ActiveX;
 
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+    {$WARN UNSAFE_CAST OFF}
+    {$WARN UNSAFE_TYPE OFF}
+  {$IFEND}
+{$ENDIF}
+
 type
   {
   TIStreamWrapForm:
@@ -181,7 +189,8 @@ begin
   // Write out the contents of the memo to the current stream position
   // we assume this is the end of the stream
   OleCheck(
-    fIMemStm.Write(PChar(memoOutStr.Text), Length(memoOutStr.Text), nil)
+    fIMemStm.Write(
+      Pointer(memoOutStr.Text), Length(memoOutStr.Text) * SizeOf(Char), nil)
   );
   // Display size of stream in status bar
   ShowMemStmSize;
