@@ -17,14 +17,22 @@ uses
   // Delphi
   StdCtrls, ComCtrls, Classes, Controls, Forms;
 
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+    {$WARN UNSAFE_CAST OFF}
+    {$WARN UNSAFE_TYPE OFF}
+  {$IFEND}
+{$ENDIF}
+
 type
   {
   TIStreamWrapHelpForm:
     Help dialog form class.
   }
   TIStreamWrapHelpForm = class(TForm)
-    btnClose: TButton;
     reDisplay: TRichEdit;
+    btnClose: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
   end;
