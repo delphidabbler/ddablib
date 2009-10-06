@@ -47,8 +47,14 @@ uses
   // Delphi
   Classes;
 
-type
+{$UNDEF SUPPORTS_STRICT}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 18.0} // >= Delphi 2006
+    {$DEFINE SUPPORTS_STRICT}
+  {$IFEND}
+{$ENDIF}
 
+type
 
   {
   TPJStreamWrapper:
@@ -63,11 +69,11 @@ type
     any TStream descendant.
   }
   TPJStreamWrapper = class(TStream)
+  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   private
-    fBaseStream: TStream;
-      {The stream which the typed stream operates on}
-    fCloseStream: Boolean;
-      {Flag giving whether base stream is freed when this class is freed}
+    fBaseStream: TStream;  // The wrapped stream
+    fCloseStream: Boolean; // Flags if wrapped stream is freed in destructor
+  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   protected
     procedure SetSize(NewSize: Longint); override;
       {Sets the size of the stream to the given value if the operation is
