@@ -1,3 +1,14 @@
+Release 3.0 of 07 October 2009
+v3.0 of 07 October 2009
++ Removed deprecated PJResWriterStreams unit from project.
++ Removed demo programs for classes in PJResWriterStreams unit.
++ Switched off "unsafe" compiler warnings.
++ Updated demo code to compile with Delphi 2010.
++ Deleted user guide from project: superseded by project's online Wiki.
++ Removed DUnit tests.
++ Changed to Mozilla Public License.
++ Updated documentation.
+
 Release 2.0.1 of 23 November 2003
 v2.0.1 of 22 November 2003
 + Made changes in PJIStreams unit:
