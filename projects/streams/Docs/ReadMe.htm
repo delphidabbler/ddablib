@@ -151,42 +151,42 @@
 </h1>
 
 
-<h2 id="contents">
-	Contents
-</h2>
-
-<ul>
-	<li><a href="#description">Description</a></li>
-	<li><a href="#compatibility">Compatibility</a></li>
-	<li><a href="#demo">Demo Project</a></li>
-	<li><a href="#installation">Installation</a></li>
-	<li><a href="#update">Update History</a></li>
-	<li><a href="#license">License and Disclaimer</a></li>
-	<li><a href="#author">About the Author</a></li>
-</ul>
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
 <h2 id="description">
 	Description
 </h2>
 
 <p>
-	This class library provides some classes that can be used to extend the
-	functionality of Delphi's TStream classes.
+	This class library contains two units that provide some classes that can be
+	used to extend the functionality of Delphi's <var>TStream</var> classes.
 </p>
 
 <p>
-	Also included in the download are demo programs and a user guide.
+	The <em>PJStreamWrapper</em> unit provides a class that can wrap any
+	<var>TStream</var> descendant while the <var>PJIStreams</var> unit provides
+	classes that implement the <var>IStream</var> interface for various
+	<var>TStream</var> descendants.
 </p>
 
+<h2 id="demo">
+	Demo Projects
+</h2>
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+<p>
+	Two demo projects are provided in the download:
 </p>
+
+<ul class="spaced">
+	<li>
+		<em>IStreamWrap</em> demonstrates how to use the classes from the
+		<var>PJIStreams</var> unit that implement <var>IStream</var> interfaces
+		for wrapped streams.
+	</li>
+	<li>
+		The <em>StreamWrap</em> program demonstrates how to derive a class from
+		the <var>TPJSteamWrapper</var> class. The demo implements a class that
+		can read and write strings from and to a stream.
+	</li>
+</ul>
 
 <h2 id="compatibility">
 	Compatibility
@@ -197,36 +197,8 @@
 	with Delphi 4 and later.
 </p>
 
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="demo">
-	Demo Projects
-</h2>
-
 <p>
-	Two demo projects are provided:
-</p>
-
-<ul class="spaced">
-	<li>
-		<em>IStreamWrap</em> demonstrates how to use the classes from the
-		<var>PJIStreams</var> unit that implement <var>IStream</var> interfaces
-		for wrapped streams.
-	</li>
-	<li>
-		<em>StreamWrap</em> program demonstrates how to derive a class from the
-		<var>TPJSteamWrapper</var> class. The demo implements a class that can
-		read and write strings from and to a stream.
-	</li>
-</ul>
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+	The classes and demos are Unicode compatible.
 </p>
 
 <h2 id="installation">
@@ -234,21 +206,40 @@
 </h2>
 
 <p>
-	Simply extract the files from the <code>zip</code> file and store in the
-	required location on your hard disk. Once compiled, if the <code>.dcu</code>
-	files are placed in a folder on your Delphi search path then the
-	<code>.pas</code> files are not required - simply <strong>use</strong> the
-	units as required.
+	The streams units are provided in a zip file. Once the units are extracted
+	you can use them as required. There are several ways you may wish to do
+	this:
 </p>
+
+<ul>
+	<li>
+		The simplest way is to add the units to your projects as you need them.
+	</li>
+	<li>
+		To make the units easier to re-use you can add the folder where you
+		extracted them to your Delphi search path and then simply use the units
+		as required without needing to add them to your project.
+	</li>
+	<li>
+		For maximum portability you can add the units to a package. <a 
+		href="http://www.delphidabbler.com/url/install-comp"
+		>More info...</a>
+	</li>
+</ul>
 
 <p>
 	The demo files are stored in the Demos sub-folder - open the
 	<code>.bpg</code> file in Delphi to compile and examine the demos.
 </p>
 
+<h2 id="documentation">
+	Documentation
+</h2>
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+<p>
+	Documentation for the classes is online in the <a
+		href="http://www.delphidabbler.com/url/streams-wiki"
+	>Stream Extension Classes Wiki</a>.
 </p>
 
 <h2 id="update">
@@ -258,11 +249,6 @@
 <p>
 	A complete change log is provided in <code>ChangeLog.txt</code> that is
 	included in the download.
-</p>
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="license">
@@ -293,20 +279,23 @@
 </p>
 
 <p>
-	Contributors:
-</p>
-
-<p class="indent">
-	NONE
-</p>
-
-<p>
 	All relevant trademarks are acknowledged.
 </p>
 
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
+</p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
 </p>
 
 <h2 id="author">
@@ -331,8 +320,8 @@
 	<div class="comments">
 		Please
 		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the components, if you
-		have found a bug, or you want to suggest any updates.
+		let me know</a> if you have any comments about the classes, but please
+		use the Issue Tracker above to report bugs and request new features.
 	</div>
 
 	<div class="copyright">
