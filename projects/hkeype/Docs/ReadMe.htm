@@ -152,14 +152,15 @@
 </h2>
 
 <p>
-	<code>PJHKEYPropEdit.pas</code> defines a property editor for properties
-	of type <var>HKEY</var> &ndash; i.e. registry root keys. The editor causes a
-	drop-down list of all the registry root keys supported by Delphi to be
-	displayed in the object inspector for any property of type <var>HKEY</var>.
+	<code>PJHKEYPropEdit.pas</code> defines a property editor named
+	<var>TPJHKEYPropEditor</var> for properties of type <var>HKEY</var> &ndash;
+	i.e. registry root keys. The editor causes a drop-down list of all the
+	registry root keys supported by Delphi to be displayed in the object
+	inspector for any property of type <var>HKEY</var>.
 </p>
 
 <p>
-	Such a property is exposed by my <var><a 
+	Such a property is exposed by the <var><a 
 		href="http://www.delphidabbler.com/software?id=wdwstate"
 	>TPJRegWdwState</a>	</var> component.
 </p>
@@ -198,7 +199,7 @@
 
 <p>
 	You can now intall the property editor into the Delphi IDE. For Delphi 2
-	install <code>PJHKEYPropEdit.pas</code> as if it were a components. For
+	install <code>PJHKEYPropEdit.pas</code> as if it were a component. For
 	Delphi 3 onwards you must include <code>PJHKEYPropEdit.pas</code> in a
 	design time package. If you need help doing this
 	<a href="http://www.delphidabbler.com/url/install-comp">see here</a>.
@@ -221,9 +222,10 @@
 	This source code is subject to the Mozilla Public License Version 1.1 (the
 	&quot;License&quot;); you may not use this program except in compliance
 	with the License. You may obtain a copy of the License at
+	copy of the License at
 	<a
-		href="http://www.mozilla.org/MPL/MPL-1.1."
-	>http://www.mozilla.org/MPL/</a>.
+		href="http://www.mozilla.org/MPL/MPL-1.1"
+	>http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
@@ -252,6 +254,22 @@
 	All relevant trademarks are acknowledged.
 </p>
 
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
+
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
+</p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
+
 <h2 id="author">
 	About the Author
 </h2>
@@ -272,8 +290,8 @@
 	<div class="comments">
 		Please
 		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the components, if you
-		have found a bug, or you want to suggest any updates.
+		let me know</a> if you have any comments about the classes, but please
+		use the Issue Tracker above to report bugs and request new features.
 	</div>
 	<div class="copyright">
 		This document is copyright &copy; 2005-2009, P D Johnson,
