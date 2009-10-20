@@ -1,7 +1,7 @@
 @rem ---------------------------------------------------------------------------
 @rem Script used to create help file for Version Information Component.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008-2009
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2009
 @rem
 @rem Requires evironment variable HC set to full file path to MS WinHelp
 @rem compiler (HCRTF.exe).
