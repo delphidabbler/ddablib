@@ -13,22 +13,28 @@
 
 setlocal
 
-cd ..
-
+set ReleaseDir=Release
 set OutFile=Release\dd-wdwstate.zip
+set DocsDir=Docs
+set HelpDir=Help
+set DemoDir=Demos
 
-del %OutFile%
+cd .\..
+
+if exist %ReleaseDir% rmdir /S /Q %ReleaseDir%
+mkdir %ReleaseDir%
 
 zip %OutFile% -9 PJWdwState.pas
 zip %OutFile% -9 PJWdwState.dcr
 
-zip %OutFile% -j -9 Docs\ChangeLog.txt
-zip %OutFile% -j -9 Docs\MPL.txt
-zip %OutFile% -j -9 Docs\ReadMe.htm
+zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
+zip %OutFile% -j -9 %DocsDir%\MPL.txt
+zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
 
-zip %OutFile% -j -9 Help\PJWdwState.hlp
-zip %OutFile% -j -9 Help\PJWdwState.als
+zip %OutFile% -j -9 %HelpDir%\PJWdwState.hlp
+zip %OutFile% -j -9 %HelpDir%\PJWdwState.als
 
-zip %OutFile% -r -9 Demos\*.*
+zip %OutFile% -r -9 %DemoDir%\*.*
+zip %OutFile% -d %DemoDir%\*.svn\*
 
 endlocal
