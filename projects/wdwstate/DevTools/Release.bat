@@ -22,8 +22,6 @@ del %OutFile%
 zip %OutFile% -9 PJWdwState.pas
 zip %OutFile% -9 PJWdwState.dcr
 
-zip %OutFile% -j -9 ..\HKeyPE\PJHKEYPropEdit.pas
-
 zip %OutFile% -j -9 Docs\ChangeLog.txt
 zip %OutFile% -j -9 Docs\MPL.txt
 zip %OutFile% -j -9 Docs\ReadMe.htm
