@@ -264,8 +264,11 @@
 </h3>
 
 <p>
-	The help file is not compatible with the Delphi 2, and Delphi 2005 and late
-	IDEs, although it can be used separately.
+	The help file is not compatible with the Delphi 2, and Delphi 2005 and later
+	IDEs, although it can be used separately. As an alternative you can get help
+	from the <a
+		href="http://www.delphidabbler.com/url/verinfo-wiki"
+	>Version Information Component Wiki</a>.
 </p>
 
 <p class="gototop">
@@ -277,15 +280,56 @@
 </h2>
 
 <p>
-	In these instructions <code><strong>$(DELPHI)</strong></code> is to be
-	taken to represent the path where the appropriate version of Delphi was
-	installed. Similarly <code><strong>$(BDS)</strong></code> refers to the
-	installation path of a version of the Borland Developement System.
+	The <em>Version Information Component</em> is supplied in a zip file. Before
+	installing you need to extract all the files from the zip file. The
+	following files will be extracted:
+</p>
+
+<ul>
+	<li>
+		<strong><code>PJVersionInfo.pas</code></strong> &ndash; Component
+		source code.
+	</li>
+	<li>
+		<strong><code>PJVersionInfo.dcr</code></strong> &ndash; Component
+		palette glyph.
+	</li>
+	<li>
+		<code>PJVersionInfo.hlp</code> &ndash; Help file that integrates into
+		the Delphi 3-7 IDE.
+	</li>
+	<li>
+		<code>PJVersionInfo.als</code> &ndash; Keyword file required when
+		integrating the help file with Delphi 6 and 7.
+	</li>
+	<li>
+		<code>ReadMe.htm</code> &ndash; This read-me file.
+	</li>
+	<li>
+		<code>ChangeLog.txt</code> &ndash; Change log.
+	</li>
+	<li>
+		<code>MPL.txt</code> &ndash; Mozilla Public License.
+	</li>
+</ul>
+
+<p>
+	In addition you will find the the source code of two <a
+		href="#demo"
+	>demo projects</a> along with readme files in the <code>Demos\1</code> and
+	<code>Demos\2</code> sub-directories.
 </p>
 
 <p>
-	Note that the help file included in the download can only integrate with the
-	IDE in Delphi 3-7.
+	You can now intall the component into the Delphi IDE.
+</p>
+
+<p>
+	For Delphi 3 onwards you must include <code>PJVersionInfo.pas</code> and
+	<code>PJVersionInfo.dcr</code> in a design time package that is installed
+	into the Delphi IDE. If you need help doing this <a
+		href="http://www.delphidabbler.com/url/install-comp"
+	>see here</a>.
 </p>
 
 <div class="pullout">
@@ -298,219 +342,12 @@
 </div>
 
 <p>
-	The installation method differs depending on the version of Delphi.
-	Therefore the instructions are divided as follows:
+	Note that the help file included in the download can only integrate with the
+	IDE in Delphi 3-7. For information on how to do this, see <a
+		href="http://www.delphidabbler.com/articles?article=15"
+	>this article</a>.
 </p>
 
-<ul>
-	<li><a href="#bds">Installation with Delphi 2005 &amp; Later</a></li>
-	<li><a href="#d3">Installation with Delphi 3 to 7</a></li>
-	<li><a href="#d2">Installation with Delphi 2</a></li>
-</ul>
-
-<h3 id="bds">
-	Installation with Delphi 2005 &amp; Later
-</h3>
-
-<ol class="spaced">
-	<li>
-		Unzip the downloaded zip file into a folder, preserving the directory
-		structure.
-	</li>
-	<li>
-		Copy <code>PJVersionInfo.pas</code> and <code>PJVersionInfo.dcr</code>
-		to where you wish to install into Delphi. This will probably be a
-		sub-folder of <code>$(BDS)\lib</code>.
-	</li>
-	<li>
-		To install the component it must be included in a design package. You
-		can either create a new design package or add the component to an
-		existing one. These instructions assume you will be installing into an
-		existing package.
-		<ul>
-			<li>
-				Open the required package. Select <em>File | Open</em> menu and
-				choose a suitable package source file. You may decide to install
-				into the &quot;user&quot; package. This is found in <code>
-				$(BDS)\Lib</code> and is named <code>dclusr.dpk</code>. You can
-				select this file or the associated <code>dclusr.bdsproj</code>
-				file.
-			</li>
-			<li>
-				The package (with <code>.bpl</code> extension) will now be
-				displayed in the Project Manager. If the package has not been
-				installed right click the <code>.bpl</code> entry in the Project
-				Manager and select <em>Install</em>. Dismiss any resulting
-				message dialog.
-			</li>
-			<li>
-				Now right click the <code>.bpl</code> entry again and select
-				<em>Add</em>. The &quot;Add&quot; dialog box will be displayed.
-				Click the dialog&#39;s <em>Browse</em> button then select <code>
-				PJVersionInfo.pas</code> from the resulting file open dialog.
-				The full path to the file should now be displayed in the
-				&quot;Add&quot; dialog&#39;s <em>Unit file name</em> edit box.
-				Click <em>OK</em> to add the component to the package.
-			</li>
-			<li>
-				Back in the Project Manager, check that
-				<code>PJVersionInfo.pas</code> and
-				<code>PJVersionInfo.dcr</code> appear under the package&#39;s
-				&quot;Contains&quot; node. If so, right click the
-				<code>.bpl</code> entry again and select <em>Compile</em>. The
-				package will now be recompiled and, if all is well, a message
-				should be displayed indicating that <var>TPJVersionInfo</var>
-				has been registered. The component should now appear in the
-				&quot;DelphiDabbler&quot; section of the Tool Palette. (Note
-				this will only appear when a form is selected in the designer).
-			</li>
-			<li>
-				Close the package project using the <em>File | Close</em> menu
-				item. If a prompt appears offering to save the package project,
-				accept this.
-			</li>
-		</ul>
-	</li>
-	<li>
-		If you wish you can now delete <code>PJVersionInfo.pas</code> from the
-		place where you copied it.
-	</li>
-	<li>
-		The supplied demo programs can be loaded into the IDE and compiled and
-		run as required.
-	</li>
-</ol>
-
-<h3 id="d3">
-	Installation with Delphi 3 to 7
-</h3>
-
-<ol class="spaced">
-	<li>
-		Unzip the downloaded zip file into a folder, preserving the directory
-		structure.
-	</li>
-	<li>
-		Copy <code>PJVersionInfo.pas</code> and <code>PJVersionInfo.dcr</code>
-		to where you wish to install into Delphi. This will probably be a
-		sub-folder of <code>$(DELPHI)\lib</code>.
-	</li>
-	<li>
-		To install the component it must be included in a design package. You
-		can either create a new design package or add the component to an
-		existing one. These instructions assume you will be installing into an
-		existing package.
-		<ul>
-			<li>
-				Open the required package. Select <em>File | Open</em> menu,
-				make sure that files with the <code>*.dpk</code> extenstion are
-				being displayed, and choose a suitable package source file. You
-				may decide to install into the &quot;user&quot; package. This is
-				found in <code>$(DELPHI)\Lib</code> and is named
-				<code>dclusr.dpk</code> or <code>dclusrXX.dpk</code> where
-				<code>XX</code> is a version number.
-			</li>
-			<li>
-				The package editor will now be displayed. If its
-				<em>Install</em> button is not disabled then click it to ensure
-				the package is installed into Delphi. Dismiss any resulting
-				message dialog.
-			</li>
-			<li>
-				Now click the package editor&#39;s <em>Add</em> button. The
-				&quot;Add&quot; dialog box will be displayed. Click the
-				dialog&#39;s <em>Browse</em> button then select
-				<code>PJVersionInfo.pas</code> from the resulting file open
-				dialog. The full path to the file should now be displayed in the
-				&quot;Add&quot; dialog&#39;s <em>Unit file name</em> edit box.
-				Click <em>OK</em> to add the component to the package.
-			</li>
-			<li>
-				Click the package editor&#39;s <em>Compile</em> button. The
-				package will now be recompiled and, if all is well, a message
-				should be displayed indicating that <var>TPJVersionInfo</var>
-				has been registered. The component should now appear in the
-				Component Palette on the &quot;DelphiDabbler&quot; tab.
-			</li>
-			<li>
-				Now close the package editor window. You will probably be
-				prompted to save the package. Agree to this and the package
-				source file will be updated with information about the new
-				component.
-			</li>
-		</ul>
-	</li>
-	<li>
-		If you wish you can now delete <code>PJVersionInfo.pas</code> from the
-		place where you copied it.
-	</li>
-	<li>
-		The simplest way to install the help file is to use my
-		<a href="http://www.delphidabbler.com/software?id=chi">Component Help
-		Installer Expert</a>. The download includes an <code>.als</code> a-link
-		keyword file for use with Delphi 6 and 7.
-		<em>Component Help Installer</em> v2.2 or later can also install the
-		keyword file for you. If you prefer to install manually,
-		<a href="http://www.delphidabbler.com/articles?article=15">this
-		article</a> explains the process.
-	</li>
-	<li>
-		The supplied demo programs can be loaded into Delphi and compiled and
-		run as required. <span class="highlight">Please note:</span> the demo
-		programs do not compile and run correctly under Delphi 3.
-	</li>
-</ol>
-
-<h3 id="d2">
-	Installation with Delphi 2
-</h3>
-
-<ol class="spaced">
-	<li>
-		Unzip the downloaded zip file into a folder, preserving the directory
-		structure.
-	</li>
-	<li>
-		Copy <code>PJVersionInfo.pas</code> and <code>PJVersionInfo.dcr</code>
-		to where you wish to install into Delphi. This will probably be a
-		sub-folder of <code>$(DELPHI)\lib</code>.
-	</li>
-	<li>
-		Install into Delphi as follows:
-		<ul>
-			<li>
-				Select the <em>Component | Install</em> menu option to display
-				the &quot;Install Components&quot; dialog box.
-			</li>
-			<li>
-				Click the <em>Add</em> button to display the &quot;Add
-				Module&quot; dialog box.
-			</li>
-			<li>
-				Click the <em>Browse</em> button and choose
-				<code>PJVersionInfo.pas</code> from the resulting standard file
-				open dialog box and click <em>Open</em>.
-			</li>
-			<li>
-				This returns you to the &quot;Install Components&quot; dialog
-				box. Click <em>OK</em> here to rebuild the component
-				library.
-			</li>
-			<li>
-				<var>TPJVersionInfo</var> should now appear on the
-				&quot;DelphiDabbler&quot; tab of the component palette.
-			</li>
-		</ul>
-	</li>
-	<li>
-		If you wish you can now delete <code>PJVersionInfo.pas</code> from the
-		place where you copied it.
-	</li>
-	<li>
-		<span class="highlight">Please note:</span> the demo programs do not
-		compile and run correctly under Delphi 2.
-	</li>
-</ol>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -535,6 +372,10 @@
 		help file.
 	</li>
 </ol>
+
+<p>
+	Delphi 3 or later is required to compile the demo projects.
+</p>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -604,6 +445,25 @@
 	<code>MPL.txt</code>.
 </p>
 
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
+
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
+</p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -631,8 +491,9 @@
 	<div class="comments">
 		Please
 		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the components, if you
-		have found a bug, or you want to suggest any updates.
+		let me know</a> if you have any comments about the component, but please
+		use the Issue Tracker noted above to report bugs and request new
+		features.
 	</div>
 
 	<div class="copyright">
