@@ -2057,22 +2057,22 @@ HS
 0
 IDH_EG1
 
-2035
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fmodern Courier New;}{\f3\fswiss Arial;}{\f4\fswiss \fprq2 System;}{\f5\fswiss \fcharset1 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJVersionInfo.NumTranslations
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPJVersionInfo\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0           \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf0 See also\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf0           \plain\f3\fs18\cf1 \protect <HS 6>\plain\f3\fs18\cf0 Example\plain\f3\fs18\cf1 \protect </HS 6>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+1987
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJVersionInfo.NumTranslations
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJVersionInfo\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 Example\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 Use this property to find the number of translations in a file's version information.
+\par \plain\f0\fs18\cf2 Use this property to find the number of translations in a file's version information.
 \par 
-\par \plain\f2\fs18\cf1 \protect <KP 3>\plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  NumTranslations: Integer;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  NumTranslations: Integer;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f5\fs18\cf0\b Description\plain\f5\fs18\cf0 
-\par \plain\f5\fs8\cf0 
-\par \plain\f5\fs18\cf0 Run time and read only. Version information resources can contain variable information in more that one langauge / character set combination. TPJVersionInfo defines each of these combinations as a "Translation". This property shows how many translations are available in a file's version information. The property has value -1 if the file contains no translations or if the file has no version information.
-\par \plain\f5\fs8\cf0 
-\par \plain\f5\fs18\cf0 To learn more about the multi-lingual capabilities of version information resources read the \plain\f5\fs18\cf1 \protect <HS 5>\plain\f5\fs18\cf0 VERSIONINFO\plain\f5\fs18\cf1 \protect </HS 5>\plain\f5\fs18\cf0  topic in the Win32 help file.\plain\f3\fs18\cf0 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Run time and read only. Version information resources can contain variable information in more that one langauge / character set combination. TPJVersionInfo defines each of these combinations as a "Translation". This property shows how many translations are available in a file's version information. The property has value \plain\f2\fs18\cf2 0\plain\f0\fs18\cf2  if the file contains no translations or if the file has no version information.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 To learn more about the multi-lingual capabilities of version information resources read the \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 VERSIONINFO\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  topic in the Win32 help file.
 \par }
 
 [Footnotes]
