@@ -1,7 +1,12 @@
+Release 3.2 of 09 November 2009
++ Changed method used to get character set descriptions. These are now obtained from operating system where possible instead of from some hard-wired values.
++ Added compiler directive to switch of unsafe code warnings on compilers that support the directive.
++ Added copy of Mozilla Public License.
++ Corrected error in help file.
++ Modified Demo 2 to enable it to compile on Delphi 2 and 3.
++ Updated documentation and included shortcut file that links to component Wiki.
+
 Release 3.1.1 of 11 December 2005
-PJVersionInfo v3.1.1 of 11 December 2005
-VIDemo v1.1 of 10 December 2005
-HelpEgs v1.1 of 10 December 2005
 + Changed component to Mozilla public license.
 + Fixed minor bug in VIDemo project.
 + Revised HelpEgs demo project to access related help file topics.
@@ -9,23 +14,14 @@ HelpEgs v1.1 of 10 December 2005
 + Updated HTML documentation.
 
 Release 3.1 of 07 September 2003
-PJVersionInfo v3.1 of 07 September 2003
-VIDemo v1.0 of 17 February 2002
-HelpEgs v1.0 of 17 February 2002
 + Fixed to be compatible with C++ Builder - direct access to fields of TVSFixedFileInfo in property declarations were replaced by calls to an indexed property getter function.
 
 Release 3.0.1 of 08 July 2003
-PJVersionInfo v3.0.1 of 08 July 2003
-VIDemo v1.0 of 17 February 2002
-HelpEgs v1.0 of 17 February 2002
 + Changed component palette from PJSoft to DelphiDabbler.
 + Updated HTML documentation.
 + Changed copyright message in help file.
 
 Release 3.0 of 17 February 2002
-PJVersionInfo v3.0 of 17 February 2002
-VIDemo v1.0 of 17 February 2002
-HelpEgs v1.0 of 17 February 2002
 + Added ability to access all "translations" stored in a file's version information, rather than just first one. This has been done so that code using earlier versions of this component should continue to work unchanged.
 + Added new property to expose fixed file information record.
 + Added new "string array" property to give access to string information by name: this property can access any custom string information if the name is known.
@@ -41,21 +37,17 @@ HelpEgs v1.0 of 17 February 2002
 + Added two demo programs, one is a sample version information reading program and the other implements examples from the help file.
 
 Release 2.1 of 28 November 1999
-VInfo v2.1 of 28 November 1999
 + Changed unit name from VerInfo to VInfo to allow component to install under Delphi 3 & 4 (VerInfo clashes with an existing unit in these versions).
 + Removed superfluous conditional compilation directives.
 + Updated HTML documentation to separate 16 bit from 32 bit version, to to include installation notes for Delphi 3/4 and to include update history.
 
 Release 2.0.1 of 08 July 1999 (release also included 16 bit v1.0.1)
-VerInfo v2.0.1 of 09 April 1999
 + Changed palette where component installs to "PJ Stuff" from "Own".
 + Added HTML documentation (shared documentation with Release 1.0.1).
 
-Unreleased
-VerInfo v2.0 of 06 December 1998
+Unreleased v2.0 of 06 December 1998
 + Forked development - 32 bit development (this fork) began with v2.0 while the 16 bit version continued with v1.0.1
 + Revised for use with Win32 - not backwards compatible with v1.0
 
-Unreleased
-VerInfo v1.0 of 26 April 1998
+Unreleased v1.0 of 26 April 1998
 + Original version - 16 bit only.
