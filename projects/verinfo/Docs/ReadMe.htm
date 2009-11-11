@@ -151,11 +151,11 @@
 
 <ul>
 	<li><a href="#description">Description</a></li>
-	<li><a href="#compatibility">Compatibility</a></li>
 	<li><a href="#installation">Installation</a></li>
 	<li><a href="#demo">Demo Projects</a></li>
 	<li><a href="#update">Update History</a></li>
 	<li><a href="#license">License and Disclaimer</a></li>
+	<li><a href="#bugs">Bugs and Feature Requests</a></li>
 	<li><a href="#author">About the Author</a></li>
 </ul>
 
@@ -221,6 +221,24 @@
 </p>
 
 <h3>
+	Compatibility
+</h3>
+
+<p>
+	<var>TPJVersionInfo</var> compiles on all Win32 versions and personalities
+	of Delphi. It has been tested with Delphi versions 2, 3, 4, 6, 7, 2006 
+	and 2010. It is assumed to work on other versions.
+</p>
+
+<p>
+	The unit name changed to <code>PJVersionInfo</code> at release 3 - this
+	means that programs using earlier versions will need to be modified (or to
+	have an alias set in Delphi&#39;s Project Options) before being recompiled
+	using the new version. Functionally, the component is backward compatible
+	with earlier versions.
+</p>
+
+<h3>
 	Further information
 </h3>
 
@@ -233,51 +251,18 @@
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
-<h2 id="compatibility">
-	Compatibility
-</h2>
-
-<h3>
-	Delphi compatibility
-</h3>
-
-<p>
-	<var>TPJVersionInfo</var> compiles on all Win32 versions and personalities
-	of Delphi. It has been tested with Delphi versions 2, 3, 4, 6, 7, 2006 
-	and 2010. It is assumed to work on other versions.
-</p>
-
-<h3>
-	Compatibility with previous versions
-</h3>
-
-<p>
-	The unit name changed to <code>PJVersionInfo</code> at release 3 - this
-	means that programs using earlier versions will need to be modified (or to
-	have an alias set in Delphi&#39;s Project Options) before being recompiled
-	using the new version. Functionally, the component is backward compatible
-	with earlier versions.
-</p>
-
-<h3>
-	Help system compatibility
-</h3>
-
-<p>
-	The help file is not compatible with the Delphi 2, and Delphi 2005 and later
-	IDEs, although it can be used separately. As an alternative you can get help
-	from the <a
-		href="http://www.delphidabbler.com/url/verinfo-wiki"
-	>Version Information Component Wiki</a>.
-</p>
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
 <h2 id="installation">
 	Installation
 </h2>
+
+<div class="pullout">
+	<strong>Important Note:</strong> If you are updating from an earlier version
+	of this component and have installed the <em>DelphiDabbler</em> About Box
+	Component (<var>TPJAboutBoxDlg</var>) you may need to uninstall it before
+	updating this component, and re-install the about box component once the
+	update has been installed. If the About Box Component is earlier that v3.2
+	it will need to be updated to the most recent version.
+</div>
 
 <p>
 	The <em>Version Information Component</em> is supplied in a zip file. Before
@@ -311,17 +296,20 @@
 	<li>
 		<code>MPL.txt</code> &ndash; Mozilla Public License.
 	</li>
+	<li>
+		<code>Wiki.URL</code> &ndash; Shortcut to online component Wiki.
+	</li>
 </ul>
 
 <p>
-	In addition you will find the the source code of two <a
+	In addition to the above files you will find the the source code of two <a
 		href="#demo"
 	>demo projects</a> along with readme files in the <code>Demos\1</code> and
 	<code>Demos\2</code> sub-directories.
 </p>
 
 <p>
-	You can now intall the component into the Delphi IDE.
+	You can now install the component into the Delphi IDE.
 </p>
 
 <p>
@@ -332,20 +320,15 @@
 	>see here</a>.
 </p>
 
-<div class="pullout">
-	<strong>Important Note:</strong> If you are updating from an earlier version
-	of this component and have installed the <em>DelphiDabbler</em> About Box
-	Component (<var>TPJAboutBoxDlg</var>) you may need to uninstall it before
-	updating this component, and re-install the about box component once the
-	update has been installed. If the About Box Component is earlier that v3.2
-	it will need to be updated to the most recent version.
-</div>
-
 <p>
 	Note that the help file included in the download can only integrate with the
 	IDE in Delphi 3-7. For information on how to do this, see <a
 		href="http://www.delphidabbler.com/articles?article=15"
-	>this article</a>.
+	>this article</a>. Users of other versions of Delphi can either use the help
+	file as a stand-alone file (in which case some links won't work) or you can
+	use the <a
+		href="http://www.delphidabbler.com/url/verinfo-wiki"
+	>Version Information Component Wiki</a>.
 </p>
 
 
@@ -365,17 +348,14 @@
 	<li>
 		<code>VIDemo.dpr</code> is an application that can extract and display
 		version information from any program (provided that the program has
-		valid version information).
+		valid version information). <strong>Note:</strong> This demo requires
+		Delphi 4 or later.
 	</li>
 	<li>
 		<code>HelpEgs.dpr</code> implements all the examples from the component
 		help file.
 	</li>
 </ol>
-
-<p>
-	Delphi 3 or later is required to compile the demo projects.
-</p>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -404,7 +384,8 @@
 	the License. You may obtain a copy of the License at
 	<a
 		href="http://www.mozilla.org/MPL/MPL-1.1"
-	>http://www.mozilla.org/MPL/MPL-1.1</a>.
+	>http://www.mozilla.org/MPL/MPL-1.1</a> or see the file <code>MPL.txt</code>
+	that is included in the download.
 </p>
 
 <p>
@@ -440,10 +421,6 @@
 	All relevant trademarks are acknowledged.
 </p>
 
-<p class="pullout">
-	A copy of the license is included in the download &ndash see
-	<code>MPL.txt</code>.
-</p>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
