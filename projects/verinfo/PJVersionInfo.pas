@@ -1,4 +1,4 @@
-{ 
+{
  * PJVersionInfo.pas
  *
  * Version Information Component (32 bit). The component reads version
@@ -37,6 +37,19 @@
 
 unit PJVersionInfo;
 
+// Determine if certain required features are supported
+{$DEFINE Supports_Assert}
+{$DEFINE Supports_ResourceString}
+{$IFDEF VER90} // Delphi 2 doesn't support resourcestring or Assert
+  {$UNDEF Supports_Assert}
+  {$UNDEF Supports_ResourceString}
+{$ENDIF}
+// Switch off unsafe code warnings if switch supported
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0}  // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
+{$ENDIF}
 
 interface
 
@@ -81,10 +94,8 @@ type
     function GetStringFileInfoByIdx(Index: Integer): string;
     function GetFixedFileInfoItemByIdx(Index: Integer): DWORD;
   private
-    fPInfoBuffer: PChar;
-      {Pointer to info buffer}
-    fPTransBuffer: Pointer;
-      {Pointer to translation buffer}
+    fPInfoBuffer: PChar;      // Pointer to info buffer
+    fPTransBuffer: Pointer;   // Pointer to translation buffer
     procedure GetInfoBuffer(Len: DWORD);
       {Creates an info buffer of required size}
     procedure GetTransBuffer(Len: UINT);
@@ -111,8 +122,8 @@ type
       read fFixedFileInfo;
       {Exposes the whole fixed file info record: following properties expose
       the various fields of it}
-    property FileVersionNumber: TPJVersionNumber read
-      GetFileVersionNumber;
+    property FileVersionNumber: TPJVersionNumber
+      read GetFileVersionNumber;
       {Version number of file, in numeric format, from fixed file info}
     property ProductVersionNumber: TPJVersionNumber
       read GetProductVersionNumber;
@@ -223,14 +234,129 @@ uses
   SysUtils;
 
 
-{ Component registration routine }
-
 procedure Register;
   {Register this component}
 begin
   RegisterComponents('DelphiDabbler', [TPJVersionInfo]);
 end;
 
+type
+  // ANSI version of CPINFOEX: provides information about a code page
+  _cpinfoexA = packed record
+    MaxCharSize: UINT;
+      {max length in bytes of a character in the code page}
+    DefaultChar: array[0..MAX_DEFAULTCHAR-1] of Byte;
+      {default character used to translate strings to the specific code page}
+    LeadByte: array[0..MAX_LEADBYTES-1] of Byte;
+      {fixed-length array of lead byte ranges: all elements null if none}
+    UnicodeDefaultChar: WideChar;
+      {unicode default char used in translations from the specific code page}
+    CodePage: UINT;
+      {code page value}
+    CodePageName: array[0..MAX_PATH-1] of AnsiChar;
+      {full localised name of the code page}
+  end;
+  CPINFOEXA = _cpinfoexA;
+  PCPInfoExA = ^CPINFOEXA;
+  TCPInfoExA = CPINFOEXA;
+
+  // Unicode version of CPINFOEX: provides information about a code page
+  _cpinfoexW = packed record
+    MaxCharSize: UINT;
+      {max length in bytes of a character in the code page}
+    DefaultChar: array[0..MAX_DEFAULTCHAR-1] of Byte;
+      {default character used to translate strings to the specific code page}
+    LeadByte: array[0..MAX_LEADBYTES-1] of Byte;
+      {fixed-length array of lead byte ranges: all elements null if none}
+    UnicodeDefaultChar: WideChar;
+      {unicode default char used in translations from the specific code page}
+    CodePage: UINT;
+      {code page value}
+    CodePageName: array[0..MAX_PATH-1] of WideChar;
+      {full localised name of the code page}
+  end;
+  CPINFOEXW = _cpinfoexW;
+  PCPInfoExW = ^CPINFOEXW;
+  TCPInfoExW = CPINFOEXW;
+
+  // Set TCPInfoEx etc to required ANSI or Unicode version of structure
+  {$IFDEF UNICODE}
+  TCPInfoEx = TCPInfoExW;
+  PCPInfoEx = PCPInfoExW;
+  {$ELSE}
+  TCPInfoEx = TCPInfoExA;
+  PCPInfoEx = PCPInfoExA;
+  {$ENDIF}
+  CPINFOEX = TCPInfoEx;
+
+var
+  // Pointer to Windows API GetCPInfoEx function if it exists or to GetCPInfoAlt
+  // otherwise
+  GetCPInfoExFn: function (CodePage: UINT; dwFlags: DWORD;
+    var lpCPInfoEx: TCPInfoEx): BOOL; stdcall;
+
+const
+  // Import name of GetCPInfoEx. Unicode and ANSI versions.
+  {$IFDEF UNICODE}
+  cGetCPInfoEx = 'GetCPInfoExW';
+  {$ELSE}
+  cGetCPInfoEx = 'GetCPInfoExA';
+  {$ENDIF}
+
+function GetCPInfoAlt(CodePage: UINT; dwFlags: DWORD;
+  var lpCPInfoEx: TCPInfoEx): BOOL; stdcall;
+  {Local implementation of GetCPInfoEx, for use on OSs that don't support
+  GetCPInfoEx. Calls older GetCPInfo API function and calculates members of
+  TCPInfoEx not provided by GetCPInfo.
+  }
+  // ---------------------------------------------------------------------------
+  procedure CopyByteArray(const Src: array of Byte; var Dest: array of Byte);
+    {Makes a copy of a byte array.
+      @param Src [in] Byte array to be copied.
+      @param Dest [in/out] In: Array to receive copy: must be same size as Src.
+        Out: Receives copy of Src.
+    }
+  var
+    Idx: Integer; // loops thru array
+  begin
+    {$IFDEF Supports_Assert}
+    Assert((Low(Src) = Low(Dest)) and (High(Src) = High(Dest)));
+    {$ENDIF}
+    for Idx := Low(Src) to High(Src) do
+      Dest[Idx] := Src[Idx];
+  end;
+  // ---------------------------------------------------------------------------
+{$IFDEF Supports_ResourceString}
+resourcestring
+{$ELSE}
+const
+{$ENDIF}
+  sCodePage = 'Code Page %d'; // description of code page if OS doesn't provide
+var
+  OldInfo: TCPInfo; // old style code page info structure for Win95/NT4
+begin
+  // We haven't got GetCPInfoEx: use old GetCPInfo to get some info
+  Result := GetCPInfo(CodePage, OldInfo);
+  if Result then
+  begin
+    // We update TCPInfoEx structure from old style structure and calculate
+    // additional info
+    // copy over from old style TCPInfo structure
+    lpCPInfoEx.MaxCharSize := OldInfo.MaxCharSize;
+    CopyByteArray(OldInfo.DefaultChar, lpCPInfoEx.DefaultChar);
+    CopyByteArray(OldInfo.LeadByte, lpCPInfoEx.LeadByte);
+    // no new default char
+    lpCPInfoEx.UnicodeDefaultChar := #0;
+    // store reference to code page
+    lpCPInfoEx.CodePage := CodePage;
+    // description is simply "Code Page NNN"
+    StrPLCopy(
+      lpCPInfoEx.CodePageName,
+      Format(sCodePage, [CodePage]),
+      SizeOf(lpCPInfoEx.CodePageName)
+    );
+  end;
+end;
 
 { TPJVersionInfo }
 
@@ -288,39 +414,43 @@ end;
 function TPJVersionInfo.GetCharSet: string;
   {Read access method for CharSet property: return string describing character
   set if we have some version info and empty string if we haven't}
-const
-  // Map code numbers to char-set names
-  cCharSets: array[0..11] of record
-    Code: Word;   // char set code
-    Str: string;  // associated name of char set
-  end = (
-    ( Code:    0; Str: '7-bit ASCII'                        ),
-    ( Code:  932; Str: 'Windows, Japan (Shift - JIS X-0208)'),
-    ( Code:  949; Str: 'Windows, Korea (Shift - KSC 5601)'  ),
-    ( Code:  950; Str: 'Windows, Taiwan (GB5)'              ),
-    ( Code: 1200; Str: 'Unicode'                            ),
-    ( Code: 1250; Str: 'Windows, Latin-2 (Eastern European)'),
-    ( Code: 1251; Str: 'Windows, Cyrillic'                  ),
-    ( Code: 1252; Str: 'Windows, Multilingual'              ),
-    ( Code: 1253; Str: 'Windows, Greek'                     ),
-    ( Code: 1254; Str: 'Windows, Turkish'                   ),
-    ( Code: 1255; Str: 'Windows, Hebrew'                    ),
-    ( Code: 1256; Str: 'Windows, Arabic'                    )
-  );
 var
-  I: Integer; // loop control
+  Info: TCPInfoEx;  // receives code page info
+  CP: Word;         // code page
+{$IFDEF Supports_ResourceString}
+resourcestring
+{$ELSE}
+const
+{$ENDIF}
+  // Special code page messages
+  sUnknownCP = '%d (Unknown Code Page)';  // unknown
+  // Messages for pages API can't return (managed apps only)
+  sUTF16LE  = '%d (Unicode UTF-16, little endian byte order)';
+  sUTF16BE  = '%d (Unicode UTF-16, big endian byte order)';
+  sUTF32LE  = '%d (Unicode UTF-32, little endian byte order)';
+  sUTF32BE  = '%d (Unicode UTF-32, big endian byte order)';
 begin
   Result := '';
   if fHaveInfo then
   begin
-    // We've have ver info: scan table of codes looking for required entry
-    for I := Low(cCharSets) to High(cCharSets) do
-      if GetCharSetCode = cCharSets[I].Code then
+    CP := GetCharSetCode;
+    case CP of
+      // Check for char codes only available in managed apps (API call won't
+      // find them)
+      1200:   Result := Format(sUTF16LE, [CP]);
+      1201:   Result := Format(sUTF16BE, [CP]);
+      12000:  Result := Format(sUTF32LE, [CP]);
+      12001:  Result := Format(sUTF32BE, [CP]);
+      else
       begin
-        // found one - record its name
-        Result := cCharSets[I].Str;
-        Exit;
+        // Not a known problem code page: get it from OS
+        if GetCPInfoExFn(CP, 0, Info) then
+          Result := Info.CodePageName
+        else
+          // Give up: can't find it
+          Result := Format(sUnknownCP, [CP]);
       end;
+    end;
   end;
 end;
 
@@ -384,13 +514,16 @@ end;
 function TPJVersionInfo.GetLanguage: string;
   {Read access method for Language property: return string describing language
   if we have some version info and empty string if we haven't}
+const
+  cBufSize = 256;   // size of buffer
 var
-  Buf: array[0..255] of char;   // stores langauge string from API call
+  Buf: array[0..Pred(cBufSize)] of Char;   // stores langauge string from API call
 begin
   // Assume failure
   Result := '';
   // Try to get language name from Win API if we have ver info
-  if fHaveInfo and (VerLanguageName(GetLanguageCode, Buf, 255) > 0) then
+  if fHaveInfo and
+    (VerLanguageName(GetLanguageCode, Buf, Pred(cBufSize)) > 0) then
     Result := Buf;
 end;
 
@@ -551,5 +684,12 @@ begin
     ReadVersionInfo;
   end;
 end;
+
+initialization
+
+// Get reference to GetCPInfoEx function
+GetCPInfoExFn := GetProcAddress(GetModuleHandle('Kernel32.dll'), cGetCPInfoEx);
+if not Assigned(GetCPInfoExFn) then
+  GetCPInfoExFn := GetCPInfoAlt;
 
 end.
