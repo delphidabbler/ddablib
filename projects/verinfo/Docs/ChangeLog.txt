@@ -1,6 +1,6 @@
 Release 3.2 of 09 November 2009
-+ Changed method used to get character set descriptions. These are now obtained from operating system where possible instead of from some hard-wired values.
-+ Added compiler directive to switch of unsafe code warnings on compilers that support the directive.
++ Changed method used to get character set descriptions. These are now obtained from operating system where possible instead of from hard-wired values.
++ Added compiler directive to switch off unsafe code warnings on compilers that support the directive.
 + Added copy of Mozilla Public License.
 + Corrected error in help file.
 + Modified Demo 2 to enable it to compile on Delphi 2 and 3.
