@@ -697,7 +697,7 @@ implementation
 
 uses
   // Delphi
-  IniFiles, MultiMon, StdCtrls, Types;
+  IniFiles, MultiMon, StdCtrls;
 
 
 { Component registration routine }
@@ -1231,7 +1231,7 @@ begin
     end;
 
     // Adjust window if we have got a work area
-    if not Types.IsRectEmpty(WorkArea) then
+    if not Windows.IsRectEmpty(WorkArea) then
     begin
       // Resize window if too wide or high if resizing permitted
       if Width > WorkArea.Right - WorkArea.Left then
