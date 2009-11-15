@@ -154,10 +154,11 @@
 
 <ul>
 	<li><a href="#overview">Overview</a></li>
-	<li><a href="#compatibility">Compatibility</a></li>
 	<li><a href="#installation">Installation</a></li>
+	<li><a href="#demos">Demo Projects</a></li>
 	<li><a href="#changelog">Change log</a></li>
-	<li><a href="#license">License</a></li>
+	<li><a href="#license">License and Disclaimer</a></li>
+	<li><a href="#bugs">Bugs and Feature Requests</a></li>
 	<li><a href="#author">About the Author</a></li>
 </ul>
 
@@ -171,10 +172,10 @@
 </h2>
 
 <p>
-	The window state components can save and restore a window's size, position
-	and state (minimized, maximized or normal) between program executions. Three
-	components are provided that use different means of recording the window's
-	information. They are:
+	The <em>Window State Components</em> can save and restore a window's size,
+	position and state (minimized, maximized or normal) between program
+	executions. Three components are provided that use different means of
+	recording the window's information. They are:
 </p>
 
 <ul class="spaced">
@@ -278,48 +279,19 @@
 
 </ul>
 
-<p>
-	Other features include:
-</p>
-
-<ul class="spaced">
-
-	<li>
-		A help file that integrates into the Delphi 3 to 7 IDE. The help file
-		does not integrate with Delphi 2005 and later but can be used, with some
-		loss of functionality, independently of the IDE.
-	</li>
-
-	<li>
-		A property editor is provided for editing the <var>RootKey</var>
-		property of <var>TPJRegWdwState</var>. This editor is also available
-		<a href="http://www.delphidabbler.com/software/hkeype">
-		separately</a>.
-	</li>
-
-</ul>
-
-<div class="pullout">
-	<strong>Note:</strong> You can see a more detailed description of the
-	components on the
-	<a href="http://www.delphidabbler.com/software/wdwstate">Window State
-	Components</a> web page.
-</div>
-
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
-<h2 id="compatibility">
+<h3>
    Compatibility
-</h2>
+</h3>
 
 <p>
-	The current version of the Window State Components have been developed and
-	tested with Delphi 7. Earlier version compiled and worked with all versions
-	from Delphi 3 to Delphi 2006. The property editor can be used with any of
-	the compilers supported by the components.
+	The components are compatible with all Win 32 versions and personalities of
+	Delphi from 4 to 2010. The components have been tested on Delphi 2, 3, 4, 6,
+	7, 2006 and 2010 and are assumed to work on other versions.
 </p>
 
 
@@ -332,336 +304,111 @@
 </h2>
 
 <p>
-	The Window State Components, their documentation and demo programs are
-	supplied in a zip file. Before installing you need to extract all the files
-	from the zip file, preserving the directory structure. The following files
-	will be extracted:
+	The <em>Window State Components</em> are supplied in a zip file. Before
+	installing you need to extract all the files from the zip file, preserving
+	the directory structure. The following files will be extracted:
 </p>
 
 <ul>
-
 	<li class="first">
 		<strong><code>PJWdwState.pas</code></strong> &ndash; component source
 		code.
 	</li>
-
 	<li>
 		<strong><code>PJWdwState.dcr</code></strong> &ndash; resource file
 		containing component palette glyphs.
 	</li>
-
 	<li>
 		<code>PJWdwState.hlp</code> &ndash; component help file that integrates
-		with the Delphi 3 to 7 OpenHelp system.
+		with the Delphi 4 to 7 OpenHelp system.
 	</li>
-
 	<li>
 		<code>PJWdwState.als</code> &ndash; a-link keyword file for integration
 		with the Delphi 6 or 7 OpenHelp system.
 	</li>
-
-	<li>
-		<strong><code>PJHKEYPropEdit.pas</code></strong> &ndash; HKEY property
-		editor.
-	</li>
-
 	<li>
 		<code>ReadMe.htm</code> &ndash; this file.
 	</li>
-	
 	<li>
 		<code>MPL.txt</code> &ndash; the Mozilla Public License.
 	</li>
-	
 	<li>
 		<code>ChangeLog.txt</code> &ndash; component's change log.
 	</li>
-
 	<li>
-		<code>Demos\DemoReadMe.htm</code> &ndash; read me file explianing use of
-		demo programs.
+		<code>Wiki.URL</code> &ndash; Shortcut to online Wiki documentation.
 	</li>
-	
-	<li>
-		<code>Demos\WdwStateDemos.bpg</code> &ndash; demo project group file.
-	</li>
-	
-	<li>
-		<code>Demos\1\StandardDemo.dpr</code> &ndash; demo 1 project file.
-	</li>
-	
-	<li>
-		<code>Demos\1\StandardDemo.res</code> &ndash; icon resource for demo 1.
-	</li>
-
-	<li>
-		<code>Demos\1\FmDemo.pas/.dfm</code> &ndash; 1st demo's main window form
-		and source.
-	</li>
-	
-	<li>
-		<code>Demos\1\FmDemoDlg.pas/.dfm</code> &ndash; 1st demo's modal dialog
-		form and source.
-	</li>
-
-	<li>
-		<code>Demos\2\StandAloneDemo.dpr</code> &ndash; demo 2 project file.
-	</li>
-
-	<li>
-		<code>Demos\2\StandAloneDemo.res</code> &ndash; icon resource for demo
-		2.
-	</li>
-	
-	<li>
-		<code>Demos\2\FmMain.pas/.dfm</code> &ndash; 2nd demo's main window form
-		and source.
-	</li>
-	
-	<li>
-		<code>Demos\3\UserDemo.dpr</code> &ndash; demo 3 project file.
-	</li>
-
-	<li>
-		<code>Demos\3\UserDemo.res</code> &ndash; icon resource for demo 3.
-	</li>
-	
-	<li>
-		<code>Demos\3\FmUserDemo.pas/.dfm</code> &ndash; 3rd demo's main window
-		form and source.
-	</li>
-
-	<li>
-		<code>Demos\4\MDIDemo.dpr</code> &ndash; demo 4 project file.
-	</li>
-
-	<li>
-		<code>Demos\4\MDIDemo.res</code> &ndash; icon resource for demo 4.
-	</li>
-
-	<li>
-		<code>Demos\4\FmMDIChild.pas/.dfm</code> &ndash; 4th demo's MDI child
-		form.
-	</li>
-	
-	<li>
-		<code>Demos\4\FmMDIMain.pas/.dfm</code> &ndash; 4th demo's MDI main
-		form.
-	</li>
-	
 </ul>
 
 <p>
-	You can now proceed to install the components and property editor using the
-	<strong>emphasised</strong> files above. Installation methods vary between
-	Delphi versions, so follow the instructions that apply to your version
-	below. Note that <code><strong>$(DELPHI)</strong></code> represents the
-	path where the appropriate version of Delphi was installed. Similarly
-	<code><strong>$(BDS)</strong></code> refers to the installation path of a
-	version of the Borland Development System.
+	In addition to the above files you will find the the source code of four
+	demo projects along with readme files in the <code>Demos</code> directory
+	and its <code>1</code>, <code>2</code>, <code>3</code> and <code>4</code>
+	sub-directories.
 </p>
 
-<ul>
-	<li><a href="#bds">Installation with Delphi 2005 &amp; Later</a></li>
-	<li><a href="#d3">Installation with Delphi 3 to 7</a></li>
-</ul>
-
-
-
-<h3 id="bds">Installation with Delphi 2005 &amp; Later</h3>
+<p>
+	You can now install the components into the Delphi IDE. If you need help
+	doing this <a
+		href="http://www.delphidabbler.com/url/install-comp"
+	>see here</a>.
+</p>
 
 <p>
-	The components must be installed into a Delphi Win32 design package. It is
-	assumed that you will be installing into an existing package. You may decide
-	to install into the &quot;user&quot; package:
-	<code>$(BDS)\Lib\dclusr.dpk</code>.
+	Note that the help file included in the download can only integrate with the
+	IDE in Delphi 4-7. For information on how to do this, see <a
+		href="http://www.delphidabbler.com/articles?article=15"
+	>this article</a>. Users of other versions of Delphi can either use the help
+	file as a stand-alone file (in which case some links won't work) or you can
+	use the <a
+		href="http://www.delphidabbler.com//url/wdwstate-wiki"
+	>Window State Components Wiki</a> that can be accessed via the provided
+	<code>Wiki</code> shortcut.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="demos">
+	Demo Projects
+</h2>
+
+<p>
+	There are four demo projects included with these components. They are:
 </p>
 
 <ol class="spaced">
-
 	<li>
-		Decide upon a suitable location into which to install the components.
-		This may be a subdirectory of your <code>Borland Studio Projects</code>
-		or <code>$(BDS)\lib</code> folders.
+		<code>StandardDemo.dpr</code><br />
+		Demonstrates how to use the components in the standard way, i.e.
+		dropped on a form from the component palette. This demo uses
+		<var>TPJRegWdwState</var>.
 	</li>
-	
 	<li>
-		Copy <code>PJWdwState.pas</code> and <code>PJWdwState.dcr</code> to the
-		chosen installation folder. If you wish to also install the
-		<var>HKEY</var> property editor for use with <var>TPJRegWdwState</var>
-		you should copy <code>PJHKEYPropEdit.pas</code> to the same location.
+		<code>StandAloneDemo.dpr</code><br />
+		Demonstrates how to create and use the components dynamically using the
+		<var>CreateStandAlone</var> constructor. This demo uses
+		<var>TPJWdwState</var>.
 	</li>
-
-	
 	<li>
-		Start the Development System (selecting the Delphi Win32 personality if
-		appropriate) then:
+		<code>UserDemo.dpr</code><br />
 
-		<ul>
-
-			<li>
-				Open the required package. Select <em>File | Open</em> menu and
-				choose a suitable package source file.
-			</li>
-
-			<li>
-				The package will now be displayed in the Project Manager with a
-				<code>.bpl</code> extension. Right click the package's entry and
-				select <em>Add</em> to display the <em>Add</em> dialog box.
-				Enter the full path to <code>PJWdwState.pas</code> in the
-				<em>Unit file name</em> edit box (use the <em>Browse</em> button
-				to navigate to the file). Click <em>OK</em> to add the component
-				to the package.
-			</li>
-			
-			<li>
-				If required repeat the previous step for
-				<code>PJHKEYPropEdit.pas</code>.
-			</li>
-
-			<li>
-				Back in the Project Manager, check that
-				<code>PJWdwState.pas</code> and <code>PJWdwState.dcr</code> and,
-				if appropriate, <code>PJHKEYPropEdit.pas</code>, appear under
-				the package's <em>Contains</em> node. If so, right click the
-				package's entry again and select <em>Compile</em>. If the
-				resulting compilation succeeds a message should be displayed
-				confirming that <var>TPJWdwState</var>,
-				<var>TPJRegWdwState</var> and <var>TPJUserWdwState</var> have
-				been registered. The components should now appear in the
-				&quot;DelphiDabbler&quot; section of the Tool Palette. (Note
-				this will only appear when a form is selected in the designer).
-				If you have installed <code>PJHKEYPropEdit.pas</code> the
-				property editor will be used by the Object Inspector when a
-				property of type <var>HKEY</var> is selected.
-			</li>
-			
-			<li>
-				If the components do not appear the package may not have been
-				installed. Install it from the Project Manager by selecting the
-				package's <em>Install</em> right click menu option.
-			</li>
-
-			<li>
-				Close the package project using the <em>File | Close</em> menu
-				item. Accept any prompt that offers to save the package project.
-			</li>
-			
-		</ul>
-		
+		Demonstrates how to use <var>TPJUserWdwState</var> and load and save
+		data in the <var>OnReadData</var> and <var>OnSaveData</var> events.
 	</li>
-
 	<li>
-		If you wish you can now delete <code>PJWdwState.pas</code> and, if used,
-		<code>PJHKEYPropEdit.pas</code>, from the chosen installation folder.
-	</li>
+		<code>MDIDemo.dpr</code><br />
 
-	
-	<li>
-		The supplied help file cannot be integrated with the IDE's help system.
-		However it can be used independently of the IDE, albeit with reduced
-		functionality.
+		Demonstrates the use of <var>TPJWdwState</var> with MDI applications.
 	</li>
-
-	<li>
-		The demo programs can be loaded into Delphi and compiled and run as
-		required.
-	</li>
-
 </ol>
-
-
-<h3 id="d3">Installation with Delphi 3 to 7</h3>
 
 <p>
-	The components must be installed into a design package. It is assumed that
-	you will be installing into an existing package. You may wish to use the
-	&quot;user&quot; package named <code>dclusr.dpk</code> or
-	<code>dclusrXX.dpk</code> (where <code>XX</code> is a version number). This
-	package can be found in <code>$(DELPHI)\Lib</code>. 
+	Further information about the demo programs can be found in file
+	<code>Demos\DemoReadMe.htm</code> that is included in the download.
 </p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the components.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
-	</li>
-	
-	<li>
-		Copy <code>PJWdwState.pas</code> and <code>PJWdwState.dcr</code> to the
-		chosen installation folder. If you wish to also install the
-		<var>HKEY</var> property editor for use with <var>TPJRegWdwState</var>
-		you should copy <code>PJHKEYPropEdit.pas</code> to the same location.
-	</li>
-	
-	<li>	
-		Start Delphi then:
-		
-		<ul>
-			
-			<li>
-				Choose the <em>Component | Install Component</em> menu option to
-				display the <em>Install Component</em> dialog box. Ensure the
-				<em>Into existing package</em> tab is selected. Enter the full
-				path to <code>PJWdwState.pas</code> in the <em>Unit file
-				name</em> edit box (use the adjacent <em>Browse</em> button to
-				navigate to the file). If required, repeat the previous step for
-				<code>PJHKEYPropEdit.pas</code>. Choose the required package from the
-				<em>Package description</em> combo box, or by navigating to the
-				package using <em>Browse</em>. Click <em>OK</em> to confirm your
-				selections. 
-			</li>
-
-			<li>
-				A confirmation dialog box may displayed, querying whether it is
-				OK to rebuild and reinstall the package. Click <em>Yes</em> to
-				proceed.
-			</li>
-			
-			<li>
-				The package will now be built and a dialog box should be
-				displayed stating that the <var>TPJWdwState</var>,
-				<var>TPJRegWdwState</var> and <var>TPJUserWdwState</var>
-				components have been installed. Click <em>OK</em> to dismiss the
-				dialog box.
-			</li>
-
-			<li>
-				The components will appear on the &quot;DelphiDabbler&quot;
-				palette. If you have installed <code>PJHKEYPropEdit.pas</code>
-				the property editor will be used by the Object Inspector when a
-				property of type <var>HKEY</var> is selected.
-			</li>
-
-		</ul>
-
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJWdwState.pas</code> and, if used,
-		<code>PJHKEYPropEdit.pas</code>, from the chosen installation folder.
-	</li>
-
-	<li>
-		The provided help file can be integrated with the IDE's OpenHelp system.
-		Delphi 6 and 7 also require the use of the supplied <code>.als</code>
-		file. The simplest way to install help is to use my
-		<a href="http://www.delphidabbler.com/software/chi">Component Help
-		Installer Expert</a> (v2.2.1 or later). If you prefer to install
-		manually,
-		<a href="http://www.delphidabbler.com/articles?article=15">this
-		article</a> explains the process.
-	</li>
-
-	<li>
-		The demo program can be loaded into Delphi and compiled and run as
-		required. <span class="highlight">Please note</span> that the first
-		demo does not compile or run with Delphi 3.
-	</li>
-
-</ol>
-
 
 
 <p class="gototop">
@@ -683,56 +430,72 @@
 </p>
 
 <h2 id="license">
-	License
+	License and Disclaimer
 </h2>
 
 <p>
-	This source code is subject to the Mozilla Public License Version 1.1 (the
-	&quot;License&quot;); you may not use this program except in compliance
-	with the License. You may obtain a copy of the License at
-	<a href="http://www.mozilla.org/MPL/.">http://www.mozilla.org/MPL/</a>.
+
+	This product, <em>Window State Components</em>,  is subject to the Mozilla
+	Public License Version 1.1 (the &quot;License&quot;). You may not use this
+	Product except in compliance with the License. You may obtain a copy of the
+	License at <a
+		href="http://www.mozilla.org/MPL/MPL-1.1"
+	>http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
 	Software distributed under the License is distributed on an &quot;AS
-	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
-	See the License for the specific language governing rights and limitations
-	under the License.
+	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+	the License for the specific language governing rights and limitations under
+	the License.
 </p>
 
 <p>
-	The Original Code is Window State Components.
+	The Initial Developer of <em>Window State Components</em> is Peter D
+	Johnson. Portions created by the Initial Developer are Copyright &copy;
+	1999-2009 Peter D Johnson (www.delphidabbler.com). All Rights Reserved.
 </p>
 
 <p>
-	The Initial Developer of the Original Code is Peter Johnson
-	(<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/)</a>.
+	Contributor(s) to this project:
 </p>
 
-<p>
-	Portions created by the Initial Developer are Copyright &copy; 1999-2007
-	Peter Johnson. All Rights Reserved.
-</p>
-
-<p>
-	Contributor(s):
-</p>
-
-<div class="indent">
+<p class="indent">
 	Stefan Winter<br />
 	Enrico Bortolazzi<br />
 	Bruce J Miller<br />
 	Craig Symons
-</div>
+</p>
 
 <p>
 	All relevant trademarks are acknowledged.
 </p>
 
-<p class="pullout">
-	A copy of the license is included in the download &ndash see
-	<code>MPL.txt</code>.
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
 </p>
+
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
+
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
+</p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -760,8 +523,9 @@
 	<div class="comments">
 		Please
 		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the components, if you
-		have found a bug, or you want to suggest any updates.
+		let me know</a> if you have any comments about the component, but please
+		use the Issue Tracker noted above to report bugs and request new
+		features.
 	</div>
 
 	<div class="copyright">
