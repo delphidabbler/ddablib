@@ -1,0 +1,690 @@
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
+{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fswiss MS Sans Serif;}{\f3\froman \fcharset2 Symbol;}{\f4\fswiss \fprq2 System;}{\f5\fmodern Courier New;}{\f6\fmodern \fcharset0 Courier New;}}
+{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}
+${\footnote {$}PJAbout unit}
+#{\footnote {#}IDH_AB_UNIT}
+@{\footnote {@}Unit topic.}
+K{\footnote {K}PJAbout}
+A{\footnote {A}PJAbout}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b PJAbout unit
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 This unit contains the implementation of the {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG} about box dialog component. It also defines various enumerated types that are related to the component.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg}
+#{\footnote {#}IDH_TPJABOUTBOXDLG}
+@{\footnote {@}TPJAboutBoxDlg component topic.}
+K{\footnote {K}TPJAboutBoxDlg}
+A{\footnote {A}TPJAboutBoxDlg;TPJAboutBoxDlg_object}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \{bmlt PJAboutBoxDlg.bmp\}\plain\f0\fs24\cf2\b  TPJAboutBoxDlg
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_AB_HEIRACHY}          {\ul Properties}{\v IDH_AB_PROPERTIES}          {\ul Methods}{\v IDH_AB_METHODS}          {\ul Events}{\v IDH_AB_EVENTS}\plain\f0\fs24\cf2\b 
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 This non-visual component encapsulates a customisable about dialog box.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJAbout}{\v IDH_AB_UNIT}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This component encapsulates an About Box in a non-visual component. It is displayed by calling its {\strike Execute}{\v IDH_AB_EXECUTE} method. The about box appears as below. It has string properties to display five different pieces of information in the about box. They are: {\strike Copyright}{\v IDH_AB_COPYRIGHT}, {\strike Notes}{\v IDH_AB_NOTES}, {\strike ProgramName}{\v IDH_AB_PROGRAMNAME}, {\strike Title}{\v IDH_AB_TITLE} and {\strike Version}{\v IDH_AB_VERSION}. The positioning of the string properties is shown in the following picture of the dialog box.
+\par \plain\f0\fs8\cf0 
+\par \{bmct AboutDlg.bmp\}\pard \qc \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Alternatively, the about box can display information from a {\strike VERSIONINFO}{\v !KL("VERSIONINFO Resource",1)} resource included in a program file. This by setting the {\strike VersionInfo}{\v IDH_AB_VERSIONINFO} property to reference a {\strike TPJVersionInfo}{\v !AL(TPJVersionInfo_object,1)} component which extracts version information from an executbale file.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The application's icon is displayed in the dialog box. This is the icon specified by the {\strike Icon}{\v !AL(TApplication_Icon,1)} property of the {\strike TApplication}{\v !AL(TApplication_object,1)} object. If no icon has been specified for the application then default Delphi icon is used.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The position of the about box on the screen is determined by the {\strike Position}{\v IDH_AB_POSITION}\plain\f1\fs18\cf0 , \plain\f0\fs18\cf0 {\strike DlgLeft}{\v IDH_AB_DLGLEFT}\plain\f1\fs18\cf0 ,\plain\f0\fs18\cf0  {\strike DlgTop}{\v IDH_AB_DLGTOP} or the {\strike CentreDlg}{\v IDH_AB_CENTREDLG} properties.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The about box contains a close button, the appearance of which is governed by the {\strike ButtonGlyph}{\v IDH_AB_BUTTONGLYPH}, {\strike ButtonHeight}{\v IDH_AB_BUTTONHEIGHT}, {\strike ButtonWidth}{\v IDH_AB_BUTTONWIDTH}, {\strike ButtonKind}{\v IDH_AB_BUTTONKIND} and {\strike AutoDetectGlyphs}{\v IDH_AB_AUTODETECTGLYPHS} properties. The position of the button is determined by the {\strike ButtonPlacing}{\v IDH_AB_BUTTONPLACING} property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The {\strike HelpContext}{\v IDH_AB_HELPCONTEXT} property allows Windows Help to be displayed for the dialog box when the F1 key is pressed.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This component has no events.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg Heirachy}
+#{\footnote {#}IDH_AB_HEIRACHY}
+@{\footnote {@}Heirachy diagram for TPJAboutBoxDlg.}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_Object,1)}
+\par     |
+\par {\strike TPersistent}{\v !AL(TPersistent_Object,1)}
+\par     |
+\par {\strike TComponent}{\v !AL(TComponent_Object,1)}
+\par \page 
+${\footnote {$}TPJAboutBoxDlg Properties}
+#{\footnote {#}IDH_AB_PROPERTIES}
+@{\footnote {@}Properties for TPJAboutBoxDlg.}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx400 \tx2400 \tx2800 \tab {\strike AutoDetectGlyphs}{\v IDH_AB_AUTODETECTGLYPHS}\tab \tab {\strike ButtonGlyph}{\v IDH_AB_BUTTONGLYPH}
+\par \tab {\strike ButtonHeight}{\v IDH_AB_BUTTONHEIGHT}\tab \tab {\strike ButtonKind}{\v IDH_AB_BUTTONKIND}
+\par \tab {\strike ButtonPlacing}{\v IDH_AB_BUTTONPLACING}\tab \tab {\strike ButtonWidth}{\v IDH_AB_BUTTONWIDTH}
+\par \tab {\strike CentreDlg}{\v IDH_AB_CENTREDLG}\tab \tab {\strike Copyright}{\v IDH_AB_COPYRIGHT}
+\par \tab {\strike DlgLeft}{\v IDH_AB_DLGLEFT}\tab \tab {\strike DlgTop}{\v IDH_AB_DLGTOP}
+\par \tab {\strike HelpContext}{\v IDH_AB_HELPCONTEXT}\tab \tab {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \tab {\strike Notes}{\v IDH_AB_NOTES}\tab \tab {\strike Position}{\v IDH_AB_POSITION}\plain\f1\fs18\cf0 
+\par \tab \plain\f0\fs18\cf0 {\strike ProgramName}{\v IDH_AB_PROGRAMNAME}\plain\f1\fs18\cf0 \tab \tab \plain\f0\fs18\cf0 {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Title}{\v IDH_AB_TITLE}\plain\f1\fs18\cf0 \tab \tab {\strike UseOSStdFonts}{\v IDH_AB_USEOSSTDFONTS}
+\par \tab {\strike UseOwnerAsParent}{\v IDH_AB_USEOWNERASPARENT}\tab \tab \plain\f0\fs18\cf0 {\strike Version}{\v IDH_AB_VERSION}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike VersionInfo}{\v IDH_AB_VERSIONINFO}
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.AutoDetectGlyphs}
+#{\footnote {#}IDH_AB_AUTODETECTGLYPHS}
+@{\footnote {@}AutoDetectGlyphs property topic.}
+K{\footnote {K}AutoDetectGlyphs,TPJAboutBoxDlg;TPJAboutBoxDlg,AutoDetectGlyphs;AutoDetectGlyphs}
+A{\footnote {A}TPJAboutBoxDlg_AutoDetectGlyphs;AutoDetectGlyphs_property;AutoDetectGlyphs}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.AutoDetectGlyphs
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_ButtonGlyph)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines whether display of glyphs depends on ButtonGlyph property or depends on the default compiler settings.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  AutoDetectGlyphs: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The About box contains one button which is used to close the dialog box. This button can display a glyph, which is determined by the {\strike ButtonGlyph}{\v IDH_AB_BUTTONGLYPH} property. AutoDetectGlyphs determines whether or not the glyph is displayed.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When AutoDetectGlyphs is False glyphs are displayed according to the ButtonGlyph property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When AutoDetectGlyphs is True the display of glyphs depends on whether the component is being used with 16 or 32 bit Delphi. For 16 bit delphi no glyphs are displayed if the global MsgDlgGlyphs variable is false. Glyphs are displayed according to the ButtonGlyph property if MsgDlgGlyphs is true. With 32 bit Delphi no glyphs are displayed when AutoDetectGlyphs is true.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value is True.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.ButtonGlyph}
+#{\footnote {#}IDH_AB_BUTTONGLYPH}
+@{\footnote {@}ButtonGlyph property topic.}
+K{\footnote {K}ButtonGlyph,TPJAboutBoxDlg;TPJAboutBoxDlg,ButtonGlyph;ButtonGlyph}
+A{\footnote {A}TPJAboutBoxDlg_ButtonGlyph;ButtonGlyph_property;ButtonGlyph}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.ButtonGlyph
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_AutoDetectGlyphs;TPJAboutBoxDlg_ButtonKind;TPJAboutBoxDlg_ButtonPlacing)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines which, if any, glyph is displayed on the dialog's close button.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  ButtonGlyph: {\strike TPJAboutBtnGlyphs}{\v IDH_TPJABOUTBTNGLYPHS};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The About box contains one button which is used to close the dialog box. The button can display a glyph (bitmap) to indicate its use. This property is used to determine which (if any) glyph to display. Valid values for the property and their meaings are as follows:
+\par \plain\f0\fs8\cf0 
+\par \pard \fi-1200 \li1600 \tx1600 \plain\f0\fs18\cf0\i Value\tab Meaning\plain\f0\fs18\cf0 
+\par abgOK\tab A green check mark appears on the button face.
+\par abgCancel\tab A red cross appears on the button face.
+\par abgIgnore\tab A green man walking away appears on the button face.
+\par abgClose\tab A door appears on the button face.
+\par abgNone\tab No glyph is displayed on the button.
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 ButtonGlyph defaults to abgOK.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 NB: If the AutoDetectGlyphs property is true then th value of the ButtonGlyph property may be ignored. See {\strike AutoDetectGlyphs}{\v IDH_AB_AUTODETECTGLYPHS} for futher information.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.ButtonHeight}
+#{\footnote {#}IDH_AB_BUTTONHEIGHT}
+@{\footnote {@}ButtonHeight property topic.}
+K{\footnote {K}ButtonHeight,TPJAboutBoxDlg;TPJAboutBoxDlg,ButtonHeight;ButtonHeight}
+A{\footnote {A}TPJAboutBoxDlg_ButtonHeight;ButtonHeight_property;ButtonHeight}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.ButtonHeight
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_ButtonWidth)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines the height of the About box's close button.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  ButtonHeight: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The About box displays one button which is used to close the dialog box. The height of this button in pixels is determined by the value of this property. The dialog box's height is adjusted according to the value of this property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value depends on the compiler in use: it is 25 pixels for Delphi 2 and later and is 33 pixels when using Delphi 1. This conforms to the default height used for button components.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.ButtonKind}
+#{\footnote {#}IDH_AB_BUTTONKIND}
+@{\footnote {@}ButtonKind property topic.}
+K{\footnote {K}ButtonKind,TPJAboutBoxDlg;TPJAboutBoxDlg,ButtonKind;ButtonKind}
+A{\footnote {A}TPJAboutBoxDlg_ButtonKind;ButtonKind_property;ButtonKind}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.ButtonKind
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_ButtonGlyph;TPJAboutBoxDlg_ButtonPlacing)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines the text displayed on the dialog's close button.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  ButtonKind: {\strike TPJAboutBtnKinds}{\v IDH_TPJABOUTBTNKINDS};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The About box contains one button which is used to close the dialog box. The button can display different text to indicate its use. The ButtonKind property is used to determine which text to display. Valid values for the property and their meaings are as follows:
+\par \plain\f0\fs8\cf0 
+\par \pard \fi-1200 \li1600 \tx1600 \plain\f0\fs18\cf0\i Value\tab Text
+\par \plain\f0\fs18\cf0 abkOK\tab 'OK' 
+\par abkDone\tab 'Done'
+\par abkClose\tab 'Close'
+\par abkCancel\tab 'Cancel'
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value is abkOK.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.ButtonPlacing}
+#{\footnote {#}IDH_AB_BUTTONPLACING}
+@{\footnote {@}ButtonPlacing property topic.}
+K{\footnote {K}ButtonPlacing,TPJAboutBoxDlg;TPJAboutBoxDlg,ButtonPlacing;ButtonPlacing}
+A{\footnote {A}TPJAboutBoxDlg_ButtonPlacing;ButtonPlacing_property;ButtonPlacing}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.ButtonPlacing
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_ButtonGlyph;TPJAboutBoxDlg_ButtonKind)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines the horizontal alignment of the dialog's close button.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  ButtonPlacing: {\strike TPJAboutBtnPlacing}{\v IDH_TPJABOUTBTNPLACING};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The About box contains one button which is used to close the dialog box. The button is positioned at the bottom of the dialog box, but can be aligned left, centre or right. The ButtonPlacing property is used to determine which position the button occupies. Valid values for the property and their meaings are as follows:
+\par \plain\f0\fs8\cf0 
+\par \pard \fi-1200 \li1600 \tx1600 \plain\f0\fs18\cf0\i Value\tab Meaning
+\par \plain\f0\fs18\cf0 abpLeft\tab Display the button at the bottom left of the dialog box
+\par abpCentre\tab Display the button at the bottom centre  of the dialog box
+\par abpRight\tab Display the button at the bottom right of the dialog box
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value is abpCentre.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.ButtonWidth}
+#{\footnote {#}IDH_AB_BUTTONWIDTH}
+@{\footnote {@}ButtonWidth property topic.}
+K{\footnote {K}ButtonWidth,TPJAboutBoxDlg;TPJAboutBoxDlg,ButtonWidth;ButtonWidth}
+A{\footnote {A}TPJAboutBoxDlg_ButtonWidth;ButtonWidth_property;ButtonWidth}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.ButtonWidth
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_ButtonHeight)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines the width of the About box's close button..
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  ButtonWidth: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par 
+\par \plain\f0\fs18\cf0 The About box displays one button which is used to close the dialog box. The width of this button in pixels is determined by the value of this property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value depends on the compiler in use: it is 75 pixels for Delphi 2 and later and is 85 pixels when using Delphi 1. This conforms to the default width used for button components.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.CentreDlg}
+#{\footnote {#}IDH_AB_CENTREDLG}
+@{\footnote {@}CentreDlg property topic.}
+K{\footnote {K}CentreDlg,TPJAboutBoxDlg;TPJAboutBoxDlg,CentreDlg;CentreDlg}
+A{\footnote {A}TPJAboutBoxDlg_CentreDlg;CentreDlg_property;CentreDlg}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.CentreDlg
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_DlgLeft;TPJAboutBoxDlg_DlgTop;TPJAboutBoxDlg_Position)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines whether the about box is \plain\f1\fs18\cf0 centred or not\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  CentreDlg: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property determines whether the About dialog box appears \plain\f1\fs18\cf0 centred or not.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When CentreDlg is set to True then the \plain\f1\fs18\cf0 dialog box is centred over the screen, the desktop work area or the owner control, accoring to the value of the {\strike Position}{\v IDH_AB_POSITION} property. The {\strike DlgLeft}{\v IDH_AB_DLGLEFT}\plain\f0\fs18\cf0  and {\strike DlgTop}{\v IDH_AB_DLGTOP} properties are ignored\plain\f1\fs18\cf0  in this case\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  The position of the dialog box may be adjusted to ensure it can all be seen.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When CentreDlg is set to False the DlgLeft and DlgTop properties determine the position of the dialog box.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.Copyright}
+#{\footnote {#}IDH_AB_COPYRIGHT}
+@{\footnote {@}Copyright property topic.}
+K{\footnote {K}Copyright,TPJAboutBoxDlg;TPJAboutBoxDlg,Copyright;Copyright}
+A{\footnote {A}TPJAboutBoxDlg_Copyright;Copyright_property;Copyright}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.Copyright
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_Notes;TPJAboutBoxDlg_ProgramName;TPJAboutBoxDlg_Version;TPJAboutBoxDlg_VersionInfo)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Contains the copyright message displayed in the about box.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  Copyright: \plain\f5\fs18\cf0\b string\plain\f5\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Copyright property provides the copyright message that is displayed on the third line of the about box.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value of this property is an empty string, which displays nothing.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i Note:\plain\f0\fs18\cf0  If the {\strike VersionInfo}{\v IDH_AB_VERSIONINFO} property is not nil then this property is ignored.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.DlgLeft}
+#{\footnote {#}IDH_AB_DLGLEFT}
+@{\footnote {@}DlgLeft property topic.}
+K{\footnote {K}DlgLeft,TPJAboutBoxDlg;TPJAboutBoxDlg,DlgLeft;DlgLeft}
+A{\footnote {A}TPJAboutBoxDlg_DlgLeft;DlgLeft_property;DlgLeft}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.DlgLeft
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_DlgTop;TPJAboutBoxDlg_CentreDlg;TPJAboutBoxDlg_Position)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines the location of the left hand side of the about box.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  DlgLeft: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The DlgLeft property determines the position of the left hand side of the about dialog box in pixels. \plain\f1\fs18\cf0 Whether the left side of the dialog is aligned relative to the screen, the desktop work area or the owning control depends on the value of the {\strike Position}{\v IDH_AB_POSITION} property. The alignment may be adjusted to ensure the whole of the dialog can be seen.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike CentreDlg}{\v IDH_AB_CENTREDLG} property is true then DlgLeft is ignored and the dialog is centred.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value of DlgLeft is 0.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.DlgTop}
+#{\footnote {#}IDH_AB_DLGTOP}
+@{\footnote {@}DlgTop property topic.}
+K{\footnote {K}DlgTop,TPJAboutBoxDlg;TPJAboutBoxDlg,DlgTop;DlgTop}
+A{\footnote {A}TPJAboutBoxDlg_DlgTop;DlgTop_property;DlgTop}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.DlgTop
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_DlgLeft;TPJAboutBoxDlg_CentreDlg;TPJAboutBoxDlg_Position)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines the location of the top of the about box.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  DlgTop: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The DlgTop property determines the position of the top of the about dialog box in pixels. \plain\f1\fs18\cf0 Whether the top of the dialog is aligned relative to the screen, the desktop work area or the owning control depends on the value of the {\strike Position}{\v IDH_AB_POSITION} property. The alignment may be adjusted to ensure the whole of the dialog can be seen.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike CentreDlg}{\v IDH_AB_CENTREDLG} property is true then DlgTop is ignored and the dialog is centred.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value of DlgTop is 0.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.HelpContext}
+#{\footnote {#}IDH_AB_HELPCONTEXT}
+@{\footnote {@}HelpContext property topic.}
+K{\footnote {K}HelpContext,TPJAboutBoxDlg;TPJAboutBoxDlg,HelpContext;HelpContext}
+A{\footnote {A}TPJAboutBoxDlg_HelpContext;HelpContext_property;HelpContext}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.HelpContext
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Stores the help topic number accessed when F1 is pressed.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b type\plain\f5\fs18\cf0  THelpContext = -MaxLongInt..MaxLongInt\plain\f5\fs18\cf0\b ;\plain\f5\fs18\cf0 
+\par \plain\f5\fs8\cf0\b 
+\par \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  HelpContext: THelpContext;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 HelpContext stores the number of the help topic in the application's help file that is displayed when the F1 key is pressed while the about box is displayed. If HelpContext is 0 then no help topic is displayed.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The property's default value is 0.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.Notes}
+#{\footnote {#}IDH_AB_NOTES}
+@{\footnote {@}Notes property topic.}
+K{\footnote {K}Notes,TPJAboutBoxDlg;TPJAboutBoxDlg,Notes;Notes}
+A{\footnote {A}TPJAboutBoxDlg_Notes;Notes_property;Notes}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.Notes
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_Copyright;TPJAboutBoxDlg_ProgramName;TPJAboutBoxDlg_Version;TPJAboutBoxDlg_VersionInfo)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Contains the notes text displayed in the dialog box.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  Notes: \plain\f5\fs18\cf0\b string\plain\f5\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Notes property is used to store the notes to be displayed in the about box. The notes appear at the bottom of the text area of the dialog box. The text will word-wrap up to three lines. When setting the property at run time end of line characters (#13) can be included in the string to force line breaks. Forcing line breaks is not possible at design time. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value for the Notes property is an empty string, which displays nothing. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i Note:\plain\f0\fs18\cf0  If the {\strike VersionInfo}{\v IDH_AB_VERSIONINFO} property is not nil then this property is ignored.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.Position}
+#{\footnote {#}IDH_AB_POSITION}
+@{\footnote {@}Position property topic.}
+K{\footnote {K}Position,TPJAboutBoxDlg;TPJAboutBoxDlg,Position;Position}
+A{\footnote {A}TPJAboutBoxDlg_Position;Position_property;Position}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.\plain\f1\fs24\cf2\b Position\plain\f0\fs24\cf2\b 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_DlgLeft;TPJAboutBoxDlg_DlgTop;TPJAboutBoxDlg_CentreDlg)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines \plain\f1\fs18\cf0 whether the about box is position relative to screen, desktop or owner.\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  \plain\f6\fs18\cf0 Position\plain\f5\fs18\cf0 : {\strike TPJAboutPosition}{\v IDH_TPJABOUTPOSITION};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The \plain\f1\fs18\cf0 Position \plain\f0\fs18\cf0  property \plain\f1\fs18\cf0 d\plain\f0\fs18\cf0 etermines whether \plain\f1\fs18\cf0 the {\strike CentreDlg}{\v IDH_AB_CENTREDLG}\plain\f0\fs18\cf0 , {\strike DlgTop}{\v IDH_AB_DLGTOP} and {\strike DlgLeft}{\v IDH_AB_DLGLEFT} properties act relative\plain\f1\fs18\cf0  \plain\f0\fs18\cf0  to screen, desktop or owning form\plain\f1\fs18\cf0 . \plain\f0\fs18\cf0  Valid values for the property and their meaings are as follows:
+\par \plain\f0\fs8\cf0 
+\par \pard \fi-1200 \li1600 \tx1600 \plain\f0\fs18\cf0\i Value\tab Text
+\par \plain\f0\fs18\cf0 ab\plain\f1\fs18\cf0 pScreen\plain\f0\fs18\cf0 \tab \plain\f1\fs18\cf0 The dialog is positioned relative to the screen.\plain\f0\fs18\cf0  
+\par \plain\f1\fs18\cf0 abpDesktop\plain\f0\fs18\cf0 \tab \plain\f1\fs18\cf0 The dialog is positioned relative to the desktop's work area (this takes into account the taskbard and toolbars). Note: when compiling with Delphi 1 the desktop work area is the whole screen, so this value has the same action as abpScreen.\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 abpOwner\plain\f0\fs18\cf0 \tab \plain\f1\fs18\cf0 The dialog is positioned relative to its owner - usually the form on which the component is dropped. If the component has no owner, or the owner is not a window control, then this setting has no effect and positioning is per abpScreen.\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value of \plain\f1\fs18\cf0 Position\plain\f0\fs18\cf0  is abpDesktop.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.ProgramName}
+#{\footnote {#}IDH_AB_PROGRAMNAME}
+@{\footnote {@}ProgramName property topic.}
+K{\footnote {K}ProgramName,TPJAboutBoxDlg;TPJAboutBoxDlg,ProgramName;ProgramName}
+A{\footnote {A}TPJAboutBoxDlg_ProgramName;ProgramName_property;ProgramName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.ProgramName
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_Copyright;TPJAboutBoxDlg_Notes;TPJAboutBoxDlg_Version;TPJAboutBoxDlg_VersionInfo)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines the name of the program displayed in the about box.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  ProgramName: \plain\f5\fs18\cf0\b string\plain\f5\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The ProgramName property defines the program name to be displayed on the first line of the about box.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If ProgramName is set to the empty string then the title of the application as specified by the {\strike Title}{\v !AL(TApplication_Title,1)} property of the {\strike Application}{\v !AL(TApplication_object,1)} object  is displayed. If you have not specified an application title then the name of the project (without the .dpr extension) is used. If ProgramName is set to any non-empty string then that string is displayed.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 ProgramName defaults to the empty string.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i Note:\plain\f0\fs18\cf0  If the {\strike VersionInfo}{\v IDH_AB_VERSIONINFO} property is not nil then this property is ignored.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.Title}
+#{\footnote {#}IDH_AB_TITLE}
+@{\footnote {@}Title property topic.}
+K{\footnote {K}Title,TPJAboutBoxDlg;TPJAboutBoxDlg,Title;Title}
+A{\footnote {A}TPJAboutBoxDlg_Title;Title_property;Title}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.Title
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines the title bar text of the about dialog box.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  Title: \plain\f5\fs18\cf0\b string\plain\f5\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Title property stores the string that is displayed in the title bar of the about dialog box. The default value of this property is 'About'.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.UseOSStdFonts}
+#{\footnote {#}IDH_AB_USEOSSTDFONTS}
+@{\footnote {@}UseOSStdFonts property topic.}
+K{\footnote {K}UseOSStdFonts,TPJAboutBoxDlg;TPJAboutBoxDlg,UseOSStdFonts;UseOSStdFonts}
+A{\footnote {A}TPJAboutBoxDlg_UseOSStdFonts;UseOSStdFonts_property;UseOSStdFonts}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.UseOSStdFonts
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f1\fs18\cf0 Specifies whether dialog box should use the system's default font\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  \plain\f6\fs18\cf0 UseOSStdFonts\plain\f5\fs18\cf0 : \plain\f6\fs18\cf0 Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 When true this property forces the dialog box to use the operating system's deafult font\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  When false (the default) the font the dialog box was designed with is used.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The property is designed to enable the specific default fonts used on Windows XP and Windows Vista to be used.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0\i This property is only available on 32 bit Windows.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.UseOwnerAsParent}
+#{\footnote {#}IDH_AB_USEOWNERASPARENT}
+@{\footnote {@}UseOwnerAsParent property topic.}
+K{\footnote {K}UseOwnerAsParent,TPJAboutBoxDlg;TPJAboutBoxDlg,UseOwnerAsParent;UseOwnerAsParent}
+A{\footnote {A}TPJAboutBoxDlg_UseOwnerAsParent;UseOwnerAsParent_property;UseOwnerAsParent}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.UseOwnerAsParent
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f1\fs18\cf0 Causes dialog box to be forced to be a child window of the owning control, if any\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  \plain\f6\fs18\cf0 UseOwnerAsParent\plain\f5\fs18\cf0 : \plain\f6\fs18\cf0 Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 When true this property sets the dialog box's parent to be the window handle of the control that owns the dialog box, providing the owner has a window handle. 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The property is provided for when the application's main form, rather than the hidden application Window is displayed in the Windows task bar. If this property is not set true it will be possible for the main window to be brought to the front by clicking its task bar icon, hiding the dialog box and hence freezing the program.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0\i This property is only available on 32 bit Windows.\plain\f0\fs18\cf0 
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.Version}
+#{\footnote {#}IDH_AB_VERSION}
+@{\footnote {@}Version property topic.}
+K{\footnote {K}Version,TPJAboutBoxDlg;TPJAboutBoxDlg,Version;Version}
+A{\footnote {A}TPJAboutBoxDlg_Version;Version_property;Version}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.Version
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_Copyright;TPJAboutBoxDlg_Notes;TPJAboutBoxDlg_ProgramName;TPJAboutBoxDlg_VersionInfo)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Determines the version number information to be displayed in the about box.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  Version: \plain\f5\fs18\cf0\b string\plain\f5\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Version property defines the version number (or other text)  to appear on the second line of the about box.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The default value of this property is an empty string, which displays nothing.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i Note:\plain\f0\fs18\cf0  If the {\strike VersionInfo}{\v IDH_AB_VERSIONINFO} property is not nil then this property is ignored.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.VersionInfo}
+#{\footnote {#}IDH_AB_VERSIONINFO}
+@{\footnote {@}VersionInfo property topic.}
+K{\footnote {K}VersionInfo,TPJAboutBoxDlg;TPJAboutBoxDlg,VersionInfo;VersionInfo}
+A{\footnote {A}TPJAboutBoxDlg_VersionInfo;VersionInfo_property;VersionInfo}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.VersionInfo
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}          {\strike See also}{\v !AL(TPJAboutBoxDlg_Copyright;TPJAboutBoxDlg_Notes;TPJAboutBoxDlg_ProgramName;TPJAboutBoxDlg_Version)}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 References a TPJVersionInfo component that provides the text displayed in the about box.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b property\plain\f5\fs18\cf0  VersionInfo: {\strike TPJVersionInfo}{\v !AL(TPJVersionInfo_object,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property allows information from a string information block in a program file's {\strike VERSIONINFO}{\v !KL("VERSIONINFO Resource",1)} resource to be displayed in the dialog box.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 To enable this to happen a {\strike TPJVersionInfo}{\v !AL(TPJVersionInfo_object,1)} component must be placed on the form and this property must reference it. The TPJVersionInfo component's {\strike FileName}{\v !AL(TPJVersionInfo_FileName,1)} property must be set to the name of the executable file from which version information is to be extracted. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The following table shows which version information string values are used, along with the properties whose values they replace:
+\par \plain\f0\fs8\cf0 
+\par \pard \li400 \tx2400 \keep \plain\f0\fs18\cf0\i VERSIONINFO string\tab Replaces property\plain\f0\fs18\cf0 
+\par ProductName\tab {\strike ProgramName}{\v IDH_AB_PROGRAMNAME}
+\par ProductVersion\tab {\strike Version}{\v IDH_AB_VERSION}
+\par LegalCopyright\tab {\strike Copyright}{\v IDH_AB_COPYRIGHT}
+\par Comments\tab {\strike Notes}{\v IDH_AB_NOTES}
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When any of these string values are not present in the version information nothing is displayed in their place. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the VersionInfo property is set to nil then the information displayed in the dialog box is taken from the string properties listed in the table above.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property has no effect on the usage of the {\strike Title}{\v IDH_AB_TITLE} property.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg Methods}
+#{\footnote {#}IDH_AB_METHODS}
+@{\footnote {@}Methods for TPJAboutBoxDlg.}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods\plain\f0\fs18\cf0 
+\par \pard \tx400 
+\par \pard TPJAboutBox adds just one method, {\strike Execute}{\v IDH_AB_EXECUTE}, to the methods inherited from {\strike TComponent}{\v !AL(TComponent_Object,1)}.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg.Execute}
+#{\footnote {#}IDH_AB_EXECUTE}
+@{\footnote {@}Execute method topic.}
+K{\footnote {K}Execute,TPJAboutBoxDlg;TPJAboutBoxDlg,Execute;Execute}
+A{\footnote {A}TPJAboutBoxDlg_Execute;Execute_method;Execute}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBoxDlg.Execute
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG}
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0 Displays the about box.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b procedure\plain\f5\fs18\cf0  Execute;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method displays the About box and returns when the user closes the About box.
+\par \page 
+${\footnote {$}TPJAboutBoxDlg Events}
+#{\footnote {#}IDH_AB_EVENTS}
+@{\footnote {@}Methods for TPJAboutBoxDlg - notes that component has no events.}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par \pard \tx400 
+\par \pard TPJAboutBoxDlg has no events.
+\par \page 
+${\footnote {$}TPJAboutBtnGlyphs}
+#{\footnote {#}IDH_TPJABOUTBTNGLYPHS}
+@{\footnote {@}TPJAboutBtnGlyphs enumerated type topic.}
+K{\footnote {K}TPJAboutBtnGlyphs}
+A{\footnote {A}TPJAboutBtnGlyphs}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBtnGlyphs
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJAbout}{\v IDH_AB_UNIT}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This enumerated type provides all the valid values for the {\strike ButtonGlyph}{\v IDH_AB_BUTTONGLYPH} property of a {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG} component. The record is declared as follows:
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f5\fs18\cf0\b type \plain\f5\fs18\cf0 TPJAboutBtnGlyphs = (abgOK, abgCancel,
+\par   abgIgnore, abgClose, abgNone);\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 See the {\strike ButtonGlyph}{\v IDH_AB_BUTTONGLYPH} property topic for details of the meaning of these values.
+\par \page 
+${\footnote {$}TPJAboutBtnKinds}
+#{\footnote {#}IDH_TPJABOUTBTNKINDS}
+@{\footnote {@}TPJAboutBtnKinds enumerated type topic.}
+K{\footnote {K}TPJAboutBtnKinds}
+A{\footnote {A}TPJAboutBtnKinds}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBtnKinds
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJAbout}{\v IDH_AB_UNIT}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This enumerated type provides all the valid values for {\strike ButtonKind}{\v IDH_AB_BUTTONKIND} property of a {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG} component.
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f5\fs18\cf0\b type\plain\f5\fs18\cf0  TPJAboutBtnKinds = (abkOK, abkDone, 
+\par   abkClose, abkCancel);\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 See the {\strike ButtonKind}{\v IDH_AB_BUTTONKIND} topic for details of the meaning of the values.
+\par \page 
+${\footnote {$}TPJAboutBtnPlacing}
+#{\footnote {#}IDH_TPJABOUTBTNPLACING}
+@{\footnote {@}TPJAboutBtnPlacing enumerated type topic.}
+K{\footnote {K}TPJAboutBtnPlacing}
+A{\footnote {A}TPJAboutBtnPlacing}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutBtnPlacing
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJAbout}{\v IDH_AB_UNIT}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This enumerated type provides all the valid values for {\strike ButtonPlacing}{\v IDH_AB_BUTTONPLACING} property of a {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG} component.
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f5\fs18\cf0\b type\plain\f5\fs18\cf0  TPJAboutBtnPlacing = (abpLeft, abpCentre, abpRight);\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 See the {\strike ButtonPlacing}{\v IDH_AB_BUTTONPLACING} topic for details of the meaning of the values.
+\par \page 
+${\footnote {$}TPJAboutPosition}
+#{\footnote {#}IDH_TPJABOUTPOSITION}
+@{\footnote {@}TPJAboutPosition enumerated type topic.}
+K{\footnote {K}TPJAboutPosition}
+A{\footnote {A}TPJAboutPosition}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs24\cf2\b TPJAboutPosition
+\par \plain\f0\fs8\cf0  
+\par \pard 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJAbout}{\v IDH_AB_UNIT}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This enumerated type provides all the valid values for {\strike Position}{\v IDH_AB_POSITION} property of a {\strike TPJAboutBoxDlg}{\v IDH_TPJABOUTBOXDLG} component.
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f5\fs18\cf0\b type\plain\f5\fs18\cf0  TPJAboutPosition\plain\f6\fs18\cf0  \plain\f5\fs18\cf0 = (abpScreen, abpDesktop, abpOwner);\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 See the {\strike Position}{\v IDH_AB_POSITION} topic for details of the meaning of the values.
+\par \page 
+}

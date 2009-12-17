@@ -1,0 +1,365 @@
+@PROJECT_NAME           About Dialog Box Component
+@PROJECT_DESC           Component that displays an about dialog box
+@ROOT                   ..\
+@AUTHOR                 Peter Johnson, LLANARTH, Ceredigion, Wales, UK
+@EMAIL                  peter.johnson@openlink.org
+@WEBSITE                http://www.delphidabbler.com/
+@COPYRIGHT              © Peter D Johnson, 1998-2005.
+@LEGAL_NOTICE           This unit is released under the Mozilla Public License
+                        v1.1. See http://www.mozilla.org/MPL/ for details.
+@DEPENDENCIES           DelphiDabbler components:
+                        + VerInfo unit v1 for 16 bit Delphi 1.
+                        + PJVersionInfo unit v3.1 or later for 32 bit Delphi.
+@HISTORY(
+  @REVISION(
+    @VERSION            1.0
+    @DATE               16/02/1998
+    @COMMENTS           Original version - 16 bit only.
+    @COMPILERS
+    @FILES(
+      @NEW(
+        @FILE           AboutBox.pas
+        @VERSION        1.0
+      )
+      @NEW(
+        @FILE           AboutBox.dcr
+        @DATE           15/02/1998
+        @COMMENTS       Resource file for 16 bit component glyph
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.0
+    @DATE               25/04/1998
+    @COMMENTS           + Added VersionInfo property.
+                        + Replaced Caption property with a Title property.
+                        + Added ButtonHeight property.
+                        + Added help file that integrates with Delphi.
+    @COMPILERS          Microsoft HC31 help compiler
+    @FILES(
+      @UPDATED(
+        @FILE           AboutBox.pas
+        @VERSION        2.0
+      )
+      @NEW(
+        @FILE           AboutBox.rtf
+        @DATE           24/04/1998
+        @COMMENTS       Help file source.
+      )
+      @NEW(
+        @FILE           AboutBox.kwf
+        @DATE           24/04/1998
+        @COMMENTS       Keyword file for Delphi help.
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.1
+    @DATE               01/08/1998
+    @COMMENTS           Added HelpContext property.
+    @COMPILERS          Microsoft HC31 help compiler
+    @FILES(
+      @UPDATED(
+        @FILE           AboutBox.pas
+        @VERSION        2.1
+      )
+      @UPDATED(
+        @FILE           AboutBox.rtf
+        @DATE           01/08/1998
+        @COMMENTS       Added information about new HelpContext property to help
+                        file.
+      )
+      @UPDATED(
+        @FILE           AboutBox.kwf
+        @DATE           01/08/1998
+        @COMMENTS       Regenerated for new keywords.
+      )
+      @NEW(
+        @FILE           AboutBox.hpj
+        @VERSION        1.0
+        @DATE           01/08/1998
+        @COMMENTS       New help project file.
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.2
+    @DATE               01/08/1998
+    @COMMENTS           Made appearance of glyphs on buttons depend on state of
+                        system global variable MsgDlgGlyphs.
+    @COMPILERS          Microsoft HC31 help compiler
+    @FILES(
+      @UPDATED(
+        @FILE           AboutBox.pas
+        @VERSION        2.2
+      )
+      @UPDATED(
+        @FILE           AboutBox.rtf
+        @DATE           01/08/1998
+        @COMMENTS       Added information about MsgDlgGlyphs keyword affecting
+                        component to help file.
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            3.0
+    @DATE               06/12/1998
+    @COMMENTS           + Made compatible with Delphi 1 & 2.
+                        + Added new AutoDetectGlyphs property.
+    @COMPILERS          Microsoft HC31 help compiler
+    @FILES(
+      @UPDATED(
+        @FILE           AboutBox.pas
+        @VERSION        3.0
+      )
+      @UPDATED(
+        @FILE           AboutBox.rtf
+        @DATE           06/12/1998
+        @COMMENTS       Added information about new AutoDetectGylphs property to
+                        help file.
+      )
+      @UPDATED(
+        @FILE           AboutBox.kwf
+        @DATE           06/12/1998
+        @COMMENTS       Regenerated for new keywords.
+      )
+      @UPDATED(
+        @FILE           Delphi1\AboutBox.dcr
+        @DATE           15/02/1998
+        @COMMENTS       Not updated - simply moved to new folder.
+        @RENAMED_FROM   aboutbox.dcr
+      )
+      @NEW(
+        @FILE           Delphi2\AboutBox.dcr
+        @DATE           06/12/1998
+        @COMMENTS       Resource file for 32 bit component glyph
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            3.0.1
+    @DATE               09/04/1999
+    @COMMENTS           Changed installation palette to "PJ Stuff" from "Own".
+    @COMPILERS          Microsoft HC31 help compiler
+    @FILES(
+      @UPDATED(
+        @FILE           AboutBox.pas
+        @VERSION        3.0.1
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            3.1
+    @DATE               27/11/1999
+    @COMMENTS           + Made compatible with Delphi 1, 2, 3 & 4.
+                        + Fixed potential bug re display of glyphs.
+                        + Adapted to work with version information component's
+                          renamed unit in 32 bit Delphi.
+    @COMPILERS          Microsoft HC31 help compiler
+    @FILES(
+      @UPDATED(
+        @FILE           AboutBox.pas
+        @VERSION        3.1
+      )
+      @UPDATED(
+        @FILE           16\AboutBox.dcr
+        @DATE           15/02/1998
+        @COMMENTS       Not changed - simply moved to new folder.
+        @RENAMED_FROM   Delphi1\aboutbox.dcr
+      )
+      @UPDATED(
+        @FILE           32\AboutBox.dcr
+        @DATE           06/12/1998
+        @COMMENTS       Not changed - simply moved to new folder.
+        @RENAMED_FROM   Delphi2\aboutbox.dcr
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            3.2
+    @DATE               09/03/2002
+    @COMMENTS           + Replaced reference to VInfo unit with reference to
+                          PJVersionInfo when compiled under 32 bit Delphi.
+                        + Changed form name to TPJAboutBoxForm.
+                        + Now removes reference to version information component
+                          if that component is deleted.
+                        + Added new ButtonWidth property.
+                        + Made default button height and width properties
+                          reflect the default button sizes used by 16 and 32 bit
+                          Delphi.
+                        + Changed dialog box font size to 8 when compiled under
+                          32 bit Delphi. This font size now conforms to Windows
+                          95 standards.
+                        + Changed component palette from 'PJ Stuff' to 'PJSoft'.
+                        + Updated help file to integrate with Delphi 3 and later
+                          - help no longer integrates under Delphi 1 and 2.
+    @COMPILERS          + Microsoft Help Workshop 4
+                        + PJSoft Help Topic Author 1.12.2
+    @FILES(
+      @REMOVED          AboutBox.rtf
+      @REMOVED          AboutBox.kwf
+      @UPDATED(
+        @FILE           PJAbout.pas
+        @VERSION        3.2
+        @RENAMED_FROM   AboutBox.pas
+      )
+      @UPDATED(
+        @FILE           16\PJAbout.dcr
+        @DATE           15/02/1998
+        @RENAMED_FROM   16\AboutBox.dcr
+        @COMMENTS       Not changed - simply renamed file.
+      )
+      @UPDATED(
+        @FILE           32\PJAbout.dcr
+        @DATE           06/12/1998
+        @RENAMED_FROM   32\AboutBox.dcr
+        @COMMENTS       Not changed - simply renamed file.
+      )
+      @NEW(
+        @FILE           Help\PJAbout.hap
+        @DATE           04/03/2002
+        @COMMENTS       Help topic file - replaces the AboutBox.rtf file as
+                        source for the help file.
+      )
+      @UPDATED(
+        @FILE           Help\PJAbout.hpj
+        @VERSION        2.0
+        @RENAMED_FROM   AboutBox.hpj
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            3.2.1
+    @DATE               10/07/2003
+    @COMMENTS           + Changed component palette from PJSoft to
+                          DelphiDabbler.
+                        + Updated help file window and copyright message.
+    @COMPILERS          + Microsoft Help Workshop 4
+                        + DelphiDabbler Help Topic Author 1.12.2
+    @FILES(
+      @UPDATED(
+        @FILE           PJAbout.pas
+        @VERSION        3.2.1
+      )
+      @UPDATED(
+        @FILE           Help\PJAbout.hpj
+        @VERSION        2.1
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            3.3
+    @DATE               08/11/2005
+    @COMMENTS           + Added new Position property that modifies action of
+                          CentreDlg, DlgLeft and DlgTop properties to be
+                          relative to either screen, desktop or owner control
+                          rather just relative to screen as before. Form
+                          positioning now defaults to be ralative to desktop
+                          centre rather than screen.
+                        + Added code to ensure dialog box is always wholly on
+                          screen, including centred dialogs.
+                        + Now constructs about dialog form with component's
+                          owner instead of application.
+                        + Set default property values for DlgLeft, DlgTop and
+                          HelpContext properties.
+                        + Ensured compatibility with Delphi 1-7.
+                        + Added demo program to distribution.
+                        + Changed to Mozilla Public License.
+                        + Updated help file new Position component.
+    @COMPILERS          + Microsoft Help Workshop 4
+                        + DelphiDabbler Help Topic Author 1.16
+    @FILES(
+      @UPDATED(
+        @FILE           PJAbout.pas
+        @VERSION        3.3
+      )
+      @UPDATED(
+        @FILE           Help\PJAbout.hap
+        @DATE           08/11/2005
+        @COMMENTS       + Added topic for new Position property.
+                        + Modified existing topics affected by new Position
+                          property.
+      )
+      @UPDATED(
+        @FILE           Help\PJAbout.hpj
+        @VERSION        2.2
+      )
+      @NEW(
+        @FILE           Demo\AboutBoxDemo.dpr
+        @VERSION        1.0
+      )
+      @NEW(
+        @FILE           Demo\FmDemo.pas
+        @VERSION        1.0
+      )
+      @NEW(
+        @FILE           Demo\VerInfo.rc
+        @VERSION        1.0
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            3.3.1
+    @DATE               12/12/2005
+    @COMMENTS           + Corrected keywords used for help file's PJAbout unit
+                          topic.
+    @COMPILERS          + Microsoft Help Workshop 4
+                        + DelphiDabbler Help Topic Author 1.16
+    @FILES(
+      @UPDATED(
+        @FILE           PJAbout.pas
+        @VERSION        3.3.1
+      )
+      @NEW(
+        @FILE           Help\PJAbout.als
+        @DATE           15/12/2005
+        @COMMENTS       New a-link keyword file for integration with Delphi 6/7
+                        OpenHelp.
+      )
+      @UPDATED(
+        @FILE           Help\PJAbout.hap
+        @DATE           12/12/2005
+        @COMMENTS       Corrected A and K keywords in PJAbout topic.
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            3.4
+    @DATE               16/06/2008
+    @COMMENTS           + Added new UseOwnerAsParent property (for Win32 only)
+                          that makes window handle of any owner of dialog as
+                          dialog's parent.
+                        + Added new UseOSStdFonts property (for Win32 only) that
+                          makes dialog use OSs standard fonts. This property
+                          added to cause XP and Vista to use their differing
+                          default fonts.
+                        + Enabled ESC key to be used to close dialog box.
+                        + Updated help file with topics about new properties.
+    @COMPILERS          + Microsoft Help Workshop 4
+                        + DelphiDabbler Help Topic Author 1.17
+    @FILES(
+      @UPDATED(
+        @FILE           PJAbout.pas
+        @VERSION        3.4
+      )
+      @UPDATED(
+        @FILE           Help\PJAbout.als
+        @DATE           16/06/2008
+        @COMMENTS       Added keywords for new properties.
+      )
+      @UPDATED(
+        @FILE           Help\PJAbout.hap
+        @DATE           16/06/2008
+        @COMMENTS       Added new topics for new properties.
+      )
+      @UPDATED(
+        @FILE           Demo\FmDemo.pas
+        @VERSION        1.1
+      )
+      @UPDATED(
+        @FILE           Demo\VerInfo.rc
+        @VERSION        1.1
+      )
+    )
+  )
+)

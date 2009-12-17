@@ -1,0 +1,25 @@
+; PJAbout.hpj
+;
+; About Box Component help project file.
+;
+; Original file name was AboutBox.hpj. Changed to PJAbout.hpj at v2.0.
+;
+; v1.0 of 01 Aug 1998  - Original version.
+; v2.0 of 09 Mar 2002  - Rewrote for new OpenHelp compatible help file used with
+;                        release 3 of component. Changed name to PJAbout.hpj
+;                        from AboutBox.hpj.
+; v2.1 of 10 Jul 2003  - Updated window title and copyright message.
+; v2.2 of 08 Nov 2005  - Updated copyright date.
+; v2.3 of 16 Jun 2008  - Updated copyright date and added web address.
+
+
+[OPTIONS]
+HCW=0
+LCID=0x809 0x0 0x0 ;English (United Kingdom)
+REPORT=Yes
+TITLE=DelphiDabbler About Box Component
+COPYRIGHT=DelphiDabbler About Box Help - Copyright © 1998-2008 P.D.Johnson (www.delphidabbler.com)
+HLP=.\PJAbout.hlp
+
+[FILES]
+PJAbout.rtf
