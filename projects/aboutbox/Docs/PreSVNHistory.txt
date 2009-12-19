@@ -1,0 +1,309 @@
+================================================================================
+
+About Box Component: Historical update information from v1.0 to v3.4
+
+================================================================================
+
+This file records known changes to files in the About Box Component from
+v1.0 to and v3.4. before the project was placed was placed under version control
+with Subversion.
+
+There are two sections:
+
+  1: Releases: Lists all the releases of the project and notes which files were
+     added, updated or deleted in each release.
+
+  2: Files: Lists all source code and development tools and provides details of
+     changes to these files.
+
+
+================================================================================
+1: RELEASES
+================================================================================
+
+This section lists all releases of the project from the first version (1.0) to 
+release 3.4. For each release the following is noted:
+
+  + Version and date
+  + List of new, updated and deleted files.
+  
+For details of changes to each release see ChangeLog.txt
+
+--------------------------------------------------------------------------------
+v1.0 - 16 Feb 1998
+--------------------------------------------------------------------------------
+New     - AboutBox.pas 1.0
+New     - AboutBox.dcr 15 Feb 1998
+
+--------------------------------------------------------------------------------
+v2.0 - 25 Apr 1998
+--------------------------------------------------------------------------------
+Updated - AboutBox.pas 2.0
+New     - AboutBox.rtf 24 Apr 1998
+New     - AboutBox.kwf 24 Apr 1998
+
+--------------------------------------------------------------------------------
+v2.1 - 01 Aug 1998
+--------------------------------------------------------------------------------
+Updated - AboutBox.pas 2.1
+Updated - AboutBox.rtf 01 Aug 1998
+Updated - AboutBox.kwf 01 Aug 1998
+New     - AboutBox.hpj 1.0
+
+--------------------------------------------------------------------------------
+v2.2 - 01 Aug 1998
+--------------------------------------------------------------------------------
+Updated - AboutBox.pas 2.2
+Updated - AboutBox.rtf 01 Aug 1998
+
+--------------------------------------------------------------------------------
+v3.0 - 06 Dec 1998
+--------------------------------------------------------------------------------
+Updated - AboutBox.pas 3.0
+Updated - AboutBox.rtf 06 Dec 1998
+Updated - AboutBox.kwf 06 Dec 1998
+Renamed - Delphi1\AboutBox.dcr from AboutBox.dcr
+New     - Delphi2\AboutBox.dcr 06 Dec 1998
+
+--------------------------------------------------------------------------------
+v3.0.1 - 09 Apr 1999
+--------------------------------------------------------------------------------
+Updated - AboutBox.pas v3.0.1
+
+--------------------------------------------------------------------------------
+v3.1 - 27 Nov 1999
+--------------------------------------------------------------------------------
+Updated - AboutBox.pas 3.1
+Renamed - 16\AboutBox.dcr from Delphi1\aboutbox.dcr
+Renamed - 32\AboutBox.dcr from Delphi2\aboutbox.dcr
+
+--------------------------------------------------------------------------------
+v3.2 - 09 Mar 2002
+--------------------------------------------------------------------------------
+Removed - AboutBox.rtf
+Removed - AboutBox.kwf
+Updated - PJAbout.pas 3.2 (renamed from AboutBox.pas)
+Renamed - 16\PJAbout.dcr from 16\AboutBox.dcr
+Renamed - 32\PJAbout.dcr from 32\AboutBox.dcr
+New     - Help\PJAbout.hap 04 Mar 2002
+Updated - Help\PJAbout.hpj 2.0 (renamed from AboutBox.hpj)
+
+--------------------------------------------------------------------------------
+v3.2.1 - 10 Jul 2003
+--------------------------------------------------------------------------------
+Updated - PJAbout.pas 3.2.1
+Updated - Help\PJAbout.hpj 2.1
+
+--------------------------------------------------------------------------------
+v3.3 - 08 Nov 2005
+--------------------------------------------------------------------------------
+Updated - PJAbout.pas 3.3
+Updated - Help\PJAbout.hap 08 Nov 2005
+Updated - Help\PJAbout.hpj 2.2
+New     - Demo\AboutBoxDemo.dpr 1.0
+New     - Demo\FmDemo.pas 1.0
+New     - Demo\VerInfo.rc 1.0
+
+--------------------------------------------------------------------------------
+v3.3.1 - 12 Dec 2005
+--------------------------------------------------------------------------------
+Updated - PJAbout.pas 3.3.1
+New     - Help\PJAbout.als 15 Dec 2005
+Updated - Help\PJAbout.hap 12 Dec 2005
+
+--------------------------------------------------------------------------------
+v3.4 of 16 Jun 2008
+--------------------------------------------------------------------------------
+Updated - PJAbout.pas 3.4
+Updated - Help\PJAbout.als 16 Jun 2008
+Updated - Help\PJAbout.hap 16 Jun 2008
+Updated - Demo\FmDemo.pas 1.1
+Updated - Demo\VerInfo.rc 1.1
+
+
+================================================================================
+2: FILES
+================================================================================
+
+This section lists all files for which an update history is known between v1 and
+and v3.4, inclusive.
+
+--------------------------------------------------------------------------------
+AboutBox.kwf
+--------------------------------------------------------------------------------
+        24 Apr 1998    - New keyword file for Delphi help.
+        01 Aug 1998    - Regenerated for new keywords.
+        06 Dec 1998    - Regenerated for new keywords.
+        09 Mar 2002    - DELETED.
+
+--------------------------------------------------------------------------------
+AboutBox.rtf
+--------------------------------------------------------------------------------
+        24 Apr 1998    - New help source file.
+        01 Aug 1998    - Added information about new HelpContext property to
+                         help file.
+        01 Aug 1998    - Added information about MsgDlgGlyphs keyword affecting
+                         component to help file.
+        06 Dec 1998    - Added information about new AutoDetectGylphs property
+                         to help file.
+        09 Mar 2002    - DELETED.
+
+--------------------------------------------------------------------------------
+PJAbout.pas
+--------------------------------------------------------------------------------
+v1.0 of 16 Feb 1998    - Original version - 16 bit only, named AboutBox.pas.
+v2.0 of 25 Apr 1998    - Added VersionInfo property to link to any
+                         TPJVersionInfo component on form to allow text in
+                         dialog box to come from file version info instead of
+                         ProgramName, Version, Copyright and Notes properties.
+                       - Replaced Caption property with a Title property which
+                         has same effect but has name in common with other VCL
+                         dialog box components.
+                       - Added button height property to control height of Done
+                         button.
+v2.1 of 01 Aug 1998    - Added HelpContext property to allow help to be
+                         displayed when F1 is pressed if property has a non zero
+                         value.
+v2.2 of 01 Aug 1998    - Made appearance of glyphs on buttons depend on state of
+                         system global variable MsgDlgGlyphs - if this value is
+                         false it overrides ButtonGlyph property and glyphs do
+                         not appear on buttons - if the value is true the
+                         appearance of glyphs depends on the ButtonGlyph
+                         property.
+v3.0 of 06 Dec 1998    - Made compatible with Delphi 1 & 2.
+                       - Made appearance of glyphs on buttons depend on state of
+                         new property AutoDetectGlyphs. If this is true
+                         (default) then whether buttons are displayed depends on
+                         whether 16 or 32 bit Delphi is being used. With 16 bit
+                         Delphi, appearance of glyphs depends on MsgDlgGlyphs
+                         typed constant (which is same default behaviour as
+                         v2.2). With 32 bit Delphi no glyphs will appear when
+                         AutoDetectGlyphs is true, which conforms with behaviour
+                         of MessageDlgXXX procedures.
+v3.0.1 of 09 Apr 1999  - Changed installation palette to 'PJ Stuff' from 'Own'.
+v3.1 of 27 Nov 1999    - Made compatible with Delphi 1, 2, 3 & 4.
+                       - Fixed potential bug where UseButtonGlyphProperty
+                         variable in Execute method was not being set under some
+                         conditions.
+                       - Replaced reference to VerInfo unit with reference to
+                         VInfo unit when compiled under 32 bit Delphi (VerInfo
+                         name clashes with an existing unit in Delphi v3 and
+                         v4).
+                       - Moved declaration of TAboutDlg form class from
+                         implementation to interface section to allow to compile
+                         under Delphi 4.
+v3.2 of 09 Mar 2002    - Renamed from AboutBox.pas to PJAbout.pas.
+                       - Replaced reference to VInfo unit with reference to
+                         PJVersionInfo when compiled under 32 bit Delphi.
+                       - Changed form name to TPJAboutBoxForm.
+                       - Added Notification method override to remove reference
+                         to version information component if that component is
+                         deleted.
+                       - Added new ButtonWidth property.
+                       - Made default button height and width properties
+                         different when compiled under 16 and 32 bit Delphi.
+                         These value reflect the default button sizes used by 16
+                         and 32 bit Delphi.
+                       - Changed dialog box font size to 8 when compiled under
+                         32 bit Delphi. This font size now conforms to Windows
+                         95 standards.
+                       - Changed component palette from 'PJ Stuff' to 'PJSoft'.
+v3.2.1 of 10 Jul 2003  - Changed component palette from 'PJSoft' to
+                         'DelphiDabbler'.
+v3.3 of 08 Nov 2005    - Added new Position property that modifies action of
+                         CentreDlg, DlgLeft and DlgTop properties to be relative
+                         to either screen, desktop or owner control rather than
+                         just relative to screen as before. Form positioning now
+                         defaults to be ralative to desktop centre rather than
+                         screen.
+                       - Added code to ensure dialog box is always wholly on
+                         screen, including centred dialogs.
+                       - Now constructs about dialog form with component's owner
+                         instead of application.
+                       - Set default property values for DlgLeft, DlgTop and
+                         HelpContext properties.
+                       - Ensured compatibility with Delphi 1-7.
+v3.3.1 of 15 Dec 2005  - Fixed error where DELPHI6ANDUP compiler define was not
+                         defined on Delphi 2005 and later.
+v3.4 of 16 Jun 2008    - Added new UseOwnerAsParent property (for Win32 only)
+                         that makes window handle of any owner of dialog as
+                         dialog's parent.
+                       - Added new UseOSStdFonts property (for Win32 only) that
+                         makes dialog use OSs standard fonts. This property
+                         added to cause XP and Vista to use their differing
+                         default fonts.
+                       - Enabled ESC key to be used to close dialog box.
+        16 Dec 2009    - Moved to SVN.
+
+--------------------------------------------------------------------------------
+16\PJAbout.dcr
+--------------------------------------------------------------------------------
+        15 Feb 1998    - New 16 bit component palette glyph named AboutBox.dcr.
+        06 Dec 1998    - Moved to Delphi1\AboutBox.dcr.
+        27 Nov 1999    - Moved to 16\AboutBox.dcr.
+        09 Mar 2002    - Renamed as 16\PJAbout.dcr.
+        16 Dec 2009    - Moved to SVN.
+
+--------------------------------------------------------------------------------
+32\PJAbout.dcr
+--------------------------------------------------------------------------------
+        06 Dec 1998    - New 32 bit component palette glyph named
+                         Delphi1\AboutBox.dcr.
+        27 Nov 1999    - Moved to 32\AboutBox.dcr.
+        09 Mar 2002    - Renamed as 32\PJAbout.dcr.
+        16 Dec 2009    - Moved to SVN.
+
+--------------------------------------------------------------------------------
+Demo\AboutBoxDemo.dpr
+--------------------------------------------------------------------------------
+v1.0 of 08 Nov 2005    - New demo project file.
+        16 Dec 2009    - Moved to SVN.
+
+--------------------------------------------------------------------------------
+Demo\FmDemo.pas
+--------------------------------------------------------------------------------
+v1.0 of 08 Nov 2005    - Original demo main form file.
+v1.1 of 16 Jun 2008    - Added support for demonstrating UseOwnerAsParent and
+                         UseOSStdFonts properties added to component at v3.4.
+        16 Dec 2009    - Moved to SVN.
+
+--------------------------------------------------------------------------------
+Demo\VerInfo.rc
+--------------------------------------------------------------------------------
+v1.0 of 08 Nov 2005    - Original version.
+v1.1 of 16 Jun 2008    - Updated version number to 1.1.0.2
+        16 Dec 2009    - Moved to SVN.
+
+--------------------------------------------------------------------------------
+Help\PJAbout.als
+--------------------------------------------------------------------------------
+        15 Dev 2005    - New a-link keyword file for integration with Delphi 6/7
+                         OpenHelp.
+        16 Jun 2008    - Added keywords for new properties.
+        16 Dec 2009    - Moved to SVN.
+
+--------------------------------------------------------------------------------
+Help\PJAbout.hap
+--------------------------------------------------------------------------------
+        04 Mar 2002    - Help topic file. Replaces the AboutBox.rtf as source
+                         for the help file.
+        08 Nov 2005    - Added topic for new Position property.
+                       - Modified existing topics affected by new Position
+                         property.
+        12 Dec 2005    - Corrected A and K keywords in PJAbout topic.
+        16 Jun 2008    - Added new topics for new properties.
+        16 Dec 2009    - Moved to SVN.
+
+--------------------------------------------------------------------------------
+Help\PJAbout.hpj
+--------------------------------------------------------------------------------
+v1.0 of 01 Aug 1998    - Original version named AboutBox.hpj.
+v2.0 of 09 Mar 2002    - Rewrote for new OpenHelp compatible help file used with
+                         release 3 of component.
+                       - Changed name to Help\PJAbout.hpj from AboutBox.hpj.
+v2.1 of 10 Jul 2003    - Updated window title and copyright message.
+v2.2 of 08 Nov 2005    - Updated copyright date.
+v2.3 of 16 Jun 2008    - Updated copyright date and added web address.
+        16 Dec 2009    - Moved to SVN.
+
+--------------------------------------------------------------------------------
