@@ -14,20 +14,11 @@
 
 unit FmDemo;
 
-{$IFDEF VER90}
-  // Delphi 2
-  {$DEFINE DELPHI3ANDBELOW}
-{$ENDIF}
-{$IFDEF VER100}
-  // Delphi 3
-  {$DEFINE DELPHI3ANDBELOW}
-{$ENDIF}
-
 interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, PJAbout, PJVersionInfo, StdCtrls, Spin;
+  Dialogs, StdCtrls, Spin, PJAbout, PJVersionInfo;
 
 type
   TForm1 = class(TForm)
@@ -37,7 +28,6 @@ type
     cbButtonPlacing: TComboBox;
     cbDlgText: TComboBox;
     cbPosition: TComboBox;
-    chkAutoDetect: TCheckBox;
     chkCentreDlg: TCheckBox;
     dlgAbout: TPJAboutBoxDlg;
     gpButton: TGroupBox;
@@ -75,7 +65,6 @@ implementation
 procedure TForm1.btnExecuteClick(Sender: TObject);
 begin
   // Update property values
-  dlgAbout.AutoDetectGlyphs := chkAutoDetect.Checked;
   dlgAbout.ButtonGlyph := TPJAboutBtnGlyphs(cbButtonGlyph.ItemIndex);
   dlgAbout.ButtonHeight := sedButtonHeight.Value;
   dlgAbout.ButtonKind := TPJAboutBtnKinds(cbButtonKind.ItemIndex);
@@ -163,8 +152,6 @@ begin
   for I := Ord(Low(TPJAboutBtnGlyphs)) to Ord(High(TPJAboutBtnGlyphs)) do
     cbButtonGlyph.Items.Add(cButtonGlyphNames[TPJAboutBtnGlyphs(I)]);
   cbButtonGlyph.ItemIndex := Ord(dlgAbout.ButtonGlyph);
-
-  chkAutoDetect.Checked := dlgAbout.AutoDetectGlyphs;
 
   for I := Ord(Low(TPJAboutBtnKinds)) to Ord(High(TPJAboutBtnKinds)) do
     cbButtonKind.Items.Add(cButtonNames[TPJAboutBtnKinds(I)]);
