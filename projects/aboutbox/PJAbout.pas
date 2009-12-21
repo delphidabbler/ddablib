@@ -536,6 +536,7 @@ procedure TPJAboutBoxDlg.Notification(AComponent: TComponent;
     @param Operations [in] Indicates whether component being added or removed.
   }
 begin
+  inherited;
   if (Operation = opRemove) and (AComponent = fVersionInfo) then
     fVersionInfo := nil;
 end;
