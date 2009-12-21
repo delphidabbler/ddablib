@@ -41,28 +41,19 @@ unit PJAbout;
 interface
 
 
-// Find if we have a Delphi 6 or higher compiler
-{$DEFINE DELPHI6ANDUP}
-{$IFDEF VER90}  {Delphi 2}
-  {$UNDEF DELPHI6ANDUP}
+// Set conditionally defined symbols and switch of code warnings
+{$DEFINE RESOURCESTRING}  // defined if resourcestring keyword supported
+{$UNDEF SCREENWORKAREA}   // defined if Screen.WorkAreaRect property supported
+{$IFDEF VER90}  // Delphi 2
+  {$UNDEF RESOURCESTRING}
 {$ENDIF}
-{$IFDEF VER93}  {C++ Builder 1}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER100} {Delphi 3}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER110} {C++ Builder 3}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER120} {Delphi 4}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER125} {C++ Builder 4}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER130} {Delphi 5}
-  {$UNDEF DELPHI6ANDUP}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 14.0} // Delphi 6
+    {$DEFINE SCREENWORKAREA}
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
 {$ENDIF}
 
 
@@ -334,6 +325,12 @@ constructor TPJAboutBoxDlg.Create(AOwner: TComponent);
   {Component constructor. Sets up dialog box.
     @param AOwner [in] Component that owns this component.
   }
+{$IFDEF RESOURCESTRING}
+resourcestring
+{$ELSE}
+const
+{$ENDIF}
+  sDefaultTitle = 'About';  // default dialog box tile
 begin
   inherited Create(AOwner);
   // Set default property values
@@ -342,7 +339,7 @@ begin
   fButtonGlyph := abgNone;
   fButtonHeight := 25;
   fButtonWidth := 75;
-  fTitle := 'About';
+  fTitle := sDefaultTitle;
   fCentreDlg := True;
   fPosition := abpDesktop;
   fAutoDetectGlyphs := False;
@@ -354,7 +351,7 @@ function TPJAboutBoxDlg.DesktopWorkArea: TRect;
       whole screen.
   }
 begin
-  {$IFDEF DELPHI6ANDUP}
+  {$IFDEF SCREENWORKAREA}
   // Delphi 6 up: get desktop area from screen object
   Result := Screen.WorkAreaRect;
   {$ELSE}
@@ -366,9 +363,18 @@ end;
 procedure TPJAboutBoxDlg.Execute;
   {Displays the dialog box.
   }
+{$IFDEF RESOURCESTRING}
+resourcestring
+{$ELSE}
+const
+{$ENDIF}
+  // Button captions
+  sOKBtnCaption = 'OK';
+  sDoneBtnCaption = 'Done';
+  sCloseBtnCaption = 'Close';
+  sCancelBtnCaption = 'Cancel';
 var
-  Dlg: TPJAboutBoxForm;             // dialog box instance
-  UseButtonGlyphProperty: Boolean;  // flag true if to use ButtonGlyph property
+  Dlg: TPJAboutBoxForm; // dialog box instance
 begin
   // Create dialog box instance
   Dlg := TPJAboutBoxForm.Create(Owner);
@@ -425,11 +431,7 @@ begin
     end;
     // decide whether to use button glyph property, depending on value of
     // AutoDetectGlyphs property
-    if fAutoDetectGlyphs then
-      UseButtonGlyphProperty := False
-    else
-      UseButtonGlyphProperty := True;
-    if UseButtonGlyphProperty then
+    if not fAutoDetectGlyphs then
       // use ButtonGlyph property: load one bitmap resources present in all
       // Delphi apps
       case ButtonGlyph of
@@ -449,10 +451,10 @@ begin
       Dlg.DoneBtn.Glyph := nil;
     // set button text per button kind property
     case ButtonKind of
-      abkOK: Dlg.DoneBtn.Caption := 'OK';
-      abkDone: Dlg.DoneBtn.Caption := 'Done';
-      abkClose: Dlg.DoneBtn.Caption := 'Close';
-      abkCancel: Dlg.DoneBtn.Caption := 'Cancel';
+      abkOK: Dlg.DoneBtn.Caption := sOKBtnCaption;
+      abkDone: Dlg.DoneBtn.Caption := sDoneBtnCaption;
+      abkClose: Dlg.DoneBtn.Caption := sCloseBtnCaption;
+      abkCancel: Dlg.DoneBtn.Caption := sCancelBtnCaption;
     end;
     // adjust dialog box height according to button height
     Dlg.ClientHeight := 166 + fButtonHeight;
