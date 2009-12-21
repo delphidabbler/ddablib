@@ -1,6 +1,7 @@
 @rem ---------------------------------------------------------------------------
-@rem Script used to delete About Box Dialogs's temp, backup files and test .dcu
-@rem and .exe files.
+@rem About Box Component
+@rem
+@rem Script used to delete temporary files and directories.
 @rem
 @rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008-2009
 @rem
@@ -15,26 +16,21 @@ echo Tidying
 echo ~~~~~~~
 echo.
 
-set SrcDir=..
+set RootDir=..
 
-echo Deleting *.~* from "%SrcDir%" and subfolders
-del /S %SrcDir%\*.~* 
+echo Deleting temporary files
+del /S %RootDir%\*.~* 
+del /S %RootDir%\*.ddp 
+del /S %RootDir%\*.dcu 
+del /S %RootDir%\*.exe 
+del /S %RootDir%\*.dsk 
+del /S %RootDir%\*.bak
+del /S %RootDir%\*.GID 
 echo.
 
-echo Deleting *.dpp from "%SrcDir%" and subfolders
-del /S %SrcDir%\*.ddp 
-echo.
-
-echo Deleting *.dcu from "%SrcDir%" and subfolders
-del /S %SrcDir%\*.dcu 
-echo.
-
-echo Deleting *.exe from "%SrcDir%" and subfolders
-del /S %SrcDir%\*.exe 
-echo.
-
-echo Deleting *.dsk from "%SrcDir%" and subfolders
-del /S %SrcDir%\*.dsk 
+echo Deleting temporary directories
+if exist %RootDir%\Release rmdir /S /Q %RootDir%\Release
+for /F "usebackq" %%i in (`dir /S /B /A:D %RootDir%\__history*`) do rmdir /S /Q %%i
 echo.
 
 echo Done.
