@@ -2,9 +2,10 @@
 @rem Script used to create zip file containing source code of About Box
 @rem Component.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008-2009
 @rem
-@rem v1.0 of 16 Jun 2008 - First version.
+@rem $Rev$
+@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 
