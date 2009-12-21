@@ -1,4 +1,9 @@
  {
+ * Main form for About Box Component demo program.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -16,21 +21,14 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2005 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2005-2009 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributors:
+ *   NONE.
  *
  * ***** END LICENSE BLOCK *****
  }
-
-
-{
-  Demo program for DelphiDabbler about box component.
-
-  This file: AboutBoxDemo.dpr v1.0 - project file.
-
-  Update history:
-  + v1.0 of 08/11/2005 - original version.
-}
 
 
 program AboutBoxDemo;

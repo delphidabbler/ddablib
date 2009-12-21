@@ -5,97 +5,8 @@
  * can get displayed information either from properties or from version
  * information.
  *
- * Original unit name was AboutBox.pas. Changed to PJAbout.pas at v3.2.
- *
- * Requires:
- *   - VerInfo unit v1 for 16 bit Delphi 1.
- *   - PJVersionInfo unit v3.1 or later for 32 bit Delphi.
- *
- * v1.0 of 16 Feb 1998    - Original version - 16 bit only.
- * v2.0 of 25 Apr 1998    - Added VersionInfo property to link to any
- *                          TPJVersionInfo component on form to allow text in
- *                          dialog box to come from file version info instead of
- *                          ProgramName, Version, Copyright and Notes
- *                          properties.
- *                        - Replaced Caption property with a Title property
- *                          which has same effect but has name in common with
- *                          other VCL dialog box components.
- *                        - Added button height property to control height of
- *                          Done button.
- * v2.1 of 01 Aug 1998    - Added HelpContext property to allow help to be
- *                          displayed when F1 is pressed if property has a non
- *                          zero value.
- * v2.2 of 01 Aug 1998    - Made appearance of glyphs on buttons depend on state
- *                          of system global variable MsgDlgGlyphs - if this
- *                          value is false it overrides ButtonGlyph property and
- *                          glyphs do not appear on buttons - if the value is
- *                          true the appearance of glyphs depends on the
- *                          ButtonGlyph property.
- * v3.0 of 06 Dec 1998    - Made compatible with Delphi 1 & 2.
- *                        - Made appearance of glyphs on buttons depend on state
- *                          of new property AutoDetectGlyphs. If this is true
- *                          (default) then whether buttons are displayed depends
- *                          on whether 16 or 32 bit Delphi is being used. With
- *                          16 bit Delphi, appearance of glyphs depends on
- *                          MsgDlgGlyphs typed constant (which is same default
- *                          behaviour as v2.2). With 32 bit Delphi no glyphs
- *                          will appear when AutoDetectGlyphs is true, which
- *                          conforms with behaviour of MessageDlgXXX procedures.
- * v3.0.1 of 09 Apr 1999  - Changed installation palette to 'PJ Stuff' from
- *                          'Own'.
- * v3.1 of 27 Nov 1999    - Made compatible with Delphi 1, 2, 3 & 4.
- *                        - Fixed potential bug where UseButtonGlyphProperty
- *                          variable in Execute method was not being set under
- *                          some conditions.
- *                        - Replaced reference to VerInfo unit with reference to
- *                          VInfo unit when compiled under 32 bit Delphi
- *                          (VerInfo name clashes with an existing unit in
- *                          Delphi v3 and v4).
- *                        - Moved declaration of TAboutDlg form class from
- *                          implementation to interface section to allow to
- *                          compile under Delphi 4.
- * v3.2 of 09 Mar 2002    - Replaced reference to VInfo unit with reference to
- *                          PJVersionInfo when compiled under 32 bit Delphi.
- *                        - Changed form name to TPJAboutBoxForm.
- *                        - Added Notification method override to remove
- *                          reference to version information component if that
- *                          component is deleted.
- *                        - Added new ButtonWidth property.
- *                        - Made default button height and width properties
- *                          different when compiled under 16 and 32 bit Delphi.
- *                          These value reflect the default button sizes used by
- *                          16 and 32 bit Delphi.
- *                        - Changed dialog box font size to 8 when compiled
- *                          under 32 bit Delphi. This font size now conforms to
- *                          Windows 95 standards.
- *                        - Changed component palette from 'PJ Stuff' to
- *                          'PJSoft'.
- * v3.2.1 of 10 Jul 2003  - Changed component palette from 'PJSoft' to
- *                          'DelphiDabbler'.
- * v3.3 of 08 Nov 2005    - Added new Position property that modifies action of
- *                          CentreDlg, DlgLeft and DlgTop properties to be
- *                          relative to either screen, desktop or owner control
- *                          rather just relative to screen as before. Form
- *                          positioning now defaults to be ralative to desktop
- *                          centre rather than screen.
- *                        - Added code to ensure dialog box is always wholly on
- *                          screen, including centred dialogs.
- *                        - Now constructs about dialog form with component's
- *                          owner instead of application.
- *                        - Set default property values for DlgLeft, DlgTop and
- *                          HelpContext properties.
- *                        - Ensured compatibility with Delphi 1-7.
- * v3.3.1 of 15 Dec 2005  - Fixed error where DELPHI6ANDUP compiler define was
- *                          not defined on Delphi 2005 and later.
- * v3.4 of 16 Jun 2008    - Added new UseOwnerAsParent property (for Win32 only)
- *                          that makes window handle of any owner of dialog as
- *                          dialog's parent.
- *                        - Added new UseOSStdFonts property (for Win32 only)
- *                          that makes dialog use OSs standard fonts. This
- *                          property added to cause XP and Vista to use their
- *                          differing default fonts.
- *                        - Enabled ESC key to be used to close dialog box.
- *
+ * $Rev$
+ * $Date$
  *
  * ***** BEGIN LICENSE BLOCK *****
  *
@@ -114,8 +25,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1998-2008 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1998-2009 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributors:
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }
