@@ -229,15 +229,18 @@ type
       'Done' or 'Close'}
     property ButtonGlyph: TPJAboutBtnGlyphs
       read fButtonGlyph write fButtonGlyph
-      default abgOK;
-      {Determines which glyph, if any, to display on dialog's OK button. The
-      AutoDetectGlyphs property influences whether or not the glyph is actually
-      is displayed}
+      default abgNone;
+      {Determines which glyph, if any, to display on dialog's OK button.
+      WARNING: If the deprecated AutoDetectGlyphs property is True then
+      ButtonGlyph is ignored}
     property AutoDetectGlyphs: Boolean
       read fAutoDetectGlyphs write fAutoDetectGlyphs
-      default True;
+      default False;
       {Determines whether any image assigned to the ButtonGlyph property is
-      displayed. If AutoDetectGlyphs is true then ButtonGlyph is ignored}
+      displayed. If AutoDetectGlyphs is true then ButtonGlyph is ignored.
+      WARNING: This property is DEPRECATED and should always be set to False.
+      Set ButtonGlyph to abgNone (default) to prevent display of gylphs on
+      buttons}
     property ButtonHeight: Integer
       read fButtonHeight write fButtonHeight
       default 25;
@@ -336,13 +339,13 @@ begin
   // Set default property values
   fButtonPlacing := abpCentre;
   fButtonKind := abkOK;
-  fButtonGlyph := abgOK;
+  fButtonGlyph := abgNone;
   fButtonHeight := 25;
   fButtonWidth := 75;
   fTitle := 'About';
   fCentreDlg := True;
   fPosition := abpDesktop;
-  fAutoDetectGlyphs := True;
+  fAutoDetectGlyphs := False;
 end;
 
 function TPJAboutBoxDlg.DesktopWorkArea: TRect;

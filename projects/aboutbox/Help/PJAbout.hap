@@ -33,7 +33,7 @@ $=TPJAboutBoxDlg
 K=TPJAboutBoxDlg
 A=TPJAboutBoxDlg;TPJAboutBoxDlg_object
 [End]
-30
+29
 NS
 1
 HS
@@ -173,13 +173,6 @@ HS
 IDH_AB_BUTTONKIND
 
 HS
-22
-0
-
-0
-IDH_AB_AUTODETECTGLYPHS
-
-HS
 23
 0
 
@@ -235,7 +228,7 @@ HS
 0
 IDH_AB_POSITION
 
-5548
+5561
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf1 \protect <BM 3>\plain\f0\fs24\cf3\b  TPJAboutBoxDlg
 \par \plain\f0\fs12\cf2 
@@ -254,13 +247,13 @@ IDH_AB_POSITION
 \par \plain\f0\fs8\cf2 
 \par \pard \qc \plain\f0\fs18\cf1 \protect <BM 8>\plain\f0\fs18\cf2 
 \par \pard \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 Alternatively, the about box can display information from a \plain\f0\fs18\cf1 \protect <HS 10>\plain\f0\fs18\cf2 VERSIONINFO\plain\f0\fs18\cf1 \protect </HS 10>\plain\f0\fs18\cf2  resource included in a program file. This by setting the \plain\f0\fs18\cf1 \protect <HS 11>\plain\f0\fs18\cf2 VersionInfo\plain\f0\fs18\cf1 \protect </HS 11>\plain\f0\fs18\cf2  property to reference a \plain\f0\fs18\cf1 \protect <HS 12>\plain\f0\fs18\cf2 TPJVersionInfo\plain\f0\fs18\cf1 \protect </HS 12>\plain\f0\fs18\cf2  component which extracts version information from an executbale file.
+\par \plain\f0\fs18\cf2 Alternatively, the about box can display information from a \plain\f0\fs18\cf1 \protect <HS 10>\plain\f0\fs18\cf2 VERSIONINFO\plain\f0\fs18\cf1 \protect </HS 10>\plain\f0\fs18\cf2  resource included in a program file. \plain\f1\fs18\cf2 Do t\plain\f0\fs18\cf2 his by setting the \plain\f0\fs18\cf1 \protect <HS 11>\plain\f0\fs18\cf2 VersionInfo\plain\f0\fs18\cf1 \protect </HS 11>\plain\f0\fs18\cf2  property to reference a \plain\f0\fs18\cf1 \protect <HS 12>\plain\f0\fs18\cf2 TPJVersionInfo\plain\f0\fs18\cf1 \protect </HS 12>\plain\f0\fs18\cf2  component which extracts version information from an execut\plain\f1\fs18\cf2 ab\plain\f0\fs18\cf2 le file.
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The application's icon is displayed in the dialog box. This is the icon specified by the \plain\f0\fs18\cf1 \protect <HS 13>\plain\f0\fs18\cf2 Icon\plain\f0\fs18\cf1 \protect </HS 13>\plain\f0\fs18\cf2  property of the \plain\f0\fs18\cf1 \protect <HS 14>\plain\f0\fs18\cf2 TApplication\plain\f0\fs18\cf1 \protect </HS 14>\plain\f0\fs18\cf2  object. If no icon has been specified for the application then default Delphi icon is used.
+\par \plain\f0\fs18\cf2 The application's icon is displayed in the dialog box. This is the icon specified by the \plain\f0\fs18\cf1 \protect <HS 13>\plain\f0\fs18\cf2 Icon\plain\f0\fs18\cf1 \protect </HS 13>\plain\f0\fs18\cf2  property of the \plain\f0\fs18\cf1 \protect <HS 14>\plain\f0\fs18\cf2 TApplication\plain\f0\fs18\cf1 \protect </HS 14>\plain\f0\fs18\cf2  object. If no icon has been specified for the application then \plain\f1\fs18\cf2 the \plain\f0\fs18\cf2 default Delphi icon is used.
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 The position of the about box on the screen is determined by the \plain\f0\fs18\cf1 \protect <HS 30>\plain\f1\fs18\cf2 Position\plain\f1\fs18\cf1 \protect </HS 30>\plain\f1\fs18\cf2 , \plain\f0\fs18\cf1 \protect <HS 15>\plain\f0\fs18\cf2 DlgLeft\plain\f0\fs18\cf1 \protect </HS 15>\plain\f1\fs18\cf2 ,\plain\f0\fs18\cf2  \plain\f0\fs18\cf1 \protect <HS 16>\plain\f0\fs18\cf2 DlgTop\plain\f0\fs18\cf1 \protect </HS 16>\plain\f0\fs18\cf2  or the \plain\f0\fs18\cf1 \protect <HS 17>\plain\f0\fs18\cf2 CentreDlg\plain\f0\fs18\cf1 \protect </HS 17>\plain\f0\fs18\cf2  properties.
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The about box contains a close button, the appearance of which is governed by the \plain\f0\fs18\cf1 \protect <HS 18>\plain\f0\fs18\cf2 ButtonGlyph\plain\f0\fs18\cf1 \protect </HS 18>\plain\f0\fs18\cf2 , \plain\f0\fs18\cf1 \protect <HS 19>\plain\f0\fs18\cf2 ButtonHeight\plain\f0\fs18\cf1 \protect </HS 19>\plain\f0\fs18\cf2 , \plain\f0\fs18\cf1 \protect <HS 20>\plain\f0\fs18\cf2 ButtonWidth\plain\f0\fs18\cf1 \protect </HS 20>\plain\f0\fs18\cf2 , \plain\f0\fs18\cf1 \protect <HS 21>\plain\f0\fs18\cf2 ButtonKind\plain\f0\fs18\cf1 \protect </HS 21>\plain\f0\fs18\cf2  and \plain\f0\fs18\cf1 \protect <HS 22>\plain\f0\fs18\cf2 AutoDetectGlyphs\plain\f0\fs18\cf1 \protect </HS 22>\plain\f0\fs18\cf2  properties. The position of the button is determined by the \plain\f0\fs18\cf1 \protect <HS 23>\plain\f0\fs18\cf2 ButtonPlacing\plain\f0\fs18\cf1 \protect </HS 23>\plain\f0\fs18\cf2  property.
+\par \plain\f0\fs18\cf2 The about box contains a close button, the appearance of which is governed by the \plain\f0\fs18\cf1 \protect <HS 18>\plain\f0\fs18\cf2 ButtonGlyph\plain\f0\fs18\cf1 \protect </HS 18>\plain\f0\fs18\cf2 , \plain\f0\fs18\cf1 \protect <HS 19>\plain\f0\fs18\cf2 ButtonHeight\plain\f0\fs18\cf1 \protect </HS 19>\plain\f0\fs18\cf2 , \plain\f0\fs18\cf1 \protect <HS 20>\plain\f0\fs18\cf2 ButtonWidth\plain\f0\fs18\cf1 \protect </HS 20>\plain\f1\fs18\cf2  and\plain\f0\fs18\cf2  \plain\f0\fs18\cf1 \protect <HS 21>\plain\f0\fs18\cf2 ButtonKind\plain\f0\fs18\cf1 \protect </HS 21>\plain\f0\fs18\cf2  properties. The position of the button is determined by the \plain\f0\fs18\cf1 \protect <HS 23>\plain\f0\fs18\cf2 ButtonPlacing\plain\f0\fs18\cf1 \protect </HS 23>\plain\f0\fs18\cf2  property.
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 The \plain\f0\fs18\cf1 \protect <HS 24>\plain\f0\fs18\cf2 HelpContext\plain\f0\fs18\cf1 \protect </HS 24>\plain\f0\fs18\cf2  property allows Windows Help to be displayed for the dialog box when the F1 key is pressed.
 \par \plain\f0\fs8\cf2 
@@ -294,14 +287,14 @@ HS
 0
 
 AL(TComponent_Object,1)
-688
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f3\fs18\cf0\b Heirachy\plain\f3\fs18\cf0 
+622
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
 \par 
-\par \plain\f3\fs18\cf1 \protect <HS 1>\plain\f3\fs18\cf0 TObject\plain\f3\fs18\cf1 \protect </HS 1>\plain\f3\fs18\cf0 
+\par \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
 \par     |
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPersistent\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0 
+\par \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 TPersistent\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
 \par     |
-\par \plain\f3\fs18\cf1 \protect <HS 3>\plain\f3\fs18\cf0 TComponent\plain\f3\fs18\cf1 \protect </HS 3>\plain\f3\fs18\cf0 
+\par \plain\f0\fs18\cf2 \protect <HS 3>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 3>\plain\f0\fs18\cf1 
 \par }
 
 [Footnotes]
@@ -457,10 +450,10 @@ HS
 0
 
 AL(TComponent_Tag,1)
-3028
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties\plain\f0\fs18\cf1 
+3177
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;\red255\green0\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties\plain\f0\fs18\cf1 
 \par 
-\par \pard \tx400 \tx2400 \tx2800 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 AutoDetectGlyphs\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 ButtonGlyph\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
+\par \pard \tx400 \tx2400 \tx2800 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 AutoDetectGlyphs\plain\f0\fs18\cf2 \protect </HS 1>\plain\f1\fs18\cf3\b *\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 ButtonGlyph\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 3>\plain\f0\fs18\cf1 ButtonHeight\plain\f0\fs18\cf2 \protect </HS 3>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 4>\plain\f0\fs18\cf1 ButtonKind\plain\f0\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 5>\plain\f0\fs18\cf1 ButtonPlacing\plain\f0\fs18\cf2 \protect </HS 5>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 6>\plain\f0\fs18\cf1 ButtonWidth\plain\f0\fs18\cf2 \protect </HS 6>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 7>\plain\f0\fs18\cf1 CentreDlg\plain\f0\fs18\cf2 \protect </HS 7>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 8>\plain\f0\fs18\cf1 Copyright\plain\f0\fs18\cf2 \protect </HS 8>\plain\f0\fs18\cf1 
@@ -471,6 +464,8 @@ AL(TComponent_Tag,1)
 \par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 14>\plain\f0\fs18\cf1 Title\plain\f0\fs18\cf2 \protect </HS 14>\plain\f1\fs18\cf1 \tab \tab \plain\f1\fs18\cf2 \protect <HS 18>\plain\f1\fs18\cf1 UseOSStdFonts\plain\f1\fs18\cf2 \protect </HS 18>\plain\f1\fs18\cf1 
 \par \tab \plain\f1\fs18\cf2 \protect <HS 19>\plain\f1\fs18\cf1 UseOwnerAsParent\plain\f1\fs18\cf2 \protect </HS 19>\plain\f1\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 15>\plain\f0\fs18\cf1 Version\plain\f0\fs18\cf2 \protect </HS 15>\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 16>\plain\f0\fs18\cf1 VersionInfo\plain\f0\fs18\cf2 \protect </HS 16>\plain\f0\fs18\cf1 
+\par 
+\par \plain\f1\fs18\cf3\b *\plain\f1\fs18\cf1  AutoDetectGlyphs is deprecated.\plain\f0\fs18\cf1 
 \par }
 
 [Footnotes]
@@ -506,26 +501,27 @@ HS
 0
 
 AL(TPJAboutBoxDlg_ButtonGlyph)
-2161
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJAboutBoxDlg.AutoDetectGlyphs
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0           \plain\f3\fs18\cf1 \protect <HS 5>\plain\f3\fs18\cf0 See also\plain\f3\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+2575
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;\red255\green0\blue0;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.AutoDetectGlyphs
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 Determines whether display of glyphs depends on ButtonGlyph property or depends on the default compiler settings.
+\par \plain\f0\fs18\cf2 Determines whether \plain\f1\fs18\cf2 the \plain\f0\fs18\cf2 ButtonGlyph property \plain\f1\fs18\cf2 is ignored\plain\f0\fs18\cf2 .\plain\f1\fs18\cf2  \plain\f1\fs18\cf4\b Deprecated\plain\f1\fs18\cf2 .\plain\f0\fs18\cf2 
 \par 
-\par \plain\f4\fs18\cf1 \protect <KP 3>\plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  AutoDetectGlyphs: Boolean;\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f2\fs18\cf1 \protect <KP 3>\plain\f2\fs18\cf2\b property\plain\f2\fs18\cf2  AutoDetectGlyphs: Boolean;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The About box contains one button which is used to close the dialog box. This button can display a glyph, which is determined by the \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf0 ButtonGlyph\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf0  property. AutoDetectGlyphs determines whether or not the glyph is displayed.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 When AutoDetectGlyphs is False glyphs are displayed according to the ButtonGlyph property.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 When AutoDetectGlyphs is True the display of glyphs depends on whether the component is being used with 16 or 32 bit Delphi. For 16 bit delphi no glyphs are displayed if the global MsgDlgGlyphs variable is false. Glyphs are displayed according to the ButtonGlyph property if MsgDlgGlyphs is true. With 32 bit Delphi no glyphs are displayed when AutoDetectGlyphs is true.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The default value is True.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The About box contains one button which is used to close the dialog box. This button can display a glyph, which is determined by the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 ButtonGlyph\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property. AutoDetectGlyphs determines whether or not the glyph is displayed.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 When AutoDetectGlyphs is False glyphs are displayed according to the ButtonGlyph property\plain\f1\fs18\cf2  but when the\plain\f0\fs18\cf2 .\plain\f1\fs18\cf2 property is false ButtonGlyph is ignored and no glyph is displayed on the button.
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2\b AutoDetectGlyphs is deprecated\plain\f1\fs18\cf2 . It was only of real use when the component was used with Delphi 1, when a different default behaviour to that expected on Delphi 2 and later was expected. To inhibit display of glyphs you should set AutoDetectGlyphs to False and set the ButtonGlyph property to \plain\f1\fs18\cf2\i abgNone\plain\f1\fs18\cf2  (the default).
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2 The \plain\f0\fs18\cf2 default value is \plain\f1\fs18\cf2\i False\plain\f1\fs18\cf2 . (Was \plain\f1\fs18\cf2\i True\plain\f1\fs18\cf2  in versions prior to v3.5).\plain\f0\fs18\cf2 
+\par 
 \par }
 
 [Footnotes]
@@ -555,21 +551,21 @@ HS
 IDH_TPJABOUTBTNGLYPHS
 
 HS
-5
-0
-
-0
-IDH_AB_AUTODETECTGLYPHS
-
-HS
 6
 0
 
 0
 
 AL(TPJAboutBoxDlg_AutoDetectGlyphs;TPJAboutBoxDlg_ButtonKind;TPJAboutBoxDlg_ButtonPlacing)
-2278
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+HS
+7
+0
+
+0
+IDH_AB_AUTODETECTGLYPHS
+
+2713
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.ButtonGlyph
 \par \plain\f0\fs12\cf2 
 \par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2 
@@ -590,9 +586,9 @@ AL(TPJAboutBoxDlg_AutoDetectGlyphs;TPJAboutBoxDlg_ButtonKind;TPJAboutBoxDlg_Butt
 \par abgClose\tab A door appears on the button face.
 \par abgNone\tab No glyph is displayed on the button.
 \par \pard \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 ButtonGlyph defaults to abgOK.
+\par \plain\f0\fs18\cf2 ButtonGlyph defaults to \plain\f0\fs18\cf2\i abg\plain\f2\fs18\cf2\i None\plain\f0\fs18\cf2 .\plain\f2\fs18\cf2  (Was \plain\f2\fs18\cf2\i abgOK\plain\f2\fs18\cf2  in versions prior to v3.5).\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 NB: If the AutoDetectGlyphs property is true then th value of the ButtonGlyph property may be ignored. See \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 AutoDetectGlyphs\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  for futher information.
+\par \plain\f0\fs18\cf2 NB: If the \plain\f2\fs18\cf2\b deprecated\plain\f2\fs18\cf2  \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 AutoDetectGlyphs\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2  property is \plain\f2\fs18\cf2 T\plain\f0\fs18\cf2 rue then th\plain\f2\fs18\cf2 e\plain\f0\fs18\cf2  value of the ButtonGlyph property \plain\f2\fs18\cf2 will\plain\f0\fs18\cf2  be ignored.\plain\f2\fs18\cf2  You are advised to ensure that AutoDetectGlyphs is set to False.\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]
@@ -621,22 +617,22 @@ HS
 0
 
 AL(TPJAboutBoxDlg_ButtonWidth)
-1598
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJAboutBoxDlg.ButtonHeight
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0           \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf0 See also\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+1373
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.ButtonHeight
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 Determines the height of the About box's close button.
+\par \plain\f0\fs18\cf2 Determines the height of the About box's close button.
 \par 
-\par \plain\f4\fs18\cf1 \protect <KP 3>\plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  ButtonHeight: Integer;\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  ButtonHeight: Integer;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The About box displays one button which is used to close the dialog box. The height of this button in pixels is determined by the value of this property. The dialog box's height is adjusted according to the value of this property.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The default value depends on the compiler in use: it is 25 pixels for Delphi 2 and later and is 33 pixels when using Delphi 1. This conforms to the default height used for button components.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The About box displays one button which is used to close the dialog box. The height of this button in pixels is determined by the value of this property. The dialog box's height is adjusted according to the value of this property.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The default value is 25 pixels.
 \par }
 
 [Footnotes]
@@ -672,8 +668,8 @@ HS
 0
 
 AL(TPJAboutBoxDlg_ButtonGlyph;TPJAboutBoxDlg_ButtonPlacing)
-1745
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+2035
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.ButtonKind
 \par \plain\f0\fs12\cf2 
 \par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
@@ -687,13 +683,15 @@ AL(TPJAboutBoxDlg_ButtonGlyph;TPJAboutBoxDlg_ButtonPlacing)
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 The About box contains one button which is used to close the dialog box. The button can display different text to indicate its use. The ButtonKind property is used to determine which text to display. Valid values for the property and their meaings are as follows:
 \par \plain\f0\fs8\cf2 
-\par \pard \fi-1200 \li1600 \tx1600 \plain\f0\fs18\cf2\i Value\tab Text
+\par \pard \fi-1200 \li1600 \tx1600 \plain\f0\fs18\cf2\i Value\tab Text\plain\f2\fs18\cf2\i  \plain\f2\fs18\cf2\b *\plain\f0\fs18\cf2\i 
 \par \plain\f0\fs18\cf2 abkOK\tab 'OK' 
 \par abkDone\tab 'Done'
 \par abkClose\tab 'Close'
 \par abkCancel\tab 'Cancel'
 \par \pard \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The default value is abkOK.
+\par \plain\f0\fs18\cf2 The default value is \plain\f0\fs18\cf2\i abkOK\plain\f0\fs18\cf2 .
+\par \plain\f0\fs8\cf2 
+\par \plain\f2\fs18\cf2\b *\plain\f2\fs18\cf2  The text is stored in resources strings and can be translated.\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]
@@ -729,7 +727,7 @@ HS
 0
 
 AL(TPJAboutBoxDlg_ButtonGlyph;TPJAboutBoxDlg_ButtonKind)
-1949
+1989
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.ButtonPlacing
 \par \plain\f0\fs12\cf2 
@@ -749,7 +747,7 @@ AL(TPJAboutBoxDlg_ButtonGlyph;TPJAboutBoxDlg_ButtonKind)
 \par abpCentre\tab Display the button at the bottom centre  of the dialog box
 \par abpRight\tab Display the button at the bottom right of the dialog box
 \par \pard \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The default value is abpCentre.
+\par \plain\f0\fs18\cf2 The default value is \plain\f0\fs18\cf2\i abpCentre\plain\f0\fs18\cf2 .
 \par }
 
 [Footnotes]
@@ -778,8 +776,8 @@ HS
 0
 
 AL(TPJAboutBoxDlg_ButtonHeight)
-1458
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+1367
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.ButtonWidth
 \par \plain\f0\fs12\cf2 
 \par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2 
@@ -794,7 +792,7 @@ AL(TPJAboutBoxDlg_ButtonHeight)
 \par 
 \par \plain\f0\fs18\cf2 The About box displays one button which is used to close the dialog box. The width of this button in pixels is determined by the value of this property.
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The default value depends on the compiler in use: it is 75 pixels for Delphi 2 and later and is 85 pixels when using Delphi 1. This conforms to the default width used for button components.
+\par \plain\f0\fs18\cf2 The default value s 75 pixels\plain\f2\fs18\cf2 .\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]
@@ -844,7 +842,7 @@ HS
 0
 IDH_AB_DLGTOP
 
-2165
+2309
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.CentreDlg
 \par \plain\f0\fs12\cf2 
@@ -861,7 +859,10 @@ IDH_AB_DLGTOP
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 When CentreDlg is set to True then the \plain\f1\fs18\cf2 dialog box is centred over the screen, the desktop work area or the owner control, accoring to the value of the \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf2 Position\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf2  property. The \plain\f1\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 DlgLeft\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  and \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 DlgTop\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2  properties are ignored\plain\f1\fs18\cf2  in this case\plain\f0\fs18\cf2 .\plain\f1\fs18\cf2  The position of the dialog box may be adjusted to ensure it can all be seen.\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 When CentreDlg is set to False the DlgLeft and DlgTop properties determine the position of the dialog box.
+\par \plain\f0\fs18\cf2 When CentreDlg is set to False the DlgLeft and DlgTop properties determine the position of the dialog box.\plain\f0\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2 The default value is \plain\f1\fs18\cf2\i True\plain\f1\fs18\cf2 .\plain\f0\fs18\cf2 .
+\par 
 \par }
 
 [Footnotes]
@@ -897,24 +898,24 @@ HS
 0
 
 AL(TPJAboutBoxDlg_Notes;TPJAboutBoxDlg_ProgramName;TPJAboutBoxDlg_Version;TPJAboutBoxDlg_VersionInfo)
-1654
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJAboutBoxDlg.Copyright
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0           \plain\f3\fs18\cf1 \protect <HS 5>\plain\f3\fs18\cf0 See also\plain\f3\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+1652
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.Copyright
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 Contains the copyright message displayed in the about box.
+\par \plain\f0\fs18\cf2 Contains the copyright message displayed in the about box.
 \par 
-\par \plain\f4\fs18\cf1 \protect <KP 3>\plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Copyright: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  Copyright: \plain\f1\fs18\cf2\b string\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The Copyright property provides the copyright message that is displayed on the third line of the about box.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The default value of this property is an empty string, which displays nothing.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0\i Note:\plain\f3\fs18\cf0  If the \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf0 VersionInfo\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf0  property is not nil then this property is ignored.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The Copyright property provides the copyright message that is displayed on the third line of the about box.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The default value of this property is an empty string, which displays nothing.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\b Note:\plain\f0\fs18\cf2  If the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 VersionInfo\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property is not nil then \plain\f2\fs18\cf2 Copyright\plain\f0\fs18\cf2  is ignored.
 \par }
 
 [Footnotes]
@@ -957,7 +958,7 @@ HS
 0
 IDH_AB_POSITION
 
-1902
+1891
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.DlgLeft
 \par \plain\f0\fs12\cf2 
@@ -974,7 +975,7 @@ IDH_AB_POSITION
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 If the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 CentreDlg\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property is true then DlgLeft is ignored and the dialog is centred.
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The default value of DlgLeft is 0.
+\par \plain\f0\fs18\cf2 The default value is 0.
 \par }
 
 [Footnotes]
@@ -1017,7 +1018,7 @@ HS
 0
 IDH_AB_POSITION
 
-1869
+1859
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.DlgTop
 \par \plain\f0\fs12\cf2 
@@ -1034,7 +1035,7 @@ IDH_AB_POSITION
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 If the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 CentreDlg\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property is true then DlgTop is ignored and the dialog is centred.
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The default value of DlgTop is 0.
+\par \plain\f0\fs18\cf2 The default value is 0.
 \par }
 
 [Footnotes]
@@ -1056,24 +1057,24 @@ IDH_TPJABOUTBOXDLG
 
 KP
 3
-1461
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green0\blue255;\red0\green128\blue0;}\pard \plain \plain\f3\fs18\cf2 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf1\b TPJAboutBoxDlg.HelpContext
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf2 \protect <HS 2>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf2 \protect </HS 2>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf2 \protect </NS 1>\plain\f3\fs8\cf0 
+1384
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.HelpContext
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 Stores the help topic number accessed when F1 is pressed.
+\par \plain\f0\fs18\cf2 Stores the help topic number accessed when F1 is pressed.
 \par 
-\par \plain\f4\fs18\cf2 \protect <KP 3>\plain\f4\fs18\cf0\b type\plain\f4\fs18\cf0  THelpContext = -MaxLongInt..MaxLongInt\plain\f4\fs18\cf0\b ;\plain\f4\fs18\cf0 
-\par \plain\f4\fs8\cf0\b 
-\par \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  HelpContext: THelpContext;\plain\f4\fs18\cf2 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b type\plain\f1\fs18\cf2  THelpContext = -MaxLongInt..MaxLongInt\plain\f1\fs18\cf2\b ;\plain\f1\fs18\cf2 
+\par \plain\f1\fs8\cf2\b 
+\par \plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  HelpContext: THelpContext;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 HelpContext stores the number of the help topic in the application's help file that is displayed when the F1 key is pressed while the about box is displayed. If HelpContext is 0 then no help topic is displayed.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The property's default value is 0.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 HelpContext stores the number of the help topic in the application's help file that is displayed when the F1 key is pressed while the about box is displayed. If HelpContext is 0 then no help topic is displayed.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The default value is 0.
 \par }
 
 [Footnotes]
@@ -1109,24 +1110,24 @@ HS
 0
 
 AL(TPJAboutBoxDlg_Copyright;TPJAboutBoxDlg_ProgramName;TPJAboutBoxDlg_Version;TPJAboutBoxDlg_VersionInfo)
-1901
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJAboutBoxDlg.Notes
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0           \plain\f3\fs18\cf1 \protect <HS 5>\plain\f3\fs18\cf0 See also\plain\f3\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+1928
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.Notes
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 Contains the notes text displayed in the dialog box.
+\par \plain\f0\fs18\cf2 Contains the notes text displayed in the dialog box.
 \par 
-\par \plain\f4\fs18\cf1 \protect <KP 3>\plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Notes: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  Notes: \plain\f1\fs18\cf2\b string\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The Notes property is used to store the notes to be displayed in the about box. The notes appear at the bottom of the text area of the dialog box. The text will word-wrap up to three lines. When setting the property at run time end of line characters (#13) can be included in the string to force line breaks. Forcing line breaks is not possible at design time. 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The default value for the Notes property is an empty string, which displays nothing. 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0\i Note:\plain\f3\fs18\cf0  If the \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf0 VersionInfo\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf0  property is not nil then this property is ignored.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The Notes property is used to store the notes to be displayed in the about box. The notes appear at the bottom of the text area of the dialog box. The text will word-wrap up to three lines. When setting the property at run time end of line characters (#13) can be included in the string to force line breaks. Forcing line breaks is not possible at design time. 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The default value for \plain\f2\fs18\cf2 this \plain\f0\fs18\cf2 property is an empty string, which displays nothing. 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\b Note:\plain\f0\fs18\cf2  If the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 VersionInfo\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property is not nil then \plain\f2\fs18\cf2 Notes\plain\f0\fs18\cf2  is ignored.
 \par }
 
 [Footnotes]
@@ -1183,7 +1184,7 @@ HS
 0
 IDH_AB_DLGLEFT
 
-3144
+3134
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.\plain\f1\fs24\cf3\b Position\plain\f0\fs24\cf3\b 
 \par \plain\f0\fs12\cf2 
@@ -1203,7 +1204,7 @@ IDH_AB_DLGLEFT
 \par \plain\f1\fs18\cf2 abpDesktop\plain\f0\fs18\cf2 \tab \plain\f1\fs18\cf2 The dialog is positioned relative to the desktop's work area (this takes into account the taskbard and toolbars). Note: when compiling with Delphi 1 the desktop work area is the whole screen, so this value has the same action as abpScreen.\plain\f0\fs18\cf2 
 \par \plain\f1\fs18\cf2 abpOwner\plain\f0\fs18\cf2 \tab \plain\f1\fs18\cf2 The dialog is positioned relative to its owner - usually the form on which the component is dropped. If the component has no owner, or the owner is not a window control, then this setting has no effect and positioning is per abpScreen.\plain\f0\fs18\cf2 
 \par \pard \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The default value of \plain\f1\fs18\cf2 Position\plain\f0\fs18\cf2  is abpDesktop.
+\par \plain\f0\fs18\cf2 The default value is \plain\f0\fs18\cf2\i abpDesktop\plain\f0\fs18\cf2 .
 \par }
 
 [Footnotes]
@@ -1254,25 +1255,25 @@ HS
 
 AL(TPJAboutBoxDlg_Copyright;TPJAboutBoxDlg_Notes;TPJAboutBoxDlg_Version;TPJAboutBoxDlg_VersionInfo)
 2226
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJAboutBoxDlg.ProgramName
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0           \plain\f3\fs18\cf1 \protect <HS 7>\plain\f3\fs18\cf0 See also\plain\f3\fs18\cf1 \protect </HS 7>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.ProgramName
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 Determines the name of the program displayed in the about box.
+\par \plain\f0\fs18\cf2 Determines the name of the program displayed in the about box.
 \par 
-\par \plain\f4\fs18\cf1 \protect <KP 3>\plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  ProgramName: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  ProgramName: \plain\f1\fs18\cf2\b string\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The ProgramName property defines the program name to be displayed on the first line of the about box.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 If ProgramName is set to the empty string then the title of the application as specified by the \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf0 Title\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf0  property of the \plain\f3\fs18\cf1 \protect <HS 5>\plain\f3\fs18\cf0 Application\plain\f3\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf0  object  is displayed. If you have not specified an application title then the name of the project (without the .dpr extension) is used. If ProgramName is set to any non-empty string then that string is displayed.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 ProgramName defaults to the empty string.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0\i Note:\plain\f3\fs18\cf0  If the \plain\f3\fs18\cf1 \protect <HS 6>\plain\f3\fs18\cf0 VersionInfo\plain\f3\fs18\cf1 \protect </HS 6>\plain\f3\fs18\cf0  property is not nil then this property is ignored.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The ProgramName property defines the program name to be displayed on the first line of the about box.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 If ProgramName is set to the empty string then the title of the application as specified by the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 Title\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property of the \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 Application\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  object  is displayed. If you have not specified an application title then the name of the project (without the .dpr extension) is used. If ProgramName is set to any non-empty string then that string is displayed.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 ProgramName defaults to the empty string.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\b Note:\plain\f0\fs18\cf2  If the \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 VersionInfo\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2  property is not nil then \plain\f2\fs18\cf2 ProgramName\plain\f0\fs18\cf2  is ignored.
 \par }
 
 [Footnotes]
@@ -1294,8 +1295,8 @@ IDH_TPJABOUTBOXDLG
 
 KP
 3
-1104
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+1293
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.Title
 \par \plain\f0\fs12\cf2 
 \par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 
@@ -1307,7 +1308,9 @@ KP
 \par 
 \par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The Title property stores the string that is displayed in the title bar of the about dialog box. The default value of this property is 'About'.
+\par \plain\f0\fs18\cf2 The Title property stores the string that is displayed in the title bar of the about dialog box.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The default value of this property is 'About'.\plain\f2\fs18\cf2  The default text is stored in a resource string and can be translated.\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]
@@ -1329,7 +1332,7 @@ IDH_TPJABOUTBOXDLG
 
 KP
 3
-1579
+1806
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.UseOSStdFonts
 \par \plain\f0\fs12\cf2 
@@ -1344,9 +1347,11 @@ KP
 \par \plain\f0\fs8\cf2 
 \par \plain\f1\fs18\cf2 When true this property forces the dialog box to use the operating system's deafult font\plain\f0\fs18\cf2 .\plain\f1\fs18\cf2  When false (the default) the font the dialog box was designed with is used.
 \par \plain\f1\fs8\cf2 
-\par \plain\f1\fs18\cf2 The property is designed to enable the specific default fonts used on Windows XP and Windows Vista to be used.
+\par \plain\f1\fs18\cf2 The property is designed to enable the specific default fonts used on Windows XP and later to be used.
 \par \plain\f1\fs8\cf2 
-\par \plain\f1\fs18\cf2\i This property is only available on 32 bit Windows.\plain\f0\fs18\cf2 
+\par \plain\f1\fs18\cf2\b Warning:\plain\f1\fs18\cf2  On some operating systems the font is larger than others and careful note should be made to ensure text is not truncated in the dialog box.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 The default value is \plain\f1\fs18\cf2\i False\plain\f1\fs18\cf2 .\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]
@@ -1368,7 +1373,7 @@ IDH_TPJABOUTBOXDLG
 
 KP
 3
-1774
+1796
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.UseOwnerAsParent
 \par \plain\f0\fs12\cf2 
@@ -1385,7 +1390,8 @@ KP
 \par \plain\f1\fs8\cf2 
 \par \plain\f1\fs18\cf2 The property is provided for when the application's main form, rather than the hidden application Window is displayed in the Windows task bar. If this property is not set true it will be possible for the main window to be brought to the front by clicking its task bar icon, hiding the dialog box and hence freezing the program.
 \par \plain\f1\fs8\cf2 
-\par \plain\f1\fs18\cf2\i This property is only available on 32 bit Windows.\plain\f0\fs18\cf2 
+\par \plain\f1\fs18\cf2 The default value is \plain\f1\fs18\cf2\i False\plain\f1\fs18\cf2 .\plain\f0\fs18\cf2 
+\par 
 \par }
 
 [Footnotes]
@@ -1421,24 +1427,24 @@ HS
 0
 
 AL(TPJAboutBoxDlg_Copyright;TPJAboutBoxDlg_Notes;TPJAboutBoxDlg_ProgramName;TPJAboutBoxDlg_VersionInfo)
-1671
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJAboutBoxDlg.Version
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0           \plain\f3\fs18\cf1 \protect <HS 5>\plain\f3\fs18\cf0 See also\plain\f3\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+1667
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.Version
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 Determines the version number information to be displayed in the about box.
+\par \plain\f0\fs18\cf2 Determines the version number information to be displayed in the about box.
 \par 
-\par \plain\f4\fs18\cf1 \protect <KP 3>\plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Version: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  Version: \plain\f1\fs18\cf2\b string\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The Version property defines the version number (or other text)  to appear on the second line of the about box.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The default value of this property is an empty string, which displays nothing.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0\i Note:\plain\f3\fs18\cf0  If the \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf0 VersionInfo\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf0  property is not nil then this property is ignored.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The Version property defines the version number (or other text)  to appear on the second line of the about box.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The default value of this property is an empty string, which displays nothing.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\b Note:\plain\f0\fs18\cf2  If the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 VersionInfo\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property is not nil then \plain\f2\fs18\cf2 Version\plain\f0\fs18\cf2  is ignored.
 \par }
 
 [Footnotes]
@@ -1532,36 +1538,36 @@ HS
 0
 
 AL(TPJAboutBoxDlg_Copyright;TPJAboutBoxDlg_Notes;TPJAboutBoxDlg_ProgramName;TPJAboutBoxDlg_Version)
-3562
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJAboutBoxDlg.VersionInfo
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0           \plain\f3\fs18\cf1 \protect <HS 14>\plain\f3\fs18\cf0 See also\plain\f3\fs18\cf1 \protect </HS 14>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+3647
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.VersionInfo
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 14>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 14>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 References a TPJVersionInfo component that provides the text displayed in the about box.
+\par \plain\f0\fs18\cf2 References a TPJVersionInfo component that provides the text displayed in the about box.
 \par 
-\par \plain\f4\fs18\cf1 \protect <KP 3>\plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  VersionInfo: \plain\f4\fs18\cf1 \protect <HS 4>\plain\f4\fs18\cf0 TPJVersionInfo\plain\f4\fs18\cf1 \protect </HS 4>\plain\f4\fs18\cf0 ;\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  VersionInfo: \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf2 TPJVersionInfo\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 This property allows information from a string information block in a program file's \plain\f3\fs18\cf1 \protect <HS 12>\plain\f3\fs18\cf0 VERSIONINFO\plain\f3\fs18\cf1 \protect </HS 12>\plain\f3\fs18\cf0  resource to be displayed in the dialog box.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 To enable this to happen a \plain\f3\fs18\cf1 \protect <HS 9>\plain\f3\fs18\cf0 TPJVersionInfo\plain\f3\fs18\cf1 \protect </HS 9>\plain\f3\fs18\cf0  component must be placed on the form and this property must reference it. The TPJVersionInfo component's \plain\f3\fs18\cf1 \protect <HS 13>\plain\f3\fs18\cf0 FileName\plain\f3\fs18\cf1 \protect </HS 13>\plain\f3\fs18\cf0  property must be set to the name of the executable file from which version information is to be extracted. 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The following table shows which version information string values are used, along with the properties whose values they replace:
-\par \plain\f3\fs8\cf0 
-\par \pard \li400 \tx2400 \plain\f3\fs18\cf1\i \protect <KP 10>\plain\f3\fs18\cf0\i VERSIONINFO string\tab Replaces property\plain\f3\fs18\cf0 
-\par ProductName\tab \plain\f3\fs18\cf1 \protect <HS 5>\plain\f3\fs18\cf0 ProgramName\plain\f3\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf0 
-\par ProductVersion\tab \plain\f3\fs18\cf1 \protect <HS 6>\plain\f3\fs18\cf0 Version\plain\f3\fs18\cf1 \protect </HS 6>\plain\f3\fs18\cf0 
-\par LegalCopyright\tab \plain\f3\fs18\cf1 \protect <HS 7>\plain\f3\fs18\cf0 Copyright\plain\f3\fs18\cf1 \protect </HS 7>\plain\f3\fs18\cf0 
-\par Comments\tab \plain\f3\fs18\cf1 \protect <HS 8>\plain\f3\fs18\cf0 Notes\plain\f3\fs18\cf1 \protect </HS 8></KP 10>\plain\f3\fs18\cf0 
-\par \pard \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 When any of these string values are not present in the version information nothing is displayed in their place. 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 If the VersionInfo property is set to nil then the information displayed in the dialog box is taken from the string properties listed in the table above.
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 This property has no effect on the usage of the \plain\f3\fs18\cf1 \protect <HS 11>\plain\f3\fs18\cf0 Title\plain\f3\fs18\cf1 \protect </HS 11>\plain\f3\fs18\cf0  property.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This property allows information from a string information block in a program file's \plain\f0\fs18\cf1 \protect <HS 12>\plain\f0\fs18\cf2 VERSIONINFO\plain\f0\fs18\cf1 \protect </HS 12>\plain\f0\fs18\cf2  resource to be displayed in the dialog box.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 To enable this to happen a \plain\f0\fs18\cf1 \protect <HS 9>\plain\f0\fs18\cf2 TPJVersionInfo\plain\f0\fs18\cf1 \protect </HS 9>\plain\f0\fs18\cf2  component must be placed on the form and this property must reference it. The TPJVersionInfo component's \plain\f0\fs18\cf1 \protect <HS 13>\plain\f0\fs18\cf2 FileName\plain\f0\fs18\cf1 \protect </HS 13>\plain\f0\fs18\cf2  property must be set to the name of the executable file from which version information is to be extracted\plain\f2\fs18\cf2 , or set to '' to get the version information of the parent executable file\plain\f0\fs18\cf2 . 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The following table shows which version information string values are used, along with the properties whose values they replace:
+\par \plain\f0\fs8\cf2 
+\par \pard \li400 \tx2400 \plain\f0\fs18\cf1\i \protect <KP 10>\plain\f0\fs18\cf2\i VERSIONINFO string\tab Replaces property\plain\f0\fs18\cf2 
+\par ProductName\tab \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 ProgramName\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
+\par ProductVersion\tab \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 Version\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2 
+\par LegalCopyright\tab \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 Copyright\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2 
+\par Comments\tab \plain\f0\fs18\cf1 \protect <HS 8>\plain\f0\fs18\cf2 Notes\plain\f0\fs18\cf1 \protect </HS 8></KP 10>\plain\f0\fs18\cf2 
+\par \pard \plain\f0\fs8\cf2 
+\par \plain\f2\fs18\cf2 If\plain\f0\fs18\cf2  any of these string values are not present in the version information nothing is displayed in their place. 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 If the VersionInfo property is set to nil then the information displayed in the dialog box is taken from the string properties listed in the table above.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This property has no effect on the the \plain\f0\fs18\cf1 \protect <HS 11>\plain\f0\fs18\cf2 Title\plain\f0\fs18\cf1 \protect </HS 11>\plain\f0\fs18\cf2  property.
 \par }
 
 [Footnotes]
@@ -1584,10 +1590,10 @@ HS
 0
 IDH_AB_EXECUTE
 
-617
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f3\fs18\cf0\b Methods\plain\f3\fs18\cf0 
+551
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods\plain\f0\fs18\cf1 
 \par \pard \tx400 
-\par \pard TPJAboutBox adds just one method, \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 Execute\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0 , to the methods inherited from \plain\f3\fs18\cf1 \protect <HS 1>\plain\f3\fs18\cf0 TComponent\plain\f3\fs18\cf1 \protect </HS 1>\plain\f3\fs18\cf0 .
+\par \pard TPJAboutBox adds just one method, \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 Execute\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 , to the methods inherited from \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 .
 \par }
 
 [Footnotes]
@@ -1609,20 +1615,20 @@ IDH_TPJABOUTBOXDLG
 
 KP
 3
-1035
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJAboutBoxDlg.Execute
-\par \plain\f3\fs12\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+969
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.Execute
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0 Displays the about box.
+\par \plain\f0\fs18\cf2 Displays the about box.
 \par 
-\par \plain\f4\fs18\cf1 \protect <KP 3>\plain\f4\fs18\cf0\b procedure\plain\f4\fs18\cf0  Execute;\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b procedure\plain\f1\fs18\cf2  Execute;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 This method displays the About box and returns when the user closes the About box.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This method displays the About box and returns when the user closes the About box.
 \par }
 
 [Footnotes]
@@ -1631,8 +1637,8 @@ $=TPJAboutBoxDlg Events
 @=Methods for TPJAboutBoxDlg - notes that component has no events.
 [End]
 0
-326
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}}{\colortbl\red0\green0\blue0;}\pard \plain \plain\f3\fs18\cf0\b Events\plain\f3\fs18\cf0 
+260
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
 \par \pard \tx400 
 \par \pard TPJAboutBoxDlg has no events.
 \par }
@@ -1677,23 +1683,23 @@ HS
 0
 IDH_AB_BUTTONGLYPH
 
-1619
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fswiss Arial;}{\f4\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f3\fs18\cf1 \protect <NS 1>\plain\f3\fs8\cf0 
-\par \plain\f3\fs24\cf2\b TPJAboutBtnGlyphs
-\par \plain\f3\fs8\cf0  \plain\f3\fs18\cf1 \protect </NS 1>\plain\f3\fs8\cf0 
+1553
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBtnGlyphs
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Unit\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf0 PJAbout\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf0 
+\par \plain\f0\fs18\cf2\b Unit\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 PJAbout\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f3\fs18\cf0\b Description\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 This enumerated type provides all the valid values for the \plain\f3\fs18\cf1 \protect <HS 6>\plain\f3\fs18\cf0 ButtonGlyph\plain\f3\fs18\cf1 \protect </HS 6>\plain\f3\fs18\cf0  property of a \plain\f3\fs18\cf1 \protect <HS 5>\plain\f3\fs18\cf0 TPJAboutBoxDlg\plain\f3\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf0  component. The record is declared as follows:
-\par \plain\f3\fs8\cf0 
-\par \plain\f4\fs18\cf1 \protect <KP 3>\plain\f4\fs18\cf0\b type \plain\f4\fs18\cf0 TPJAboutBtnGlyphs = (abgOK, abgCancel,
-\par   abgIgnore, abgClose, abgNone);\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf0 
-\par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 See the \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf0 ButtonGlyph\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf0  property topic for details of the meaning of these values.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This enumerated type provides all the valid values for the \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 ButtonGlyph\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2  property of a \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  component. The record is declared as follows:
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b type \plain\f1\fs18\cf2 TPJAboutBtnGlyphs = (abgOK, abgCancel,
+\par   abgIgnore, abgClose, abgNone);\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 See the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 ButtonGlyph\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property topic for details of the meaning of these values.
 \par }
 
 [Footnotes]
@@ -1736,23 +1742,23 @@ HS
 0
 IDH_AB_BUTTONKIND
 
-1555
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman \fcharset2 Symbol;}{\f2\fswiss \fprq2 System;}{\f3\fmodern Courier New;}{\f4\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}\pard \plain \plain\f4\fs18\cf1 \protect <NS 1>\plain\f4\fs8\cf0 
-\par \plain\f4\fs24\cf2\b TPJAboutBtnKinds
-\par \plain\f4\fs8\cf0  \plain\f4\fs18\cf1 \protect </NS 1>\plain\f4\fs8\cf0 
+1489
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBtnKinds
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
-\par \plain\f4\fs18\cf0\b Unit\plain\f4\fs18\cf0 
-\par \plain\f4\fs8\cf0 
-\par \plain\f4\fs18\cf1 \protect <HS 2>\plain\f4\fs18\cf0 PJAbout\plain\f4\fs18\cf1 \protect </HS 2>\plain\f4\fs18\cf0 
+\par \plain\f0\fs18\cf2\b Unit\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 PJAbout\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 
 \par 
-\par \plain\f4\fs18\cf0\b Description\plain\f4\fs18\cf0 
-\par \plain\f4\fs8\cf0 
-\par \plain\f4\fs18\cf0 This enumerated type provides all the valid values for \plain\f4\fs18\cf1 \protect <HS 4>\plain\f4\fs18\cf0 ButtonKind\plain\f4\fs18\cf1 \protect </HS 4>\plain\f4\fs18\cf0  property of a \plain\f4\fs18\cf1 \protect <HS 5>\plain\f4\fs18\cf0 TPJAboutBoxDlg\plain\f4\fs18\cf1 \protect </HS 5>\plain\f4\fs18\cf0  component.
-\par \plain\f4\fs8\cf0 
-\par \plain\f3\fs18\cf1 \protect <KP 3>\plain\f3\fs18\cf0\b type\plain\f3\fs18\cf0  TPJAboutBtnKinds = (abkOK, abkDone, 
-\par   abkClose, abkCancel);\plain\f3\fs18\cf1 \protect </KP 3>\plain\f4\fs18\cf0 
-\par \plain\f4\fs8\cf0 
-\par \plain\f4\fs18\cf0 See the \plain\f4\fs18\cf1 \protect <HS 6>\plain\f4\fs18\cf0 ButtonKind\plain\f4\fs18\cf1 \protect </HS 6>\plain\f4\fs18\cf0  topic for details of the meaning of the values.
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This enumerated type provides all the valid values for \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 ButtonKind\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property of a \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  component.
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf1 \protect <KP 3>\plain\f1\fs18\cf2\b type\plain\f1\fs18\cf2  TPJAboutBtnKinds = (abkOK, abkDone, 
+\par   abkClose, abkCancel);\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 See the \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 ButtonKind\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2  topic for details of the meaning of the values.
 \par }
 
 [Footnotes]
