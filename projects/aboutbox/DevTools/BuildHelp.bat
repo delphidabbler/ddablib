@@ -3,6 +3,9 @@
 @rem
 @rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008-2009
 @rem
+@rem Requires evironment variable HC set to full file path to MS WinHelp
+@rem compiler (HCRTF.exe).
+@rem
 @rem $Rev$
 @rem $Date$
 @rem ---------------------------------------------------------------------------
@@ -10,18 +13,21 @@
 
 @echo off
 
-set HelpDir=..\Help
+setlocal
 
+set HelpDir=..\Help
+set HelpFile=PJAbout.hlp
 set ErrorMsg=
 
-rem Build help file into exe folder
-%DELPHI7%\Help\Tools\HCRTF.exe -x %HelpDir%\PJAbout.hlp
+if "%HC%" == "" set ErrorMsg=Environment variable HC not set
+if not "%ErrorMsg%" == "" goto error
+
+%HC% -x %HelpDir%\%HelpFile%
 if errorlevel 1 set ErrorMsg=Compilation failed
 if not "%ErrorMsg%"=="" goto error
 goto success
 
 :error
-rem Display error message
 echo *** ERROR: %ErrorMsg%
 goto end
 
@@ -29,4 +35,5 @@ goto end
 echo Succeeded
 
 :end
-rem All done
+
+endlocal
