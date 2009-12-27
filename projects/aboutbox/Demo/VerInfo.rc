@@ -12,8 +12,8 @@
 #define VERINFO 1
 
 VERINFO VERSIONINFO
-FILEVERSION 1, 1, 0, 2
-PRODUCTVERSION 1, 1, 0, 0
+FILEVERSION 1, 2, 0, 3
+PRODUCTVERSION 1, 2, 0, 0
 FILEFLAGSMASK 0x00
 FILEOS VOS__WINDOWS32
 FILETYPE VFT_APP
@@ -24,9 +24,9 @@ FILETYPE VFT_APP
   {
    VALUE "Comments", "This demo shows how to use the TPJAboutBox component. It is released under the Mozilla Public License.\000"
    VALUE "CompanyName", "DelphiDabbler.com\000"
-   VALUE "LegalCopyright", "This demo is copyright (c) PD Johnson, 2005-2008.\000"
+   VALUE "LegalCopyright", "This demo is copyright (c) PD Johnson, 2005-2009.\000"
    VALUE "ProductName", "About Box Dialog Demo by DelphiDabbler\000"
-   VALUE "ProductVersion", "v1.1.0.0\000"
+   VALUE "ProductVersion", "v1.2.0.0\000"
   }
  }
  BLOCK "VarFileInfo"
