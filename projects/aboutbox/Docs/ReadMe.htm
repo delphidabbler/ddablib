@@ -1,17 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
 
 	<title>
-		DelphiDabbler.com Info Sheet: About Box Component
+		DelphiDabbler About Box Component ReadMe
 	</title>
 
 	<style type="text/css">
-		<!--
 		body {
 			margin: 1em;
 			padding: 0;
@@ -133,33 +131,28 @@
 			font-size: 8pt;
 			text-align: right;
 		}
-		-->
 	</style>
 
 </head>
 
 <body>
 
-
 <h1>
 	About Box Component<br />
-	<span class="subtitle">Information Sheet</span>
+	<span class="subtitle">ReadMe</span>
 </h1>
-
 
 <h2 id="contents">Contents</h2>
 
 <ul>
 	<li><a href="#description">Description</a></li>
-	<li><a href="#compatibility">Compatibility</a></li>
 	<li><a href="#installation">Installation</a></li>
 	<li><a href="#demo">Demo Project</a></li>
 	<li><a href="#update">Update History</a></li>
-	<li><a href="#license">License</a></li>
+	<li><a href="#license">License and Disclaimer</a></li>
+	<li><a href="#bugs">Bugs and Feature Requests</a></li>
 	<li><a href="#author">About the Author</a></li>
 </ul>
-
-
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -180,29 +173,22 @@
 
 <ul>
 	<li>
-
 		<var>Title</var> &ndash; Contents appear in the window title. The
 		default value is 'About'. 
 	</li>
-	
 	<li>
 		<var>ProgramName</var> &ndash; The name of the program. This is the
 		title  of the application. The default value is the same as
 		<var>TApplications</var>'s <var>Title</var> property. 
 	</li>
-
-	
 	<li>
 		<var>Version</var> &ndash; This version number of the program. Optional
 		property &ndash; default is nothing.
 	</li>
-	
 	<li>
 		<var>Copyright</var> &ndash; A copyright message. Optional property
 		&ndash; default is nothing. 
 	</li>
-
-	
 	<li>
 		<var>Notes</var> &ndash; Up to three lines of notes. Optional property
 		&ndash; default is nothing.
@@ -211,107 +197,45 @@
 
 <p>
 	Alternatively, the about box can display information from a VERSIONINFO
-	resource included in the program. This is accessed using a linked
-	<var>TPJVersionInfo</var> component (<a href="#verinfo">see below</a>) by
-	using the about box's <var>VersionInfo</var> property. The values of the
+	resource included in the program. This is accessed via a linked
+	<var>TPJVersionInfo</var> component. The values of the
 	<var>ProgramName</var>, <var>Version</var>, <var>Copyright</var> and
-	<var>Notes</var> properties are ignored and relevant string information
+	<var>Notes</var> properties are ignored and relevant strings from the
 	program's version information is used in their stead.
-
 </p>
 
 <p>
-	The About box also displays an icon. This is the icon defined for the
-	application (see the <var>Icon</var> property of <var>TApplication</var>).
-	If no icon has been specified for the application the default Delphi icon is
-	used.
+	The dialog's position can be specified relative to the screen, desktop or
+	parent application. The dialog has a single close button whose appearance
+	and position is customised. The About box also displays the program's icon.
 </p>
-
-<p>
-	The dialog's location when displayed can be explicitly set using the
-	<var>DlgLeft</var> and <var>DlgTop</var> properties. If <var>CentreDlg</var>
-	is set to True when the about box is centred. These properties act relative
-	to the screen, the desktop work area or the owning control, depending on the
-	value of the<var>Position</var> property.
-</p>
-
-<p>
-	The appearance and location of the dialog's close button can be customised.
-	Its appearance is governed by the <var>ButtonGlyph</var>,
-	<var>ButtonKind</var> and <var>AutoDetectGlyphs</var> properties while
-	the button's position and size are determined by the
-	<var>ButtonPlacing</var>, <var>ButtonWidth</var> and <var>ButtonHeight</var>
-	properties.
-</p>
-
-<p>
-	The <var>HelpContext</var> property allows Windows Help to be displayed
-	for the dialog box when F1 is pressed.
-</p>
-
-<p>
-	Finally, for 32 bit Windows only, there are two further properties: 
-	<var>UseOwnerAsParent</var> that sets the window handle of any owner of the
-	dialog as the dialog's parent, and <var>UseOSStdFonts</var> that makes the
-	dialog use the OSs standard fonts.
-</p>
-
 
 <h3>
-	Help file
-</h3>
-
-<p>
-	A help file is included that integrates into the OpenHelp system of Delphi 3
-	to 7. The help file can be used independently of the IDE with Delphi 2 and
-	Delphi 2005 onwards. This also applies to Delphi provided it is run on a 32
-	bit Windows platform.
-</p>
-
-<p>
-	The help file will not work on Windows Vista by default since the help
-	program is not distributed with Vista.
-</p>
-
-
-<h3 id="verinfo">
 	Required component
 </h3>
 
 <p>
-	<var>TPJAboutBoxDlg</var> requires that a DelphiDabbler Version Information
-	Component (<var>TPJVersionInfo</var>) is installed in order to compile. The
-	version of <var>TPJVersionInfo</var> required depends on whether the about
-	box is being compiled under Delphi 1 or under Delphi 2 and later. The
-	required versions are:
+	<var>TPJAboutBoxDlg</var> requires that a DelphiDabbler <a
+		href="http://www.delphidabbler.com/software/verinfo"
+	>Version Information Component</a> is installed in order to compile.
 </p>
 
-<ul>
-	<li>
-		The <a href="http://www.delphidabbler.com/software/verinfo16">16 bit
-		version</a> for use with Delphi 1.
-	</li>
-	<li>
-		The <a href="http://www.delphidabbler.com/software/verinfo">32 bit
-		version</a> for use with Delphi 2 and later.
-	</li>
-</ul>
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="compatibility">
+<h3>
 	Compatibility
-</h2>
+</h3>
 
 <p>
-	The unit name changed to <code>PJAbout</code> as at release 3. Programs
-	using earlier releases will need to be modified (or to have an alias set in
-	Delphi's Project Options) before being recompiled using the new version.
+	<var>TPJAboutBoxDlg</var> compiles on all Win32 versions and personalities
+	of Delphi. It has been tested with Delphi versions 2, 3, 4, 6, 7, 2006 
+	and 2010. It is assumed to work on other versions. <strong>Note:</strong>
+	Delphi 1 support was dropped at v3.5.
 </p>
 
+<p>
+	The unit name changed to <code>PJAbout</code> at release 3. Programs using
+	earlier releases will need to be modified (or to have an alias set in
+	Delphi's Project Options) before being recompiled using the new version.
+</p>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -322,14 +246,11 @@
 </h2>
 
 <div class="pullout">
-	<strong>Important Note:</strong> Please ensure that you have installed an
-	appropriate <var>TPJVersionInfo</var> component before installing
-	<var>TPJAboutBoxDlg</var>. For 32 bit versions of Delphi you need <var>
-	<a href="http://www.delphidabbler.com/software?id=verinfo">TPJVersionInfo</a>
-	</var> version 3.0 or later. For Delphi 1 you need a
-	<a href="http://www.delphidabbler.com/software?id=verinfo16">16 bit
-	version</a></var> the component.
-
+	<strong>Important Note:</strong> Please ensure that you have installed the
+	<var><a
+		href="http://www.delphidabbler.com/software?id=verinfo"
+	>TPJVersionInfo</a></var> component v3.0 or later <strong>before</strong>
+	installing the about box component.
 </div>
 
 <p>
@@ -340,420 +261,66 @@
 </p>
 
 <ul>
-
 	<li class="first">
-		<strong><code>PJAbout.pas</code></strong> &ndash; component source code.
+		<strong><code>PJAbout.pas</code></strong> &ndash; Component source code.
 	</li>
 	<li>
-		<strong><code>PJAbout.dfm</code></strong> &ndash; form file containing
+		<strong><code>PJAbout.dfm</code></strong> &ndash; Form file containing
 		about box.
 	</li>
 	<li>
-		<code>PJAbout.hlp</code> &ndash; component help file that integrates
-		with the Delphi 3 to 7 OpenHelp system.
+		<strong><code>PJAbout.dcr</code></strong> &ndash; Component palette
+		glyph.
 	</li>
 	<li>
-		<code>PJAbout.als</code> &ndash; a-link keyword file for integration
-		with the Delphi 6 or 7 OpenHelp system.
+		<code>PJAbout.hlp</code> &ndash; Help file that integrates with the
+		Delphi 3-7 IDE.
 	</li>
 	<li>
-		<code>ReadMe.htm</code> &ndash; this file.
+		<code>PJAbout.als</code> &ndash; Keyword file required when integrating
+		the help file with Delphi 6 and 7. 
 	</li>
 	<li>
-		<code>ChangeLog.txt</code> &ndash; component's change log.
+		<code>ReadMe.htm</code> &ndash; This read-me file.
 	</li>
 	<li>
-		<code>MPL.txt</code> &ndash; the Mozilla Public License.
+		<code>ChangeLog.txt</code> &ndash; Change log.
 	</li>
 	<li>
-		<strong><code>16\PJAbout.dcr</code></strong> &ndash; resource file
-		containing a 16 bit component palette glyph for use with Delphi 1.
+		<code>MPL.txt</code> &ndash; Mozilla Public License.
 	</li>
 	<li>
-		<strong><code>32\PJAbout.dcr</code></strong> &ndash; resource file
-		containing a 32 bit component palette glyph for use with Delphi 2 and
-		later.
+		<code>Wiki.URL</code> &ndash; Shortcut to online component Wiki.
 	</li>
-	<li>
-
-		<code>Demo\AboutBoxDemo.dpr</code> &ndash; demo program project file.
-	</li>
-	<li>
-		<code>Demo\AboutBoxDemo.res</code> &ndash; demo program's icon resource.
-	</li>
-	<li>
-		<code>Demo\AboutBoxDemo.cfg</code> &ndash; compiler config file for demo
-		program.
-	</li>
-
-	<li>
-		<code>Demo\FmDemo.pas</code> &ndash; demo program main form source code.
-	</li>
-	<li>
-		<code>Demo\FmDemo.dfm</code> &ndash; demo program main form.
-	</li>
-	<li>
-
-		<code>Demo\VerInfo.rc</code> &ndash; source for demo program's version
-		information resource.
-	</li>
-	<li>
-		<code>Demo\VerInfo.res</code> &ndash; demo program's version information
-		resource.
-	</li>
-	
 </ul>
 
 <p>
-	You can now proceed to install the component using the
-	<strong>emphasised</strong> files above. Installation methods vary between
-	Delphi versions, so follow the instructions that apply to your version
-	below. Note that <code><strong>$(DELPHI)</strong></code> represents the
-	path where the appropriate version of Delphi was installed. Similarly
-	<code><strong>$(BDS)</strong></code> refers to the installation path of a
-	version of the Borland Development System.
+	In addition to the above files you will find the the source code of a <a
+		href="#demo"
+	>demo project</a> in the <code>Demo</code> sub-directory.
 </p>
-
-<ul>
-	<li><a href="#bds">Installation with Delphi 2005 &amp; 2006</a></li>
-
-	<li><a href="#d3">Installation with Delphi 3 to 7</a></li>
-	<li><a href="#d2">Installation with Delphi 2</a></li>
-	<li><a href="#d1">Installation with Delphi 1</a></li>
-</ul>
-
-
-
-<h3 id="bds">Installation with Delphi 2005 &amp; 2006</h3>
 
 <p>
-	The component must be installed into a Delphi Win32 design package. It is
-	assumed that you will be installing into an existing package. You may decide
-	to install into the &quot;user&quot; package:
-	<code>$(BDS)\Lib\dclusr.dpk</code>.
+	You can now install the component into the Delphi IDE. The files
+	<code>PJAbout.pas</code>, <code>PJAbout.dfm</code> and
+	<code>PJAbout.dcr</code> are required to do this. For Delphi 3 onwards you
+	must include these files in a design time package that is installed into the
+	Delphi IDE. If you need help doing this
+	<a
+		href="http://www.delphidabbler.com/url/install-comp"
+	>see here</a>.
 </p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your <code>Borland Studio Projects</code>
-
-		or <code>$(BDS)\lib</code> folders.
-	</li>
-	
-	<li>
-		Copy <code>PJAbout.pas</code>, <code>PJAbout.dfm</code> and
-		<code>32\PJAbout.dcr</code> to the chosen installation folder.
-	</li>
-
-	
-	<li>
-		Start the Development System (selecting the Delphi Win32 personality if
-		appropriate) then:
-
-		<ul>
-
-			<li>
-				Open the required package. Select <em>File | Open</em> menu and
-				choose a suitable package source file.
-			</li>
-
-			<li>
-
-				The package will now be displayed in the Project Manager with a
-				<code>.bpl</code> extension. Right click the package's entry and
-				select <em>Add</em> to display the <em>Add</em> dialog box.
-				Enter the full path to <code>PJAbout.pas</code> in the <em>Unit
-				file name</em> edit box (use the <em>Browse</em> button to
-				navigate to the file). Click <em>OK</em> to add the component to
-				the package.
-			</li>
-
-			<li>
-				Back in the Project Manager, check that
-				<code>PJAbout.pas</code>, <code>PJAbout.dfm</code> and
-				<code>PJAbout.dcr</code> appear under the package's
-				<em>Contains</em> node. If so, right click the package's entry
-				again and select <em>Compile</em>. If the resulting
-				compilation succeeds a message should be displayed confirming
-				that <var>TPJAboutBoxDlg</var>
-
-				has been registered. The component should now appear in the
-				&quot;DelphiDabbler&quot; section of the Tool Palette. (Note
-				this will only appear when a form is selected in the designer).
-			</li>
-			
-			<li>
-				If the component does not appear the package may not have been
-				installed. Install it from the Project Manager by selecting the
-				package's <em>Install</em> right click menu option.
-			</li>
-
-			<li>
-
-				Close the package project using the <em>File | Close</em> menu
-				item. Accept any prompt that offers to save the package project.
-			</li>
-			
-		</ul>
-		
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJAbout.pas</code> from the chosen
-		installation folder.
-	</li>
-
-	
-	<li>
-		The supplied help file cannot be integrated with the IDE's help system.
-		However it can be used independently of the IDE, albeit with reduced
-		functionality.
-	</li>
-
-	<li>
-		The demo program can be loaded into Delphi and compiled and run as
-		required.
-	</li>
-
-</ol>
-
-
-
-<h3 id="d3">Installation with Delphi 3 to 7</h3>
 
 <p>
-	The component must be installed into a design package. It is assumed that
-	you will be installing into an existing package. You may wish to use the
-	&quot;user&quot; package named <code>dclusr.dpk</code> or
-	<code>dclusrXX.dpk</code> (where <code>XX</code> is a version number). This
-	package can be found in <code>$(DELPHI)\Lib</code>. 
-
+	Note that the help file included in the download can only integrate with the
+	IDE in Delphi 3-7. For information on how to do this, see <a
+		href="http://www.delphidabbler.com/articles?article=15"
+	>this article</a>. Users of other versions of Delphi can either use the help
+	file as a stand-alone file (in which case some links won't work) or you can
+	use the <a
+		href="http://www.delphidabbler.com/url/aboutbox-wiki"
+	>About Box Component Wiki</a>.
 </p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
-	</li>
-	
-	<li>
-		Copy <code>PJAbout.pas</code>, <code>PJAbout.dfm</code> and
-		<code>32\PJAbout.dcr</code> to the chosen installation folder.
-	</li>
-
-	
-	<li>	
-		Start Delphi then:
-		
-		<ul>
-			
-			<li>
-				Choose the <em>Component | Install Component</em> menu option to
-				display the <em>Install Component</em> dialog box. Ensure the
-				<em>Into existing package</em> tab is selected. Enter the full
-				path to <code>PJAbout.pas</code> in the <em>Unit file name</em>
-
-				edit box (use the adjacent <em>Browse</em> button to navigate to
-				the file). Choose the required package from the <em>Package
-				description</em> combo box, or by navigating to the package
-				using <em>Browse</em>. Click <em>OK</em> to confirm your
-				selections. 
-			</li>
-
-			<li>
-				A confirmation dialog box may displayed, querying whether it is
-				OK to rebuild and reinstall the package. Click <em>Yes</em> to
-				proceed.
-			</li>
-			
-			<li>
-				The package will now be built and a dialog box should be
-				displayed stating that the <var>TPJAboutBoxDlg</var> component
-				has been installed. Click <em>OK</em> to dismiss the dialog box.
-			</li>
-
-			<li>
-				The component will appear on the &quot;DelphiDabbler&quot;
-				palette.
-			</li>
-		</ul>
-
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJAbout.pas</code> from the chosen
-		installation folder.
-	</li>
-	
-	<li>
-		The provided help file can be integrated with the IDE's OpenHelp system.
-		Delphi 6 and 7 also require the use of the supplied <code>.als</code>
-		file. The simplest way to install help, is to use my
-		<a href="http://www.delphidabbler.com/software?id=chi">Component Help
-		Installer Expert</a> (v2.2.1 or later). If you prefer to install
-		manually,
-		<a href="http://www.delphidabbler.com/articles?article=15">this
-		article</a> explains the process. Please note that <em>Component Help
-		Installer Expert</em> does not work on Windows Vista.
-	</li>
-
-	
-	<li>
-		The demo program can be loaded into Delphi and compiled and run as
-		required.
-	</li>
-
-
-</ol>
-
-
-
-<h3 id="d2">Installation with Delphi 2</h3>
-
-<ol class="spaced">
-
-	<li>
-
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
-	</li>
-	
-	<li>
-		Copy <code>PJAbout.pas</code>, <code>PJAbout.dfm</code> and
-		<code>32\PJAbout.dcr</code> to the chosen installation folder.
-	</li>
-
-	
-
-	<li>
-		Start Delphi 2 then:
-
-		<ul>
-
-			<li>
-				Select the <em>Component | Install</em> menu option to display
-				the <em>Install Components</em> dialog box.
-			</li>
-
-			<li>
-				Click the <em>Add</em> button to display the <em>Add Module</em>
-				dialog box.
-			</li>
-
-			<li>
-				click the <em>Browse</em> button. Choose
-				<code>PJAbout.pas</code> from the resulting standard file open
-				dialog box and click <em>Open</em>.
-			</li>
-
-			<li>
-				This returns you to the <em>Install Components</em> dialog box.
-				Click <em>OK</em> to rebuild the component library.
-			</li>
-
-			<li>
-				<var>TPJAboutBoxDlg</var> should now appear on the
-				&quot;DelphiDabbler&quot; tab of the component palette.
-			</li>
-
-		</ul>
-
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJAbout.pas</code> from the chosen
-		installation folder.
-	</li>
-	
-	<li>
-
-		The supplied help file cannot be integrated with the IDE's help system.
-		However it can be used independently of the IDE, albeit with reduced
-		functionality.
-	</li>
-
-	<li>
-		The demo program can be loaded into Delphi 2 and compiled and run as
-		required.
-	</li>
-
-</ol>
-
-
-
-<h3 id="d1">Installation with Delphi 1</h3>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
-	</li>
-	
-	<li>
-		Copy <code>PJAbout.pas</code>, <code>PJAbout.dfm</code> and
-		<code>16\PJAbout.dcr</code> to the chosen installation folder.
-	</li>
-
-	
-
-	<li>
-		Start Delphi 1 then:
-
-		<ul>
-
-			<li>
-				Select the <em>Component | Install</em> menu option to display
-				the <em>Install Components</em> dialog box.
-			</li>
-
-			<li>
-				Click the <em>Add</em> button to display the <em>Add Module</em>
-				dialog box.
-			</li>
-
-			<li>
-				Click the <em>Browse</em> button. Choose
-				<code>PJAbout.pas</code> from the resulting standard file open
-				dialog box and click <em>OK</em>.
-			</li>
-
-			<li>
-				This returns you to the <em>Install Components</em> dialog box.
-				Click <em>OK</em> to rebuild the component library.
-			</li>
-
-			<li>
-				<var>TPJAboutBoxDlg</var> should now appear on the
-				&quot;DelphiDabbler&quot; tab of the component palette.
-			</li>
-
-		</ul>
-
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJAbout.pas</code> from the chosen
-		installation folder.
-	</li>
-	
-	<li>
-
-		The supplied help file cannot be integrated with the IDE's help system.
-		However, if you are running Delphi 1 on a 32 bit Windows platform, the
-		help file can be used independently of the IDE, albeit with reduced
-		functionality.
-	</li>
-
-	<li>
-		<span class="highlight">Please note:</span> The demo program will not
-		compile under Delphi 1.
-	</li>
-
-</ol>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -765,10 +332,9 @@
 
 <p>
 	A demo program is included in the download that can be used to exercise the
-	component. This program can be compiled with any 32 bit version of Delphi,
-	but does not work with Delphi 1.
+	component. This program can be compiled with any supported version of
+	Delphi.
 </p>
-
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -783,20 +349,21 @@
 	 download.
 </p>
 
-
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="license">
-	License
+	License and Disclaimer
 </h2>
 
 <p>
 	This product, <em>About Box Component</em>, is subject to the Mozilla Public
 	License Version 1.1 (the &quot;License&quot;). You may not use this Product
 	except in compliance with the License. You may obtain a copy of the License
-	at <a href="http://www.mozilla.org/MPL/">http://www.mozilla.org/MPL/</a>.
+	at <a
+		href="http://www.mozilla.org/MPL/MPL-1.1"
+	>http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
@@ -807,14 +374,34 @@
 </p>
 
 <p>
-	The Initial Developer of <em>About Box Component</em> is Peter D Johnson.
-	Portions created by the Initial Developer are Copyright &copy; 1998-2008
-	Peter D Johnson (www.delphidabbler.com). All Rights	Reserved.
+	The Initial Developer of About Box Component is Peter D Johnson. Portions
+	created by the Initial Developer are Copyright &copy; 1998-2009 Peter D
+	Johnson (www.delphidabbler.com). All Rights Reserved.
 </p>
 
+<p>
+	All relevant trademarks are acknowledged.
+</p>
 
-<p>All relevant trademarks are acknowledged.</p>
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
 
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
+
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
+</p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -826,27 +413,29 @@
 
 <p>
 	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-	Wales, UK, writing write mainly in Delphi. My programs are available for
-	download from:
+	Wales, UK, writing write mainly in Delphi. My programs and code are available
+	from:
 	<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
 </p>
 
+<p>
+	I can be <a href="http://www.delphidabbler.com/contact">contacted via the
+	website.</a>
+</p> 
 
 <div class="endnotes">
-
 	<div class="comments">
 		Please
 		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the components, if you
-		have found a bug, or you want to suggest any updates.
+		let me know</a> if you have any comments about the component, but please
+		use the Issue Tracker noted above to report bugs and request new
+		features.
 	</div>
-
 	<div class="copyright">
-		This info sheet is copyright &copy; 2005-2008, P D Johnson,
+		This document is copyright &copy; 2005-2009, P D Johnson,
 		<a href="http://www.delphidabbler.com/">
 		www.delphidabbler.com</a>
 	</div>
-
 </div>
 
 </body>
