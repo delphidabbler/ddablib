@@ -36,7 +36,7 @@ HCW=0
 LCID=0x809 0x0 0x0 ;English (United Kingdom)
 REPORT=Yes
 TITLE=DelphiDabbler About Box Component
-COPYRIGHT=DelphiDabbler About Box Help - Copyright © 1998-2008 P.D.Johnson (www.delphidabbler.com)
+COPYRIGHT=DelphiDabbler About Box Help - Copyright © 1998-2009 P.D.Johnson (www.delphidabbler.com)
 HLP=.\PJAbout.hlp
 
 [FILES]
