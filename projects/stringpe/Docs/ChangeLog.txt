@@ -1,0 +1,12 @@
+Release 1.1.1 of 21 December 2005
+PJStringPE v1.1.1 of 21 December 2005
++ Changed compiler directives to allow compilation with Delphi 2005/6.
+
+Release 1.1 of 12 August 2004
+PJStringPE v1.1 of 12 August 2004
++ Disabled minimize button and system menu item.
++ Made form respond to Esc key to cancel dialog and Ctrl+Return to OK the dialog.
+
+Release 1.0 of 30 June 2004
+PJStringPE v1.0 of 30 June 2004
++ Original version.
