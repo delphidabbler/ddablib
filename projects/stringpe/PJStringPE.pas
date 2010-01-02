@@ -1,43 +1,13 @@
-{ ##
-  @PROJECT_NAME             Extended String Property Editor.
-  @PROJECT_DESC             Property editor for properties of type string and
-                            TCaption that extends default editor to provide a
-                            dialog for editing multi-line strings.
-  @FILE                     PJStringPE.pas
-  @COMMENTS                 Property editor source code.
-  @AUTHOR                   Peter Johnson, LLANARTH, Ceredigion, Wales, UK
-  @OWNER                    DelphiDabbler
-  @EMAIL                    peter.johnson@openlink.org
-  @WEBSITE                  http://www.delphidabbler.com/
-  @COPYRIGHT                © Peter D Johnson, 2004.
-  @LEGAL_NOTICE             This property editor is distributed under the
-                            Mozilla Public License - see below.
-  @CREDITS                  Richard C Haven for the Ctrl+Return and Esc key
-                            functionality.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 30/06/2004
-      @COMMENTS             Original version.
-    )
-    @REVISION(
-      @VERSION              1.1
-      @DATE                 12/08/2004
-      @COMMENTS             + Disabled minimize button and system menu item.
-                            + Made form respond to Ees key to cancel dialog and
-                              Ctrl+Return to OK the dialog.
-    )
-    @REVISION(
-      @VERSION              1.1.1
-      @DATE                 21/12/2005
-      @COMMENTS             Changed compiler directives to allow compilation
-                            with Delphi 2005/6.
-    )
-  )
-}
-
-
-{
+{ 
+ * PJStringPE.pas
+ *
+ * Extended String Property Editor source code. Property editor for the Delphi
+ * IDE that enables multi-line strings to be edited and assigned to component
+ * string properties at design time.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -50,16 +20,16 @@
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
  * the specific language governing rights and limitations under the License.
  *
- * The Original Code is Extended String Property Editor.
+ * The Original Code is PJStringPE.pas
  *
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2004-2005 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2004-2010 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
- *   Richard C Haven
+ *   Richard C Haven (Ctrl+Return and Esc key functionality)
  *
  * ***** END LICENSE BLOCK *****
 }
