@@ -1,0 +1,66 @@
+================================================================================
+
+Extended String Property Editor: Historical update information from v1.0 to
+v1.1.1
+
+================================================================================
+
+This file records known changes to files in the Extended String Property Editor
+from v1.0 to v1.1.1 before the project was placed under version control with
+Subversion.
+
+There are two sections:
+
+  1: Releases: Lists all the releases of the project and notes which files were
+     added, updated or deleted in each release.
+
+  2: Files: Lists all source code and development tools and provides details of
+     changes to these files.
+
+
+================================================================================
+1: RELEASES
+================================================================================
+
+This section lists all releases of the project from the first version (1.0) to 
+release 1.1.1. For each release the following is noted:
+
+  + Version and date
+  + List of new, updated and deleted files.
+  
+For details of changes to each release see ChangeLog.txt
+
+--------------------------------------------------------------------------------
+v1.0 of 30 Jun 2004
+--------------------------------------------------------------------------------
+New:     PJStringPE.pas 1.0
+
+--------------------------------------------------------------------------------
+v1.1 of 12 Aug 2004
+--------------------------------------------------------------------------------
+Updated: PJStringPE.pas 1.1
+
+--------------------------------------------------------------------------------
+v1.1.1 of 21 Dec 2005
+--------------------------------------------------------------------------------
+Updated: PJStringPE.pas 1.1.1
+
+
+================================================================================
+2: FILES
+================================================================================
+
+This section lists all files for which an update history is known between v1 and
+and v1.1.1, inclusive.
+
+--------------------------------------------------------------------------------
+PJStringPE.pas (and PJStringPE.dfm)
+--------------------------------------------------------------------------------
+v1.0 of 30 Jun 2004   - Original version.
+v1.1 of 12 Aug 2004   - Disabled minimize button and system menu item.
+                      - Made form respond to Ees key to cancel dialog and
+                        Ctrl+Return to OK the dialog.
+v1.1.1 of 21 Dec 2005 - Changed compiler directives to allow compilation with
+                        Delphi 2005/6.
+          02 Jan 2010 - Moved to SVN.
+--------------------------------------------------------------------------------
