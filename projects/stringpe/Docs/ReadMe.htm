@@ -1,17 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
+<!--
+ * Read-me file for Extended String Property Editor
+ *
+ * $Rev$
+ * $Date$
+-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
 
 	<title>
-		DelphiDabbler.com Info Sheet: Extended String Property Editor
+		DelphiDabbler Extended String Property Editor ReadMe
 	</title>
 
 	<style type="text/css">
-		<!--
 		body {
 			margin: 1em;
 			padding: 0;
@@ -91,14 +94,6 @@
 		a:hover {
 			text-decoration: underline;
 		}
-		.gototop {
-			margin: 1em 0 0 0;
-			padding: 0.3em 0 0 0;
-			text-align: center;
-			position: relative;
-			float: right;
-			font-weight: bold;
-		}
 		.pullout {
 			border-left: 8px silver solid;
 			xborder-bottom: 2px silver solid;
@@ -133,7 +128,9 @@
 			font-size: 8pt;
 			text-align: right;
 		}
-		-->
+		.smallcaps {
+			font-variant: small-caps;
+		}
 	</style>
 
 </head>
@@ -143,26 +140,9 @@
 
 <h1>
 	Extended String Property Editor<br />
-	<span class="subtitle">Information Sheet</span>
+	<span class="subtitle">ReadMe</span>
 </h1>
 
-
-<h2 id="contents">Contents</h2>
-
-<ul>
-	<li><a href="#description">Description</a></li>
-	<li><a href="#compatibility">Compatibility</a></li>
-	<li><a href="#installation">Installation</a></li>
-	<li><a href="#update">Update History</a></li>
-	<li><a href="#license">License and Disclaimer</a></li>
-	<li><a href="#author">About the Author</a></li>
-</ul>
-
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="description">
 	Description
@@ -173,20 +153,17 @@
 	standard Delphi string property editor.
 </p>
 
-<ol>
-
+<ol class="spaced">
 	<li>
 		The standard property editor does not allow multi-line strings with
 		embedded CR/LF characters to be entered via the object inspector. Such
 		strings can only be assigned run-time.
 	</li>
-	
 	<li>
 		Although 32 bit Delphi strings have a 2Gb size limit, the standard
 		property editor only accepts strings up to 255 characters long. Once
 		again, longer strings must be assigned at run-time.
 	</li>
-	
 </ol>
 
 <p>
@@ -199,290 +176,137 @@
 </p>
 
 <p>
-	Clicking OK (or pressing Ctrl+Return) causes the entered text to be assigned
-	to the property. Any new lines will be displayed in the object inspector as
-	pairs of vertical bars or empty squares, depending on the Delphi version.
+	Clicking OK (or pressing <span class="smallcaps">Ctrl+Return</span>) causes
+	the entered text to be assigned to the property. Any new lines will be
+	displayed in the object inspector as pairs of vertical bars or empty
+	squares, depending on the Delphi version.
 </p>
 
 <p>
 	The edit dialog is resizable. Word wrapping can be switched on or off. Both
-	the word-wrapping and dialog box size and position are persistent.
+	the word-wrapping and dialog box size and position are persistent. Load and
+	Save buttons are provided in the dialog box to enable the property's value
+	to be loaded from, or saved to a file.
 </p>
 
-<p>
-	Load and Save buttons are provided in the dialog box to enable the
-	property's value to be loaded from, or saved to a file.
-</p>
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="compatibility">
 	Compatibility
 </h2>
 
 <p>
-	The property editor compiles and works with all versions of Delphi from
-	Delphi 4. It has been tested with Delphi 4, 6, 7 and 2006.
+	The property editor compiles and works with all Win 32 version of Delphi
+	from 4 onwards. It has been tested with Delphi 4, 6, 7, 2006 and 2010.
 </p>
 
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="installation">
 	Installation
 </h2>
 
 <p>
-	The Extended String Property Editor and its readme file are supplied in a
-	zip file. Before installing you need to extract all the files from the zip
-	file, preserving the directory structure. The following files will be
+	The <em>Extended String Property Editor</em> is supplied in a zip file.
+	Before installing you need to extract all the files from the zip file. The
+	following files will be
 	extracted:
 </p>
 
 <ul>
-
-	<li class="first">
-		<strong><code>PJStringPE.pas</code></strong> &ndash; property editor
+	<li>
+		<strong><code>PJStringPE.pas</code></strong> &ndash; Property editor
 		source code.
 	</li>
-
 	<li>
-		<strong><code>PJStringPE.dfm</code></strong> &ndash; property editor
+		<strong><code>PJStringPE.dfm</code></strong> &ndash; Property editor
 		form file.
 	</li>
-
 	<li>
-		<code>ReadMe.htm</code> &ndash; this file.
+		<code>ReadMe.htm</code> &ndash; This read-me file.
 	</li>
-
 	<li>
-		<code>ChangeLog.txt</code> &ndash; change log.
+		<code>ChangeLog.txt</code> &ndash; Change log.
 	</li>
-
+	<li>
+		<code>MPL.txt</code> &ndash; Mozilla Public License.
+	</li>
 </ul>
 
 <p>
-	You can now proceed to install the property editor. Installation methods
-	vary between Delphi versions, so follow the instructions that apply to your
-	version below. Note that <code><strong>$(DELPHI)</strong></code> represents
-	the path where the appropriate version of Delphi was installed. Similarly
-	<code><strong>$(BDS)</strong></code> refers to the installation path of a
-	version of the Borland Development System.
+	<code>PJStringPE.pas</code> and <code>PJStringPE.dfm</code> must be
+	included in a design time package that is then installed into the IDE. If
+	you need help doing this <a
+		href="http://www.delphidabbler.com/url/install-comp"
+	>see here</a>.
 </p>
 
-<ul>
-	<li><a href="#bds">Installation with Delphi 2005 &amp; 2006</a></li>
-	<li><a href="#d4">Installation with Delphi 4 to 7</a></li>
-</ul>
-
-
-
-<h3 id="bds">Installation with Delphi 2005 &amp; 2006</h3>
-
-<p>
-	The property editor must be installed into a Delphi Win32 design package. It
-	is assumed that you will be installing into an existing package. You may
-	decide to install into the &quot;user&quot; package:
-	<code>$(BDS)\Lib\dclusr.dpk</code>.
-</p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the property
-		editor. This may be a subdirectory of your <code>Borland Studio
-		Projects</code> or <code>$(BDS)\lib</code> folders.
-	</li>
-	
-	<li>
-		Copy <code>PJStringPE.pas</code> and <code>PJStringPE.dfm</code> to the
-		chosen installation folder.
-	</li>
-		
-	<li>
-		Start the Development System (selecting the Delphi Win32 personality if
-		appropriate) then:
-
-		<ul>
-
-			<li>
-				Open the required package. Select <em>File | Open</em> menu and
-				choose a suitable package source file.
-			</li>
-
-			<li>
-				The package will now be displayed in the Project Manager with a
-				<code>.bpl</code> extension. Right click the package's entry and
-				select <em>Add</em> to display the <em>Add</em> dialog box.
-				Enter the full path to <code>PJStringPE.pas</code> in the
-				<em>Unit file name</em> edit box (use the <em>Browse</em> button
-				to navigate to the file). Click <em>OK</em> to add the property
-				editor to the package.
-			</li>
-
-			<li>
-				Back in the Project Manager, check that
-				<code>PJStringPE.pas</code> appears under the package's
-				<em>Contains</em> node. If so, right click the package's entry
-				again and select <em>Compile</em>. The property editor will now
-				be installed and available for use.
-			</li>
-			
-			<li>
-				If the property editor is not used by the Object Inspector the
-				package may not have been installed. Install it from the Project
-				Manager by selecting the package's <em>Install</em> right click
-				menu option.
-			</li>
-
-			<li>
-				Close the package project using the <em>File | Close</em> menu
-				item. Accept any prompt that offers to save the package project.
-			</li>
-			
-		</ul>
-		
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJStringPE.pas</code> from the
-		chosen installation folder.
-	</li>
-
-	
-</ol>
-
-
-<h3 id="d4">Installation with Delphi 4 to 7</h3>
-
-<p>
-	The property editor must be installed into a design package. It is assumed
-	that you will be installing into an existing package. You may wish to use
-	the &quot;user&quot; package named <code>dclusr.dpk</code> or
-	<code>dclusrXX.dpk</code> (where <code>XX</code> is a version number). This
-	package can be found in <code>$(DELPHI)\Lib</code>. For Delphi 6 and later
-	ensure that the package &quot;requires&quot; <code>designide.pas</code>. 
-</p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the property
-		editor. This may be a subdirectory of your <code>$(DELPHI)\lib</code>
-		folder.
-	</li>
-	
-	<li>
-		Copy <code>PJStringPE.pas</code> and <code>PJStringPE.dfm</code> to the
-		chosen installation folder.
-	</li>
-
-	<li>	
-		Start Delphi then:
-		
-		<ul>
-			
-			<li>
-				Choose the <em>Component | Install Component</em> menu option to
-				display the <em>Install Component</em> dialog box. Ensure the
-				<em>Into existing package</em> tab is selected. Enter the full
-				path to <code>PJStringPE.pas</code> in the <em>Unit file
-				name</em> edit box (use the adjacent <em>Browse</em> button to
-				navigate to the file). Choose the required package from the
-				<em>Package description</em> combo box, or by navigating to the
-				package using <em>Browse</em>. Click <em>OK</em> to confirm your
-				selections. 
-			</li>
-
-			<li>
-				A confirmation dialog box may displayed, querying whether it is
-				OK to rebuild and reinstall the package. Click <em>Yes</em> to
-				proceed.
-			</li>
-			
-			<li>
-				The package will now be built. If this succeeds the property
-				editor will now be ready for use.
-			</li>
-
-		</ul>
-
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJStringPE.pas</code> from the
-		chosen installation folder.
-	</li>
-	
-</ol>
-
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="update">
 	Update History
 </h2>
 
 <p>
-	 A complete change log is provided in a text file that is included in the
-	 download.
+	 A complete change log is provided in the file <code>ChangeLog.txt</code>
+	 that is included in the download.
 </p>
 
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="license">
 	License and Disclaimer
 </h2>
 
 <p>
-	This source code is subject to the Mozilla Public License Version 1.1 (the
-	&quot;License&quot;); you may not use this program except in compliance
-	with the License. You may obtain a copy of the License at
-	<a href="http://www.mozilla.org/MPL/.">http://www.mozilla.org/MPL/</a>.
+	This product, <em>Extended String Property Editor</em>, is subject to the
+	Mozilla Public License Version 1.1 (the &quot;License&quot;). You may not
+	use this Product except in compliance with the License. You may obtain a
+	copy of the License at <a
+		href="http://www.mozilla.org/MPL/MPL-1.1" 
+	>http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
 	Software distributed under the License is distributed on an &quot;AS
-	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
-	See the License for the specific language governing rights and limitations
-	under the License.
+	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+	the License for the specific language governing rights and limitations under
+	the License.
+
 </p>
 
 <p>
-	The Original Code is PJStringPE.pas (Extended String Property Editor).
+	The Initial Developer of <em>Extended String Property Editor</em> is Peter D
+	Johnson. Portions created by the Initial Developer are Copyright &copy;
+	2004-2010 Peter D Johnson (www.delphidabbler.com). All Rights Reserved.
 </p>
 
 <p>
-	The Initial Developer of the Original Code is Peter Johnson
-	(<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/)</a>.
+	Contributor(s) to this project:
 </p>
 
-<p>
-	Portions created by the Initial Developer are Copyright &copy; 2004-2005
-	Peter Johnson. All Rights Reserved.
+<p class="indent">
+	Richard C Haven (<span class="smallcaps">Ctrl+Return</span> and
+	<span class="smallcaps">Esc</span> key functionality).
 </p>
-
 
 <p>
 	All relevant trademarks are acknowledged.
 </p>
 
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
+
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
 </p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
+
 
 <h2 id="author">
 	About the Author
@@ -490,27 +314,30 @@
 
 <p>
 	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-	Wales,  UK, writing write mainly in Delphi. My programs are available for
-	download from:
+	Wales,  UK, writing write mainly in Delphi. My programs and code are
+	available from:
 	<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
 </p>
 
+<p>
+	I can be <a href="http://www.delphidabbler.com/contact">contacted via the
+	website.</a>
+</p> 
+
 
 <div class="endnotes">
-
 	<div class="comments">
 		Please
 		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the property editor, if
-		you have found a bug, or you want to suggest any updates.
+		let me know</a> if you have any comments about the property editor, but
+		please use the Issue Tracker above to report bugs and request new
+		features.
 	</div>
-
 	<div class="copyright">
-		This info sheet is copyright &copy; 2005, P D Johnson,
+		This document is copyright &copy; 2005-2010, P D Johnson,
 		<a href="http://www.delphidabbler.com/">
 		www.delphidabbler.com</a>
 	</div>
-
 </div>
 
 </body>
