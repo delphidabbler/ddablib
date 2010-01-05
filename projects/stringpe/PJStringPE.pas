@@ -1,4 +1,4 @@
-{ 
+{
  * PJStringPE.pas
  *
  * Extended String Property Editor source code. Property editor for the Delphi
@@ -157,12 +157,14 @@ begin
     TypeInfo(string),             // use for any string component
     nil,                          // use for any component
     '',                           // use for any property
-    TPJStringPE);                 // property editor class
+    TPJStringPE                   // property editor class
+  );
   RegisterPropertyEditor(
     TypeInfo(TCaption),           // use for any TCaption component
     nil,                          // use for any component
     '',                           // use for any property
-    TPJStringPE);                 // property editor class
+    TPJStringPE                   // property editor class
+  );
 end;
 
 
@@ -195,8 +197,12 @@ end;
 { TPJStringPEDlg }
 
 const
-  // Registry key where property editors settings are stored
-  cRegKey = '\Software\delphiDabbler\Experts\StringPE';
+  // Registry key where property editor's settings are stored
+  cRegKey = '\Software\DelphiDabbler\Experts\StringPE';
+  // Names of registry values used for settings
+  cWordWrapSetting = 'WordWrap';               // whether word wrap is enabled
+  cWindowPlacementSetting = 'WindowPlacement'; // size and location of window
+
 
 procedure TPJStringPEDlg.btnLoadClick(Sender: TObject);
   {Event handler for "Load" button. Gets file from user and loads its contents
@@ -236,31 +242,36 @@ var
 begin
   // Save word wrap value
   WordWrap := cbWordWrap.Checked;
-  SaveSetting('WordWrap', WordWrap, SizeOf(WordWrap));
+  SaveSetting(cWordWrapSetting, WordWrap, SizeOf(WordWrap));
   // Save window placement
   FillChar(Pl, 0, SizeOf(Pl));
   Pl.Length := SizeOf(TWindowPlacement);
   GetWindowPlacement(Self.Handle, @Pl);
   SaveSetting(
-    'WindowPlacement', Pl.rcNormalPosition, SizeOf(Pl.rcNormalPosition)
+    cWindowPlacementSetting, Pl.rcNormalPosition, SizeOf(Pl.rcNormalPosition)
   );
 end;
 
 procedure TPJStringPEDlg.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
-  {Form key down event handler. Handles ESC and CTRL+RETURN key presses to
-  simulate clicking of Cancel and OK buttons respectively.
+  {Form key down event handler. Handles unmodified ESC and CTRL+RETURN key
+  presses to simulate clicking of Cancel and OK buttons respectively.
     @param Sender [in] Object generating event. Not used.
     @param Key [in/out] Code of key pressed. Unchanged.
     @param Shift [in] Combination of shift keys pressed.
   }
+const
+  cShiftKeys = [ssCtrl, ssAlt, ssShift];  // set of modifier keys
 begin
   case Key of
-    VK_ESCAPE:  // ESC key - cancel dialog
-      ModalResult := mrCancel;
-    VK_RETURN:  // CTRL+RETURN - OK the dialog
+    VK_ESCAPE:
+      if Shift * cShiftKeys = [] then
+        // unmodified ESC key - cancel dialog
+        ModalResult := mrCancel;
+    VK_RETURN:
     begin
-      if Shift = [ssCtrl] then
+      if Shift * cShiftKeys = [ssCtrl] then
+        // CTRL+RETURN - OK the dialog
         ModalResult := mrOK;
     end;
   end;
@@ -276,13 +287,13 @@ var
   WorkArea: TRect;      // desktop work area
 begin
   // Get word wrapping setting and update accordingly
-  if not ReadSetting('WordWrap', WordWrap, SizeOf(WordWrap)) then
+  if not ReadSetting(cWordWrapSetting, WordWrap, SizeOf(WordWrap)) then
     WordWrap := False;
   UpdateWordWrap(WordWrap);
   // Get window placement setting and place window accordingly
   FillChar(Pl, SizeOf(Pl), #0);
   if ReadSetting(
-    'WindowPlacement', Pl.rcNormalPosition, SizeOf(Pl.rcNormalPosition)
+    cWindowPlacementSetting, Pl.rcNormalPosition, SizeOf(Pl.rcNormalPosition)
   ) then
   begin
     // we have read settings: position and size window accordingly
@@ -369,3 +380,4 @@ begin
 end;
 
 end.
+
