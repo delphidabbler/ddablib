@@ -64,7 +64,8 @@ type
 
   {
   TPJStringPEDlg:
-    Dialog box used to edit multi-line string properties.
+    Dialog box used to edit multi-line string properties. Instantiated by
+    TPJStringPE.
   }
   TPJStringPEDlg = class(TForm)
     edText: TMemo;
@@ -82,42 +83,44 @@ type
     procedure cbWordWrapClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     function SaveSetting(const ID: string; var Value;
       const Size: Integer): Boolean;
       {Saves given setting as binary data in registry.
-        @param ID name of the value's registry value.
-        @param Value untyped value to be written to registry.
-        @param Size size of Value in bytes.
+        @param ID [in] Name of the value's registry value.
+        @param Value [in/out] Untyped value to be written to registry.
+          Unmodified (var parameter type required by referenced TRegistry
+          method).
+        @param Size [in] Size of Value in bytes.
         @return True on success or false on error.
       }
     function ReadSetting(const ID: string; var Value;
       const Size: Integer): Boolean;
       {Reads data for a given setting.
-        @param ID name of the registry value storing setting data.
-        @param Value untyped value to recieve setting data.
-        @param Size size of Value in bytes.
+        @param ID [in] Name of the registry value storing setting data.
+        @param Value [in/out] Untyped value that recieves setting data. Any
+          existing input value is overwritten.
+        @param Size [in] Size of Value in bytes.
         @return True if setting read successfully, false on error.
       }
     procedure UpdateWordWrap(Flag: Boolean);
       {Updates editor's word wrap settings and check box.
-        @param Flag whether we require word wrapping.
+        @param Flag [in] Indicates whether we require word wrapping.
       }
   end;
 
 
-  {*
+  {
   TPJStringPE:
-    Property editor for hot text component's Code property.
+    Extended string property editor.
   }
   TPJStringPE = class(TStringProperty)
   public
     function GetAttributes: TPropertyAttributes; override;
       {Tell object inspector that editor displays a dialog box in addition to
       other attributes of a standard string property editor.
-        @return a set of values describing attributes of property editor.
+        @return A set of values describing attributes of property editor.
       }
     procedure Edit; override;
       {Display property editor dialog box to edit the property.
@@ -179,7 +182,7 @@ end;
 function TPJStringPE.GetAttributes: TPropertyAttributes;
   {Tell object inspector that editor displays a dialog box in addition to other
   attributes of a standard string property editor.
-    @return a set of values describing attributes of property editor.
+    @return A set of values describing attributes of property editor.
   }
 begin
   Result := inherited GetAttributes + [paDialog];
@@ -193,9 +196,9 @@ const
   cRegKey = '\Software\delphiDabbler\Experts\StringPE';
 
 procedure TPJStringPEDlg.btnLoadClick(Sender: TObject);
-  {Event handler for "Load" button. Gets file from user and loads
-  its contents in editor.
-    @param Sender object generating event.
+  {Event handler for "Load" button. Gets file from user and loads its contents
+  in editor.
+    @param Sender [in] Object generating event. Not used.
   }
 begin
   if dlgOpen.Execute then
@@ -205,7 +208,7 @@ end;
 procedure TPJStringPEDlg.btnSaveClick(Sender: TObject);
   {Event handler for "Save" button. Saves contents of editor to file specified
   by user.
-    @param Sender object generating event.
+    @param Sender [in] Object generating event. Not used.
   }
 begin
   if dlgSave.Execute then
@@ -214,7 +217,7 @@ end;
 
 procedure TPJStringPEDlg.cbWordWrapClick(Sender: TObject);
   {Event handler for "Word Wrap" check box. Updates word wrapping in editor.
-    @param Sender object generating event.
+    @param Sender [in] Object generating event. Not used.
   }
 begin
   UpdateWordWrap(cbWordWrap.Checked);
@@ -222,11 +225,11 @@ end;
 
 procedure TPJStringPEDlg.FormDestroy(Sender: TObject);
   {Form destruction event handler. Saves persistent settings.
-    @param Sender object generating event.
+    @param Sender [in] Object generating event. Not used.
   }
 var
-  WordWrap: Boolean;    // Whether editor word wraps
-  Pl: TWindowPlacement; // Placement of editor window
+  WordWrap: Boolean;    // whether editor word wraps
+  Pl: TWindowPlacement; // placement of editor window
 begin
   // Save word wrap value
   WordWrap := cbWordWrap.Checked;
@@ -244,7 +247,9 @@ procedure TPJStringPEDlg.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
   {Form key down event handler. Handles ESC and CTRL+RETURN key presses to
   simulate clicking of Cancel and OK buttons respectively.
-    @param Sender object generating event.
+    @param Sender [in] Object generating event. Not used.
+    @param Key [in/out] Code of key pressed. Unchanged.
+    @param Shift [in] Combination of shift keys pressed.
   }
 begin
   case Key of
@@ -260,7 +265,7 @@ end;
 
 procedure TPJStringPEDlg.FormShow(Sender: TObject);
   {Form show event handler. Reads persistent settings and applies them.
-    @param Sender object generating event.
+    @param Sender [in] Object generating event. Not used.
   }
 var
   WordWrap: Boolean;    // whether editor word wraps
@@ -300,9 +305,10 @@ end;
 function TPJStringPEDlg.ReadSetting(const ID: string; var Value;
   const Size: Integer): Boolean;
   {Reads data for a given setting.
-    @param ID name of the registry value storing setting data.
-    @param Value untyped value to recieve setting data.
-    @param Size size of Value in bytes.
+    @param ID [in] Name of the registry value storing setting data.
+    @param Value [in/out] Untyped value that recieves setting data. Any existing
+      input value is overwritten.
+    @param Size [in] Size of Value in bytes.
     @return True if setting read successfully, false on error.
   }
 begin
@@ -323,9 +329,10 @@ end;
 function TPJStringPEDlg.SaveSetting(const ID: string; var Value;
   const Size: Integer): Boolean;
   {Saves given setting as binary data in registry.
-    @param ID name of the value's registry value.
-    @param Value untyped value to be written to registry.
-    @param Size size of Value in bytes.
+    @param ID [in] Name of the value's registry value.
+    @param Value [in/out] Untyped value to be written to registry. Unmodified
+      (var parameter type required by referenced TRegistry method).
+    @param Size [in] Size of Value in bytes.
     @return True on success or false on error.
   }
 begin
@@ -345,7 +352,7 @@ end;
 
 procedure TPJStringPEDlg.UpdateWordWrap(Flag: Boolean);
   {Updates editor's word wrap settings and check box.
-    @param Flag whether we require word wrapping.
+    @param Flag [in] Indicates whether we require word wrapping.
   }
 const
   // map of flag to TMemo.Scrollbars property value
