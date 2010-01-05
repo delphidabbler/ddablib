@@ -79,7 +79,6 @@ type
     btnSave: TButton;
     dlgOpen: TOpenDialog;
     dlgSave: TSaveDialog;
-    bvlFrame: TBevel;
     cbWordWrap: TCheckBox;
     procedure btnLoadClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
