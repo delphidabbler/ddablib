@@ -1,0 +1,1691 @@
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
+{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset2 WingDings;}{\f3\fnil \fcharset0 Arial;}{\f4\fmodern Courier New;}{\f5\fmodern \fcharset0 Courier New;}{\f6\fnil \fcharset0 Courier New;}}
+{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}
+#{\footnote {#}IDH_PJDROPFILES}
+${\footnote {$}PJDropFiles unit}
+K{\footnote {K}PJDropFiles;PJDropFiles unit}
+A{\footnote {A}PJDropFiles;PJDropFiles unit}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b PJ\plain\f1\fs22\cf2\b DropFiles unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This unit contains the implementation of three components that handle files dragged from Windows Explorer onto a program. They are:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab {\strike TPJDropFiles}{\v IDH_DF_CLASS} - a windowed container component that catches files dropped on the control or on any child components.
+\par \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS} - a control that sub classes a form and catches any files dropped on the form.
+\par \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS} - a control that sub classes an associated {\strike TWinControl}{\v !AL(TWinControl_object,1)} descendant.
+\par \plain\f0\fs8\cf0 
+\par \pard \plain\f1\fs18\cf0 Two filter components (used to filter files dropped on the drop files components) are also provided:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike TPJExtFileFilter}{\v IDH_EFF_CLASS} - filters out all files that do not have one of more specified extensions.
+\par \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike TPJWildCardFileFilter}{\v IDH_WCF_CLASS} - filters out file names that do not match the given wildcard.
+\par \pard \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The unit also contains support code and helper classes that are not designed for public use.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_CLASS}
+${\footnote {$}TPJDropFiles}
+K{\footnote {K}TPJDropFiles}
+A{\footnote {A}TPJDropFiles_Object;TPJDropFiles}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \{bmlt TPJDropFiles.bmp\}\plain\f0\fs22\cf2\b  TPJDropFiles\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_DF_HEIRACHY}          {\ul Properties}{\v IDH_DF_PROPS}          {\ul Methods}{\v IDH_DF_METHODS}           {\ul Events}{\v IDH_DF_EVENTS}          {\strike See also}{\v !AL(TPJFormDropFiles_object;TPJCtrlDropFiles_object)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard TPJDropfiles accepts files dragged and dropped from Windows Explorer.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This component provides a window which can accept files dragged and dropped from Windows Explorer (the component handles {\strike WM_DROPFILES}{\v !AL(WM_DROPFILES,1)} messages to do this). This control can contain child components (in a similar way to TPanel components). Files dropped over any such child component are also accepted by the parent TPJDropFiles component.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The main use for TPJDropFiles is when you need to detect file drops on non-windowed components such as TLabel or TShape. To do this drop a TPJDropFiles on a form and then place the required non-windowed control on top of the TPJDropFiles, aligning and sizing both components as required.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The TPJDropFiles component can be aligned with the form on which it is placed using the {\strike Align}{\v !AL(TControl_Align,1)} property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When files dragged from Explorer are dropped over th\plain\f1\fs18\cf0 e\plain\f0\fs18\cf0  component the {\strike OnDropFiles}{\v IDH_DF_ONDROPFILES} event is triggered. The names of the files are recorded in the {\strike Files}{\v IDH_DF_FILES} property and the number of files dropped is held in the {\strike Count}{\v IDH_DF_COUNT} property. \plain\f1\fs18\cf0 The {\strike Options}{\v IDH_DF_OPTIONS} and {\strike Filter}{\v IDH_DF_FILTER} properties and the {\strike OnFileFilter}{\v IDH_DF_ONFILEFILTER} event are used to determine which files appear in the Files property and if the names of files in dropped folders are included. \plain\f0\fs18\cf0 The name of the first file dropped is stored in the {\strike FileName}{\v IDH_DF_FILENAME} property. The point at which the files were dropped is given by the {\strike DropPoint}{\v IDH_DF_DROPPOINT} property (in coordinates relative to the control). The {\strike DropControl}{\v IDH_DF_DROPCONTROL} property iden\plain\f1\fs18\cf0 ti\plain\f0\fs18\cf0 fies \plain\f1\fs18\cf0 which (if any) \plain\f0\fs18\cf0 control \plain\f1\fs18\cf0 was\plain\f0\fs18\cf0  under the mouse cursor when the files were dropped.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The component accepts dropped files only if the {\strike Enabled}{\v IDH_DF_ENABLED} property is True. When Enabled is false drop file messages are ignored and are therefore visible to the owning form.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Set the {\strike ForegroundOnDrop}{\v IDH_DF_FOREGROUNDONDROP} property to true to bring the window containing the component to the foreground when files are dropped on the component.
+\par 
+\par \plain\f0\fs18\cf0\b Interaction with {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If the {\strike PassThrough}{\v IDH_DF_PASSTHROUGH} property is true then any file drop messages handled by this component are passed on to the owing form (as custom {\strike PJ_DROPFILES}{\v IDH_PJ_DROPFILES_MSG} messages) and can then be processed by a TPJFormDropFiles component. {\strike WM_DROPFILES}{\v !AL(WM_DROPFILES,1)} messages also reach the form (and TPJFormDropFiles) if TPJDropFile's Enabled property is false.
+\par \page 
+#{\footnote {#}IDH_DF_HEIRACHY}
+${\footnote {$}TPJDropFiles heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par      |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par      |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}
+\par      |
+\par {\strike TControl}{\v !AL(TControl_object,1)}
+\par      |
+\par {\strike TWinControl}{\v !AL(TWinControl_object,1)}
+\par      |
+\par {\strike TCustomControl}{\v !AL(TCustomControl_object,1)}
+\par \page 
+#{\footnote {#}IDH_DF_PROPS}
+${\footnote {$}TPJDropFiles properties}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike Align}{\v !AL(TControl_Align,1)}
+\par \plain\f1\fs18\cf0 \tab {\strike Anchors}{\v !AL(TControl_Anchors,1)} *\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab {\strike Constraints}{\v !AL(TControl_Constraints,1)} *\plain\f0\fs18\cf0 
+\par >\tab {\strike Count}{\v IDH_DF_COUNT}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Cursor}{\v !AL(TControl_Cursor,1)}
+\par >\tab {\strike DropControl}{\v IDH_DF_DROPCONTROL}
+\par >\tab {\strike DropPoint}{\v IDH_DF_DROPPOINT}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Enabled}{\v IDH_DF_ENABLED}
+\par >\tab {\strike FileName}{\v IDH_DF_FILENAME}
+\par >\tab {\strike Files}{\v IDH_DF_FILES}
+\par \plain\f1\fs18\cf0 \tab {\strike Filter}{\v IDH_DF_FILTER}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike ForegroundOnDrop}{\v IDH_DF_FOREGROUNDONDROP}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Height}{\v !AL(TControl_Height,1)}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike HelpContext}{\v !AL(TWinControl_HelpContext,1)}
+\par \plain\f1\fs18\cf0 \tab {\strike HelpKeyword}{\v !AL(TControl_HelpKeyword,1)} *\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab {\strike HelpType}{\v !AL(TControl_HelpType,1)} *\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Hint}{\v !AL(TControl_Hint,1)}
+\par \plain\f1\fs18\cf0 >\tab {\strike IsFolder}{\v IDH_DF_ISFOLDER}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Left}{\v !AL(TControl_Left,1)}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Name}{\v !AL(TControl_Name,1)}\plain\f1\fs18\cf0 
+\par \tab {\strike Options}{\v IDH_DF_OPTIONS}
+\par \tab \plain\f0\fs18\cf0 {\strike ParentShowHint}{\v !AL(TControl_ParentShowHint,1)}\plain\f1\fs18\cf0 
+\par \tab \plain\f0\fs18\cf0 {\strike PassThrough}{\v IDH_DF_PASSTHROUGH}\plain\f1\fs18\cf0 
+\par \tab \plain\f0\fs18\cf0 {\strike ShowHint}{\v !AL(TControl_ShowHint,1)}
+\par \plain\f1\fs18\cf0 \tab {\strike TabOrder}{\v !AL(TControl_TabOrder,1)}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab {\strike TabStop}{\v !AL(TControl_TabStop,1)}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Tag}{\v !AL(TComponent_Tag,1)}\plain\f1\fs18\cf0 
+\par \tab \plain\f0\fs18\cf0 {\strike Top}{\v !AL(TControl_Top,1)}\plain\f1\fs18\cf0 
+\par \tab {\strike Visible}{\v !AL(TControl_Visible,1)}
+\par \tab \plain\f0\fs18\cf0 {\strike Width}{\v !AL(TControl_Width,1)}
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time properties inherited from {\strike TCustomControl}{\v !AL(TCustomControl_object,1)}. 
+\par 
+\par >\tab = run time only
+\par \plain\f1\fs18\cf0 * = not available in all Delphi versions.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_COUNT}
+${\footnote {$}TPJDropFiles.Count}
+K{\footnote {K}Count,TPJDropFiles;TPJDropFiles,Count;Count}
+A{\footnote {A}TPJDropFiles_Count;Count_Property;Count}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.Count\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This read-only property returns the number of files dropped on the \plain\f1\fs18\cf0 control\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Count: Integer;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When files are dropped on the \plain\f1\fs18\cf0 control or its child controls\plain\f0\fs18\cf0  their names are stored in the {\strike Files}{\v IDH_DF_FILES} array property. The number of files in the Files array is given by the Count property.
+\par \page 
+#{\footnote {#}IDH_DF_DROPCONTROL}
+${\footnote {$}TPJDropFiles.DropControl}
+K{\footnote {K}DropControl,TPJDropFiles;TPJDropFiles,DropControl;DropControl}
+A{\footnote {A}TPJDropFiles_DropControl;DropControl_Property;DropControl}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.DropControl\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This read only property references \plain\f1\fs18\cf0 the \plain\f0\fs18\cf0 control that the files were dropped on.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  DropControl: {\strike TControl}{\v !AL(TControl_object,1)};
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Provides a reference to the control that was under the mouse cursor when files were dropped. R\plain\f0\fs18\cf0 eturns \plain\f1\fs18\cf0 a reference to the TPJDropFiles component if no child control was under the cursor\plain\f0\fs18\cf0 .
+\par \page 
+#{\footnote {#}IDH_DF_DROPPOINT}
+${\footnote {$}TPJDropFiles.DropPoint}
+K{\footnote {K}DropPoint,TPJDropFiles;TPJDropFiles,DropPoint;DropPoint}
+A{\footnote {A}TPJDropFiles_DropPoint;DropPoint_Property;DropPoint}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.DropPoint\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This read only property gives the mouse coordinates when the files were dropped.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  DropPoint: {\strike TPoint}{\v !AL(TPoint,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The mouse position in client coordinates of the TPJDropFiles control where the last files were dropped.
+\par \page 
+#{\footnote {#}IDH_DF_ENABLED}
+${\footnote {$}TPJDropFiles.Enabled}
+K{\footnote {K}Enabled,TPJDropFiles;TPJDropFiles,Enabled;Enabled}
+A{\footnote {A}TPJDropFiles_Enabled;Enabled_Property;Enabled}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.Enabled\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Determines whether dropped files are handled or ignored.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 E\plain\f4\fs18\cf0 nabled: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When Enabled is true the control handles all file drop messages sent to itself. When false file drops are ignored and messages are passed to the owning form.
+\par \page 
+#{\footnote {#}IDH_DF_FILTER}
+${\footnote {$}TPJDropFiles.Filter}
+K{\footnote {K}Filter,TPJDropFiles;TPJDropFiles,Filter;Filter}
+A{\footnote {A}TPJDropFiles_Filter;Filter_Property;Filter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.\plain\f1\fs22\cf2\b Filter\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Filters out files without the specified extensions\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 Filter\plain\f4\fs18\cf0 : {\strike TPJFileFilter}{\v IDH_FF_CLASS};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The component can filter the dropped files and store only those files that pass through the filter. This property references a component that descends from the abstract base class TPJFileFilter. Various TPJFileFilter descendants perform different kinds of filtering. Those supported in this release are:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike TPJExtFileFilter}{\v IDH_EFF_CLASS} - filters out all files that do not have one of more specified extensions.
+\par \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike TPJWildCardFileFilter}{\v IDH_WCF_CLASS} - filters out file names that do not match the given wildcard.
+\par \pard \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 If a the Filter property is assigned then the referenced component is used to filter each dropped file. Any remaining file is then passed to the {\strike OnFileFilter}{\v IDH_DF_ONFILEFILTER} event, if handled.
+\par \page 
+#{\footnote {#}IDH_DF_FILENAME}
+${\footnote {$}TPJDropFiles.FileName}
+K{\footnote {K}FileName,TPJDropFiles;TPJDropFiles,FileName;FileName}
+A{\footnote {A}TPJDropFiles_FileName;FileName_Property;FileName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.FileName\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard The name of the file dropped on the control.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  FileName: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When a file is dropped on the control, this read-only property contains the fully specified name of the file. If more than one file is dropped, this property stores the name of the first file dropped. If no files have been dropped then the empty string is returned. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i Note\plain\f0\fs18\cf0 : when one or more files have been dropped FileName = {\strike Files}{\v IDH_DF_FILES}[0].\plain\f1\fs18\cf0  If no files are available then FileName = ''.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_FILES}
+${\footnote {$}TPJDropFiles.Files}
+K{\footnote {K}Files,TPJDropFiles;TPJDropFiles,Files;Files}
+A{\footnote {A}TPJDropFiles_Files;Files_Property;Files}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.Files\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard The names of the most recent files dropped on the control.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Files[Idx: Integer]: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When a file (or files) are dropped on the control, this read-only array property contains an indexed list of the fully specified names of the dropped files. The array is zero based. The {\strike Count}{\v IDH_DF_COUNT} property gives the number of files dropped. Attempts to access array elements outside \plain\f1\fs18\cf0 the index range \plain\f0\fs18\cf0 result in an exception being raised.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The contents of Files may not extactly reflect all the names of the dropped files and folders. The listed files can be varied by specifying values to the {\strike Options}{\v IDH_DF_OPTIONS} property. To ensure the Files property contains exactly the files and folders that were dropped set the Options property to [dfoIncFiles, dfoIncFolders] (the default).
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 To test whether the file at index Idx is a file or a folder use {\strike IsFolder}{\v IDH_DF_ISFOLDER}[Idx];\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_FOREGROUNDONDROP}
+${\footnote {$}TPJDropFiles.ForegroundOnDrop}
+K{\footnote {K}ForegroundOnDrop,TPJDropFiles;TPJDropFiles,ForegroundOnDrop;ForegroundOnDrop}
+A{\footnote {A}TPJDropFiles_ForegroundOnDrop;ForegroundOnDrop_Property;ForegroundOnDrop}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.ForegroundOnDrop\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Causes owning window to be brought to front when file dropped.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  ForegroundOnDrop: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When this property is true the form containing the component is brought to the front when files are dropped on \plain\f1\fs18\cf0 the control\plain\f0\fs18\cf0 . When ForegroundOnDrop is false (default) then the position of the owning form in the Z-Order remains unchanged.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_ISFOLDER}
+${\footnote {$}TPJDropFiles.IsFolder}
+K{\footnote {K}IsFolder,TPJDropFiles;TPJDropFiles,IsFolder;IsFolder}
+A{\footnote {A}TPJDropFiles_IsFolder;IsFolder_Property;IsFolder}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.\plain\f1\fs22\cf2\b IsFolder\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Tells whether each of the dropped files is a folder or a file\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 IsFolder[Idx: Integer]: Boolean\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 T\plain\f0\fs18\cf0 his read-only array property \plain\f1\fs18\cf0 informs whether the file at the same index in the {\strike Files}{\v IDH_DF_FILES} property is a folder (true) or a file (false). \plain\f0\fs18\cf0 The array is zero based\plain\f1\fs18\cf0  and is indexed from 0..{\strike Count}{\v IDH_DF_COUNT}-1. \plain\f0\fs18\cf0 Attempts to access array elements outside this range result in an exception being raised.\plain\f1\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_OPTIONS}
+${\footnote {$}TPJDropFiles.Options}
+K{\footnote {K}Options,TPJDropFiles;TPJDropFiles,Options;Options}
+A{\footnote {A}TPJDropFiles_Options;Options_Property;Options}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.\plain\f1\fs22\cf2\b Options\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Determines how the dropped files are processed and which files are stored in the Files property\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 Options\plain\f4\fs18\cf0 : {\strike TPJDropFilesOptions}{\v IDH_TPJDROPFILESOPTIONS};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This property determines how dropped files are interpreted. The resulting files are made available through the {\strike Files}{\v IDH_DF_FILES} property. The property can take any one or more of the following values:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f1\fs18\cf0\i dfoIncFiles\plain\f1\fs18\cf0 \tab When this options is specified ordinary files are included in the list of dropped files. If the option is not present ordinary files are excluded.
+\par \plain\f1\fs18\cf0\i dfoIncFolders\plain\f1\fs18\cf0 \tab Including this option causes folders to be included in the list of dropped files. Folders are excluded if the option is not set.
+\par \plain\f1\fs18\cf0\i dfoRecurseFolders\plain\f1\fs18\cf0 \tab In the absence of this option only the files actually dropped are made available via the Files property (subject to presence of \plain\f1\fs18\cf0\i dfoIncFile\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i dfoIncFolders\plain\f1\fs18\cf0 ). When this option is set all folders in the list of dropped files are scanned and the files and sub-folders they contain are also recorded. This scan continues recursively through all sub-folders.
+\par \pard \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 It makes no sense to omit both the \plain\f1\fs18\cf0\i dfoIncFiles\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i dfoIncFolders\plain\f1\fs18\cf0  options since no files will be returned.
+\par \plain\f1\fs12\cf0 
+\par \plain\f1\fs18\cf0\b Example\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 To illustrate the various uses of this property consider the following directory tree (where items marked * are folders):
+\par \plain\f1\fs8\cf0 
+\par \plain\f6\fs18\cf0 C:\\Foo \plain\f3\fs18\cf0 *\plain\f6\fs18\cf0 
+\par   A.txt
+\par   B.txt
+\par   Blah \plain\f3\fs18\cf0 *\plain\f6\fs18\cf0 
+\par     C.txt
+\par C:\\Bar \plain\f3\fs18\cf0 *\plain\f6\fs18\cf0 
+\par C:\\D.txt\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 If \plain\f6\fs18\cf0 C:\\Foo\plain\f1\fs18\cf0 , \plain\f6\fs18\cf0 C:\\Bar\plain\f1\fs18\cf0  and \plain\f6\fs18\cf0 C:\\C.txt\plain\f1\fs18\cf0  are dragged and dropped on the control, the following files will be stored in the Files property for the given value of the Options property:
+\par \plain\f1\fs8\cf0 
+\par \pard \tx2000 \tx4000 \keep \plain\f1\fs18\cf0 [dfoIncFiles]\tab [dfoIncFolders]\tab [dfoIncFiles, dfoIncFolders]
+\par \plain\f6\fs18\cf0 C:\\D.txt\tab C:\\Foo\tab C:\\D.txt
+\par \tab C:\\Bar\tab C:\\Foo
+\par \tab \tab C:\\Bar
+\par \pard \tx2000 \tx4000 \plain\f1\fs8\cf0 
+\par \pard \tx2000 \tx4000 \keep \plain\f1\fs18\cf0 [dfoRecurseFolders, \tab [dfoRecurseFolders,\tab [dfoRecurseFolders,
+\par dfoIncFiles]\tab dfoIncFolders]\tab dfoIncFiles, dfoIncFolders]
+\par \plain\f6\fs18\cf0 C:\\Foo\\A.txt\tab C:\\Foo\tab C:\\Foo
+\par C:\\Foo\\B.txt\tab C:\\Foo\\Blah\tab C:\\Foo\\A.txt
+\par C:\\Foo\\Blah\\C.txt\tab C:\\Bah\tab C:\\Foo\\B.txt
+\par C:\\D.txt\tab \tab C:\\Foo\\Blah
+\par \tab \tab C:\\Foo\\Blah\\C.txt
+\par \tab \tab C:\\Foo\\Bar
+\par \tab \tab C:\\D.txt\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_PASSTHROUGH}
+${\footnote {$}TPJDropFiles.PassThrough}
+K{\footnote {K}PassThrough,TPJDropFiles;TPJDropFiles,PassThrough;PassThrough}
+A{\footnote {A}TPJDropFiles_PassThrough;PassThrough_Property;PassThrough}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.PassThrough\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Causes drop files messages to be passed through to the owning form.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  PassThrough: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When PassThrough is false (default) and the control is {\strike enabled}{\v IDH_DF_ENABLED} any drop files messages intercepted by this control are not forwarded to the form. When PassThrough is true and the control is enabled then normal processing occurs when files are dropped and then the {\strike WM_DROPFILES}{\v !AL(WM_DROPFILES,1)} message is converted to a custom {\strike PJ_DROPFILES}{\v IDH_PJ_DROPFILES_MSG} message and the message is forwarded to the form. Any {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS} component on the form can intercept the PJ_DROPFILES message and handle it like a standard WM_DROPFILES message.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When the drop files message is passed on, the drop point is converted into form coordinates and sent to the form as part of the PJ_DROPFILES message. In this way a TPJFormDropFiles component has its {\strike DropPoint}{\v IDH_FDF_DROPPOINT} property set to the correct value in terms of the form.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_METHODS}
+${\footnote {$}TPJDropFiles methods}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike Paint}{\v IDH_DF_PAINT}
+\par 
+\par \pard TPJDropFiles defines no additional methods to those inherited from {\strike TCustomControl}{\v !AL(TCustomControl_object,1)}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_PAINT}
+${\footnote {$}TPJDropFiles.Paint}
+K{\footnote {K}Paint,TPJDropFiles;TPJDropFiles,Paint;Paint}
+A{\footnote {A}TPJDropFiles_Paint;Paint_method;Paint}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.Paint\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  
+\par \pard \plain\f0\fs18\cf0 Paints outline of component at design time
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b procedure \plain\f4\fs18\cf0 Paint; \plain\f4\fs18\cf0\b override\plain\f4\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This method is automatically called to display the control during the processing of a WM_PAINT message. At run time the method does nothing. At design time it draws a dashed outline of the control.
+\par \page 
+#{\footnote {#}IDH_DF_EVENTS}
+${\footnote {$}TPJDropFiles events}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab {\strike OnBeforeDrop}{\v IDH_DF_ONBEFOREDROP}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike OnDropFiles}{\v IDH_DF_ONDROPFILES}\plain\f0\fs20\cf0 
+\par \plain\f1\fs20\cf0 \tab {\strike OnFileFilter}{\v IDH_DF_ONFILEFILTER}\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_ONBEFOREDROP}
+${\footnote {$}TPJDropFiles.OnBeforeDrop}
+K{\footnote {K}OnBeforeDrop,TPJDropFiles;TPJDropFiles,OnBeforeDrop;OnBeforeDrop}
+A{\footnote {A}TPJDropFiles_OnBeforeDrop;OnBeforeDrop_Event;OnBeforeDrop}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.On\plain\f1\fs22\cf2\b BeforeDrop\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Event o\plain\f0\fs18\cf0 ccurs \plain\f1\fs18\cf0 just before\plain\f0\fs18\cf0  files dropped on the \plain\f1\fs18\cf0 control are processed\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 OnBeforeDrop\plain\f4\fs18\cf0 : {\strike TNotifyEvent}{\v !AL(TNotifyEvent,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered when files are dropped on the \plain\f1\fs18\cf0 control but before the files are processed\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 If the processing of files is likely to be a lengthy occurence then an hourglass or similar user interface device can be displayed here\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  The {\strike Files}{\v IDH_DF_FILES} property does not yet contain details of the files dropped when this event is triggered, so the Files property should not be read.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The {\strike OnDropFiles}{\v IDH_DF_ONDROPFILES} event is triggered after the processing of files takes place. The Files property should therefore be read in the OnDropFiles event handler.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_ONDROPFILES}
+${\footnote {$}TPJDropFiles.OnDropFiles}
+K{\footnote {K}OnDropFiles,TPJDropFiles;TPJDropFiles,OnDropFiles;OnDropFiles}
+A{\footnote {A}TPJDropFiles_OnDropFiles;OnDropFiles_Event;OnDropFiles}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.OnDropFiles\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Occurs when files are dropped on the component's window.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  OnDropFiles: {\strike TNotifyEvent}{\v !AL(TNotifyEvent,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered \plain\f1\fs18\cf0 after\plain\f0\fs18\cf0  files \plain\f1\fs18\cf0 have been \plain\f0\fs18\cf0 dropped on the component\plain\f1\fs18\cf0  and the files have been processed\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 When this event is triggered all the files are available in the {\strike Files}{\v IDH_DF_FILES} property. The {\strike OnBeforeDrop}{\v IDH_DF_ONBEFOREDROP} event handler is triggered before processing takes place.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is not triggered when the {\strike Enabled}{\v IDH_DF_ENABLED} property is False.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_DF_ONFILEFILTER}
+${\footnote {$}TPJDropFiles.OnFileFilter}
+K{\footnote {K}OnFileFilter,TPJDropFiles;TPJDropFiles,OnFileFilter;OnFileFilter}
+A{\footnote {A}TPJDropFiles_OnFileFilter;OnFileFilter_Event;OnFileFilter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.On\plain\f1\fs22\cf2\b FileFilter\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJDropFiles}{\v IDH_DF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Occurs for each file and folder processed and allows for custom filtering of files\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  On\plain\f5\fs18\cf0 FileFilter\plain\f4\fs18\cf0 : {\strike TPJDroppedFileFilter}{\v IDH_TPJDROPPEDFILEFILTER};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This event is triggered for each dropped file* and folder handled by the control. The file or folder can be omitted from the list of dropped files by altering the \plain\f1\fs18\cf0\i Accept\plain\f1\fs18\cf0  parameter of the event handler from True to False.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 Folders that are filtered out by this event are not added to the {\strike Files[]}{\v IDH_FDF_FILES} property but are still scanned when the \plain\f1\fs18\cf0\i dfoRecurseFolders\plain\f1\fs18\cf0  {\strike Option}{\v IDH_FDF_OPTIONS} is set.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 * Note that the Filter property takes precedence and files filtered out by the assoicated filter component are not processed by this event.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_CLASS}
+${\footnote {$}TPJFormDropFiles}
+K{\footnote {K}TPJFormDropFiles}
+A{\footnote {A}TPJFormDropFiles_Object;TPJFormDropFiles}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \{bmlt TPJFormDropFiles.bmp\}\plain\f0\fs22\cf2\b  TPJFormDropFiles\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_FDF_HEIRACHY}          {\ul Properties}{\v IDH_FDF_PROPS}          {\ul Methods}{\v IDH_FDF_METHODS}           {\ul Events}{\v IDH_FDF_EVENTS}          {\strike See also}{\v !AL(TPJDropFiles_object;TPJCtrlDropFiles_object)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This non-visual component catches all {\strike WM_DROPFILES}{\v !AL(WM_DROPFILES,1)} messages that are received by the form where it is placed. The component therefore intercepts files dragged from Windows Explorer and dropped \plain\f1\fs18\cf0 anywhere \plain\f0\fs18\cf0 on the form\plain\f1\fs18\cf0 , including the non-client areas. Use TPJFormDropFiles whenever you just need to catch files anywhere on the main window without botering about which particular control the files are dropped on.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When files dragged from Explorer are dropped on the form the {\strike OnDropFiles}{\v IDH_FDF_ONDROPFILES} event is triggered. The names of the files are recorded in the {\strike Files}{\v IDH_FDF_FILES} property and the number of files dropped is held in the {\strike Count}{\v IDH_FDF_COUNT} property. \plain\f1\fs18\cf0 The {\strike Options}{\v IDH_FDF_OPTIONS} and {\strike Filter}{\v IDH_FDF_FILTER} properties and the {\strike OnFileFilter}{\v IDH_FDF_ONFILEFILTER} event are used to determine which files appear in the Files property and if the names of files in dropped folders are included. \plain\f0\fs18\cf0 The name of the first file dropped is stored in the {\strike FileName}{\v IDH_FDF_FILENAME} property. The point at which the files were dropped is given by the {\strike DropPoint}{\v IDH_FDF_DROPPOINT} property (in coordinates relative to the \plain\f1\fs18\cf0 form's client area\plain\f0\fs18\cf0 ). The {\strike DropControl}{\v IDH_FDF_DROPCONTROL} property idenitfies any control that was under the mouse cursor when the files were dropped.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 TPJFormDropFiles accepts dropped files only if the {\strike Enabled}{\v IDH_FDF_ENABLED} property is True.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Set the {\strike ForegroundOnDrop}{\v IDH_FDF_FOREGROUNDONDROP} property to true to bring the window containing the component to the foreground when files are dropped on it.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 No more than one TPJFormDropFiles component can be placed on a form. An exception is raised if an attempt is made to place more than one component on a form.
+\par 
+\par \plain\f0\fs18\cf0\b Interaction with {\strike TPJDropFiles}{\v IDH_DF_CLASS}\plain\f1\fs18\cf0\b  and {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If there \plain\f1\fs18\cf0 are\plain\f0\fs18\cf0  one or more TPJDropFiles \plain\f1\fs18\cf0 or TPJCtrlDropFiles \plain\f0\fs18\cf0 components on the same for as a TPJFormDropFiles component, then, by default, TPJFormDropFiles does not catch any files dropped over the TPJDropFiles windows\plain\f1\fs18\cf0  or the controls managed by TPJCtrlDropFiles\plain\f0\fs18\cf0 . TPJDropFiles \plain\f1\fs18\cf0 and TPJCtrlDropFiles \plain\f0\fs18\cf0 components do forward file drop messages to the form (and hence to TPJFormDropFiles) if the\plain\f1\fs18\cf0 ir\plain\f0\fs18\cf0  {\strike Enabled}{\v !AL(TPJDropFiles_Enabled;TPJCtrlDropFiles_Enabled)} propert\plain\f1\fs18\cf0 ies\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 are\plain\f0\fs18\cf0  false or the\plain\f1\fs18\cf0 ir\plain\f0\fs18\cf0  {\strike PassThrough}{\v !AL(TPJDropFiles_PassThrough;TPJCtrlDropFiles_PassThrough)} propert\plain\f1\fs18\cf0 ies\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 are\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 t\plain\f0\fs18\cf0 rue.
+\par \page 
+#{\footnote {#}IDH_FDF_HEIRACHY}
+${\footnote {$}TPJFormDropFiles heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par      |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par      |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}\plain\f0\fs20\cf0 
+\par \plain\f0\fs18\cf0      |
+\par TPJSubClassedDropFiles\plain\f0\fs20\cf0 
+\par 
+\par \page 
+#{\footnote {#}IDH_FDF_PROPS}
+${\footnote {$}TPJFormDropFiles properties}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 >\tab {\strike Count}{\v IDH_FDF_COUNT}
+\par >\tab {\strike DropControl}{\v IDH_FDF_DROPCONTROL}
+\par >\tab {\strike DropPoint}{\v IDH_FDF_DROPPOINT}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Enabled}{\v IDH_FDF_ENABLED}
+\par >\tab {\strike FileName}{\v IDH_FDF_FILENAME}
+\par >\tab {\strike Files}{\v IDH_FDF_FILES}
+\par \plain\f1\fs18\cf0 \tab {\strike Filter}{\v IDH_FDF_FILTER}\plain\f0\fs18\cf0 
+\par \tab {\strike ForegroundOnDrop}{\v IDH_FDF_FOREGROUNDONDROP}
+\par \plain\f1\fs18\cf0 >\tab {\strike IsFolder}{\v IDH_FDF_ISFOLDER}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Options}{\v IDH_FDF_OPTIONS}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time only properties inherited from {\strike TComponent}{\v !AL(TComponent_object,1)}.
+\par 
+\par >\tab = run time only
+\par \pard \plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_COUNT}
+${\footnote {$}TPJFormDropFiles.Count}
+K{\footnote {K}Count,TPJFormDropFiles;TPJFormDropFiles,Count;Count}
+A{\footnote {A}TPJFormDropFiles_Count;Count_Property;Count}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.Count\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This read-only property returns the number of files dropped on the form.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Count: Integer;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When files are dropped on the form their names are stored in the {\strike Files}{\v IDH_FDF_FILES} zero-based array property. The number of files in the Files array is given by the Count property.
+\par \plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_DROPCONTROL}
+${\footnote {$}TPJFormDropFiles.DropControl}
+K{\footnote {K}DropControl,TPJFormDropFiles;TPJFormDropFiles,DropControl;DropControl}
+A{\footnote {A}TPJFormDropFiles_DropControl;DropControl_Property;DropControl}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.DropControl\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This read only property references any control on the form that the files were dropped on.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  DropControl: {\strike TControl}{\v !AL(TControl_object,1)};
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Returns a reference to any control on \plain\f0\fs18\cf0 the form \plain\f1\fs18\cf0 that is \plain\f0\fs18\cf0 under the mouse when \plain\f1\fs18\cf0 the \plain\f0\fs18\cf0 files are dropped\plain\f1\fs18\cf0 . If no child controls are under the cursor then a reference to the form is returned providing the mouse is in the form's client area and \plain\f0\fs18\cf0 nil \plain\f1\fs18\cf0 is returned otherwise.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_DROPPOINT}
+${\footnote {$}TPJFormDropFiles.DropPoint}
+K{\footnote {K}DropPoint,TPJFormDropFiles;TPJFormDropFiles,DropPoint;DropPoint}
+A{\footnote {A}TPJFormDropFiles_DropPoint;DropPoint_Property;DropPoint}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.DropPoint\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This read only property gives the mouse coordinates when the files were dropped.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  DropPoint: {\strike TPoint}{\v !AL(TPoint,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The mouse position in client coordinates of the form control where the last files were dropped.
+\par \page 
+#{\footnote {#}IDH_FDF_ENABLED}
+${\footnote {$}TPJFormDropFiles.Enabled}
+K{\footnote {K}Enabled,TPJFormDropFiles;TPJFormDropFiles,Enabled;Enabled}
+A{\footnote {A}TPJFormDropFiles_Enabled;Enabled_Property;Enabled}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.Enabled\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Determines whether dropped files are handled or ignored.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Enabled: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When Enabled is true the component handles all file drop messages to the owner form. When false file drops are ignored.
+\par \page 
+#{\footnote {#}IDH_FDF_FILENAME}
+${\footnote {$}TPJFormDropFiles.FileName}
+K{\footnote {K}FileName,TPJFormDropFiles;TPJFormDropFiles,FileName;FileName}
+A{\footnote {A}TPJFormDropFiles_FileName;FileName_Property;FileName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.FileName\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard The name of a file dropped on the form.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  FileName: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When a file is dropped on the form, this read-only property contains the fully specified name of the file. If more than one file is dropped, this property stores the name of the first file dropped. If no files have been dropped then the empty string is returned.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i Note\plain\f0\fs18\cf0 : when one or more files have been dropped FileName = {\strike Files}{\v IDH_FDF_FILES}[0].\plain\f1\fs18\cf0  If no files are available then FileName = ''.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_FILES}
+${\footnote {$}TPJFormDropFiles.Files}
+K{\footnote {K}Files,TPJFormDropFiles;TPJFormDropFiles,Files;Files}
+A{\footnote {A}TPJFormDropFiles_Files;Files_Property;Files}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.Files\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard The names of the most recent files dropped on the \plain\f1\fs18\cf0 form\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Files[Idx: Integer]: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When a file (or files) are dropped on the form, this read-only array property contains an indexed list of the fully specified names of the dropped files. The array is zero based. The {\strike Count}{\v IDH_FDF_COUNT} property gives the number of files dropped. Attempts to access array elements outside \plain\f1\fs18\cf0 the index \plain\f0\fs18\cf0 range result in an exception being raised.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The contents of Files may not extactly reflect the names of the dropped files. The contents can be varied by specifying different values of the {\strike Options}{\v IDH_FDF_OPTIONS} property. To ensure the Files property contains exactly the files and folders that were dropped set the Options property to [dfoIncFiles, dfoIncFolders] (the default).
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 To test whether the file at index Idx is a file or a folder use {\strike IsFolder}{\v IDH_FDF_ISFOLDER}[Idx];\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_FILTER}
+${\footnote {$}TPJFormDropFiles.Filter}
+K{\footnote {K}Filter,TPJFormDropFiles;TPJFormDropFiles,Filter;Filter}
+A{\footnote {A}TPJFormDropFiles_Filter;Filter_Property;Filter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.\plain\f1\fs22\cf2\b Filter\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Filters out files without the specified extensions\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 Filter\plain\f4\fs18\cf0 : {\strike TPJFileFilter}{\v IDH_FF_CLASS};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The component can filter the dropped files and store only those files that pass through the filter. This property references a component that descends from the abstract base class TPJFileFilter. Various TPJFileFilter descendants perform different kinds of filtering. Those supported in this release are:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike TPJExtFileFilter}{\v IDH_EFF_CLASS} - filters out all files that do not have one of more specified extensions.
+\par \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike TPJWildCardFileFilter}{\v IDH_WCF_CLASS} - filters out file names that do not match the given wildcard.
+\par \pard \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 If a the Filter property is assigned then the component is used to filter each dropped file. Any remaining file is then passed to the {\strike OnFileFilter}{\v IDH_FDF_ONFILEFILTER} event, if handled.
+\par \page 
+#{\footnote {#}IDH_FDF_FOREGROUNDONDROP}
+${\footnote {$}TPJFormDropFiles.ForegroundOnDrop}
+K{\footnote {K}ForegroundOnDrop,TPJFormDropFiles;TPJFormDropFiles,ForegroundOnDrop;ForegroundOnDrop}
+A{\footnote {A}TPJFormDropFiles_ForegroundOnDrop;ForegroundOnDrop_Property;ForegroundOnDrop}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.ForegroundOnDrop\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Causes \plain\f1\fs18\cf0 form \plain\f0\fs18\cf0 to be brought to front when file dropped.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  ForegroundOnDrop: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When this property is true the form containing the component is brought to the front when files are dropped on it. When ForegroundOnDrop is false (default) then the position of the owning form in the Z-Order remains unchanged.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_ISFOLDER}
+${\footnote {$}TPJFormDropFiles.IsFolder}
+K{\footnote {K}IsFolder,TPJFormDropFiles;TPJFormDropFiles,IsFolder;IsFolder}
+A{\footnote {A}TPJFormDropFiles_IsFolder;IsFolder_Property;IsFolder}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.\plain\f1\fs22\cf2\b IsFolder\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Whether each of the dropped files is a folder or a file\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 IsFolder[Idx: Integer]: Boolean\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 T\plain\f0\fs18\cf0 his read-only array property \plain\f1\fs18\cf0 informs whether the file at the same index in the {\strike Files}{\v IDH_FDF_FILES} property is a folder (true) or a file (false). \plain\f0\fs18\cf0 The array is zero based\plain\f1\fs18\cf0  and is indexed from 0..{\strike Count}{\v IDH_FDF_COUNT}-1. \plain\f0\fs18\cf0 Attempts to access array elements outside this range result in an exception being raised.\plain\f1\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_OPTIONS}
+${\footnote {$}TPJFormDropFiles.Options}
+K{\footnote {K}Options,TPJFormDropFiles;TPJFormDropFiles,Options;Options}
+A{\footnote {A}TPJFormDropFiles_Options;Options_Property;Options}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.\plain\f1\fs22\cf2\b Options\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Determines how the dropped files are processed and which files are stored in the Files property\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 Options\plain\f4\fs18\cf0 : {\strike TPJDropFilesOptions}{\v IDH_TPJDROPFILESOPTIONS};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This property determines how dropped files are interpreted. The resulting files are made available through the {\strike Files}{\v IDH_FDF_FILES} property. The property can take any one or more of the following values:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f1\fs18\cf0\i dfoIncFiles\plain\f1\fs18\cf0 \tab When this option is specified ordinary files are included in the list of dropped files. If the option is not present ordinary files are excluded.
+\par \plain\f1\fs18\cf0\i dfoIncFolders\plain\f1\fs18\cf0 \tab Including this option causes folders to be included in the list of dropped files. Folders are excluded if the option is not set.
+\par \plain\f1\fs18\cf0\i dfoRecurseFolders\plain\f1\fs18\cf0 \tab In the absence of this options only the files actually dropped are made available via the Files property (subject to presence of \plain\f1\fs18\cf0\i dfoIncFile\plain\f1\fs18\cf0  and/or \plain\f1\fs18\cf0\i dfoIncFolders\plain\f1\fs18\cf0 ). When this option is set all folders in the list of dropped files are scanned and the files and sub-folders they contain are also recorded. This scan continues recursively through all sub-folders.
+\par \pard \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 It makes no sense to omit both the \plain\f1\fs18\cf0\i dfoIncFiles\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i dfoIncFolders\plain\f1\fs18\cf0  options since no files will be returned.
+\par \plain\f1\fs12\cf0 
+\par \plain\f1\fs18\cf0\b Example\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 To illustrate the various uses of this option consider the following directory tree (where items marked * are folders):
+\par \plain\f1\fs8\cf0 
+\par \plain\f6\fs18\cf0 C:\\Foo \plain\f3\fs18\cf0 *\plain\f6\fs18\cf0 
+\par   A.txt
+\par   B.txt
+\par   Blah \plain\f3\fs18\cf0 *\plain\f6\fs18\cf0 
+\par     C.txt
+\par C:\\Bar \plain\f3\fs18\cf0 *\plain\f6\fs18\cf0 
+\par C:\\D.txt\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 If \plain\f6\fs18\cf0 C:\\Foo\plain\f1\fs18\cf0 , \plain\f6\fs18\cf0 C:\\Bar\plain\f1\fs18\cf0  and \plain\f6\fs18\cf0 C:\\C.txt\plain\f1\fs18\cf0  are dragged and dropped on a form, the following files will be stored in the Files property for the given value of the Options property:
+\par \plain\f1\fs8\cf0 
+\par \pard \tx2000 \tx4000 \keep \plain\f1\fs18\cf0 [dfoIncFiles]\tab [dfoIncFolders]\tab [dfoIncFiles, dfoIncFolders]
+\par \plain\f6\fs18\cf0 C:\\D.txt\tab C:\\Foo\tab C:\\D.txt
+\par \tab C:\\Bar\tab C:\\Foo
+\par \tab \tab C:\\Bar
+\par \pard \tx2000 \tx4000 \plain\f1\fs8\cf0 
+\par \pard \tx2000 \tx4000 \keep \plain\f1\fs18\cf0 [dfoRecurseFolders, \tab [dfoRecurseFolders,\tab [dfoRecurseFolders,
+\par dfoIncFiles]\tab dfoIncFolders]\tab dfoIncFiles, dfoIncFolders]
+\par \plain\f6\fs18\cf0 C:\\Foo\\A.txt\tab C:\\Foo\tab C:\\Foo
+\par C:\\Foo\\B.txt\tab C:\\Foo\\Blah\tab C:\\Foo\\A.txt
+\par C:\\Foo\\Blah\\C.txt\tab C:\\Bah\tab C:\\Foo\\B.txt
+\par C:\\D.txt\tab \tab C:\\Foo\\Blah
+\par \tab \tab C:\\Foo\\Blah\\C.txt
+\par \tab \tab C:\\Foo\\Bar
+\par \tab \tab C:\\D.txt\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_METHODS}
+${\footnote {$}TPJFormDropFiles methods}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods
+\par \plain\f0\fs18\cf0 
+\par TPJFormDropFiles defines no additional methods to those defined in {\strike TComponent}{\v !AL(TComponent_object,1)}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_EVENTS}
+${\footnote {$}TPJFormDropFiles events}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab {\strike OnBeforeDrop}{\v IDH_FDF_ONBEFOREDROP}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike OnDropFiles}{\v IDH_FDF_ONDROPFILES}
+\par \plain\f1\fs18\cf0 \tab {\strike OnFileFilter}{\v IDH_FDF_ONFILEFILTER}\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_ONBEFOREDROP}
+${\footnote {$}TPJFormDropFiles.OnBeforeDrop}
+K{\footnote {K}OnBeforeDrop,TPJFormDropFiles;TPJFormDropFiles,OnBeforeDrop;OnBeforeDrop}
+A{\footnote {A}TPJFormDropFiles_OnBeforeDrop;OnBeforeDrop_Event;OnBeforeDrop}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.On\plain\f1\fs22\cf2\b BeforeDrop\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Event o\plain\f0\fs18\cf0 ccurs \plain\f1\fs18\cf0 just before\plain\f0\fs18\cf0  files dropped on the form\plain\f1\fs18\cf0  are processed\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 OnBeforeDrop\plain\f4\fs18\cf0 : {\strike TNotifyEvent}{\v !AL(TNotifyEvent,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered when files are dropped on the form\plain\f1\fs18\cf0  but before the files are processed\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 If the processing of files is likely to be a lengthy occurence then an hourglass or similar user interface device can be displayed here\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  The {\strike Files}{\v IDH_FDF_FILES} property does not yet contain details of the files dropped when this event is triggered, so the Files property should not be read.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The {\strike OnDropFiles}{\v IDH_FDF_ONDROPFILES} event is triggered after the processing of files takes place. The Files property should therefore be read in the OnDropFiles event handler.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_ONDROPFILES}
+${\footnote {$}TPJFormDropFiles.OnDropFiles}
+K{\footnote {K}OnDropFiles,TPJFormDropFiles;TPJFormDropFiles,OnDropFiles;OnDropFiles}
+A{\footnote {A}TPJFormDropFiles_OnDropFiles;OnDropFiles_Event;OnDropFiles}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.OnDropFiles\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Occurs when files are dropped on the form.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  OnDropFiles: {\strike TNotifyEvent}{\v !AL(TNotifyEvent,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered when files are dropped on the form. \plain\f1\fs18\cf0 When this event has been triggered all files are available in the {\strike Files}{\v IDH_FDF_FILES} property. The {\strike OnBeforeDrop}{\v IDH_FDF_ONBEFOREDROP} event handler is triggered before processing takes place.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The event is also triggered when files are dropped on a {\strike TPJDropFiles}{\v IDH_DF_CLASS} component \plain\f1\fs18\cf0 or a control managed by a {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS} component \plain\f0\fs18\cf0 on the same form and that component's {\strike PassThrough}{\v !AL(TPJDropFiles_PassThrough;TPJCtrlDropFiles_PassThrough)} property is true.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is not triggered when the {\strike Enabled}{\v IDH_FDF_ENABLED} property is False.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_FDF_ONFILEFILTER}
+${\footnote {$}TPJFormDropFiles.OnFileFilter}
+K{\footnote {K}OnFileFilter,TPJFormDropFiles;TPJFormDropFiles,OnFileFilter;OnFileFilter}
+A{\footnote {A}TPJFormDropFiles_OnFileFilter;OnFileFilter_Event;OnFileFilter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJ\plain\f1\fs22\cf2\b Form\plain\f0\fs22\cf2\b DropFiles.On\plain\f1\fs22\cf2\b FileFilter\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Occurs for each file and folder processed and allows for custom filtering of files\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  On\plain\f5\fs18\cf0 FileFilter\plain\f4\fs18\cf0 : {\strike TPJDroppedFileFilter}{\v IDH_TPJDROPPEDFILEFILTER};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This event is triggered for each dropped file* and folder handled by the control. The file or folder can be omitted from the list of dropped files by altering the \plain\f1\fs18\cf0\i Accept\plain\f1\fs18\cf0  parameter of the event handler from True to False.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 Folders that are filtered out by this event are not added to the {\strike Files[]}{\v IDH_FDF_FILES} property but are still scanned when the \plain\f1\fs18\cf0\i dfoRecurseFolders\plain\f1\fs18\cf0  {\strike Option}{\v IDH_FDF_OPTIONS} is set.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 * Note that the Filter property takes precedence and files filtered out by the associated filter component are not processed by this event.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_CLASS}
+${\footnote {$}TPJCtrlDropFiles}
+K{\footnote {K}TPJCtrlDropFiles}
+A{\footnote {A}TPJCtrlDropFiles_Object;TPJCtrlDropFiles}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \{bmlt TPJCtrlDropFiles.bmp\}\plain\f0\fs22\cf2\b  TPJ\plain\f1\fs22\cf2\b Ctrl\plain\f0\fs22\cf2\b DropFiles\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_CDF_HEIRACHY}          {\ul Properties}{\v IDH_CDF_PROPS}          {\ul Methods}{\v IDH_CDF_METHODS}           {\ul Events}{\v IDH_CDF_EVENTS}          {\strike See also}{\v !AL(TPJDropFiles_object;TPJFormDropFiles_object)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This non-visual component catches all {\strike WM_DROPFILES}{\v !AL(WM_DROPFILES,1)} messages that are received by \plain\f1\fs18\cf0 a control referenced by the {\strike ManagedControl}{\v IDH_CDF_MANAGEDCONTROL} property\plain\f0\fs18\cf0 . The component therefore intercepts files dragged from Windows Explorer and dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0 .
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Use TPJCtrlDropFiles when you want to take different actions depending on which control files are dropped on - you can use a different TPJCtrlDropFiles component for each control that can receive file drops.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When files dragged from Explorer are dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0  the {\strike OnDropFiles}{\v IDH_CDF_ONDROPFILES} event is triggered. The names of the files are recorded in the {\strike Files}{\v IDH_CDF_FILES} property and the number of files dropped is held in the {\strike Count}{\v IDH_CDF_COUNT} property. \plain\f1\fs18\cf0 The {\strike Options}{\v IDH_CDF_COUNT} and {\strike Filter}{\v IDH_CDF_FILTER} properties and the {\strike OnFileFilter}{\v IDH_CDF_ONFILEFILTER} event are used to determine which files appear in the Files property and if the names of files in dropped folders are included. \plain\f0\fs18\cf0 The name of the first file dropped is stored in the {\strike FileName}{\v IDH_CDF_FILENAME} property. The point at which the files were dropped is given by the {\strike DropPoint}{\v IDH_CDF_DROPPOINT} property (in coordinates relative to the \plain\f1\fs18\cf0 form's client area\plain\f0\fs18\cf0 ). The {\strike DropControl}{\v IDH_CDF_DROPCONTROL} property idenitfies any control that was under the mouse cursor when the files were dropped.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 TPJ\plain\f1\fs18\cf0 Ctrl\plain\f0\fs18\cf0 DropFiles accepts dropped files only if the {\strike Enabled}{\v IDH_CDF_ENABLED} property is True.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Set the {\strike ForegroundOnDrop}{\v IDH_CDF_FOREGROUNDONDROP} property to true to bring the window containing the component to the foreground when files are dropped on it.
+\par 
+\par \plain\f1\fs18\cf0\b Frames\plain\f0\fs18\cf0\b 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 TPJCtrlDropFiles can be used to manage files dropped on frames. Simply drop the component on the frame and set the ManagedControl property to reference the frame. Note that frames are only available in Delphi 5 and later.
+\par \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Interaction with {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 If the {\strike PassThrough}{\v IDH_CDF_PASSTHROUGH} \plain\f0\fs18\cf0 property is true then any file drop messages handled by this component are passed on to the owing form (as custom\plain\f1\fs18\cf0  {\strike PJ_DROPFILES}{\v IDH_PJ_DROPFILES_MSG} \plain\f0\fs18\cf0 messages) and can then be processed by a TPJFormDropFiles component.\plain\f1\fs18\cf0  {\strike WM_DROPFILES}{\v !AL(WM_DROPFILES,1)} \plain\f0\fs18\cf0 messages also reach the form (and TPJFormDropFiles) if TPJ\plain\f1\fs18\cf0 Ctrl\plain\f0\fs18\cf0 DropFile's Enabled property is false.
+\par 
+\par \page 
+#{\footnote {#}IDH_CDF_HEIRACHY}
+${\footnote {$}TPJCtrlDropFiles heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par      |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par      |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}\plain\f0\fs20\cf0 
+\par \plain\f0\fs18\cf0      |
+\par TPJSubClassedDropFiles\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_PROPS}
+${\footnote {$}TPJCtrlDropFiles properties}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 >\tab {\strike Count}{\v IDH_CDF_COUNT}
+\par >\tab {\strike DropControl}{\v IDH_CDF_DROPCONTROL}
+\par >\tab {\strike DropPoint}{\v IDH_CDF_DROPPOINT}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Enabled}{\v IDH_CDF_ENABLED}
+\par >\tab {\strike FileName}{\v IDH_CDF_FILENAME}
+\par >\tab {\strike Files}{\v IDH_CDF_FILES}
+\par \plain\f1\fs18\cf0 \tab {\strike Filter}{\v IDH_CDF_FILTER}\plain\f0\fs18\cf0 
+\par \tab {\strike ForegroundOnDrop}{\v IDH_CDF_FOREGROUNDONDROP}
+\par \plain\f1\fs18\cf0 >\tab {\strike IsFolder}{\v IDH_CDF_ISFOLDER}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab {\strike ManagedControl}{\v IDH_CDF_MANAGEDCONTROL}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Options}{\v IDH_CDF_OPTIONS}
+\par \plain\f1\fs18\cf0 \tab {\strike PassThrough}{\v IDH_CDF_PASSTHROUGH}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time only properties inherited from {\strike TComponent}{\v !AL(TComponent_object,1)}.
+\par 
+\par >\tab = run time only
+\par \pard \plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_COUNT}
+${\footnote {$}TPJCtrlDropFiles.Count}
+K{\footnote {K}Count,TPJCtrlDropFiles;TPJCtrlDropFiles,Count;Count}
+A{\footnote {A}TPJCtrlDropFiles_Count;Count_Property;Count}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.Count\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This read-only property returns the number of files dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Count: Integer;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When files are dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0  their names are stored in the {\strike Files}{\v IDH_CDF_FILES} zero-based array property. The number of files in the Files array is given by the Count property.
+\par \plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_DROPCONTROL}
+${\footnote {$}TPJCtrlDropFiles.DropControl}
+K{\footnote {K}DropControl,TPJCtrlDropFiles;TPJCtrlDropFiles,DropControl;DropControl}
+A{\footnote {A}TPJCtrlDropFiles_DropControl;DropControl_Property;DropControl}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.DropControl\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This read only property references any control \plain\f1\fs18\cf0 parented by the managed control where files are dropped\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  DropControl: {\strike TControl}{\v !AL(TControl_object,1)};
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Returns a reference to any control parented by the managed control that is \plain\f0\fs18\cf0 under the mouse when \plain\f1\fs18\cf0 the \plain\f0\fs18\cf0 files are dropped\plain\f1\fs18\cf0 . If no child controls are under the cursor then a reference to managed control itself is returned.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_DROPPOINT}
+${\footnote {$}TPJCtrlDropFiles.DropPoint}
+K{\footnote {K}DropPoint,TPJCtrlDropFiles;TPJCtrlDropFiles,DropPoint;DropPoint}
+A{\footnote {A}TPJCtrlDropFiles_DropPoint;DropPoint_Property;DropPoint}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.DropPoint\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This read only property gives the mouse coordinates when the files were dropped.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  DropPoint: {\strike TPoint}{\v !AL(TPoint,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The mouse position in client coordinates of the \plain\f1\fs18\cf0 managed\plain\f0\fs18\cf0  control where the last files were dropped.
+\par \page 
+#{\footnote {#}IDH_CDF_ENABLED}
+${\footnote {$}TPJCtrlDropFiles.Enabled}
+K{\footnote {K}Enabled,TPJCtrlDropFiles;TPJCtrlDropFiles,Enabled;Enabled}
+A{\footnote {A}TPJCtrlDropFiles_Enabled;Enabled_Property;Enabled}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.Enabled\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Determines whether dropped files are handled or ignored.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Enabled: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When Enabled is true the component handles all file drop messages to the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0 . When false file drops are ignored\plain\f1\fs18\cf0  and are passed through to the owning form\plain\f0\fs18\cf0 .
+\par \page 
+#{\footnote {#}IDH_CDF_FILTER}
+${\footnote {$}TPJCtrlDropFiles.Filter}
+K{\footnote {K}Filter,TPJCtrlDropFiles;TPJCtrlDropFiles,Filter;Filter}
+A{\footnote {A}TPJCtrlDropFiles_Filter;Filter_Property;Filter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.\plain\f1\fs22\cf2\b Filter\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Filters out files without the specified extensions\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 Filter\plain\f4\fs18\cf0 : {\strike TPJFileFilter}{\v IDH_FF_CLASS};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The component can filter the dropped files and store only those files that pass through the filter. This property references a component that descends from the abstract base class TPJFileFilter. Various TPJFileFilter descendants perform different kinds of filtering. Those supported in this release are:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike TPJExtFileFilter}{\v IDH_EFF_CLASS} - filters out all files that do not have one of more specified extensions.
+\par \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike TPJWildCardFileFilter}{\v IDH_WCF_CLASS} - filters out file names that do not match the given wildcard.
+\par \pard \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 If a the Filter property is assigned then the component is used to filter each dropped file. Any remaining file is then passed to the {\strike OnFileFilter}{\v IDH_CDF_ONFILEFILTER} event, if handled.
+\par \page 
+#{\footnote {#}IDH_CDF_FILENAME}
+${\footnote {$}TPJCtrlDropFiles.FileName}
+K{\footnote {K}FileName,TPJCtrlDropFiles;TPJCtrlDropFiles,FileName;FileName}
+A{\footnote {A}TPJCtrlDropFiles_FileName;FileName_Property;FileName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.FileName\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard The name of a file dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  FileName: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When a file is dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0 , this read-only property contains the fully specified name of the file. If more than one file is dropped, this property stores the name of the first file dropped. If no files have been dropped then the empty string is returned.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i Note\plain\f0\fs18\cf0 : when one or more files have been dropped FileName = {\strike Files}{\v IDH_CDF_FILES}[0].\plain\f1\fs18\cf0  If no files are available then FileName = ''.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_FILES}
+${\footnote {$}TPJCtrlDropFiles.Files}
+K{\footnote {K}Files,TPJCtrlDropFiles;TPJCtrlDropFiles,Files;Files}
+A{\footnote {A}TPJCtrlDropFiles_Files;Files_Property;Files}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.Files\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard The names of the most recent files dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Files[Idx: Integer]: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When a file (or files) are dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0 , this read-only array property contains an indexed list of the fully specified names of the dropped files. The array is zero based. The {\strike Count}{\v IDH_CDF_COUNT} property gives the number of files dropped. Attempts to access array elements outside \plain\f1\fs18\cf0 the index \plain\f0\fs18\cf0 range result in an exception being raised.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The contents of Files may not extactly reflect the names of the dropped files. The contents can be varied by specifying different values of the {\strike Options}{\v IDH_CDF_OPTIONS} property. To ensure the Files property contains exactly the files and folders that were dropped set the Options property to [dfoIncFiles, dfoIncFolders] (the default).
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 To test whether the file at index Idx is a file or a folder use {\strike IsFolder}{\v IDH_CDF_ISFOLDER}[Idx];\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_FOREGROUNDONDROP}
+${\footnote {$}TPJCtrlDropFiles.ForegroundOnDrop}
+K{\footnote {K}ForegroundOnDrop,TPJCtrlDropFiles;TPJCtrlDropFiles,ForegroundOnDrop;ForegroundOnDrop}
+A{\footnote {A}TPJCtrlDropFiles_ForegroundOnDrop;ForegroundOnDrop_Property;ForegroundOnDrop}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.ForegroundOnDrop\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Causes \plain\f1\fs18\cf0 parent form \plain\f0\fs18\cf0 to be brought to front when file dropped.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  ForegroundOnDrop: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When this property is true the form containing \plain\f1\fs18\cf0 this\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 component\plain\f0\fs18\cf0  is brought to the front when files are dropped on \plain\f1\fs18\cf0 the managed control\plain\f0\fs18\cf0 . When ForegroundOnDrop is false (default) then the position of the owning form in the Z-Order remains unchanged.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_ISFOLDER}
+${\footnote {$}TPJCtrlDropFiles.IsFolder}
+K{\footnote {K}IsFolder,TPJCtrlDropFiles;TPJCtrlDropFiles,IsFolder;IsFolder}
+A{\footnote {A}TPJCtrlDropFiles_IsFolder;IsFolder_Property;IsFolder}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.\plain\f1\fs22\cf2\b IsFolder\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Whether each of the dropped files is a folder or a file\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 IsFolder[Idx: Integer]: Boolean\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 T\plain\f0\fs18\cf0 his read-only array property \plain\f1\fs18\cf0 informs whether the file at the same index in the {\strike Files}{\v IDH_CDF_FILES} property is a folder (true) or a file (false). \plain\f0\fs18\cf0 The array is zero based\plain\f1\fs18\cf0  and is indexed from 0..{\strike Count}{\v IDH_CDF_COUNT}-1. \plain\f0\fs18\cf0 Attempts to access array elements outside this range result in an exception being raised.\plain\f1\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_MANAGEDCONTROL}
+${\footnote {$}TPJCtrlDropFiles.ManagedControl}
+K{\footnote {K}ManagedControl,TPJCtrlDropFiles;TPJCtrlDropFiles,ManagedControl;ManagedControl}
+A{\footnote {A}TPJCtrlDropFiles_ManagedControl;ManagedControl_Property;ManagedControl}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJ\plain\f1\fs22\cf2\b Ctrl\plain\f0\fs22\cf2\b DropFiles.\plain\f1\fs22\cf2\b ManagedControl\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 References the managed control\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 ManagedControl\plain\f4\fs18\cf0 : \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Refers to the associated control for which file drops are managed. If this property is nil then no files drops are handled.\plain\f0\fs18\cf0\i 
+\par \page 
+#{\footnote {#}IDH_CDF_OPTIONS}
+${\footnote {$}TPJCtrlDropFiles.Options}
+K{\footnote {K}Options,TPJCtrlDropFiles;TPJCtrlDropFiles,Options;Options}
+A{\footnote {A}TPJCtrlDropFiles_Options;Options_Property;Options}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.\plain\f1\fs22\cf2\b Options\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Determines how the dropped files are processed and which files are stored in the Files property\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 Options\plain\f4\fs18\cf0 : {\strike TPJDropFilesOptions}{\v IDH_TPJDROPFILESOPTIONS};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This property determines how dropped files are interpreted. The resulting files are made available through the {\strike Files}{\v IDH_CDF_FILES} property. The property can take any one or more of the following values:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f1\fs18\cf0\i dfoIncFiles\plain\f1\fs18\cf0 \tab When this option is specified ordinary files are included in the list of dropped files. If the option is not present ordinary files are excluded.
+\par \plain\f1\fs18\cf0\i dfoIncFolders\plain\f1\fs18\cf0 \tab Including this option causes folders to be included in the list of dropped files. Folders are excluded if the option is not set.
+\par \plain\f1\fs18\cf0\i dfoRecurseFolders\plain\f1\fs18\cf0 \tab In the absence of this options only the files actually dropped are made available via the Files property (subject to presence of \plain\f1\fs18\cf0\i dfoIncFile\plain\f1\fs18\cf0  and/or \plain\f1\fs18\cf0\i dfoIncFolders\plain\f1\fs18\cf0 ). When this option is set all folders in the list of dropped files are scanned and the files and sub-folders they contain are also recorded. This scan continues recursively through all sub-folders.
+\par \pard \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 It makes no sense to omit both the \plain\f1\fs18\cf0\i dfoIncFiles\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i dfoIncFolders\plain\f1\fs18\cf0  options since no files will be returned.
+\par \plain\f1\fs12\cf0 
+\par \plain\f1\fs18\cf0\b Example\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 To illustrate the various uses of this option consider the following directory tree (where items marked * are folders):
+\par \plain\f1\fs8\cf0 
+\par \plain\f6\fs18\cf0 C:\\Foo \plain\f3\fs18\cf0 *\plain\f6\fs18\cf0 
+\par   A.txt
+\par   B.txt
+\par   Blah \plain\f3\fs18\cf0 *\plain\f6\fs18\cf0 
+\par     C.txt
+\par C:\\Bar \plain\f3\fs18\cf0 *\plain\f6\fs18\cf0 
+\par C:\\D.txt\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 If \plain\f6\fs18\cf0 C:\\Foo\plain\f1\fs18\cf0 , \plain\f6\fs18\cf0 C:\\Bar\plain\f1\fs18\cf0  and \plain\f6\fs18\cf0 C:\\C.txt\plain\f1\fs18\cf0  are dragged and dropped on the managed control, the following files will be stored in the Files property for the given value of the Options property:
+\par \plain\f1\fs8\cf0 
+\par \pard \tx2000 \tx4000 \keep \plain\f1\fs18\cf0 [dfoIncFiles]\tab [dfoIncFolders]\tab [dfoIncFiles, dfoIncFolders]
+\par \plain\f6\fs18\cf0 C:\\D.txt\tab C:\\Foo\tab C:\\D.txt
+\par \tab C:\\Bar\tab C:\\Foo
+\par \tab \tab C:\\Bar
+\par \pard \tx2000 \tx4000 \plain\f1\fs8\cf0 
+\par \pard \tx2000 \tx4000 \keep \plain\f1\fs18\cf0 [dfoRecurseFolders, \tab [dfoRecurseFolders,\tab [dfoRecurseFolders,
+\par dfoIncFiles]\tab dfoIncFolders]\tab dfoIncFiles, dfoIncFolders]
+\par \plain\f6\fs18\cf0 C:\\Foo\\A.txt\tab C:\\Foo\tab C:\\Foo
+\par C:\\Foo\\B.txt\tab C:\\Foo\\Blah\tab C:\\Foo\\A.txt
+\par C:\\Foo\\Blah\\C.txt\tab C:\\Bah\tab C:\\Foo\\B.txt
+\par C:\\D.txt\tab \tab C:\\Foo\\Blah
+\par \tab \tab C:\\Foo\\Blah\\C.txt
+\par \tab \tab C:\\Foo\\Bar
+\par \tab \tab C:\\D.txt\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_PASSTHROUGH}
+${\footnote {$}TPJCtrlDropFiles.PassThrough}
+K{\footnote {K}PassThrough,TPJCtrlDropFiles;TPJCtrlDropFiles,PassThrough;PassThrough}
+A{\footnote {A}TPJCtrlDropFiles_PassThrough;PassThrough_Property;PassThrough}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.PassThrough\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Causes drop files messages to be passed through to the owning form.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  PassThrough: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When PassThrough is false (default) and the control is {\strike enabled}{\v IDH_CDF_ENABLED} any drop files messages intercepted by this control are not forwarded to the form. When PassThrough is true and the control is enabled then normal processing occurs when files are dropped and then the {\strike WM_DROPFILES}{\v !AL(WM_DROPFILES,1)} message is converted to a custom {\strike PJ_DROPFILES}{\v IDH_PJ_DROPFILES_MSG} message and the message is forwarded to the form. Any {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS} component on the form can intercept the PJ_DROPFILES message and handle it like a standard WM_DROPFILES message.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When the drop files message is passed on, the drop point is converted into form coordinates and sent to the form as part of the PJ_DROPFILES message. In this way a TPJFormDropFiles component has its {\strike DropPoint}{\v IDH_FDF_DROPPOINT} property set to the correct value in terms of the form.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_METHODS}
+${\footnote {$}TPJCtrlDropFiles methods}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods
+\par \plain\f0\fs18\cf0 
+\par TPJCtrlDropFiles\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 defines no additional methods to those defined in {\strike TComponent}{\v !AL(TComponent_object,1)}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_EVENTS}
+${\footnote {$}TPJCtrlDropFiles events}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab {\strike OnBeforeDrop}{\v IDH_CDF_ONBEFOREDROP}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike OnDropFiles}{\v IDH_CDF_ONDROPFILES}
+\par \plain\f1\fs18\cf0 \tab {\strike OnFileFilter}{\v IDH_CDF_ONFILEFILTER}\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_ONBEFOREDROP}
+${\footnote {$}TPJCtrlDropFiles.OnBeforeDrop}
+K{\footnote {K}OnBeforeDrop,TPJCtrlDropFiles;TPJCtrlDropFiles,OnBeforeDrop;OnBeforeDrop}
+A{\footnote {A}TPJCtrlDropFiles_OnBeforeDrop;OnBeforeDrop_Event;OnBeforeDrop}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.On\plain\f1\fs22\cf2\b BeforeDrop\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Event o\plain\f0\fs18\cf0 ccurs \plain\f1\fs18\cf0 just before\plain\f0\fs18\cf0  files dropped on the \plain\f1\fs18\cf0 managed control are processed\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 OnBeforeDrop\plain\f4\fs18\cf0 : {\strike TNotifyEvent}{\v !AL(TNotifyEvent,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered when files are dropped on the \plain\f1\fs18\cf0 managed control but before the files are processed\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 If the processing of files is likely to be a lengthy occurence then an hourglass or similar user interface device can be displayed here\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  The {\strike Files}{\v IDH_CDF_FILES} property does not yet contain details of the files dropped when this event is triggered, so the property should not be read.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The {\strike OnDropFiles}{\v IDH_CDF_ONDROPFILES} event is triggered after the processing of files takes place. The Files property should therefore be read in the OnDropFiles event handler.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_ONDROPFILES}
+${\footnote {$}TPJCtrlDropFiles.OnDropFiles}
+K{\footnote {K}OnDropFiles,TPJCtrlDropFiles;TPJCtrlDropFiles,OnDropFiles;OnDropFiles}
+A{\footnote {A}TPJCtrlDropFiles_OnDropFiles;OnDropFiles_Event;OnDropFiles}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.OnDropFiles\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Occurs when files are dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  OnDropFiles: {\strike TNotifyEvent}{\v !AL(TNotifyEvent,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered when files are dropped on the \plain\f1\fs18\cf0 managed control\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 When this event has been triggered all files are available in the {\strike Files}{\v IDH_CDF_FILES} property. The {\strike OnBeforeDrop}{\v IDH_CDF_ONBEFOREDROP} event handler is triggered before processing takes place.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is not triggered when the {\strike Enabled}{\v IDH_CDF_ENABLED} property is False.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_CDF_ONFILEFILTER}
+${\footnote {$}TPJCtrlDropFiles.OnFileFilter}
+K{\footnote {K}OnFileFilter,TPJCtrlDropFiles;TPJCtrlDropFiles,OnFileFilter;OnFileFilter}
+A{\footnote {A}TPJCtrlDropFiles_OnFileFilter;OnFileFilter_Event;OnFileFilter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.On\plain\f1\fs22\cf2\b FileFilter\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Occurs for each file and folder processed and allows for custom filtering of files\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  On\plain\f5\fs18\cf0 FileFilter\plain\f4\fs18\cf0 : {\strike TPJDroppedFileFilter}{\v IDH_TPJDROPPEDFILEFILTER};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This event is triggered for each dropped file* and folder handled by the component. The file or folder can be omitted from the list of dropped files by altering the \plain\f1\fs18\cf0\i Accept\plain\f1\fs18\cf0  parameter of the event handler from True to False.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 Folders that are filtered out by this event are not added to the {\strike Files[]}{\v IDH_CDF_FILES} property but are still scanned when the \plain\f1\fs18\cf0\i dfoRecurseFolders\plain\f1\fs18\cf0  {\strike Option}{\v IDH_CDF_OPTIONS} is set.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 * Note that the Filter property takes precedence and files filtered out by the associated filter component are not processed by this event.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FF_CLASS}
+${\footnote {$}TPJFileFilter}
+K{\footnote {K}TPJFileFilter}
+A{\footnote {A}TPJFileFilter_Object;TPJFileFilter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFileFilter\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_FF_HEIRACHY}          {\ul Properties}{\v IDH_FF_PROPERTIES}          {\ul Methods}{\v IDH_FF_METHODS}           {\ul Events}{\v IDH_FF_EVENTS}\plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 TPJExtFileFilter\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 is an abstract base class for file filter components.\plain\f0\fs18\cf0 
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par 
+\par \plain\f1\fs18\cf0 This is the abstract base class for components designed for use with {\strike TPJDropFiles}{\v IDH_DF_CLASS} and {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS} to filter the files dropped. It must also be used as the base class for any custom filter components. Components of this class should never be instantiated.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The component simply declare an abstract method - Accept - that is called by an associated TPJDropFiles and TPJFormDropFiles component whenever they detect files being dropped. The method is used to perform the filtering. It is for decendant components to implement this method.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FF_HEIRACHY}
+${\footnote {$}TPJFileFilter heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par      |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par      |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}
+\par \page 
+#{\footnote {#}IDH_FF_PROPERTIES}
+${\footnote {$}TPJFileFilter properties}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 \plain\f1\fs18\cf0 TPJFileFilter declares no properties over and above those declared by \plain\f0\fs18\cf0 {\strike TComponent}{\v !AL(TComponent_object,1)}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_FF_METHODS}
+${\footnote {$}TPJFileFilter methods}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike Accept}{\v IDH_FF_ACCEPT}
+\par \pard 
+\par TPJFileFilter defines no additional methods to those inherited from {\strike TComponent}{\v !AL(TComponent_object,1)}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_FF_ACCEPT}
+${\footnote {$}TPJFileFilter.Accept}
+K{\footnote {K}Accept,TPJFileFilter;TPJFileFilter,Accept;Accept}
+A{\footnote {A}TPJFileFilter_Accept;Accept_method;Accept}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f1\fs22\cf2\b TPJFileFilter\plain\f0\fs22\cf2\b .\plain\f1\fs22\cf2\b Accept\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJFileFilter}{\v IDH_FF_CLASS}
+\par \plain\f0\fs8\cf0  
+\par \pard \plain\f1\fs18\cf0 Returns whether a given file or folder passes though a filter.\plain\f0\fs18\cf0 
+\par 
+\par \pard \fi-200 \li200 \plain\f5\fs18\cf0\b function\plain\f4\fs18\cf0\b  \plain\f5\fs18\cf0 Accept(\plain\f5\fs18\cf0\b const\plain\f5\fs18\cf0  FilePath: \plain\f5\fs18\cf0\b string\plain\f5\fs18\cf0 ; \plain\f5\fs18\cf0\b const\plain\f5\fs18\cf0  IsFolder: Boolean): Boolean;\plain\f4\fs18\cf0  \plain\f5\fs18\cf0\b virtual\plain\f4\fs18\cf0 ;\plain\f5\fs18\cf0  \plain\f5\fs18\cf0\b abstract\plain\f5\fs18\cf0 ;\plain\f4\fs18\cf0 
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This abstract method is called by the filter's owning drop files component whenever files are dropped. It is called once for each dropped file or folder dropped. Its purpose is to determine which of the dropped files or folders are to pass through the filter. \plain\f1\fs18\cf0\i FilePath\plain\f1\fs18\cf0  is the fully qualified path the the file or folder concerned, while \plain\f1\fs18\cf0\i IsFolder\plain\f1\fs18\cf0  indicates wether \plain\f1\fs18\cf0\i FilePath\plain\f1\fs18\cf0  is a file or folder. The method returns true to indicate a file or folder passes through the filter and false if it is to be filtered out.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0\b Note\plain\f1\fs18\cf0 : This method is abstract and must be implemented in an appropriate way by decendant classes.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_FF_EVENTS}
+${\footnote {$}TPJFileFilter events}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab TPJFileFilter has no events.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_EFF_CLASS}
+${\footnote {$}TPJExtFileFilter}
+K{\footnote {K}TPJExtFileFilter}
+A{\footnote {A}TPJExtFileFilter_Object;TPJExtFileFilter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \{bmlt TPJExtFileFilter.bmp\}\plain\f0\fs22\cf2\b  TPJExtFileFilter\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_EFF_HEIRACHY}          {\ul Properties}{\v IDH_EFF_PROPERTIES}          {\ul Methods}{\v IDH_EFF_METHODS}           {\ul Events}{\v IDH_EFF_EVENTS}          {\strike See also}{\v !AL(TPJWildCardFileFilter_object)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 TPJExtFileFilter\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 is a file filter component for use with the drop files components that filters files according to their extension.\plain\f0\fs18\cf0 
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par 
+\par \plain\f1\fs18\cf0 This component is designed for use with {\strike TPJDropFiles}{\v IDH_DF_CLASS}, {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS} and {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS} components to filter the files dropped based on the extension of the file or folder dropped.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 It provides two properties - {\strike Extensions}{\v IDH_EFF_EXTENSIONS} and {\strike Style}{\v IDH_EFF_STYLE} that determine which extensions are passed through the filter and whether the filter applies to files, folders or both.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The component implements the inherited {\strike Accept}{\v IDH_EFF_ACCEPT} method to return true when files pass through the filter as configiured by the Extensions and Style properties.\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_EFF_HEIRACHY}
+${\footnote {$}TPJExtFileFilter heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par      |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par      |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}
+\par      |
+\par {\strike TPJFileFilter}{\v IDH_FF_CLASS}
+\par \page 
+#{\footnote {#}IDH_EFF_PROPERTIES}
+${\footnote {$}TPJExtFileFilter properties}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab {\strike Extensions}{\v IDH_EFF_EXTENSIONS}
+\par \tab \plain\f0\fs18\cf0 {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \plain\f1\fs18\cf0 \tab {\strike Style}{\v IDH_EFF_STYLE}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time only properties inherited from {\strike TComponent}{\v !AL(TComponent_object,1)}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_EFF_EXTENSIONS}
+${\footnote {$}TPJExtFileFilter.Extensions}
+K{\footnote {K}Extensions,TPJExtFileFilter;TPJExtFileFilter,Extensions;Extensions}
+A{\footnote {A}TPJExtFileFilter_Extensions;Extensions_Property;Extensions}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJExtFileFilter.\plain\f1\fs22\cf2\b Extensions\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJExtFileFilter}{\v IDH_EFF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Filters out files without the specified extensions\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 Extensions\plain\f4\fs18\cf0 : \plain\f5\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The component can filter files,  only accepting the names of files ending with the extensions specified in this property\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  If Extensions is set to the empty string (the default) then file names are not filtered and all pass through.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 Multiple extensions can be stored in the property by separating them with semi-colons. The dot preceeding extensions should be included. If any extensions are specified without the leading dot the character is automatically prepended. A property editor is supplied that enables the extension list to be built using a dialog box. This editor ensures that the extension string is formatted correctly.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 Wildcards are not supported (see {\strike TPJWildCardFileFilter}{\v IDH_WCF_CLASS} for wildcard support). Only extensions that completely match those specified in the property (ignoring case) pass through the filter.  Whether the filter applies to file names, folder names or both depends on the value of the {\strike Style}{\v IDH_EFF_STYLE} property.\plain\f1\fs12\cf0 
+\par 
+\par \plain\f1\fs18\cf0\b Example\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 To filter for files with .htm, .html or .shtml extensions set Extensions to \plain\f6\fs18\cf0 '.htm;.html;.shtml'\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_EFF_STYLE}
+${\footnote {$}TPJExtFileFilter.Style}
+K{\footnote {K}Style,TPJExtFileFilter;TPJExtFileFilter,Style;Style}
+A{\footnote {A}TPJExtFileFilter_Style;Style_Property;Style}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJExtFileFilter.\plain\f1\fs22\cf2\b Style\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJExtFileFilter}{\v IDH_EFF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Determines the type of file the filter acts upon\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 Style\plain\f4\fs18\cf0 : {\strike TPJExtFileFilterStyle}{\v IDH_TPJEXTFILEFILTERSTYLE};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This property determines which kinds of file names have the extension filter applied. Possible values are:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f1\fs18\cf0\i fsFilterFilesOnly\plain\f1\fs18\cf0 \tab Files are filtered by their extension while all folders are passed through the filter regardless of extension.
+\par \plain\f1\fs18\cf0\i fsFilterFoldersOnly\plain\f1\fs18\cf0 \tab Folders are filtered by their extension while all files are passed through the filter.
+\par \plain\f1\fs18\cf0\i fsAll\plain\f1\fs18\cf0 \tab The filter is applied to both files and folders.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The default value is \plain\f1\fs18\cf0\i fsFilterFilesOnly\plain\f1\fs18\cf0 .
+\par 
+\par \pard \plain\f1\fs18\cf0\b Note\plain\f1\fs18\cf0 : To prevent files or folders passing being accepted by the drop files control use that control's {\strike Options}{\v !AL(TPJDropFiles_Options;TPJFormDropFiles_Options;TPJCtrlDropFiles_Options)} property.\plain\f1\fs8\cf0 
+\par \page 
+#{\footnote {#}IDH_EFF_METHODS}
+${\footnote {$}TPJExtFileFilter methods}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike Accept}{\v IDH_EFF_ACCEPT}
+\par 
+\par \pard TPJExtFileFilter defines no additional methods to those inherited from {\strike TComponent}{\v !AL(TComponent_object,1)}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_EFF_ACCEPT}
+${\footnote {$}TPJExtFileFilter.Accept}
+K{\footnote {K}Accept,TPJExtFileFilter;TPJExtFileFilter,Accept;Accept}
+A{\footnote {A}TPJExtFileFilter_Accept;Accept_method;Accept}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f1\fs22\cf2\b TPJExtFileFilter\plain\f0\fs22\cf2\b .\plain\f1\fs22\cf2\b Accept\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJExtFileFilter}{\v IDH_EFF_CLASS}
+\par \plain\f0\fs8\cf0  
+\par \pard \plain\f1\fs18\cf0 Returns whether a given file or folder passes though the filter.\plain\f0\fs18\cf0 
+\par 
+\par \pard \fi-200 \li200 \plain\f5\fs18\cf0\b function\plain\f4\fs18\cf0\b  \plain\f5\fs18\cf0 Accept(\plain\f5\fs18\cf0\b const\plain\f5\fs18\cf0  FilePath: \plain\f5\fs18\cf0\b string\plain\f5\fs18\cf0 ; \plain\f5\fs18\cf0\b const\plain\f5\fs18\cf0  IsFolder: Boolean): Boolean;\plain\f4\fs18\cf0  \plain\f5\fs18\cf0\b virtual\plain\f4\fs18\cf0 ;\plain\f5\fs18\cf0  \plain\f5\fs18\cf0\b abstract\plain\f5\fs18\cf0 ;\plain\f4\fs18\cf0 
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This method is called by the filter's owning drop files component whenever files are dropped. It is called once for each dropped file or folder dropped and returns true if the file of folder specified by the \plain\f1\fs18\cf0\i FilePath\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i IsFolder\plain\f1\fs18\cf0  passes through the filter and false if not.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 For a file to pass through the filter it must either be of a type that is not being filtered (per the {\strike Style}{\v IDH_EFF_STYLE} property) or it must have an extension that matches one of those list in the {\strike Extensions}{\v IDH_EFF_EXTENSIONS} property.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 This method is used internally by the drop files components. There is no reason to call the method from program code unless to discover whether a file or folder will pass the filter.
+\par \page 
+#{\footnote {#}IDH_EFF_EVENTS}
+${\footnote {$}TPJExtFileFilter events}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab TPJExtFileFilter has no events.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_WCF_CLASS}
+${\footnote {$}TPJWildCardFileFilter}
+K{\footnote {K}TPJWildCardFileFilter}
+A{\footnote {A}TPJWildCardFileFilter_Object;TPJWildCardFileFilter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \{bmlt TPJWildCardFileFilter.bmp\}\plain\f0\fs22\cf2\b  TPJWildCardFileFilter\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_WCF_HEIRACHY}          {\ul Properties}{\v IDH_WCF_PROPERTIES}          {\ul Methods}{\v IDH_WCF_METHODS}           {\ul Events}{\v IDH_WCF_EVENTS}          {\strike See also}{\v !AL(TPJExtFileFilter_object)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 TPJWildCardFileFilter\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 is a file filter component for use with the drop files components that filters files according to a DOS-style wild card.\plain\f0\fs18\cf0 
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par 
+\par \plain\f1\fs18\cf0 This component is designed for use with {\strike TPJDropFiles}{\v IDH_DF_CLASS}, {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS} and {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS} components to filter the files dropped based on a suppliaed wild card.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 It provides a single property - {\strike WildCard}{\v IDH_WCF_WILDCARD} - that specifies the wild card to be used as the filter.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The component implements the inherited Accept method to return true when files pass through the filter by matching the wild card.\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 
+\par \plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_WCF_HEIRACHY}
+${\footnote {$}TPJWildCardFileFilter heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par      |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par      |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}
+\par      |
+\par {\strike TPJFileFilter}{\v IDH_FF_CLASS}
+\par \page 
+#{\footnote {#}IDH_WCF_PROPERTIES}
+${\footnote {$}TPJWildCardFileFilter properties}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \plain\f1\fs18\cf0 \tab {\strike WildCard}{\v IDH_WCF_WILDCARD}\plain\f0\fs18\cf0 
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time only properties inherited from {\strike TComponent}{\v !AL(TComponent_object,1)}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_WCF_WILDCARD}
+${\footnote {$}TPJWildCardFileFilter.WildCard}
+K{\footnote {K}WildCard,TPJWildCardFileFilter;TPJWildCardFileFilter,WildCard;WildCard}
+A{\footnote {A}TPJWildCardFileFilter_WildCard;WildCard_Property;WildCard}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJWildCardFileFilter.\plain\f1\fs22\cf2\b WildCard\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWildCardFileFilter}{\v IDH_WCF_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Filter files based on a wildcard string\plain\f0\fs18\cf0 .
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f5\fs18\cf0 WildCard\plain\f4\fs18\cf0 : \plain\f5\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This property stores the wildcard that is used by the component to filter files\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  The wildcard is applied to the actual filename or folder name (not the path) and uses the same special characters as DOS (and Windows) wildcards. The wildcard is applied to both files and folders.
+\par \plain\f1\fs12\cf0 
+\par \plain\f1\fs18\cf0\b Example\plain\f1\fs18\cf0 
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 To filter out all files except those with names beginning with "PJ" and with a ".pas" extension set WildCard to \plain\f6\fs18\cf0 'PJ*.pas'\plain\f1\fs18\cf0 .\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_WCF_METHODS}
+${\footnote {$}TPJWildCardFileFilter methods}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods
+\par \plain\f0\fs18\cf0 
+\par \pard \tx200 \tab {\strike Accept}{\v IDH_WCF_ACCEPT}
+\par 
+\par \pard TPJWildCardFileFilter defines no additional methods to those inherited from {\strike TComponent}{\v !AL(TComponent_object,1)}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_WCF_ACCEPT}
+${\footnote {$}TPJWildCardFileFilter.Accept}
+K{\footnote {K}Accept,TPJWildCardFileFilter;TPJWildCardFileFilter,Accept;Accept}
+A{\footnote {A}TPJWildCardFileFilter_Accept;Accept_method;Accept}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f1\fs22\cf2\b TPJWildCardFileFilter\plain\f0\fs22\cf2\b .\plain\f1\fs22\cf2\b Accept\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJWildCardFileFilter}{\v IDH_WCF_CLASS}
+\par \plain\f0\fs8\cf0  
+\par \pard \plain\f1\fs18\cf0 Returns whether a given file or folder passes though the filter.\plain\f0\fs18\cf0 
+\par 
+\par \pard \fi-200 \li200 \plain\f5\fs18\cf0\b function\plain\f4\fs18\cf0\b  \plain\f5\fs18\cf0 Accept(\plain\f5\fs18\cf0\b const\plain\f5\fs18\cf0  FilePath: \plain\f5\fs18\cf0\b string\plain\f5\fs18\cf0 ; \plain\f5\fs18\cf0\b const\plain\f5\fs18\cf0  IsFolder: Boolean): Boolean;\plain\f4\fs18\cf0  \plain\f5\fs18\cf0\b virtual\plain\f4\fs18\cf0 ;\plain\f5\fs18\cf0  \plain\f5\fs18\cf0\b abstract\plain\f5\fs18\cf0 ;\plain\f4\fs18\cf0 
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This method is called by the filter's owning drop files component whenever files are dropped. It is called once for each dropped file or folder dropped and returns true if the file of folder specified by the \plain\f1\fs18\cf0\i FilePath\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i IsFolder\plain\f1\fs18\cf0  passes through the filter and false if not.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 For a file to pass through the filter its file or filder name (not the path) must match the wild card specified in the {\strike WildCard}{\v IDH_WCF_WILDCARD} property.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 This method is used internally by the drop files components. There is no reason to call the method from program code unless to discover whether a file or folder will pass the filter.
+\par \page 
+#{\footnote {#}IDH_WCF_EVENTS}
+${\footnote {$}TPJWildCardFileFilter events}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab TPJWildCardFileFilter has no events.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_TPJDROPFILESOPTION}
+${\footnote {$}TPJDropFilesOption}
+K{\footnote {K}TPJDropFilesOption}
+A{\footnote {A}TPJDropFilesOption}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJ\plain\f1\fs22\cf2\b DropFilesOption\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This enumeration represents the possible values to be included in the set properties that govern the processing and filtering to be applied to dropped files.
+\par \plain\f1\fs8\cf0 
+\par \pard \keep \plain\f6\fs18\cf0 TPJDropFilesOption = (
+\par   dfoIncFiles,\tab \plain\f3\fs18\cf0 // plain files included\plain\f6\fs18\cf0 
+\par   dfoIncFolders,\tab \plain\f3\fs18\cf0 // folders included\plain\f6\fs18\cf0 
+\par   dfoRecurseFolders\tab \plain\f3\fs18\cf0 // contents of folders found and included\plain\f6\fs18\cf0 
+\par );\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_TPJDROPFILESOPTIONS}
+${\footnote {$}TPJDropFilesOptions}
+K{\footnote {K}TPJDropFilesOptions}
+A{\footnote {A}TPJDropFilesOptions}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJ\plain\f1\fs22\cf2\b DropFilesOptions\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This is a set of {\strike TPJDropFilesOption}{\v IDH_TPJDROPFILESOPTION} values that specify the processing and filtering to be applied to dropped files.
+\par \plain\f1\fs8\cf0 
+\par \pard \keep \plain\f6\fs18\cf0 TPJDropFilesOptions = \plain\f6\fs18\cf0\b set of\plain\f6\fs18\cf0  {\strike TPJDropFilesOption}{\v IDH_TPJDROPFILESOPTION};\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_TPJEXTFILEFILTERSTYLE}
+${\footnote {$}TPJExtFileFilterStyle}
+K{\footnote {K}TPJExtFileFilterStyle}
+A{\footnote {A}TPJExtFileFilterStyle}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f1\fs22\cf2\b TPJExtFileFilterStyle\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This enumeration represents the kind of filtering performed by the {\strike TPJExtFileFilter}{\v IDH_EFF_CLASS} component according to its {\strike Style}{\v IDH_EFF_STYLE} property.
+\par \plain\f1\fs8\cf0 
+\par \pard \keep \plain\f6\fs18\cf0 TPJExtFileFilterStyle = (
+\par \pard \tx2400   fsFilterFilesOnly,\tab \plain\f3\fs18\cf0 // only filter files - pass folders through\plain\f6\fs18\cf0 
+\par   fsFilterFoldersOnly,\tab \plain\f3\fs18\cf0 // only filter folders - pass files through\plain\f6\fs18\cf0 
+\par   fsAll\tab \plain\f3\fs18\cf0 // filter folders and files\plain\f6\fs18\cf0 
+\par \pard );\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_TPJDROPPEDFILEFILTER}
+${\footnote {$}TPJDroppedFileFilter}
+K{\footnote {K}TPJDroppedFileFilter}
+A{\footnote {A}TPJDroppedFileFilter}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJDroppedFileFilter\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJDropFiles}{\v IDH_PJDROPFILES}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Event handler type for {\strike OnFileFilter}{\v !AL(OnFileFilter_Event)} events, triggered for each file and folder dropped after processing by any filter component. This event can be handled to apply custom filtering to each file and folder.
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-200 \li200 \tx200 \plain\f6\fs18\cf0 TPJDroppedFileFilter = \plain\f6\fs18\cf0\b procedure\plain\f6\fs18\cf0 (Sender: TObject; \plain\f6\fs18\cf0\b const\plain\f6\fs18\cf0  FileName: \plain\f6\fs18\cf0\b string\plain\f6\fs18\cf0 ; \plain\f6\fs18\cf0\b const\plain\f6\fs18\cf0  IsFolder: Boolean; \plain\f6\fs18\cf0\b var\plain\f6\fs18\cf0  Accept: Boolean) \plain\f6\fs18\cf0\b of object\plain\f6\fs18\cf0 ;
+\par \plain\f3\fs18\cf0 
+\par \pard \plain\f3\fs18\cf0\i FileName \plain\f3\fs18\cf0 is the name of the file or folder being filtered. \plain\f3\fs18\cf0\i IsFolder \plain\f3\fs18\cf0 is true if \plain\f3\fs18\cf0\i FileName\plain\f3\fs18\cf0  denotes a folder. The state of the \plain\f3\fs18\cf0\i Accept\plain\f3\fs18\cf0  flag determines if \plain\f3\fs18\cf0\i FileName\plain\f3\fs18\cf0  is to be added to the list of dropped files / folders. \plain\f3\fs18\cf0\i Accept\plain\f3\fs18\cf0  is true by default - set it to false to omit the file from the list of dropped files and folders.\plain\f6\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_PJ_DROPFILES_MSG}
+${\footnote {$}PJ_DROPFILES message}
+K{\footnote {K}PJ_DROPFILES}
+A{\footnote {A}PJ_DROPFILES}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b PJ_DROPFILES message
+\par \plain\f0\fs8\cf2\b  \plain\f0\fs22\cf2\b 
+\par \pard \plain\f0\fs18\cf0 This is a custom message used by {\strike TPJDropFiles}{\v IDH_DF_CLASS}\plain\f1\fs18\cf0 ,\plain\f0\fs18\cf0  {\strike TPJFormDropFiles}{\v IDH_FDF_CLASS}\plain\f1\fs18\cf0  and {\strike TPJCtrlDropFiles}{\v IDH_CDF_CLASS}\plain\f0\fs18\cf0 .
+\par 
+\par \plain\f0\fs18\cf0\b Parameters
+\par \plain\f0\fs8\cf0\b 
+\par \pard \keep \plain\f4\fs18\cf0 hDrop = THandle(WParam)\plain\f0\fs18\cf0 \tab // drop handle
+\par \plain\f4\fs18\cf0 Pos = TSmallPoint(LParam)\plain\f0\fs18\cf0 \tab // mouse cursor position in form coordinates
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When a TPJDropFiles \plain\f1\fs18\cf0 or TPJCtrlDropFiles \plain\f0\fs18\cf0 component receives a {\strike WM_DROPFILES}{\v !AL(WM_DROPFILES,1)} message and the component's {\strike Enabled}{\v !AL(TPJDropFiles_Enabled;TPJCtrlDropFiles_Enabled)} and {\strike PassThrough}{\v !AL(TPJDropFiles_PassThrough;TPJCtrlDropFiles_PassThrough)} properties are both true, the component passes information about the WM_DROPFILES message to the owning form. WM_DROPFILES contains a drop handle that can be used to find the mouse coordinates at the time the files were dropped. However, the mouse coordinates are relative to the TPJDropFiles component's window\plain\f1\fs18\cf0  or the window managed by TPJCtrlDropFiles\plain\f0\fs18\cf0 .
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 PJ_DROPFILES is used to circumvent this problem. This message contains the drop position in form coordinates. When TPJDropFiles \plain\f1\fs18\cf0 or TPJCtrlDropFiles \plain\f0\fs18\cf0 passes through a drop files message it converts the drop coordinates into form coordinates and sends them to the form in the LParam field of a PJ_DROPFILES message. The WParam field is set to the drop handle per the WM_DROPFILES message.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 A TPJFormDropFiles component on the form will handle the PJ_DROPFILES message as if it were a WM_DROPFILES message except that it ignores the drop coordinates provided by the drop handle and uses those in PJ_DROPFILES instead.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 A PJ_DROPFILES message must be is unique across the system because it is used by more than one window class. It is created by using the {\strike RegisterWindowMessage}{\v !AL(RegisterWindowMessage,1)} API call. To use the message in other components get the message code by calling \plain\f4\fs18\cf0 RegisterWindowMessage('PJ_DROPFILES')\plain\f0\fs18\cf0 . Return 1 if PJ_DROPFILES is handled and 0 if not (this is unlike WM_DROPFILES where 0 is returned when the message is handled).
+\par \page 
+}

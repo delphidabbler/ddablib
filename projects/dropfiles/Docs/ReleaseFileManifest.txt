@@ -1,0 +1,109 @@
+Drop Files Components
+=====================
+
+Release File Manifest
+---------------------
+
+Release 1.1.1a
+--------------
+
+drpfiles.pas      : component source file
+drpfiles.hlp      : help file (for Delphi 1/2)
+drpfiles.kwf      : help keyword file (for Delphi 1/2)
+drpfiles.htm      : information sheet
+readme.txt        : readme file pointing user to cbview.htm for info
+16\drpfiles.dcr   : 16bit resource file for component palette glyph
+32\drpfiles.dcr   : 32bit resourec file for component palette glyph
+
+Release 2.0.1, 3.0 and 3.1
+--------------------------
+
+PJDropFiles.pas   : component source file
+PJDropFiles.dcr   : 32bit resource file for component palette glyph
+PJDropFiles.hlp   : help file (for Delphi 3 onwards)
+pjdropfiles.htm   : information sheet
+
+Release 3.2
+-----------
+
+PJDropFiles.pas          : component source file
+PJDropFiles.dcr          : 32bit resource file for component palette glyph
+PJDropFiles.hlp          : help file (for Delphi 3 onwards)
+pjdropfiles.htm          : information sheet
+Demo\DropFilesDemo.dpr   : demo project file
+Demo\DropFilesDemo.cfg   : demo configuration file
+Demo\DropFilesDemo.res   : demo resource file (contains MAINICON)
+Demo\FmDropFilesDemo.pas : demo form source code
+Demo\FmDropFilesDemo.dfm : demo form file
+Demo\DelphiDabbler.ico   : demo program icon 
+
+Release 4.0
+-----------
+
+PJDropFiles.pas          : component source file
+PJDropFiles.dcr          : 32bit resource file for component palette glyph
+PJDropFiles.hlp          : help file (for Delphi 3 onwards)
+pjdropfiles.htm          : information sheet
+Demo\DropFilesDemo.dpr   : demo project file
+Demo\DropFilesDemo.cfg   : demo configuration file
+Demo\DropFilesDemo.res   : demo resource file (contains MAINICON)
+Demo\FmDropFilesDemo.pas : demo form source code
+Demo\FmDropFilesDemo.dfm : demo form file
+Demo\DelphiDabbler.ico   : demo program icon 
+Demo\ReadMe.txt          : compilation notes for demo program
+
+Release 4.1 and 4.1.1
+---------------------
+
+PJDropFiles.pas          : component source file
+PJDropFilesDsgn.pas      : design time unit contains component and property editor
+PJDropFilesDsgn.dfm      : Form file for extension filter property editor
+PJDropFiles.dcr          : 32bit resource file for component palette glyph
+PJDropFiles.hlp          : help file (for Delphi 3 onwards)
+pjdropfiles.htm          : information sheet
+Demo\DropFilesDemo.dpr   : demo project file
+Demo\DropFilesDemo.cfg   : demo configuration file
+Demo\DropFilesDemo.res   : demo resource file (contains MAINICON)
+Demo\FmDropFilesDemo.pas : demo form source code
+Demo\FmDropFilesDemo.dfm : demo form file
+Demo\DelphiDabbler.ico   : demo program icon 
+Demo\ReadMe.txt          : compilation notes for demo program
+
+Release 4.1.2
+-------------
+PJDropFiles.pas          : component source file
+PJDropFilesDsgn.pas      : design time unit contains component and property editor
+PJDropFilesDsgn.dfm      : Form file for extension filter property editor
+PJDropFiles.dcr          : 32bit resource file for component palette glyph
+PJDropFiles.hlp          : help file
+PJDropFiles.als          : a-link keyword file for Delphi 6/7.
+ReadMe.htm               : information sheet
+ChangeLog.txt            : change log
+Demo\DropFilesDemo.dpr   : demo project file
+Demo\DropFilesDemo.cfg   : demo configuration file
+Demo\DropFilesDemo.res   : demo resource file (contains MAINICON)
+Demo\FmDropFilesDemo.pas : demo form source code
+Demo\FmDropFilesDemo.dfm : demo form file
+Demo\DelphiDabbler.ico   : demo program icon 
+
+Release 5.0 and 5.0.1
+---------------------
+PJDropFiles.pas            : component source file
+PJDropFilesDsgn.pas        : design time unit contains component and property editor
+PJDropFilesDsgn.dfm        : Form file for extension filter property editor
+PJDropFiles.dcr            : 32bit resource file for component palette glyph
+PJDropFiles.hlp            : help file
+PJDropFiles.als            : a-link keyword file for Delphi 6/7.
+ReadMe.htm                 : information sheet
+ChangeLog.txt              : change log
+Demo\1\DropFilesDemo.dpr   : main demo project file
+Demo\1\DropFilesDemo.res   : main demo resource file (contains MAINICON)
+Demo\1\FmDropFilesDemo.pas : main demo form source code
+Demo\1\FmDropFilesDemo.dfm : main demo form file
+Demo\2\FrameDemo.dpr       : frame demo project file
+Demo\2\FrameDemo.res       : frame demo resource file (contains MAINICON)
+Demo\2\FmFrameDemo.pas     : frame demo form source code
+Demo\2\FmFrameDemo.dfm     : frame demo form file
+Demo\2\FrDemo.pas          : frame demo frame source code
+Demo\2\FrDemo.dfm          : frame demo frame file
+Demo\DelphiDabbler.ico     : demo program icon 

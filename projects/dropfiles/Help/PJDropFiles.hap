@@ -1,0 +1,4909 @@
+<*HelpAuthor HTA1.9*>
+AK
+85
+[Footnotes]
+#=IDH_PJDROPFILES
+$=PJDropFiles unit
+K=PJDropFiles;PJDropFiles unit
+A=PJDropFiles;PJDropFiles unit
+[End]
+7
+NS
+1
+HS
+2
+0
+
+0
+IDH_DF_CLASS
+
+HS
+3
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+4
+0
+
+0
+IDH_EFF_CLASS
+
+HS
+5
+0
+
+0
+IDH_WCF_CLASS
+
+HS
+6
+0
+
+0
+IDH_CDF_CLASS
+
+HS
+7
+0
+
+0
+
+AL(TWinControl_object,1)
+2497
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset2 WingDings;}{\f3\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 1>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b PJ\plain\f1\fs22\cf2\b DropFiles unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This unit contains the implementation of three components that handle files dragged from Windows Explorer onto a program. They are:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf3 \'A7\plain\f3\fs18\cf3 \tab \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf3 TPJDropFiles\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf3  - a windowed container component that catches files dropped on the control or on any child components.
+\par \plain\f2\fs18\cf3 \'A7\plain\f3\fs18\cf3 \tab \plain\f3\fs18\cf1 \protect <HS 3>\plain\f3\fs18\cf3 TPJFormDropFiles\plain\f3\fs18\cf1 \protect </HS 3>\plain\f3\fs18\cf3  - a control that sub classes a form and catches any files dropped on the form.
+\par \plain\f2\fs18\cf3 \'A7\plain\f3\fs18\cf3 \tab \plain\f3\fs18\cf1 \protect <HS 6>\plain\f3\fs18\cf3 TPJCtrlDropFiles\plain\f3\fs18\cf1 \protect </HS 6>\plain\f3\fs18\cf3  - a control that sub classes an associated \plain\f3\fs18\cf1 \protect <HS 7>\plain\f3\fs18\cf3 TWinControl\plain\f3\fs18\cf1 \protect </HS 7>\plain\f3\fs18\cf3  descendant.
+\par \plain\f0\fs8\cf3 
+\par \pard \plain\f1\fs18\cf3 Two filter components (used to filter files dropped on the drop files components) are also provided:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf3 TPJExtFileFilter\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf3  - filters out all files that do not have one of more specified extensions.
+\par \plain\f2\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf3 TPJWildCardFileFilter\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf3  - filters out file names that do not match the given wildcard.
+\par \pard \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 The unit also contains support code and helper classes that are not designed for public use.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_DF_CLASS
+$=TPJDropFiles
+K=TPJDropFiles
+A=TPJDropFiles_Object;TPJDropFiles
+[End]
+25
+HS
+1
+0
+
+0
+IDH_PJDROPFILES
+
+NS
+2
+HS
+3
+0
+
+1
+IDH_DF_HEIRACHY
+
+HS
+4
+0
+
+1
+IDH_DF_PROPS
+
+HS
+5
+0
+
+0
+IDH_DF_OPTIONS
+
+HS
+6
+0
+
+0
+IDH_DF_FILTER
+
+HS
+7
+0
+
+0
+IDH_DF_ONFILEFILTER
+
+HS
+25
+0
+
+0
+IDH_DF_COUNT
+
+HS
+118
+0
+
+1
+IDH_DF_METHODS
+
+HS
+119
+0
+
+1
+IDH_DF_EVENTS
+
+HS
+122
+0
+
+0
+
+AL(TControl_Align,1)
+HS
+123
+0
+
+0
+IDH_DF_ONDROPFILES
+
+HS
+124
+0
+
+0
+IDH_DF_FILES
+
+HS
+125
+0
+
+0
+IDH_DF_FILENAME
+
+HS
+126
+0
+
+0
+IDH_DF_DROPPOINT
+
+HS
+127
+0
+
+0
+IDH_DF_DROPCONTROL
+
+HS
+128
+0
+
+0
+IDH_DF_ENABLED
+
+HS
+129
+0
+
+0
+IDH_DF_FOREGROUNDONDROP
+
+HS
+130
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+131
+0
+
+0
+IDH_DF_PASSTHROUGH
+
+HS
+145
+0
+
+0
+
+AL(WM_DROPFILES,1)
+HS
+159
+0
+
+0
+
+AL(WM_DROPFILES,1)
+HS
+160
+0
+
+0
+IDH_PJ_DROPFILES_MSG
+
+HS
+167
+0
+
+0
+
+AL(TPJFormDropFiles_object;TPJCtrlDropFiles_object)
+BM
+172
+TPJDropFiles.bmp
+0
+1
+6035
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 2>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf1\b \protect <BM 172>\plain\f0\fs22\cf2\b  TPJDropFiles\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf3 Heirachy\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf3 Properties\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 118>\plain\f0\fs18\cf3 Methods\plain\f0\fs18\cf1 \protect </HS 118>\plain\f0\fs18\cf3            \plain\f0\fs18\cf1 \protect <HS 119>\plain\f0\fs18\cf3 Events\plain\f0\fs18\cf1 \protect </HS 119>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 167>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 167>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 2>\plain\f0\fs18\cf3 
+\par TPJDropfiles accepts files dragged and dropped from Windows Explorer.
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This component provides a window which can accept files dragged and dropped from Windows Explorer (the component handles \plain\f0\fs18\cf1 \protect <HS 145>\plain\f0\fs18\cf3 WM_DROPFILES\plain\f0\fs18\cf1 \protect </HS 145>\plain\f0\fs18\cf3  messages to do this). This control can contain child components (in a similar way to TPanel components). Files dropped over any such child component are also accepted by the parent TPJDropFiles component.
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 The main use for TPJDropFiles is when you need to detect file drops on non-windowed components such as TLabel or TShape. To do this drop a TPJDropFiles on a form and then place the required non-windowed control on top of the TPJDropFiles, aligning and sizing both components as required.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The TPJDropFiles component can be aligned with the form on which it is placed using the \plain\f0\fs18\cf1 \protect <HS 122>\plain\f0\fs18\cf3 Align\plain\f0\fs18\cf1 \protect </HS 122>\plain\f0\fs18\cf3  property.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When files dragged from Explorer are dropped over th\plain\f1\fs18\cf3 e\plain\f0\fs18\cf3  component the \plain\f0\fs18\cf1 \protect <HS 123>\plain\f0\fs18\cf3 OnDropFiles\plain\f0\fs18\cf1 \protect </HS 123>\plain\f0\fs18\cf3  event is triggered. The names of the files are recorded in the \plain\f0\fs18\cf1 \protect <HS 124>\plain\f0\fs18\cf3 Files\plain\f0\fs18\cf1 \protect </HS 124>\plain\f0\fs18\cf3  property and the number of files dropped is held in the \plain\f0\fs18\cf1 \protect <HS 25>\plain\f0\fs18\cf3 Count\plain\f0\fs18\cf1 \protect </HS 25>\plain\f0\fs18\cf3  property. \plain\f1\fs18\cf3 The \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf3 Options\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf3  and \plain\f1\fs18\cf1 \protect <HS 6>\plain\f1\fs18\cf3 Filter\plain\f1\fs18\cf1 \protect </HS 6>\plain\f1\fs18\cf3  properties and the \plain\f1\fs18\cf1 \protect <HS 7>\plain\f1\fs18\cf3 OnFileFilter\plain\f1\fs18\cf1 \protect </HS 7>\plain\f1\fs18\cf3  event are used to determine which files appear in the Files property and if the names of files in dropped folders are included. \plain\f0\fs18\cf3 The name of the first file dropped is stored in the \plain\f0\fs18\cf1 \protect <HS 125>\plain\f0\fs18\cf3 FileName\plain\f0\fs18\cf1 \protect </HS 125>\plain\f0\fs18\cf3  property. The point at which the files were dropped is given by the \plain\f0\fs18\cf1 \protect <HS 126>\plain\f0\fs18\cf3 DropPoint\plain\f0\fs18\cf1 \protect </HS 126>\plain\f0\fs18\cf3  property (in coordinates relative to the control). The \plain\f0\fs18\cf1 \protect <HS 127>\plain\f0\fs18\cf3 DropControl\plain\f0\fs18\cf1 \protect </HS 127>\plain\f0\fs18\cf3  property iden\plain\f1\fs18\cf3 ti\plain\f0\fs18\cf3 fies \plain\f1\fs18\cf3 which (if any) \plain\f0\fs18\cf3 control \plain\f1\fs18\cf3 was\plain\f0\fs18\cf3  under the mouse cursor when the files were dropped.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The component accepts dropped files only if the \plain\f0\fs18\cf1 \protect <HS 128>\plain\f0\fs18\cf3 Enabled\plain\f0\fs18\cf1 \protect </HS 128>\plain\f0\fs18\cf3  property is True. When Enabled is false drop file messages are ignored and are therefore visible to the owning form.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Set the \plain\f0\fs18\cf1 \protect <HS 129>\plain\f0\fs18\cf3 ForegroundOnDrop\plain\f0\fs18\cf1 \protect </HS 129>\plain\f0\fs18\cf3  property to true to bring the window containing the component to the foreground when files are dropped on the component.
+\par 
+\par \plain\f0\fs18\cf3\b Interaction with \plain\f0\fs18\cf1\b \protect <HS 130>\plain\f0\fs18\cf3\b TPJFormDropFiles\plain\f0\fs18\cf1\b \protect </HS 130>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 If the \plain\f0\fs18\cf1 \protect <HS 131>\plain\f0\fs18\cf3 PassThrough\plain\f0\fs18\cf1 \protect </HS 131>\plain\f0\fs18\cf3  property is true then any file drop messages handled by this component are passed on to the owing form (as custom \plain\f0\fs18\cf1 \protect <HS 160>\plain\f0\fs18\cf3 PJ_DROPFILES\plain\f0\fs18\cf1 \protect </HS 160>\plain\f0\fs18\cf3  messages) and can then be processed by a TPJFormDropFiles component. \plain\f0\fs18\cf1 \protect <HS 159>\plain\f0\fs18\cf3 WM_DROPFILES\plain\f0\fs18\cf1 \protect </HS 159>\plain\f0\fs18\cf3  messages also reach the form (and TPJFormDropFiles) if TPJDropFile's Enabled property is false.
+\par }
+
+[Footnotes]
+#=IDH_DF_HEIRACHY
+$=TPJDropFiles heirachy
+[End]
+6
+HS
+29
+0
+
+0
+
+AL(TObject_object,1)
+HS
+30
+0
+
+0
+
+AL(TPersistent_object,1)
+HS
+31
+0
+
+0
+
+AL(TComponent_object,1)
+HS
+32
+0
+
+0
+
+AL(TControl_object,1)
+HS
+33
+0
+
+0
+
+AL(TWinControl_object,1)
+HS
+34
+0
+
+0
+
+AL(TCustomControl_object,1)
+1050
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 29>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 29>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 30>\plain\f0\fs18\cf1 TPersistent\plain\f0\fs18\cf2 \protect </HS 30>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 31>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 31>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 32>\plain\f0\fs18\cf1 TControl\plain\f0\fs18\cf2 \protect </HS 32>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 33>\plain\f0\fs18\cf1 TWinControl\plain\f0\fs18\cf2 \protect </HS 33>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 34>\plain\f0\fs18\cf1 TCustomControl\plain\f0\fs18\cf2 \protect </HS 34>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_DF_PROPS
+$=TPJDropFiles properties
+[End]
+31
+HS
+1
+0
+
+0
+IDH_DF_OPTIONS
+
+HS
+2
+0
+
+0
+IDH_DF_ISFOLDER
+
+HS
+3
+0
+
+0
+
+AL(TControl_Anchors,1)
+HS
+4
+0
+
+0
+IDH_DF_FILTER
+
+HS
+5
+0
+
+0
+
+AL(TControl_Constraints,1)
+HS
+6
+0
+
+0
+
+AL(TControl_TabStop,1)
+HS
+7
+0
+
+0
+
+AL(TWinControl_HelpContext,1)
+HS
+8
+0
+
+0
+
+AL(TControl_Cursor,1)
+HS
+9
+0
+
+0
+
+AL(TControl_Height,1)
+HS
+10
+0
+
+0
+
+AL(TControl_Hint,1)
+HS
+11
+0
+
+0
+
+AL(TControl_Left,1)
+HS
+12
+0
+
+0
+
+AL(TControl_Name,1)
+HS
+13
+0
+
+0
+
+AL(TControl_ParentShowHint,1)
+HS
+14
+0
+
+0
+
+AL(TControl_ShowHint,1)
+HS
+15
+0
+
+0
+
+AL(TComponent_Tag,1)
+HS
+16
+0
+
+0
+
+AL(TControl_Top,1)
+HS
+17
+0
+
+0
+
+AL(TControl_Width,1)
+HS
+18
+0
+
+0
+
+AL(TControl_Align,1)
+HS
+19
+0
+
+0
+
+AL(TControl_HelpKeyword,1)
+HS
+20
+0
+
+0
+
+AL(TControl_HelpType,1)
+HS
+21
+0
+
+0
+
+AL(TControl_TabOrder,1)
+HS
+22
+0
+
+0
+
+AL(TControl_Visible,1)
+HS
+27
+0
+
+0
+IDH_DF_COUNT
+
+HS
+44
+0
+
+0
+IDH_DF_DROPCONTROL
+
+HS
+57
+0
+
+0
+IDH_DF_DROPPOINT
+
+HS
+59
+0
+
+0
+IDH_DF_ENABLED
+
+HS
+61
+0
+
+0
+IDH_DF_FILENAME
+
+HS
+65
+0
+
+0
+IDH_DF_FILES
+
+HS
+67
+0
+
+0
+IDH_DF_FOREGROUNDONDROP
+
+HS
+94
+0
+
+0
+IDH_DF_PASSTHROUGH
+
+HS
+96
+0
+
+0
+
+AL(TCustomControl_object,1)
+4872
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 18>\plain\f0\fs18\cf1 Align\plain\f0\fs18\cf2 \protect </HS 18>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 3>\plain\f1\fs18\cf1 Anchors\plain\f1\fs18\cf2 \protect </HS 3>\plain\f1\fs18\cf1  *\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 5>\plain\f1\fs18\cf1 Constraints\plain\f1\fs18\cf2 \protect </HS 5>\plain\f1\fs18\cf1  *\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 27>\plain\f0\fs18\cf1 Count\plain\f0\fs18\cf2 \protect </HS 27>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 8>\plain\f0\fs18\cf1 Cursor\plain\f0\fs18\cf2 \protect </HS 8>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 44>\plain\f0\fs18\cf1 DropControl\plain\f0\fs18\cf2 \protect </HS 44>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 57>\plain\f0\fs18\cf1 DropPoint\plain\f0\fs18\cf2 \protect </HS 57>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 59>\plain\f0\fs18\cf1 Enabled\plain\f0\fs18\cf2 \protect </HS 59>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 61>\plain\f0\fs18\cf1 FileName\plain\f0\fs18\cf2 \protect </HS 61>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 65>\plain\f0\fs18\cf1 Files\plain\f0\fs18\cf2 \protect </HS 65>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 4>\plain\f1\fs18\cf1 Filter\plain\f1\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 67>\plain\f0\fs18\cf1 ForegroundOnDrop\plain\f0\fs18\cf2 \protect </HS 67>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 9>\plain\f0\fs18\cf1 Height\plain\f0\fs18\cf2 \protect </HS 9>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 7>\plain\f0\fs18\cf1 HelpContext\plain\f0\fs18\cf2 \protect </HS 7>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 19>\plain\f1\fs18\cf1 HelpKeyword\plain\f1\fs18\cf2 \protect </HS 19>\plain\f1\fs18\cf1  *\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 20>\plain\f1\fs18\cf1 HelpType\plain\f1\fs18\cf2 \protect </HS 20>\plain\f1\fs18\cf1  *\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 10>\plain\f0\fs18\cf1 Hint\plain\f0\fs18\cf2 \protect </HS 10>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 >\tab \plain\f1\fs18\cf2 \protect <HS 2>\plain\f1\fs18\cf1 IsFolder\plain\f1\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 11>\plain\f0\fs18\cf1 Left\plain\f0\fs18\cf2 \protect </HS 11>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 12>\plain\f0\fs18\cf1 Name\plain\f0\fs18\cf2 \protect </HS 12>\plain\f1\fs18\cf1 
+\par \tab \plain\f1\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 Options\plain\f1\fs18\cf2 \protect </HS 1>\plain\f1\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 13>\plain\f0\fs18\cf1 ParentShowHint\plain\f0\fs18\cf2 \protect </HS 13>\plain\f1\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 94>\plain\f0\fs18\cf1 PassThrough\plain\f0\fs18\cf2 \protect </HS 94>\plain\f1\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 14>\plain\f0\fs18\cf1 ShowHint\plain\f0\fs18\cf2 \protect </HS 14>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 21>\plain\f1\fs18\cf1 TabOrder\plain\f1\fs18\cf2 \protect </HS 21>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 6>\plain\f1\fs18\cf1 TabStop\plain\f1\fs18\cf2 \protect </HS 6>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 15>\plain\f0\fs18\cf1 Tag\plain\f0\fs18\cf2 \protect </HS 15>\plain\f1\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 16>\plain\f0\fs18\cf1 Top\plain\f0\fs18\cf2 \protect </HS 16>\plain\f1\fs18\cf1 
+\par \tab \plain\f1\fs18\cf2 \protect <HS 22>\plain\f1\fs18\cf1 Visible\plain\f1\fs18\cf2 \protect </HS 22>\plain\f1\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 17>\plain\f0\fs18\cf1 Width\plain\f0\fs18\cf2 \protect </HS 17>\plain\f0\fs18\cf1 
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time properties inherited from \plain\f0\fs18\cf2 \protect <HS 96>\plain\f0\fs18\cf1 TCustomControl\plain\f0\fs18\cf2 \protect </HS 96>\plain\f0\fs18\cf1 . 
+\par 
+\par >\tab = run time only
+\par \plain\f1\fs18\cf1 * = not available in all Delphi versions.\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_DF_COUNT
+$=TPJDropFiles.Count
+K=Count,TPJDropFiles;TPJDropFiles,Count;Count
+A=TPJDropFiles_Count;Count_Property;Count
+[End]
+4
+KP
+1
+HS
+23
+0
+
+0
+IDH_DF_CLASS
+
+NS
+24
+HS
+71
+0
+
+0
+IDH_DF_FILES
+
+1357
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 24>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.Count\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 23>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 23>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 24>\plain\f0\fs18\cf3 
+\par This read-only property returns the number of files dropped on the \plain\f1\fs18\cf3 control\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  Count: Integer;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f2\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When files are dropped on the \plain\f1\fs18\cf3 control or its child controls\plain\f0\fs18\cf3  their names are stored in the \plain\f0\fs18\cf1 \protect <HS 71>\plain\f0\fs18\cf3 Files\plain\f0\fs18\cf1 \protect </HS 71>\plain\f0\fs18\cf3  array property. The number of files in the Files array is given by the Count property.
+\par }
+
+[Footnotes]
+#=IDH_DF_DROPCONTROL
+$=TPJDropFiles.DropControl
+K=DropControl,TPJDropFiles;TPJDropFiles,DropControl;DropControl
+A=TPJDropFiles_DropControl;DropControl_Property;DropControl
+[End]
+4
+KP
+1
+HS
+40
+0
+
+0
+IDH_DF_CLASS
+
+HS
+43
+0
+
+0
+
+AL(TControl_object,1)
+NS
+53
+1394
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 53>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.DropControl\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 40>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 40>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 53>\plain\f0\fs18\cf3 
+\par This read only property references \plain\f1\fs18\cf3 the \plain\f0\fs18\cf3 control that the files were dropped on.
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  DropControl: \plain\f2\fs18\cf1 \protect <HS 43>\plain\f2\fs18\cf3 TControl\plain\f2\fs18\cf1 \protect </HS 43>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f2\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 Provides a reference to the control that was under the mouse cursor when files were dropped. R\plain\f0\fs18\cf3 eturns \plain\f1\fs18\cf3 a reference to the TPJDropFiles component if no child control was under the cursor\plain\f0\fs18\cf3 .
+\par }
+
+[Footnotes]
+#=IDH_DF_DROPPOINT
+$=TPJDropFiles.DropPoint
+K=DropPoint,TPJDropFiles;TPJDropFiles,DropPoint;DropPoint
+A=TPJDropFiles_DropPoint;DropPoint_Property;DropPoint
+[End]
+4
+KP
+1
+NS
+52
+HS
+54
+0
+
+0
+IDH_DF_CLASS
+
+HS
+56
+0
+
+0
+
+AL(TPoint,1)
+1165
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 52>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.DropPoint\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 54>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 54>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 52>\plain\f0\fs18\cf3 
+\par This read only property gives the mouse coordinates when the files were dropped.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  DropPoint: \plain\f1\fs18\cf1 \protect <HS 56>\plain\f1\fs18\cf3 TPoint\plain\f1\fs18\cf1 \protect </HS 56>\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The mouse position in client coordinates of the TPJDropFiles control where the last files were dropped.
+\par }
+
+[Footnotes]
+#=IDH_DF_ENABLED
+$=TPJDropFiles.Enabled
+K=Enabled,TPJDropFiles;TPJDropFiles,Enabled;Enabled
+A=TPJDropFiles_Enabled;Enabled_Property;Enabled
+[End]
+3
+KP
+1
+HS
+72
+0
+
+0
+IDH_DF_CLASS
+
+NS
+73
+1158
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 73>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.Enabled\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 72>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 72>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 73>\plain\f0\fs18\cf3 
+\par Determines whether dropped files are handled or ignored.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  \plain\f2\fs18\cf3 E\plain\f1\fs18\cf3 nabled: Boolean;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When Enabled is true the control handles all file drop messages sent to itself. When false file drops are ignored and messages are passed to the owning form.
+\par }
+
+[Footnotes]
+#=IDH_DF_FILTER
+$=TPJDropFiles.Filter
+K=Filter,TPJDropFiles;TPJDropFiles,Filter;Filter
+A=TPJDropFiles_Filter;Filter_Property;Filter
+[End]
+7
+HS
+1
+0
+
+0
+IDH_DF_ONFILEFILTER
+
+HS
+2
+0
+
+0
+IDH_EFF_CLASS
+
+HS
+3
+0
+
+0
+IDH_WCF_CLASS
+
+HS
+4
+0
+
+0
+IDH_FF_CLASS
+
+KP
+5
+HS
+72
+0
+
+0
+IDH_DF_CLASS
+
+NS
+73
+2421
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}{\f4\fnil \fcharset2 WingDings;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 73>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.\plain\f1\fs22\cf2\b Filter\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 72>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 72>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 73>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Filters out files without the specified extensions\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 5>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 Filter\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf3 TPJFileFilter\plain\f3\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 5>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 The component can filter the dropped files and store only those files that pass through the filter. This property references a component that descends from the abstract base class TPJFileFilter. Various TPJFileFilter descendants perform different kinds of filtering. Those supported in this release are:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-400 \li400 \tx400 \plain\f4\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 TPJExtFileFilter\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  - filters out all files that do not have one of more specified extensions.
+\par \plain\f4\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 TPJWildCardFileFilter\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  - filters out file names that do not match the given wildcard.
+\par \pard \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 If a the Filter property is assigned then the referenced component is used to filter each dropped file. Any remaining file is then passed to the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 OnFileFilter\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  event, if handled.
+\par }
+
+[Footnotes]
+#=IDH_DF_FILENAME
+$=TPJDropFiles.FileName
+K=FileName,TPJDropFiles;TPJDropFiles,FileName;FileName
+A=TPJDropFiles_FileName;FileName_Property;FileName
+[End]
+4
+KP
+1
+HS
+76
+0
+
+0
+IDH_DF_CLASS
+
+NS
+77
+HS
+78
+0
+
+0
+IDH_DF_FILES
+
+1583
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 77>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.FileName\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 76>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 76>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 77>\plain\f0\fs18\cf3 
+\par The name of the file dropped on the control.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  FileName: \plain\f1\fs18\cf3\b string\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When a file is dropped on the control, this read-only property contains the fully specified name of the file. If more than one file is dropped, this property stores the name of the first file dropped. If no files have been dropped then the empty string is returned. 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3\i Note\plain\f0\fs18\cf3 : when one or more files have been dropped FileName = \plain\f0\fs18\cf1 \protect <HS 78>\plain\f0\fs18\cf3 Files\plain\f0\fs18\cf1 \protect </HS 78>\plain\f0\fs18\cf3 [0].\plain\f2\fs18\cf3  If no files are available then FileName = ''.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_DF_FILES
+$=TPJDropFiles.Files
+K=Files,TPJDropFiles;TPJDropFiles,Files;Files
+A=TPJDropFiles_Files;Files_Property;Files
+[End]
+6
+HS
+1
+0
+
+0
+IDH_DF_OPTIONS
+
+HS
+2
+0
+
+0
+IDH_DF_ISFOLDER
+
+KP
+3
+HS
+63
+0
+
+0
+IDH_DF_COUNT
+
+HS
+81
+0
+
+0
+IDH_DF_CLASS
+
+NS
+82
+2226
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 82>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.Files\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 81>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 81>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 82>\plain\f0\fs18\cf3 
+\par The names of the most recent files dropped on the control.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 3>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  Files[Idx: Integer]: \plain\f1\fs18\cf3\b string\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When a file (or files) are dropped on the control, this read-only array property contains an indexed list of the fully specified names of the dropped files. The array is zero based. The \plain\f0\fs18\cf1 \protect <HS 63>\plain\f0\fs18\cf3 Count\plain\f0\fs18\cf1 \protect </HS 63>\plain\f0\fs18\cf3  property gives the number of files dropped. Attempts to access array elements outside \plain\f2\fs18\cf3 the index range \plain\f0\fs18\cf3 result in an exception being raised.
+\par \plain\f0\fs8\cf3 
+\par \plain\f2\fs18\cf3 The contents of Files may not extactly reflect all the names of the dropped files and folders. The listed files can be varied by specifying values to the \plain\f2\fs18\cf1 \protect <HS 1>\plain\f2\fs18\cf3 Options\plain\f2\fs18\cf1 \protect </HS 1>\plain\f2\fs18\cf3  property. To ensure the Files property contains exactly the files and folders that were dropped set the Options property to [dfoIncFiles, dfoIncFolders] (the default).
+\par \plain\f2\fs8\cf3 
+\par \plain\f2\fs18\cf3 To test whether the file at index Idx is a file or a folder use \plain\f2\fs18\cf1 \protect <HS 2>\plain\f2\fs18\cf3 IsFolder\plain\f2\fs18\cf1 \protect </HS 2>\plain\f2\fs18\cf3 [Idx];\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_DF_FOREGROUNDONDROP
+$=TPJDropFiles.ForegroundOnDrop
+K=ForegroundOnDrop,TPJDropFiles;TPJDropFiles,ForegroundOnDrop;ForegroundOnDrop
+A=TPJDropFiles_ForegroundOnDrop;ForegroundOnDrop_Property;ForegroundOnDrop
+[End]
+3
+KP
+1
+HS
+85
+0
+
+0
+IDH_DF_CLASS
+
+NS
+86
+1272
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 86>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.ForegroundOnDrop\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 85>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 85>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 86>\plain\f0\fs18\cf3 
+\par Causes owning window to be brought to front when file dropped.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  ForegroundOnDrop: Boolean;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When this property is true the form containing the component is brought to the front when files are dropped on \plain\f2\fs18\cf3 the control\plain\f0\fs18\cf3 . When ForegroundOnDrop is false (default) then the position of the owning form in the Z-Order remains unchanged.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_DF_ISFOLDER
+$=TPJDropFiles.IsFolder
+K=IsFolder,TPJDropFiles;TPJDropFiles,IsFolder;IsFolder
+A=TPJDropFiles_IsFolder;IsFolder_Property;IsFolder
+[End]
+5
+HS
+1
+0
+
+0
+IDH_DF_FILES
+
+HS
+2
+0
+
+0
+IDH_DF_COUNT
+
+KP
+4
+HS
+87
+0
+
+0
+IDH_DF_CLASS
+
+NS
+88
+1718
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 88>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.\plain\f1\fs22\cf2\b IsFolder\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 87>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 87>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 88>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Tells whether each of the dropped files is a folder or a file\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 4>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 IsFolder[Idx: Integer]: Boolean\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 4>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 T\plain\f0\fs18\cf3 his read-only array property \plain\f1\fs18\cf3 informs whether the file at the same index in the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property is a folder (true) or a file (false). \plain\f0\fs18\cf3 The array is zero based\plain\f1\fs18\cf3  and is indexed from 0..\plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 Count\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3 -1. \plain\f0\fs18\cf3 Attempts to access array elements outside this range result in an exception being raised.\plain\f1\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_DF_OPTIONS
+$=TPJDropFiles.Options
+K=Options,TPJDropFiles;TPJDropFiles,Options;Options
+A=TPJDropFiles_Options;Options_Property;Options
+[End]
+7
+KP
+1
+KP
+2
+HS
+3
+0
+
+0
+IDH_DF_FILES
+
+HS
+4
+0
+
+0
+IDH_TPJDROPFILESOPTIONS
+
+KP
+5
+HS
+87
+0
+
+0
+IDH_DF_CLASS
+
+NS
+88
+4617
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}{\f4\fnil \fcharset0 Courier New;}{\f5\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 88>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.\plain\f1\fs22\cf2\b Options\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 87>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 87>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 88>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Determines how the dropped files are processed and which files are stored in the Files property\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 5>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 Options\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf3 TPJDropFilesOptions\plain\f3\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 5>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This property determines how dropped files are interpreted. The resulting files are made available through the \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  property. The property can take any one or more of the following values:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f1\fs18\cf3\i dfoIncFiles\plain\f1\fs18\cf3 \tab When this options is specified ordinary files are included in the list of dropped files. If the option is not present ordinary files are excluded.
+\par \plain\f1\fs18\cf3\i dfoIncFolders\plain\f1\fs18\cf3 \tab Including this option causes folders to be included in the list of dropped files. Folders are excluded if the option is not set.
+\par \plain\f1\fs18\cf3\i dfoRecurseFolders\plain\f1\fs18\cf3 \tab In the absence of this option only the files actually dropped are made available via the Files property (subject to presence of \plain\f1\fs18\cf3\i dfoIncFile\plain\f1\fs18\cf3  and \plain\f1\fs18\cf3\i dfoIncFolders\plain\f1\fs18\cf3 ). When this option is set all folders in the list of dropped files are scanned and the files and sub-folders they contain are also recorded. This scan continues recursively through all sub-folders.
+\par \pard \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 It makes no sense to omit both the \plain\f1\fs18\cf3\i dfoIncFiles\plain\f1\fs18\cf3  and \plain\f1\fs18\cf3\i dfoIncFolders\plain\f1\fs18\cf3  options since no files will be returned.
+\par \plain\f1\fs12\cf3 
+\par \plain\f1\fs18\cf3\b Example\plain\f1\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 To illustrate the various uses of this property consider the following directory tree (where items marked * are folders):
+\par \plain\f1\fs8\cf3 
+\par \plain\f4\fs18\cf3 C:\\Foo \plain\f5\fs18\cf3 *\plain\f4\fs18\cf3 
+\par   A.txt
+\par   B.txt
+\par   Blah \plain\f5\fs18\cf3 *\plain\f4\fs18\cf3 
+\par     C.txt
+\par C:\\Bar \plain\f5\fs18\cf3 *\plain\f4\fs18\cf3 
+\par C:\\D.txt\plain\f1\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 If \plain\f4\fs18\cf3 C:\\Foo\plain\f1\fs18\cf3 , \plain\f4\fs18\cf3 C:\\Bar\plain\f1\fs18\cf3  and \plain\f4\fs18\cf3 C:\\C.txt\plain\f1\fs18\cf3  are dragged and dropped on the control, the following files will be stored in the Files property for the given value of the Options property:
+\par \plain\f1\fs8\cf3 
+\par \pard \tx2000 \tx4000 \plain\f1\fs18\cf1 \protect <KP 1>\plain\f1\fs18\cf3 [dfoIncFiles]\tab [dfoIncFolders]\tab [dfoIncFiles, dfoIncFolders]
+\par \plain\f4\fs18\cf3 C:\\D.txt\tab C:\\Foo\tab C:\\D.txt
+\par \tab C:\\Bar\tab C:\\Foo
+\par \tab \tab C:\\Bar\plain\f4\fs18\cf1 \protect </KP 1>\plain\f4\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <KP 2>\plain\f1\fs18\cf3 [dfoRecurseFolders, \tab [dfoRecurseFolders,\tab [dfoRecurseFolders,
+\par dfoIncFiles]\tab dfoIncFolders]\tab dfoIncFiles, dfoIncFolders]
+\par \plain\f4\fs18\cf3 C:\\Foo\\A.txt\tab C:\\Foo\tab C:\\Foo
+\par C:\\Foo\\B.txt\tab C:\\Foo\\Blah\tab C:\\Foo\\A.txt
+\par C:\\Foo\\Blah\\C.txt\tab C:\\Bah\tab C:\\Foo\\B.txt
+\par C:\\D.txt\tab \tab C:\\Foo\\Blah
+\par \tab \tab C:\\Foo\\Blah\\C.txt
+\par \tab \tab C:\\Foo\\Bar
+\par \tab \tab C:\\D.txt\plain\f1\fs18\cf1 \protect </KP 2>\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_DF_PASSTHROUGH
+$=TPJDropFiles.PassThrough
+K=PassThrough,TPJDropFiles;TPJDropFiles,PassThrough;PassThrough
+A=TPJDropFiles_PassThrough;PassThrough_Property;PassThrough
+[End]
+8
+KP
+1
+HS
+69
+0
+
+0
+
+AL(WM_DROPFILES,1)
+HS
+89
+0
+
+0
+IDH_DF_CLASS
+
+NS
+90
+HS
+91
+0
+
+0
+IDH_DF_ENABLED
+
+HS
+92
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+93
+0
+
+0
+IDH_FDF_DROPPOINT
+
+HS
+158
+0
+
+0
+IDH_PJ_DROPFILES_MSG
+
+2332
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 90>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.PassThrough\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 89>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 89>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 90>\plain\f0\fs18\cf3 
+\par Causes drop files messages to be passed through to the owning form.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  PassThrough: Boolean;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When PassThrough is false (default) and the control is \plain\f0\fs18\cf1 \protect <HS 91>\plain\f0\fs18\cf3 enabled\plain\f0\fs18\cf1 \protect </HS 91>\plain\f0\fs18\cf3  any drop files messages intercepted by this control are not forwarded to the form. When PassThrough is true and the control is enabled then normal processing occurs when files are dropped and then the \plain\f0\fs18\cf1 \protect <HS 69>\plain\f0\fs18\cf3 WM_DROPFILES\plain\f0\fs18\cf1 \protect </HS 69>\plain\f0\fs18\cf3  message is converted to a custom \plain\f0\fs18\cf1 \protect <HS 158>\plain\f0\fs18\cf3 PJ_DROPFILES\plain\f0\fs18\cf1 \protect </HS 158>\plain\f0\fs18\cf3  message and the message is forwarded to the form. Any \plain\f0\fs18\cf1 \protect <HS 92>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 92>\plain\f0\fs18\cf3  component on the form can intercept the PJ_DROPFILES message and handle it like a standard WM_DROPFILES message.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When the drop files message is passed on, the drop point is converted into form coordinates and sent to the form as part of the PJ_DROPFILES message. In this way a TPJFormDropFiles component has its \plain\f0\fs18\cf1 \protect <HS 93>\plain\f0\fs18\cf3 DropPoint\plain\f0\fs18\cf1 \protect </HS 93>\plain\f0\fs18\cf3  property set to the correct value in terms of the form.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_DF_METHODS
+$=TPJDropFiles methods
+[End]
+2
+HS
+143
+0
+
+0
+
+AL(TCustomControl_object,1)
+HS
+174
+0
+
+0
+IDH_DF_PAINT
+
+600
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 174>\plain\f0\fs18\cf1 Paint\plain\f0\fs18\cf2 \protect </HS 174>\plain\f0\fs18\cf1 
+\par 
+\par \pard TPJDropFiles defines no additional methods to those inherited from \plain\f0\fs18\cf2 \protect <HS 143>\plain\f0\fs18\cf1 TCustomControl\plain\f0\fs18\cf2 \protect </HS 143>\plain\f0\fs18\cf1 .\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_DF_PAINT
+$=TPJDropFiles.Paint
+K=Paint,TPJDropFiles;TPJDropFiles,Paint;Paint
+A=TPJDropFiles_Paint;Paint_method;Paint
+[End]
+3
+KP
+1
+NS
+177
+HS
+178
+0
+
+0
+IDH_DF_CLASS
+
+1188
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 177>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.Paint\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 178>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 178>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 177>\plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Paints outline of component at design time
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b procedure \plain\f1\fs18\cf3 Paint; \plain\f1\fs18\cf3\b override\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f1\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This method is automatically called to display the control during the processing of a WM_PAINT message. At run time the method does nothing. At design time it draws a dashed outline of the control.
+\par }
+
+[Footnotes]
+#=IDH_DF_EVENTS
+$=TPJDropFiles events
+[End]
+3
+HS
+1
+0
+
+0
+IDH_DF_ONBEFOREDROP
+
+HS
+2
+0
+
+0
+IDH_DF_ONFILEFILTER
+
+HS
+116
+0
+
+0
+IDH_DF_ONDROPFILES
+
+722
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 OnBeforeDrop\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 116>\plain\f0\fs18\cf1 OnDropFiles\plain\f0\fs18\cf2 \protect </HS 116>\plain\f0\fs20\cf1 
+\par \plain\f1\fs20\cf1 \tab \plain\f1\fs20\cf2 \protect <HS 2>\plain\f1\fs20\cf1 OnFileFilter\plain\f1\fs20\cf2 \protect </HS 2>\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_DF_ONBEFOREDROP
+$=TPJDropFiles.OnBeforeDrop
+K=OnBeforeDrop,TPJDropFiles;TPJDropFiles,OnBeforeDrop;OnBeforeDrop
+A=TPJDropFiles_OnBeforeDrop;OnBeforeDrop_Event;OnBeforeDrop
+[End]
+6
+HS
+1
+0
+
+0
+IDH_DF_FILES
+
+HS
+2
+0
+
+0
+IDH_DF_ONDROPFILES
+
+KP
+3
+HS
+102
+0
+
+0
+IDH_DF_CLASS
+
+NS
+107
+HS
+115
+0
+
+0
+
+AL(TNotifyEvent,1)
+2217
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 107>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.On\plain\f1\fs22\cf2\b BeforeDrop\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 102>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 102>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 107>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Event o\plain\f0\fs18\cf3 ccurs \plain\f1\fs18\cf3 just before\plain\f0\fs18\cf3  files dropped on the \plain\f1\fs18\cf3 control are processed\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 OnBeforeDrop\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 115>\plain\f2\fs18\cf3 TNotifyEvent\plain\f2\fs18\cf1 \protect </HS 115>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This event is triggered when files are dropped on the \plain\f1\fs18\cf3 control but before the files are processed\plain\f0\fs18\cf3 . \plain\f1\fs18\cf3 If the processing of files is likely to be a lengthy occurence then an hourglass or similar user interface device can be displayed here\plain\f0\fs18\cf3 .\plain\f1\fs18\cf3  The \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property does not yet contain details of the files dropped when this event is triggered, so the Files property should not be read.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 The \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 OnDropFiles\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  event is triggered after the processing of files takes place. The Files property should therefore be read in the OnDropFiles event handler.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_DF_ONDROPFILES
+$=TPJDropFiles.OnDropFiles
+K=OnDropFiles,TPJDropFiles;TPJDropFiles,OnDropFiles;OnDropFiles
+A=TPJDropFiles_OnDropFiles;OnDropFiles_Event;OnDropFiles
+[End]
+7
+HS
+1
+0
+
+0
+IDH_DF_ONBEFOREDROP
+
+HS
+2
+0
+
+0
+IDH_DF_FILES
+
+KP
+3
+HS
+100
+0
+
+0
+IDH_DF_CLASS
+
+HS
+101
+0
+
+0
+IDH_DF_ENABLED
+
+NS
+106
+HS
+114
+0
+
+0
+
+AL(TNotifyEvent,1)
+1954
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 106>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.OnDropFiles\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 100>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 100>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 106>\plain\f0\fs18\cf3 
+\par Occurs when files are dropped on the component's window.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 3>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  OnDropFiles: \plain\f1\fs18\cf1 \protect <HS 114>\plain\f1\fs18\cf3 TNotifyEvent\plain\f1\fs18\cf1 \protect </HS 114>\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This event is triggered \plain\f2\fs18\cf3 after\plain\f0\fs18\cf3  files \plain\f2\fs18\cf3 have been \plain\f0\fs18\cf3 dropped on the component\plain\f2\fs18\cf3  and the files have been processed\plain\f0\fs18\cf3 . \plain\f2\fs18\cf3 When this event is triggered all the files are available in the \plain\f2\fs18\cf1 \protect <HS 2>\plain\f2\fs18\cf3 Files\plain\f2\fs18\cf1 \protect </HS 2>\plain\f2\fs18\cf3  property. The \plain\f2\fs18\cf1 \protect <HS 1>\plain\f2\fs18\cf3 OnBeforeDrop\plain\f2\fs18\cf1 \protect </HS 1>\plain\f2\fs18\cf3  event handler is triggered before processing takes place.\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This event is not triggered when the \plain\f0\fs18\cf1 \protect <HS 101>\plain\f0\fs18\cf3 Enabled\plain\f0\fs18\cf1 \protect </HS 101>\plain\f0\fs18\cf3  property is False.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_DF_ONFILEFILTER
+$=TPJDropFiles.OnFileFilter
+K=OnFileFilter,TPJDropFiles;TPJDropFiles,OnFileFilter;OnFileFilter
+A=TPJDropFiles_OnFileFilter;OnFileFilter_Event;OnFileFilter
+[End]
+6
+HS
+1
+0
+
+0
+IDH_FDF_FILES
+
+HS
+2
+0
+
+0
+IDH_FDF_OPTIONS
+
+KP
+3
+HS
+100
+0
+
+0
+IDH_DF_CLASS
+
+NS
+106
+HS
+114
+0
+
+0
+IDH_TPJDROPPEDFILEFILTER
+
+2174
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 106>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJDropFiles.On\plain\f1\fs22\cf2\b FileFilter\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 100>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 100>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 106>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Occurs for each file and folder processed and allows for custom filtering of files\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  On\plain\f3\fs18\cf3 FileFilter\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 114>\plain\f3\fs18\cf3 TPJDroppedFileFilter\plain\f2\fs18\cf1 \protect </HS 114>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This event is triggered for each dropped file* and folder handled by the control. The file or folder can be omitted from the list of dropped files by altering the \plain\f1\fs18\cf3\i Accept\plain\f1\fs18\cf3  parameter of the event handler from True to False.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 Folders that are filtered out by this event are not added to the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files[]\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property but are still scanned when the \plain\f1\fs18\cf3\i dfoRecurseFolders\plain\f1\fs18\cf3  \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 Option\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  is set.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 * Note that the Filter property takes precedence and files filtered out by the assoicated filter component are not processed by this event.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_CLASS
+$=TPJFormDropFiles
+K=TPJFormDropFiles
+A=TPJFormDropFiles_Object;TPJFormDropFiles
+[End]
+24
+NS
+1
+HS
+2
+0
+
+0
+IDH_PJDROPFILES
+
+HS
+3
+0
+
+0
+IDH_FDF_OPTIONS
+
+HS
+4
+0
+
+0
+IDH_FDF_FILTER
+
+HS
+5
+0
+
+1
+IDH_FDF_HEIRACHY
+
+HS
+6
+0
+
+1
+IDH_FDF_PROPS
+
+HS
+7
+0
+
+0
+IDH_FDF_ONFILEFILTER
+
+HS
+8
+0
+
+0
+IDH_CDF_CLASS
+
+HS
+26
+0
+
+0
+IDH_FDF_COUNT
+
+HS
+120
+0
+
+1
+IDH_FDF_METHODS
+
+HS
+121
+0
+
+1
+IDH_FDF_EVENTS
+
+HS
+132
+0
+
+0
+IDH_FDF_ONDROPFILES
+
+HS
+133
+0
+
+0
+IDH_FDF_FILES
+
+HS
+134
+0
+
+0
+IDH_FDF_FILENAME
+
+HS
+135
+0
+
+0
+IDH_FDF_DROPPOINT
+
+HS
+136
+0
+
+0
+IDH_FDF_DROPCONTROL
+
+HS
+137
+0
+
+0
+IDH_FDF_ENABLED
+
+HS
+138
+0
+
+0
+IDH_FDF_FOREGROUNDONDROP
+
+HS
+139
+0
+
+0
+IDH_DF_CLASS
+
+HS
+140
+0
+
+0
+
+AL(TPJDropFiles_Enabled;TPJCtrlDropFiles_Enabled)
+HS
+141
+0
+
+0
+
+AL(TPJDropFiles_PassThrough;TPJCtrlDropFiles_PassThrough)
+HS
+142
+0
+
+0
+
+AL(WM_DROPFILES,1)
+HS
+168
+0
+
+0
+
+AL(TPJDropFiles_object;TPJCtrlDropFiles_object)
+BM
+173
+TPJFormDropFiles.bmp
+0
+1
+6060
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 1>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf1\b \protect <BM 173>\plain\f0\fs22\cf2\b  TPJFormDropFiles\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf3 Heirachy\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf3 Properties\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 120>\plain\f0\fs18\cf3 Methods\plain\f0\fs18\cf1 \protect </HS 120>\plain\f0\fs18\cf3            \plain\f0\fs18\cf1 \protect <HS 121>\plain\f0\fs18\cf3 Events\plain\f0\fs18\cf1 \protect </HS 121>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 168>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 168>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This non-visual component catches all \plain\f0\fs18\cf1 \protect <HS 142>\plain\f0\fs18\cf3 WM_DROPFILES\plain\f0\fs18\cf1 \protect </HS 142>\plain\f0\fs18\cf3  messages that are received by the form where it is placed. The component therefore intercepts files dragged from Windows Explorer and dropped \plain\f1\fs18\cf3 anywhere \plain\f0\fs18\cf3 on the form\plain\f1\fs18\cf3 , including the non-client areas. Use TPJFormDropFiles whenever you just need to catch files anywhere on the main window without botering about which particular control the files are dropped on.\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When files dragged from Explorer are dropped on the form the \plain\f0\fs18\cf1 \protect <HS 132>\plain\f0\fs18\cf3 OnDropFiles\plain\f0\fs18\cf1 \protect </HS 132>\plain\f0\fs18\cf3  event is triggered. The names of the files are recorded in the \plain\f0\fs18\cf1 \protect <HS 133>\plain\f0\fs18\cf3 Files\plain\f0\fs18\cf1 \protect </HS 133>\plain\f0\fs18\cf3  property and the number of files dropped is held in the \plain\f0\fs18\cf1 \protect <HS 26>\plain\f0\fs18\cf3 Count\plain\f0\fs18\cf1 \protect </HS 26>\plain\f0\fs18\cf3  property. \plain\f1\fs18\cf3 The \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 Options\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  and \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf3 Filter\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf3  properties and the \plain\f1\fs18\cf1 \protect <HS 7>\plain\f1\fs18\cf3 OnFileFilter\plain\f1\fs18\cf1 \protect </HS 7>\plain\f1\fs18\cf3  event are used to determine which files appear in the Files property and if the names of files in dropped folders are included. \plain\f0\fs18\cf3 The name of the first file dropped is stored in the \plain\f0\fs18\cf1 \protect <HS 134>\plain\f0\fs18\cf3 FileName\plain\f0\fs18\cf1 \protect </HS 134>\plain\f0\fs18\cf3  property. The point at which the files were dropped is given by the \plain\f0\fs18\cf1 \protect <HS 135>\plain\f0\fs18\cf3 DropPoint\plain\f0\fs18\cf1 \protect </HS 135>\plain\f0\fs18\cf3  property (in coordinates relative to the \plain\f1\fs18\cf3 form's client area\plain\f0\fs18\cf3 ). The \plain\f0\fs18\cf1 \protect <HS 136>\plain\f0\fs18\cf3 DropControl\plain\f0\fs18\cf1 \protect </HS 136>\plain\f0\fs18\cf3  property idenitfies any control that was under the mouse cursor when the files were dropped.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 TPJFormDropFiles accepts dropped files only if the \plain\f0\fs18\cf1 \protect <HS 137>\plain\f0\fs18\cf3 Enabled\plain\f0\fs18\cf1 \protect </HS 137>\plain\f0\fs18\cf3  property is True.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Set the \plain\f0\fs18\cf1 \protect <HS 138>\plain\f0\fs18\cf3 ForegroundOnDrop\plain\f0\fs18\cf1 \protect </HS 138>\plain\f0\fs18\cf3  property to true to bring the window containing the component to the foreground when files are dropped on it.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 No more than one TPJFormDropFiles component can be placed on a form. An exception is raised if an attempt is made to place more than one component on a form.
+\par 
+\par \plain\f0\fs18\cf3\b Interaction with \plain\f0\fs18\cf1\b \protect <HS 139>\plain\f0\fs18\cf3\b TPJDropFiles\plain\f0\fs18\cf1\b \protect </HS 139>\plain\f1\fs18\cf3\b  and \plain\f1\fs18\cf1\b \protect <HS 8>\plain\f1\fs18\cf3\b TPJCtrlDropFiles\plain\f1\fs18\cf1\b \protect </HS 8>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 If there \plain\f1\fs18\cf3 are\plain\f0\fs18\cf3  one or more TPJDropFiles \plain\f1\fs18\cf3 or TPJCtrlDropFiles \plain\f0\fs18\cf3 components on the same for as a TPJFormDropFiles component, then, by default, TPJFormDropFiles does not catch any files dropped over the TPJDropFiles windows\plain\f1\fs18\cf3  or the controls managed by TPJCtrlDropFiles\plain\f0\fs18\cf3 . TPJDropFiles \plain\f1\fs18\cf3 and TPJCtrlDropFiles \plain\f0\fs18\cf3 components do forward file drop messages to the form (and hence to TPJFormDropFiles) if the\plain\f1\fs18\cf3 ir\plain\f0\fs18\cf3  \plain\f0\fs18\cf1 \protect <HS 140>\plain\f0\fs18\cf3 Enabled\plain\f0\fs18\cf1 \protect </HS 140>\plain\f0\fs18\cf3  propert\plain\f1\fs18\cf3 ies\plain\f0\fs18\cf3  \plain\f1\fs18\cf3 are\plain\f0\fs18\cf3  false or the\plain\f1\fs18\cf3 ir\plain\f0\fs18\cf3  \plain\f0\fs18\cf1 \protect <HS 141>\plain\f0\fs18\cf3 PassThrough\plain\f0\fs18\cf1 \protect </HS 141>\plain\f0\fs18\cf3  propert\plain\f1\fs18\cf3 ies\plain\f0\fs18\cf3  \plain\f1\fs18\cf3 are\plain\f0\fs18\cf3  \plain\f1\fs18\cf3 t\plain\f0\fs18\cf3 rue.
+\par }
+
+[Footnotes]
+#=IDH_FDF_HEIRACHY
+$=TPJFormDropFiles heirachy
+[End]
+3
+HS
+36
+0
+
+0
+
+AL(TObject_object,1)
+HS
+37
+0
+
+0
+
+AL(TPersistent_object,1)
+HS
+38
+0
+
+0
+
+AL(TComponent_object,1)
+717
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 36>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 36>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 37>\plain\f0\fs18\cf1 TPersistent\plain\f0\fs18\cf2 \protect </HS 37>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 38>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 38>\plain\f0\fs20\cf1 
+\par \plain\f0\fs18\cf1      |
+\par TPJSubClassedDropFiles\plain\f0\fs20\cf1 
+\par 
+\par }
+
+[Footnotes]
+#=IDH_FDF_PROPS
+$=TPJFormDropFiles properties
+[End]
+13
+HS
+1
+0
+
+0
+IDH_FDF_OPTIONS
+
+HS
+2
+0
+
+0
+IDH_FDF_ISFOLDER
+
+HS
+4
+0
+
+0
+IDH_FDF_FILTER
+
+HS
+19
+0
+
+0
+
+AL(TComponent_Name,1)
+HS
+20
+0
+
+0
+
+AL(TComponent_Tag,1)
+HS
+28
+0
+
+0
+IDH_FDF_COUNT
+
+HS
+45
+0
+
+0
+IDH_FDF_DROPCONTROL
+
+HS
+58
+0
+
+0
+IDH_FDF_DROPPOINT
+
+HS
+60
+0
+
+0
+IDH_FDF_ENABLED
+
+HS
+62
+0
+
+0
+IDH_FDF_FILENAME
+
+HS
+66
+0
+
+0
+IDH_FDF_FILES
+
+HS
+68
+0
+
+0
+IDH_FDF_FOREGROUNDONDROP
+
+HS
+97
+0
+
+0
+
+AL(TComponent_object,1)
+2223
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 >\tab \plain\f0\fs18\cf2 \protect <HS 28>\plain\f0\fs18\cf1 Count\plain\f0\fs18\cf2 \protect </HS 28>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 45>\plain\f0\fs18\cf1 DropControl\plain\f0\fs18\cf2 \protect </HS 45>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 58>\plain\f0\fs18\cf1 DropPoint\plain\f0\fs18\cf2 \protect </HS 58>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 60>\plain\f0\fs18\cf1 Enabled\plain\f0\fs18\cf2 \protect </HS 60>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 62>\plain\f0\fs18\cf1 FileName\plain\f0\fs18\cf2 \protect </HS 62>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 66>\plain\f0\fs18\cf1 Files\plain\f0\fs18\cf2 \protect </HS 66>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 4>\plain\f1\fs18\cf1 Filter\plain\f1\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 68>\plain\f0\fs18\cf1 ForegroundOnDrop\plain\f0\fs18\cf2 \protect </HS 68>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 >\tab \plain\f1\fs18\cf2 \protect <HS 2>\plain\f1\fs18\cf1 IsFolder\plain\f1\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 19>\plain\f0\fs18\cf1 Name\plain\f0\fs18\cf2 \protect </HS 19>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 Options\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 20>\plain\f0\fs18\cf1 Tag\plain\f0\fs18\cf2 \protect </HS 20>\plain\f0\fs18\cf1 
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time only properties inherited from \plain\f0\fs18\cf2 \protect <HS 97>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 97>\plain\f0\fs18\cf1 .
+\par 
+\par >\tab = run time only
+\par \pard \plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_FDF_COUNT
+$=TPJFormDropFiles.Count
+K=Count,TPJFormDropFiles;TPJFormDropFiles,Count;Count
+A=TPJFormDropFiles_Count;Count_Property;Count
+[End]
+4
+KP
+1
+HS
+21
+0
+
+0
+IDH_FDF_CLASS
+
+NS
+22
+HS
+70
+0
+
+0
+IDH_FDF_FILES
+
+1268
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 22>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.Count\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 21>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 21>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 22>\plain\f0\fs18\cf3 
+\par This read-only property returns the number of files dropped on the form.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  Count: Integer;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f1\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When files are dropped on the form their names are stored in the \plain\f0\fs18\cf1 \protect <HS 70>\plain\f0\fs18\cf3 Files\plain\f0\fs18\cf1 \protect </HS 70>\plain\f0\fs18\cf3  zero-based array property. The number of files in the Files array is given by the Count property.
+\par \plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_DROPCONTROL
+$=TPJFormDropFiles.DropControl
+K=DropControl,TPJFormDropFiles;TPJFormDropFiles,DropControl;DropControl
+A=TPJFormDropFiles_DropControl;DropControl_Property;DropControl
+[End]
+4
+KP
+1
+HS
+41
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+42
+0
+
+0
+
+AL(TControl_object,1)
+NS
+51
+1567
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 51>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.DropControl\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 41>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 41>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 51>\plain\f0\fs18\cf3 
+\par This read only property references any control on the form that the files were dropped on.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  DropControl: \plain\f1\fs18\cf1 \protect <HS 42>\plain\f1\fs18\cf3 TControl\plain\f1\fs18\cf1 \protect </HS 42>\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f1\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f2\fs18\cf3 Returns a reference to any control on \plain\f0\fs18\cf3 the form \plain\f2\fs18\cf3 that is \plain\f0\fs18\cf3 under the mouse when \plain\f2\fs18\cf3 the \plain\f0\fs18\cf3 files are dropped\plain\f2\fs18\cf3 . If no child controls are under the cursor then a reference to the form is returned providing the mouse is in the form's client area and \plain\f0\fs18\cf3 nil \plain\f2\fs18\cf3 is returned otherwise.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_DROPPOINT
+$=TPJFormDropFiles.DropPoint
+K=DropPoint,TPJFormDropFiles;TPJFormDropFiles,DropPoint;DropPoint
+A=TPJFormDropFiles_DropPoint;DropPoint_Property;DropPoint
+[End]
+4
+KP
+1
+HS
+46
+0
+
+0
+
+AL(TPoint,1)
+NS
+47
+HS
+55
+0
+
+0
+IDH_FDF_CLASS
+
+1146
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 47>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.DropPoint\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 55>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 55>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 47>\plain\f0\fs18\cf3 
+\par This read only property gives the mouse coordinates when the files were dropped.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  DropPoint: \plain\f1\fs18\cf1 \protect <HS 46>\plain\f1\fs18\cf3 TPoint\plain\f1\fs18\cf1 \protect </HS 46>\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The mouse position in client coordinates of the form control where the last files were dropped.
+\par }
+
+[Footnotes]
+#=IDH_FDF_ENABLED
+$=TPJFormDropFiles.Enabled
+K=Enabled,TPJFormDropFiles;TPJFormDropFiles,Enabled;Enabled
+A=TPJFormDropFiles_Enabled;Enabled_Property;Enabled
+[End]
+3
+KP
+1
+HS
+74
+0
+
+0
+IDH_FDF_CLASS
+
+NS
+75
+1053
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 75>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.Enabled\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 74>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 74>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 75>\plain\f0\fs18\cf3 
+\par Determines whether dropped files are handled or ignored.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  Enabled: Boolean;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When Enabled is true the component handles all file drop messages to the owner form. When false file drops are ignored.
+\par }
+
+[Footnotes]
+#=IDH_FDF_FILENAME
+$=TPJFormDropFiles.FileName
+K=FileName,TPJFormDropFiles;TPJFormDropFiles,FileName;FileName
+A=TPJFormDropFiles_FileName;FileName_Property;FileName
+[End]
+4
+KP
+1
+HS
+79
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+80
+0
+
+0
+IDH_FDF_FILES
+
+NS
+95
+1582
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 95>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.FileName\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 79>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 79>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 95>\plain\f0\fs18\cf3 
+\par The name of a file dropped on the form.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  FileName: \plain\f1\fs18\cf3\b string\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When a file is dropped on the form, this read-only property contains the fully specified name of the file. If more than one file is dropped, this property stores the name of the first file dropped. If no files have been dropped then the empty string is returned.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3\i Note\plain\f0\fs18\cf3 : when one or more files have been dropped FileName = \plain\f0\fs18\cf1 \protect <HS 80>\plain\f0\fs18\cf3 Files\plain\f0\fs18\cf1 \protect </HS 80>\plain\f0\fs18\cf3 [0].\plain\f2\fs18\cf3  If no files are available then FileName = ''.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_FILES
+$=TPJFormDropFiles.Files
+K=Files,TPJFormDropFiles;TPJFormDropFiles,Files;Files
+A=TPJFormDropFiles_Files;Files_Property;Files
+[End]
+6
+HS
+1
+0
+
+0
+IDH_FDF_OPTIONS
+
+HS
+2
+0
+
+0
+IDH_FDF_ISFOLDER
+
+KP
+3
+HS
+64
+0
+
+0
+IDH_FDF_COUNT
+
+HS
+83
+0
+
+0
+IDH_FDF_CLASS
+
+NS
+84
+2256
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 84>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.Files\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 83>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 83>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 84>\plain\f0\fs18\cf3 
+\par The names of the most recent files dropped on the \plain\f1\fs18\cf3 form\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  Files[Idx: Integer]: \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When a file (or files) are dropped on the form, this read-only array property contains an indexed list of the fully specified names of the dropped files. The array is zero based. The \plain\f0\fs18\cf1 \protect <HS 64>\plain\f0\fs18\cf3 Count\plain\f0\fs18\cf1 \protect </HS 64>\plain\f0\fs18\cf3  property gives the number of files dropped. Attempts to access array elements outside \plain\f1\fs18\cf3 the index \plain\f0\fs18\cf3 range result in an exception being raised.
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 The contents of Files may not extactly reflect the names of the dropped files. The contents can be varied by specifying different values of the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Options\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property. To ensure the Files property contains exactly the files and folders that were dropped set the Options property to [dfoIncFiles, dfoIncFolders] (the default).
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 To test whether the file at index Idx is a file or a folder use \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 IsFolder\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3 [Idx];\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_FILTER
+$=TPJFormDropFiles.Filter
+K=Filter,TPJFormDropFiles;TPJFormDropFiles,Filter;Filter
+A=TPJFormDropFiles_Filter;Filter_Property;Filter
+[End]
+7
+HS
+1
+0
+
+0
+IDH_FDF_ONFILEFILTER
+
+HS
+2
+0
+
+0
+IDH_EFF_CLASS
+
+HS
+3
+0
+
+0
+IDH_WCF_CLASS
+
+HS
+4
+0
+
+0
+IDH_FF_CLASS
+
+KP
+5
+HS
+72
+0
+
+0
+IDH_FDF_CLASS
+
+NS
+73
+2418
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}{\f4\fnil \fcharset2 WingDings;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 73>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.\plain\f1\fs22\cf2\b Filter\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 72>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 72>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 73>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Filters out files without the specified extensions\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 5>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 Filter\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf3 TPJFileFilter\plain\f3\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 5>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 The component can filter the dropped files and store only those files that pass through the filter. This property references a component that descends from the abstract base class TPJFileFilter. Various TPJFileFilter descendants perform different kinds of filtering. Those supported in this release are:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-400 \li400 \tx400 \plain\f4\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 TPJExtFileFilter\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  - filters out all files that do not have one of more specified extensions.
+\par \plain\f4\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 TPJWildCardFileFilter\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  - filters out file names that do not match the given wildcard.
+\par \pard \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 If a the Filter property is assigned then the component is used to filter each dropped file. Any remaining file is then passed to the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 OnFileFilter\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  event, if handled.
+\par }
+
+[Footnotes]
+#=IDH_FDF_FOREGROUNDONDROP
+$=TPJFormDropFiles.ForegroundOnDrop
+K=ForegroundOnDrop,TPJFormDropFiles;TPJFormDropFiles,ForegroundOnDrop;ForegroundOnDrop
+A=TPJFormDropFiles_ForegroundOnDrop;ForegroundOnDrop_Property;ForegroundOnDrop
+[End]
+3
+KP
+1
+HS
+87
+0
+
+0
+IDH_FDF_CLASS
+
+NS
+88
+1262
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 88>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.ForegroundOnDrop\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 87>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 87>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 88>\plain\f0\fs18\cf3 
+\par Causes \plain\f1\fs18\cf3 form \plain\f0\fs18\cf3 to be brought to front when file dropped.
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  ForegroundOnDrop: Boolean;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When this property is true the form containing the component is brought to the front when files are dropped on it. When ForegroundOnDrop is false (default) then the position of the owning form in the Z-Order remains unchanged.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_ISFOLDER
+$=TPJFormDropFiles.IsFolder
+K=IsFolder,TPJFormDropFiles;TPJFormDropFiles,IsFolder;IsFolder
+A=TPJFormDropFiles_IsFolder;IsFolder_Property;IsFolder
+[End]
+5
+HS
+1
+0
+
+0
+IDH_FDF_FILES
+
+HS
+2
+0
+
+0
+IDH_FDF_COUNT
+
+KP
+4
+HS
+87
+0
+
+0
+IDH_FDF_CLASS
+
+NS
+88
+1720
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 88>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.\plain\f1\fs22\cf2\b IsFolder\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 87>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 87>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 88>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Whether each of the dropped files is a folder or a file\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 4>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 IsFolder[Idx: Integer]: Boolean\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 4>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 T\plain\f0\fs18\cf3 his read-only array property \plain\f1\fs18\cf3 informs whether the file at the same index in the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property is a folder (true) or a file (false). \plain\f0\fs18\cf3 The array is zero based\plain\f1\fs18\cf3  and is indexed from 0..\plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 Count\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3 -1. \plain\f0\fs18\cf3 Attempts to access array elements outside this range result in an exception being raised.\plain\f1\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_OPTIONS
+$=TPJFormDropFiles.Options
+K=Options,TPJFormDropFiles;TPJFormDropFiles,Options;Options
+A=TPJFormDropFiles_Options;Options_Property;Options
+[End]
+7
+KP
+1
+KP
+2
+HS
+3
+0
+
+0
+IDH_FDF_FILES
+
+HS
+4
+0
+
+0
+IDH_TPJDROPFILESOPTIONS
+
+KP
+5
+HS
+87
+0
+
+0
+IDH_FDF_CLASS
+
+NS
+88
+4621
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}{\f4\fnil \fcharset0 Courier New;}{\f5\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 88>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.\plain\f1\fs22\cf2\b Options\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 87>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 87>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 88>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Determines how the dropped files are processed and which files are stored in the Files property\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 5>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 Options\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf3 TPJDropFilesOptions\plain\f3\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 5>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This property determines how dropped files are interpreted. The resulting files are made available through the \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  property. The property can take any one or more of the following values:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f1\fs18\cf3\i dfoIncFiles\plain\f1\fs18\cf3 \tab When this option is specified ordinary files are included in the list of dropped files. If the option is not present ordinary files are excluded.
+\par \plain\f1\fs18\cf3\i dfoIncFolders\plain\f1\fs18\cf3 \tab Including this option causes folders to be included in the list of dropped files. Folders are excluded if the option is not set.
+\par \plain\f1\fs18\cf3\i dfoRecurseFolders\plain\f1\fs18\cf3 \tab In the absence of this options only the files actually dropped are made available via the Files property (subject to presence of \plain\f1\fs18\cf3\i dfoIncFile\plain\f1\fs18\cf3  and/or \plain\f1\fs18\cf3\i dfoIncFolders\plain\f1\fs18\cf3 ). When this option is set all folders in the list of dropped files are scanned and the files and sub-folders they contain are also recorded. This scan continues recursively through all sub-folders.
+\par \pard \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 It makes no sense to omit both the \plain\f1\fs18\cf3\i dfoIncFiles\plain\f1\fs18\cf3  and \plain\f1\fs18\cf3\i dfoIncFolders\plain\f1\fs18\cf3  options since no files will be returned.
+\par \plain\f1\fs12\cf3 
+\par \plain\f1\fs18\cf3\b Example\plain\f1\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 To illustrate the various uses of this option consider the following directory tree (where items marked * are folders):
+\par \plain\f1\fs8\cf3 
+\par \plain\f4\fs18\cf3 C:\\Foo \plain\f5\fs18\cf3 *\plain\f4\fs18\cf3 
+\par   A.txt
+\par   B.txt
+\par   Blah \plain\f5\fs18\cf3 *\plain\f4\fs18\cf3 
+\par     C.txt
+\par C:\\Bar \plain\f5\fs18\cf3 *\plain\f4\fs18\cf3 
+\par C:\\D.txt\plain\f1\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 If \plain\f4\fs18\cf3 C:\\Foo\plain\f1\fs18\cf3 , \plain\f4\fs18\cf3 C:\\Bar\plain\f1\fs18\cf3  and \plain\f4\fs18\cf3 C:\\C.txt\plain\f1\fs18\cf3  are dragged and dropped on a form, the following files will be stored in the Files property for the given value of the Options property:
+\par \plain\f1\fs8\cf3 
+\par \pard \tx2000 \tx4000 \plain\f1\fs18\cf1 \protect <KP 1>\plain\f1\fs18\cf3 [dfoIncFiles]\tab [dfoIncFolders]\tab [dfoIncFiles, dfoIncFolders]
+\par \plain\f4\fs18\cf3 C:\\D.txt\tab C:\\Foo\tab C:\\D.txt
+\par \tab C:\\Bar\tab C:\\Foo
+\par \tab \tab C:\\Bar\plain\f4\fs18\cf1 \protect </KP 1>\plain\f4\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <KP 2>\plain\f1\fs18\cf3 [dfoRecurseFolders, \tab [dfoRecurseFolders,\tab [dfoRecurseFolders,
+\par dfoIncFiles]\tab dfoIncFolders]\tab dfoIncFiles, dfoIncFolders]
+\par \plain\f4\fs18\cf3 C:\\Foo\\A.txt\tab C:\\Foo\tab C:\\Foo
+\par C:\\Foo\\B.txt\tab C:\\Foo\\Blah\tab C:\\Foo\\A.txt
+\par C:\\Foo\\Blah\\C.txt\tab C:\\Bah\tab C:\\Foo\\B.txt
+\par C:\\D.txt\tab \tab C:\\Foo\\Blah
+\par \tab \tab C:\\Foo\\Blah\\C.txt
+\par \tab \tab C:\\Foo\\Bar
+\par \tab \tab C:\\D.txt\plain\f1\fs18\cf1 \protect </KP 2>\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_METHODS
+$=TPJFormDropFiles methods
+[End]
+1
+HS
+144
+0
+
+0
+
+AL(TComponent_object,1)
+442
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods
+\par \plain\f0\fs18\cf1 
+\par TPJFormDropFiles defines no additional methods to those defined in \plain\f0\fs18\cf2 \protect <HS 144>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 144>\plain\f0\fs18\cf1 .\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_FDF_EVENTS
+$=TPJFormDropFiles events
+[End]
+3
+HS
+1
+0
+
+0
+IDH_FDF_ONBEFOREDROP
+
+HS
+2
+0
+
+0
+IDH_FDF_ONFILEFILTER
+
+HS
+117
+0
+
+0
+IDH_FDF_ONDROPFILES
+
+722
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 OnBeforeDrop\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 117>\plain\f0\fs18\cf1 OnDropFiles\plain\f0\fs18\cf2 \protect </HS 117>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 2>\plain\f1\fs18\cf1 OnFileFilter\plain\f1\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_FDF_ONBEFOREDROP
+$=TPJFormDropFiles.OnBeforeDrop
+K=OnBeforeDrop,TPJFormDropFiles;TPJFormDropFiles,OnBeforeDrop;OnBeforeDrop
+A=TPJFormDropFiles_OnBeforeDrop;OnBeforeDrop_Event;OnBeforeDrop
+[End]
+6
+HS
+1
+0
+
+0
+IDH_FDF_FILES
+
+HS
+2
+0
+
+0
+IDH_FDF_ONDROPFILES
+
+KP
+3
+HS
+102
+0
+
+0
+IDH_FDF_CLASS
+
+NS
+107
+HS
+115
+0
+
+0
+
+AL(TNotifyEvent,1)
+2219
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 107>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.On\plain\f1\fs22\cf2\b BeforeDrop\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 102>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 102>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 107>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Event o\plain\f0\fs18\cf3 ccurs \plain\f1\fs18\cf3 just before\plain\f0\fs18\cf3  files dropped on the form\plain\f1\fs18\cf3  are processed\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 OnBeforeDrop\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 115>\plain\f2\fs18\cf3 TNotifyEvent\plain\f2\fs18\cf1 \protect </HS 115>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This event is triggered when files are dropped on the form\plain\f1\fs18\cf3  but before the files are processed\plain\f0\fs18\cf3 . \plain\f1\fs18\cf3 If the processing of files is likely to be a lengthy occurence then an hourglass or similar user interface device can be displayed here\plain\f0\fs18\cf3 .\plain\f1\fs18\cf3  The \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property does not yet contain details of the files dropped when this event is triggered, so the Files property should not be read.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 The \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 OnDropFiles\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  event is triggered after the processing of files takes place. The Files property should therefore be read in the OnDropFiles event handler.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_ONDROPFILES
+$=TPJFormDropFiles.OnDropFiles
+K=OnDropFiles,TPJFormDropFiles;TPJFormDropFiles,OnDropFiles;OnDropFiles
+A=TPJFormDropFiles_OnDropFiles;OnDropFiles_Event;OnDropFiles
+[End]
+10
+HS
+1
+0
+
+0
+IDH_FDF_FILES
+
+HS
+2
+0
+
+0
+IDH_FDF_ONBEFOREDROP
+
+KP
+3
+HS
+4
+0
+
+0
+IDH_CDF_CLASS
+
+HS
+102
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+103
+0
+
+0
+IDH_DF_CLASS
+
+HS
+104
+0
+
+0
+
+AL(TPJDropFiles_PassThrough;TPJCtrlDropFiles_PassThrough)
+HS
+105
+0
+
+0
+IDH_FDF_ENABLED
+
+NS
+107
+HS
+115
+0
+
+0
+
+AL(TNotifyEvent,1)
+2407
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 107>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFormDropFiles.OnDropFiles\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 102>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 102>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 107>\plain\f0\fs18\cf3 
+\par Occurs when files are dropped on the form.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 3>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  OnDropFiles: \plain\f1\fs18\cf1 \protect <HS 115>\plain\f1\fs18\cf3 TNotifyEvent\plain\f1\fs18\cf1 \protect </HS 115>\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This event is triggered when files are dropped on the form. \plain\f2\fs18\cf3 When this event has been triggered all files are available in the \plain\f2\fs18\cf1 \protect <HS 1>\plain\f2\fs18\cf3 Files\plain\f2\fs18\cf1 \protect </HS 1>\plain\f2\fs18\cf3  property. The \plain\f2\fs18\cf1 \protect <HS 2>\plain\f2\fs18\cf3 OnBeforeDrop\plain\f2\fs18\cf1 \protect </HS 2>\plain\f2\fs18\cf3  event handler is triggered before processing takes place.\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The event is also triggered when files are dropped on a \plain\f0\fs18\cf1 \protect <HS 103>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 103>\plain\f0\fs18\cf3  component \plain\f2\fs18\cf3 or a control managed by a \plain\f2\fs18\cf1 \protect <HS 4>\plain\f2\fs18\cf3 TPJCtrlDropFiles\plain\f2\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf3  component \plain\f0\fs18\cf3 on the same form and that component's \plain\f0\fs18\cf1 \protect <HS 104>\plain\f0\fs18\cf3 PassThrough\plain\f0\fs18\cf1 \protect </HS 104>\plain\f0\fs18\cf3  property is true.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This event is not triggered when the \plain\f0\fs18\cf1 \protect <HS 105>\plain\f0\fs18\cf3 Enabled\plain\f0\fs18\cf1 \protect </HS 105>\plain\f0\fs18\cf3  property is False.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FDF_ONFILEFILTER
+$=TPJFormDropFiles.OnFileFilter
+K=OnFileFilter,TPJFormDropFiles;TPJFormDropFiles,OnFileFilter;OnFileFilter
+A=TPJFormDropFiles_OnFileFilter;OnFileFilter_Event;OnFileFilter
+[End]
+6
+HS
+1
+0
+
+0
+IDH_FDF_FILES
+
+HS
+2
+0
+
+0
+IDH_FDF_OPTIONS
+
+KP
+3
+HS
+100
+0
+
+0
+IDH_FDF_CLASS
+
+NS
+106
+HS
+114
+0
+
+0
+IDH_TPJDROPPEDFILEFILTER
+
+2262
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 106>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJ\plain\f1\fs22\cf2\b Form\plain\f0\fs22\cf2\b DropFiles.On\plain\f1\fs22\cf2\b FileFilter\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 100>\plain\f0\fs18\cf3 TPJ\plain\f1\fs18\cf3 Form\plain\f0\fs18\cf3 DropFiles\plain\f0\fs18\cf1 \protect </HS 100>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 106>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Occurs for each file and folder processed and allows for custom filtering of files\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  On\plain\f3\fs18\cf3 FileFilter\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 114>\plain\f3\fs18\cf3 TPJDroppedFileFilter\plain\f2\fs18\cf1 \protect </HS 114>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This event is triggered for each dropped file* and folder handled by the control. The file or folder can be omitted from the list of dropped files by altering the \plain\f1\fs18\cf3\i Accept\plain\f1\fs18\cf3  parameter of the event handler from True to False.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 Folders that are filtered out by this event are not added to the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files[]\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property but are still scanned when the \plain\f1\fs18\cf3\i dfoRecurseFolders\plain\f1\fs18\cf3  \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 Option\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  is set.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 * Note that the Filter property takes precedence and files filtered out by the associated filter component are not processed by this event.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_CLASS
+$=TPJCtrlDropFiles
+K=TPJCtrlDropFiles
+A=TPJCtrlDropFiles_Object;TPJCtrlDropFiles
+[End]
+25
+NS
+1
+HS
+2
+0
+
+0
+IDH_PJDROPFILES
+
+HS
+3
+0
+
+0
+IDH_CDF_COUNT
+
+HS
+4
+0
+
+0
+IDH_CDF_FILTER
+
+HS
+5
+0
+
+1
+IDH_CDF_HEIRACHY
+
+HS
+6
+0
+
+1
+IDH_CDF_PROPS
+
+HS
+7
+0
+
+0
+IDH_CDF_ONFILEFILTER
+
+HS
+8
+0
+
+0
+IDH_CDF_PASSTHROUGH
+
+HS
+9
+0
+
+0
+IDH_PJ_DROPFILES_MSG
+
+HS
+10
+0
+
+0
+
+AL(WM_DROPFILES,1)
+HS
+11
+0
+
+0
+IDH_CDF_MANAGEDCONTROL
+
+HS
+26
+0
+
+0
+IDH_CDF_COUNT
+
+HS
+120
+0
+
+1
+IDH_CDF_METHODS
+
+HS
+121
+0
+
+1
+IDH_CDF_EVENTS
+
+HS
+132
+0
+
+0
+IDH_CDF_ONDROPFILES
+
+HS
+133
+0
+
+0
+IDH_CDF_FILES
+
+HS
+134
+0
+
+0
+IDH_CDF_FILENAME
+
+HS
+135
+0
+
+0
+IDH_CDF_DROPPOINT
+
+HS
+136
+0
+
+0
+IDH_CDF_DROPCONTROL
+
+HS
+137
+0
+
+0
+IDH_CDF_ENABLED
+
+HS
+138
+0
+
+0
+IDH_CDF_FOREGROUNDONDROP
+
+HS
+139
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+142
+0
+
+0
+
+AL(WM_DROPFILES,1)
+HS
+168
+0
+
+0
+
+AL(TPJDropFiles_object;TPJFormDropFiles_object)
+BM
+173
+TPJCtrlDropFiles.bmp
+0
+1
+6135
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 1>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf1\b \protect <BM 173>\plain\f0\fs22\cf2\b  TPJ\plain\f1\fs22\cf2\b Ctrl\plain\f0\fs22\cf2\b DropFiles\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf3 Heirachy\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf3 Properties\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 120>\plain\f0\fs18\cf3 Methods\plain\f0\fs18\cf1 \protect </HS 120>\plain\f0\fs18\cf3            \plain\f0\fs18\cf1 \protect <HS 121>\plain\f0\fs18\cf3 Events\plain\f0\fs18\cf1 \protect </HS 121>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 168>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 168>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This non-visual component catches all \plain\f0\fs18\cf1 \protect <HS 142>\plain\f0\fs18\cf3 WM_DROPFILES\plain\f0\fs18\cf1 \protect </HS 142>\plain\f0\fs18\cf3  messages that are received by \plain\f1\fs18\cf3 a control referenced by the \plain\f1\fs18\cf1 \protect <HS 11>\plain\f1\fs18\cf3 ManagedControl\plain\f1\fs18\cf1 \protect </HS 11>\plain\f1\fs18\cf3  property\plain\f0\fs18\cf3 . The component therefore intercepts files dragged from Windows Explorer and dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3 .
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 Use TPJCtrlDropFiles when you want to take different actions depending on which control files are dropped on - you can use a different TPJCtrlDropFiles component for each control that can receive file drops.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When files dragged from Explorer are dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3  the \plain\f0\fs18\cf1 \protect <HS 132>\plain\f0\fs18\cf3 OnDropFiles\plain\f0\fs18\cf1 \protect </HS 132>\plain\f0\fs18\cf3  event is triggered. The names of the files are recorded in the \plain\f0\fs18\cf1 \protect <HS 133>\plain\f0\fs18\cf3 Files\plain\f0\fs18\cf1 \protect </HS 133>\plain\f0\fs18\cf3  property and the number of files dropped is held in the \plain\f0\fs18\cf1 \protect <HS 26>\plain\f0\fs18\cf3 Count\plain\f0\fs18\cf1 \protect </HS 26>\plain\f0\fs18\cf3  property. \plain\f1\fs18\cf3 The \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 Options\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  and \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf3 Filter\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf3  properties and the \plain\f1\fs18\cf1 \protect <HS 7>\plain\f1\fs18\cf3 OnFileFilter\plain\f1\fs18\cf1 \protect </HS 7>\plain\f1\fs18\cf3  event are used to determine which files appear in the Files property and if the names of files in dropped folders are included. \plain\f0\fs18\cf3 The name of the first file dropped is stored in the \plain\f0\fs18\cf1 \protect <HS 134>\plain\f0\fs18\cf3 FileName\plain\f0\fs18\cf1 \protect </HS 134>\plain\f0\fs18\cf3  property. The point at which the files were dropped is given by the \plain\f0\fs18\cf1 \protect <HS 135>\plain\f0\fs18\cf3 DropPoint\plain\f0\fs18\cf1 \protect </HS 135>\plain\f0\fs18\cf3  property (in coordinates relative to the \plain\f1\fs18\cf3 form's client area\plain\f0\fs18\cf3 ). The \plain\f0\fs18\cf1 \protect <HS 136>\plain\f0\fs18\cf3 DropControl\plain\f0\fs18\cf1 \protect </HS 136>\plain\f0\fs18\cf3  property idenitfies any control that was under the mouse cursor when the files were dropped.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 TPJ\plain\f1\fs18\cf3 Ctrl\plain\f0\fs18\cf3 DropFiles accepts dropped files only if the \plain\f0\fs18\cf1 \protect <HS 137>\plain\f0\fs18\cf3 Enabled\plain\f0\fs18\cf1 \protect </HS 137>\plain\f0\fs18\cf3  property is True.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Set the \plain\f0\fs18\cf1 \protect <HS 138>\plain\f0\fs18\cf3 ForegroundOnDrop\plain\f0\fs18\cf1 \protect </HS 138>\plain\f0\fs18\cf3  property to true to bring the window containing the component to the foreground when files are dropped on it.
+\par 
+\par \plain\f1\fs18\cf3\b Frames\plain\f0\fs18\cf3\b 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 TPJCtrlDropFiles can be used to manage files dropped on frames. Simply drop the component on the frame and set the ManagedControl property to reference the frame. Note that frames are only available in Delphi 5 and later.
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Interaction with \plain\f0\fs18\cf1\b \protect <HS 139>\plain\f0\fs18\cf3\b TPJ\plain\f1\fs18\cf3\b Form\plain\f0\fs18\cf3\b DropFiles\plain\f0\fs18\cf1\b \protect </HS 139>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 If the \plain\f1\fs18\cf1 \protect <HS 8>\plain\f1\fs18\cf3 PassThrough\plain\f1\fs18\cf1 \protect </HS 8>\plain\f1\fs18\cf3  \plain\f0\fs18\cf3 property is true then any file drop messages handled by this component are passed on to the owing form (as custom\plain\f1\fs18\cf3  \plain\f1\fs18\cf1 \protect <HS 9>\plain\f1\fs18\cf3 PJ_DROPFILES\plain\f1\fs18\cf1 \protect </HS 9>\plain\f1\fs18\cf3  \plain\f0\fs18\cf3 messages) and can then be processed by a TPJFormDropFiles component.\plain\f1\fs18\cf3  \plain\f1\fs18\cf1 \protect <HS 10>\plain\f1\fs18\cf3 WM_DROPFILES\plain\f1\fs18\cf1 \protect </HS 10>\plain\f1\fs18\cf3  \plain\f0\fs18\cf3 messages also reach the form (and TPJFormDropFiles) if TPJ\plain\f1\fs18\cf3 Ctrl\plain\f0\fs18\cf3 DropFile's Enabled property is false.
+\par 
+\par }
+
+[Footnotes]
+#=IDH_CDF_HEIRACHY
+$=TPJCtrlDropFiles heirachy
+[End]
+3
+HS
+36
+0
+
+0
+
+AL(TObject_object,1)
+HS
+37
+0
+
+0
+
+AL(TPersistent_object,1)
+HS
+38
+0
+
+0
+
+AL(TComponent_object,1)
+710
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 36>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 36>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 37>\plain\f0\fs18\cf1 TPersistent\plain\f0\fs18\cf2 \protect </HS 37>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 38>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 38>\plain\f0\fs20\cf1 
+\par \plain\f0\fs18\cf1      |
+\par TPJSubClassedDropFiles\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_CDF_PROPS
+$=TPJCtrlDropFiles properties
+[End]
+15
+HS
+1
+0
+
+0
+IDH_CDF_OPTIONS
+
+HS
+2
+0
+
+0
+IDH_CDF_ISFOLDER
+
+HS
+3
+0
+
+0
+IDH_CDF_MANAGEDCONTROL
+
+HS
+4
+0
+
+0
+IDH_CDF_FILTER
+
+HS
+5
+0
+
+0
+IDH_CDF_PASSTHROUGH
+
+HS
+19
+0
+
+0
+
+AL(TComponent_Name,1)
+HS
+20
+0
+
+0
+
+AL(TComponent_Tag,1)
+HS
+28
+0
+
+0
+IDH_CDF_COUNT
+
+HS
+45
+0
+
+0
+IDH_CDF_DROPCONTROL
+
+HS
+58
+0
+
+0
+IDH_CDF_DROPPOINT
+
+HS
+60
+0
+
+0
+IDH_CDF_ENABLED
+
+HS
+62
+0
+
+0
+IDH_CDF_FILENAME
+
+HS
+66
+0
+
+0
+IDH_CDF_FILES
+
+HS
+68
+0
+
+0
+IDH_CDF_FOREGROUNDONDROP
+
+HS
+97
+0
+
+0
+
+AL(TComponent_object,1)
+2524
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 >\tab \plain\f0\fs18\cf2 \protect <HS 28>\plain\f0\fs18\cf1 Count\plain\f0\fs18\cf2 \protect </HS 28>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 45>\plain\f0\fs18\cf1 DropControl\plain\f0\fs18\cf2 \protect </HS 45>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 58>\plain\f0\fs18\cf1 DropPoint\plain\f0\fs18\cf2 \protect </HS 58>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 60>\plain\f0\fs18\cf1 Enabled\plain\f0\fs18\cf2 \protect </HS 60>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 62>\plain\f0\fs18\cf1 FileName\plain\f0\fs18\cf2 \protect </HS 62>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 66>\plain\f0\fs18\cf1 Files\plain\f0\fs18\cf2 \protect </HS 66>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 4>\plain\f1\fs18\cf1 Filter\plain\f1\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 68>\plain\f0\fs18\cf1 ForegroundOnDrop\plain\f0\fs18\cf2 \protect </HS 68>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 >\tab \plain\f1\fs18\cf2 \protect <HS 2>\plain\f1\fs18\cf1 IsFolder\plain\f1\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 3>\plain\f1\fs18\cf1 ManagedControl\plain\f1\fs18\cf2 \protect </HS 3>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 19>\plain\f0\fs18\cf1 Name\plain\f0\fs18\cf2 \protect </HS 19>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 Options\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 5>\plain\f1\fs18\cf1 PassThrough\plain\f1\fs18\cf2 \protect </HS 5>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 20>\plain\f0\fs18\cf1 Tag\plain\f0\fs18\cf2 \protect </HS 20>\plain\f0\fs18\cf1 
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time only properties inherited from \plain\f0\fs18\cf2 \protect <HS 97>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 97>\plain\f0\fs18\cf1 .
+\par 
+\par >\tab = run time only
+\par \pard \plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_CDF_COUNT
+$=TPJCtrlDropFiles.Count
+K=Count,TPJCtrlDropFiles;TPJCtrlDropFiles,Count;Count
+A=TPJCtrlDropFiles_Count;Count_Property;Count
+[End]
+4
+KP
+1
+HS
+21
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+22
+HS
+70
+0
+
+0
+IDH_CDF_FILES
+
+1396
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 22>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.Count\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 21>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 21>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 22>\plain\f0\fs18\cf3 
+\par This read-only property returns the number of files dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  Count: Integer;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f2\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When files are dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3  their names are stored in the \plain\f0\fs18\cf1 \protect <HS 70>\plain\f0\fs18\cf3 Files\plain\f0\fs18\cf1 \protect </HS 70>\plain\f0\fs18\cf3  zero-based array property. The number of files in the Files array is given by the Count property.
+\par \plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_DROPCONTROL
+$=TPJCtrlDropFiles.DropControl
+K=DropControl,TPJCtrlDropFiles;TPJCtrlDropFiles,DropControl;DropControl
+A=TPJCtrlDropFiles_DropControl;DropControl_Property;DropControl
+[End]
+4
+KP
+1
+HS
+41
+0
+
+0
+IDH_CDF_CLASS
+
+HS
+42
+0
+
+0
+
+AL(TControl_object,1)
+NS
+51
+1497
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 51>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.DropControl\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 41>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 41>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 51>\plain\f0\fs18\cf3 
+\par This read only property references any control \plain\f1\fs18\cf3 parented by the managed control where files are dropped\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  DropControl: \plain\f2\fs18\cf1 \protect <HS 42>\plain\f2\fs18\cf3 TControl\plain\f2\fs18\cf1 \protect </HS 42>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f2\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 Returns a reference to any control parented by the managed control that is \plain\f0\fs18\cf3 under the mouse when \plain\f1\fs18\cf3 the \plain\f0\fs18\cf3 files are dropped\plain\f1\fs18\cf3 . If no child controls are under the cursor then a reference to managed control itself is returned.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_DROPPOINT
+$=TPJCtrlDropFiles.DropPoint
+K=DropPoint,TPJCtrlDropFiles;TPJCtrlDropFiles,DropPoint;DropPoint
+A=TPJCtrlDropFiles_DropPoint;DropPoint_Property;DropPoint
+[End]
+4
+KP
+1
+HS
+46
+0
+
+0
+
+AL(TPoint,1)
+NS
+47
+HS
+55
+0
+
+0
+IDH_CDF_CLASS
+
+1217
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 47>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.DropPoint\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 55>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 55>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 47>\plain\f0\fs18\cf3 
+\par This read only property gives the mouse coordinates when the files were dropped.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  DropPoint: \plain\f1\fs18\cf1 \protect <HS 46>\plain\f1\fs18\cf3 TPoint\plain\f1\fs18\cf1 \protect </HS 46>\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The mouse position in client coordinates of the \plain\f2\fs18\cf3 managed\plain\f0\fs18\cf3  control where the last files were dropped.
+\par }
+
+[Footnotes]
+#=IDH_CDF_ENABLED
+$=TPJCtrlDropFiles.Enabled
+K=Enabled,TPJCtrlDropFiles;TPJCtrlDropFiles,Enabled;Enabled
+A=TPJCtrlDropFiles_Enabled;Enabled_Property;Enabled
+[End]
+3
+KP
+1
+HS
+74
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+75
+1206
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 75>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.Enabled\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 74>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 74>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 75>\plain\f0\fs18\cf3 
+\par Determines whether dropped files are handled or ignored.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  Enabled: Boolean;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When Enabled is true the component handles all file drop messages to the \plain\f2\fs18\cf3 managed control\plain\f0\fs18\cf3 . When false file drops are ignored\plain\f2\fs18\cf3  and are passed through to the owning form\plain\f0\fs18\cf3 .
+\par }
+
+[Footnotes]
+#=IDH_CDF_FILTER
+$=TPJCtrlDropFiles.Filter
+K=Filter,TPJCtrlDropFiles;TPJCtrlDropFiles,Filter;Filter
+A=TPJCtrlDropFiles_Filter;Filter_Property;Filter
+[End]
+7
+HS
+1
+0
+
+0
+IDH_CDF_ONFILEFILTER
+
+HS
+2
+0
+
+0
+IDH_EFF_CLASS
+
+HS
+3
+0
+
+0
+IDH_WCF_CLASS
+
+HS
+4
+0
+
+0
+IDH_FF_CLASS
+
+KP
+5
+HS
+72
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+73
+2418
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}{\f4\fnil \fcharset2 WingDings;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 73>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.\plain\f1\fs22\cf2\b Filter\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 72>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 72>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 73>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Filters out files without the specified extensions\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 5>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 Filter\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf3 TPJFileFilter\plain\f3\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 5>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 The component can filter the dropped files and store only those files that pass through the filter. This property references a component that descends from the abstract base class TPJFileFilter. Various TPJFileFilter descendants perform different kinds of filtering. Those supported in this release are:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-400 \li400 \tx400 \plain\f4\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 TPJExtFileFilter\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  - filters out all files that do not have one of more specified extensions.
+\par \plain\f4\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 TPJWildCardFileFilter\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  - filters out file names that do not match the given wildcard.
+\par \pard \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 If a the Filter property is assigned then the component is used to filter each dropped file. Any remaining file is then passed to the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 OnFileFilter\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  event, if handled.
+\par }
+
+[Footnotes]
+#=IDH_CDF_FILENAME
+$=TPJCtrlDropFiles.FileName
+K=FileName,TPJCtrlDropFiles;TPJCtrlDropFiles,FileName;FileName
+A=TPJCtrlDropFiles_FileName;FileName_Property;FileName
+[End]
+4
+KP
+1
+HS
+79
+0
+
+0
+IDH_CDF_CLASS
+
+HS
+80
+0
+
+0
+IDH_CDF_FILES
+
+NS
+95
+1680
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 95>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.FileName\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 79>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 79>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 95>\plain\f0\fs18\cf3 
+\par The name of a file dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  FileName: \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When a file is dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3 , this read-only property contains the fully specified name of the file. If more than one file is dropped, this property stores the name of the first file dropped. If no files have been dropped then the empty string is returned.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3\i Note\plain\f0\fs18\cf3 : when one or more files have been dropped FileName = \plain\f0\fs18\cf1 \protect <HS 80>\plain\f0\fs18\cf3 Files\plain\f0\fs18\cf1 \protect </HS 80>\plain\f0\fs18\cf3 [0].\plain\f1\fs18\cf3  If no files are available then FileName = ''.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_FILES
+$=TPJCtrlDropFiles.Files
+K=Files,TPJCtrlDropFiles;TPJCtrlDropFiles,Files;Files
+A=TPJCtrlDropFiles_Files;Files_Property;Files
+[End]
+6
+HS
+1
+0
+
+0
+IDH_CDF_OPTIONS
+
+HS
+2
+0
+
+0
+IDH_CDF_ISFOLDER
+
+KP
+3
+HS
+64
+0
+
+0
+IDH_CDF_COUNT
+
+HS
+83
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+84
+2316
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 84>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.Files\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 83>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 83>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 84>\plain\f0\fs18\cf3 
+\par The names of the most recent files dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  Files[Idx: Integer]: \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When a file (or files) are dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3 , this read-only array property contains an indexed list of the fully specified names of the dropped files. The array is zero based. The \plain\f0\fs18\cf1 \protect <HS 64>\plain\f0\fs18\cf3 Count\plain\f0\fs18\cf1 \protect </HS 64>\plain\f0\fs18\cf3  property gives the number of files dropped. Attempts to access array elements outside \plain\f1\fs18\cf3 the index \plain\f0\fs18\cf3 range result in an exception being raised.
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 The contents of Files may not extactly reflect the names of the dropped files. The contents can be varied by specifying different values of the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Options\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property. To ensure the Files property contains exactly the files and folders that were dropped set the Options property to [dfoIncFiles, dfoIncFolders] (the default).
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 To test whether the file at index Idx is a file or a folder use \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 IsFolder\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3 [Idx];\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_FOREGROUNDONDROP
+$=TPJCtrlDropFiles.ForegroundOnDrop
+K=ForegroundOnDrop,TPJCtrlDropFiles;TPJCtrlDropFiles,ForegroundOnDrop;ForegroundOnDrop
+A=TPJCtrlDropFiles_ForegroundOnDrop;ForegroundOnDrop_Property;ForegroundOnDrop
+[End]
+3
+KP
+1
+HS
+87
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+88
+1401
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 88>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.ForegroundOnDrop\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 87>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 87>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 88>\plain\f0\fs18\cf3 
+\par Causes \plain\f1\fs18\cf3 parent form \plain\f0\fs18\cf3 to be brought to front when file dropped.
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  ForegroundOnDrop: Boolean;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When this property is true the form containing \plain\f1\fs18\cf3 this\plain\f0\fs18\cf3  \plain\f1\fs18\cf3 component\plain\f0\fs18\cf3  is brought to the front when files are dropped on \plain\f1\fs18\cf3 the managed control\plain\f0\fs18\cf3 . When ForegroundOnDrop is false (default) then the position of the owning form in the Z-Order remains unchanged.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_ISFOLDER
+$=TPJCtrlDropFiles.IsFolder
+K=IsFolder,TPJCtrlDropFiles;TPJCtrlDropFiles,IsFolder;IsFolder
+A=TPJCtrlDropFiles_IsFolder;IsFolder_Property;IsFolder
+[End]
+5
+HS
+1
+0
+
+0
+IDH_CDF_FILES
+
+HS
+2
+0
+
+0
+IDH_CDF_COUNT
+
+KP
+4
+HS
+87
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+88
+1720
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 88>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.\plain\f1\fs22\cf2\b IsFolder\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 87>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 87>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 88>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Whether each of the dropped files is a folder or a file\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 4>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 IsFolder[Idx: Integer]: Boolean\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 4>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 T\plain\f0\fs18\cf3 his read-only array property \plain\f1\fs18\cf3 informs whether the file at the same index in the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property is a folder (true) or a file (false). \plain\f0\fs18\cf3 The array is zero based\plain\f1\fs18\cf3  and is indexed from 0..\plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 Count\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3 -1. \plain\f0\fs18\cf3 Attempts to access array elements outside this range result in an exception being raised.\plain\f1\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_MANAGEDCONTROL
+$=TPJCtrlDropFiles.ManagedControl
+K=ManagedControl,TPJCtrlDropFiles;TPJCtrlDropFiles,ManagedControl;ManagedControl
+A=TPJCtrlDropFiles_ManagedControl;ManagedControl_Property;ManagedControl
+[End]
+3
+KP
+1
+HS
+79
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+95
+1312
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 95>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJ\plain\f1\fs22\cf2\b Ctrl\plain\f0\fs22\cf2\b DropFiles.\plain\f1\fs22\cf2\b ManagedControl\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 79>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 79>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 95>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 References the managed control\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 ManagedControl\plain\f2\fs18\cf3 : \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 Refers to the associated control for which file drops are managed. If this property is nil then no files drops are handled.\plain\f0\fs18\cf3\i 
+\par }
+
+[Footnotes]
+#=IDH_CDF_OPTIONS
+$=TPJCtrlDropFiles.Options
+K=Options,TPJCtrlDropFiles;TPJCtrlDropFiles,Options;Options
+A=TPJCtrlDropFiles_Options;Options_Property;Options
+[End]
+7
+KP
+1
+KP
+2
+HS
+3
+0
+
+0
+IDH_CDF_FILES
+
+HS
+4
+0
+
+0
+IDH_TPJDROPFILESOPTIONS
+
+KP
+5
+HS
+87
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+88
+4634
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}{\f4\fnil \fcharset0 Courier New;}{\f5\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 88>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.\plain\f1\fs22\cf2\b Options\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 87>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 87>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 88>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Determines how the dropped files are processed and which files are stored in the Files property\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 5>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 Options\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf3 TPJDropFilesOptions\plain\f3\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 5>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This property determines how dropped files are interpreted. The resulting files are made available through the \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  property. The property can take any one or more of the following values:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f1\fs18\cf3\i dfoIncFiles\plain\f1\fs18\cf3 \tab When this option is specified ordinary files are included in the list of dropped files. If the option is not present ordinary files are excluded.
+\par \plain\f1\fs18\cf3\i dfoIncFolders\plain\f1\fs18\cf3 \tab Including this option causes folders to be included in the list of dropped files. Folders are excluded if the option is not set.
+\par \plain\f1\fs18\cf3\i dfoRecurseFolders\plain\f1\fs18\cf3 \tab In the absence of this options only the files actually dropped are made available via the Files property (subject to presence of \plain\f1\fs18\cf3\i dfoIncFile\plain\f1\fs18\cf3  and/or \plain\f1\fs18\cf3\i dfoIncFolders\plain\f1\fs18\cf3 ). When this option is set all folders in the list of dropped files are scanned and the files and sub-folders they contain are also recorded. This scan continues recursively through all sub-folders.
+\par \pard \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 It makes no sense to omit both the \plain\f1\fs18\cf3\i dfoIncFiles\plain\f1\fs18\cf3  and \plain\f1\fs18\cf3\i dfoIncFolders\plain\f1\fs18\cf3  options since no files will be returned.
+\par \plain\f1\fs12\cf3 
+\par \plain\f1\fs18\cf3\b Example\plain\f1\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 To illustrate the various uses of this option consider the following directory tree (where items marked * are folders):
+\par \plain\f1\fs8\cf3 
+\par \plain\f4\fs18\cf3 C:\\Foo \plain\f5\fs18\cf3 *\plain\f4\fs18\cf3 
+\par   A.txt
+\par   B.txt
+\par   Blah \plain\f5\fs18\cf3 *\plain\f4\fs18\cf3 
+\par     C.txt
+\par C:\\Bar \plain\f5\fs18\cf3 *\plain\f4\fs18\cf3 
+\par C:\\D.txt\plain\f1\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 If \plain\f4\fs18\cf3 C:\\Foo\plain\f1\fs18\cf3 , \plain\f4\fs18\cf3 C:\\Bar\plain\f1\fs18\cf3  and \plain\f4\fs18\cf3 C:\\C.txt\plain\f1\fs18\cf3  are dragged and dropped on the managed control, the following files will be stored in the Files property for the given value of the Options property:
+\par \plain\f1\fs8\cf3 
+\par \pard \tx2000 \tx4000 \plain\f1\fs18\cf1 \protect <KP 1>\plain\f1\fs18\cf3 [dfoIncFiles]\tab [dfoIncFolders]\tab [dfoIncFiles, dfoIncFolders]
+\par \plain\f4\fs18\cf3 C:\\D.txt\tab C:\\Foo\tab C:\\D.txt
+\par \tab C:\\Bar\tab C:\\Foo
+\par \tab \tab C:\\Bar\plain\f4\fs18\cf1 \protect </KP 1>\plain\f4\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <KP 2>\plain\f1\fs18\cf3 [dfoRecurseFolders, \tab [dfoRecurseFolders,\tab [dfoRecurseFolders,
+\par dfoIncFiles]\tab dfoIncFolders]\tab dfoIncFiles, dfoIncFolders]
+\par \plain\f4\fs18\cf3 C:\\Foo\\A.txt\tab C:\\Foo\tab C:\\Foo
+\par C:\\Foo\\B.txt\tab C:\\Foo\\Blah\tab C:\\Foo\\A.txt
+\par C:\\Foo\\Blah\\C.txt\tab C:\\Bah\tab C:\\Foo\\B.txt
+\par C:\\D.txt\tab \tab C:\\Foo\\Blah
+\par \tab \tab C:\\Foo\\Blah\\C.txt
+\par \tab \tab C:\\Foo\\Bar
+\par \tab \tab C:\\D.txt\plain\f1\fs18\cf1 \protect </KP 2>\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_PASSTHROUGH
+$=TPJCtrlDropFiles.PassThrough
+K=PassThrough,TPJCtrlDropFiles;TPJCtrlDropFiles,PassThrough;PassThrough
+A=TPJCtrlDropFiles_PassThrough;PassThrough_Property;PassThrough
+[End]
+8
+KP
+1
+HS
+69
+0
+
+0
+
+AL(WM_DROPFILES,1)
+HS
+89
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+90
+HS
+91
+0
+
+0
+IDH_CDF_ENABLED
+
+HS
+92
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+93
+0
+
+0
+IDH_FDF_DROPPOINT
+
+HS
+158
+0
+
+0
+IDH_PJ_DROPFILES_MSG
+
+2340
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 90>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.PassThrough\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 89>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 89>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 90>\plain\f0\fs18\cf3 
+\par Causes drop files messages to be passed through to the owning form.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 1>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  PassThrough: Boolean;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When PassThrough is false (default) and the control is \plain\f0\fs18\cf1 \protect <HS 91>\plain\f0\fs18\cf3 enabled\plain\f0\fs18\cf1 \protect </HS 91>\plain\f0\fs18\cf3  any drop files messages intercepted by this control are not forwarded to the form. When PassThrough is true and the control is enabled then normal processing occurs when files are dropped and then the \plain\f0\fs18\cf1 \protect <HS 69>\plain\f0\fs18\cf3 WM_DROPFILES\plain\f0\fs18\cf1 \protect </HS 69>\plain\f0\fs18\cf3  message is converted to a custom \plain\f0\fs18\cf1 \protect <HS 158>\plain\f0\fs18\cf3 PJ_DROPFILES\plain\f0\fs18\cf1 \protect </HS 158>\plain\f0\fs18\cf3  message and the message is forwarded to the form. Any \plain\f0\fs18\cf1 \protect <HS 92>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 92>\plain\f0\fs18\cf3  component on the form can intercept the PJ_DROPFILES message and handle it like a standard WM_DROPFILES message.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When the drop files message is passed on, the drop point is converted into form coordinates and sent to the form as part of the PJ_DROPFILES message. In this way a TPJFormDropFiles component has its \plain\f0\fs18\cf1 \protect <HS 93>\plain\f0\fs18\cf3 DropPoint\plain\f0\fs18\cf1 \protect </HS 93>\plain\f0\fs18\cf3  property set to the correct value in terms of the form.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_METHODS
+$=TPJCtrlDropFiles methods
+[End]
+1
+HS
+144
+0
+
+0
+
+AL(TComponent_object,1)
+510
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods
+\par \plain\f0\fs18\cf1 
+\par TPJCtrlDropFiles\plain\f1\fs18\cf1  \plain\f0\fs18\cf1 defines no additional methods to those defined in \plain\f0\fs18\cf2 \protect <HS 144>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 144>\plain\f0\fs18\cf1 .\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_CDF_EVENTS
+$=TPJCtrlDropFiles events
+[End]
+3
+HS
+1
+0
+
+0
+IDH_CDF_ONBEFOREDROP
+
+HS
+2
+0
+
+0
+IDH_CDF_ONFILEFILTER
+
+HS
+117
+0
+
+0
+IDH_CDF_ONDROPFILES
+
+722
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 OnBeforeDrop\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 117>\plain\f0\fs18\cf1 OnDropFiles\plain\f0\fs18\cf2 \protect </HS 117>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 2>\plain\f1\fs18\cf1 OnFileFilter\plain\f1\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_CDF_ONBEFOREDROP
+$=TPJCtrlDropFiles.OnBeforeDrop
+K=OnBeforeDrop,TPJCtrlDropFiles;TPJCtrlDropFiles,OnBeforeDrop;OnBeforeDrop
+A=TPJCtrlDropFiles_OnBeforeDrop;OnBeforeDrop_Event;OnBeforeDrop
+[End]
+6
+HS
+1
+0
+
+0
+IDH_CDF_FILES
+
+HS
+2
+0
+
+0
+IDH_CDF_ONDROPFILES
+
+KP
+3
+HS
+102
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+107
+HS
+115
+0
+
+0
+
+AL(TNotifyEvent,1)
+2235
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 107>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.On\plain\f1\fs22\cf2\b BeforeDrop\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 102>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 102>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 107>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Event o\plain\f0\fs18\cf3 ccurs \plain\f1\fs18\cf3 just before\plain\f0\fs18\cf3  files dropped on the \plain\f1\fs18\cf3 managed control are processed\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 OnBeforeDrop\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 115>\plain\f2\fs18\cf3 TNotifyEvent\plain\f2\fs18\cf1 \protect </HS 115>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This event is triggered when files are dropped on the \plain\f1\fs18\cf3 managed control but before the files are processed\plain\f0\fs18\cf3 . \plain\f1\fs18\cf3 If the processing of files is likely to be a lengthy occurence then an hourglass or similar user interface device can be displayed here\plain\f0\fs18\cf3 .\plain\f1\fs18\cf3  The \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property does not yet contain details of the files dropped when this event is triggered, so the property should not be read.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 The \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 OnDropFiles\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  event is triggered after the processing of files takes place. The Files property should therefore be read in the OnDropFiles event handler.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_ONDROPFILES
+$=TPJCtrlDropFiles.OnDropFiles
+K=OnDropFiles,TPJCtrlDropFiles;TPJCtrlDropFiles,OnDropFiles;OnDropFiles
+A=TPJCtrlDropFiles_OnDropFiles;OnDropFiles_Event;OnDropFiles
+[End]
+7
+HS
+1
+0
+
+0
+IDH_CDF_FILES
+
+HS
+2
+0
+
+0
+IDH_CDF_ONBEFOREDROP
+
+KP
+3
+HS
+102
+0
+
+0
+IDH_CDF_CLASS
+
+HS
+105
+0
+
+0
+IDH_CDF_ENABLED
+
+NS
+107
+HS
+115
+0
+
+0
+
+AL(TNotifyEvent,1)
+1888
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 107>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.OnDropFiles\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 102>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 102>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 107>\plain\f0\fs18\cf3 
+\par Occurs when files are dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  OnDropFiles: \plain\f2\fs18\cf1 \protect <HS 115>\plain\f2\fs18\cf3 TNotifyEvent\plain\f2\fs18\cf1 \protect </HS 115>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This event is triggered when files are dropped on the \plain\f1\fs18\cf3 managed control\plain\f0\fs18\cf3 . \plain\f1\fs18\cf3 When this event has been triggered all files are available in the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property. The \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 OnBeforeDrop\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  event handler is triggered before processing takes place.\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This event is not triggered when the \plain\f0\fs18\cf1 \protect <HS 105>\plain\f0\fs18\cf3 Enabled\plain\f0\fs18\cf1 \protect </HS 105>\plain\f0\fs18\cf3  property is False.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_CDF_ONFILEFILTER
+$=TPJCtrlDropFiles.OnFileFilter
+K=OnFileFilter,TPJCtrlDropFiles;TPJCtrlDropFiles,OnFileFilter;OnFileFilter
+A=TPJCtrlDropFiles_OnFileFilter;OnFileFilter_Event;OnFileFilter
+[End]
+6
+HS
+1
+0
+
+0
+IDH_CDF_FILES
+
+HS
+2
+0
+
+0
+IDH_CDF_OPTIONS
+
+KP
+3
+HS
+100
+0
+
+0
+IDH_CDF_CLASS
+
+NS
+106
+HS
+114
+0
+
+0
+IDH_TPJDROPPEDFILEFILTER
+
+2184
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 106>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJCtrlDropFiles.On\plain\f1\fs22\cf2\b FileFilter\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 100>\plain\f0\fs18\cf3 TPJCtrlDropFiles\plain\f0\fs18\cf1 \protect </HS 100>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 106>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Occurs for each file and folder processed and allows for custom filtering of files\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  On\plain\f3\fs18\cf3 FileFilter\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 114>\plain\f3\fs18\cf3 TPJDroppedFileFilter\plain\f2\fs18\cf1 \protect </HS 114>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This event is triggered for each dropped file* and folder handled by the component. The file or folder can be omitted from the list of dropped files by altering the \plain\f1\fs18\cf3\i Accept\plain\f1\fs18\cf3  parameter of the event handler from True to False.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 Folders that are filtered out by this event are not added to the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Files[]\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property but are still scanned when the \plain\f1\fs18\cf3\i dfoRecurseFolders\plain\f1\fs18\cf3  \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 Option\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  is set.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 * Note that the Filter property takes precedence and files filtered out by the associated filter component are not processed by this event.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FF_CLASS
+$=TPJFileFilter
+K=TPJFileFilter
+A=TPJFileFilter_Object;TPJFileFilter
+[End]
+8
+HS
+1
+0
+
+0
+IDH_PJDROPFILES
+
+NS
+2
+HS
+3
+0
+
+1
+IDH_FF_HEIRACHY
+
+HS
+4
+0
+
+1
+IDH_FF_PROPERTIES
+
+HS
+5
+0
+
+0
+IDH_DF_CLASS
+
+HS
+6
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+118
+0
+
+1
+IDH_FF_METHODS
+
+HS
+119
+0
+
+1
+IDH_FF_EVENTS
+
+2228
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 2>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJFileFilter\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf3 Heirachy\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf3 Properties\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 118>\plain\f0\fs18\cf3 Methods\plain\f0\fs18\cf1 \protect </HS 118>\plain\f0\fs18\cf3            \plain\f0\fs18\cf1 \protect <HS 119>\plain\f0\fs18\cf3 Events\plain\f0\fs18\cf1 \protect </HS 119>\plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 2>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 TPJExtFileFilter\plain\f0\fs18\cf3  \plain\f1\fs18\cf3 is an abstract base class for file filter components.\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par 
+\par \plain\f1\fs18\cf3 This is the abstract base class for components designed for use with \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf3 TPJDropFiles\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf3  and \plain\f1\fs18\cf1 \protect <HS 6>\plain\f1\fs18\cf3 TPJFormDropFiles\plain\f1\fs18\cf1 \protect </HS 6>\plain\f1\fs18\cf3  to filter the files dropped. It must also be used as the base class for any custom filter components. Components of this class should never be instantiated.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 The component simply declare an abstract method - Accept - that is called by an associated TPJDropFiles and TPJFormDropFiles component whenever they detect files being dropped. The method is used to perform the filtering. It is for decendant components to implement this method.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FF_HEIRACHY
+$=TPJFileFilter heirachy
+[End]
+3
+HS
+29
+0
+
+0
+
+AL(TObject_object,1)
+HS
+30
+0
+
+0
+
+AL(TPersistent_object,1)
+HS
+31
+0
+
+0
+
+AL(TComponent_object,1)
+630
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 29>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 29>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 30>\plain\f0\fs18\cf1 TPersistent\plain\f0\fs18\cf2 \protect </HS 30>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 31>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 31>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_FF_PROPERTIES
+$=TPJFileFilter properties
+[End]
+1
+HS
+97
+0
+
+0
+
+AL(TComponent_object,1)
+540
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 \plain\f1\fs18\cf1 TPJFileFilter declares no properties over and above those declared by \plain\f0\fs18\cf2 \protect <HS 97>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 97>\plain\f0\fs18\cf1 .\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_FF_METHODS
+$=TPJFileFilter methods
+[End]
+2
+HS
+1
+0
+
+0
+IDH_FF_ACCEPT
+
+HS
+143
+0
+
+0
+
+AL(TComponent_object,1)
+624
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 Accept\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \pard 
+\par TPJFileFilter defines no additional methods to those inherited from \plain\f0\fs18\cf2 \protect <HS 143>\plain\f1\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 143>\plain\f0\fs18\cf1 .\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_FF_ACCEPT
+$=TPJFileFilter.Accept
+K=Accept,TPJFileFilter;TPJFileFilter,Accept;Accept
+A=TPJFileFilter_Accept;Accept_method;Accept
+[End]
+2
+NS
+177
+HS
+178
+0
+
+0
+IDH_FF_CLASS
+
+2202
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern \fcharset0 Courier New;}{\f3\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 177>\plain\f0\fs8\cf2 
+\par \plain\f1\fs22\cf2\b TPJFileFilter\plain\f0\fs22\cf2\b .\plain\f1\fs22\cf2\b Accept\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 178>\plain\f1\fs18\cf3 TPJFileFilter\plain\f0\fs18\cf1 \protect </HS 178>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 177>\plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 Returns whether a given file or folder passes though a filter.\plain\f0\fs18\cf3 
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf3\b function\plain\f3\fs18\cf3\b  \plain\f2\fs18\cf3 Accept(\plain\f2\fs18\cf3\b const\plain\f2\fs18\cf3  FilePath: \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ; \plain\f2\fs18\cf3\b const\plain\f2\fs18\cf3  IsFolder: Boolean): Boolean;\plain\f3\fs18\cf3  \plain\f2\fs18\cf3\b virtual\plain\f3\fs18\cf3 ;\plain\f2\fs18\cf3  \plain\f2\fs18\cf3\b abstract\plain\f2\fs18\cf3 ;\plain\f3\fs18\cf3 
+\par \pard \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This abstract method is called by the filter's owning drop files component whenever files are dropped. It is called once for each dropped file or folder dropped. Its purpose is to determine which of the dropped files or folders are to pass through the filter. \plain\f1\fs18\cf3\i FilePath\plain\f1\fs18\cf3  is the fully qualified path the the file or folder concerned, while \plain\f1\fs18\cf3\i IsFolder\plain\f1\fs18\cf3  indicates wether \plain\f1\fs18\cf3\i FilePath\plain\f1\fs18\cf3  is a file or folder. The method returns true to indicate a file or folder passes through the filter and false if it is to be filtered out.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3\b Note\plain\f1\fs18\cf3 : This method is abstract and must be implemented in an appropriate way by decendant classes.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_FF_EVENTS
+$=TPJFileFilter events
+[End]
+0
+326
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab TPJFileFilter has no events.\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_EFF_CLASS
+$=TPJExtFileFilter
+K=TPJExtFileFilter
+A=TPJExtFileFilter_Object;TPJExtFileFilter
+[End]
+14
+HS
+1
+0
+
+0
+IDH_PJDROPFILES
+
+NS
+2
+HS
+3
+0
+
+1
+IDH_EFF_HEIRACHY
+
+HS
+4
+0
+
+1
+IDH_EFF_PROPERTIES
+
+HS
+5
+0
+
+0
+IDH_DF_CLASS
+
+HS
+6
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+7
+0
+
+0
+IDH_EFF_EXTENSIONS
+
+HS
+8
+0
+
+0
+IDH_EFF_STYLE
+
+HS
+9
+0
+
+0
+IDH_EFF_ACCEPT
+
+HS
+10
+0
+
+0
+IDH_CDF_CLASS
+
+HS
+118
+0
+
+1
+IDH_EFF_METHODS
+
+HS
+119
+0
+
+1
+IDH_EFF_EVENTS
+
+HS
+167
+0
+
+0
+
+AL(TPJWildCardFileFilter_object)
+BM
+172
+TPJExtFileFilter.bmp
+0
+1
+2966
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 2>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf1\b \protect <BM 172>\plain\f0\fs22\cf2\b  TPJExtFileFilter\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf3 Heirachy\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf3 Properties\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 118>\plain\f0\fs18\cf3 Methods\plain\f0\fs18\cf1 \protect </HS 118>\plain\f0\fs18\cf3            \plain\f0\fs18\cf1 \protect <HS 119>\plain\f0\fs18\cf3 Events\plain\f0\fs18\cf1 \protect </HS 119>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 167>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 167>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 2>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 TPJExtFileFilter\plain\f0\fs18\cf3  \plain\f1\fs18\cf3 is a file filter component for use with the drop files components that filters files according to their extension.\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par 
+\par \plain\f1\fs18\cf3 This component is designed for use with \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf3 TPJDropFiles\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf3 , \plain\f1\fs18\cf1 \protect <HS 6>\plain\f1\fs18\cf3 TPJFormDropFiles\plain\f1\fs18\cf1 \protect </HS 6>\plain\f1\fs18\cf3  and \plain\f1\fs18\cf1 \protect <HS 10>\plain\f1\fs18\cf3 TPJCtrlDropFiles\plain\f1\fs18\cf1 \protect </HS 10>\plain\f1\fs18\cf3  components to filter the files dropped based on the extension of the file or folder dropped.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 It provides two properties - \plain\f1\fs18\cf1 \protect <HS 7>\plain\f1\fs18\cf3 Extensions\plain\f1\fs18\cf1 \protect </HS 7>\plain\f1\fs18\cf3  and \plain\f1\fs18\cf1 \protect <HS 8>\plain\f1\fs18\cf3 Style\plain\f1\fs18\cf1 \protect </HS 8>\plain\f1\fs18\cf3  that determine which extensions are passed through the filter and whether the filter applies to files, folders or both.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 The component implements the inherited \plain\f1\fs18\cf1 \protect <HS 9>\plain\f1\fs18\cf3 Accept\plain\f1\fs18\cf1 \protect </HS 9>\plain\f1\fs18\cf3  method to return true when files pass through the filter as configiured by the Extensions and Style properties.\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_EFF_HEIRACHY
+$=TPJExtFileFilter heirachy
+[End]
+4
+HS
+1
+0
+
+0
+IDH_FF_CLASS
+
+HS
+29
+0
+
+0
+
+AL(TObject_object,1)
+HS
+30
+0
+
+0
+
+AL(TPersistent_object,1)
+HS
+31
+0
+
+0
+
+AL(TComponent_object,1)
+770
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 29>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 29>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 30>\plain\f0\fs18\cf1 TPersistent\plain\f0\fs18\cf2 \protect </HS 30>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 31>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 31>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 TPJFileFilter\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_EFF_PROPERTIES
+$=TPJExtFileFilter properties
+[End]
+5
+HS
+1
+0
+
+0
+IDH_EFF_EXTENSIONS
+
+HS
+2
+0
+
+0
+IDH_EFF_STYLE
+
+HS
+19
+0
+
+0
+
+AL(TComponent_Name,1)
+HS
+20
+0
+
+0
+
+AL(TComponent_Tag,1)
+HS
+97
+0
+
+0
+
+AL(TComponent_object,1)
+1079
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 Extensions\plain\f1\fs18\cf2 \protect </HS 1>\plain\f1\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 19>\plain\f0\fs18\cf1 Name\plain\f0\fs18\cf2 \protect </HS 19>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 2>\plain\f1\fs18\cf1 Style\plain\f1\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 20>\plain\f0\fs18\cf1 Tag\plain\f0\fs18\cf2 \protect </HS 20>\plain\f0\fs18\cf1 
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time only properties inherited from \plain\f0\fs18\cf2 \protect <HS 97>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 97>\plain\f0\fs18\cf1 .\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_EFF_EXTENSIONS
+$=TPJExtFileFilter.Extensions
+K=Extensions,TPJExtFileFilter;TPJExtFileFilter,Extensions;Extensions
+A=TPJExtFileFilter_Extensions;Extensions_Property;Extensions
+[End]
+5
+HS
+1
+0
+
+0
+IDH_WCF_CLASS
+
+HS
+2
+0
+
+0
+IDH_EFF_STYLE
+
+KP
+3
+HS
+72
+0
+
+0
+IDH_EFF_CLASS
+
+NS
+73
+2735
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}{\f4\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 73>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJExtFileFilter.\plain\f1\fs22\cf2\b Extensions\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 72>\plain\f0\fs18\cf3 TPJExtFileFilter\plain\f0\fs18\cf1 \protect </HS 72>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 73>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Filters out files without the specified extensions\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 Extensions\plain\f2\fs18\cf3 : \plain\f3\fs18\cf3\b string\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 The component can filter files,  only accepting the names of files ending with the extensions specified in this property\plain\f0\fs18\cf3 .\plain\f1\fs18\cf3  If Extensions is set to the empty string (the default) then file names are not filtered and all pass through.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 Multiple extensions can be stored in the property by separating them with semi-colons. The dot preceeding extensions should be included. If any extensions are specified without the leading dot the character is automatically prepended. A property editor is supplied that enables the extension list to be built using a dialog box. This editor ensures that the extension string is formatted correctly.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 Wildcards are not supported (see \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 TPJWildCardFileFilter\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  for wildcard support). Only extensions that completely match those specified in the property (ignoring case) pass through the filter.  Whether the filter applies to file names, folder names or both depends on the value of the \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 Style\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  property.\plain\f1\fs12\cf3 
+\par 
+\par \plain\f1\fs18\cf3\b Example\plain\f1\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 To filter for files with .htm, .html or .shtml extensions set Extensions to \plain\f4\fs18\cf3 '.htm;.html;.shtml'\plain\f1\fs18\cf3 .\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_EFF_STYLE
+$=TPJExtFileFilter.Style
+K=Style,TPJExtFileFilter;TPJExtFileFilter,Style;Style
+A=TPJExtFileFilter_Style;Style_Property;Style
+[End]
+5
+KP
+1
+HS
+2
+0
+
+0
+
+AL(TPJDropFiles_Options;TPJFormDropFiles_Options;TPJCtrlDropFiles_Options)
+HS
+3
+0
+
+0
+IDH_TPJEXTFILEFILTERSTYLE
+
+HS
+72
+0
+
+0
+IDH_EFF_CLASS
+
+NS
+73
+2245
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 73>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJExtFileFilter.\plain\f1\fs22\cf2\b Style\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 72>\plain\f0\fs18\cf3 TPJExtFileFilter\plain\f0\fs18\cf1 \protect </HS 72>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 73>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Determines the type of file the filter acts upon\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 Style\plain\f2\fs18\cf3 : \plain\f2\fs18\cf1 \protect <HS 3>\plain\f3\fs18\cf3 TPJExtFileFilterStyle\plain\f3\fs18\cf1 \protect </HS 3>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This property determines which kinds of file names have the extension filter applied. Possible values are:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f1\fs18\cf3\i fsFilterFilesOnly\plain\f1\fs18\cf3 \tab Files are filtered by their extension while all folders are passed through the filter regardless of extension.
+\par \plain\f1\fs18\cf3\i fsFilterFoldersOnly\plain\f1\fs18\cf3 \tab Folders are filtered by their extension while all files are passed through the filter.
+\par \plain\f1\fs18\cf3\i fsAll\plain\f1\fs18\cf3 \tab The filter is applied to both files and folders.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 The default value is \plain\f1\fs18\cf3\i fsFilterFilesOnly\plain\f1\fs18\cf3 .
+\par 
+\par \pard \plain\f1\fs18\cf3\b Note\plain\f1\fs18\cf3 : To prevent files or folders passing being accepted by the drop files control use that control's \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 Options\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  property.\plain\f1\fs8\cf3 
+\par }
+
+[Footnotes]
+#=IDH_EFF_METHODS
+$=TPJExtFileFilter methods
+[End]
+2
+HS
+1
+0
+
+0
+IDH_EFF_ACCEPT
+
+HS
+143
+0
+
+0
+
+AL(TComponent_object,1)
+627
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 Accept\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par 
+\par \pard TPJExtFileFilter defines no additional methods to those inherited from \plain\f0\fs18\cf2 \protect <HS 143>\plain\f1\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 143>\plain\f0\fs18\cf1 .\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_EFF_ACCEPT
+$=TPJExtFileFilter.Accept
+K=Accept,TPJExtFileFilter;TPJExtFileFilter,Accept;Accept
+A=TPJExtFileFilter_Accept;Accept_method;Accept
+[End]
+4
+HS
+1
+0
+
+0
+IDH_EFF_STYLE
+
+HS
+2
+0
+
+0
+IDH_EFF_EXTENSIONS
+
+NS
+177
+HS
+178
+0
+
+0
+IDH_EFF_CLASS
+
+2448
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern \fcharset0 Courier New;}{\f3\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 177>\plain\f0\fs8\cf2 
+\par \plain\f1\fs22\cf2\b TPJExtFileFilter\plain\f0\fs22\cf2\b .\plain\f1\fs22\cf2\b Accept\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 178>\plain\f1\fs18\cf3 TPJExtFileFilter\plain\f0\fs18\cf1 \protect </HS 178>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 177>\plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 Returns whether a given file or folder passes though the filter.\plain\f0\fs18\cf3 
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf3\b function\plain\f3\fs18\cf3\b  \plain\f2\fs18\cf3 Accept(\plain\f2\fs18\cf3\b const\plain\f2\fs18\cf3  FilePath: \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ; \plain\f2\fs18\cf3\b const\plain\f2\fs18\cf3  IsFolder: Boolean): Boolean;\plain\f3\fs18\cf3  \plain\f2\fs18\cf3\b virtual\plain\f3\fs18\cf3 ;\plain\f2\fs18\cf3  \plain\f2\fs18\cf3\b abstract\plain\f2\fs18\cf3 ;\plain\f3\fs18\cf3 
+\par \pard \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This method is called by the filter's owning drop files component whenever files are dropped. It is called once for each dropped file or folder dropped and returns true if the file of folder specified by the \plain\f1\fs18\cf3\i FilePath\plain\f1\fs18\cf3  and \plain\f1\fs18\cf3\i IsFolder\plain\f1\fs18\cf3  passes through the filter and false if not.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 For a file to pass through the filter it must either be of a type that is not being filtered (per the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Style\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property) or it must have an extension that matches one of those list in the \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 Extensions\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  property.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 This method is used internally by the drop files components. There is no reason to call the method from program code unless to discover whether a file or folder will pass the filter.
+\par }
+
+[Footnotes]
+#=IDH_EFF_EVENTS
+$=TPJExtFileFilter events
+[End]
+0
+329
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab TPJExtFileFilter has no events.\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_WCF_CLASS
+$=TPJWildCardFileFilter
+K=TPJWildCardFileFilter
+A=TPJWildCardFileFilter_Object;TPJWildCardFileFilter
+[End]
+12
+HS
+1
+0
+
+0
+IDH_PJDROPFILES
+
+NS
+2
+HS
+3
+0
+
+1
+IDH_WCF_HEIRACHY
+
+HS
+4
+0
+
+1
+IDH_WCF_PROPERTIES
+
+HS
+5
+0
+
+0
+IDH_DF_CLASS
+
+HS
+6
+0
+
+0
+IDH_FDF_CLASS
+
+HS
+7
+0
+
+0
+IDH_WCF_WILDCARD
+
+HS
+8
+0
+
+0
+IDH_CDF_CLASS
+
+HS
+118
+0
+
+1
+IDH_WCF_METHODS
+
+HS
+119
+0
+
+1
+IDH_WCF_EVENTS
+
+HS
+167
+0
+
+0
+
+AL(TPJExtFileFilter_object)
+BM
+172
+TPJWildCardFileFilter.bmp
+0
+1
+2670
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 2>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf1\b \protect <BM 172>\plain\f0\fs22\cf2\b  TPJWildCardFileFilter\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf3 Heirachy\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf3 Properties\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 118>\plain\f0\fs18\cf3 Methods\plain\f0\fs18\cf1 \protect </HS 118>\plain\f0\fs18\cf3            \plain\f0\fs18\cf1 \protect <HS 119>\plain\f0\fs18\cf3 Events\plain\f0\fs18\cf1 \protect </HS 119>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 167>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 167>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 2>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 TPJWildCardFileFilter\plain\f0\fs18\cf3  \plain\f1\fs18\cf3 is a file filter component for use with the drop files components that filters files according to a DOS-style wild card.\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par 
+\par \plain\f1\fs18\cf3 This component is designed for use with \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf3 TPJDropFiles\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf3 , \plain\f1\fs18\cf1 \protect <HS 6>\plain\f1\fs18\cf3 TPJFormDropFiles\plain\f1\fs18\cf1 \protect </HS 6>\plain\f1\fs18\cf3  and \plain\f1\fs18\cf1 \protect <HS 8>\plain\f1\fs18\cf3 TPJCtrlDropFiles\plain\f1\fs18\cf1 \protect </HS 8>\plain\f1\fs18\cf3  components to filter the files dropped based on a suppliaed wild card.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 It provides a single property - \plain\f1\fs18\cf1 \protect <HS 7>\plain\f1\fs18\cf3 WildCard\plain\f1\fs18\cf1 \protect </HS 7>\plain\f1\fs18\cf3  - that specifies the wild card to be used as the filter.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 The component implements the inherited Accept method to return true when files pass through the filter by matching the wild card.\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_WCF_HEIRACHY
+$=TPJWildCardFileFilter heirachy
+[End]
+4
+HS
+1
+0
+
+0
+IDH_FF_CLASS
+
+HS
+29
+0
+
+0
+
+AL(TObject_object,1)
+HS
+30
+0
+
+0
+
+AL(TPersistent_object,1)
+HS
+31
+0
+
+0
+
+AL(TComponent_object,1)
+770
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 29>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 29>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 30>\plain\f0\fs18\cf1 TPersistent\plain\f0\fs18\cf2 \protect </HS 30>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 31>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 31>\plain\f0\fs18\cf1 
+\par      |
+\par \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 TPJFileFilter\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_WCF_PROPERTIES
+$=TPJWildCardFileFilter properties
+[End]
+4
+HS
+1
+0
+
+0
+IDH_WCF_WILDCARD
+
+HS
+19
+0
+
+0
+
+AL(TComponent_Name,1)
+HS
+20
+0
+
+0
+
+AL(TComponent_Tag,1)
+HS
+97
+0
+
+0
+
+AL(TComponent_object,1)
+953
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 19>\plain\f0\fs18\cf1 Name\plain\f0\fs18\cf2 \protect </HS 19>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 20>\plain\f0\fs18\cf1 Tag\plain\f0\fs18\cf2 \protect </HS 20>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 WildCard\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \pard \tx200 \tx2000 \tx2200 \tx4000 \tx4200 
+\par plus all run-time only properties inherited from \plain\f0\fs18\cf2 \protect <HS 97>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 97>\plain\f0\fs18\cf1 .\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_WCF_WILDCARD
+$=TPJWildCardFileFilter.WildCard
+K=WildCard,TPJWildCardFileFilter;TPJWildCardFileFilter,WildCard;WildCard
+A=TPJWildCardFileFilter_WildCard;WildCard_Property;WildCard
+[End]
+3
+KP
+1
+HS
+85
+0
+
+0
+IDH_WCF_CLASS
+
+NS
+86
+1792
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}{\f4\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 86>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b TPJWildCardFileFilter.\plain\f1\fs22\cf2\b WildCard\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 85>\plain\f0\fs18\cf3 TPJWildCardFileFilter\plain\f0\fs18\cf1 \protect </HS 85>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 86>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 Filter files based on a wildcard string\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf3\b property\plain\f2\fs18\cf3  \plain\f3\fs18\cf3 WildCard\plain\f2\fs18\cf3 : \plain\f3\fs18\cf3\b string\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This property stores the wildcard that is used by the component to filter files\plain\f0\fs18\cf3 .\plain\f1\fs18\cf3  The wildcard is applied to the actual filename or folder name (not the path) and uses the same special characters as DOS (and Windows) wildcards. The wildcard is applied to both files and folders.
+\par \plain\f1\fs12\cf3 
+\par \plain\f1\fs18\cf3\b Example\plain\f1\fs18\cf3 
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 To filter out all files except those with names beginning with "PJ" and with a ".pas" extension set WildCard to \plain\f4\fs18\cf3 'PJ*.pas'\plain\f1\fs18\cf3 .\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_WCF_METHODS
+$=TPJWildCardFileFilter methods
+[End]
+2
+HS
+1
+0
+
+0
+IDH_WCF_ACCEPT
+
+HS
+143
+0
+
+0
+
+AL(TComponent_object,1)
+632
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods
+\par \plain\f0\fs18\cf1 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 Accept\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par 
+\par \pard TPJWildCardFileFilter defines no additional methods to those inherited from \plain\f0\fs18\cf2 \protect <HS 143>\plain\f1\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 143>\plain\f0\fs18\cf1 .\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_WCF_ACCEPT
+$=TPJWildCardFileFilter.Accept
+K=Accept,TPJWildCardFileFilter;TPJWildCardFileFilter,Accept;Accept
+A=TPJWildCardFileFilter_Accept;Accept_method;Accept
+[End]
+3
+HS
+1
+0
+
+0
+IDH_WCF_WILDCARD
+
+NS
+177
+HS
+178
+0
+
+0
+IDH_WCF_CLASS
+
+2283
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern \fcharset0 Courier New;}{\f3\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 177>\plain\f0\fs8\cf2 
+\par \plain\f1\fs22\cf2\b TPJWildCardFileFilter\plain\f0\fs22\cf2\b .\plain\f1\fs22\cf2\b Accept\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 178>\plain\f1\fs18\cf3 TPJWildCardFileFilter\plain\f0\fs18\cf1 \protect </HS 178>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 177>\plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 Returns whether a given file or folder passes though the filter.\plain\f0\fs18\cf3 
+\par 
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf3\b function\plain\f3\fs18\cf3\b  \plain\f2\fs18\cf3 Accept(\plain\f2\fs18\cf3\b const\plain\f2\fs18\cf3  FilePath: \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ; \plain\f2\fs18\cf3\b const\plain\f2\fs18\cf3  IsFolder: Boolean): Boolean;\plain\f3\fs18\cf3  \plain\f2\fs18\cf3\b virtual\plain\f3\fs18\cf3 ;\plain\f2\fs18\cf3  \plain\f2\fs18\cf3\b abstract\plain\f2\fs18\cf3 ;\plain\f3\fs18\cf3 
+\par \pard \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This method is called by the filter's owning drop files component whenever files are dropped. It is called once for each dropped file or folder dropped and returns true if the file of folder specified by the \plain\f1\fs18\cf3\i FilePath\plain\f1\fs18\cf3  and \plain\f1\fs18\cf3\i IsFolder\plain\f1\fs18\cf3  passes through the filter and false if not.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 For a file to pass through the filter its file or filder name (not the path) must match the wild card specified in the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 WildCard\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  property.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 This method is used internally by the drop files components. There is no reason to call the method from program code unless to discover whether a file or folder will pass the filter.
+\par }
+
+[Footnotes]
+#=IDH_WCF_EVENTS
+$=TPJWildCardFileFilter events
+[End]
+0
+334
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab TPJWildCardFileFilter has no events.\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_TPJDROPFILESOPTION
+$=TPJDropFilesOption
+K=TPJDropFilesOption
+A=TPJDropFilesOption
+[End]
+3
+NS
+1
+KP
+2
+HS
+3
+0
+
+0
+IDH_PJDROPFILES
+
+1459
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset0 Courier New;}{\f3\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 1>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJ\plain\f1\fs22\cf2\b DropFilesOption\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This enumeration represents the possible values to be included in the set properties that govern the processing and filtering to be applied to dropped files.
+\par \plain\f1\fs8\cf3 
+\par \plain\f2\fs18\cf1 \protect <KP 2>\plain\f2\fs18\cf3 TPJDropFilesOption = (
+\par   dfoIncFiles,\tab \plain\f3\fs18\cf3 // plain files included\plain\f2\fs18\cf3 
+\par   dfoIncFolders,\tab \plain\f3\fs18\cf3 // folders included\plain\f2\fs18\cf3 
+\par   dfoRecurseFolders\tab \plain\f3\fs18\cf3 // contents of folders found and included\plain\f2\fs18\cf3 
+\par );\plain\f2\fs18\cf1 \protect </KP 2>\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_TPJDROPFILESOPTIONS
+$=TPJDropFilesOptions
+K=TPJDropFilesOptions
+A=TPJDropFilesOptions
+[End]
+5
+NS
+1
+KP
+2
+HS
+3
+0
+
+0
+IDH_TPJDROPFILESOPTION
+
+HS
+4
+0
+
+0
+IDH_TPJDROPFILESOPTION
+
+HS
+5
+0
+
+0
+IDH_PJDROPFILES
+
+1380
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 1>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJ\plain\f1\fs22\cf2\b DropFilesOptions\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This is a set of \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 TPJDropFilesOption\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  values that specify the processing and filtering to be applied to dropped files.
+\par \plain\f1\fs8\cf3 
+\par \plain\f2\fs18\cf1 \protect <KP 2>\plain\f2\fs18\cf3 TPJDropFilesOptions = \plain\f2\fs18\cf3\b set of\plain\f2\fs18\cf3  \plain\f2\fs18\cf1 \protect <HS 4>\plain\f2\fs18\cf3 TPJDropFilesOption\plain\f2\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 2>\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_TPJEXTFILEFILTERSTYLE
+$=TPJExtFileFilterStyle
+K=TPJExtFileFilterStyle
+A=TPJExtFileFilterStyle
+[End]
+5
+NS
+1
+KP
+2
+HS
+3
+0
+
+0
+IDH_PJDROPFILES
+
+HS
+4
+0
+
+0
+IDH_EFF_CLASS
+
+HS
+5
+0
+
+0
+IDH_EFF_STYLE
+
+1677
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset0 Courier New;}{\f3\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 1>\plain\f0\fs8\cf2\b 
+\par \plain\f1\fs22\cf2\b TPJExtFileFilterStyle\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This enumeration represents the kind of filtering performed by the \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf3 TPJExtFileFilter\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf3  component according to its \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf3 Style\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf3  property.
+\par \plain\f1\fs8\cf3 
+\par \plain\f2\fs18\cf1 \protect <KP 2>\plain\f2\fs18\cf3 TPJExtFileFilterStyle = (
+\par \pard \tx2400   fsFilterFilesOnly,\tab \plain\f3\fs18\cf3 // only filter files - pass folders through\plain\f2\fs18\cf3 
+\par   fsFilterFoldersOnly,\tab \plain\f3\fs18\cf3 // only filter folders - pass files through\plain\f2\fs18\cf3 
+\par   fsAll\tab \plain\f3\fs18\cf3 // filter folders and files\plain\f2\fs18\cf3 
+\par \pard );\plain\f2\fs18\cf1 \protect </KP 2>\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_TPJDROPPEDFILEFILTER
+$=TPJDroppedFileFilter
+K=TPJDroppedFileFilter
+A=TPJDroppedFileFilter
+[End]
+3
+NS
+1
+HS
+2
+0
+
+0
+
+AL(OnFileFilter_Event)
+HS
+3
+0
+
+0
+IDH_PJDROPFILES
+
+2207
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset0 Courier New;}{\f3\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 1>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJDroppedFileFilter\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf3 PJDropFiles\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 Event handler type for \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 OnFileFilter\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3  events, triggered for each file and folder dropped after processing by any filter component. This event can be handled to apply custom filtering to each file and folder.
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-200 \li200 \tx200 \plain\f2\fs18\cf3 TPJDroppedFileFilter = \plain\f2\fs18\cf3\b procedure\plain\f2\fs18\cf3 (Sender: TObject; \plain\f2\fs18\cf3\b const\plain\f2\fs18\cf3  FileName: \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ; \plain\f2\fs18\cf3\b const\plain\f2\fs18\cf3  IsFolder: Boolean; \plain\f2\fs18\cf3\b var\plain\f2\fs18\cf3  Accept: Boolean) \plain\f2\fs18\cf3\b of object\plain\f2\fs18\cf3 ;
+\par \plain\f3\fs18\cf3 
+\par \pard \plain\f3\fs18\cf3\i FileName \plain\f3\fs18\cf3 is the name of the file or folder being filtered. \plain\f3\fs18\cf3\i IsFolder \plain\f3\fs18\cf3 is true if \plain\f3\fs18\cf3\i FileName\plain\f3\fs18\cf3  denotes a folder. The state of the \plain\f3\fs18\cf3\i Accept\plain\f3\fs18\cf3  flag determines if \plain\f3\fs18\cf3\i FileName\plain\f3\fs18\cf3  is to be added to the list of dropped files / folders. \plain\f3\fs18\cf3\i Accept\plain\f3\fs18\cf3  is true by default - set it to false to omit the file from the list of dropped files and folders.\plain\f2\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_PJ_DROPFILES_MSG
+$=PJ_DROPFILES message
+K=PJ_DROPFILES
+A=PJ_DROPFILES
+[End]
+10
+HS
+1
+0
+
+0
+IDH_CDF_CLASS
+
+HS
+2
+0
+
+0
+
+AL(WM_DROPFILES,1)
+HS
+147
+0
+
+0
+IDH_DF_CLASS
+
+HS
+148
+0
+
+0
+IDH_FDF_CLASS
+
+KP
+150
+KP
+151
+HS
+156
+0
+
+0
+
+AL(TPJDropFiles_Enabled;TPJCtrlDropFiles_Enabled)
+HS
+157
+0
+
+0
+
+AL(TPJDropFiles_PassThrough;TPJCtrlDropFiles_PassThrough)
+NS
+165
+HS
+171
+0
+
+0
+
+AL(RegisterWindowMessage,1)
+3720
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 165>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf2\b PJ_DROPFILES message
+\par \plain\f0\fs8\cf2\b  \plain\f0\fs22\cf1\b \protect </NS 165>\plain\f0\fs22\cf2\b 
+\par \plain\f0\fs18\cf3 This is a custom message used by \plain\f0\fs18\cf1 \protect <HS 147>\plain\f0\fs18\cf3 TPJDropFiles\plain\f0\fs18\cf1 \protect </HS 147>\plain\f1\fs18\cf3 ,\plain\f0\fs18\cf3  \plain\f0\fs18\cf1 \protect <HS 148>\plain\f0\fs18\cf3 TPJFormDropFiles\plain\f0\fs18\cf1 \protect </HS 148>\plain\f1\fs18\cf3  and \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 TPJCtrlDropFiles\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f0\fs18\cf3\b Parameters
+\par \plain\f0\fs8\cf3\b 
+\par \plain\f2\fs18\cf1 \protect <KP 150>\plain\f2\fs18\cf3 hDrop = THandle(WParam)\plain\f0\fs18\cf3 \tab // drop handle\plain\f0\fs18\cf1 \protect </KP 150>\plain\f0\fs18\cf3 
+\par \plain\f2\fs18\cf1 \protect <KP 151>\plain\f2\fs18\cf3 Pos = TSmallPoint(LParam)\plain\f0\fs18\cf3 \tab // mouse cursor position in form coordinates\plain\f0\fs18\cf1 \protect </KP 151>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When a TPJDropFiles \plain\f1\fs18\cf3 or TPJCtrlDropFiles \plain\f0\fs18\cf3 component receives a \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf3 WM_DROPFILES\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf3  message and the component's \plain\f0\fs18\cf1 \protect <HS 156>\plain\f0\fs18\cf3 Enabled\plain\f0\fs18\cf1 \protect </HS 156>\plain\f0\fs18\cf3  and \plain\f0\fs18\cf1 \protect <HS 157>\plain\f0\fs18\cf3 PassThrough\plain\f0\fs18\cf1 \protect </HS 157>\plain\f0\fs18\cf3  properties are both true, the component passes information about the WM_DROPFILES message to the owning form. WM_DROPFILES contains a drop handle that can be used to find the mouse coordinates at the time the files were dropped. However, the mouse coordinates are relative to the TPJDropFiles component's window\plain\f1\fs18\cf3  or the window managed by TPJCtrlDropFiles\plain\f0\fs18\cf3 .
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 PJ_DROPFILES is used to circumvent this problem. This message contains the drop position in form coordinates. When TPJDropFiles \plain\f1\fs18\cf3 or TPJCtrlDropFiles \plain\f0\fs18\cf3 passes through a drop files message it converts the drop coordinates into form coordinates and sends them to the form in the LParam field of a PJ_DROPFILES message. The WParam field is set to the drop handle per the WM_DROPFILES message.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 A TPJFormDropFiles component on the form will handle the PJ_DROPFILES message as if it were a WM_DROPFILES message except that it ignores the drop coordinates provided by the drop handle and uses those in PJ_DROPFILES instead.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 A PJ_DROPFILES message must be is unique across the system because it is used by more than one window class. It is created by using the \plain\f0\fs18\cf1 \protect <HS 171>\plain\f0\fs18\cf3 RegisterWindowMessage\plain\f0\fs18\cf1 \protect </HS 171>\plain\f0\fs18\cf3  API call. To use the message in other components get the message code by calling \plain\f2\fs18\cf3 RegisterWindowMessage('PJ_DROPFILES')\plain\f0\fs18\cf3 . Return 1 if PJ_DROPFILES is handled and 0 if not (this is unlike WM_DROPFILES where 0 is returned when the message is handled).
+\par }
+
