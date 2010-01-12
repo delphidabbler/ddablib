@@ -1,32 +1,12 @@
-{ ##
-  @PROJECT_NAME             DropFilesDemo
-  @PROJECT_DESC             Demonstrates use of Drop Files components and
-                            filters.
-  @FILE                     DropFilesDemo.dpr
-  @COMMENTS                 Demo program project file.
-  @LEGAL_NOTICE             This demo program is distributed under the Mozilla
-                            Public License - see below for details.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 09/02/2005
-      @COMMENTS             Original version.
-    )
-    @REVISION(
-      @VERSION              1.1
-      @DATE                 12/04/2004
-      @COMMENTS             Added title.
-    )
-    @REVISION(
-      @VERSION              1.2
-      @DATE                 19/03/2006
-      @COMMENTS             Modified title.
-    )
-  )
-}
-
-
-{
+{ 
+ * DropFilesDemo.dpr
+ *
+ * Project file for demo program that demonstrates use of Drop Files Components
+ * and filters.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -44,8 +24,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1997-2006 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1997-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }

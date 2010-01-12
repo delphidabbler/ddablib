@@ -1,22 +1,12 @@
-{ ##
-  @PROJECT_NAME             FrameDemo
-  @PROJECT_DESC             Demonstrates use of Drop Files components and
-                            frames.
-  @FILE                     FrameDemo.dpr
-  @COMMENTS                 Project file.
-  @LEGAL_NOTICE             This demo program is distributed under the Mozilla
-                            Public License - see below for details.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 19/03/2006
-      @COMMENTS             Original version.
-    )
-  )
-}
-
-
-{
+{ 
+ * FrameDemo.dpr
+ *
+ * Project file for demo program that demonstrates use of Drop Files Components
+ * with frames.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -34,8 +24,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2006 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2006-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }

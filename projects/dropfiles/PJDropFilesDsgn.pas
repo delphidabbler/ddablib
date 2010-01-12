@@ -1,53 +1,12 @@
-{ ##
-  @FILE                     PJDropFilesDsgn.pas
-  @COMMENTS                 Component and property editors and component
-                            registration.
-  @PROJECT_NAME             Drop files components
-  @PROJECT_DESC             Components that enable files dragged and dropped
-                            from explorer to be "caught". One component catches
-                            files in its own "container" window (that can
-                            contain other components) and the other enables a
-                            form to catch dropped files.
-  @AUTHOR                   Peter Johnson, LLANARTH, Ceredigion, Wales, UK
-  @EMAIL                    peter.johnson@openlink.org
-  @WEBSITE                  http://www.delphidabbler.com/
-  @COPYRIGHT                © Peter D Johnson, 1998-2006.
-  @LEGAL_NOTICE             These components are distributed under the Mozilla
-                            Public License - see below.
-  @OTHER_NAMES              None
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 27/09/2004
-      @COMMENTS             Original version containing component editor for
-                            TPJDropFiles and TPJFormDropFiles and property
-                            editor for TPJExtFileFilter.
-    )
-    @REVISION(
-      @VERSION              1.1
-      @DATE                 02/10/2004
-      @COMMENTS             Refactored TPJDropFilesCE component editor to a much
-                            simpler implementation.
-    )
-    @REVISION(
-      @VERSION              1.2
-      @DATE                 18/12/2005
-      @COMMENTS             + Changed compiler directives to prevent bug that
-                              was causing compilation failure on Delphi 2005 and
-                              later.
-                            + Replaced default routine parameters with fixed
-                              ones to enable compilation with Delphi 3.
-    )
-    @REVISION(
-      @VERSION              1.3
-      @DATE                 19/03/2006
-      @COMMENTS             Registered new TPJCtrlDropFiles component.
-    )
-  )
-}
-
-
 {
+ * PJDropFilesDsgn.pas
+ *
+ * Component and property editors and component registration for Drop Files
+ * Components.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -60,15 +19,16 @@
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
  * the specific language governing rights and limitations under the License.
  *
- * The Original Code is Drop Files Components.
+ * The Original Code is PJDropFilesDsgn.pas.
  *
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1998-2006 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1998-2010 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }

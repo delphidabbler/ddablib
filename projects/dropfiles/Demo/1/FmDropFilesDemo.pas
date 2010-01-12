@@ -1,41 +1,12 @@
-{ ##
-  @PROJECT_NAME             DropFilesDemo
-  @PROJECT_DESC             Demonstrates use of Drop Files components and
-                            filters.
-  @FILE                     FmDropFilesDemo.pas
-  @COMMENTS                 Drop files demo main form.
-  @LEGAL_NOTICE             This demo program is distributed under the Mozilla
-                            Public License - see below for details.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 09/02/2004
-      @COMMENTS             Original version
-    )
-    @REVISION(
-      @VERSION              2.0
-      @DATE                 12/04/2004
-      @COMMENTS             Added support for demonstrating component filters.
-    )
-    @REVISION(
-      @VERSION              2.1
-      @DATE                 18/12/2005
-      @COMMENTS             Made changes in order to compile with Delphi 3:
-                            + Removed unrecognised form properties.
-                            + Added conditional compilation to ensure Delphi 3
-                              ignores ImgList unit reference.
-    )
-    @REVISION(
-      @VERSION              3.0
-      @DATE                 19/03/2006
-      @COMMENTS             Complete rewrite for use with PJDropFiles v5 and
-                            addition of TPJCtrlDropFiles.
-    )
-  )
-}
-
-
-{
+{ 
+ * FmDropFilesDemo.pas
+ *
+ * Main form file for demo program that demonstrates use of Drop Files
+ * Components and filters.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -53,8 +24,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1997-2006 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1997-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }

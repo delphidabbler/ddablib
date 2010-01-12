@@ -1,164 +1,12 @@
-{ ##
-  @FILE                     PJDropFiles.pas
-  @COMMENTS                 The component source code.
-  @PROJECT_NAME             Drop files components
-  @PROJECT_DESC             Components that enable files dragged and dropped
-                            from explorer to be "caught". One component catches
-                            files in its own "container" window (that can
-                            contain other components) and the other enables a
-                            form to catch dropped files.
-  @AUTHOR                   Peter Johnson, LLANARTH, Ceredigion, Wales, UK
-  @EMAIL                    peter.johnson@openlink.org
-  @WEBSITE                  http://www.delphidabbler.com/
-  @COPYRIGHT                © Peter D Johnson, 1998-2006.
-  @LEGAL_NOTICE             These components are distributed under the Mozilla
-                            Public License - see below.
-  @OTHER_NAMES              + Original unit name was DrpFiles.pas
-                            + Changed to PJDropFiles.pas at v2.0
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 15/05/1998
-      @COMMENTS             Original version.
-    )
-    @REVISION(
-      @VERSION              1.1
-      @DATE                 12/10/1998
-      @COMMENTS             Changed 2nd parameter to DragQueryFile when used to
-                            find number of files dropped from $FFFF to
-                            Cardinal(-1) to make it portable across 16 and 32
-                            bit platforms. This was needed to allow the
-                            component to compile under Delphi 2.
-    )
-    @REVISION(
-      @VERSION              1.1a
-      @DATE                 09/04/1999
-      @COMMENTS             Changed installation palette from "Own" to "PJ
-                            Stuff".
-    )
-    @REVISION(
-      @VERSION              2.0
-      @DATE                 29/04/2001
-      @COMMENTS             Major rewrite:
-                            + Added new FileName, PassThrough and
-                              ForegroundOnDrop properties to TPJDropFiles.
-                            + Added new component TPJFormDropFiles to intercept
-                              files dropped directly on form (subclasses form's
-                              window proc).
-                            + Moved all common code for two components into
-                              helper classes.
-                            + Removed support for 16 bit Delphi.
-                            + Changed OnDropFiles event so no longer provides
-                              drop coordinates: use DropPoint property instead.
-                            + Changed unit name to PJDropFiles from DrpFiles.
-    )
-    @REVISION(
-      @VERSION              2.1
-      @DATE                 13/05/2001
-      @COMMENTS             Fixed bug where length of file name strings was
-                            being set incorrectly when collecting dropped files.
-    )
-    @REVISION(
-      @VERSION              3.0
-      @DATE                 26/10/2002
-      @COMMENTS             Major update:
-                            + Added facility to recurse through dropped folders
-                              and include all files in folders and sub folders
-                              in file list.
-                            + Also added facility to exclude folder and/or file
-                              names from list.
-                            + New Options property provides access to above new
-                              facilities.
-                            + Added new OnBeforeDrop event that is triggered
-                              before dropped files are processed.
-                            + Added new IsFolder array property that informs if
-                              a dropped file is a file or folder.
-                            + Fixed a bug in TPJFormDropFiles that was causing
-                              program to halt on exceptions.
-                            + Changed component palette name from PJ Stuff to
-                              DelphiDabbler.
-                            + Moved string literals in error messages to
-                              resource strings.\
-                            Backwards compatible with v2.
-    )
-    @REVISION(
-      @VERSION              3.1
-      @DATE                 29/07/2003
-      @COMMENTS             Prevented compiler warnings under Delphi 6 and 7 by
-                            using MakeObjectInstance and FreeObjectInstance from
-                            Classes unit in Delphi 6/7 and from Forms unit in
-                            lower versions.
-    )
-    @REVISION(
-      @VERSION              3.2
-      @DATE                 09/02/2004
-      @COMMENTS             Fixed bug in code that determines control under drop
-                            point that was often returning the parent of the
-                            actual control under the cursor.
-    )
-    @REVISION(
-      @VERSION              4.0
-      @DATE                 12/04/2004
-      @COMMENTS             + Added ability to filter files dropped on the
-                              controls, either via the new OnFileFilter event or
-                              by using a separate file filter component.
-                            + Added abstract base class for new file filter
-                              components.
-                            + Added filter component that filters on file
-                              extensions.
-                            + Added filter component that filters file names on
-                              wildcards.
-                            + Fixed a memory leak in
-                              TPJAbstractDropFilesHelper.Destroy.
-    )
-    @REVISION(
-      @VERSION              4.1
-      @DATE                 27/09/2004
-      @COMMENTS             Removed component registration to new design unit
-                            PJDropFilesDsgn
-    )
-    @REVISION(
-      @VERSION              4.2
-      @DATE                 18/12/2005
-      @COMMENTS             Fixed bug in detecting compilers to prevent
-                            deprecated warnings with Delphi 2005 and later.
-    )
-    @REVISION(
-      @VERSION              5.0
-      @DATE                 19/03/2006
-      @COMMENTS             + Added new TPJCtrlDropFiles component that handles
-                              file drops for any assigned TWinControl
-                              descendant. TPJCtrlDropFiles descends from new
-                              TPJSubClassedDropFiles abstract component
-                            + Revised TPJFormDropFiles to descend from
-                              TPJSubClassedDropFiles.
-                            + Added new TPJCtrlDropFilesHelper class to work
-                              with TPJCtrlDropFiles.
-                            + Exposed several new properties of TPJDropFiles:
-                              Anchors, Constraints, TabOrder, TabStop, Visible.
-                            + Changed pass through processing to find ultimate
-                              owning form rather than simply parent form. This
-                              allows pass through processing to work with
-                              frames.
-                            + Hidden controls now ignored when searching for
-                              DropControl.
-                            + Fixed bug in TPJWildCardFileFilter that didn't
-                              respond to change in wildcard when files dragged
-                              from same folder.
-    )
-    @REVISION(
-      @VERSION              5.1
-      @DATE                 19/10/2006
-      @COMMENTS             + Fixed bug that was occasionally freezing IDE when
-                              closing a form containing a TPJSubClassedDropFiles
-                              descendant component. Thanks to Kirr for
-                              suggesting this fix.
-    )
-  )
-}
-
-
-{
+{ 
+ * PJDropFiles.pas
+ *
+ * Components that enable files dragged and dropped from explorer to be
+ * "caught" along with secondary components used to filter dropped files.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -171,15 +19,16 @@
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
  * the specific language governing rights and limitations under the License.
  *
- * The Original Code is Drop Files Components.
+ * The Original Code is PJDropFiles.pas.
  *
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1998-2006 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1998-2010 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }
