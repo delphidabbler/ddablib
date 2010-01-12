@@ -40,7 +40,7 @@ unit PJDropFiles;
 interface
 
 
-// Set conditionally defined symbols
+// Set conditionally defined symbols and switch off certain warnings
 {$UNDEF DELPHI4ANDUP}
 {$UNDEF DELPHI6ANDUP}
 {$IFDEF VER120} // Delphi 4
@@ -56,6 +56,10 @@ interface
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
     {$DEFINE DELPHI4ANDUP}
     {$DEFINE DELPHI6ANDUP}
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
+    {$WARN UNSAFE_CAST OFF}
+    {$WARN SYMBOL_PLATFORM OFF}
   {$IFEND}
 {$ENDIF}
 
