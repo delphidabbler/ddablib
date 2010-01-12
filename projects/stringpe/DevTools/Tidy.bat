@@ -10,7 +10,6 @@
 @rem ---------------------------------------------------------------------------
 
 @echo off
-
 setlocal
 
 echo Tidying
@@ -26,7 +25,7 @@ del /S %RootDir%\*.dcu
 del /S %RootDir%\*.exe 
 del /S %RootDir%\*.dsk 
 del /S %RootDir%\*.bak
-del /S %RootDir%\*.GID 
+del /S /AH %RootDir%\*.GID 
 echo.
 
 echo Deleting temporary directories
