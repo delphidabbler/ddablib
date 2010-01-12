@@ -40,36 +40,23 @@ unit PJDropFiles;
 interface
 
 
-{ Find which compilers we have }
-{$DEFINE DELPHI6ANDUP}
-{$DEFINE DELPHI4ANDUP}
-{$IFDEF VER80}  {Delphi 1}
-  {$UNDEF DELPHI6ANDUP}
+// Set conditionally defined symbols
+{$UNDEF DELPHI4ANDUP}
+{$UNDEF DELPHI6ANDUP}
+{$IFDEF VER120} // Delphi 4
+  {$DEFINE DELPHI4ANDUP}
 {$ENDIF}
-{$IFDEF VER90}  {Delphi 2}
-  {$UNDEF DELPHI4ANDUP}
-  {$UNDEF DELPHI6ANDUP}
+{$IFDEF VER125} // C++ Builder 4
+  {$DEFINE DELPHI4ANDUP}
 {$ENDIF}
-{$IFDEF VER93}  {C++ Builder 1}
-  {$UNDEF DELPHI4ANDUP}
-  {$UNDEF DELPHI6ANDUP}
+{$IFDEF VER130} // Delphi 5
+  {$DEFINE DELPHI4ANDUP}
 {$ENDIF}
-{$IFDEF VER100} {Delphi 3}
-  {$UNDEF DELPHI4ANDUP}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER110} {C++ Builder 3}
-  {$UNDEF DELPHI4ANDUP}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER120} {Delphi 4}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER125} {C++ Builder 4}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER130} {Delphi 5}
-  {$UNDEF DELPHI6ANDUP}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
+    {$DEFINE DELPHI4ANDUP}
+    {$DEFINE DELPHI6ANDUP}
+  {$IFEND}
 {$ENDIF}
 
 
@@ -79,7 +66,6 @@ uses
 
 
 type
-
 
   {
   TPJFileFilter:
@@ -97,7 +83,6 @@ type
       the filter and false if not}
   end;
 
-
   {
   TPJExtFileFilterStyle:
     Values of TPJExtFileFilter component's Style property.
@@ -107,7 +92,6 @@ type
     fsFilterFoldersOnly,  // folders are filtered by extension, files pass thru
     fsAll                 // filter is applied to files and folders
   );
-
 
   {
   TPJExtFileFilter:
@@ -143,7 +127,6 @@ type
       comments on TPJExtFileFilterStyle}
   end;
 
-
   {
   TPJWildCardFileFilter:
     Filter component used to filter out files that do not have a file name
@@ -176,7 +159,6 @@ type
       DOS format - '?' and '*' are supported}
   end;
 
-
   {
   TPJDroppedFileFilter:
     Type of method used to handle OnFileFilter events. FileName is name of a
@@ -186,7 +168,6 @@ type
   }
   TPJDroppedFileFilter = procedure(Sender: TObject; const FileName: string;
     const IsFolder: Boolean; var Accept: Boolean) of object;
-
 
   {
   TPJDropFilesOption:
@@ -198,13 +179,11 @@ type
     dfoRecurseFolders   // recurse through all folder in list of dropped files
   );
 
-
   {
   TPJDropFilesOptions:
     Set containing possible values of Options property.
   }
   TPJDropFilesOptions = set of TPJDropFilesOption;
-
 
   {
   TPJAbstractDropFilesHelper:
@@ -285,7 +264,6 @@ type
       {Called before dropped files are processed. Triggers OnBeforeDrop event}
   end;
 
-
   {
   TPJDropFilesHelper:
     Helper class customised to TPJDropFiles.
@@ -296,7 +274,6 @@ type
       {Returns return reference to the component's related windowed control:
       this is the control itself in this class}
   end;
-
 
   {
   TPJFormDropFilesHelper:
@@ -309,7 +286,6 @@ type
       this is the form on which owns the component}
   end;
 
-
   {
   TPJCtrlDropFilesHelper:
     Helper class customised to TPJCtrlDropFiles
@@ -319,7 +295,6 @@ type
     function GetContainer: TWinControl; override;
       {Returns return reference to the control managed by the related component}
   end;
-
 
   {
   TPJDropFiles:
@@ -439,7 +414,6 @@ type
       false}
   end;
 
-
   {
   TPJSubClassedDropFiles:
     Base class for drop files components handle drop files for an associated
@@ -532,7 +506,6 @@ type
       false}
   end;
 
-
   {
   TPJFormDropFiles:
     Component that subclasses owner form window to provide ability to catch
@@ -558,7 +531,6 @@ type
     destructor Destroy; override;
       {Component destructor. Tears down component}
   end;
-
 
   {
   TPJCtrlDropFiles:
@@ -630,11 +602,9 @@ resourcestring
   sOnlyOneAllowed = 'Only one TPJFormDropFiles component is permitted on a '
     + 'form: %0:s is already present on %1:s';
 
-
 var
   // Id of private, unique, PJ_DROPFILES message
   pvtPJDropFilesMsg: UINT;
-
 
 { TPJDropFiles }
 
@@ -860,7 +830,6 @@ begin
   Msg.Result := 0;
 end;
 
-
 { TPJSubClassedDropFiles }
 
 constructor TPJSubClassedDropFiles.Create(AOwner: TComponent);
@@ -1023,7 +992,6 @@ begin
   Helper.fOptions := Value;
 end;
 
-
 { TPJFormDropFiles }
 
 constructor TPJFormDropFiles.Create(AOwner: TComponent);
@@ -1046,9 +1014,9 @@ begin
   begin
     // install new window procedure and record previous one
     {$IFDEF DELPHI6ANDUP}
-      fNewWndProc := Classes.MakeObjectInstance(NewWndProc);
+    fNewWndProc := Classes.MakeObjectInstance(NewWndProc);
     {$ELSE}
-      fNewWndProc := Forms.MakeObjectInstance(NewWndProc);
+    fNewWndProc := Forms.MakeObjectInstance(NewWndProc);
     {$ENDIF}
     fOldWndProc := Pointer(SetWindowLong(
       FormHandle,
@@ -1080,9 +1048,9 @@ begin
     if FormHandle <> 0 then
       SetWindowLong(FormHandle, GWL_WNDPROC, Integer(fOldWndProc));
     {$IFDEF DELPHI6ANDUP}
-      Classes.FreeObjectInstance(fNewWndProc);
+    Classes.FreeObjectInstance(fNewWndProc);
     {$ELSE}
-      Forms.FreeObjectInstance(fNewWndProc);
+    Forms.FreeObjectInstance(fNewWndProc);
     {$ENDIF}
   end;
   inherited Destroy;
@@ -1136,7 +1104,6 @@ begin
       Msg.WParam, Msg.LParam);
 end;
 
-
 { TPJCtrlDropFiles }
 
 function TPJCtrlDropFiles.ClientToScreen(ClientPos: TPoint): TPoint;
@@ -1155,9 +1122,9 @@ begin
   begin
     // install new window procedure and record previous one
     {$IFDEF DELPHI6ANDUP}
-      fNewWndProc := Classes.MakeObjectInstance(NewWndProc);
+    fNewWndProc := Classes.MakeObjectInstance(NewWndProc);
     {$ELSE}
-      fNewWndProc := Forms.MakeObjectInstance(NewWndProc);
+    fNewWndProc := Forms.MakeObjectInstance(NewWndProc);
     {$ENDIF}
   end;
 end;
@@ -1176,9 +1143,9 @@ begin
   if Assigned(fNewWndProc) then
   begin
     {$IFDEF DELPHI6ANDUP}
-      Classes.FreeObjectInstance(fNewWndProc);
+    Classes.FreeObjectInstance(fNewWndProc);
     {$ELSE}
-      Forms.FreeObjectInstance(fNewWndProc);
+    Forms.FreeObjectInstance(fNewWndProc);
     {$ENDIF}
   end;
   inherited;
@@ -1291,7 +1258,6 @@ begin
     Helper.AcceptFiles(Enabled);
   end;
 end;
-
 
 { TPJAbstractDropFilesHelper }
 
@@ -1546,7 +1512,6 @@ begin
     UpdateList(FileName, False);
 end;
 
-
 { TPJDropFilesHelper }
 
 function TPJDropFilesHelper.GetContainer: TWinControl;
@@ -1555,7 +1520,6 @@ function TPJDropFilesHelper.GetContainer: TWinControl;
 begin
   Result := fComp as TWinControl;
 end;
-
 
 { TPJFormDropFilesHelper }
 
@@ -1574,7 +1538,6 @@ begin
     Result := nil;
 end;
 
-
 { TPJCtrlDropFilesHelper }
 
 function TPJCtrlDropFilesHelper.GetContainer: TWinControl;
@@ -1582,7 +1545,6 @@ function TPJCtrlDropFilesHelper.GetContainer: TWinControl;
 begin
   Result := (fComp as TPJCtrlDropFiles).ManagedControl;
 end;
-
 
 { TPJExtFileFilter }
 
@@ -1715,7 +1677,6 @@ begin
   end;
 end;
 
-
 { TPJWildCardFileFilter }
 
 function TPJWildCardFileFilter.Accept(const FilePath: string;
@@ -1778,7 +1739,6 @@ begin
   inherited;
 end;
 
-
 procedure TPJWildCardFileFilter.SetWildCard(const Value: string);
   {Write accessor for WildCard property: records that wild card has changed}
 begin
@@ -1788,10 +1748,8 @@ end;
 
 initialization
 
-
 // Register custom message
 pvtPJDropFilesMsg := RegisterWindowMessage('PJ_DROPFILES');
-
 
 end.
 

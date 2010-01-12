@@ -40,39 +40,20 @@ unit PJDropFilesDsgn;
 interface
 
 
-{ Find if we have a Delphi 6 or higher compiler }
-{$DEFINE DELPHI6ANDUP}
-{$IFDEF VER80}  {Delphi 1}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER90}  {Delphi 2}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER93}  {C++ Builder 1}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER100} {Delphi 3}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER110} {C++ Builder 3}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER120} {Delphi 4}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER125} {C++ Builder 4}
-  {$UNDEF DELPHI6ANDUP}
-{$ENDIF}
-{$IFDEF VER130} {Delphi 5}
-  {$UNDEF DELPHI6ANDUP}
+// Find if we have a Delphi 6 or higher compiler
+{$UNDEF DELPHI4ANDUP}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
+    {$DEFINE DELPHI6ANDUP}
+  {$IFEND}
 {$ENDIF}
 
 
 uses
   {$IFDEF DELPHI6ANDUP}
-    DesignIntf, DesignEditors, TopLevels,
+  DesignIntf, DesignEditors, TopLevels,
   {$ELSE}
-    DsgnIntf,
+  DsgnIntf,
   {$ENDIF}
   Forms, StdCtrls, Classes, Controls;
 
@@ -169,7 +150,6 @@ uses
 
 {$R *.DFM}
 
-
 { Helper routines: from the CodeSnip database at www.delphidabbler.com }
 
 function SplitStr(const S: string; Delim: Char; out S1, S2: string): Boolean;
@@ -248,7 +228,6 @@ begin
         Result := Result + Delim + SL[Idx];
   end;
 end;
-
 
 { TPJExtFileFilterExtPEDlg }
 
@@ -330,7 +309,6 @@ begin
   ExplodeStr(ExtStr, ';', lbExtensions.Items, False);
 end;
 
-
 { TPJExtFileFilterExtPE }
 
 procedure TPJExtFileFilterExtPE.Edit;
@@ -356,9 +334,8 @@ begin
   Result := inherited GetAttributes + [paDialog];
 end;
 
-
 { TPJDropFilesCE }
-                              
+
 procedure TPJDropFilesCE.EditProperty(
   {$IFDEF DELPHI6ANDUP}
   const PropertyEditor: IProperty; var Continue: Boolean
@@ -374,7 +351,6 @@ begin
   if CompareText(PropertyEditor.GetName, 'OnDropFiles') = 0 then
     inherited;
 end;
-
 
 { Component, property editor and component editor registration }
 
@@ -411,3 +387,4 @@ begin
 end;
 
 end.
+
