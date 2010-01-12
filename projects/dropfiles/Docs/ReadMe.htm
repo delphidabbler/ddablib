@@ -1,17 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
+<!--
+ * Read-me file for Drop Files Components
+ *
+ * $Rev$
+ * $Date$
+-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
 
 	<title>
-		DelphiDabbler.com Info Sheet: Drop Files Components
+		DelphiDabbler.com Drop Files Components ReadMe
 	</title>
 
 	<style type="text/css">
-		<!--
 		body {
 			margin: 1em;
 			padding: 0;
@@ -133,7 +136,6 @@
 			font-size: 8pt;
 			text-align: right;
 		}
-		-->
 	</style>
 
 </head>
@@ -142,7 +144,7 @@
 
 <h1>
 	Drop Files Components<br />
-	<span class="subtitle">Information Sheet</span>
+	<span class="subtitle">ReadMe</span>
 </h1>
 
 
@@ -151,13 +153,13 @@
 </h2>
 
 <ul>
-	<li><a href="#overview">Overview</a></li>
-	<li><a href="#compatibility">Compatibility</a></li>
+	<li><a href="#desc">Description</a></li>
 	<li><a href="#installation">Installation</a></li>
-	<li><a href="#bugs">Bugs</a></li>
-	<li><a href="#changelog">Change log</a></li>
-	<li><a href="#license">License</a></li>
-	<li><a href="#author">About the author</a></li>
+	<li><a href="#demos">Demo Programs</a></li>
+	<li><a href="#update">Update History</a></li>
+	<li><a href="#license">License and Disclaimer</a></li>
+	<li><a href="#bugs">Bugs and Feature Requests</a></li>
+	<li><a href="#author">About the Author</a></li>
 </ul>
 
 
@@ -165,71 +167,80 @@
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
-<h2 id="overview">
-	Overview
+<h2 id="desc">
+	Description
 </h2>
 
 <p>
-	Three components are provided that enable applications to support Windows
-	Explorer file drag and drop. The components are:
+	Three components are supplied that support drag and drop from Windows
+	Explorer along with subsidiary components that can filter dropped files. The
+	components are:
 </p>
 
 <ul class="spaced">
 	<li>
 		<span class="highlight">TPJDropFiles</span><br />
-		This windowed component catches files dropped anywhere over its window.
-		It can act as a container for other components.
+		Container control that catches files dragged and dropped onto its client
+		area or the client area of child controls.
 	</li>
-
 	<li>
 		<span class="highlight">TPFormDropFiles</span><br />
-		This non-visual component catches files dropped anywhere on its form,
-		including the non-client areas.
-	</li>
+		Non-visual component that catches files dragged and dropped from
+		Explorer onto the form that contains the component.
+	<li>
 	<li>
 		<span class="highlight">TPJCtrlDropFiles</span><br />
-		This non-visual component catches files dropped on an associated
-		<var>TWinControl</var> or <var>TFrame</var>.
+		Non-visual component that catches files dragged and dropped from
+		Explorer onto an associated control.
+	</li>
+	<li>
+		<span class="highlight">TPJExtFileFilter</span><br />
+		File filter component that filters files according to their extension.
+	</li>
+	<li>
+		<span class="highlight">TPJWildCardFileFilter</span><br />
+		File filter component that filters files according to a DOS-style wild
+		card.
+	</li>
+	<li>
+		<span class="highlight">TPJFileFilter</span><br />
+		An abstract base class for file filter components.
 	</li>
 </ul>
 
 <p>
-	Key features of these components are:
+	Some design time assistance is provided by component and property editors.
+</p>
+
+<p>
+	Key features of the drop files components are:
 </p>
 
 <ul class="spaced">
-
 	<li>
 		An <var>OnDropFiles</var> event is triggered when files are dropped.
 	</li>
-
 	<li>
 		The names of dropped files are made available through the
-		<var>Files</var> array property. For convenience, the name of the first
-		file is also stored in the <var>FileName</var> property.
+		<var>Files[]</var> array property. For convenience, the name of the
+		first file is also stored in the <var>FileName</var> property.
 	</li>
-
 	<li>
 		The list of dropped files can be configured to include only files, only
 		folders or all files and folders.
 	</li>
-
 	<li>
 		Dropped folders can be recursed so that all the files and sub-folders in
 		each of the dropped folders are listed.
 	</li>
-
 	<li>
 		Filters can be applied to the dropped files and folders. This is done in
 		one of two ways:
-		
 		<ul class="unspaced">
-		
 			<li class="first">
 				By handling the <var>OnFileFilter</var> event and deciding which
 				files and folders to pass through the filter.
 			</li>
-
 			<li>
 				By linking the drop file component to a special file filter
 				component, derived from the abstract <var>TPJFileFilter</var>.
@@ -240,56 +251,128 @@
 				using DOS-style wildcards. Developers can create further filter
 				components by deriving from <var>TPJFileFilter</var>.
 			</li>
-
 		</ul>
-		
 	</li>
-
 	<li>
 		The mouse co-ordinates where the files were dropped can be retrieved, as
 		can a reference to any control under the mouse cursor at the time.
 	</li>
-
 	<li>
 		The <var>OnBeforeDrop</var> event can be used to do pre-processing
 		before the files are actually dropped.
 	</li>
-
 	<li>
-		The <var>IsFolder</var> array property tells if an equivalent item in
-		the <var>Files</var> list is a file or a folder.
+		The <var>IsFolder[]</var> array property informs if an equivalent item
+		in the <var>Files[]</var> property is a file or a folder.
 	</li>
-
 	<li>
 		The owning window can be brought to the front when files are dropped.
 	</li>
-
-	<li>
-		Some design time assistance is provided by component and property
-		editors.
-	</li>
-	
 </ul>
 
-
 <h3>
-	Help file
+   Compatibility
 </h3>
 
 <p>
-	An OpenHelp compatible help file is included that integrates with Delphi 3
-	to 7. The help file does not integrate with Delphi 2005 and later, but can
-	be used as a stand-alone help file with some loss of functionality. An
-	a-link keyword file is supplied for use with Delphi 6 and 7.
+	The Drop Files Components compile with Delphi 3 and later. They have been
+	tested with Delphi 3, 4, 6, 7, 2006 and 2010 and are assumed to work with
+	other versions.
 </p>
 
 
-<h3>
-	Demo programs
-</h3>
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="installation">
+	Installation
+</h2>
 
 <p>
-	The source code for two demo programs is included. Details are:
+	The Drop Files Components, their documentation and the demo program are
+	supplied in a zip file. Before installing you need to extract all the files
+	from the zip file, preserving the directory structure. The following files
+	will be extracted:
+</p>
+
+<ul>
+	<li class="first">
+		<strong><code>PJDropFiles.pas</code></strong> &ndash; Component source
+		code.
+	</li>
+	<li>
+		<strong><code>PJDropFiles.dcr</code></strong> &ndash; Component palette
+		glyphs.
+	</li>
+	<li>
+		<strong><code>PJDropFilesDsgn.pas</code></strong> &ndash; Component
+		property editors and component registration source code.
+	</li>
+	<li>
+		<strong><code>PJDropFilesDsgn.dfm</code></strong> &ndash; Property
+		editor form.
+	</li>
+	<li>
+		<code>PJDropFiles.hlp</code> &ndash; Help file that integrates with the
+		Delphi 3-7 IDE. 
+	</li>
+	<li>
+		<code>PJDropFiles.als</code> &ndash; Keyword file required when
+		integrating the help file with Delphi 6 and 7. 
+	</li>
+	<li>
+		<code>ReadMe.htm</code> &ndash; this read-mefile.
+	</li>
+	<li>
+		<code>ChangeLog.txt</code> &ndash; Change log.
+	</li>
+	<li>
+		<code>MPL.txt</code> &ndash; Mozilla Public License.
+	</li>
+	<li>
+		<code>Wiki.URL</code> &ndash; Shortcut to online component Wiki.
+	</li>
+</ul>
+
+<p>
+	In addtion to the above files you will find the source code of <a
+		href="#demos"
+	>two demo projects</a> the <code>Demo\1</code> and <code>Demo\2</code>
+	sub-directories.
+</p>
+
+<p>
+	You can now install the components into the Delphi IDE. To do this, the
+	files <code>PJDropFiles.pas</code>, <code>PJDropFiles.dcr</code>, 
+	<code>PJDropFilesDsgn.pas</code> and <code>PJDropFilesDsgn.dfm</code> should
+	be added to a design time package. If you need help doing this <a
+		href="http://www.delphidabbler.com/url/install-comp"
+	>see here</a>.
+</p>
+
+<p>
+	Note that the help file included in the download can only integrate with the
+	IDE in Delphi 3-7. For information on how to do this, see <a
+		href="http://www.delphidabbler.com/articles?article=15"
+	>this article</a>. Users of other versions of Delphi can either use the help
+	file as a stand-alone file (in which case some links won't work) or you can
+	use the <a
+		href="http://www.delphidabbler.com/url/dropfiles-wiki"
+	>Drop Files Components Wiki</a>.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="demos">
+	Demo programs
+</h2>
+
+<p>
+	The source code for two demo programs is included in the download:
 </p>
 
 <ol class="spaced">
@@ -310,353 +393,8 @@
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
-<h2 id="compatibility">
-   Compatibility
-</h2>
-
-<p>
-	The Drop Files Components compile with Delphi 3 and later. They have been
-	tested with Delphi 3, 4, 6, 7 and 2006.
-</p>
-
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="installation">
-	Installation
-</h2>
-
-<p>
-	The Drop Files Components, their documentation and the demo program are
-	supplied in a zip file. Before installing you need to extract all the files
-	from the zip file, preserving the directory structure. The following files
-	will be extracted:
-</p>
-
-<ul>
-
-	<li class="first">
-		<strong><code>PJDropFiles.pas</code></strong> &ndash; component source
-		code.
-	</li>
-	<li>
-		<strong><code>PJDropFiles.dcr</code></strong> &ndash; resource file
-		containing component palette glyphs.
-	</li>
-	<li>
-		<strong><code>PJDropFilesDsgn.pas</code></strong> &ndash; source file
-		for component registration and component and property editors.
-	</li>
-	<li>
-		<strong><code>PJDropFilesDsgn.dfm</code></strong> &ndash; property
-		editor form.
-	</li>
-	<li>
-		<code>PJDropFiles.hlp</code> &ndash; component help file that integrates
-		with the Delphi 3 to 7 OpenHelp system.
-	</li>
-	<li>
-		<code>PJDropFiles.als</code> &ndash; a-link keyword file for integration
-		with the Delphi 6 or 7 OpenHelp system.
-	</li>
-	<li>
-		<code>ReadMe.htm</code> &ndash; this file.
-	</li>
-	<li>
-		<code>ChangeLog.txt</code> &ndash; component's change log.
-	</li>
-	<li>
-		<code>Demo\DelphiDabbler.ico</code> &ndash; DelphiDabbler icon used by
-		demo programs.
-	</li>
-	<li>
-		<code>Demo\1\DropFilesDemo.dpr</code> &ndash; main demo project file.
-	</li>
-	<li>
-		<code>Demo\1\DropFilesDemo.res</code> &ndash; icon resource for main
-		demo.
-	</li>
-	<li>
-		<code>Demo\1\FmDropFilesDemo.pas</code> &ndash; main demo form source
-		file.
-	</li>
-	<li>
-		<code>Demo\1\FmDropFilesDemo.dfm</code> &ndash; main demo form file.
-	</li>
-	<li>
-		<code>Demo\2\FrameDemo.dpr</code> &ndash; frame demo project file.
-	</li>
-	<li>
-		<code>Demo\2\FrameDemo.res</code> &ndash; icon resource for frame demo.
-	</li>
-	<li>
-		<code>Demo\2\FmFrameDemo.pas</code> &ndash; frame demo form source file.
-	</li>
-	<li>
-		<code>Demo\2\FmFrameDemo.dfm</code> &ndash; frame demo form file.
-	</li>
-	<li>
-		<code>Demo\2\FrDemo.pas</code> &ndash; frame demo frame source file.
-	</li>
-	<li>
-		<code>Demo\2\FrDemo.dfm</code> &ndash; frame demo frame file.
-	</li>
-	
-</ul>
-
-<p>
-	You can now proceed to install the components and property editor using the
-	<strong>emphasised</strong> files above. Installation methods vary between
-	Delphi versions, so follow the instructions that apply to your version
-	below. Note that <code><strong>$(DELPHI)</strong></code> represents the
-	path where the appropriate version of Delphi was installed. Similarly
-	<code><strong>$(BDS)</strong></code> refers to the installation path of a
-	version of the Borland Development System.
-</p>
-
-<ul>
-	<li><a href="#bds">Installation with Delphi 2005 &amp; 2006</a></li>
-	<li><a href="#d3">Installation with Delphi 3 to 7</a></li>
-</ul>
-
-
-
-<h3 id="bds">
-	Installation with Delphi 2005 &amp; 2006
-</h3>
-
-<p>
-	The components must be installed into a Delphi Win32 design package. It is
-	assumed that you will be installing into an existing package. You may decide
-	to install into the &quot;user&quot; package:
-	<code>$(BDS)\Lib\dclusr.dpk</code>.
-</p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the components.
-		This may be a subdirectory of your <code>Borland Studio Projects</code>
-		or <code>$(BDS)\lib</code> folders.
-	</li>
-	
-	<li>
-		Copy <code>PJDropFiles.pas</code>, <code>PJDropFiles.dcr</code>,
-		<code>PJDropFilesDsgn.pas</code> and <code>PJDropFilesDsgn.dfm</code> to
-		the chosen installation folder.
-	</li>
-	
-	<li>
-		Start the Development System (selecting the Delphi Win32 personality if
-		appropriate) then:
-
-		<ul>
-
-			<li>
-				Open the required package. Select <em>File | Open</em> menu and
-				choose a suitable package source file.
-			</li>
-
-			<li>
-				The package will now be displayed in the Project Manager with a
-				<code>.bpl</code> extension. Right click the package's entry and
-				select <em>Add</em> to display the <em>Add</em> dialog box.
-				Enter the full path to <code>PJDropFiles.pas</code> in the
-				<em>Unit file name</em> edit box (use the <em>Browse</em> button
-				to navigate to the file). Click <em>OK</em> to add the component
-				to the package.
-			</li>
-			
-			<li>
-				Repeat the previous step for <code>PJDropFilesDsgn.pas</code>.
-			</li>
-
-			<li>
-				Back in the Project Manager, check that all the added files
-				appear under the package's <em>Contains</em> node. If so, right
-				click the package's entry again and select <em>Compile</em>. If
-				the resulting compilation succeeds a message should be displayed
-				confirming that <var>TPJDropFiles</var>,
-				<var>TPJCtrlDropFiles</var>, <var>TPJFormDropFiles</var>,
-				<var>TPJExtFileFilter</var> and <var>TPJWildCardFileFilter</var>
-				have been registered. The components should now appear in the
-				&quot;DelphiDabbler&quot; section of the Tool Palette. (Note
-				this will only appear when a form is selected in the designer).
-			</li>
-			
-			<li>
-				If the components do not appear the package may not have been
-				installed. Install it from the Project Manager by selecting the
-				package's <em>Install</em> right click menu option.
-			</li>
-
-			<li>
-				Close the package project using the <em>File | Close</em> menu
-				item. Accept any prompt that offers to save the package project.
-			</li>
-			
-		</ul>
-		
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJDropFiles.pas</code> and
-		<code>PJDropFilesDsgn.pas</code> from the chosen installation folder.
-	</li>
-	
-	<li>
-		The supplied help file cannot be integrated with the IDE's help system.
-		However it can be used independently of the IDE, albeit with reduced
-		functionality.
-	</li>
-
-	<li>
-		The demo programs can be loaded into Delphi and compiled and run as
-		required.
-	</li>
-
-</ol>
-
-
-<h3 id="d3">
-	Installation with Delphi 3 to 7
-</h3>
-
-<p>
-	The components must be installed into a design package. It is assumed that
-	you will be installing into an existing package. You may wish to use the
-	&quot;user&quot; package named <code>dclusr.dpk</code> or
-	<code>dclusrXX.dpk</code> (where <code>XX</code> is a version number). This
-	package can be found in <code>$(DELPHI)\Lib</code>. 
-</p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the components.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
-	</li>
-	
-	<li>
-		Copy <code>PJDropFiles.pas</code>, <code>PJDropFiles.dcr</code>,
-		<code>PJDropFilesDsgn.pas</code> and <code>PJDropFilesDsgn.dfm</code> to
-		the chosen installation folder.
-	</li>
-
-	<li>	
-		Start Delphi then:
-		
-		<ul>
-			
-			<li>
-				Choose the <em>Component | Install Component</em> menu option to
-				display the <em>Install Component</em> dialog box. Ensure the
-				<em>Into existing package</em> tab is selected. Enter the full
-				path to <code>PJDropFiles.pas</code> in the <em>Unit file
-				name</em> edit box (use the adjacent <em>Browse</em> button to
-				navigate to the file). Repeat the previous step for
-				<code>PJDropFilesDsgn.pas</code>. Choose the required package
-				from the <em>Package description</em> combo box, or by
-				navigating to the package using <em>Browse</em>. Click
-				<em>OK</em> to confirm your selections. 
-			</li>
-
-			<li>
-				A confirmation dialog box may displayed, querying whether it is
-				OK to rebuild and reinstall the package. Click <em>Yes</em> to
-				proceed.
-			</li>
-			
-			<li>
-				The package will now be built and a dialog box should be
-				displayed stating that the <var>TPJDropFiles</var>,
-				<var>TPJFormDropFiles</var>, <var>TPJCtrlDropFiles</var>, 
-				<var>TPJExtFileFilter</var> and <var>TPJWildCardFileFilter</var>
-				components have been installed. Click <em>OK</em> to dismiss the
-				dialog box.
-			</li>
-
-			<li>
-				The components will appear on the &quot;DelphiDabbler&quot;
-				palette.
-			</li>
-
-		</ul>
-
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJDropFiles.pas</code> and
-		<code>PJDropFilesDsgn.pas</code> from the chosen installation folder.
-	</li>
-
-	<li>
-		The provided help file can be integrated with the IDE's OpenHelp system.
-		Delphi 6 and 7 also require the use of the supplied <code>.als</code>
-		file. The simplest way to install help is to use my
-		<a href="http://www.delphidabbler.com/software?id=chi">Component Help
-		Installer Expert</a> (v2.2.1 or later). If you prefer to install
-		manually,
-		<a href="http://www.delphidabbler.com/articles?article=15">this
-		article</a> explains the process.
-	</li>
-
-	<li>
-		The demo programs can be loaded into Delphi and compiled and run as
-		required. The frame demo requires Delphi 5 and higher.
-	</li>
-
-</ol>
-
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="bugs">Bugs</h2>
-
-<p>
-	There are no known outstanding bugs.
-</p>
-
-<p>
-	There was a bug in release 2.0 where length of strings containing names of
-	dropped files was being set incorrectly. This was fixed in release 2.0.1.
-</p>
-
-<p>
-	In v3.0 and v3.1 the DropControl property did not always return the correct
-	control. This was fixed in v3.2.
-</p>
-	
-<p>
-	There was a small memory leak in all release 3 versions. This was fixed in
-	release 4.0.
-</p>
-
-<p>
-	In release 4 there was a minor bug in the wildcard file filter where a
-	change of wildcard was sometimes ignored. This was fixed in release 5.0.
-</p>
-
-<p>
-	In release 5.0 there was a bug in the design time behaviour of
-	<var>TPJFormDropFiles</var> and <var>TPJCtrlDropFiles</var> that could cause
-	the IDE to freeze when a form containing one of the components was closed.
-	This was fixed in v5.0.1. Thanks to <em>Kirr</em> for suggesting the fix.
-</p>
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="changelog">
-	Change log
+<h2 id="update">
+	Update History
 </h2>
 
 <p>
@@ -665,41 +403,34 @@
 </p>
 
 
-
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="license">
-	License
+	License and Disclaimer
 </h2>
 
 <p>
-	This source code is subject to the Mozilla Public License Version 1.1 (the
-	&quot;License&quot;); you may not use this program except in compliance
-	with the License. You may obtain a copy of the License at
-	<a href="http://www.mozilla.org/MPL/.">http://www.mozilla.org/MPL/</a>.
+	This product, <em>Drop Files Components</em>,  is subject to the Mozilla
+	Public License Version 1.1 (the &quot;License&quot;). You may not use this
+	Product except in compliance with the License. You may obtain a copy of the
+	License at <a
+		href="http://www.mozilla.org/MPL/MPL-1.1"
+	>http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
 	Software distributed under the License is distributed on an &quot;AS
-	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
-	See the License for the specific language governing rights and limitations
-	under the License.
+	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+	the License for the specific language governing rights and limitations under
+	the License.
 </p>
 
 <p>
-	The Original Code is Drop Files Components.
-</p>
-
-<p>
-	The Initial Developer of the Original Code is Peter Johnson
-	(<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>).
-</p>
-
-<p>
-	Portions created by the Initial Developer are Copyright &copy; 1998-2006
-	Peter Johnson. All Rights Reserved.
+	The Initial Developer of <em>Drop Files Components</em> is Peter D Johnson.
+	Portions created by the Initial Developer are Copyright &copy; 1998-2010
+	Peter D Johnson (www.delphidabbler.com). All Rights Reserved.
 </p>
 
 <p>
@@ -711,34 +442,59 @@
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
+
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
+</p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
 <h2 id="author">
-	About the author
+	About the Author
 </h2>
 
 <p>
 	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-	Wales,  UK, writing write mainly in Delphi. My programs are available for
-	download from:
-	<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+	Wales, UK, writing write mainly in Delphi. My programs and code are available
+	from <a
+		href="http://www.delphidabbler.com/"
+	>http://www.delphidabbler.com/</a>.
 </p>
 
+<p>
+	I can be <a
+		href="http://www.delphidabbler.com/contact"
+	>contacted via the website</a>.
+</p> 
 
 
 <div class="endnotes">
-
 	<div class="comments">
-		Please
-		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the components, if you
-		have found a bug, or you want to suggest any updates.
+		Please <a
+			href="http://www.delphidabbler.com/contact"
+		>let me know</a> if you have any comments about the component, but
+		please use the Issue Tracker noted above to report bugs and request new
+		features.
 	</div>
-
 	<div class="copyright">
-		This info sheet is copyright &copy; 2005-2006, P D Johnson,
-		<a href="http://www.delphidabbler.com/">
-		www.delphidabbler.com</a>
+		This document is copyright &copy; 2005-2010, P D Johnson, <a
+			href="http://www.delphidabbler.com/"
+		>www.delphidabbler.com</a>
 	</div>
-
 </div>
 
 </body>
