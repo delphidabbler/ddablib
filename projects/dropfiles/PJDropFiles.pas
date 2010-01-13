@@ -43,6 +43,7 @@ interface
 // Set conditionally defined symbols and switch off certain warnings
 {$UNDEF DELPHI4ANDUP}
 {$UNDEF DELPHI6ANDUP}
+{$UNDEF DELPHI2005ANDUP}
 {$IFDEF VER120} // Delphi 4
   {$DEFINE DELPHI4ANDUP}
 {$ENDIF}
@@ -60,6 +61,9 @@ interface
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_CAST OFF}
     {$WARN SYMBOL_PLATFORM OFF}
+  {$IFEND}
+  {$IF CompilerVersion >= 17.0} // Delphi 2005 and later
+    {$DEFINE DELPHI2005ANDUP}
   {$IFEND}
 {$ENDIF}
 
@@ -597,6 +601,7 @@ implementation
 
 uses
   // Delphi
+  {$IFDEF DELPHI2005ANDUP}Types, {for inlining}{$ENDIF}
   SysUtils, Graphics, ShellAPI, Forms;
 
 
