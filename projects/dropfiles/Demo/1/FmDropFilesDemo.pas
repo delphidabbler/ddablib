@@ -17,6 +17,12 @@ unit FmDropFilesDemo;
 
 interface
 
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
+    {$WARN SYMBOL_DEPRECATED OFF}
+  {$IFEND}
+{$ENDIF}
+
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, PJDropFiles, ExtCtrls;
