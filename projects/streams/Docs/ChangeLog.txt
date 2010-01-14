@@ -1,5 +1,10 @@
-Release 3.0 of 07 October 2009
-v3.0 of 07 October 2009
+; ------------------------------------------------------------------------------
+; Change Log for Stream Extension Classes
+; $Rev$
+; $Date$
+; ------------------------------------------------------------------------------
+
+Release v3.0 of 07 October 2009
 + Removed deprecated PJResWriterStreams unit from project.
 + Removed demo programs for classes in PJResWriterStreams unit.
 + Switched off "unsafe" compiler warnings.
@@ -9,19 +14,16 @@ v3.0 of 07 October 2009
 + Changed to Mozilla Public License.
 + Updated documentation.
 
-Release 2.0.1 of 23 November 2003
-v2.0.1 of 22 November 2003
+Release v2.0.1 of 23 November 2003
 + Made changes in PJIStreams unit:
   - Fixed some minor bugs.
   - Added simplified method for getting stream name.
   - Modified use of task allocator.
 
-Release 2.0 of 30 September 2001
-v2.0 of 30 September 2001
+Release v2.0 of 30 September 2001
 + Added new unit providing classes that implement the IStream interface.
 + Renamed earlier units and classes in keeping with my library naming conventions.
 + Added some demo programs to the release.
 
-Release 1.0 of 02 July 2000
-v1.0 of 26 March 2000
+Release v1.0 of 02 July 2000
 + Original version - stream wrapper base class and resource file encapsulation classes only.

@@ -4,7 +4,7 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
-Release 1.2 of 05 January 2010
+Release v1.2 of 05 January 2010
 + Changed property editor form:
   - Removed bevel from around memo control.
   - Re-arranged controls so that dialog appears correctly on Vista and later Delphis.
@@ -15,12 +15,12 @@ Release 1.2 of 05 January 2010
 + Updated documentation.
 + Included MPL license in release.
 
-Release 1.1.1 of 21 December 2005
+Release v1.1.1 of 21 December 2005
 + Changed compiler directives to allow compilation with Delphi 2005/6.
 
-Release 1.1 of 12 August 2004
+Release v1.1 of 12 August 2004
 + Disabled minimize button and system menu item.
 + Made form respond to Esc key to cancel dialog and Ctrl+Return to OK the dialog.
 
-Release 1.0 of 30 June 2004
+Release v1.0 of 30 June 2004
 + Original version.

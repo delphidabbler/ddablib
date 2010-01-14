@@ -4,17 +4,17 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
-Release 5.0.2 of 14 January 2010
+Release v5.0.2 of 14 January 2010
 + Enabled function inlining on Delphi 2005 and later.
 + Switched off some compilation warnings on Delphi 7 and later.
 + Simplified compiler directives.
 + Updated documentation including corrections to help file.
 + Included copy of MPL in release.
 
-Release 5.0.1 of 19 October 2006
+Release v5.0.1 of 19 October 2006
 + Fixed bug that was occasionally freezing IDE when closing a form containing a TPJSubClassedDropFiles descendant component.
 
-Release 5.0 of 19 March 2006
+Release v5.0 of 19 March 2006
 + Added new TPJCtrlDropFiles component that handles file drops for any assigned TWinControl descendant. TPJCtrlDropFiles descends from new TPJSubClassedDropFiles abstract component.
 + Revised TPJFormDropFiles to descend from TPJSubClassedDropFiles.
 + Exposed several new properties of TPJDropFiles: Anchors, Constraints, TabOrder, TabStop, Visible.
@@ -24,15 +24,15 @@ Release 5.0 of 19 March 2006
 + Updated help file and a-link keyword file re new component and fixed some errors in help file.
 + Completely rewrote demo program that exercises all components and added second demo program to show how to use TPJCtrlDropFiles with frames.
 
-Release 4.1.2 of 21 December 2005
+Release v4.1.2 of 21 December 2005
 + Fixed bugs preventing component compilation with Delphi 3, 2005 and 2006.
 + Fixed bug preventing demo program compilation with Delphi 3.
 + Added new a-link keyword file for use with Delphi 6/7 OpenHelp.
 
-Release 4.1.1 of 02 October 2004
+Release v4.1.1 of 02 October 2004
 + Refactored the component editor, TPJDropFilesCE. Now has a much simpler implementation.
 
-Release 4.1 of 27 September 2004
+Release v4.1 of 27 September 2004
 + Added new property editor for the TPJExtFileFilter.Extensions property that displays a dialog that assists in building the extension string.
 + Added new component editor for TPJFormDropFiles and TPJDropFiles that creates an OnDropFiles event handler in the designer when the components are double clicked rather than the previous default OnBeforeDrop event handler.
 + Switched off the DelphiDabbler extended string property editor (if present) for TPJWildCardFileFilter's Wildcard property.
@@ -40,7 +40,7 @@ Release 4.1 of 27 September 2004
 + Removed component registration code from PJDropFiles unit to PJDropFilesDsgn unit.
 + Updated help file re new property editor.
 
-Release 4.0 of 12 April 2004
+Release v4.0 of 12 April 2004
 + Added ability to filter files dropped on the controls, either via the new OnFileFilter event or by using a linked file filter component.
 + Added abstract base class for new file filter components.
 + Added filter component that filters on file extensions.
@@ -50,17 +50,17 @@ Release 4.0 of 12 April 2004
 + Updated help file.
 + Updated demo program re new features.
 
-Release 3.2 of 09 February 2004
+Release v3.2 of 09 February 2004
 + Fixed bug in code that determines control under drop point - the parent of the actual control under the cursor was often being returned.
 + Corrected errors and typos in help file.
 + Changed to Mozilla public license.
 + Added demo program.
 
-Release 3.1 of 29 July 2003
+Release v3.1 of 29 July 2003
 + Prevented compiler warnings when compiling the component under Delphi 6 and 7.
 + Updated copyright information in help file.
 
-Release 3.0 of 27 October 2002
+Release v3.0 of 27 October 2002
 + Major update (backwards compatible with v2)
 + Added new Options property to determine how dropped files are handled. Options are:
   - to include or exclude folders from list
@@ -71,10 +71,10 @@ Release 3.0 of 27 October 2002
 + Fixed a bug in TPJFormDropFiles that was causing programs to halt on exceptions raised inside OnDropFiles event handlers.
 + Changed component palette name from "PJ Stuff" to "DelphiDabbler".
 
-Release 2.0.1 of 13 May 2001
+Release v2.0.1 of 13 May 2001
 + Fixed minor bug where strings holding names of dropped files had incorrect length set.
 
-Release 2.0 of 29 April 2001
+Release v2.0 of 29 April 2001
 + Completely rewrote TPJDropFiles component and added FileName, PassThrough and ForegroundOnDrop properties.
 + Added new TPJFormDropFiles component.
 + Changed OnDropFiles event type so it no longer provides drop coordinates: we now use DropPoint property instead.
@@ -82,10 +82,10 @@ Release 2.0 of 29 April 2001
 + Broke backwards compatibility with Delph 1.
 + Changed unit name from DrpFiles to PJDropFiles.
 
-Release 1.1.1a of 28 November 1999
+Release v1.1.1a of 28 November 1999
 + Updated HTML documentation to include installation notes for Delphi 3/4 and update history.
 
-Release 1.1.1 of 10 April 1999
+Release v1.1.1 of 10 April 1999
 + Changed component palette from "Own" to "PJ Stuff".
 + Added HTML documentation.
 
@@ -93,5 +93,4 @@ Un-released v1.1 of 22 October 1998
 + Changed 2nd parameter to DragQueryFile API call, when used to find number of files dropped, from $FFFF to Cardinal(-1) to make it portable across 16 and 32 bit platforms. This was needed to allow the component to compile under Delphi 2.
 
 Un-released v1.0 of 15 May 1998
-DrpFiles v1.0 of 15 May 1998
 + Original version - 16 bit only.

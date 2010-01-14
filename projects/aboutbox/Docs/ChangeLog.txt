@@ -1,6 +1,10 @@
-; About Box Dialog Change Log
+; ------------------------------------------------------------------------------
+; Change Log for About Box Components
+; $Rev$
+; $Date$
+; ------------------------------------------------------------------------------
 
-Release v3.5 of 27 Dec 2009
+Release v3.5 of 27 December 2009
 + Removed Delphi 1 support.
 + Changed default values of AutoDetectGlyphs and ButtonGlyphs properties.
 + Simplified and rationalised setting and use of conditional define symbols and removed unused conditional define symbols from demo.
