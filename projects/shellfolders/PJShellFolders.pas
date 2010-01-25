@@ -41,42 +41,15 @@ interface
 
 
 // Determine compiler
-{$DEFINE DELPHI6ANDUP}
-{$DEFINE DELPHI7ANDUP}
-{$IFDEF VER80}  {Delphi 1}
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER90}  {Delphi 2}
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER93}  {C++ Builder 1}
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER100} {Delphi 3}
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER110} {C++ Builder 3}
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER120} {Delphi 4}
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER125} {C++ Builder 4}
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER130} {Delphi 5}
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER140} {Delphi 6}
-  {$UNDEF DELPHI7ANDUP}
+{$UNDEF DELPHI6ANDUP}
+{$UNDEF DELPHI7ANDUP}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
+    {$DEFINE DELPHI6ANDUP}
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
+    {$DEFINE DELPHI7ANDUP}
+  {$IFEND}
 {$ENDIF}
 
 
@@ -84,8 +57,8 @@ uses
   // Delphi
   SysUtils, Windows, Classes, Controls, Messages, ShlObj
   {$IFDEF DELPHI6ANDUP}
-    // include this unit for extra shell folder identifiers
-    , SHFolder
+  // include this unit for extra shell folder identifiers
+  , SHFolder
   {$ENDIF}
   ;
 
@@ -93,7 +66,7 @@ uses
 {$IFNDEF DELPHI6ANDUP}
 const
   //
-  // CSIDL_ constants provided in SHFolder unit in Delphi 6/7
+  // CSIDL_ constants provided in SHFolder unit in Delphi 6 and later
   //
 
   // Folder ids
@@ -121,7 +94,6 @@ const
   // Flag
   CSIDL_FLAG_CREATE               = $8000;
   {$EXTERNALSYM CSIDL_FLAG_CREATE}
-
 {$ENDIF}
 
 const
@@ -198,7 +170,7 @@ const
 {$IFNDEF DELPHI7ANDUP}
 const
   // New dialog style
-  BIF_NEWDIALOGSTYLE = $0040; // Defined in ShlObj for Delphi 6 and later
+  BIF_NEWDIALOGSTYLE = $0040; // Defined in ShlObj for Delphi 7 and later
   {$EXTERNALSYM BIF_NEWDIALOGSTYLE}
 {$ENDIF}
 
