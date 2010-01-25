@@ -1,17 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
+<!--
+ * Read-me file for Shell Folders Unit
+ *
+ * $Rev$
+ * $Date$
+-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
 
 	<title>
-		DelphiDabbler.com Info Sheet: Shell Folders Unit
+		DelphiDabbler.com Shell Folders Unit ReadMe
 	</title>
 
 	<style type="text/css">
-		<!--
 		body {
 			margin: 1em;
 			padding: 0;
@@ -133,7 +136,6 @@
 			font-size: 8pt;
 			text-align: right;
 		}
-		-->
 	</style>
 
 </head>
@@ -142,7 +144,7 @@
 
 <h1>
 	Shell Folder Unit<br />
-	<span class="subtitle">Information Sheet</span>
+	<span class="subtitle">ReadMe</span>
 </h1>
 
 
@@ -151,13 +153,27 @@
 </h2>
 
 <ul>
-	<li><a href="#overview">Overview</a></li>
-	<li><a href="#compatibility">Compatibility</a></li>
-	<li><a href="#installation">Installation</a></li>
-	<li><a href="#bugs">Bugs</a></li>
-	<li><a href="#changelog">Change log</a></li>
-	<li><a href="#license">License</a></li>
-	<li><a href="#author">About the author</a></li>
+	<li>
+		<a href="#desc">Description</a>
+	</li>
+	<li>
+		<a href="#installation">Installation</a>
+	</li>
+	<li>
+		<a href="#demo">Demo Programs</a>
+	</li>
+	<li>
+		<a href="#update">Update History</a>
+	</li>
+	<li>
+		<a href="#license">License and Disclaimer</a>
+	</li>
+	<li>
+		<a href="#bugs">Bugs and Feature Requests</a>
+	</li>
+	<li>
+		<a href="#author">About the Author</a>
+	</li>
 </ul>
 
 
@@ -165,8 +181,8 @@
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
-<h2 id="overview">
-	Overview
+<h2 id="desc">
+	Description
 </h2>
 
 <p>
@@ -175,75 +191,34 @@
 </p>
 
 <ul>
-
 	<li>
 		A component that provides information about a specified special shell
 		folder.
 	</li>
-
 	<li>
 		A class that enumerates all the special shell folders.
 	</li>
-	
 	<li>
 		Routines to manipulate special shell folder information.
 	</li>
-
 	<li>
 		A component that encapsulates the Windows <em>Browse for Folder</em>
 		dialog box.
 	</li>
-	
 	<li>
 		A property editor that enumerates special shell folder identifiers.
 	</li>
-
 </ul>
 
 
 <h3>
-	Help file
-</h3>
-
-<p>
-	A OpenHelp compatible help file is supplied. It provides help on all the
-	components, classes, interfaces and routines. The help file integrates
-	with the help system of Delphi 4 to 7. Although it does not integrate with
-	the Delphi 2005 and later IDEs it can be used independently of the IDE,
-	albeit with some loss of functionality.
-</p>
-
-<p>
-	An <code>.als</code> file is also supplied to assist in integration with
-	Delphi 6 and 7.
-</p>
-
-
-<h3>
-	Demo program
-</h3>
-
-<p>
-	A demo program with associated explanatory notes is included in the
-	download. The demo lists and provides information about all the special
-	shell folders supported by the unit.
-</p>
-
-	
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="compatibility">
    Compatibility
-</h2>
+</h3>
 
 <p>
 	The Shell Folders Unit compiles with Delphi 4 and later. Various versions
-	have been tested with Delphi 4, 6, 7 and 2006.
+	have been tested with Delphi 4, 6, 7, 2006 and 2010.
 </p>
-
 
 
 <p class="gototop">
@@ -262,345 +237,88 @@
 </p>
 
 <ul>
-
-	<li class="first">
-		<strong><code>PJShellFolders.pas</code></strong> &ndash; classes,
+	<li>
+		<strong><code>PJShellFolders.pas</code></strong> &ndash; Classes,
 		routines and component source code.
 	</li>
-
 	<li>
-		<strong><code>PJShellFolders.dcr</code></strong> &ndash; resource file
-		containing component palette glyphs.
+		<strong><code>PJShellFolders.dcr</code></strong> &ndash; Component
+		palette glyphs.
 	</li>
-
 	<li>
-		<strong><code>PJShellFoldersDsgn.pas</code></strong> &ndash; source file
-		for component registration and property editors.
+		<strong><code>PJShellFoldersDsgn.pas</code></strong> &ndash; Component
+		registration and property editors source code.
 	</li>
-
 	<li>
-		<code>PJShellFolders.hlp</code> &ndash; help file that integrates with
-		the Delphi 3 to 7 OpenHelp system.
+		<code>PJShellFolders.hlp</code> &ndash; Help file that integrates with
+		the Delphi 3 to 7 IDE.
 	</li>
-
 	<li>
-		<code>PJShellFolders.als</code> &ndash; a-link keyword file for
-		integration with the Delphi 6 or 7 OpenHelp system.
+		<code>PJShellFolders.als</code> &ndash; Keyword file required when
+		integrating the help file with Delphi 6 and 7. 
 	</li>
-
 	<li>
-		<code>ReadMe.htm</code> &ndash; this file.
+		<code>ReadMe.htm</code> &ndash; This read-me file.
 	</li>
-	
 	<li>
-		<code>ChangeLog.txt</code> &ndash; component's change log.
+		<code>ChangeLog.txt</code> &ndash; Change log.
 	</li>
-
 	<li>
-		<code>Demo\DelphiDabbler.ico</code> &ndash; demo program icon.
+		<code>MPL.txt</code> &ndash; Mozilla Public License.
 	</li>
-
 	<li>
-		<code>Demo\DemoReadMe.html</code> &ndash; description of how to use the
-		demo program along with review of source code.
+		<code>Wiki.URL</code> &ndash; Shortcut to online component Wiki.
 	</li>
-
-	<li>
-		<code>Demo\ShellFolderDemo.dpr</code> &ndash; demo project file.
-	</li>
-	
-	<li>
-		<code>Demo\ShellFolderDemo.res</code> &ndash; icon resource for demo.
-	</li>
-
-	<li>
-		<code>Demo\ShellFolderDemo.cfg</code> &ndash; demo compiler
-		configuration file.
-	</li>
-	
-	<li>
-		<code>Demo\ShellFolderDemoForm.pas</code> &ndash; demo form source file.
-	</li>
-
-	<li>
-		<code>Demo\ShellFolderDemoForm.dfm</code> &ndash; demo form file.
-	</li>
-	
 </ul>
 
 <p>
-	You can now proceed to install the components and property editor using the
-	<strong>emphasised</strong> files above. Installation methods vary between
-	Delphi versions, so follow the instructions that apply to your version. Note
-	that <code><strong>$(DELPHI)</strong></code> represents the path where the
-	appropriate version of Delphi was installed. Similarly
-	<code><strong>$(BDS)</strong></code> refers to the installation path of a
-	version of the Borland Development System.
+	In addtion to the above files you will find the source code of a <a
+		href="#demo"
+	>demo project</a> in the <code>Demo</code> sub-directory.
 </p>
-
-<ul>
-	<li><a href="#bds">Installation with Delphi 2005 &amp; 2006</a></li>
-	<li><a href="#d4">Installation with Delphi 4 to 7</a></li>
-</ul>
-
-
-
-<h3 id="bds">
-	Installation with Delphi 2005 &amp; 2006
-</h3>
 
 <p>
-	The components must be installed into a Delphi Win32 design package. It is
-	assumed that you will be installing into an existing package. You may decide
-	to install into the &quot;user&quot; package:
-	<code>$(BDS)\Lib\dclusr.dpk</code>.
+	You can now install the components into the Delphi IDE. To do this, the
+	files <code>PJShellFolders.pas</code>, <code>PJShellFolders.dcr</code> and
+	<code>PJShellFoldersDsgn.pas</code> should be added to a design time
+	package. If you need help doing this <a
+		href="http://www.delphidabbler.com/url/install-comp"
+	>see here</a>.
 </p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the components.
-		This may be a subdirectory of your <code>Borland Studio Projects</code>
-		or <code>$(BDS)\lib</code> folders.
-	</li>
-	
-	<li>
-		Copy <code>PHShellFolders.pas</code>, <code>PHShellFolders.dcr</code>
-		and <code>PHShellFoldersDsgn.pas</code> to the chosen installation
-		folder.
-	</li>
-	
-	<li>
-		Start the Development System (selecting the Delphi Win32 personality if
-		appropriate) then:
-
-		<ul>
-
-			<li>
-				Open the required package. Select <em>File | Open</em> menu and
-				choose a suitable package source file.
-			</li>
-
-			<li>
-				The package will now be displayed in the Project Manager with a
-				<code>.bpl</code> extension. Right click the package's entry and
-				select <em>Add</em> to display the <em>Add</em> dialog box.
-				Enter the full path to <code>PHShellFolders.pas</code> in the
-				<em>Unit file name</em> edit box (use the <em>Browse</em> button
-				to navigate to the file). Click <em>OK</em> to add the component
-				to the package.
-			</li>
-			
-			<li>
-				Repeat the previous step for
-				<code>PHShellFoldersDsgn.pas</code>.
-			</li>
-
-			<li>
-				Back in the Project Manager, check that all the added files
-				appear under the package's <em>Contains</em> node. If so, right
-				click the package's entry again and select <em>Compile</em>. If
-				the resulting compilation succeeds a message should be displayed
-				confirming that <var>TPJSpecialFolderInfo</var> and
-				<var>TPJBrowseDialog</var> have been registered. The
-				components should now appear in the &quot;DelphiDabbler&quot;
-				section of the Tool Palette. (Note that this will only appear
-				when a form is selected in the designer).
-			</li>
-			
-			<li>
-				If the components do not appear, the package may not have been
-				installed. Install it from the Project Manager by selecting the
-				package's <em>Install</em> right click menu option.
-			</li>
-
-			<li>
-				Close the package project using the <em>File | Close</em> menu
-				item. Accept any prompt that offers to save the package project.
-			</li>
-			
-		</ul>
-		
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PHShellFolders.pas</code> and
-		<code>PHShellFoldersDsgn.pas</code> from the chosen installation folder.
-	</li>
-	
-	<li>
-		The supplied help file cannot be integrated with the IDE's help system.
-		However it can be used independently of the IDE, albeit with reduced
-		functionality.
-	</li>
-
-	<li>
-		The demo program can be loaded into Delphi and compiled and run as
-		required.
-	</li>
-
-</ol>
-
-
-<h3 id="d4">
-	Installation with Delphi 4 to 7
-</h3>
 
 <p>
-	The components must be installed into a design package. It is assumed that
-	you will be installing into an existing package. You may wish to use the
-	&quot;user&quot; package named <code>dclusr.dpk</code> or
-	<code>dclusrXX.dpk</code> (where <code>XX</code> is a version number). This
-	package can be found in <code>$(DELPHI)\Lib</code>. For Delphi 6 and 7 
-	ensure that the chosen package &quot;requires&quot;
-	<code>designide.dcp</code>. 
+	Note that the help file included in the download can only integrate with the
+	IDE in Delphi 3-7. For information on how to do this, see <a
+		href="http://www.delphidabbler.com/articles?article=15"
+	>this article</a>. Users of other versions of Delphi can either use the help
+	file as a stand-alone file (in which case some links won't work) or you can
+	use the <a
+		href="http://www.delphidabbler.com/url/shellfolders-wiki"
+	>Shell Folders Unit Wiki</a>.
 </p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the components.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
-	</li>
-	
-	<li>
-		Copy <code>PHShellFolders.pas</code>, <code>PHShellFolders.dcr</code>
-		and <code>PHShellFoldersDsgn.pas</code> to the chosen installation
-		folder.
-	</li>
-
-	<li>	
-		Start Delphi then:
-		
-		<ul>
-			
-			<li>
-				Choose the <em>Component | Install Component</em> menu option to
-				display the <em>Install Component</em> dialog box. Ensure the
-				<em>Into existing package</em> tab is selected. Enter the full
-				path to <code>PJShellFolders.pas</code> in the <em>Unit file
-				name</em> edit box. (Use the adjacent <em>Browse</em> button to
-				navigate to the file). Repeat the previous step for
-				<code>PJShellFoldersDsgn.pas</code>. Choose the required package
-				from the <em>Package description</em> combo box, or by
-				navigating to the package using the <em>Browse</em> button.
-				Click <em>OK</em> to confirm your selections. 
-			</li>
-
-			<li>
-				A confirmation dialog box may displayed, querying whether it is
-				OK to rebuild and reinstall the package. Click <em>Yes</em> to
-				proceed.
-			</li>
-			
-			<li>
-				The package will now be built and a dialog box should be
-				displayed stating that the <var>TPJSpecialFolderInfo</var> and
-				<var>TPJBrowseDialog</var> components have been installed. Click
-				<em>OK</em> to dismiss the dialog box.
-			</li>
-
-			<li>
-				The components will appear on the &quot;DelphiDabbler&quot;
-				palette.
-			</li>
-
-		</ul>
-
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PHShellFolders.pas</code> and
-		<code>PHShellFoldersDsgn.pas</code> from the chosen installation folder.
-	</li>
-	
-	<li>
-		The provided help file can be integrated with the IDE's OpenHelp system.
-		Delphi 6 and 7 also require the use of the supplied <code>.als</code>
-		file. The simplest way to install the help file is to use my
-		<a href="http://www.delphidabbler.com/software?id=chi">Component Help
-		Installer Expert</a> (v2.2.1 or later). If you prefer to install
-		manually,
-		<a href="http://www.delphidabbler.com/articles?article=15">this
-		article</a> explains the process.
-	</li>
-
-	<li>
-		The demo program can be loaded into Delphi and compiled and run as
-		required.
-	</li>
-
-</ol>
-
 
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
-<h2 id="bugs">Bugs</h2>
+<h2 id="demo">
+	Demo Program
+</h2>
 
 <p>
-	<em>There are no known outstanding bugs.</em>
+	A demo program with associated explanatory notes is included in the
+	download. The demo lists and provides information about all the special
+	shell folders supported by the unit.
 </p>
 
-<p>
-	The following is a list of reported bugs along with notes of the releases
-	where they were fixed:
-</p>
-
-<ul>
-
-	<li>
-		Occasional GPF errors were being reported when displaying the new style
-		browse for folder dialog box. <em>Fixed in release 2.2.4</em>.
-	</li>
-	
-	<li>
-		The browser for folder dialog box's OK button was not being disabled
-		when required when new style dialog box is used. <em>Fixed in release
-		2.2.4</em>.
-	</li>
-
-	<li>
-		<code>PJShellFolders.pas</code> would not compile with Delphi 2005/6.
-		<em>Fixed in release 2.2.2</em>.
-	</li>
-	
-	<li>
-		Range check error in demo program. <em>Fixed in release 2.2.2</em>.
-	</li>
-	
-	<li>
-		Special folder ID property editor was read-only and not permitting
-		special folder IDs to be edited at design time. <em>Fixed in release
-		2.2.1</em>.
-	</li>
-	
-	<li>
-		<var>HelpContext</var> property did not have default specifier.
-		<em>Fixed in release 2.2</em>.
-	</li>
-	
-	<li>
-		Compiler warning &quot;deprecated&quot; was being displayed when
-		<code>PJShellFolders.pas</code> was compiled with Delphi 6 or 7.
-		<em>Fixed in release 2.1</em>.
-	</li>
-	
-	<li>
-		Folder display names not being shown correctly on Windows NT OSs.
-		<em>Fixed in release 2.0</em>.
-	</li>
-
-</ul>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
-<h2 id="changelog">
-	Change log
+<h2 id="update">
+	Update History
 </h2>
 
 <p>
@@ -609,21 +327,21 @@
 </p>
 
 
-
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="license">
-	License
+	License and Disclaimer
 </h2>
-
 
 <p>
 	This product, <em>Shell Folders Unit</em>, is subject to the Mozilla Public
-	License Version 1.1 (the &quot;License&quot;). You may not use this product
+	License Version 1.1 (the &quot;License&quot;). You may not use this Product
 	except in compliance with the License. You may obtain a copy of the License
-	at <a href="http://www.mozilla.org/MPL/">http://www.mozilla.org/MPL/</a>.
+	at <a
+		href="http://www.mozilla.org/MPL/MPL-1.1"
+	>http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
@@ -634,10 +352,9 @@
 </p>
 
 <p>
-	The Initial Developer of Shell Folders Unit is Peter D Johnson. Portions
-	created by the Initial Developer are Copyright &copy; 2001-2007 Peter D
-	Johnson (<a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>).
-	All Rights Reserved.
+	The Initial Developer of <em>Shell Folders Unit</em> is Peter D Johnson.
+	Portions created by the Initial Developer are Copyright &copy; 2001-2010
+	Peter D Johnson (www.delphidabbler.com). All Rights	Reserved.
 </p>
 
 <p>
@@ -658,34 +375,59 @@
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
+
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
+</p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
 <h2 id="author">
-	About the author
+	About the Author
 </h2>
 
 <p>
 	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-	Wales,  UK, writing write mainly in Delphi. My programs are available for
-	download from
-	<a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>.
+	Wales, UK, writing write mainly in Delphi. My programs and code are available
+	from <a
+		href="http://www.delphidabbler.com/"
+	>http://www.delphidabbler.com/</a>.
 </p>
 
+<p>
+	I can be <a
+		href="http://www.delphidabbler.com/contact"
+	>contacted via the website</a>.
+</p> 
 
 
 <div class="endnotes">
-
 	<div class="comments">
-		Please
-		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the components, if you
-		have found a bug, or you want to suggest any updates.
+		Please <a
+			href="http://www.delphidabbler.com/contact"
+		>let me know</a> if you have any comments about the component, but
+		please use the Issue Tracker noted above to report bugs and request new
+		features.
 	</div>
-
 	<div class="copyright">
-		This info sheet is copyright &copy; 2005-2007, P D Johnson,
-		<a href="http://www.delphidabbler.com/">
-		www.delphidabbler.com</a>
+		This document is copyright &copy; 2005-2010, P D Johnson, <a
+			href="http://www.delphidabbler.com/"
+		>www.delphidabbler.com</a>
 	</div>
-
 </div>
 
 </body>
