@@ -1,0 +1,259 @@
+================================================================================
+
+Shell Folders Unit: Historical update information from v1.0 to v2.2.4
+
+================================================================================
+
+This file records known changes to files in the Shell Folders Unit from v1.0 to
+and v2.2.4. before the project was placed was placed under version control with
+Subversion.
+
+There are two sections:
+
+  1: Releases: Lists all the releases of the project and notes which files were
+     added, updated or deleted in each release.
+
+  2: Files: Lists all source code and development tools and provides details of
+     changes to these files.
+
+
+================================================================================
+1: RELEASES
+================================================================================
+
+This section lists all releases of the project from the first version (1.0) to 
+release 2.2.4. For each release the following is noted:
+
+  + Version and date
+  + List of new, updated and deleted files.
+  
+For details of changes to each release see ChangeLog.txt
+
+--------------------------------------------------------------------------------
+v1.0 of 01 Apr 2001
+--------------------------------------------------------------------------------
+New     - PJShellFolders.pas 1.0
+New     - PJShellFolders.dcr 25 Mar 2001
+New     - Help\PJShellFolders.hpj 1.0
+New     - Help\PJShellFolders.hap 29 Mar 2001
+
+--------------------------------------------------------------------------------
+v2.0 of 15 Jun 2003
+--------------------------------------------------------------------------------
+Updated - PJShellFolders.pas 2.0
+New     - PJShellFoldersDsgn.pas 1.0
+Updated - Help\PJShellFolders.hpj 1.1
+Updated - Help\PJShellFolders.hap 15 Jun 2003
+New     - Demo\ShellFolderDemo.dpr 1.0
+New     - Demo\ShellFolderDemoForm.pas 1.0
+
+--------------------------------------------------------------------------------
+v2.1 of 29 Jul 2003
+--------------------------------------------------------------------------------
+Updated - PJShellFolders.pas 2.1
+Updated - Demo\ShellFolderDemoForm.pas 1.1
+
+--------------------------------------------------------------------------------
+v2.2 of 22 Aug 2004
+--------------------------------------------------------------------------------
+Updated - PJShellFolders.pas 2.2
+Updated - Help\PJShellFolders.hpj 1.2
+Updated - Help\PJShellFolders.hap 22 Aug 2004
+New     - Help\PJShellFolders.als 22 Aug 2004
+Updated - Demo\ShellFolderDemoForm.pas 1.2
+
+--------------------------------------------------------------------------------
+v2.2.1 - 09 Jan 2005
+--------------------------------------------------------------------------------
+Updated - PJShellFoldersDsgn.pas 1.1
+
+--------------------------------------------------------------------------------
+v2.2.2 - 22 Dec 2005
+--------------------------------------------------------------------------------
+Updated - PJShellFolders.pas 2.3
+Updated - PJShellFoldersDsgn.pas 1.2
+Updated - Demo\ShellFolderDemoForm.pas 1.3
+Updated - Demo\ShellFolderDemo.dpr 1.1
+New     - Demo\DelphiDabbler.ico 02 Oct 2004
+
+--------------------------------------------------------------------------------
+v2.2.3 of 12 Apr 2006
+--------------------------------------------------------------------------------
+Updated - PJShellFolders.pas 2.4
+
+--------------------------------------------------------------------------------
+v2.2.4 of 03 Jul 2007
+--------------------------------------------------------------------------------
+Updated - PJShellFolders.pas 2.5
+Updated - Demo\ShellFolderDemoForm.pas 1.4
+Updated - Help\PJShellFolders.hpj 1.3
+Updated - Help\PJShellFolders.hap 03 Jul 2007
+Updated - Help\PJShellFolders.als 03 Jul 2007
+
+
+================================================================================
+2: FILES
+================================================================================
+
+This section lists all files for which an update history is known between v1 and
+and v2.2.4, inclusive.
+
+--------------------------------------------------------------------------------
+PJShellFolders.dcr
+--------------------------------------------------------------------------------
+        25 Mar 2001    - Original version of component palette glyphs.
+        25 Jan 2010    - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+PJShellFolders.pas
+--------------------------------------------------------------------------------
+v1.0 of 01 Apr 2001    - Original version.
+v2.0 of 15 Jun 2003    - Removed registration procedure and TPJFolderIDPE
+                         property editor to new PJShellFoldersDsgn unit and
+                         removed DsgnIntf unit reference
+                       - Added boDirsOnly option to TPJBrowseDialog.Options
+                         property - user can now specify if browse dialog
+                         displays and accepts virtual folders or just those in
+                         file system (previously the latter was only option
+                         available).
+                       - Added new EPJShellFolders exception and used in place
+                         of Exception. Added helper routines to raise exceptions
+                         and moved all error message strings to resource
+                         strings.
+                       - Renamed GetFolderDisplayName as
+                         PIDLToFolderDisplayName, made public, and rewrote code
+                         to get display names properly under WinNT and Win9x.
+                       - Renamed GetFolderPath function as PIDLToFolderPath and
+                         made public.
+                       - Added TPJBrowseDialog.OnSelChangeEx event to give
+                         access to PIDL of selected folder.
+                       - TPJBrowseDialog now displays help button as disabled
+                         when HelpContext = 0.
+                       - Moved conditionally compiled additional shell folder
+                         constants missing from Delphi 3 to interface section to
+                         make available to users.
+v2.1 of 29 Jul 2003    - Prevented warnings when compiling unit with Delphi 6 &
+                         7 using conditional compilation. (Thanks to Philippe
+                         Lucarz).
+                       - Conditionally added extra CSIDL_ constants that are
+                         declared in Delphi 6's ShlObj unit.
+v2.2 of 22 Aug 2004    - Added support for new dialog style - selected using a
+                         new option in the Options property. Based on code
+                         suggested by Ryan Fischbach.
+                       - Provided default specifier of 0 for HelpContext
+                         property. Thanks to Ryan Fischbach for suggesting.
+                       - Added support for more new special folder (CSIDL_)
+                         identifiers per MSDN documentation.
+v2.3 of 22 Dec 2005    - Revised compiler directives to enable support for
+                         Delphi 2005/6.
+                       - Removed Delphi 3 specific code since no longer compiles
+                         with Delphi 3.
+v2.4 of 12 Apr 2006    - Added new CSIDL_* special folder constants including
+                         some slated for Windows Vista.
+                       - Added CSIDL_FLAG_CREATE create flag for forcing
+                         creation of new folder. This flag is not provided on
+                         early Delphis.
+v2.5 of 03 Jul 2007    - Removed CSIDL_ constants that were provisioanally
+                         slated for Windows Vista but were removed from MSDN
+                         documentation.
+                       - Changed tests for valid folder ids to ignore any
+                         CSIDL_FLAG_ values that may have been included with the
+                         folder id.
+                       - Added various additional CSIDL_FLAG_ constants.
+                       - Changed TPJBrowseDialog.Options property to permit any
+                         combination of values. Certain options are now ignored
+                         when used in combination with others.
+                       - Added TPJBrowseDlgOption enumeration that provides
+                         basis of TPJBrowseDlgOptions set. Previously
+                         enumeration was defined in set declaration.
+                       - Changed to always initialise COM regardless of whether
+                         code used to display new style browser for folder.
+                         Previous code that selectively initialised COM was
+                         buggy.
+                       - Refactored some duplicated code.
+                       - Fixed code that enables / disables browser dialog box
+                         OK button to work with new style dialog.
+                       - Made help button caption localisable.
+        25 Jan 2010    - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+PJShellFoldersDsgn.pas
+--------------------------------------------------------------------------------
+v1.0 of 15 Jun 2003    - Original version.
+v1.1 of 09 Jan 2005    - Fixed bug in special folder id property editor that
+                         ignoring user's changes to the property value.
+                       - Removed editor's read-only attribute.
+v1.2 of 22 Dec 2005    - Revised compiler directives to enable support for
+                         Delphi 2005/6.
+        25 Jan 2010    - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\DelphiDabbler.ico
+--------------------------------------------------------------------------------
+        02 Oct 2004    - Main icon for demo program.
+        25 Jan 2010    - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\ShellFolderDemo.dpr
+--------------------------------------------------------------------------------
+v1.0 of 15 Jun 2003    - Original version.
+v1.1 of 22 Dec 2005    - Set Application.Title.
+                       - Changed application's icon to DelphDabbler standard
+                         icon.
+        25 Jan 2010    - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\ShellFolderDemoForm.pas
+--------------------------------------------------------------------------------
+v1.0 of 15 Jun 2003    - Original version.
+v1.1 of 29 Jul 2003    - Updated - detail not known.
+v1.2 of 22 Aug 2004    - Added code to demonstrate new style dialog.
+v1.3 of 22 Dec 2005    - Fixed range check bug.
+v1.4 of 03 Jul 2007    - Refined to allow all browser dialog box options to be
+                         configured from UI.
+                       - Changed to display both small and large icon of
+                         selected folder in browser dialog box. We now also
+                         display path to selected folder, if any.
+                       - Changed demo of browser dialog box customisation making
+                         headline text bold instead of adding new text control
+                         to dialog box.
+        25 Jan 2010    - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJShellFolders.als
+--------------------------------------------------------------------------------
+        22 Aug 2004    - Original help a-link keyword file.
+        03 Jul 2007    - Regenerated to ensure synchronisation with help file.
+        25 Jan 2010    - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJShellFolders.hap
+--------------------------------------------------------------------------------
+        29 Mar 2001    - New help topic file.
+        15 Jun 2003    - Corrected error where topics were referring to wrong
+                         unit.
+                       - Added topic for unit with links to various classes and
+                         routines.
+                       - Added topics for new PIDL information routines.
+                       - Added group topics for difference routine types.
+                       - Added additional topics and updated existing topics re
+                         changed / new properties.
+        22 Aug 2004    - Updated re new boNewDlgStyle option.
+                       - Added further A-keywords to file to improve integration
+                         with Delphi help.
+        03 Jul 2007    - Updated re changes in TPJBrowseDialog.Options property.
+        25 Jan 2010    - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJShellFolders.hpj
+--------------------------------------------------------------------------------
+v1.0 of 30 Mar 2001    - Original version.
+v1.1 of 15 Jun 2003    - Replaced PJSoft references with DelphiDabbler.
+                       - Updated copyright date.
+v1.2 of 22 Aug 2004    - Updated copyright date to include 2004.
+                       - Changed name of help file to include "Shell Folders
+                         Unit" rather than "Shell Folder Components".
+v1.3 of 03 Jul 2007    - Updated copyright date to include 2007.
+        25 Jan 2010    - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
