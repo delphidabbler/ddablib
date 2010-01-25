@@ -1,17 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
+<!--
+ * Read-me file for Shell Folders Unit
+ *
+ * $Rev$
+ * $Date$
+-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
 
 	<title>
-		DelphiDabbler.com: Shell Folders Demo ReadMe
+		DelphiDabbler.com Shell Folders Demo ReadMe
 	</title>
 
 	<style type="text/css">
-		<!--
 		body {
 			margin: 1em;
 			padding: 0;
@@ -133,7 +136,6 @@
 			font-size: 8pt;
 			text-align: right;
 		}
-		-->
 	</style>
 
 </head>
@@ -158,7 +160,7 @@
 
 <p>
 	The project was created with Delphi 4, Delphi 7 and Delphi 2006 and compiles
-	on all Win32 Delphis from v4 to 2006.
+	on all Win32 Delphis from v4 to 2010.
 </p>
 
 
@@ -187,22 +189,18 @@
 </p>
 
 <ul class="spaced">
-
 	<li>
 		ID: the symbolic constant associated with the folder.
 	</li>
-
 	<li>
 		Display name: the display name of the folder (or &lt;not supported&gt;
 		if the folder is not supported by the underlying operating system).
 	</li>
-	
 	<li>
 		Folder path: the path to the folder in the file system. If the folder is
 		not part of the physical file system, i.e. is virtual, then &lt;virtual
 		folder&gt; is displayed. No entry is present for unsupported folders.
 	</li>
-
 </ul>
 
 <p>
@@ -210,7 +208,6 @@
 </p>
 
 <ul class="spaced">
-
 	<li>
 		<em>Browse selected folder</em> button:<br />
 		Clicking this button displays the <em>Browse for Folder</em> dialog box
@@ -220,7 +217,6 @@
 		supported by the operating system the button is disabled. The dialog can
 		also be displayed by double clicking the folder's entry in the display. 
 	</li>
-	
 	<li>
 		<em>Dialog Box Options</em> group box:<br />
 		This group box contains check boxes that enable and disable associated
@@ -258,14 +254,12 @@
 			</li>
 		</ul>
 	</li>
-	
 	<li>
 		<em>Bold Headline Text</em> check box:<br />
 		When checked the <em>Browse for folder</em> dialog box will display 
 		its headline text in bold. This customisation is carried out in the
-		demo program's OnInitialize event handler.
+		demo program's <var>OnInitialize</var> event handler.
 	</li>
-	
 	<li>
 		<em>Use OnSelChange</em> radio button:<br />
 		When this button is checked the browse dialog box component uses the
@@ -276,7 +270,6 @@
 		Style Dialog</em> check box is checked since the new style dialog box
 		does not support status text.
 	</li>
-	
 	<li>
 		<em>Use OnSelChangeEx</em> radio button:<br />
 		When this button is checked the browse dialog box component uses the
@@ -288,7 +281,6 @@
 		handler does not display status text when the <em>New Style Dialog</em>
 		is check box is checked.
 	</li>
-	
 </ul>
 
 <h2>
@@ -297,12 +289,12 @@
 
 <p>
 	The main purpose of this demo is to provide source code that shows how to
-	use the various classes and components from <code>PJShellFolder</code>.
-	The code of <code>ShellFolderDemoForm.pas</code> illustrates the following:
+	use the various classes and components from the <code>PJShellFolders</code>
+	unit. The code of <code>ShellFolderDemoForm.pas</code> illustrates the
+	following:
 </p>
 
 <ul class="spaced">
-	
 	<li>
 		The <var>DisplaySpecialFolders</var> method (called from
 		<var>FormCreate</var>) uses the <var>IPJSpecialFolderEnum</var>
@@ -311,13 +303,11 @@
 		uses the <var>TPJSpecialFolderInfo</var> component to get the
 		information to display.
 	</li>
-	
 	<li>
 		The <var>IsSelectionSupported</var> method uses the
 		<var>TPJSpecialFolderInfo</var> component to test to see if the
 		currently highlighted folder is supported by the operating system.
 	</li>
-	
 	<li>
 		The <var>BrowseButtonClick</var> event handler sets up the
 		<var>TPJBrowseDialog</var> component to display the <em>Browse for
@@ -326,14 +316,12 @@
 		dialog box. This causes the component's OnInitialise event to fire
 		&ndash; how this is handled is described below.
 	</li>
-	
 	<li>
 		The <var>BrowseDialogInitialise</var> method handles the
 		<var>TPJBrowseDialog.OnInitialise</var> event and makes the headline
 		control display its headline text in bold if the <em>Bold Headline
 		Text</em> check box is checked.
 	</li>
-	
 	<li>
 		As folders are selected in the the browse dialog either the
 		<var>TPJBrowseDialog.OnSelChange</var> or
@@ -342,9 +330,7 @@
 		respectively, according to the state of the <em>Use OnSelChange</em> and
 		<em>Use OnSelChangeEx</em> radio buttons. These event handlers perform
 		as follows:
-		
-		<ul class="unspaced">
-		
+		<ul class="spaced">
 			<li>
 				<var>BrowseDlgSelChange</var>: This event handler simply
 				displays the selected folder's display name in the dialog's
@@ -352,7 +338,6 @@
 				always enabled. Status text is ignored if the dialog box has the
 				new style.
 			</li>
-			
 			<li>
 				<var>BrowseDlgSelChangeEx</var>: This event handler gets the
 				display name and path from the PIDL passed to the handler and
@@ -362,18 +347,14 @@
 				the folder's path and displays them in the main form. Status
 				text is ignored if the dialog has the new style.
 			</li>
-		
 		</ul>
-		
 	</li>
-	
 	<li>
 		When the browse dialog is closed, the <var>TPJBrowseDialog.OnClose</var>
 		event is triggered and handled by the <var>BrowseDlgClose</var> event
 		handler. This simply ensures that any icons and path displayed in the
 		main window are cleared.
 	</li>
-	
 </ul>
 
 <p>
@@ -383,20 +364,18 @@
 
 
 <div class="endnotes">
-
 	<div class="comments">
-		Please
-		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments the components or this demo or
-		if you have found a bug.
+		Please <a
+			href="http://www.delphidabbler.com/contact"
+		>let me know</a> if you have any comments about the component, but
+		please use the Issue Tracker noted above to report bugs and request new
+		features.
 	</div>
-
 	<div class="copyright">
-		This document is copyright &copy; 2005-2007, P D Johnson,
-		<a href="http://www.delphidabbler.com/">
-		www.delphidabbler.com</a>
+		This document is copyright &copy; 2005-2010, P D Johnson, <a
+			href="http://www.delphidabbler.com/"
+		>www.delphidabbler.com</a>
 	</div>
-
 </div>
 
 </body>
