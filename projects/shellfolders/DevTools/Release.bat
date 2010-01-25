@@ -1,20 +1,40 @@
 @rem ---------------------------------------------------------------------------
 @rem Script used to create zip file containing Shell Folders Unit release
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007-2010
 @rem
-@rem v1.0 of 03 Jul 2007 - First version.
+@rem $Rev$
+@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 @echo off
-cd ..
 
-set OutFile=Releases\dd-shellfolders.zip
-del %OutFile%
+setlocal
 
-zip -j -9 %OutFile% PJShellFolders.pas PJShellFolders.dcr PJShellFoldersDsgn.pas
-zip -j -9 %OutFile% Docs\ChangeLog.txt Docs\ReadMe.htm
-zip -j -9 %OutFile% Help\PJShellFolders.als Help\PJShellFolders.hlp
-zip -r -9 %OutFile% Demo\*.*
+cd .\..
 
-cd DevTools
+set OutFile=Release\dd-shellfolders.zip
+set SrcDir=
+set DocsDir=Docs
+set DemoDir=Demo
+set HelpDir=Help
+
+if exist Release rmdir /S /Q Release
+mkdir Release
+
+zip -j -9 %OutFile% PJShellFolders.pas
+zip -j -9 %OutFile% PJShellFolders.dcr
+zip -j -9 %OutFile% PJShellFoldersDsgn.pas
+
+zip -j -9 %OutFile% %HelpDir%\PJShellFolders.als
+zip -j -9 %OutFile% %HelpDir%\PJShellFolders.hlp
+
+zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
+zip -j -9 %OutFile% %DocsDir%\MPL.txt
+zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
+zip -j -9 %OutFile% %DocsDir%\Wiki.URL
+
+zip %OutFile% -r -9 %DemoDir%\*.*
+zip %OutFile% -d %DemoDir%\*.svn\*
+
+endlocal
