@@ -1,0 +1,53 @@
+Release 2.2.4 of 03 July 2007
++ Removed CSIDL_ constants that were provisioanally slated for Windows Vista but were removed from MSDN documentation.
++ Changed tests for valid folder ids to ignore any CSIDL_FLAG_ values that may have been included with the folder id.
++ Added various additional CSIDL_FLAG_ constants.
++ Changed TPJBrowseDialog.Options property to permit any combination of values. Certain options are now ignored when used in combination with others.
++ Added TPJBrowseDlgOption enumeration that provides basis of TPJBrowseDlgOptions set.  Previously enumeration was defined in set declaration.
++ Changed to always initialise COM regardless of whether code used to display new style browser for folder. Previous code that selectively initialised COM was buggy.
++ Refactored some duplicated code.
++ Fixed code that enables / disables browser dialog box OK button to work with new style dialog.
++ Made help button caption localisable.
++ Updated help file re changes to TPJBrowseDialog.Options property.
++ Updated demo program, simplifying browse dialog customisation and giving access to all browse dialog options.
+
+Release 2.2.3 of 12 April 2006
++ Added new CSIDL_ special folder and folder creation constants.
+
+Release 2.2.2 of 22 December 2005	
++ Updated to compile with Delphi 2005/6.
++ Removed Delphi 3 specific code.
++ Fixed range check bug in demo program and changed icon from Delphi default to DelphiDabbler.
+
+Release 2.2.1 of 09 January 2005	
++ Fixed bug in shell folder ID property editor that was preventing user from changing the value of properties at design time.
+
+Release 2.2 of 22 August 2004
++ Added support for new dialog style enabled via the Options property.
++ Provided default specifier of 0 for HelpContext property. 
++ Added further special folder identifiers. 
++ Updated help file re new TPJBrowseFolder new dialog style option and added additional "A" keywords to improve Delphi help integration.
++ Updated text of Help about box. 
++ Added new .als file for integrating with Delphi 6 and 7 OpenHelp system.
++ Added code to exercise new style dialog box to demo program.
++ Changed to Mozilla public license. 
+
+Release 2.1 of 29 July 2003
++ Prevented compiler warnings being issued when compiling under Delphi 6 and 7. 
++ Added support for additional special shell folders. 
++ Modified demo program.
+
+Release 2.0 of 15 June 2003
++ Fixed bug that meant that display name wasn't being shown correctly in Win NT OSs. 
++ Added new OnSelChangeEx event to TPJBrowseDialog component that exposes selected folder's PIDL. 
++ Enabled TPJBrowseDialog to display and accept virtual as well as file system folders. 
++ TPJBrowseDialog now displays disabled help button when HelpContext is 0. 
++ Additional shell folder identifiers missing from Delphi 3 are now conditionally placed in interface of unit in Delphi 3. 
++ Added new public functions to get folder path and display name from PIDLs. 
++ All errors in components and routines now raise EPJShellFolder exceptions. 
++ Property editor and component registration moved to separate design time unit. 
++ Help file corrected and updated. 
++ Demo program added.
+
+Release 1.0 of 01 April 2001
++ Original version with help file and HTML documentation. 

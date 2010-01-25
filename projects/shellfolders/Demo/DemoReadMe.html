@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+	<title>
+		DelphiDabbler.com: Shell Folders Demo ReadMe
+	</title>
+
+	<style type="text/css">
+		<!--
+		body {
+			margin: 1em;
+			padding: 0;
+			font-family: Verdana, Arial, sans-serif;
+			font-size: 9pt;
+			line-height: 150%;
+		}
+		h1 {
+			margin: 0 0 1em 0;
+			padding: 0.5em;
+			border: 1px silver solid;
+			background-color: #eee;
+			font-size: 13pt;
+			font-weight: bold;
+			text-align: center;
+		}
+		h1 .subtitle {
+			font-style: italic;
+			color: #336;
+		}
+		h2 {
+			margin: 1em 0 0 0;
+			padding: 0;
+			padding-bottom: 6px;
+			border-bottom: 1px silver solid;
+			font-size: 11pt;
+			font-weight: bold;
+		}
+		h3 {
+			margin: 0.5em 0 0 0;
+			padding: 0;
+			font-size: 9pt;
+			font-weight: bold;
+		}
+		p {
+			margin: 0.5em 0 0 0;
+			padding: 0;
+		}
+		ul, ol {
+			margin: 0.5em 0 0 3em;
+			padding: 0;
+		}
+		ul {
+			list-style-type: square;
+		}
+		ul.spaced li,
+		ol.spaced li {
+			margin-top: 0.5em;
+		}
+		ul.spaced li,
+		ol.spaced li {
+			margin-top: 0.5em;
+		}
+		ul.unspaced li,
+		ol.unspaced li {
+			margin-top: 0;
+		}
+		ul.unspaced li.first,
+		ol.unspaced li.first {
+			margin-top: 0.5em;
+		}
+		code {
+			font-family: "Courier New", Courier, monospace;
+		}
+		a:link {
+			color: #336;
+			text-decoration: underline;
+		}
+		a:visited {
+			color: #669;
+			text-decoration: underline;
+		}
+		a:active {
+			color: #336;
+			text-decoration: underline;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+		.gototop {
+			margin: 1em 0 0 0;
+			padding: 0.3em 0 0 0;
+			text-align: center;
+			position: relative;
+			float: right;
+			font-weight: bold;
+		}
+		.pullout {
+			border-left: 8px silver solid;
+			xborder-bottom: 2px silver solid;
+			xborder-top: 2px silver solid;
+			background-color: #eee;
+			margin: 0.5em 0 0 0;
+			padding: 0.25em 0.5em;
+			font-style: italic;
+		}
+		.indent {
+			margin-left: 3em;
+		}
+		.highlight {
+			color: #336;
+			font-style: italic;
+			font-weight: bold;
+		}
+		.endnotes {
+			margin: 1.5em 0 0 0;
+			padding: 1em 0 0 0;
+			border-top: 1px silver solid;
+		}
+		.comments {
+			font-style: italic;
+		}
+		.copyright,
+		.copyright a:link,
+		.copyright a:visited,
+		.copyright a:active {
+			margin: 1em 0 0 0;
+			color: gray;
+			font-size: 8pt;
+			text-align: right;
+		}
+		-->
+	</style>
+
+</head>
+
+<body>
+
+
+<h1>
+	Shell Folders Unit<br />
+	<span class="subtitle">Demo Program ReadMe</span>
+</h1>
+
+
+<h2>
+	Introduction
+</h2>
+
+<p>
+	This project is provided with the DelphiDabbler <em>Shell Folders Unit</em>
+	to demonstrate how to use some of the code in the unit.
+</p>
+
+<p>
+	The project was created with Delphi 4, Delphi 7 and Delphi 2006 and compiles
+	on all Win32 Delphis from v4 to 2006.
+</p>
+
+
+<h2>
+	Installing the Demo Project
+</h2>
+
+<p>
+	The demo project is provided in the same zip file as the <em>Shell Folders
+	Unit</em>. Ensure the unit's components are installed before trying to
+	compile this demo. Copy the code from the <code>Demo</code> subfolder of
+	the zip drive to some suitable location on your hard drive then open the
+	<code>ShellFolderDemo.dpr</code> project in Delphi.
+</p>
+
+
+<h2>
+	Overview
+</h2>
+
+<p>
+	The demo program exercises much of the main code in
+	<code>PJShellFolders.pas</code>. On starting the program displays
+	information about each of the supported special shell folders in the main
+	part of the window. This information is:
+</p>
+
+<ul class="spaced">
+
+	<li>
+		ID: the symbolic constant associated with the folder.
+	</li>
+
+	<li>
+		Display name: the display name of the folder (or &lt;not supported&gt;
+		if the folder is not supported by the underlying operating system).
+	</li>
+	
+	<li>
+		Folder path: the path to the folder in the file system. If the folder is
+		not part of the physical file system, i.e. is virtual, then &lt;virtual
+		folder&gt; is displayed. No entry is present for unsupported folders.
+	</li>
+
+</ul>
+
+<p>
+	Below the main display are several controls:
+</p>
+
+<ul class="spaced">
+
+	<li>
+		<em>Browse selected folder</em> button:<br />
+		Clicking this button displays the <em>Browse for Folder</em> dialog box
+		with the selected special folder as the root in the display. Click the
+		button to experiment with the dialog, the behaviour of which changes
+		according to the state of other control. If the selected folder is not
+		supported by the operating system the button is disabled. The dialog can
+		also be displayed by double clicking the folder's entry in the display. 
+	</li>
+	
+	<li>
+		<em>Dialog Box Options</em> group box:<br />
+		This group box contains check boxes that enable and disable associated
+		options in the browse dialog box's <var>Options</var> properties, as
+		follows:
+		<ul>
+			<li>
+				<em>Show Help</em>:<br />
+				Displays a help button in the dialog box. The button will be
+				disabled because no help context is assigned to the dialog box
+				&ndash; assigning a non-zero help context would enable the
+				button. No help button is displayed if <em>New Style Dialog</em>
+				is checked.
+			</li>
+			<li>
+				<em>Context Help</em>:<br />
+				Displays a &quot;<strong>?</strong>&quot; button in the dialog
+				box title and enables context sensitive help.
+			</li>
+			<li>
+				<em>Status Text</em>:<br />
+				Displays status text in the dialog box. The status text is set
+				in the demo's OnSelChange and OnSelChangeEx event handlers.
+				Status text is not displayed if <em>New Style Dialog</em> is
+				checked.
+			</li>
+			<li>
+				<em>Directories Only</em>:<br />
+				Displays only folders from the file system in the dialog box.
+			</li>
+			<li>
+				<em>New Style Dialog</em>:<br />
+				Displays the dialog in the new style. It is resizeable and
+				displays a <em>New Folder</em> button.
+			</li>
+		</ul>
+	</li>
+	
+	<li>
+		<em>Bold Headline Text</em> check box:<br />
+		When checked the <em>Browse for folder</em> dialog box will display 
+		its headline text in bold. This customisation is carried out in the
+		demo program's OnInitialize event handler.
+	</li>
+	
+	<li>
+		<em>Use OnSelChange</em> radio button:<br />
+		When this button is checked the browse dialog box component uses the
+		demo's <var>OnSelChange</var> event handler when the selected folder
+		changes. The event handler displays the name of the selected folder in
+		the dialog's status text and ensures the <em>OK</em> button is always
+		enabled. This event handler does not display status text when <em>New
+		Style Dialog</em> check box is checked since the new style dialog box
+		does not support status text.
+	</li>
+	
+	<li>
+		<em>Use OnSelChangeEx</em> radio button:<br />
+		When this button is checked the browse dialog box component uses the
+		demo's <var>OnSelChangeEx</var> event handler when the selected folder
+		changes. The event handler displays the set's the dialogs's status text
+		to indicate the name of the selected folder, along with information
+		about whether the folder is virtual. The path to the folder and its
+		small and large icons are displayed in the main window. This event
+		handler does not display status text when the <em>New Style Dialog</em>
+		is check box is checked.
+	</li>
+	
+</ul>
+
+<h2>
+	Source Code
+</h2>
+
+<p>
+	The main purpose of this demo is to provide source code that shows how to
+	use the various classes and components from <code>PJShellFolder</code>.
+	The code of <code>ShellFolderDemoForm.pas</code> illustrates the following:
+</p>
+
+<ul class="spaced">
+	
+	<li>
+		The <var>DisplaySpecialFolders</var> method (called from
+		<var>FormCreate</var>) uses the <var>IPJSpecialFolderEnum</var>
+		interface, implemented by the <var>TPJSpecialFolderEnum</var> class, to
+		display details of all supported folders in the main window. The code
+		uses the <var>TPJSpecialFolderInfo</var> component to get the
+		information to display.
+	</li>
+	
+	<li>
+		The <var>IsSelectionSupported</var> method uses the
+		<var>TPJSpecialFolderInfo</var> component to test to see if the
+		currently highlighted folder is supported by the operating system.
+	</li>
+	
+	<li>
+		The <var>BrowseButtonClick</var> event handler sets up the
+		<var>TPJBrowseDialog</var> component to display the <em>Browse for
+		Folders</em> dialog using the selected special folder as its root node.
+		The <var>TPJBrowseDialog.Execute</var> method is called to display the
+		dialog box. This causes the component's OnInitialise event to fire
+		&ndash; how this is handled is described below.
+	</li>
+	
+	<li>
+		The <var>BrowseDialogInitialise</var> method handles the
+		<var>TPJBrowseDialog.OnInitialise</var> event and makes the headline
+		control display its headline text in bold if the <em>Bold Headline
+		Text</em> check box is checked.
+	</li>
+	
+	<li>
+		As folders are selected in the the browse dialog either the
+		<var>TPJBrowseDialog.OnSelChange</var> or
+		<var>TPJBrowseDialog.OnSelChangeEx</var> events are handled by the
+		<var>BrowseDlgSelChange</var> or <var>BrowseDlgSelChangeEx</var> methods
+		respectively, according to the state of the <em>Use OnSelChange</em> and
+		<em>Use OnSelChangeEx</em> radio buttons. These event handlers perform
+		as follows:
+		
+		<ul class="unspaced">
+		
+			<li>
+				<var>BrowseDlgSelChange</var>: This event handler simply
+				displays the selected folder's display name in the dialog's
+				status text and ensures the dialog's <em>OK</em> button is
+				always enabled. Status text is ignored if the dialog box has the
+				new style.
+			</li>
+			
+			<li>
+				<var>BrowseDlgSelChangeEx</var>: This event handler gets the
+				display name and path from the PIDL passed to the handler and
+				displays folder information according to whether the folder is
+				virtual in the dialog's status text. It then gets the handleS of
+				the small and large icons associated with the folder, along with
+				the folder's path and displays them in the main form. Status
+				text is ignored if the dialog has the new style.
+			</li>
+		
+		</ul>
+		
+	</li>
+	
+	<li>
+		When the browse dialog is closed, the <var>TPJBrowseDialog.OnClose</var>
+		event is triggered and handled by the <var>BrowseDlgClose</var> event
+		handler. This simply ensures that any icons and path displayed in the
+		main window are cleared.
+	</li>
+	
+</ul>
+
+<p>
+	Please run the program and examine the source code to get an idea about how
+	to use the <code>PJShellFolders</code> unit.
+</p>
+
+
+<div class="endnotes">
+
+	<div class="comments">
+		Please
+		<a href="http://www.delphidabbler.com/contact">
+		let me know</a> if you have any comments the components or this demo or
+		if you have found a bug.
+	</div>
+
+	<div class="copyright">
+		This document is copyright &copy; 2005-2007, P D Johnson,
+		<a href="http://www.delphidabbler.com/">
+		www.delphidabbler.com</a>
+	</div>
+
+</div>
+
+</body>
+
+</html>

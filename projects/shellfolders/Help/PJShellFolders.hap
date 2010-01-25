@@ -1,0 +1,2909 @@
+<*HelpAuthor HTA1.9*>
+AK
+52
+[Footnotes]
+#=IDH_SF_UNIT
+$=PJShellFolders unit
+K=PJShellFolders
+A=PJShellFolders
+[End]
+7
+HS
+1
+0
+
+0
+IDH_SFIROUTINES
+
+HS
+2
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+HS
+3
+0
+
+0
+IDH_IPJSPECIALFOLDERENUM
+
+HS
+4
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+HS
+5
+0
+
+0
+IDH_BD_CLASS
+
+HS
+6
+0
+
+0
+IDH_PIDLROUTINES
+
+NS
+21
+2207
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset2 WingDings;}{\f3\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 21>\plain\f0\fs8\cf2\b  
+\par \plain\f1\fs22\cf2\b PJShellFolders\plain\f0\fs20\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 21>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 This unit provides components, classes and routines to assist in working with shell folders. There are two components:
+\par \plain\f1\fs8\cf3 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf3 \'A7\plain\f3\fs18\cf3 \tab \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf3 TPJSpecialFolderInfo\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf3  - \plain\f0\fs18\cf3 provides information about the Shell's various special folders.\plain\f3\fs18\cf3 
+\par \plain\f2\fs18\cf3 \'A7\plain\f3\fs18\cf3 \tab \plain\f3\fs18\cf1 \protect <HS 5>\plain\f3\fs18\cf3 TPJBrowseDialog\plain\f3\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf3  - provides access to the Browse for Folder dialog box.
+\par \pard \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 There is also a c\plain\f0\fs18\cf3 lass \plain\f1\fs18\cf3 (\plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 TPJSpecialFolderEnum\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3 ) \plain\f0\fs18\cf3 that enumerates the Shell's special folder identifiers\plain\f1\fs18\cf3 . This class implements the \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 IPJSpecialFolderEnum\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3  interface. \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 Functions\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3  that provide information about the special folder identifiers and symbolic constants are also provided.
+\par \plain\f1\fs8\cf3 
+\par \plain\f1\fs18\cf3 Finally, PJShellFolders provides two \plain\f1\fs18\cf1 \protect <HS 6>\plain\f1\fs18\cf3 functions\plain\f1\fs18\cf1 \protect </HS 6>\plain\f1\fs18\cf3  to provide information about the folders described by PIDLs.\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_TPJSPECIALFOLDERINFO
+$=TPJSpecialFolderInfo
+K=TPJSpecialFolderInfo
+A=TPJSpecialFolderInfo_Object;TPJSpecialFolderInfo;PJShellFolders_TPJSpecialFolderInfo
+[End]
+14
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+NS
+21
+HS
+26
+0
+
+1
+IDH_SPECIAL_HEIRACHY
+
+HS
+52
+0
+
+1
+IDH_SPECIAL_PROPERTIES
+
+HS
+253
+0
+
+0
+IDH_SPECIAL_FOLDERID
+
+HS
+254
+0
+
+0
+IDH_SPECIAL_ISSUPPORTED
+
+HS
+255
+0
+
+0
+IDH_SPECIAL_ISVIRTUAL
+
+HS
+256
+0
+
+0
+IDH_SPECIAL_PATH
+
+HS
+257
+0
+
+0
+IDH_SPECIAL_DISPLAYNAME
+
+HS
+258
+0
+
+0
+IDH_SPECIALFOLDERIDTOSTR
+
+HS
+259
+0
+
+0
+IDH_ISVALIDSPECIALFOLDERID
+
+HS
+260
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+HS
+261
+0
+
+0
+
+AL(TPJSpecialFolderEnum_Object;PJSysInfo_IPJSpecialFolderEnum)
+BM
+292
+PJSpecialFolderInfo.bmp
+0
+1
+3420
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 21>\plain\f0\fs8\cf2\b  
+\par \plain\f0\fs22\cf1\b \protect <BM 292>\plain\f0\fs22\cf2\b  TPJSpecialFolderInfo\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 26>\plain\f0\fs18\cf3 Heirachy\plain\f0\fs18\cf1 \protect </HS 26>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 52>\plain\f0\fs18\cf3 Properties\plain\f0\fs18\cf1 \protect </HS 52>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 261>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 261>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 21>\plain\f0\fs18\cf3 
+\par TPJSpecialFolderInfo provides information about the Shell's various special folders.
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 TPJSpecialFolderInfo is a non-visual component that provides information about a given Windows special folder.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 To get information about a special folder set the \plain\f0\fs18\cf1 \protect <HS 253>\plain\f0\fs18\cf3 FolderID\plain\f0\fs18\cf1 \protect </HS 253>\plain\f0\fs18\cf3  property to the required special folder id. The run time only properties of the component can then be used to read off information about the folder. Test \plain\f0\fs18\cf1 \protect <HS 254>\plain\f0\fs18\cf3 IsSupported\plain\f0\fs18\cf1 \protect </HS 254>\plain\f0\fs18\cf3  to check if the folder is supported on the current platform. If the folder is not supported then both Path and DisplayName are empty. If \plain\f0\fs18\cf1 \protect <HS 255>\plain\f0\fs18\cf3 IsVirtual\plain\f0\fs18\cf1 \protect </HS 255>\plain\f0\fs18\cf3  is true then the folder is virtual and the Path property will be empty. If IsVirtual is false then the folder exists in the file system and the folder's path is given by the \plain\f0\fs18\cf1 \protect <HS 256>\plain\f0\fs18\cf3 Path\plain\f0\fs18\cf1 \protect </HS 256>\plain\f0\fs18\cf3  property. \plain\f0\fs18\cf1 \protect <HS 257>\plain\f0\fs18\cf3 DisplayName\plain\f0\fs18\cf1 \protect </HS 257>\plain\f0\fs18\cf3  gives the name used for the folder - for non-virtual folders this often has the same value as Path.
+\par 
+\par \plain\f0\fs18\cf3\b Supporting functions\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Valid values for FormatID can be obtained using the \plain\f0\fs18\cf1 \protect <HS 260>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 260>\plain\f0\fs18\cf3  class. Supplying invalid values to FormatID will cause an exception to be raised. Use the \plain\f0\fs18\cf1 \protect <HS 259>\plain\f0\fs18\cf3 IsValidSpecialFolderID\plain\f0\fs18\cf1 \protect </HS 259>\plain\f0\fs18\cf3  function to check validity. \plain\f0\fs18\cf1 \protect <HS 258>\plain\f0\fs18\cf3 SpecialFolderIdToStr\plain\f0\fs18\cf1 \protect </HS 258>\plain\f0\fs18\cf3  returns the identifier of a valid folder ID.
+\par }
+
+[Footnotes]
+#=IDH_SPECIAL_DISPLAYNAME
+$=TPJSpecialFolderInfo.DisplayName
+K=DisplayName,TPJSpecialFolderInfo;TPJSpecialFolderInfo,DisplayName;DisplayName
+A=TPJSpecialFolderInfo_DisplayName;DisplayName_property;DisplayName
+[End]
+8
+NS
+38
+HS
+47
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+KP
+117
+HS
+287
+0
+
+0
+IDH_SPECIAL_FOLDERID
+
+HS
+288
+0
+
+0
+IDH_SPECIAL_PATH
+
+HS
+289
+0
+
+0
+IDH_SPECIAL_ISSUPPORTED
+
+HS
+290
+0
+
+0
+IDH_SPECIAL_ISVIRTUAL
+
+HS
+291
+0
+
+0
+
+AL(TPJSpecialFolderInfo_FolderID;TPJSpecialFolderInfo_IsSupported;TPJSpecialFolderInfo_IsVirtual;TPJSpecialFolderInfo_Path)
+1983
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 38>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.DisplayName\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 47>\plain\f0\fs18\cf3 TPJSpecialFolderInfo\plain\f0\fs18\cf1 \protect </HS 47>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 291>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 291>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 38>\plain\f0\fs18\cf3 
+\par This property gives the name used to display the folder in Explorer.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 117>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  DisplayName: \plain\f1\fs18\cf3\b string\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 117>\plain\f1\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This property gives the display name of the special folder specified by the \plain\f0\fs18\cf1 \protect <HS 287>\plain\f0\fs18\cf3 FolderID\plain\f0\fs18\cf1 \protect </HS 287>\plain\f0\fs18\cf3  property. For physical folders (\plain\f0\fs18\cf1 \protect <HS 290>\plain\f0\fs18\cf3 IsVirtual\plain\f0\fs18\cf1 \protect </HS 290>\plain\f0\fs18\cf3  is false), DisplayName often (but not always) has the same value as the \plain\f0\fs18\cf1 \protect <HS 288>\plain\f0\fs18\cf3 Path\plain\f0\fs18\cf1 \protect </HS 288>\plain\f0\fs18\cf3  property.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 DisplayName is set to the empty string if the special folder is not supported by the operating system (see \plain\f0\fs18\cf1 \protect <HS 289>\plain\f0\fs18\cf3 IsSupported\plain\f0\fs18\cf1 \protect </HS 289>\plain\f0\fs18\cf3 ).
+\par }
+
+[Footnotes]
+#=IDH_SPECIAL_CREATE
+$=TPJSpecialFolderInfo.Create
+K=Create,TPJSpecialFolderInfo;TPJSpecialFolderInfo,Create;Create
+A=TPJSpecialFolderInfo_Create;Create_Method;Create
+[End]
+4
+KP
+1
+HS
+221
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+HS
+222
+0
+
+0
+IDH_SPECIAL_FOLDERID
+
+NS
+223
+1261
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 223>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.Create
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 221>\plain\f0\fs18\cf3 TPJSpecialFolderInfo\plain\f0\fs18\cf1 \protect </HS 221>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 223>\plain\f0\fs18\cf3 
+\par Constructor gets information for desktop folder.
+\par 
+\par \plain\f1\fs18\cf1 \protect <KP 1>\plain\f1\fs18\cf3\b constructor \plain\f1\fs18\cf3 Create(AOwner: TComponent); \plain\f1\fs18\cf3\b override\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 TPJSpecialFolderInfo's constructor sets the \plain\f0\fs18\cf1 \protect <HS 222>\plain\f0\fs18\cf3 FolderID\plain\f0\fs18\cf1 \protect </HS 222>\plain\f0\fs18\cf3  property to CSIDL_DESKTOP and sets the read only properties to contain information about the desktop folder.
+\par }
+
+[Footnotes]
+#=IDH_SPECIAL_FOLDERID
+$=TPJSpecialFolderInfo.FolderID
+K=FolderID,TPJSpecialFolderInfo;TPJSpecialFolderInfo,FolderID;FolderID
+A=TPJSpecialFolderInfo_FolderID;FolderID_Property;FolderID
+[End]
+5
+NS
+37
+HS
+48
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+KP
+118
+HS
+285
+0
+
+0
+IDH_ISVALIDSPECIALFOLDERID
+
+HS
+286
+0
+
+0
+
+AL(PJShellFolders_IsValidSpecialFolderID)
+1709
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 37>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.FolderID\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 48>\plain\f0\fs18\cf3 TPJSpecialFolderInfo\plain\f0\fs18\cf1 \protect </HS 48>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 286>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 286>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 37>\plain\f0\fs18\cf3 
+\par Use this property to provide the format ID of the special folder you need information about.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 118>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  FolderID: Integer;\plain\f1\fs18\cf1 \protect </KP 118>\plain\f1\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Set this property to an appropriate value to get information about a special folder. When the property is set the information about the folder is stored in the component's run time read only properties. The default value is the Desktop (CSIDL_DESKTOP).
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 If FormatID is set to an unknown value an exception will be raised. Use the \plain\f0\fs18\cf1 \protect <HS 285>\plain\f0\fs18\cf3 IsValidSpecialFolderID\plain\f0\fs18\cf1 \protect </HS 285>\plain\f0\fs18\cf3  function to check a folder ID for validity.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_SPECIAL_ISSUPPORTED
+$=TPJSpecialFolderInfo.IsSupported
+K=IsSupported,TPJSpecialFolderInfo;TPJSpecialFolderInfo,IsSupported;IsSupported
+A=TPJSpecialFolderInfo_IsSupported;IsSupported_Property;IsSupported
+[End]
+8
+NS
+36
+HS
+49
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+KP
+119
+HS
+280
+0
+
+0
+IDH_SPECIAL_FOLDERID
+
+HS
+281
+0
+
+0
+IDH_SPECIAL_ISVIRTUAL
+
+HS
+282
+0
+
+0
+IDH_SPECIAL_DISPLAYNAME
+
+HS
+283
+0
+
+0
+IDH_SPECIAL_PATH
+
+HS
+284
+0
+
+0
+
+AL(TPJSpecialFolderInfo_DisplayName;TPJSpecialFolderInfo_FolderID;TPJSpecialFolderInfo_IsVirtual;TPJSpecialFolderInfo_Path)
+1861
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 36>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.IsSupported\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 49>\plain\f0\fs18\cf3 TPJSpecialFolderInfo\plain\f0\fs18\cf1 \protect </HS 49>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 284>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 284>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 36>\plain\f0\fs18\cf3 
+\par Use this property to determine if the current special folder is supported by the operating system.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 119>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  IsSupported: Boolean;\plain\f1\fs18\cf1 \protect </KP 119>\plain\f1\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This property returns true if the special folder specified by \plain\f0\fs18\cf1 \protect <HS 280>\plain\f0\fs18\cf3 FolderID\plain\f0\fs18\cf1 \protect </HS 280>\plain\f0\fs18\cf3  is supported on the operating system and false if it is not. When IsSupported is false the component's other properties have zero values: \plain\f0\fs18\cf1 \protect <HS 281>\plain\f0\fs18\cf3 IsVirtual\plain\f0\fs18\cf1 \protect </HS 281>\plain\f0\fs18\cf3  is false and \plain\f0\fs18\cf1 \protect <HS 282>\plain\f0\fs18\cf3 DisplayName\plain\f0\fs18\cf1 \protect </HS 282>\plain\f0\fs18\cf3  and \plain\f0\fs18\cf1 \protect <HS 283>\plain\f0\fs18\cf3 Path\plain\f0\fs18\cf1 \protect </HS 283>\plain\f0\fs18\cf3  are empty strings.
+\par }
+
+[Footnotes]
+#=IDH_SPECIAL_ISVIRTUAL
+$=TPJSpecialFolderInfo.IsVirtual
+K=IsVirtual,TPJSpecialFolderInfo;TPJSpecialFolderInfo,IsVirtual;IsVirtual
+A=TPJSpecialFolderInfo_IsVirtual;IsVirtual_Property;IsVirtual
+[End]
+7
+NS
+35
+HS
+50
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+KP
+120
+HS
+275
+0
+
+0
+IDH_SPECIAL_FOLDERID
+
+HS
+276
+0
+
+0
+IDH_SPECIAL_PATH
+
+HS
+278
+0
+
+0
+IDH_SPECIAL_ISSUPPORTED
+
+HS
+279
+0
+
+0
+
+AL(TPJSpecialFolderInfo_FolderID;TPJSpecialFolderInfo_IsSupported;TPJSpecialFolderInfo_Path)
+1909
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 35>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.IsVirtual\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 50>\plain\f0\fs18\cf3 TPJSpecialFolderInfo\plain\f0\fs18\cf1 \protect </HS 50>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 279>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 279>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 35>\plain\f0\fs18\cf3 
+\par Use this property to determine if the current special folder is virtual or not.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 120>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  IsVirtual: Boolean;\plain\f1\fs18\cf1 \protect </KP 120>\plain\f1\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 When this property is false the special folder specified by \plain\f0\fs18\cf1 \protect <HS 275>\plain\f0\fs18\cf3 FolderID\plain\f0\fs18\cf1 \protect </HS 275>\plain\f0\fs18\cf3  the folder is a physical folder in the file system and the \plain\f0\fs18\cf1 \protect <HS 276>\plain\f0\fs18\cf3 Path\plain\f0\fs18\cf1 \protect </HS 276>\plain\f0\fs18\cf3  property gives its location. When IsVirtual is true then the folder is not physically present in the file system and the Path property is set to the empty string.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 IsVirtual is set to false if the special folder is not supported by the operating system (see \plain\f0\fs18\cf1 \protect <HS 278>\plain\f0\fs18\cf3 IsSupported\plain\f0\fs18\cf1 \protect </HS 278>\plain\f0\fs18\cf3 ).
+\par }
+
+[Footnotes]
+#=IDH_SPECIAL_PATH
+$=TPJSpecialFolderInfo.Path
+K=Path,TPJSpecialFolderInfo;TPJSpecialFolderInfo,Path;Path
+A=TPJSpecialFolderInfo_Path;Path_Property;Path
+[End]
+7
+NS
+34
+HS
+51
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+KP
+121
+HS
+271
+0
+
+0
+IDH_SPECIAL_FOLDERID
+
+HS
+272
+0
+
+0
+IDH_SPECIAL_ISVIRTUAL
+
+HS
+273
+0
+
+0
+IDH_SPECIAL_ISSUPPORTED
+
+HS
+274
+0
+
+0
+
+AL(TPJSpecialFolderInfo_FolderID;TPJSpecialFolderInfo_IsSupported;TPJSpecialFolderInfo_IsVirtual)
+1977
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 34>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.Path\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 51>\plain\f0\fs18\cf3 TPJSpecialFolderInfo\plain\f0\fs18\cf1 \protect </HS 51>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 274>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 274>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 34>\plain\f0\fs18\cf3 
+\par This property specifies the location of the folder in the file system, if any.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 121>\plain\f1\fs18\cf3\b property\plain\f1\fs18\cf3  Path: \plain\f1\fs18\cf3\b string\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 121>\plain\f1\fs18\cf3 
+\par \plain\f0\fs18\cf3 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The Path property stores the directory of the special folder currently specified in \plain\f0\fs18\cf1 \protect <HS 271>\plain\f0\fs18\cf3 FolderID\plain\f0\fs18\cf1 \protect </HS 271>\plain\f0\fs18\cf3 . If the folder is virtual then it is not in the file system and the Path property is set to the empty string.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Use the \plain\f0\fs18\cf1 \protect <HS 272>\plain\f0\fs18\cf3 IsVirtual\plain\f0\fs18\cf1 \protect </HS 272>\plain\f0\fs18\cf3  property to check whether a folder is virtual or physical.
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Path is set to the empty string if the special folder is not supported by the operating system (see \plain\f0\fs18\cf1 \protect <HS 273>\plain\f0\fs18\cf3 IsSupported\plain\f0\fs18\cf1 \protect </HS 273>\plain\f0\fs18\cf3 ).
+\par }
+
+[Footnotes]
+#=IDH_SPECIAL_HEIRACHY
+$=TPJSpecialFolderInfo Heirachy
+[End]
+3
+HS
+23
+0
+
+0
+
+AL(TObject_object,1)
+HS
+24
+0
+
+0
+
+AL(TPersistent_object,1)
+HS
+25
+0
+
+0
+
+AL(TComponent_object,1)
+628
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 23>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 23>\plain\f0\fs18\cf1 
+\par     |
+\par \plain\f0\fs18\cf2 \protect <HS 24>\plain\f0\fs18\cf1 TPersistent\plain\f0\fs18\cf2 \protect </HS 24>\plain\f0\fs18\cf1 
+\par     |
+\par \plain\f0\fs18\cf2 \protect <HS 25>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 25>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_SPECIAL_PROPERTIES
+$=TPJSpecialFolderInfo Properties
+[End]
+7
+HS
+27
+0
+
+0
+IDH_SPECIAL_DISPLAYNAME
+
+HS
+28
+0
+
+0
+IDH_SPECIAL_FOLDERID
+
+HS
+29
+0
+
+0
+IDH_SPECIAL_ISSUPPORTED
+
+HS
+30
+0
+
+0
+IDH_SPECIAL_ISVIRTUAL
+
+HS
+31
+0
+
+0
+
+AL(TComponent_Name,1)
+HS
+32
+0
+
+0
+IDH_SPECIAL_PATH
+
+HS
+33
+0
+
+0
+
+AL(TComponent_Tag,1)
+1204
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 >\tab \plain\f0\fs18\cf2 \protect <HS 27>\plain\f0\fs18\cf1 DisplayName\plain\f0\fs18\cf2 \protect </HS 27>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 28>\plain\f0\fs18\cf1 FolderID\plain\f0\fs18\cf2 \protect </HS 28>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 29>\plain\f0\fs18\cf1 IsSupported\plain\f0\fs18\cf2 \protect </HS 29>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 30>\plain\f0\fs18\cf1 IsVirtual\plain\f0\fs18\cf2 \protect </HS 30>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 31>\plain\f0\fs18\cf1 Name\plain\f0\fs18\cf2 \protect </HS 31>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 32>\plain\f0\fs18\cf1 Path\plain\f0\fs18\cf2 \protect </HS 32>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 33>\plain\f0\fs18\cf1 Tag\plain\f0\fs18\cf2 \protect </HS 33>\plain\f0\fs18\cf1 
+\par 
+\par >\tab = run time properties\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_TPJSPECIALFOLDERENUM
+$=TPJSpecialFolderEnum
+K=TPJSpecialFolderEnum
+A=TPJSpecialFolderEnum_Object;TPJSpecialFolderEnum;PJShellFolders_TPJSpecialFolderEnum
+[End]
+10
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+HS
+144
+0
+
+1
+IDH_SPECIALENUM_HEIRACHY
+
+HS
+145
+0
+
+1
+IDH_SPECIALENUM_METHODS
+
+HS
+165
+0
+
+0
+IDH_SPECIALENUM_EG
+
+NS
+166
+HS
+176
+0
+
+0
+IDH_SPECIALENUM_NEXT
+
+HS
+177
+0
+
+0
+IDH_SPECIALENUM_INIT
+
+HS
+178
+0
+
+0
+IDH_SPECIALENUM_ATEND
+
+HS
+179
+0
+
+0
+IDH_SPECIALENUM_COUNT
+
+HS
+264
+0
+
+0
+
+AL(TPJSpecialFolderInfo_Object;PJShellFolders_IPJSpecialFolderEnum)
+2312
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 166>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 144>\plain\f0\fs18\cf3 Heirachy\plain\f0\fs18\cf1 \protect </HS 144>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 145>\plain\f0\fs18\cf3 Methods\plain\f0\fs18\cf1 \protect </HS 145>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 264>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 264>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 165>\plain\f0\fs18\cf3 Example\plain\f0\fs18\cf1 \protect </HS 165>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 166>\plain\f0\fs18\cf3 
+\par Class that enumerates the Shell's special folder identifiers.
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Windows defines integer identifiers to represent the shell's special folders. TPJSpecialFolderEnum is a class that enumerates the values of all the special folder identifiers 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The key method is the \plain\f0\fs18\cf1 \protect <HS 176>\plain\f0\fs18\cf3 Next\plain\f0\fs18\cf1 \protect </HS 176>\plain\f0\fs18\cf3  method which returns a sequence of identifiers each time it called. The \plain\f0\fs18\cf1 \protect <HS 177>\plain\f0\fs18\cf3 Init\plain\f0\fs18\cf1 \protect </HS 177>\plain\f0\fs18\cf3  methods re-intialises the enumeration and the \plain\f0\fs18\cf1 \protect <HS 178>\plain\f0\fs18\cf3 AtEnd\plain\f0\fs18\cf1 \protect </HS 178>\plain\f0\fs18\cf3  methods returns true when all the indentifiers have been returned. The number of identifiers in the enumeration are given by the \plain\f0\fs18\cf1 \protect <HS 179>\plain\f0\fs18\cf3 Count\plain\f0\fs18\cf1 \protect </HS 179>\plain\f0\fs18\cf3  method.
+\par }
+
+[Footnotes]
+#=IDH_SPECIALENUM_EG
+$=TPJSpecialFolderEnum EG
+[End]
+11
+KP
+156
+HS
+157
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+HS
+159
+0
+
+0
+IDH_SPECIALENUM_CREATE
+
+HS
+160
+0
+
+0
+IDH_SPECIALENUM_INIT
+
+HS
+161
+0
+
+0
+IDH_SPECIALENUM_ATEND
+
+HS
+162
+0
+
+0
+IDH_SPECIALENUM_NEXT
+
+HS
+163
+0
+
+0
+IDH_SPECIALFOLDERIDTOSTR
+
+HS
+164
+0
+
+0
+IDH_STRTOSPECIALFOLDERID
+
+NS
+194
+HS
+269
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+HS
+270
+0
+
+0
+
+AL(PJSysInfo_SpecialFolderIdToStr;PJSysInfo_StrToSpecialFolderId)
+3429
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;\red128\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 194>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b Example for TPJSpecialFolderEnum and support functions
+\par \plain\f0\fs8\cf2\b  \plain\f0\fs18\cf1\b \protect </NS 194>\plain\f0\fs18\cf2\b 
+\par \plain\f0\fs18\cf3 This example illustrates the use of the \plain\f0\fs18\cf1 \protect <HS 269>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 269>\plain\f0\fs18\cf3  class and some of the \plain\f0\fs18\cf1 \protect <HS 270>\plain\f0\fs18\cf3 special folder support functions\plain\f0\fs18\cf1 \protect </HS 270>\plain\f0\fs18\cf3 .
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Drop a TListBox and a TLabel component on a form. When the program starts and the form is created, the list box is filled with the names of the special folder identifier constants. Double clicking an item in the list  box displays the constant's name and value (in hex) in the label.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 156>\plain\f1\fs18\cf3\b procedure\plain\f1\fs18\cf3  TForm1.FormCreate(Sender: TObject);
+\par \plain\f1\fs18\cf3\b var\plain\f1\fs18\cf3 
+\par   Enum: \plain\f1\fs18\cf1 \protect <HS 157>\plain\f1\fs18\cf3 TPJSpecialFolderEnum\plain\f1\fs18\cf1 \protect </HS 157>\plain\f1\fs18\cf3 ;
+\par \plain\f1\fs18\cf3\b begin\plain\f1\fs18\cf3 
+\par   Enum := TPJSpecialFolderEnum.\plain\f1\fs18\cf1 \protect <HS 159>\plain\f1\fs18\cf3 Create\plain\f1\fs18\cf1 \protect </HS 159>\plain\f1\fs18\cf3 ;
+\par   \plain\f1\fs18\cf3\b try\plain\f1\fs18\cf3 
+\par     ListBox1.Clear;
+\par     Enum.\plain\f1\fs18\cf1 \protect <HS 160>\plain\f1\fs18\cf3 Init\plain\f1\fs18\cf1 \protect </HS 160>\plain\f1\fs18\cf3 ;
+\par     \plain\f1\fs18\cf3\b while\plain\f1\fs18\cf3  \plain\f1\fs18\cf3\b not\plain\f1\fs18\cf3  Enum.\plain\f1\fs18\cf1 \protect <HS 161>\plain\f1\fs18\cf3 AtEnd\plain\f1\fs18\cf1 \protect </HS 161>\plain\f1\fs18\cf3  \plain\f1\fs18\cf3\b do\plain\f1\fs18\cf3 
+\par       ListBox1.Items.Add(\plain\f1\fs18\cf1 \protect <HS 163>\plain\f1\fs18\cf3 SpecialFolderIdToStr\plain\f1\fs18\cf1 \protect </HS 163>\plain\f1\fs18\cf3 (Enum.\plain\f1\fs18\cf1 \protect <HS 162>\plain\f1\fs18\cf3 Next\plain\f1\fs18\cf1 \protect </HS 162>\plain\f1\fs18\cf3 ));
+\par   \plain\f1\fs18\cf3\b finally\plain\f1\fs18\cf3 
+\par     Enum.Free;
+\par   \plain\f1\fs18\cf3\b end\plain\f1\fs18\cf3 ;
+\par \plain\f1\fs18\cf3\b end\plain\f1\fs18\cf3 ;
+\par 
+\par \plain\f1\fs18\cf3\b procedure\plain\f1\fs18\cf3  TForm1.ListBox1DblClick(Sender: TObject);
+\par \plain\f1\fs18\cf3\b var\plain\f1\fs18\cf3 
+\par   Index: Integer;
+\par \plain\f1\fs18\cf3\b begin\plain\f1\fs18\cf3 
+\par   Index := ListBox1.ItemIndex;
+\par   \plain\f1\fs18\cf3\b if\plain\f1\fs18\cf3  Index <> -1 \plain\f1\fs18\cf3\b then\plain\f1\fs18\cf3 
+\par     Label1.Caption := Format(\plain\f1\fs18\cf4 '%s = $%4.4x'\plain\f1\fs18\cf3 ,
+\par       [ListBox1.Items[Index],
+\par       \plain\f1\fs18\cf1 \protect <HS 164>\plain\f1\fs18\cf3 StrToSpecialFolderID\plain\f1\fs18\cf1 \protect </HS 164>\plain\f1\fs18\cf3 (ListBox1.Items[Index])]);
+\par \plain\f1\fs18\cf3\b end\plain\f1\fs18\cf3 ;\plain\f1\fs18\cf1 \protect </KP 156>\plain\f0\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_SPECIALENUM_ATEND
+$=TPJSpecialFolderEnum.AtEnd
+K=AtEnd,TPJSpecialFolderEnum;TPJSpecialFolderEnum,AtEnd;AtEnd
+A=TPJSpecialFolderEnum_AtEnd;AtEnd_Method;AtEnd
+[End]
+5
+KP
+155
+HS
+167
+0
+
+0
+IDH_SPECIALENUM_EG
+
+NS
+168
+HS
+170
+0
+
+0
+
+AL(TPJSpecialFolderEnum_Next;TPJSpecialFolderEnum_Init)
+HS
+171
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+1331
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 168>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.AtEnd
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 171>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 171>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 170>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 170>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 167>\plain\f0\fs18\cf3 Example\plain\f0\fs18\cf1 \protect </HS 167>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 168>\plain\f0\fs18\cf3 
+\par Tests whether the end of the enumeration has been reached.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 155>\plain\f1\fs18\cf3\b function\plain\f1\fs18\cf3  AtEnd: Boolean;\plain\f1\fs18\cf1 \protect </KP 155>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Use this function when enumerating the special folder identifiers. The function returns true when all the identifier values have been returned.
+\par }
+
+[Footnotes]
+#=IDH_SPECIALENUM_COUNT
+$=TPJSpecialFolderEnum.Count
+K=Count,TPJSpecialFolderEnum;TPJSpecialFolderEnum,Count;Count
+A=TPJSpecialFolderEnum_Count;Count_Method;Count
+[End]
+5
+KP
+154
+NS
+169
+HS
+172
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+HS
+180
+0
+
+0
+IDH_NUMSPECIALFOLDERIDS
+
+HS
+181
+0
+
+0
+
+AL(PJShellFolders_NumSpecialFolderIds)
+1362
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 169>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.Count
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 172>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 172>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 181>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 181>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 169>\plain\f0\fs18\cf3 
+\par Returns the number of special folder identifiers in the enumeration.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 154>\plain\f1\fs18\cf3\b function\plain\f1\fs18\cf3  Count: Integer;\plain\f1\fs18\cf1 \protect </KP 154>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This member function returns the number of special folder identifier values in the enumeration. The result is the same as calling the non-member \plain\f0\fs18\cf1 \protect <HS 180>\plain\f0\fs18\cf3 NumSpecialFolderIds\plain\f0\fs18\cf1 \protect </HS 180>\plain\f0\fs18\cf3  function.
+\par 
+\par }
+
+[Footnotes]
+#=IDH_SPECIALENUM_CREATE
+$=TPJSpecialFolderEnum.Create
+K=Create,TPJSpecialFolderEnum;TPJSpecialFolderEnum,Create;Create
+A=TPJSpecialFolderEnum_Create;Create_Method;Create
+[End]
+3
+KP
+153
+HS
+173
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+NS
+195
+1111
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 195>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.Create
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 173>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 173>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 195>\plain\f0\fs18\cf3 
+\par Constructs and intialises a TPJSpecialFolderEnum object.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 153>\plain\f1\fs18\cf3\b constructor\plain\f1\fs18\cf3  Create;\plain\f1\fs18\cf1 \protect </KP 153>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This constructor intialises the enumeration when the object is constructed. Therefore the Init method does not need to be called before enumerating the special folder indentifier values.
+\par }
+
+[Footnotes]
+#=IDH_SPECIALENUM_INIT
+$=TPJSpecialFolderEnum.Init
+K=Init,TPJSpecialFolderEnum;TPJSpecialFolderEnum,Init;Init
+A=TPJSpecialFolderEnum_Init;Init_Method;Init
+[End]
+6
+KP
+152
+HS
+174
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+HS
+182
+0
+
+0
+IDH_SPECIALENUM_NEXT
+
+HS
+183
+0
+
+0
+
+AL(TPJSpecialFolderEnum_Next)
+HS
+184
+0
+
+0
+IDH_SPECIALENUM_EG
+
+NS
+196
+1443
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 196>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.Init
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 174>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 174>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 183>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 183>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 184>\plain\f0\fs18\cf3 Example\plain\f0\fs18\cf1 \protect </HS 184>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 196>\plain\f0\fs18\cf3 
+\par Reinitialises the enumeration.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 152>\plain\f1\fs18\cf3\b procedure\plain\f1\fs18\cf3  Init;\plain\f1\fs18\cf1 \protect </KP 152>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The Init method initialises the enumeration so that the next call of the \plain\f0\fs18\cf1 \protect <HS 182>\plain\f0\fs18\cf3 Next\plain\f0\fs18\cf1 \protect </HS 182>\plain\f0\fs18\cf3  method returns the first special folder indentifier value. Init is implicitly called by the constructor.
+\par }
+
+[Footnotes]
+#=IDH_SPECIALENUM_NEXT
+$=TPJSpecialFolderEnum.Next
+K=Next,TPJSpecialFolderEnum;TPJSpecialFolderEnum,Next;Next
+A=TPJSpecialFolderEnum_Next;Next_Method;Next
+[End]
+6
+KP
+151
+HS
+175
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+HS
+185
+0
+
+0
+IDH_SPECIALENUM_EG
+
+HS
+188
+0
+
+0
+
+AL(TPJSpecialFolderEnum_Init;TPJSpecialFolderEnum_AtEnd)
+NS
+197
+HS
+248
+0
+
+0
+IDH_SPECIALENUM_INIT
+
+1558
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 197>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.Next
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 175>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 175>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 188>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 188>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 185>\plain\f0\fs18\cf3 Example\plain\f0\fs18\cf1 \protect </HS 185>\plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 197>\plain\f0\fs18\cf3 
+\par Returns the next value in the enumeration.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 151>\plain\f1\fs18\cf3\b function\plain\f1\fs18\cf3  Next: Integer;\plain\f1\fs18\cf1 \protect </KP 151>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The Next method is the key method of this class. It returns the value of the next special folder in the enumeration. If Next is called when the enumeration is at an end then -1 is returned. To reinitialise the enumeration call \plain\f0\fs18\cf1 \protect <HS 248>\plain\f0\fs18\cf3 Init\plain\f0\fs18\cf1 \protect </HS 248>\plain\f0\fs18\cf3 . After a call to Init, Next returns the first value in the enumeration.
+\par }
+
+[Footnotes]
+#=IDH_SPECIALENUM_METHODS
+$=TPJSpecialFolderEnum Methods
+[End]
+5
+HS
+146
+0
+
+0
+IDH_SPECIALENUM_ATEND
+
+HS
+147
+0
+
+0
+IDH_SPECIALENUM_COUNT
+
+HS
+148
+0
+
+0
+IDH_SPECIALENUM_CREATE
+
+HS
+149
+0
+
+0
+IDH_SPECIALENUM_INIT
+
+HS
+150
+0
+
+0
+IDH_SPECIALENUM_NEXT
+
+879
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 146>\plain\f0\fs18\cf1 AtEnd\plain\f0\fs18\cf2 \protect </HS 146>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 147>\plain\f0\fs18\cf1 Count\plain\f0\fs18\cf2 \protect </HS 147>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 148>\plain\f0\fs18\cf1 Create\plain\f0\fs18\cf2 \protect </HS 148>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 149>\plain\f0\fs18\cf1 Init\plain\f0\fs18\cf2 \protect </HS 149>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 150>\plain\f0\fs18\cf1 Next\plain\f0\fs18\cf2 \protect </HS 150>\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_SPECIALENUM_HEIRACHY
+$=TPJSpecialFolderEnum Heirachy
+[End]
+2
+HS
+142
+0
+
+0
+
+AL(TObject_object,1)
+HS
+143
+0
+
+0
+
+AL(TInterfacedObject_object,1)
+500
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 142>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 142>\plain\f0\fs18\cf1 
+\par     |
+\par \plain\f0\fs18\cf2 \protect <HS 143>\plain\f0\fs18\cf1 TInterfacedObject\plain\f0\fs18\cf2 \protect </HS 143>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_IPJSPECIALFOLDERENUM
+$=IPJSpecialFolderEnum
+K=IPJSpecialFolderEnum
+A=IPJSpecialFolderEnum;PJShellFolders_IPJSpecialFolderEnum;IPJSpecialFolderEnum_interface;IPJSpecialFolderEnum_object
+[End]
+6
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+HS
+227
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+HS
+250
+0
+
+1
+IDH_INTFSPECIALENUM_HEIRACHY
+
+HS
+251
+0
+
+1
+IDH_INTFSPECIALENUM_METHODS
+
+NS
+252
+HS
+263
+0
+
+0
+
+AL(TPJSpecialFolderInfo_Object;TPJSpecialFolderEnum_Object)
+1681
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 252>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 250>\plain\f0\fs18\cf3 Heirachy\plain\f0\fs18\cf1 \protect </HS 250>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 251>\plain\f0\fs18\cf3 Methods\plain\f0\fs18\cf1 \protect </HS 251>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 263>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 263>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 252>\plain\f0\fs18\cf3 
+\par In\plain\f0\fs20\cf3 terface to object that can enumerate the \plain\f0\fs18\cf3 Shell's special folder identifiers.
+\par \plain\f0\fs20\cf3 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Windows defines integer identifiers to represent the shell's special folders. IPJSpecialFolderEnum provides an interface to a class that enumerates the values of all the special folder identifiers. The interface is implemented by the \plain\f0\fs18\cf1 \protect <HS 227>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 227>\plain\f0\fs18\cf3  class.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_INTFSPECIALENUM_ATEND
+$=IPJSpecialFolderEnum AtEnd
+K=AtEnd,IPJSpecialFolderEnum;IPJSpecialFolderEnum,AtEnd;AtEnd
+A=IPJSpecialFolderEnum_AtEnd;AtEnd_Method;AtEnd
+[End]
+3
+KP
+234
+HS
+237
+0
+
+0
+IDH_IPJSPECIALFOLDERENUM
+
+NS
+238
+1060
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 238>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum.AtEnd
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs20\cf1 \protect <HS 237>\plain\f0\fs20\cf3 I\plain\f0\fs18\cf3 PJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 237>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 238>\plain\f0\fs18\cf3 
+\par Tests whether the end of the enumeration has been reached.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 234>\plain\f1\fs18\cf3\b function\plain\f1\fs18\cf3  AtEnd: Boolean;\plain\f1\fs18\cf1 \protect </KP 234>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The function returns true when all the special folder identifier values have been returned.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_INTFSPECIALENUM_COUNT
+$=IPJSpecialFolderEnum Count
+K=Count,IPJSpecialFolderEnum;IPJSpecialFolderEnum,Count;Count
+A=IPJSpecialFolderEnum_Count;Count_Method;Count
+[End]
+3
+HS
+224
+0
+
+0
+IDH_IPJSPECIALFOLDERENUM
+
+KP
+233
+NS
+239
+1036
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 239>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum.Count
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 224>\plain\f0\fs18\cf3 IPJSpecialFolderInfo\plain\f0\fs18\cf1 \protect </HS 224>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 239>\plain\f0\fs18\cf3 
+\par Tests for the end of the enumeration.
+\par \plain\f0\fs20\cf3 
+\par \plain\f1\fs20\cf1\b \protect <KP 233>\plain\f1\fs20\cf3\b function\plain\f1\fs20\cf3  Count: Integer;\plain\f1\fs20\cf1 \protect </KP 233>\plain\f0\fs20\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This function returns the number of special folder identifier values in the enumeration.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_INTFSPECIALENUM_INIT
+$=IPJSpecialFolderEnum.Init
+K=Init,IPJSpecialFolderEnum;IPJSpecialFolderEnum,Init;Init
+A=IPJSpecialFolderEnum_Init;Init_Method;Init
+[End]
+4
+HS
+240
+0
+
+0
+IDH_INTFSPECIALENUM_NEXT
+
+KP
+241
+HS
+242
+0
+
+0
+IDH_IPJSPECIALFOLDERENUM
+
+NS
+243
+1159
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 243>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum.Init
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 242>\plain\f0\fs18\cf3 IPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 242>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 243>\plain\f0\fs18\cf3 
+\par Reinitialises the enumeration.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 241>\plain\f1\fs18\cf3\b procedure\plain\f1\fs18\cf3  Init;\plain\f1\fs18\cf1 \protect </KP 241>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The Init method initialises the enumeration so that the next call of the \plain\f0\fs18\cf1 \protect <HS 240>\plain\f0\fs18\cf3 Next\plain\f0\fs18\cf1 \protect </HS 240>\plain\f0\fs18\cf3  method returns the first special folder indentifier value.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_INTFSPECIALENUM_NEXT
+$=IPJSpecialFolderEnum.Next
+K=Next,IPJSpecialFolderEnum;IPJSpecialFolderEnum,Next;Next
+A=IPJSpecialFolderEnum_Next;Next_Method;Next
+[End]
+4
+HS
+244
+0
+
+0
+IDH_INTFSPECIALENUM_INIT
+
+KP
+245
+HS
+246
+0
+
+0
+IDH_IPJSPECIALFOLDERENUM
+
+NS
+247
+1237
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 247>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum.Next
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 246>\plain\f0\fs18\cf3 ISpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 246>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 247>\plain\f0\fs18\cf3 
+\par Returns the next value in the enumeration.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 245>\plain\f1\fs18\cf3\b funciton\plain\f1\fs18\cf3  Next: Integer;\plain\f1\fs18\cf1 \protect </KP 245>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 The Next method returns the value of the next special folder in the enumeration. If Next is called when the enumeration is at an end then -1 is returned. To reinitialise the enumeration call \plain\f0\fs18\cf1 \protect <HS 244>\plain\f0\fs18\cf3 Init\plain\f0\fs18\cf1 \protect </HS 244>\plain\f0\fs18\cf3 .\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_INTFSPECIALENUM_METHODS
+$=IPJSpecialFolderEnum Methods
+[End]
+4
+HS
+229
+0
+
+0
+IDH_INTFSPECIALENUM_ATEND
+
+HS
+230
+0
+
+0
+IDH_INTFSPECIALENUM_COUNT
+
+HS
+231
+0
+
+0
+IDH_INTFSPECIALENUM_INIT
+
+HS
+232
+0
+
+0
+IDH_INTFSPECIALENUM_NEXT
+
+750
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 229>\plain\f0\fs18\cf1 AtEnd\plain\f0\fs18\cf2 \protect </HS 229>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 230>\plain\f0\fs18\cf1 Count\plain\f0\fs18\cf2 \protect </HS 230>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 231>\plain\f0\fs18\cf1 Init\plain\f0\fs18\cf2 \protect </HS 231>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 232>\plain\f0\fs18\cf1 Next\plain\f0\fs18\cf2 \protect </HS 232>\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_INTFSPECIALENUM_HEIRACHY
+$=IPJSpecialFolderEnum Heirachy
+[End]
+1
+HS
+228
+0
+
+0
+
+AL(IUnknown,1)
+354
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 228>\plain\f0\fs18\cf1 IUnknown\plain\f0\fs18\cf2 \protect </HS 228>\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_BD_CLASS
+$=TPJBrowseDialog
+K=TPJBrowseDialog
+A=TPJBrowseDialog;TPJBrowseDialog_object;PJShellFolders_TPJBrowseDialog
+[End]
+8
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+HS
+2
+0
+
+0
+IDH_BD_EXECUTE
+
+NS
+297
+BM
+298
+PJBrowseDialog.bmp
+0
+1
+HS
+299
+0
+
+1
+IDH_BD_HEIRACHY
+
+HS
+300
+0
+
+1
+IDH_BD_PROPERTIES
+
+HS
+301
+0
+
+1
+IDH_BD_METHODS
+
+HS
+302
+0
+
+1
+IDH_BD_EVENTS
+
+1812
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 297>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf1 \protect <BM 298>\plain\f0\fs22\cf3\b  TPJBrowseDialog\plain\f0\fs18\cf2 
+\par \plain\f0\fs12\cf2  
+\par \plain\f0\fs18\cf1 \protect <HS 299>\plain\f0\fs18\cf2 Heirachy\plain\f0\fs18\cf1 \protect </HS 299>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 300>\plain\f0\fs18\cf2 Properties\plain\f0\fs18\cf1 \protect </HS 300>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 301>\plain\f0\fs18\cf2 Methods\plain\f0\fs18\cf1 \protect </HS 301>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 302>\plain\f0\fs18\cf2 Events\plain\f0\fs18\cf1 \protect </HS 302>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 297>\plain\f0\fs18\cf2 
+\par TPJBrowseDialog displays the Windows Browse for Folders dialog box.
+\par 
+\par \plain\f0\fs18\cf2\b Unit\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf2 PJShellFolders\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This component permits the Windows Browse for Folders dialog box to be displayed. TPJBrowseDialog also permits the dialog box to be customised. The dialog box is displayed at run time when the \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 Execute\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2  method is called. The path and display name of the folder selected when the user OKs are made available via the component's properties.
+\par }
+
+[Footnotes]
+#=IDH_BD_HEIRACHY
+$=TPJBrowseDialog Heirachy
+[End]
+3
+HS
+293
+0
+
+0
+
+AL(TObject_object,1)
+HS
+294
+0
+
+0
+
+AL(TPersistent_object,1)
+HS
+295
+0
+
+0
+
+AL(TComponent_object,1)
+634
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Heirachy\plain\f0\fs18\cf1 
+\par 
+\par \plain\f0\fs18\cf2 \protect <HS 293>\plain\f0\fs18\cf1 TObject\plain\f0\fs18\cf2 \protect </HS 293>\plain\f0\fs18\cf1 
+\par     |
+\par \plain\f0\fs18\cf2 \protect <HS 294>\plain\f0\fs18\cf1 TPersistent\plain\f0\fs18\cf2 \protect </HS 294>\plain\f0\fs18\cf1 
+\par     |
+\par \plain\f0\fs18\cf2 \protect <HS 295>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 295>\plain\f0\fs20\cf1 
+\par }
+
+[Footnotes]
+#=IDH_BD_PROPERTIES
+$=TPJBrowseDialog Properties
+[End]
+10
+HS
+312
+0
+
+0
+IDH_BD_DISPLAYNAME
+
+HS
+313
+0
+
+0
+IDH_BD_FOLDERNAME
+
+HS
+314
+0
+
+0
+IDH_BD_HANDLE
+
+HS
+315
+0
+
+0
+IDH_BD_HEADLINE
+
+HS
+316
+0
+
+0
+IDH_BD_HELPCONTEXT
+
+HS
+317
+0
+
+0
+
+AL(TComponent_Name,1)
+HS
+318
+0
+
+0
+IDH_BD_OPTIONS
+
+HS
+319
+0
+
+0
+IDH_BD_ROOTFOLDERID
+
+HS
+320
+0
+
+0
+
+AL(TComponent_Tag,1)
+HS
+321
+0
+
+0
+IDH_BD_TITLE
+
+1593
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 >\tab \plain\f0\fs18\cf2 \protect <HS 312>\plain\f0\fs18\cf1 DisplayName\plain\f0\fs18\cf2 \protect </HS 312>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 313>\plain\f0\fs18\cf1 FolderName\plain\f0\fs18\cf2 \protect </HS 313>\plain\f0\fs18\cf1 
+\par >\tab \plain\f0\fs18\cf2 \protect <HS 314>\plain\f0\fs18\cf1 Handle\plain\f0\fs18\cf2 \protect </HS 314>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 315>\plain\f0\fs18\cf1 Headline\plain\f0\fs18\cf2 \protect </HS 315>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 316>\plain\f0\fs18\cf1 HelpContext\plain\f0\fs18\cf2 \protect </HS 316>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 317>\plain\f0\fs18\cf1 Name\plain\f0\fs18\cf2 \protect </HS 317>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 318>\plain\f0\fs18\cf1 Options\plain\f0\fs18\cf2 \protect </HS 318>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 319>\plain\f0\fs18\cf1 RootFolderID\plain\f0\fs18\cf2 \protect </HS 319>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 320>\plain\f0\fs18\cf1 Tag\plain\f0\fs18\cf2 \protect </HS 320>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 321>\plain\f0\fs18\cf1 Title\plain\f0\fs18\cf2 \protect </HS 321>\plain\f0\fs18\cf1 
+\par 
+\par >\tab = run time properties
+\par }
+
+[Footnotes]
+#=IDH_BD_DISPLAYNAME
+$=TPJBrowseDialog.DisplayName
+K=TPJBrowseDialog,DisplayName;DisplayName,TPJBrowseDialog;DisplayName
+A=TPJBrowseDialog_DisplayName;DisplayName_property;DisplayName
+[End]
+5
+NS
+303
+HS
+326
+0
+
+0
+IDH_BD_CLASS
+
+HS
+328
+0
+
+0
+
+AL(TPJBrowseDialog_FolderName)
+KP
+334
+HS
+350
+0
+
+0
+IDH_BD_FOLDERNAME
+
+1929
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 303>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.DisplayName\plain\f0\fs20\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 326>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 326>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 328>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 328>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs20\cf1 \protect </NS 303>\plain\f0\fs20\cf2 
+\par \plain\f0\fs18\cf2 DisplayName gives the display name of the selected folder.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 334>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  DisplayName: \plain\f1\fs18\cf2\b string\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 334>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This property gives the display name of the folder the user selected in the dialog box. This name is the same as that used in the dialog box. If the selected folder is a physical folder in the file system then DisplayName contains the name of the folder whose full path is specified in the \plain\f0\fs18\cf1 \protect <HS 350>\plain\f0\fs18\cf2 FolderName\plain\f0\fs18\cf1 \protect </HS 350>\plain\f0\fs18\cf2  property. If the user cancelled the dialog box then DisplayName is not updated.
+\par \plain\f0\fs8\cf2 
+\par \plain\f2\fs18\cf2 If \plain\f0\fs18\cf2 DisplayName is set to the empty string\plain\f2\fs18\cf2  then\plain\f0\fs18\cf2  no folder has yet been selected by the user.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Run time and read only.
+\par }
+
+[Footnotes]
+#=IDH_BD_FOLDERNAME
+$=TPJBrowseDialog.FolderName
+K=TPJBrowseDialog,FolderName;FolderName,TPJBrowseDialog;FolderName
+A=TPJBrowseDialog_FolderName;FolderName_property;FolderName
+[End]
+4
+HS
+329
+0
+
+0
+IDH_BD_CLASS
+
+HS
+330
+0
+
+0
+
+AL(TPJBrowseDialog_DisplayName)
+NS
+332
+KP
+333
+1904
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 332>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.FolderName\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 329>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 329>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 330>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 330>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 332>\plain\f0\fs18\cf2 
+\par FolderName contains the path to the folder selected in the dialog box.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 333>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  FolderName: \plain\f1\fs18\cf2\b string\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 333>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Set FolderName to the path of the (physical) folder you would like to be selected in the dialog box when it is displayed.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 When the user OKs the dialog box FolderName is updated. For physical folders (i.e. those \plain\f2\fs18\cf2 i the file system\plain\f0\fs18\cf2 ) this property contains the full path name of the folder that was selected by the user in the dialog box. If the selected folder is virtual then this property is set to the empty string. If the user cancelled the dialog box then FolderName is not updated.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 FolderName is set to the empty string \plain\f2\fs18\cf2 when \plain\f0\fs18\cf2 no folder has yet been selected by the user.
+\par }
+
+[Footnotes]
+#=IDH_BD_HANDLE
+$=TPJBrowseDialog.Handle
+K=TPJBrowseDialog,Handle;Handle,TPJBrowseDialog;Handle
+A=TPJBrowseDialog_Handle;Handle_property;Handle
+[End]
+8
+HS
+1
+0
+
+0
+IDH_BD_ONSELCHANGEEX
+
+KP
+351
+NS
+359
+HS
+360
+0
+
+0
+IDH_BD_CLASS
+
+HS
+361
+0
+
+0
+IDH_BD_EXECUTE
+
+HS
+362
+0
+
+0
+IDH_BD_ONINITIALISE
+
+HS
+363
+0
+
+0
+IDH_BD_ONSELCHANGE
+
+HS
+364
+0
+
+0
+IDH_BD_ONCLOSE
+
+1919
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 359>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.Handle\plain\f0\fs20\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 360>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 360>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 359>\plain\f0\fs18\cf2 
+\par The window handle of the dialog box.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 351>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  Handle: THandle;\plain\f1\fs18\cf1 \protect </KP 351>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This property provides access to the Browse for Folder dialog box's window handle while the \plain\f0\fs18\cf1 \protect <HS 361>\plain\f0\fs18\cf2 Execute\plain\f0\fs18\cf1 \protect </HS 361>\plain\f0\fs18\cf2  method is active. At other times Handle is set to 0. Handle therefore only references a valid window handle when the dialog box is displayed. The property is intended for use in the \plain\f0\fs18\cf1 \protect <HS 362>\plain\f0\fs18\cf2 OnInitialise\plain\f0\fs18\cf1 \protect </HS 362>\plain\f0\fs18\cf2 , \plain\f0\fs18\cf1 \protect <HS 363>\plain\f0\fs18\cf2 OnSelChange\plain\f0\fs18\cf1 \protect </HS 363>\plain\f2\fs18\cf2 , \plain\f2\fs18\cf1 \protect <HS 1>\plain\f2\fs18\cf2 OnSelChangeEx\plain\f2\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf2  and \plain\f0\fs18\cf1 \protect <HS 364>\plain\f0\fs18\cf2 OnClose\plain\f0\fs18\cf1 \protect </HS 364>\plain\f0\fs18\cf2  events whenever it is necessary to customise the window's behaviour.\plain\f0\fs20\cf2 
+\par }
+
+[Footnotes]
+#=IDH_BD_HEADLINE
+$=TPJBrowseDialog.Headline
+K=TPJBrowseDialog,Headline;Headline,TPJBrowseDialog;Headline
+A=TPJBrowseDialog_Headline;Headline_property;Headline
+[End]
+4
+KP
+352
+NS
+365
+HS
+366
+0
+
+0
+IDH_BD_CLASS
+
+HS
+386
+0
+
+0
+
+AL(TPJBrowseDialog_Title)
+1525
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 365>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.Headline\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 366>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 366>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 386>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 386>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 365>\plain\f0\fs18\cf2 
+\par Displays the given text in the Browse dialog box.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 352>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  Headline: \plain\f1\fs18\cf2\b string\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 352>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Setting this property displays assigned string in the Browse for Folder dialog box, above the tree view. The text is usually used to give instructions to the user or information about the purpose of the dialog box.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Setting the property when the dialog box is displayed (from one of the event handlers) does not change the text displayed in the dialog box.\plain\f0\fs20\cf2 
+\par }
+
+[Footnotes]
+#=IDH_BD_HELPCONTEXT
+$=TPJBrowseDialog.HelpContext
+K=TPJBrowseDialog,HelpContext;HelpContext,TPJBrowseDialog;HelpContext
+A=TPJBrowseDialog_HelpContext;HelpContext_property;HelpContext
+[End]
+5
+KP
+353
+NS
+367
+HS
+368
+0
+
+0
+IDH_BD_CLASS
+
+HS
+380
+0
+
+0
+
+AL(TPJBrowseDialog_Options)
+HS
+381
+0
+
+0
+IDH_BD_OPTIONS
+
+2018
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 367>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.HelpContext\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 368>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 368>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 380>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 380>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 367>\plain\f0\fs18\cf2 
+\par Specifies the context number for online Help.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 353>\plain\f1\fs18\cf2\b 
+\par type \plain\f1\fs18\cf2 THelpContext = -MaxLongInt..MaxLongInt;
+\par \plain\f1\fs8\cf2\b 
+\par \plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  HelpContext: THelpContext;\plain\f1\fs18\cf1 \protect </KP 353>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The HelpContext property is an integer value that determines which Help screen appears when the user requests context-sensitive online Help. If HelpContext is set to the default value of 0 then any request for help is ignored\plain\f2\fs18\cf2  and the dialog's help button (when displayed) is disabled.\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 The value of HelpContext is used when the \plain\f2\fs18\cf2 dialog's h\plain\f0\fs18\cf2 elp button is \plain\f2\fs18\cf2 displayed \plain\f0\fs18\cf2 and is clicked, or when the F1 key pressed and the \plain\f0\fs18\cf1 \protect <HS 381>\plain\f0\fs18\cf2 Options\plain\f0\fs18\cf1 \protect </HS 381>\plain\f0\fs18\cf2  property does not include \plain\f0\fs18\cf2\i boContextHelp\plain\f0\fs18\cf2 .\plain\f0\fs20\cf2 
+\par }
+
+[Footnotes]
+#=IDH_BD_OPTIONS
+$=TPJBrowseDialog.Options
+K=TPJBrowseDialog,Options;Options,TPJBrowseDialog;Options
+A=TPJBrowseDialog_Options;Options_property;Options
+[End]
+10
+HS
+1
+0
+
+0
+IDH_BD_ONSELCHANGEEX
+
+KP
+2
+NS
+341
+HS
+342
+0
+
+0
+IDH_BD_CLASS
+
+BD
+343
+2
+0
+BD
+344
+3
+0
+HS
+345
+0
+
+0
+IDH_BD_HELPCONTEXT
+
+HS
+346
+0
+
+0
+IDH_BD_ONSELCHANGE
+
+HS
+347
+0
+
+0
+
+AL(TPJBrowseDialog_HelpContext;TPJBrowseDialog_OnSelChange;TPJBrowseDialog_OnSelChangeEx)
+BM
+379
+ContextHelp.bmp
+1
+1
+5720
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fmodern \fcharset0 Courier New;}{\f3\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 341>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.Options\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 342>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 342>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 347>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 347>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 341>\plain\f0\fs18\cf2 
+\par Determines the appearance and behavior of the Browse for Folders dialog box.
+\par 
+\par \pard \fi-200 \li200 \plain\f1\fs18\cf2\b type\plain\f1\fs18\cf2  TPJBrowseDlgOption = (boShowHelp, boContextHelp,\plain\f2\fs18\cf2  \plain\f1\fs18\cf2 boStatusText\plain\f2\fs18\cf2 , boDirsOnly, boNewDlgStyle\plain\f1\fs18\cf2 );\plain\f0\fs18\cf2 
+\par \plain\f1\fs18\cf2\b type\plain\f1\fs18\cf2  TPJBrowseDlgOptions = \plain\f2\fs18\cf2\b set of\plain\f2\fs18\cf2  \plain\f1\fs18\cf2 TPJBrowseDlgOption\plain\f2\fs18\cf2 ;\plain\f1\fs18\cf2 
+\par \pard \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf1\b \protect <KP 2>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  Options: TPJBrowseDlgOptions;\plain\f1\fs18\cf1 \protect </KP 2>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Use the Options property to customize the appearance and functionality of the dialog. The possible values of Options are:
+\par \plain\f0\fs8\cf2 
+\par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf2\b Value\tab Meaning\plain\f0\fs20\cf2 
+\par \plain\f0\fs20\cf1 \protect <BD 343>\plain\f0\fs8\cf2  \plain\f0\fs20\cf1 \protect </BD 343>\plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\i boShowHelp\plain\f0\fs18\cf2 \tab Displays a help button in the dialog box. When the user clicks the button the application's help file is activated at the topic given by the component's \plain\f0\fs18\cf1 \protect <HS 345>\plain\f0\fs18\cf2 HelpContext\plain\f0\fs18\cf1 \protect </HS 345>\plain\f0\fs18\cf2  property. When HelpContext is 0 the button is \plain\f3\fs18\cf2 disabled\plain\f0\fs18\cf2 . If \plain\f0\fs18\cf2\i Options \plain\f0\fs18\cf2 does not include \plain\f0\fs18\cf2\i boContextHelp\plain\f0\fs18\cf2  then pressing F1 has the same effect as clicking the Help button.\plain\f3\fs18\cf2  This option is not compatible with \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  and \plain\f3\fs18\cf2\i boShowHelp\plain\f3\fs18\cf2  is ignored when \plain\f3\fs18\cf2\i boNewStyleDlg\plain\f3\fs18\cf2  is included in \plain\f3\fs18\cf2\i Options\plain\f3\fs18\cf2 .\plain\f0\fs20\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\i boContextHelp\plain\f0\fs18\cf2 \tab Displays the \plain\f0\fs18\cf1 \protect <BM 379>\plain\f0\fs18\cf2  button in the dialog's title bar. Clicking this button and the\plain\f3\fs18\cf2 n\plain\f0\fs18\cf2  clicking a control in the dialog brings up context sensitive popup help on each control in a window. Pressing F1 has the same effect. In this case the help relates to the currently active control.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\i boStatusText\plain\f0\fs18\cf2 \tab Permits status information to be displayed in the dialog box in response to selection changes. To cause this text to appear \plain\f3\fs18\cf2 either \plain\f0\fs18\cf2 the \plain\f0\fs18\cf1 \protect <HS 346>\plain\f0\fs18\cf2 OnSelChange\plain\f0\fs18\cf1 \protect </HS 346>\plain\f0\fs18\cf2  \plain\f3\fs18\cf2 or the \plain\f3\fs18\cf1 \protect <HS 1>\plain\f3\fs18\cf2 OnSelChangeEx\plain\f3\fs18\cf1 \protect </HS 1>\plain\f3\fs18\cf2  \plain\f0\fs18\cf2 event must be handled and the required text sent back to the dialog box via the event handler's \plain\f0\fs18\cf2\i StatusText \plain\f0\fs18\cf2 parameter.\plain\f3\fs18\cf2  This option is not compatible with \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  and \plain\f3\fs18\cf2\i boStatusText \plain\f3\fs18\cf2  is ignored if \plain\f3\fs18\cf2\i boNewStyleDlg\plain\f3\fs18\cf2  is included in \plain\f3\fs18\cf2\i Options\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f3\fs18\cf2\i boDirsOnly\plain\f3\fs18\cf2 \tab Causes dialog box to display only folders in the file system. The OK button is disabled if the selected folder is virtual. If this option is omitted then file system and virtual folders are provided and any folder can be selected. Note that if \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  is specified executing the dialog box with a virtual folder specified as the root folder can cause an error message to be displayed.
+\par \plain\f0\fs8\cf2 
+\par \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2 \tab Displays dialog using "new style" - i.e. the dialog is resizable and displays a "New Folder" button. This option is not compatible with \plain\f3\fs18\cf2\i boShowHelp\plain\f3\fs18\cf2  and \plain\f3\fs18\cf2\i boStatusText\plain\f3\fs18\cf2 . and these options are ignored id \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  is included in \plain\f3\fs18\cf2\i Options\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf1 \protect <BD 344>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 344>\plain\f0\fs8\cf2 
+\par 
+\par \plain\f3\fs18\cf2 The default value for this property is \plain\f3\fs18\cf2\i [boContextHelp, boDirsOnly]\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
+\par }
+
+[Footnotes]
+#=IDH_BD_ROOTFOLDERID
+$=TPJBrowseDialog.RootFolderID
+K=TPJBrowseDialog,RootFolderID;RootFolderID,TPJBrowseDialog;RootFolderID
+A=TPJBrowseDialog_RootFolderID;RootFolderID_property;RootFolderID
+[End]
+7
+KP
+354
+NS
+369
+HS
+370
+0
+
+0
+IDH_BD_CLASS
+
+HS
+382
+0
+
+0
+
+AL(TPJSpecialFolderInfo_object;TPJSpecialFolderEnum_object;PJShellFolders_IsValidSpecialFolderId)
+HS
+383
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+HS
+384
+0
+
+0
+IDH_ISVALIDSPECIALFOLDERID
+
+HS
+385
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+2706
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 369>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.RootFolderID\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 370>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 370>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 382>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 382>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 369>\plain\f0\fs18\cf2 
+\par Determines the root folder displayed in the dialog box.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 354>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  RootFolderID: Integer;\plain\f1\fs18\cf1 \protect </KP 354>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 RootFolderID specifies the identifier of a Shell special folder that is used as the root of the folder tree displayed in the dialog box. The property defaults to the desktop (CSIDL_DESKTOP).
+\par \plain\f0\fs8\cf2 
+\par \plain\f2\fs18\cf2 Some v\plain\f0\fs18\cf2 alid folder IDs are \plain\f2\fs18\cf2 defined in Delphi's\plain\f0\fs18\cf2  ShlObj unit\plain\f2\fs18\cf2 . In Delphi 6 and later additional folder ids are defined in the SHFolder unit. Even more ids are defined in PJShellFolders, which also defines the SHFolder unit's ids for Delphi 5 and lower\plain\f0\fs18\cf2 .
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 All the valid values can be found using the \plain\f0\fs18\cf1 \protect <HS 383>\plain\f0\fs18\cf2 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 383>\plain\f0\fs18\cf2  enumerator class. An identifier can be tested for validity using the \plain\f0\fs18\cf1 \protect <HS 384>\plain\f0\fs18\cf2 IsValidSpecialFolder\plain\f0\fs18\cf1 \protect </HS 384>\plain\f0\fs18\cf2  function.\plain\f2\fs18\cf2  
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Assigning an invalid value to the property causes an exception to be raised. Not all special folder identifiers are supported on all versions of Windows. Attempting to display a folder that is not supported by the operating system will cause an exception to be raised. Use the \plain\f0\fs18\cf1 \protect <HS 385>\plain\f0\fs18\cf2 TPJSpecialFolderInfo\plain\f0\fs18\cf1 \protect </HS 385>\plain\f0\fs18\cf2  component to test if a special folder is supported without raising an exception.\plain\f0\fs20\cf2 
+\par }
+
+[Footnotes]
+#=IDH_BD_TITLE
+$=TPJBrowseDialog.Title
+K=TPJBrowseDialog,Title;Title,TPJBrowseDialog;Title
+A=TPJBrowseDialog_Title;Title_property;Title
+[End]
+4
+KP
+355
+NS
+371
+HS
+372
+0
+
+0
+IDH_BD_CLASS
+
+HS
+387
+0
+
+0
+
+AL(TPJBrowseDialog_Headline)
+1399
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 371>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.Title\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 372>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 372>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 387>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 387>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 371>\plain\f0\fs18\cf2 
+\par Specifies the text displayed in the dialog's title bar.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 355>\plain\f1\fs18\cf2\b type \plain\f1\fs18\cf2 TCaption = \plain\f1\fs18\cf2\b type\plain\f1\fs18\cf2  \plain\f1\fs18\cf2\b string;
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  Title: TCaption;\plain\f1\fs18\cf1 \protect </KP 355>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Use Title to specify the text that appears in the Browse dialog's title bar. If no value is assigned to Title, the dialog has the title "Browse for Folder".\plain\f0\fs20\cf2 
+\par }
+
+[Footnotes]
+#=IDH_BD_METHODS
+$=TPJBrowseDialog Methods
+[End]
+2
+HS
+296
+0
+
+0
+
+AL(TComponent_object,1)
+HS
+322
+0
+
+0
+IDH_BD_EXECUTE
+
+549
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 322>\plain\f0\fs18\cf1 Execute\plain\f0\fs18\cf2 \protect </HS 322>\plain\f0\fs18\cf1 
+\par 
+\par TPJBrowseDialog also inherits methods from \plain\f0\fs18\cf2 \protect <HS 296>\plain\f0\fs18\cf1 TComponent\plain\f0\fs18\cf2 \protect </HS 296>\plain\f0\fs18\cf1 .
+\par }
+
+[Footnotes]
+#=IDH_BD_EXECUTE
+$=TPJBrowseDialog.Execute
+K=TPJBrowseDialog,Execute;Execute,TPJBrowseDialog;Execute
+A=TPJBrowseDialog_Execute;Execute_method;Execute
+[End]
+3
+KP
+356
+NS
+373
+HS
+374
+0
+
+0
+IDH_BD_CLASS
+
+1097
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 373>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.Execute\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 374>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 374>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 373>\plain\f0\fs18\cf2 
+\par Displays the Browse for Folder dialog.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 356>\plain\f1\fs18\cf2\b function\plain\f1\fs18\cf2  Execute: Boolean;\plain\f1\fs18\cf1 \protect </KP 356>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Execute opens the browse for folder dialog box, returning True when the user selects a folder and clicks OK. If the user clicks Cancel, Execute returns False.\plain\f0\fs20\cf2 
+\par }
+
+[Footnotes]
+#=IDH_BD_EVENTS
+$=TPJBrowseDialog Events
+[End]
+4
+HS
+1
+0
+
+0
+IDH_BD_ONSELCHANGEEX
+
+HS
+323
+0
+
+0
+IDH_BD_ONCLOSE
+
+HS
+324
+0
+
+0
+IDH_BD_ONINITIALISE
+
+HS
+325
+0
+
+0
+IDH_BD_ONSELCHANGE
+
+819
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
+\par 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 323>\plain\f0\fs18\cf1 OnClose\plain\f0\fs18\cf2 \protect </HS 323>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 324>\plain\f0\fs18\cf1 OnInitialise\plain\f0\fs18\cf2 \protect </HS 324>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 325>\plain\f0\fs18\cf1 OnSelChange\plain\f0\fs18\cf2 \protect </HS 325>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 OnSelChangeEx\plain\f1\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_BD_ONCLOSE
+$=TPJBrowseDialog.OnClose
+K=TPJBrowseDialog,OnClose;OnClose,TPJBrowseDialog;OnClose
+A=TPJBrowseDialog_OnClose;OnClose_event;OnClose
+[End]
+5
+KP
+357
+HS
+358
+0
+
+0
+
+AL(TNotifyEvent,1)
+NS
+375
+HS
+376
+0
+
+0
+IDH_BD_CLASS
+
+HS
+388
+0
+
+0
+IDH_BD_HANDLE
+
+1320
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 375>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.OnClose\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 376>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 376>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 375>\plain\f0\fs18\cf2 
+\par Occurs when the dialog closes.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 357>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  OnClose: \plain\f1\fs18\cf1 \protect <HS 358>\plain\f1\fs18\cf2 TNotifyEvent\plain\f1\fs18\cf1 \protect </HS 358>\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 357>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Write an OnClose event handler to perform special processing when the dialog closes. The dialog's window handle is still available via the \plain\f0\fs18\cf1 \protect <HS 388>\plain\f0\fs18\cf2 Handle\plain\f0\fs18\cf1 \protect </HS 388>\plain\f0\fs18\cf2  property.
+\par \plain\f0\fs20\cf2 
+\par }
+
+[Footnotes]
+#=IDH_BD_ONINITIALISE
+$=TPJBrowseDialog.OnInitialise
+K=TPJBrowseDialog,OnInitialise;OnInitialise,TPJBrowseDialog;OnInitialise
+A=TPJBrowseDialog_OnInitialise;OnInitialise_event;OnInitialise
+[End]
+7
+HS
+1
+0
+
+0
+IDH_BD_ONSELCHANGEEX
+
+HS
+308
+0
+
+0
+
+AL(TNotifyEvent,1)
+KP
+309
+NS
+377
+HS
+378
+0
+
+0
+IDH_BD_CLASS
+
+HS
+389
+0
+
+0
+IDH_BD_ONSELCHANGE
+
+HS
+394
+0
+
+0
+IDH_BD_HANDLE
+
+1875
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 377>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.OnInitialise\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 378>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 378>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 377>\plain\f0\fs18\cf2 
+\par Occurs when the dialog initialises.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 309>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  OnInitialise: \plain\f1\fs18\cf1 \protect <HS 308>\plain\f1\fs18\cf2 TNotifyEvent\plain\f1\fs18\cf1 \protect </HS 308>\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 309>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This event is triggered after the dialog has opened and the default folder has been selected but before the dialog is displayed. \plain\f0\fs18\cf1 \protect <HS 389>\plain\f0\fs18\cf2 OnSelChange\plain\f0\fs18\cf1 \protect </HS 389>\plain\f0\fs18\cf2  \plain\f2\fs18\cf2 and \plain\f2\fs18\cf1 \protect <HS 1>\plain\f2\fs18\cf2 OnSelChangeEx\plain\f2\fs18\cf1 \protect </HS 1>\plain\f2\fs18\cf2  \plain\f0\fs18\cf2 events will usually fire before OnInitialise. The dialog's window handle is available via the \plain\f0\fs18\cf1 \protect <HS 394>\plain\f0\fs18\cf2 Handle\plain\f0\fs18\cf1 \protect </HS 394>\plain\f0\fs18\cf2  property.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Write on OnInitialise event handler to perform special processing when the dialog is intialised.\plain\f0\fs20\cf2 
+\par }
+
+[Footnotes]
+#=IDH_BD_ONSELCHANGE
+$=TPJBrowseDialog.OnSelChange
+K=TPJBrowseDialog,OnSelChange;OnSelChange,TPJBrowseDialog;OnSelChange
+A=TPJBrowseDialog_OnSelChange;OnSelChange_event;OnSelChange
+[End]
+10
+HS
+1
+0
+
+0
+IDH_BD_OPTIONS
+
+HS
+2
+0
+
+0
+IDH_BD_ONSELCHANGEEX
+
+KP
+307
+HS
+310
+0
+
+0
+IDH_BD_CLASS
+
+NS
+311
+KP
+349
+HS
+390
+0
+
+0
+IDH_BD_ONINITIALISE
+
+HS
+391
+0
+
+0
+IDH_BD_OPTIONS
+
+HS
+392
+0
+
+0
+
+AL(TPJBrowseDialog_Options;TPJBrowseDialog_OnSelChangeEx)
+HS
+395
+0
+
+0
+IDH_BD_HANDLE
+
+4631
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fmodern \fcharset0 Courier New;}{\f3\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 311>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.OnSelChange\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 310>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 310>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 392>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 392>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 311>\plain\f0\fs18\cf2 
+\par Event that occurs whenever the selection in the dialog box changes.
+\par 
+\par \plain\f1\fs18\cf1\b \protect <KP 349>\plain\f1\fs18\cf2\b type\plain\f1\fs18\cf2  TPJBrowseSelChangeEvent\plain\f2\fs18\cf2  = \plain\f1\fs18\cf2\b procedure\plain\f1\fs18\cf2 (Sender: TObject; 
+\par \plain\f2\fs18\cf2   \plain\f1\fs18\cf2 FolderName, DisplayName: AnsiString; 
+\par   \plain\f1\fs18\cf2\b var\plain\f1\fs18\cf2  StatusText: AnsiString;
+\par   \plain\f1\fs18\cf2\b var\plain\f1\fs18\cf2  OKEnabled: Boolean) \plain\f1\fs18\cf2\b of object\plain\f1\fs18\cf2 ;\plain\f1\fs18\cf1 \protect </KP 349>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf1\b \protect <KP 307>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  OnSelChange: TPJBrowseSelChangeEvent;\plain\f1\fs18\cf1 \protect </KP 307>\plain\f1\fs18\cf2 
+\par \plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This event is triggered whenever the selected folder changes. This can occur before the dialog is displayed and before the \plain\f0\fs18\cf1 \protect <HS 390>\plain\f0\fs18\cf2 OnIntialise\plain\f0\fs18\cf1 \protect </HS 390>\plain\f0\fs18\cf2  event is triggered.  Write a handler to perform any required processing when the selected folder changes and to update the status text and state of the dialog's OK button.\plain\f3\fs18\cf2  The OnSelChange event is immediately followed by the \plain\f3\fs18\cf1 \protect <HS 2>\plain\f3\fs18\cf2 OnSelChangeEx\plain\f3\fs18\cf1 \protect </HS 2>\plain\f3\fs18\cf2  event. It is recommended that only one of these events is handled.\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\i FolderName\plain\f0\fs18\cf2  is the full path name name of newly selected folder (or the empty string if the folder is virtual).
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\i DisplayName\plain\f0\fs18\cf2  is the text used to display the newly selected folder in the dialog's tree view. 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\i StatusText\plain\f0\fs18\cf2  will always be the empty string. Set this value to whatever text should be displayed in the dialog's status area. Setting StatusText will \plain\f3\fs18\cf2 only have an \plain\f0\fs18\cf2 effect if the \plain\f0\fs18\cf1 \protect <HS 391>\plain\f0\fs18\cf2 Options\plain\f0\fs18\cf1 \protect </HS 391>\plain\f0\fs18\cf2  property include\plain\f3\fs18\cf2 s\plain\f0\fs18\cf2  \plain\f0\fs18\cf2\i boStatusText\plain\f3\fs18\cf2  and does not include \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f0\fs18\cf2 .\plain\f3\fs18\cf2  \plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\i OKEnabled\plain\f0\fs18\cf2  will be True if the dialog's OK button \plain\f3\fs18\cf2 should \plain\f0\fs18\cf2 presently \plain\f3\fs18\cf2 be \plain\f0\fs18\cf2 enabled and False if it \plain\f3\fs18\cf2 should be \plain\f0\fs18\cf2 disabled. Setting \plain\f0\fs18\cf2\i OKEnabled\plain\f0\fs18\cf2  to a different value will change the state of the OK button accordingly. \plain\f3\fs18\cf2 The default state of the OK button depends on whether \plain\f3\fs18\cf2\i boDirsOnly\plain\f3\fs18\cf2  is included in the \plain\f3\fs18\cf1 \protect <HS 1>\plain\f3\fs18\cf2 Options\plain\f3\fs18\cf1 \protect </HS 1>\plain\f3\fs18\cf2  property. If \plain\f3\fs18\cf2\i boDirsOnly\plain\f3\fs18\cf2  is included in Options then the \plain\f0\fs18\cf2 OK button will be enabled when a physical folder is selected and disabled when a virtual folder is selected.\plain\f3\fs18\cf2  \plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 When OnSelChange is triggered the dialog's window handle is available via the \plain\f0\fs18\cf1 \protect <HS 395>\plain\f0\fs18\cf2 Handle\plain\f0\fs18\cf1 \protect </HS 395>\plain\f0\fs18\cf2  property.
+\par }
+
+[Footnotes]
+#=IDH_BD_ONSELCHANGEEX
+$=TPJBrowseDialog.OnSelChangeEx
+K=TPJBrowseDialog,OnSelChangeEx;OnSelChangeEx,TPJBrowseDialog;OnSelChangeEx
+A=TPJBrowseDialog_OnSelChangeEx;OnSelChangeEx_event;OnSelChangeEx
+[End]
+10
+HS
+1
+0
+
+0
+IDH_BD_OPTIONS
+
+HS
+2
+0
+
+0
+IDH_BD_ONSELCHANGE
+
+KP
+307
+HS
+310
+0
+
+0
+IDH_BD_CLASS
+
+NS
+311
+KP
+349
+HS
+390
+0
+
+0
+IDH_BD_ONINITIALISE
+
+HS
+391
+0
+
+0
+IDH_BD_OPTIONS
+
+HS
+392
+0
+
+0
+
+AL(TPJBrowseDialog_Options;TPJBrowseDialog_OnSelChange)
+HS
+395
+0
+
+0
+IDH_BD_HANDLE
+
+4914
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 311>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJBrowseDialog.OnSelChange\plain\f1\fs22\cf3\b Ex\plain\f0\fs22\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 310>\plain\f0\fs18\cf2 TPJBrowseDialog\plain\f0\fs18\cf1 \protect </HS 310>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 392>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 392>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 311>\plain\f0\fs18\cf2 
+\par Event that occurs whenever the selection in the dialog box changes.
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 349>\plain\f2\fs18\cf2 TPJBrowseSelChangeEventEx = \plain\f2\fs18\cf2\b procedure(\plain\f2\fs18\cf2 Sender: TObject;
+\par \plain\f3\fs18\cf2\b   \plain\f2\fs18\cf2 PIDL: PItemIDList; \plain\f2\fs18\cf2\b var\plain\f2\fs18\cf2  StatusText: AnsiString;
+\par   \plain\f2\fs18\cf2\b var\plain\f2\fs18\cf2  OKEnabled: Boolean) \plain\f2\fs18\cf2\b of object;\plain\f2\fs18\cf1 \protect </KP 349>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f2\fs18\cf1\b \protect <KP 307>\plain\f2\fs18\cf2\b property\plain\f2\fs18\cf2  OnSelChange\plain\f3\fs18\cf2 Ex\plain\f2\fs18\cf2 : TPJBrowseSelChangeEvent\plain\f3\fs18\cf2 Ex\plain\f2\fs18\cf2 ;\plain\f2\fs18\cf1 \protect </KP 307>\plain\f2\fs18\cf2 
+\par \plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This event is triggered whenever the selected folder changes. \plain\f1\fs18\cf2 It provides access to the PIDL of the folder that has been selected. The event immediately follows the \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf2 OnSelChange\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf2  event and \plain\f0\fs18\cf2 can occur before the dialog is displayed and before the \plain\f0\fs18\cf1 \protect <HS 390>\plain\f0\fs18\cf2 OnIntialise\plain\f0\fs18\cf1 \protect </HS 390>\plain\f0\fs18\cf2  event is triggered.  Write a handler to perform any required processing \plain\f1\fs18\cf2 of the PIDL \plain\f0\fs18\cf2 when the selected folder changes and to update the status text and state of the dialog's OK button.\plain\f1\fs18\cf2  It is recommended that only one of the OnSelChange and OnSelChangeEx events is handled.\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2\i PIDL\plain\f0\fs18\cf2  is the \plain\f1\fs18\cf2 PIDL \plain\f0\fs18\cf2 of \plain\f1\fs18\cf2 the \plain\f0\fs18\cf2 newly selected folder\plain\f1\fs18\cf2 . \plain\f1\fs18\cf2\b Note\plain\f1\fs18\cf2 : This PIDL should be copied if it is to be retained beyond the life of the event handler and the copy should ultimately be freed using the Shell's allocator.\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\i StatusText\plain\f0\fs18\cf2  will always be the empty string. Set this value to whatever text should be displayed in the dialog's status area. Setting StatusText will \plain\f1\fs18\cf2 only have an effect\plain\f0\fs18\cf2  \plain\f0\fs18\cf1 \protect <HS 391>\plain\f0\fs18\cf2 Options\plain\f0\fs18\cf1 \protect </HS 391>\plain\f0\fs18\cf2  property include\plain\f1\fs18\cf2 s\plain\f0\fs18\cf2  \plain\f0\fs18\cf2\i boStatusText\plain\f1\fs18\cf2  and does not include \plain\f1\fs18\cf2\i boNewDlgStyle\plain\f0\fs18\cf2 .\plain\f1\fs18\cf2  Setting the status text in this event handler will override any status text set in the OnSelChange event handler.\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\i OKEnabled\plain\f0\fs18\cf2  will be True if the dialog's OK button is presently enabled and False if it is disabled. Setting \plain\f0\fs18\cf2\i OKEnabled\plain\f0\fs18\cf2  to a different value will change the state of the OK button accordingly. \plain\f1\fs18\cf2 The default state of the OK button depends on whether \plain\f1\fs18\cf2\i boDirsOnly\plain\f1\fs18\cf2  is included in the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf2 Options\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf2  property. If \plain\f1\fs18\cf2\i boDirsOnly\plain\f1\fs18\cf2  is included in Options then the \plain\f0\fs18\cf2 OK button will be enabled when a physical folder is selected and disabled when a virtual folder is selected.\plain\f1\fs18\cf2  \plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 When OnSelChange\plain\f1\fs18\cf2 Ex\plain\f0\fs18\cf2  is triggered the dialog's window handle is available via the \plain\f0\fs18\cf1 \protect <HS 395>\plain\f0\fs18\cf2 Handle\plain\f0\fs18\cf1 \protect </HS 395>\plain\f0\fs18\cf2  property.
+\par }
+
+[Footnotes]
+#=IDH_SFIROUTINES
+$=Special Folder Identifier Routines
+K=special folder identifier routines
+@=List of special folder identifier routines.
+[End]
+6
+HS
+1
+0
+
+0
+IDH_ISVALIDSPECIALFOLDERID
+
+HS
+2
+0
+
+0
+IDH_NUMSPECIALFOLDERIDS
+
+HS
+3
+0
+
+0
+IDH_SPECIALFOLDERIDTOSTR
+
+HS
+4
+0
+
+0
+IDH_STRTOSPECIALFOLDERID
+
+HS
+5
+0
+
+0
+IDH_SF_UNIT
+
+NS
+21
+1508
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset2 WingDings;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 21>\plain\f0\fs8\cf2\b  
+\par \plain\f1\fs22\cf2\b Special Folder Identifier Routines\plain\f0\fs20\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 21>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 The \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf3  unit defines four routines that provide information about special shell folder identifiers. They are:
+\par \plain\f1\fs12\cf3 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 IsValidSpecialFolderId\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3 
+\par \plain\f2\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 NumSpecialFolderIds\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3 
+\par \plain\f2\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf3 SpecialFolderIdToStr\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf3 
+\par \plain\f2\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf3 StrToSpecialFolderId\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_ISVALIDSPECIALFOLDERID
+$=IsValidSpecialFolderId
+K=IsValidSpecialFolderId
+A=IsValidSpecialFolderId;PJShellFolders_IsValidSpecialFolderId;IsValidSpecialFolderId_function
+[End]
+9
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+HS
+127
+0
+
+0
+IDH_TPJSPECIALFOLDERINFO
+
+HS
+128
+0
+
+0
+IDH_SPECIAL_FOLDERID
+
+HS
+129
+0
+
+0
+IDH_SPECIALFOLDERIDTOSTR
+
+KP
+130
+HS
+131
+0
+
+0
+
+AL(PJShellFolders_SpecialFolderIdToStr;TPJSystemFolderInfo_FolderID)
+NS
+134
+HS
+189
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+HS
+190
+0
+
+0
+IDH_SPECIALENUM_EG
+
+2444
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 134>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IsValidSpecialFolderId\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 131>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 131>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 190>\plain\f0\fs18\cf3 Example\plain\f0\fs18\cf1 \protect </HS 190>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 134>\plain\f0\fs18\cf3 
+\par Returns true if the given special folder identifier is defined by Windows.
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 130>\plain\f2\fs18\cf3\b function \plain\f2\fs18\cf3 IsValidSpecialFolderId(ID: Integer): Boolean;\plain\f2\fs18\cf1 \protect </KP 130>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Windows defines identifiers to represent the shell's special folders. Use this function to determine if a particular value is valid as a Windows special folder identifier. 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 This test can be performed to check an identifier value before passing to \plain\f0\fs18\cf1 \protect <HS 129>\plain\f0\fs18\cf3 SpecialFolderIdToStr\plain\f0\fs18\cf1 \protect </HS 129>\plain\f0\fs18\cf3  or before setting the \plain\f0\fs18\cf1 \protect <HS 127>\plain\f0\fs18\cf3 TPJSpecialFolderInfo\plain\f0\fs18\cf1 \protect </HS 127>\plain\f0\fs18\cf3  component's \plain\f0\fs18\cf1 \protect <HS 128>\plain\f0\fs18\cf3 FolderID\plain\f0\fs18\cf1 \protect </HS 128>\plain\f0\fs18\cf3  property to avoid exception being raised by an invalid value.
+\par 
+\par \plain\f0\fs18\cf3\b Tip\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Use the \plain\f0\fs18\cf1 \protect <HS 189>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 189>\plain\f0\fs18\cf3  class to enumerate all the valid folder identifiers.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_NUMSPECIALFOLDERIDS
+$=NumSpecialFolderIds
+K=NumSpecialFolderIds
+A=NumSpecialFolderIds;PJShellFolders_NumSpecialFolderIds;NumSpecialFolderIds_function
+[End]
+3
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+NS
+136
+KP
+137
+1210
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 136>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b NumSpecialFolderIds\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 136>\plain\f0\fs18\cf3 
+\par Returns the number of special folder identifiers defined by Windows.
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 137>\plain\f2\fs18\cf3\b function \plain\f2\fs18\cf3 NumSpecialFolderIds: Integer;\plain\f2\fs18\cf1 \protect </KP 137>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Windows defines identifiers to represent the shell's special folders. Use this function to find the number of such identifiers defined by Windows. \plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_SPECIALFOLDERIDTOSTR
+$=SpecialFolderIdToStr
+K=SpecialFolderIdToStr
+A=SpecialFolderIdToStr;PJShellFolders_SpecialFolderIdToStr;SpecialFolderIdToStr_function
+[End]
+7
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+KP
+132
+HS
+133
+0
+
+0
+IDH_ISVALIDSPECIALFOLDERID
+
+NS
+135
+HS
+141
+0
+
+0
+
+AL(PJShellFolders_StrToSpecialFolderID;PJShellFolders_IsSpecialFolderId)
+HS
+191
+0
+
+0
+IDH_SPECIALENUM_EG
+
+HS
+192
+0
+
+0
+IDH_TPJSPECIALFOLDERENUM
+
+2449
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 135>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b SpecialFolderIdToStr\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 141>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 141>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 191>\plain\f0\fs18\cf3 Example\plain\f0\fs18\cf1 \protect </HS 191>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 135>\plain\f0\fs18\cf3 
+\par Returns the string representation of the constant identifier used by Windows to identify a special folder.
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 132>\plain\f2\fs18\cf3\b function \plain\f2\fs18\cf3 SpecialFolderIdToStr(ID: Integer): \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ;\plain\f2\fs18\cf1 \protect </KP 132>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Windows defines identifiers to represent the shell's special folders. The ShlObj unit defines symbolic constants for these values. Passing an indentifier value to this function causes the name of the associated symbolic constant to be returned as a string. If the value is not a valid special folder indentifier the an exception is raised. 
+\par 
+\par \plain\f0\fs18\cf3\b Tips\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 To check if an identifier value is valid use the \plain\f0\fs18\cf1 \protect <HS 133>\plain\f0\fs18\cf3 IsValidSpecialFolderId\plain\f0\fs18\cf1 \protect </HS 133>\plain\f0\fs18\cf3  function.
+\par Use the \plain\f0\fs18\cf1 \protect <HS 192>\plain\f0\fs18\cf3 TPJSpecialFolderEnum\plain\f0\fs18\cf1 \protect </HS 192>\plain\f0\fs18\cf3  class to enumerate all the valid folder identifiers.
+\par 
+\par \plain\f0\fs18\cf3\b Example\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 For example SpecialFolderIdToStr(4) returns 'CSIDL_PRINTERS'. \plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_STRTOSPECIALFOLDERID
+$=StrToSpecialFolderId
+K=StrToSpecialFolderID
+A=StrToSpecialFolderID;PJShellFolders_StrToSpecialFolderID;StrToSpecialFolderID_function
+[End]
+5
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+NS
+138
+KP
+139
+HS
+140
+0
+
+0
+
+AL(PJShellFolders_SpecialFolderIdToStr)
+HS
+193
+0
+
+0
+IDH_SPECIALENUM_EG
+
+1815
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 138>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b StrToSpecialFolderID\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 140>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 140>\plain\f0\fs18\cf3           \plain\f0\fs18\cf1 \protect <HS 193>\plain\f0\fs18\cf3 Example\plain\f0\fs18\cf1 \protect </HS 193>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 138>\plain\f0\fs18\cf3 
+\par Returns the value of the special folder identifier associated with the Windows symbolic constant.
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 139>\plain\f2\fs18\cf3\b function \plain\f2\fs18\cf3 StrToSpecialFolderID(const IDStr: \plain\f2\fs18\cf3\b string\plain\f2\fs18\cf3 ): Integer;\plain\f2\fs18\cf1 \protect </KP 139>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f0\fs18\cf3 Windows defines identifiers to represent the shell's special folders. The ShlObj unit defines symbolic constants for these values. Passing the string representation of one of these constants to this function returns the constant's value.  Passing an invalid constant name causes an exception to be raised.
+\par 
+\par For example StrToSpecialFolderId('CSIDL_PRINTERS') returns 4.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_PIDLROUTINES
+$=PIDL information routines
+K=special folder identifier routines
+@=List of PIDL information routines.
+[End]
+4
+HS
+1
+0
+
+0
+IDH_PIDLTOFOLDERPATH
+
+HS
+2
+0
+
+0
+IDH_PIDLTOFOLDERDISPLAYNAME
+
+HS
+5
+0
+
+0
+IDH_SF_UNIT
+
+NS
+21
+1127
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset2 WingDings;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 21>\plain\f0\fs8\cf2\b  
+\par \plain\f1\fs22\cf2\b Special Folder Identifier Routines\plain\f0\fs20\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 21>\plain\f0\fs18\cf3 
+\par \plain\f1\fs18\cf3 The \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf3  unit defines two routines that provide information a given PIDL structure. They are:
+\par \plain\f1\fs12\cf3 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PIDLToFolderPath\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf3 
+\par \plain\f2\fs18\cf3 \'A7\plain\f1\fs18\cf3 \tab \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf3 PIDLToFolderDisplayName\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf3 
+\par }
+
+[Footnotes]
+#=IDH_PIDLTOFOLDERPATH
+$=PIDLToFolderPath
+K=PIDLToFolderPath
+A=PIDLToFolderPath;PJShellFolders_PIDLToFolderPath;PIDLToFolderPath_function
+[End]
+4
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+KP
+130
+HS
+131
+0
+
+0
+
+AL(PJShellFolders_PIDLToFolderDisplayName)
+NS
+134
+1465
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 134>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b PIDLToFolderPath\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 131>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 131>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 134>\plain\f0\fs18\cf3 
+\par Returns \plain\f1\fs18\cf3 the path of the folder described by PIDL\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 130>\plain\f2\fs18\cf3\b function\plain\f2\fs18\cf3  PIDLToFolderPath(PIDL: PItemIDList): \plain\f2\fs18\cf3\b string;\plain\f2\fs18\cf1 \protect </KP 130>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This function returns the path in the file system to the folder defined by PIDL\plain\f0\fs18\cf3 . \plain\f1\fs18\cf3 If PIDL represents a virtual folder then the function returns the empty string.\plain\f0\fs20\cf3 
+\par }
+
+[Footnotes]
+#=IDH_PIDLTOFOLDERDISPLAYNAME
+$=PIDLToFolderDisplayName
+K=PIDLToFolderDisplayName
+A=PIDLToFolderDisplayName;PJShellFolders_PIDLToFolderDisplayName;PIDLToFolderDisplayName_function
+[End]
+4
+HS
+1
+0
+
+0
+IDH_SF_UNIT
+
+KP
+130
+HS
+131
+0
+
+0
+
+AL(PJShellFolders_PIDLToFolderPath)
+NS
+134
+1399
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue0;}\pard \plain \plain\f0\fs22\cf1\b \protect <NS 134>\plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b PIDLToFolderDisplayName\plain\f0\fs20\cf3 
+\par \plain\f0\fs12\cf3 
+\par \plain\f0\fs18\cf1 \protect <HS 131>\plain\f0\fs18\cf3 See also\plain\f0\fs18\cf1 \protect </HS 131>\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3  \plain\f0\fs18\cf1 \protect </NS 134>\plain\f0\fs18\cf3 
+\par Returns \plain\f1\fs18\cf3 the display name of the folder described by PIDL\plain\f0\fs18\cf3 .
+\par 
+\par \plain\f0\fs18\cf3\b Unit\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf3 PJShellFolders\plain\f1\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 130>\plain\f2\fs18\cf3\b function\plain\f2\fs18\cf3  PIDLToFolderDisplayName(PIDL: PItemIDList): \plain\f2\fs18\cf3\b string;\plain\f2\fs18\cf1 \protect </KP 130>\plain\f0\fs18\cf3 
+\par 
+\par \plain\f0\fs18\cf3\b Description\plain\f0\fs18\cf3 
+\par \plain\f0\fs8\cf3 
+\par \plain\f1\fs18\cf3 This function returns the display name (as used in Explorer) of the folder defined by PIDL\plain\f0\fs18\cf3 .\plain\f1\fs18\cf3 
+\par }
+

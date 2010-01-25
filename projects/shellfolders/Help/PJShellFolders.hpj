@@ -1,0 +1,76 @@
+;## @FILE                       PJShellFolders.hpj
+;## @COMMENTS                   Help project file.
+;## @PROJECT_NAME               Windows shell folders routines and components.
+;## @PROJECT_DESC               A set of routines, classes and components for
+;##                             processing Windows shell folders. Includes:
+;##                             + Component that provides information about a
+;##                               specified special shell folder
+;##                             + Class that enumerates all the special shell
+;##                               folders
+;##                             + Routines to manipulate special shell folder
+;##                               information
+;##                             + Component that encapsulates the Windows Browse
+;##                               for Folder dialog box.
+;## @HISTORY(
+;##   @REVISION(
+;##     @VERSION                1.0
+;##     @DATE                   30/03/2001
+;##     @COMMENTS               Original version.
+;##   )
+;##   @REVISION(
+;##     @VERSION                1.1
+;##     @DATE                   15/06/2003
+;##     @COMMENTS               + Replaced PJSoft references with DelphiDabbler.
+;##                             + Updated copyright date.
+;##   )
+;##   @REVISION(
+;##     @VERSION                1.2
+;##     @DATE                   22/08/2004
+;##     @COMMENTS               + Updated copyright date to include 2004.
+;##                             + Changed name of help file to include "Shell
+;##                               Folders Unit" rather than "Shell Folder
+;##                               Components".
+;##   )
+;##   @REVISION(
+;##     @VERSION                1.3
+;##     @DATE                   03/07/2007
+;##     @COMMENTS               Updated copyright date to include 2007.
+;##   )
+;## )
+
+
+;** ***** BEGIN LICENSE BLOCK *****
+;** 
+;** Version: MPL 1.1
+;** 
+;** The contents of this file are subject to the Mozilla Public License Version
+;** 1.1 (the "License"); you may not use this file except in compliance with the
+;** License. You may obtain a copy of the License at http://www.mozilla.org/MPL/
+;** 
+;** Software distributed under the License is distributed on an "AS IS" basis,
+;** WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+;** the specific language governing rights and limitations under the License.
+;** 
+;** The Original Code is Shell Folders Unit.
+;** 
+;** The Initial Developer of the Original Code is Peter Johnson
+;** (http://www.delphidabbler.com/).
+;** 
+;** Portions created by the Initial Developer are Copyright (C) 2001-2007 Peter
+;** Johnson. All Rights Reserved.
+;** 
+;** Contributor(s): none
+;**
+;** ***** END LICENSE BLOCK *****
+
+
+[OPTIONS]
+HCW=0
+LCID=0x809 0x0 0x0 ;English (United Kingdom)
+REPORT=Yes
+TITLE=DelphiDabbler Shell Folders Help
+COPYRIGHT=DelphiDabbler Shell Folders Unit copyright © P D Johnson, 2001-2007
+HLP=.\PJShellFolders.hlp
+
+[FILES]
+.\PJShellFolders.rtf

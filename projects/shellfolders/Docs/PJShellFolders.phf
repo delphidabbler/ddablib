@@ -1,0 +1,297 @@
+@PROJECT_NAME           Windows shell folders routines and components.
+@PROJECT_DESC           A set of routines, classes and components for processing
+                        Windows shell folders. Includes:
+                        + Component that provides information about a specified
+                          special shell folder.
+                        + Class that enumerates all the special shell folders.
+                        + Routines to manipulate special shell folder
+                          information.
+                        + Component that encapsulates the Windows Browse for
+                          Folder dialog box.
+@ROOT                   ..\.
+@LEGAL_NOTICE           This unit and components are distributed under the
+                        Mozilla Public License - see PJShellFolders.pas for
+                        details of the license.
+@EMAIL                  peter.johnson@openlink.org
+@WEBSITE                http://www.delphidabbler.com/
+@OWNER                  DelphiDabbler.
+@AUTHOR                 Peter D Johnson, Llanarth, Ceredigion, Wales, UK.
+@COPYRIGHT              Copyright © 2001-2006, P.D.Johnson, Llanarth,
+                        Ceredigion, Wales UK.
+@CREDITS                + Philippe Lucarz for code that removes warnings when
+                          compiling under Delphi 6 and 7 (implemented v2.1).
+                        + Ryan Fischbach for suggesting code that enables adds
+                          the new dialog style to TPJBrowseDialog (implemented
+                          with changes v2.2).
+@HISTORY(
+  @REVISION(
+    @VERSION            1.0
+    @DATE               01/04/2001
+    @COMMENTS           Original version.
+    @COMPILERS          + Help Topic Author 1.7.5
+                        + Microsoft Help Workshop 4
+    @FILES(
+      @NEW(
+        @FILE           PJShellFolders.pas
+        @VERSION        1.0
+      )
+      @NEW(
+        @FILE           PJShellFolders.dcr
+        @DATE           25/03/2001
+        @COMMENTS       Resource file that stores component glyphs.
+      )
+      @NEW(
+        @FILE           Help\PJShellFolders.hpj
+        @VERSION        1.0
+      )
+      @NEW(
+        @FILE           Help\PJShellFolders.hap
+        @DATE           29/03/2001
+        @COMMENTS       Help topic file.
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.0
+    @DATE               15/06/2003
+    @COMMENTS           + Fixed bug that meant that display name wasn't being
+                          shown correctly in Win NT OSs.
+                        + Added new OnSelChangeEx event to TPJBrowseDialog
+                          component that exposes selected folder's PIDL.
+                        + Enabled TPJBrowseDialog to display and accept virtual
+                          as well as file system folders.
+                        + TPJBrowseDialog now displays disabled help button when
+                          HelpContext is 0.
+                        + Additional shell folder identifiers missing from
+                          Delphi 3 are now conditionally placed in interface of
+                          unit in Delphi 3.
+                        + Added new public functions to get folder path and
+                          display name from PIDLs.
+                        + All errors in components and routiens now raise
+                          EPJShellFolder exceptions.
+                        + Property editor and component registration moved to
+                          separate design time unit.
+                        + Help file corrected and updated.
+                        + Added demo program.
+    @COMPILERS          + Help Topic Author 1.12.4
+                        + Microsoft Help Workshop 4
+    @FILES(
+      @UPDATED(
+        @FILE           PJShellFolders.pas
+        @VERSION        2.0
+      )
+      @NEW(
+        @FILE           PJShellFoldersDsgn.pas
+        @VERSION        1.0
+      )
+      @UPDATED(
+        @FILE           Help\PJShellFolders.hpj
+        @VERSION        1.1
+      )
+      @UPDATED(
+        @FILE           Help\PJShellFolders.hap
+        @DATE           15/06/2003
+        @COMMENTS       + Corrected error where topics were referring to woring
+                          unit.
+                        + Added topic for unit with links to various classes and
+                          routines.
+                        + Added topics for new PIDL information routines.
+                        + Added group topics for difference routine types.
+                        + Added additional topics and updated existing topics re
+                          changed / new properties.
+      )
+      @NEW(
+        @FILE           Demo\ShellFolderDemo.dpr
+        @VERSION        1.0
+      )
+      @NEW(
+        @FILE           Demo\ShellFolderDemoForm.pas
+        @VERSION        1.0
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.1
+    @DATE               29/07/2003
+    @COMMENTS           + Updated to prevent warnings when compiled under Delphi
+                          6/7.
+                        + Added extra shell folder indentifiers.
+                        + Modified demo program.
+    @COMPILERS          + Help Topic Author 1.12.4
+                        + Microsoft Help Workshop 4
+    @FILES(
+      @UPDATED(
+        @FILE           PJShellFolders.pas
+        @VERSION        2.1
+      )
+      @UPDATED(
+        @FILE           Demo\ShellFolderDemoForm.pas
+        @VERSION        1.1
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.2
+    @DATE               22/08/2004
+    @COMMENTS           + Added support for new dialog style - selected using a
+                          new option in the Options property.
+                        + Provided default specifier of 0 for HelpContext
+                          property.
+                        + Added support for more new special folder
+                          indentifiers.
+                        + Updated help file re new TPJBrowseFolder option and
+                          added additional "A" keywords to improve Delphi help
+                          integration. Help about box text updated.
+                        + Added new .als file for integration with Delphi 6 or 7
+                          OpenHelp system.
+                        + Added code to exercise new style dialog box to demo
+                          program.
+                        + Changed to Mozilla public license.
+    @COMPILERS          + Help Topic Author 1.13
+                        + Microsoft Help Workshop 4
+    @FILES(
+      @UPDATED(
+        @FILE           PJShellFolders.pas
+        @VERSION        2.2
+      )
+      @UPDATED(
+        @FILE           Help\PJShellFolders.hpj
+        @VERSION        1.2
+      )
+      @UPDATED(
+        @FILE           Help\PJShellFolders.hap
+        @DATE           22/08/2004
+        @COMMENTS       + Updated re new boNewDlgStyle option.
+                        + Added further A-keywords to file to improve
+                          integration with Delphi help.
+      )
+      @NEW(
+        @FILE           Help\PJShellFolders.als
+        @DATE           22/08/2004
+        @COMMENTS       New file for integration with Delphi 6 or 7 OpenHelp
+                        system. Contains a list of A-Keywords in help file.
+      )
+      @UPDATED(
+        @FILE           Demo\ShellFolderDemoForm.pas
+        @VERSION        1.2
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.2.1
+    @DATE               09/01/2005
+    @COMMENTS           Fixed bug in shell folder ID property editor that was
+                        preventing user from changing the value of properties at
+                        design time.
+    @COMPILERS          + Help Topic Author 1.13
+                        + Microsoft Help Workshop 4
+    @FILES(
+      @UPDATED(
+        @FILE           PJShellFoldersDsgn.pas
+        @VERSION        1.1
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.2.2
+    @DATE               22/12/2005
+    @COMMENTS           + Updated to compile with Delphi 2005/6.
+                        + Removed Delphi 3 specific code.
+                        + Fixed range check bug in demo program.
+    @COMPILERS          + Help Topic Author 1.13
+                        + Microsoft Help Workshop 4
+    @FILES(
+      @UPDATED(
+        @FILE           PJShellFolders.pas
+        @VERSION        2.3
+      )
+      @UPDATED(
+        @FILE           PJShellFoldersDsgn.pas
+        @VERSION        1.2
+      )
+      @UPDATED(
+        @FILE           Demo\ShellFolderDemoForm.pas
+        @VERSION        1.3
+      )
+      @UPDATED(
+        @FILE           Demo\ShellFolderDemo.dpr
+        @VERSION        1.1
+      )
+      @NEW(
+        @FILE           Demo\DelphiDabbler.ico
+        @DATE           02/10/2004
+        @COMMENTS       Main program icon.
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.2.3
+    @DATE               12/04/2006
+    @COMMENTS           Added new CSIDL_ special folder and folder creation
+                        constants.
+    @COMPILERS          + Help Topic Author 1.13
+                        + Microsoft Help Workshop 4
+    @FILES(
+      @UPDATED(
+        @FILE           PJShellFolders.pas
+        @VERSION        2.4
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            2.2.4
+    @DATE               03/07/2007
+    @COMPILERS          + Help Topic Author 1.13
+                        + Microsoft Help Workshop 4
+    @COMMENTS           + Removed CSIDL_ constants that were provisioanally
+                          slated for Windows Vista but were removed from MSDN
+                          documentation.
+                        + Changed tests for valid folder ids to ignore any
+                          CSIDL_FLAG_ values that may have been included with
+                          the folder id.
+                        + Added various additional CSIDL_FLAG_ constants.
+                        + Changed TPJBrowseDialog.Options property to permit any
+                          combination of values. Certain options are now ignored
+                          when used in combination with others.
+                        + Added TPJBrowseDlgOption enumeration that provides
+                          basis of TPJBrowseDlgOptions set. Previously
+                          enumeration was defined in set declaration.
+                        + Changed to always initialise COM regardless of whether
+                          code used to display new style browser for folder.
+                          Previous code that selectively initialised COM was
+                          buggy.
+                        + Refactored some duplicated code.
+                        + Fixed code that enables / disables browser dialog box
+                          OK button to work with new style dialog.
+                        + Made help button caption localisable.
+                        + Updated help file re changes to
+                          TPJBrowseDialog.Options property.
+                        + Updated demo program, simplifying browse dialog
+                          customisation and giving access to all browse dialog
+                          options.
+    @FILES(
+      @UPDATED(
+        @FILE           PJShellFolders.pas
+        @VERSION        2.5
+      )
+      @UPDATED(
+        @FILE           Demo\ShellFolderDemoForm.pas
+        @VERSION        1.4
+      )
+      @UPDATED(
+        @FILE           Help\PJShellFolders.hpj
+        @VERSION        1.3
+      )
+      @UPDATED(
+        @FILE           Help\PJShellFolders.hap
+        @DATE           03/07/2007
+        @COMMENTS       Updated re changes in TPJBrowseDialog.Options property.
+      )
+      @UPDATED(
+        @FILE           Help\PJShellFolders.als
+        @DATE           03/07/2007
+        @COMMENTS       Regenerated to ensure synchronisation with help file.
+      )
+    )
+  )
+)

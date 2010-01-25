@@ -1,0 +1,1016 @@
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
+{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset2 WingDings;}{\f3\fnil \fcharset0 Arial;}{\f4\fmodern Courier New;}{\f5\fnil \fcharset0 Courier New;}{\f6\fmodern \fcharset0 Courier New;}}
+{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red128\green0\blue0;}
+#{\footnote {#}IDH_SF_UNIT}
+${\footnote {$}PJShellFolders unit}
+K{\footnote {K}PJShellFolders}
+A{\footnote {A}PJShellFolders}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b  
+\par \plain\f1\fs22\cf2\b PJShellFolders\plain\f0\fs20\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 This unit provides components, classes and routines to assist in working with shell folders. There are two components:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab {\strike TPJSpecialFolderInfo}{\v IDH_TPJSPECIALFOLDERINFO} - \plain\f0\fs18\cf0 provides information about the Shell's various special folders.\plain\f3\fs18\cf0 
+\par \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab {\strike TPJBrowseDialog}{\v IDH_BD_CLASS} - provides access to the Browse for Folder dialog box.
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 There is also a c\plain\f0\fs18\cf0 lass \plain\f1\fs18\cf0 ({\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM}) \plain\f0\fs18\cf0 that enumerates the Shell's special folder identifiers\plain\f1\fs18\cf0 . This class implements the {\strike IPJSpecialFolderEnum}{\v IDH_IPJSPECIALFOLDERENUM} interface. {\strike Functions}{\v IDH_SFIROUTINES} that provide information about the special folder identifiers and symbolic constants are also provided.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 Finally, PJShellFolders provides two {\strike functions}{\v IDH_PIDLROUTINES} to provide information about the folders described by PIDLs.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_TPJSPECIALFOLDERINFO}
+${\footnote {$}TPJSpecialFolderInfo}
+K{\footnote {K}TPJSpecialFolderInfo}
+A{\footnote {A}TPJSpecialFolderInfo_Object;TPJSpecialFolderInfo;PJShellFolders_TPJSpecialFolderInfo}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b  
+\par \{bmlt PJSpecialFolderInfo.bmp\}\plain\f0\fs22\cf2\b  TPJSpecialFolderInfo\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_SPECIAL_HEIRACHY}          {\ul Properties}{\v IDH_SPECIAL_PROPERTIES}          {\strike See also}{\v !AL(TPJSpecialFolderEnum_Object;PJSysInfo_IPJSpecialFolderEnum)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard TPJSpecialFolderInfo provides information about the Shell's various special folders.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}\plain\f0\fs18\cf0 
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 TPJSpecialFolderInfo is a non-visual component that provides information about a given Windows special folder.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 To get information about a special folder set the {\strike FolderID}{\v IDH_SPECIAL_FOLDERID} property to the required special folder id. The run time only properties of the component can then be used to read off information about the folder. Test {\strike IsSupported}{\v IDH_SPECIAL_ISSUPPORTED} to check if the folder is supported on the current platform. If the folder is not supported then both Path and DisplayName are empty. If {\strike IsVirtual}{\v IDH_SPECIAL_ISVIRTUAL} is true then the folder is virtual and the Path property will be empty. If IsVirtual is false then the folder exists in the file system and the folder's path is given by the {\strike Path}{\v IDH_SPECIAL_PATH} property. {\strike DisplayName}{\v IDH_SPECIAL_DISPLAYNAME} gives the name used for the folder - for non-virtual folders this often has the same value as Path.
+\par 
+\par \plain\f0\fs18\cf0\b Supporting functions\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Valid values for FormatID can be obtained using the {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM} class. Supplying invalid values to FormatID will cause an exception to be raised. Use the {\strike IsValidSpecialFolderID}{\v IDH_ISVALIDSPECIALFOLDERID} function to check validity. {\strike SpecialFolderIdToStr}{\v IDH_SPECIALFOLDERIDTOSTR} returns the identifier of a valid folder ID.
+\par \page 
+#{\footnote {#}IDH_SPECIAL_DISPLAYNAME}
+${\footnote {$}TPJSpecialFolderInfo.DisplayName}
+K{\footnote {K}DisplayName,TPJSpecialFolderInfo;TPJSpecialFolderInfo,DisplayName;DisplayName}
+A{\footnote {A}TPJSpecialFolderInfo_DisplayName;DisplayName_property;DisplayName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.DisplayName\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderInfo}{\v IDH_TPJSPECIALFOLDERINFO}          {\strike See also}{\v !AL(TPJSpecialFolderInfo_FolderID;TPJSpecialFolderInfo_IsSupported;TPJSpecialFolderInfo_IsVirtual;TPJSpecialFolderInfo_Path)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This property gives the name used to display the folder in Explorer.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  DisplayName: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property gives the display name of the special folder specified by the {\strike FolderID}{\v IDH_SPECIAL_FOLDERID} property. For physical folders ({\strike IsVirtual}{\v IDH_SPECIAL_ISVIRTUAL} is false), DisplayName often (but not always) has the same value as the {\strike Path}{\v IDH_SPECIAL_PATH} property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 DisplayName is set to the empty string if the special folder is not supported by the operating system (see {\strike IsSupported}{\v IDH_SPECIAL_ISSUPPORTED}).
+\par \page 
+#{\footnote {#}IDH_SPECIAL_CREATE}
+${\footnote {$}TPJSpecialFolderInfo.Create}
+K{\footnote {K}Create,TPJSpecialFolderInfo;TPJSpecialFolderInfo,Create;Create}
+A{\footnote {A}TPJSpecialFolderInfo_Create;Create_Method;Create}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.Create
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderInfo}{\v IDH_TPJSPECIALFOLDERINFO}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Constructor gets information for desktop folder.
+\par 
+\par \pard \keep \plain\f5\fs18\cf0\b constructor \plain\f5\fs18\cf0 Create(AOwner: TComponent); \plain\f5\fs18\cf0\b override\plain\f5\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 TPJSpecialFolderInfo's constructor sets the {\strike FolderID}{\v IDH_SPECIAL_FOLDERID} property to CSIDL_DESKTOP and sets the read only properties to contain information about the desktop folder.
+\par \page 
+#{\footnote {#}IDH_SPECIAL_FOLDERID}
+${\footnote {$}TPJSpecialFolderInfo.FolderID}
+K{\footnote {K}FolderID,TPJSpecialFolderInfo;TPJSpecialFolderInfo,FolderID;FolderID}
+A{\footnote {A}TPJSpecialFolderInfo_FolderID;FolderID_Property;FolderID}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.FolderID\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderInfo}{\v IDH_TPJSPECIALFOLDERINFO}          {\strike See also}{\v !AL(PJShellFolders_IsValidSpecialFolderID)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Use this property to provide the format ID of the special folder you need information about.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  FolderID: Integer;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Set this property to an appropriate value to get information about a special folder. When the property is set the information about the folder is stored in the component's run time read only properties. The default value is the Desktop (CSIDL_DESKTOP).
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If FormatID is set to an unknown value an exception will be raised. Use the {\strike IsValidSpecialFolderID}{\v IDH_ISVALIDSPECIALFOLDERID} function to check a folder ID for validity.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_SPECIAL_ISSUPPORTED}
+${\footnote {$}TPJSpecialFolderInfo.IsSupported}
+K{\footnote {K}IsSupported,TPJSpecialFolderInfo;TPJSpecialFolderInfo,IsSupported;IsSupported}
+A{\footnote {A}TPJSpecialFolderInfo_IsSupported;IsSupported_Property;IsSupported}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.IsSupported\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderInfo}{\v IDH_TPJSPECIALFOLDERINFO}          {\strike See also}{\v !AL(TPJSpecialFolderInfo_DisplayName;TPJSpecialFolderInfo_FolderID;TPJSpecialFolderInfo_IsVirtual;TPJSpecialFolderInfo_Path)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Use this property to determine if the current special folder is supported by the operating system.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  IsSupported: Boolean;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property returns true if the special folder specified by {\strike FolderID}{\v IDH_SPECIAL_FOLDERID} is supported on the operating system and false if it is not. When IsSupported is false the component's other properties have zero values: {\strike IsVirtual}{\v IDH_SPECIAL_ISVIRTUAL} is false and {\strike DisplayName}{\v IDH_SPECIAL_DISPLAYNAME} and {\strike Path}{\v IDH_SPECIAL_PATH} are empty strings.
+\par \page 
+#{\footnote {#}IDH_SPECIAL_ISVIRTUAL}
+${\footnote {$}TPJSpecialFolderInfo.IsVirtual}
+K{\footnote {K}IsVirtual,TPJSpecialFolderInfo;TPJSpecialFolderInfo,IsVirtual;IsVirtual}
+A{\footnote {A}TPJSpecialFolderInfo_IsVirtual;IsVirtual_Property;IsVirtual}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.IsVirtual\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderInfo}{\v IDH_TPJSPECIALFOLDERINFO}          {\strike See also}{\v !AL(TPJSpecialFolderInfo_FolderID;TPJSpecialFolderInfo_IsSupported;TPJSpecialFolderInfo_Path)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Use this property to determine if the current special folder is virtual or not.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  IsVirtual: Boolean;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When this property is false the special folder specified by {\strike FolderID}{\v IDH_SPECIAL_FOLDERID} the folder is a physical folder in the file system and the {\strike Path}{\v IDH_SPECIAL_PATH} property gives its location. When IsVirtual is true then the folder is not physically present in the file system and the Path property is set to the empty string.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 IsVirtual is set to false if the special folder is not supported by the operating system (see {\strike IsSupported}{\v IDH_SPECIAL_ISSUPPORTED}).
+\par \page 
+#{\footnote {#}IDH_SPECIAL_PATH}
+${\footnote {$}TPJSpecialFolderInfo.Path}
+K{\footnote {K}Path,TPJSpecialFolderInfo;TPJSpecialFolderInfo,Path;Path}
+A{\footnote {A}TPJSpecialFolderInfo_Path;Path_Property;Path}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderInfo.Path\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderInfo}{\v IDH_TPJSPECIALFOLDERINFO}          {\strike See also}{\v !AL(TPJSpecialFolderInfo_FolderID;TPJSpecialFolderInfo_IsSupported;TPJSpecialFolderInfo_IsVirtual)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard This property specifies the location of the folder in the file system, if any.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Path: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Path property stores the directory of the special folder currently specified in {\strike FolderID}{\v IDH_SPECIAL_FOLDERID}. If the folder is virtual then it is not in the file system and the Path property is set to the empty string.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Use the {\strike IsVirtual}{\v IDH_SPECIAL_ISVIRTUAL} property to check whether a folder is virtual or physical.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Path is set to the empty string if the special folder is not supported by the operating system (see {\strike IsSupported}{\v IDH_SPECIAL_ISSUPPORTED}).
+\par \page 
+#{\footnote {#}IDH_SPECIAL_HEIRACHY}
+${\footnote {$}TPJSpecialFolderInfo Heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par     |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par     |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}
+\par \page 
+#{\footnote {#}IDH_SPECIAL_PROPERTIES}
+${\footnote {$}TPJSpecialFolderInfo Properties}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 >\tab {\strike DisplayName}{\v IDH_SPECIAL_DISPLAYNAME}
+\par \tab {\strike FolderID}{\v IDH_SPECIAL_FOLDERID}
+\par >\tab {\strike IsSupported}{\v IDH_SPECIAL_ISSUPPORTED}
+\par >\tab {\strike IsVirtual}{\v IDH_SPECIAL_ISVIRTUAL}
+\par \tab {\strike Name}{\v !AL(TComponent_Name,1)}
+\par >\tab {\strike Path}{\v IDH_SPECIAL_PATH}
+\par \tab {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par 
+\par >\tab = run time properties\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_TPJSPECIALFOLDERENUM}
+${\footnote {$}TPJSpecialFolderEnum}
+K{\footnote {K}TPJSpecialFolderEnum}
+A{\footnote {A}TPJSpecialFolderEnum_Object;TPJSpecialFolderEnum;PJShellFolders_TPJSpecialFolderEnum}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_SPECIALENUM_HEIRACHY}          {\ul Methods}{\v IDH_SPECIALENUM_METHODS}          {\strike See also}{\v !AL(TPJSpecialFolderInfo_Object;PJShellFolders_IPJSpecialFolderEnum)}          {\strike Example}{\v IDH_SPECIALENUM_EG}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Class that enumerates the Shell's special folder identifiers.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}\plain\f0\fs18\cf0 
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Windows defines integer identifiers to represent the shell's special folders. TPJSpecialFolderEnum is a class that enumerates the values of all the special folder identifiers 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The key method is the {\strike Next}{\v IDH_SPECIALENUM_NEXT} method which returns a sequence of identifiers each time it called. The {\strike Init}{\v IDH_SPECIALENUM_INIT} methods re-intialises the enumeration and the {\strike AtEnd}{\v IDH_SPECIALENUM_ATEND} methods returns true when all the indentifiers have been returned. The number of identifiers in the enumeration are given by the {\strike Count}{\v IDH_SPECIALENUM_COUNT} method.
+\par \page 
+#{\footnote {#}IDH_SPECIALENUM_EG}
+${\footnote {$}TPJSpecialFolderEnum EG}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b Example for TPJSpecialFolderEnum and support functions
+\par \plain\f0\fs8\cf2\b  \plain\f0\fs18\cf2\b 
+\par \pard \plain\f0\fs18\cf0 This example illustrates the use of the {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM} class and some of the {\strike special folder support functions}{\v !AL(PJSysInfo_SpecialFolderIdToStr;PJSysInfo_StrToSpecialFolderId)}.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Drop a TListBox and a TLabel component on a form. When the program starts and the form is created, the list box is filled with the names of the special folder identifier constants. Double clicking an item in the list  box displays the constant's name and value (in hex) in the label.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b procedure\plain\f4\fs18\cf0  TForm1.FormCreate(Sender: TObject);
+\par \plain\f4\fs18\cf0\b var\plain\f4\fs18\cf0 
+\par   Enum: {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM};
+\par \plain\f4\fs18\cf0\b begin\plain\f4\fs18\cf0 
+\par   Enum := TPJSpecialFolderEnum.{\strike Create}{\v IDH_SPECIALENUM_CREATE};
+\par   \plain\f4\fs18\cf0\b try\plain\f4\fs18\cf0 
+\par     ListBox1.Clear;
+\par     Enum.{\strike Init}{\v IDH_SPECIALENUM_INIT};
+\par     \plain\f4\fs18\cf0\b while\plain\f4\fs18\cf0  \plain\f4\fs18\cf0\b not\plain\f4\fs18\cf0  Enum.{\strike AtEnd}{\v IDH_SPECIALENUM_ATEND} \plain\f4\fs18\cf0\b do\plain\f4\fs18\cf0 
+\par       ListBox1.Items.Add({\strike SpecialFolderIdToStr}{\v IDH_SPECIALFOLDERIDTOSTR}(Enum.{\strike Next}{\v IDH_SPECIALENUM_NEXT}));
+\par   \plain\f4\fs18\cf0\b finally\plain\f4\fs18\cf0 
+\par     Enum.Free;
+\par   \plain\f4\fs18\cf0\b end\plain\f4\fs18\cf0 ;
+\par \plain\f4\fs18\cf0\b end\plain\f4\fs18\cf0 ;
+\par 
+\par \plain\f4\fs18\cf0\b procedure\plain\f4\fs18\cf0  TForm1.ListBox1DblClick(Sender: TObject);
+\par \plain\f4\fs18\cf0\b var\plain\f4\fs18\cf0 
+\par   Index: Integer;
+\par \plain\f4\fs18\cf0\b begin\plain\f4\fs18\cf0 
+\par   Index := ListBox1.ItemIndex;
+\par   \plain\f4\fs18\cf0\b if\plain\f4\fs18\cf0  Index <> -1 \plain\f4\fs18\cf0\b then\plain\f4\fs18\cf0 
+\par     Label1.Caption := Format(\plain\f4\fs18\cf3 '%s = $%4.4x'\plain\f4\fs18\cf0 ,
+\par       [ListBox1.Items[Index],
+\par       {\strike StrToSpecialFolderID}{\v IDH_STRTOSPECIALFOLDERID}(ListBox1.Items[Index])]);
+\par \plain\f4\fs18\cf0\b end\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_SPECIALENUM_ATEND}
+${\footnote {$}TPJSpecialFolderEnum.AtEnd}
+K{\footnote {K}AtEnd,TPJSpecialFolderEnum;TPJSpecialFolderEnum,AtEnd;AtEnd}
+A{\footnote {A}TPJSpecialFolderEnum_AtEnd;AtEnd_Method;AtEnd}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.AtEnd
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM}          {\strike See also}{\v !AL(TPJSpecialFolderEnum_Next;TPJSpecialFolderEnum_Init)}          {\strike Example}{\v IDH_SPECIALENUM_EG}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Tests whether the end of the enumeration has been reached.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function\plain\f4\fs18\cf0  AtEnd: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Use this function when enumerating the special folder identifiers. The function returns true when all the identifier values have been returned.
+\par \page 
+#{\footnote {#}IDH_SPECIALENUM_COUNT}
+${\footnote {$}TPJSpecialFolderEnum.Count}
+K{\footnote {K}Count,TPJSpecialFolderEnum;TPJSpecialFolderEnum,Count;Count}
+A{\footnote {A}TPJSpecialFolderEnum_Count;Count_Method;Count}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.Count
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM}          {\strike See also}{\v !AL(PJShellFolders_NumSpecialFolderIds)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Returns the number of special folder identifiers in the enumeration.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function\plain\f4\fs18\cf0  Count: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This member function returns the number of special folder identifier values in the enumeration. The result is the same as calling the non-member {\strike NumSpecialFolderIds}{\v IDH_NUMSPECIALFOLDERIDS} function.
+\par 
+\par \page 
+#{\footnote {#}IDH_SPECIALENUM_CREATE}
+${\footnote {$}TPJSpecialFolderEnum.Create}
+K{\footnote {K}Create,TPJSpecialFolderEnum;TPJSpecialFolderEnum,Create;Create}
+A{\footnote {A}TPJSpecialFolderEnum_Create;Create_Method;Create}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.Create
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Constructs and intialises a TPJSpecialFolderEnum object.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b constructor\plain\f4\fs18\cf0  Create;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This constructor intialises the enumeration when the object is constructed. Therefore the Init method does not need to be called before enumerating the special folder indentifier values.
+\par \page 
+#{\footnote {#}IDH_SPECIALENUM_INIT}
+${\footnote {$}TPJSpecialFolderEnum.Init}
+K{\footnote {K}Init,TPJSpecialFolderEnum;TPJSpecialFolderEnum,Init;Init}
+A{\footnote {A}TPJSpecialFolderEnum_Init;Init_Method;Init}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.Init
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM}          {\strike See also}{\v !AL(TPJSpecialFolderEnum_Next)}          {\strike Example}{\v IDH_SPECIALENUM_EG}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Reinitialises the enumeration.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b procedure\plain\f4\fs18\cf0  Init;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Init method initialises the enumeration so that the next call of the {\strike Next}{\v IDH_SPECIALENUM_NEXT} method returns the first special folder indentifier value. Init is implicitly called by the constructor.
+\par \page 
+#{\footnote {#}IDH_SPECIALENUM_NEXT}
+${\footnote {$}TPJSpecialFolderEnum.Next}
+K{\footnote {K}Next,TPJSpecialFolderEnum;TPJSpecialFolderEnum,Next;Next}
+A{\footnote {A}TPJSpecialFolderEnum_Next;Next_Method;Next}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b TPJSpecialFolderEnum.Next
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM}          {\strike See also}{\v !AL(TPJSpecialFolderEnum_Init;TPJSpecialFolderEnum_AtEnd)}          {\strike Example}{\v IDH_SPECIALENUM_EG}\plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Returns the next value in the enumeration.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function\plain\f4\fs18\cf0  Next: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Next method is the key method of this class. It returns the value of the next special folder in the enumeration. If Next is called when the enumeration is at an end then -1 is returned. To reinitialise the enumeration call {\strike Init}{\v IDH_SPECIALENUM_INIT}. After a call to Init, Next returns the first value in the enumeration.
+\par \page 
+#{\footnote {#}IDH_SPECIALENUM_METHODS}
+${\footnote {$}TPJSpecialFolderEnum Methods}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike AtEnd}{\v IDH_SPECIALENUM_ATEND}
+\par \tab {\strike Count}{\v IDH_SPECIALENUM_COUNT}
+\par \tab {\strike Create}{\v IDH_SPECIALENUM_CREATE}
+\par \tab {\strike Init}{\v IDH_SPECIALENUM_INIT}
+\par \tab {\strike Next}{\v IDH_SPECIALENUM_NEXT}\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_SPECIALENUM_HEIRACHY}
+${\footnote {$}TPJSpecialFolderEnum Heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par     |
+\par {\strike TInterfacedObject}{\v !AL(TInterfacedObject_object,1)}
+\par \page 
+#{\footnote {#}IDH_IPJSPECIALFOLDERENUM}
+${\footnote {$}IPJSpecialFolderEnum}
+K{\footnote {K}IPJSpecialFolderEnum}
+A{\footnote {A}IPJSpecialFolderEnum;PJShellFolders_IPJSpecialFolderEnum;IPJSpecialFolderEnum_interface;IPJSpecialFolderEnum_object}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_INTFSPECIALENUM_HEIRACHY}          {\ul Methods}{\v IDH_INTFSPECIALENUM_METHODS}          {\strike See also}{\v !AL(TPJSpecialFolderInfo_Object;TPJSpecialFolderEnum_Object)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard In\plain\f0\fs20\cf0 terface to object that can enumerate the \plain\f0\fs18\cf0 Shell's special folder identifiers.
+\par \plain\f0\fs20\cf0 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}\plain\f0\fs18\cf0 
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Windows defines integer identifiers to represent the shell's special folders. IPJSpecialFolderEnum provides an interface to a class that enumerates the values of all the special folder identifiers. The interface is implemented by the {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERINFO} class.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_INTFSPECIALENUM_ATEND}
+${\footnote {$}IPJSpecialFolderEnum AtEnd}
+K{\footnote {K}AtEnd,IPJSpecialFolderEnum;IPJSpecialFolderEnum,AtEnd;AtEnd}
+A{\footnote {A}IPJSpecialFolderEnum_AtEnd;AtEnd_Method;AtEnd}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum.AtEnd
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs20\cf0 {\strike IPJSpecialFolderEnum}{\v IDH_IPJSPECIALFOLDERENUM}\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Tests whether the end of the enumeration has been reached.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function\plain\f4\fs18\cf0  AtEnd: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The function returns true when all the special folder identifier values have been returned.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_INTFSPECIALENUM_COUNT}
+${\footnote {$}IPJSpecialFolderEnum Count}
+K{\footnote {K}Count,IPJSpecialFolderEnum;IPJSpecialFolderEnum,Count;Count}
+A{\footnote {A}IPJSpecialFolderEnum_Count;Count_Method;Count}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum.Count
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike IPJSpecialFolderInfo}{\v IDH_IPJSPECIALFOLDERENUM}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Tests for the end of the enumeration.
+\par \plain\f0\fs20\cf0 
+\par \pard \keep \plain\f4\fs20\cf0\b function\plain\f4\fs20\cf0  Count: Integer;\plain\f0\fs20\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This function returns the number of special folder identifier values in the enumeration.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_INTFSPECIALENUM_INIT}
+${\footnote {$}IPJSpecialFolderEnum.Init}
+K{\footnote {K}Init,IPJSpecialFolderEnum;IPJSpecialFolderEnum,Init;Init}
+A{\footnote {A}IPJSpecialFolderEnum_Init;Init_Method;Init}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum.Init
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike IPJSpecialFolderEnum}{\v IDH_IPJSPECIALFOLDERENUM}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Reinitialises the enumeration.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b procedure\plain\f4\fs18\cf0  Init;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Init method initialises the enumeration so that the next call of the {\strike Next}{\v IDH_INTFSPECIALENUM_NEXT} method returns the first special folder indentifier value.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_INTFSPECIALENUM_NEXT}
+${\footnote {$}IPJSpecialFolderEnum.Next}
+K{\footnote {K}Next,IPJSpecialFolderEnum;IPJSpecialFolderEnum,Next;Next}
+A{\footnote {A}IPJSpecialFolderEnum_Next;Next_Method;Next}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IPJSpecialFolderEnum.Next
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike ISpecialFolderEnum}{\v IDH_IPJSPECIALFOLDERENUM}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Returns the next value in the enumeration.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b funciton\plain\f4\fs18\cf0  Next: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The Next method returns the value of the next special folder in the enumeration. If Next is called when the enumeration is at an end then -1 is returned. To reinitialise the enumeration call {\strike Init}{\v IDH_INTFSPECIALENUM_INIT}.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_INTFSPECIALENUM_METHODS}
+${\footnote {$}IPJSpecialFolderEnum Methods}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike AtEnd}{\v IDH_INTFSPECIALENUM_ATEND}
+\par \tab {\strike Count}{\v IDH_INTFSPECIALENUM_COUNT}
+\par \tab {\strike Init}{\v IDH_INTFSPECIALENUM_INIT}
+\par \tab {\strike Next}{\v IDH_INTFSPECIALENUM_NEXT}\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_INTFSPECIALENUM_HEIRACHY}
+${\footnote {$}IPJSpecialFolderEnum Heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike IUnknown}{\v !AL(IUnknown,1)}\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_CLASS}
+${\footnote {$}TPJBrowseDialog}
+K{\footnote {K}TPJBrowseDialog}
+A{\footnote {A}TPJBrowseDialog;TPJBrowseDialog_object;PJShellFolders_TPJBrowseDialog}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \{bmlt PJBrowseDialog.bmp\}\plain\f0\fs22\cf2\b  TPJBrowseDialog\plain\f0\fs18\cf0 
+\par \plain\f0\fs12\cf0  
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_BD_HEIRACHY}          {\ul Properties}{\v IDH_BD_PROPERTIES}          {\ul Methods}{\v IDH_BD_METHODS}          {\ul Events}{\v IDH_BD_EVENTS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard TPJBrowseDialog displays the Windows Browse for Folders dialog box.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}
+\par 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This component permits the Windows Browse for Folders dialog box to be displayed. TPJBrowseDialog also permits the dialog box to be customised. The dialog box is displayed at run time when the {\strike Execute}{\v IDH_BD_EXECUTE} method is called. The path and display name of the folder selected when the user OKs are made available via the component's properties.
+\par \page 
+#{\footnote {#}IDH_BD_HEIRACHY}
+${\footnote {$}TPJBrowseDialog Heirachy}
+
+\pard \plain \plain\f0\fs18\cf0\b Heirachy\plain\f0\fs18\cf0 
+\par 
+\par {\strike TObject}{\v !AL(TObject_object,1)}
+\par     |
+\par {\strike TPersistent}{\v !AL(TPersistent_object,1)}
+\par     |
+\par {\strike TComponent}{\v !AL(TComponent_object,1)}\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_PROPERTIES}
+${\footnote {$}TPJBrowseDialog Properties}
+
+\pard \plain \plain\f0\fs18\cf0\b Properties\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 >\tab {\strike DisplayName}{\v IDH_BD_DISPLAYNAME}
+\par \tab {\strike FolderName}{\v IDH_BD_FOLDERNAME}
+\par >\tab {\strike Handle}{\v IDH_BD_HANDLE}
+\par \tab {\strike Headline}{\v IDH_BD_HEADLINE}
+\par \tab {\strike HelpContext}{\v IDH_BD_HELPCONTEXT}
+\par \tab {\strike Name}{\v !AL(TComponent_Name,1)}
+\par \tab {\strike Options}{\v IDH_BD_OPTIONS}
+\par \tab {\strike RootFolderID}{\v IDH_BD_ROOTFOLDERID}
+\par \tab {\strike Tag}{\v !AL(TComponent_Tag,1)}
+\par \tab {\strike Title}{\v IDH_BD_TITLE}
+\par 
+\par >\tab = run time properties
+\par \page 
+#{\footnote {#}IDH_BD_DISPLAYNAME}
+${\footnote {$}TPJBrowseDialog.DisplayName}
+K{\footnote {K}TPJBrowseDialog,DisplayName;DisplayName,TPJBrowseDialog;DisplayName}
+A{\footnote {A}TPJBrowseDialog_DisplayName;DisplayName_property;DisplayName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.DisplayName\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_FolderName)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs20\cf0 
+\par \pard \plain\f0\fs18\cf0 DisplayName gives the display name of the selected folder.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  DisplayName: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property gives the display name of the folder the user selected in the dialog box. This name is the same as that used in the dialog box. If the selected folder is a physical folder in the file system then DisplayName contains the name of the folder whose full path is specified in the {\strike FolderName}{\v IDH_BD_FOLDERNAME} property. If the user cancelled the dialog box then DisplayName is not updated.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 If \plain\f0\fs18\cf0 DisplayName is set to the empty string\plain\f1\fs18\cf0  then\plain\f0\fs18\cf0  no folder has yet been selected by the user.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Run time and read only.
+\par \page 
+#{\footnote {#}IDH_BD_FOLDERNAME}
+${\footnote {$}TPJBrowseDialog.FolderName}
+K{\footnote {K}TPJBrowseDialog,FolderName;FolderName,TPJBrowseDialog;FolderName}
+A{\footnote {A}TPJBrowseDialog_FolderName;FolderName_property;FolderName}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.FolderName\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_DisplayName)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard FolderName contains the path to the folder selected in the dialog box.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  FolderName: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Set FolderName to the path of the (physical) folder you would like to be selected in the dialog box when it is displayed.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When the user OKs the dialog box FolderName is updated. For physical folders (i.e. those \plain\f1\fs18\cf0 i the file system\plain\f0\fs18\cf0 ) this property contains the full path name of the folder that was selected by the user in the dialog box. If the selected folder is virtual then this property is set to the empty string. If the user cancelled the dialog box then FolderName is not updated.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 FolderName is set to the empty string \plain\f1\fs18\cf0 when \plain\f0\fs18\cf0 no folder has yet been selected by the user.
+\par \page 
+#{\footnote {#}IDH_BD_HANDLE}
+${\footnote {$}TPJBrowseDialog.Handle}
+K{\footnote {K}TPJBrowseDialog,Handle;Handle,TPJBrowseDialog;Handle}
+A{\footnote {A}TPJBrowseDialog_Handle;Handle_property;Handle}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.Handle\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard The window handle of the dialog box.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Handle: THandle;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This property provides access to the Browse for Folder dialog box's window handle while the {\strike Execute}{\v IDH_BD_EXECUTE} method is active. At other times Handle is set to 0. Handle therefore only references a valid window handle when the dialog box is displayed. The property is intended for use in the {\strike OnInitialise}{\v IDH_BD_ONINITIALISE}, {\strike OnSelChange}{\v IDH_BD_ONSELCHANGE}\plain\f1\fs18\cf0 , {\strike OnSelChangeEx}{\v IDH_BD_ONSELCHANGEEX}\plain\f0\fs18\cf0  and {\strike OnClose}{\v IDH_BD_ONCLOSE} events whenever it is necessary to customise the window's behaviour.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_HEADLINE}
+${\footnote {$}TPJBrowseDialog.Headline}
+K{\footnote {K}TPJBrowseDialog,Headline;Headline,TPJBrowseDialog;Headline}
+A{\footnote {A}TPJBrowseDialog_Headline;Headline_property;Headline}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.Headline\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_Title)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Displays the given text in the Browse dialog box.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Headline: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Setting this property displays assigned string in the Browse for Folder dialog box, above the tree view. The text is usually used to give instructions to the user or information about the purpose of the dialog box.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Setting the property when the dialog box is displayed (from one of the event handlers) does not change the text displayed in the dialog box.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_HELPCONTEXT}
+${\footnote {$}TPJBrowseDialog.HelpContext}
+K{\footnote {K}TPJBrowseDialog,HelpContext;HelpContext,TPJBrowseDialog;HelpContext}
+A{\footnote {A}TPJBrowseDialog_HelpContext;HelpContext_property;HelpContext}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.HelpContext\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_Options)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Specifies the context number for online Help.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b 
+\par type \plain\f4\fs18\cf0 THelpContext = -MaxLongInt..MaxLongInt;
+\par \plain\f4\fs8\cf0\b 
+\par \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  HelpContext: THelpContext;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The HelpContext property is an integer value that determines which Help screen appears when the user requests context-sensitive online Help. If HelpContext is set to the default value of 0 then any request for help is ignored\plain\f1\fs18\cf0  and the dialog's help button (when displayed) is disabled.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The value of HelpContext is used when the \plain\f1\fs18\cf0 dialog's h\plain\f0\fs18\cf0 elp button is \plain\f1\fs18\cf0 displayed \plain\f0\fs18\cf0 and is clicked, or when the F1 key pressed and the {\strike Options}{\v IDH_BD_OPTIONS} property does not include \plain\f0\fs18\cf0\i boContextHelp\plain\f0\fs18\cf0 .\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_OPTIONS}
+${\footnote {$}TPJBrowseDialog.Options}
+K{\footnote {K}TPJBrowseDialog,Options;Options,TPJBrowseDialog;Options}
+A{\footnote {A}TPJBrowseDialog_Options;Options_property;Options}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.Options\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_HelpContext;TPJBrowseDialog_OnSelChange;TPJBrowseDialog_OnSelChangeEx)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Determines the appearance and behavior of the Browse for Folders dialog box.
+\par 
+\par \pard \fi-200 \li200 \plain\f4\fs18\cf0\b type\plain\f4\fs18\cf0  TPJBrowseDlgOption = (boShowHelp, boContextHelp,\plain\f6\fs18\cf0  \plain\f4\fs18\cf0 boStatusText\plain\f6\fs18\cf0 , boDirsOnly, boNewDlgStyle\plain\f4\fs18\cf0 );\plain\f0\fs18\cf0 
+\par \plain\f4\fs18\cf0\b type\plain\f4\fs18\cf0  TPJBrowseDlgOptions = \plain\f6\fs18\cf0\b set of\plain\f6\fs18\cf0  \plain\f4\fs18\cf0 TPJBrowseDlgOption\plain\f6\fs18\cf0 ;\plain\f4\fs18\cf0 
+\par \pard \plain\f4\fs8\cf0 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Options: TPJBrowseDlgOptions;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Use the Options property to customize the appearance and functionality of the dialog. The possible values of Options are:
+\par \plain\f0\fs8\cf0 
+\par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf0\b Value\tab Meaning\plain\f0\fs20\cf0 
+\par \pard \fi-1600 \li1600 \tx1600 \brdrt \brdrs \plain\f0\fs8\cf0  
+\par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf0\i boShowHelp\plain\f0\fs18\cf0 \tab Displays a help button in the dialog box. When the user clicks the button the application's help file is activated at the topic given by the component's {\strike HelpContext}{\v IDH_BD_HELPCONTEXT} property. When HelpContext is 0 the button is \plain\f1\fs18\cf0 disabled\plain\f0\fs18\cf0 . If \plain\f0\fs18\cf0\i Options \plain\f0\fs18\cf0 does not include \plain\f0\fs18\cf0\i boContextHelp\plain\f0\fs18\cf0  then pressing F1 has the same effect as clicking the Help button.\plain\f1\fs18\cf0  This option is not compatible with \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i boShowHelp\plain\f1\fs18\cf0  is ignored when \plain\f1\fs18\cf0\i boNewStyleDlg\plain\f1\fs18\cf0  is included in \plain\f1\fs18\cf0\i Options\plain\f1\fs18\cf0 .\plain\f0\fs20\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i boContextHelp\plain\f0\fs18\cf0 \tab Displays the \{bmct ContextHelp.bmp\} button in the dialog's title bar. Clicking this button and the\plain\f1\fs18\cf0 n\plain\f0\fs18\cf0  clicking a control in the dialog brings up context sensitive popup help on each control in a window. Pressing F1 has the same effect. In this case the help relates to the currently active control.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i boStatusText\plain\f0\fs18\cf0 \tab Permits status information to be displayed in the dialog box in response to selection changes. To cause this text to appear \plain\f1\fs18\cf0 either \plain\f0\fs18\cf0 the {\strike OnSelChange}{\v IDH_BD_ONSELCHANGE} \plain\f1\fs18\cf0 or the {\strike OnSelChangeEx}{\v IDH_BD_ONSELCHANGEEX} \plain\f0\fs18\cf0 event must be handled and the required text sent back to the dialog box via the event handler's \plain\f0\fs18\cf0\i StatusText \plain\f0\fs18\cf0 parameter.\plain\f1\fs18\cf0  This option is not compatible with \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i boStatusText \plain\f1\fs18\cf0  is ignored if \plain\f1\fs18\cf0\i boNewStyleDlg\plain\f1\fs18\cf0  is included in \plain\f1\fs18\cf0\i Options\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0\i boDirsOnly\plain\f1\fs18\cf0 \tab Causes dialog box to display only folders in the file system. The OK button is disabled if the selected folder is virtual. If this option is omitted then file system and virtual folders are provided and any folder can be selected. Note that if \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  is specified executing the dialog box with a virtual folder specified as the root folder can cause an error message to be displayed.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0 \tab Displays dialog using "new style" - i.e. the dialog is resizable and displays a "New Folder" button. This option is not compatible with \plain\f1\fs18\cf0\i boShowHelp\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i boStatusText\plain\f1\fs18\cf0 . and these options are ignored id \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  is included in \plain\f1\fs18\cf0\i Options\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \pard \fi-1600 \li1600 \tx1600 \brdrb \brdrs \plain\f0\fs8\cf0  
+\par \pard \fi-1600 \li1600 \tx1600 
+\par \plain\f1\fs18\cf0 The default value for this property is \plain\f1\fs18\cf0\i [boContextHelp, boDirsOnly]\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_ROOTFOLDERID}
+${\footnote {$}TPJBrowseDialog.RootFolderID}
+K{\footnote {K}TPJBrowseDialog,RootFolderID;RootFolderID,TPJBrowseDialog;RootFolderID}
+A{\footnote {A}TPJBrowseDialog_RootFolderID;RootFolderID_property;RootFolderID}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.RootFolderID\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJSpecialFolderInfo_object;TPJSpecialFolderEnum_object;PJShellFolders_IsValidSpecialFolderId)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Determines the root folder displayed in the dialog box.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  RootFolderID: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 RootFolderID specifies the identifier of a Shell special folder that is used as the root of the folder tree displayed in the dialog box. The property defaults to the desktop (CSIDL_DESKTOP).
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Some v\plain\f0\fs18\cf0 alid folder IDs are \plain\f1\fs18\cf0 defined in Delphi's\plain\f0\fs18\cf0  ShlObj unit\plain\f1\fs18\cf0 . In Delphi 6 and later additional folder ids are defined in the SHFolder unit. Even more ids are defined in PJShellFolders, which also defines the SHFolder unit's ids for Delphi 5 and lower\plain\f0\fs18\cf0 .
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 All the valid values can be found using the {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM} enumerator class. An identifier can be tested for validity using the {\strike IsValidSpecialFolder}{\v IDH_ISVALIDSPECIALFOLDERID} function.\plain\f1\fs18\cf0  
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Assigning an invalid value to the property causes an exception to be raised. Not all special folder identifiers are supported on all versions of Windows. Attempting to display a folder that is not supported by the operating system will cause an exception to be raised. Use the {\strike TPJSpecialFolderInfo}{\v IDH_TPJSPECIALFOLDERINFO} component to test if a special folder is supported without raising an exception.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_TITLE}
+${\footnote {$}TPJBrowseDialog.Title}
+K{\footnote {K}TPJBrowseDialog,Title;Title,TPJBrowseDialog;Title}
+A{\footnote {A}TPJBrowseDialog_Title;Title_property;Title}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.Title\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_Headline)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Specifies the text displayed in the dialog's title bar.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b type \plain\f4\fs18\cf0 TCaption = \plain\f4\fs18\cf0\b type\plain\f4\fs18\cf0  \plain\f4\fs18\cf0\b string;
+\par \plain\f4\fs8\cf0 
+\par \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  Title: TCaption;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Use Title to specify the text that appears in the Browse dialog's title bar. If no value is assigned to Title, the dialog has the title "Browse for Folder".\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_METHODS}
+${\footnote {$}TPJBrowseDialog Methods}
+
+\pard \plain \plain\f0\fs18\cf0\b Methods\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike Execute}{\v IDH_BD_EXECUTE}
+\par 
+\par TPJBrowseDialog also inherits methods from {\strike TComponent}{\v !AL(TComponent_object,1)}.
+\par \page 
+#{\footnote {#}IDH_BD_EXECUTE}
+${\footnote {$}TPJBrowseDialog.Execute}
+K{\footnote {K}TPJBrowseDialog,Execute;Execute,TPJBrowseDialog;Execute}
+A{\footnote {A}TPJBrowseDialog_Execute;Execute_method;Execute}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.Execute\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Displays the Browse for Folder dialog.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function\plain\f4\fs18\cf0  Execute: Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Execute opens the browse for folder dialog box, returning True when the user selects a folder and clicks OK. If the user clicks Cancel, Execute returns False.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_EVENTS}
+${\footnote {$}TPJBrowseDialog Events}
+
+\pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
+\par 
+\par \pard \tx200 \tab {\strike OnClose}{\v IDH_BD_ONCLOSE}
+\par \tab {\strike OnInitialise}{\v IDH_BD_ONINITIALISE}
+\par \tab {\strike OnSelChange}{\v IDH_BD_ONSELCHANGE}
+\par \plain\f1\fs18\cf0 \tab {\strike OnSelChangeEx}{\v IDH_BD_ONSELCHANGEEX}\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_ONCLOSE}
+${\footnote {$}TPJBrowseDialog.OnClose}
+K{\footnote {K}TPJBrowseDialog,OnClose;OnClose,TPJBrowseDialog;OnClose}
+A{\footnote {A}TPJBrowseDialog_OnClose;OnClose_event;OnClose}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.OnClose\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Occurs when the dialog closes.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  OnClose: {\strike TNotifyEvent}{\v !AL(TNotifyEvent,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Write an OnClose event handler to perform special processing when the dialog closes. The dialog's window handle is still available via the {\strike Handle}{\v IDH_BD_HANDLE} property.
+\par \plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_ONINITIALISE}
+${\footnote {$}TPJBrowseDialog.OnInitialise}
+K{\footnote {K}TPJBrowseDialog,OnInitialise;OnInitialise,TPJBrowseDialog;OnInitialise}
+A{\footnote {A}TPJBrowseDialog_OnInitialise;OnInitialise_event;OnInitialise}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.OnInitialise\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Occurs when the dialog initialises.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  OnInitialise: {\strike TNotifyEvent}{\v !AL(TNotifyEvent,1)};\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered after the dialog has opened and the default folder has been selected but before the dialog is displayed. {\strike OnSelChange}{\v IDH_BD_ONSELCHANGE} \plain\f1\fs18\cf0 and {\strike OnSelChangeEx}{\v IDH_BD_ONSELCHANGEEX} \plain\f0\fs18\cf0 events will usually fire before OnInitialise. The dialog's window handle is available via the {\strike Handle}{\v IDH_BD_HANDLE} property.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Write on OnInitialise event handler to perform special processing when the dialog is intialised.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_ONSELCHANGE}
+${\footnote {$}TPJBrowseDialog.OnSelChange}
+K{\footnote {K}TPJBrowseDialog,OnSelChange;OnSelChange,TPJBrowseDialog;OnSelChange}
+A{\footnote {A}TPJBrowseDialog_OnSelChange;OnSelChange_event;OnSelChange}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.OnSelChange\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_Options;TPJBrowseDialog_OnSelChangeEx)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Event that occurs whenever the selection in the dialog box changes.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b type\plain\f4\fs18\cf0  TPJBrowseSelChangeEvent\plain\f6\fs18\cf0  = \plain\f4\fs18\cf0\b procedure\plain\f4\fs18\cf0 (Sender: TObject; 
+\par \plain\f6\fs18\cf0   \plain\f4\fs18\cf0 FolderName, DisplayName: AnsiString; 
+\par   \plain\f4\fs18\cf0\b var\plain\f4\fs18\cf0  StatusText: AnsiString;
+\par   \plain\f4\fs18\cf0\b var\plain\f4\fs18\cf0  OKEnabled: Boolean) \plain\f4\fs18\cf0\b of object\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  OnSelChange: TPJBrowseSelChangeEvent;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered whenever the selected folder changes. This can occur before the dialog is displayed and before the {\strike OnIntialise}{\v IDH_BD_ONINITIALISE} event is triggered.  Write a handler to perform any required processing when the selected folder changes and to update the status text and state of the dialog's OK button.\plain\f1\fs18\cf0  The OnSelChange event is immediately followed by the {\strike OnSelChangeEx}{\v IDH_BD_ONSELCHANGEEX} event. It is recommended that only one of these events is handled.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i FolderName\plain\f0\fs18\cf0  is the full path name name of newly selected folder (or the empty string if the folder is virtual).
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i DisplayName\plain\f0\fs18\cf0  is the text used to display the newly selected folder in the dialog's tree view. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i StatusText\plain\f0\fs18\cf0  will always be the empty string. Set this value to whatever text should be displayed in the dialog's status area. Setting StatusText will \plain\f1\fs18\cf0 only have an \plain\f0\fs18\cf0 effect if the {\strike Options}{\v IDH_BD_OPTIONS} property include\plain\f1\fs18\cf0 s\plain\f0\fs18\cf0  \plain\f0\fs18\cf0\i boStatusText\plain\f1\fs18\cf0  and does not include \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i OKEnabled\plain\f0\fs18\cf0  will be True if the dialog's OK button \plain\f1\fs18\cf0 should \plain\f0\fs18\cf0 presently \plain\f1\fs18\cf0 be \plain\f0\fs18\cf0 enabled and False if it \plain\f1\fs18\cf0 should be \plain\f0\fs18\cf0 disabled. Setting \plain\f0\fs18\cf0\i OKEnabled\plain\f0\fs18\cf0  to a different value will change the state of the OK button accordingly. \plain\f1\fs18\cf0 The default state of the OK button depends on whether \plain\f1\fs18\cf0\i boDirsOnly\plain\f1\fs18\cf0  is included in the {\strike Options}{\v IDH_BD_OPTIONS} property. If \plain\f1\fs18\cf0\i boDirsOnly\plain\f1\fs18\cf0  is included in Options then the \plain\f0\fs18\cf0 OK button will be enabled when a physical folder is selected and disabled when a virtual folder is selected.\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When OnSelChange is triggered the dialog's window handle is available via the {\strike Handle}{\v IDH_BD_HANDLE} property.
+\par \page 
+#{\footnote {#}IDH_BD_ONSELCHANGEEX}
+${\footnote {$}TPJBrowseDialog.OnSelChangeEx}
+K{\footnote {K}TPJBrowseDialog,OnSelChangeEx;OnSelChangeEx,TPJBrowseDialog;OnSelChangeEx}
+A{\footnote {A}TPJBrowseDialog_OnSelChangeEx;OnSelChangeEx_event;OnSelChangeEx}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.OnSelChange\plain\f1\fs22\cf2\b Ex\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_Options;TPJBrowseDialog_OnSelChange)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Event that occurs whenever the selection in the dialog box changes.
+\par 
+\par \pard \keep \plain\f4\fs18\cf0 TPJBrowseSelChangeEventEx = \plain\f4\fs18\cf0\b procedure(\plain\f4\fs18\cf0 Sender: TObject;
+\par \plain\f6\fs18\cf0\b   \plain\f4\fs18\cf0 PIDL: PItemIDList; \plain\f4\fs18\cf0\b var\plain\f4\fs18\cf0  StatusText: AnsiString;
+\par   \plain\f4\fs18\cf0\b var\plain\f4\fs18\cf0  OKEnabled: Boolean) \plain\f4\fs18\cf0\b of object;\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  OnSelChange\plain\f6\fs18\cf0 Ex\plain\f4\fs18\cf0 : TPJBrowseSelChangeEvent\plain\f6\fs18\cf0 Ex\plain\f4\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered whenever the selected folder changes. \plain\f1\fs18\cf0 It provides access to the PIDL of the folder that has been selected. The event immediately follows the {\strike OnSelChange}{\v IDH_BD_ONSELCHANGE} event and \plain\f0\fs18\cf0 can occur before the dialog is displayed and before the {\strike OnIntialise}{\v IDH_BD_ONINITIALISE} event is triggered.  Write a handler to perform any required processing \plain\f1\fs18\cf0 of the PIDL \plain\f0\fs18\cf0 when the selected folder changes and to update the status text and state of the dialog's OK button.\plain\f1\fs18\cf0  It is recommended that only one of the OnSelChange and OnSelChangeEx events is handled.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0\i PIDL\plain\f0\fs18\cf0  is the \plain\f1\fs18\cf0 PIDL \plain\f0\fs18\cf0 of \plain\f1\fs18\cf0 the \plain\f0\fs18\cf0 newly selected folder\plain\f1\fs18\cf0 . \plain\f1\fs18\cf0\b Note\plain\f1\fs18\cf0 : This PIDL should be copied if it is to be retained beyond the life of the event handler and the copy should ultimately be freed using the Shell's allocator.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i StatusText\plain\f0\fs18\cf0  will always be the empty string. Set this value to whatever text should be displayed in the dialog's status area. Setting StatusText will \plain\f1\fs18\cf0 only have an effect\plain\f0\fs18\cf0  {\strike Options}{\v IDH_BD_OPTIONS} property include\plain\f1\fs18\cf0 s\plain\f0\fs18\cf0  \plain\f0\fs18\cf0\i boStatusText\plain\f1\fs18\cf0  and does not include \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0  Setting the status text in this event handler will override any status text set in the OnSelChange event handler.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\i OKEnabled\plain\f0\fs18\cf0  will be True if the dialog's OK button is presently enabled and False if it is disabled. Setting \plain\f0\fs18\cf0\i OKEnabled\plain\f0\fs18\cf0  to a different value will change the state of the OK button accordingly. \plain\f1\fs18\cf0 The default state of the OK button depends on whether \plain\f1\fs18\cf0\i boDirsOnly\plain\f1\fs18\cf0  is included in the {\strike Options}{\v IDH_BD_OPTIONS} property. If \plain\f1\fs18\cf0\i boDirsOnly\plain\f1\fs18\cf0  is included in Options then the \plain\f0\fs18\cf0 OK button will be enabled when a physical folder is selected and disabled when a virtual folder is selected.\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 When OnSelChange\plain\f1\fs18\cf0 Ex\plain\f0\fs18\cf0  is triggered the dialog's window handle is available via the {\strike Handle}{\v IDH_BD_HANDLE} property.
+\par \page 
+#{\footnote {#}IDH_SFIROUTINES}
+${\footnote {$}Special Folder Identifier Routines}
+K{\footnote {K}special folder identifier routines}
+@{\footnote {@}List of special folder identifier routines.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b  
+\par \plain\f1\fs22\cf2\b Special Folder Identifier Routines\plain\f0\fs20\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 The {\strike PJShellFolders}{\v IDH_SF_UNIT} unit defines four routines that provide information about special shell folder identifiers. They are:
+\par \plain\f1\fs12\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike IsValidSpecialFolderId}{\v IDH_ISVALIDSPECIALFOLDERID}
+\par \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike NumSpecialFolderIds}{\v IDH_NUMSPECIALFOLDERIDS}
+\par \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike SpecialFolderIdToStr}{\v IDH_SPECIALFOLDERIDTOSTR}
+\par \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike StrToSpecialFolderId}{\v IDH_STRTOSPECIALFOLDERID}
+\par \page 
+#{\footnote {#}IDH_ISVALIDSPECIALFOLDERID}
+${\footnote {$}IsValidSpecialFolderId}
+K{\footnote {K}IsValidSpecialFolderId}
+A{\footnote {A}IsValidSpecialFolderId;PJShellFolders_IsValidSpecialFolderId;IsValidSpecialFolderId_function}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b IsValidSpecialFolderId\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJShellFolders_SpecialFolderIdToStr;TPJSystemFolderInfo_FolderID)}          {\strike Example}{\v IDH_SPECIALENUM_EG}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Returns true if the given special folder identifier is defined by Windows.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function \plain\f4\fs18\cf0 IsValidSpecialFolderId(ID: Integer): Boolean;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Windows defines identifiers to represent the shell's special folders. Use this function to determine if a particular value is valid as a Windows special folder identifier. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This test can be performed to check an identifier value before passing to {\strike SpecialFolderIdToStr}{\v IDH_SPECIALFOLDERIDTOSTR} or before setting the {\strike TPJSpecialFolderInfo}{\v IDH_TPJSPECIALFOLDERINFO} component's {\strike FolderID}{\v IDH_SPECIAL_FOLDERID} property to avoid exception being raised by an invalid value.
+\par 
+\par \plain\f0\fs18\cf0\b Tip\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Use the {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM} class to enumerate all the valid folder identifiers.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_NUMSPECIALFOLDERIDS}
+${\footnote {$}NumSpecialFolderIds}
+K{\footnote {K}NumSpecialFolderIds}
+A{\footnote {A}NumSpecialFolderIds;PJShellFolders_NumSpecialFolderIds;NumSpecialFolderIds_function}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b NumSpecialFolderIds\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Returns the number of special folder identifiers defined by Windows.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function \plain\f4\fs18\cf0 NumSpecialFolderIds: Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Windows defines identifiers to represent the shell's special folders. Use this function to find the number of such identifiers defined by Windows. \plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_SPECIALFOLDERIDTOSTR}
+${\footnote {$}SpecialFolderIdToStr}
+K{\footnote {K}SpecialFolderIdToStr}
+A{\footnote {A}SpecialFolderIdToStr;PJShellFolders_SpecialFolderIdToStr;SpecialFolderIdToStr_function}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b SpecialFolderIdToStr\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJShellFolders_StrToSpecialFolderID;PJShellFolders_IsSpecialFolderId)}          {\strike Example}{\v IDH_SPECIALENUM_EG}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Returns the string representation of the constant identifier used by Windows to identify a special folder.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function \plain\f4\fs18\cf0 SpecialFolderIdToStr(ID: Integer): \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Windows defines identifiers to represent the shell's special folders. The ShlObj unit defines symbolic constants for these values. Passing an indentifier value to this function causes the name of the associated symbolic constant to be returned as a string. If the value is not a valid special folder indentifier the an exception is raised. 
+\par 
+\par \plain\f0\fs18\cf0\b Tips\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 To check if an identifier value is valid use the {\strike IsValidSpecialFolderId}{\v IDH_ISVALIDSPECIALFOLDERID} function.
+\par Use the {\strike TPJSpecialFolderEnum}{\v IDH_TPJSPECIALFOLDERENUM} class to enumerate all the valid folder identifiers.
+\par 
+\par \plain\f0\fs18\cf0\b Example\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 For example SpecialFolderIdToStr(4) returns 'CSIDL_PRINTERS'. \plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_STRTOSPECIALFOLDERID}
+${\footnote {$}StrToSpecialFolderId}
+K{\footnote {K}StrToSpecialFolderID}
+A{\footnote {A}StrToSpecialFolderID;PJShellFolders_StrToSpecialFolderID;StrToSpecialFolderID_function}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b StrToSpecialFolderID\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJShellFolders_SpecialFolderIdToStr)}          {\strike Example}{\v IDH_SPECIALENUM_EG}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Returns the value of the special folder identifier associated with the Windows symbolic constant.
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function \plain\f4\fs18\cf0 StrToSpecialFolderID(const IDStr: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ): Integer;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Windows defines identifiers to represent the shell's special folders. The ShlObj unit defines symbolic constants for these values. Passing the string representation of one of these constants to this function returns the constant's value.  Passing an invalid constant name causes an exception to be raised.
+\par 
+\par For example StrToSpecialFolderId('CSIDL_PRINTERS') returns 4.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_PIDLROUTINES}
+${\footnote {$}PIDL information routines}
+K{\footnote {K}special folder identifier routines}
+@{\footnote {@}List of PIDL information routines.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b  
+\par \plain\f1\fs22\cf2\b Special Folder Identifier Routines\plain\f0\fs20\cf0 
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 The {\strike PJShellFolders}{\v IDH_SF_UNIT} unit defines two routines that provide information a given PIDL structure. They are:
+\par \plain\f1\fs12\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike PIDLToFolderPath}{\v IDH_PIDLTOFOLDERPATH}
+\par \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike PIDLToFolderDisplayName}{\v IDH_PIDLTOFOLDERDISPLAYNAME}
+\par \page 
+#{\footnote {#}IDH_PIDLTOFOLDERPATH}
+${\footnote {$}PIDLToFolderPath}
+K{\footnote {K}PIDLToFolderPath}
+A{\footnote {A}PIDLToFolderPath;PJShellFolders_PIDLToFolderPath;PIDLToFolderPath_function}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b PIDLToFolderPath\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJShellFolders_PIDLToFolderDisplayName)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Returns \plain\f1\fs18\cf0 the path of the folder described by PIDL\plain\f0\fs18\cf0 .
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function\plain\f4\fs18\cf0  PIDLToFolderPath(PIDL: PItemIDList): \plain\f4\fs18\cf0\b string;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This function returns the path in the file system to the folder defined by PIDL\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 If PIDL represents a virtual folder then the function returns the empty string.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_PIDLTOFOLDERDISPLAYNAME}
+${\footnote {$}PIDLToFolderDisplayName}
+K{\footnote {K}PIDLToFolderDisplayName}
+A{\footnote {A}PIDLToFolderDisplayName;PJShellFolders_PIDLToFolderDisplayName;PIDLToFolderDisplayName_function}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf2\b 
+\par \plain\f0\fs22\cf2\b PIDLToFolderDisplayName\plain\f0\fs20\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJShellFolders_PIDLToFolderPath)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Returns \plain\f1\fs18\cf0 the display name of the folder described by PIDL\plain\f0\fs18\cf0 .
+\par 
+\par \plain\f0\fs18\cf0\b Unit\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 {\strike PJShellFolders}{\v IDH_SF_UNIT}\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b function\plain\f4\fs18\cf0  PIDLToFolderDisplayName(PIDL: PItemIDList): \plain\f4\fs18\cf0\b string;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This function returns the display name (as used in Explorer) of the folder defined by PIDL\plain\f0\fs18\cf0 .\plain\f1\fs18\cf0 
+\par \page 
+}
