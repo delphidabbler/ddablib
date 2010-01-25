@@ -1,50 +1,11 @@
-{ ##
-  @PROJECT_NAME             ShellFolderDemo
-  @PROJECT_DESC             Demonstrates shell folders unit.
-  @FILE                     ShellFolderDemoForm.pas
-  @COMMENTS                 Main form and code for demo program.
-  @DEPENDENCIES             Requires TPJSpecialFolderInfo and TPJBrowseDialog.
-  @LICENSE                  The demo is released under the Mozilla public
-                            license (see below).
-  @COPYRIGHT                Copyright (c) 2003-2007, Peter D Johnson.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 15/06/2003
-      @COMMENTS             Original version.
-    )
-    @REVISION(
-      @VERSION              1.1
-      @DATE                 29/07/2003
-      @COMMENTS             Updated - detail not known.
-    )
-    @REVISION(
-      @VERSION              1.2
-      @DATE                 22/08/2004
-      @COMMENTS             Added code to demonstrate new style dialog.
-    )
-    @REVISION(
-      @VERSION              1.3
-      @DATE                 22/12/2005
-      @COMMENTS             Fixed range check bug.
-    )
-    @REVISION(
-      @VERSION              1.4
-      @DATE                 03/07/2007
-      @COMMENTS             + Refined to allow all browser dialog box options to
-                              be configured from UI.
-                            + Changed to display both small and large icon of
-                              selected folder in browser dialog box. We now also
-                              display path to selected folder, if any.
-                            + Changed demo of browser dialog box customisation
-                              making headline text bold instead of adding new
-                              text control to dialog box.
-    )
-  )
-}
-
-
 {
+ * ShellFolderDemoForm.pas
+ *
+ * Main form and code for Shell Folders Unit demo program.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -62,8 +23,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2003-2007 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2003-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }

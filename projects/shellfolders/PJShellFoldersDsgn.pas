@@ -1,50 +1,12 @@
-{ ##
-  @PROJECT_NAME             Windows shell folders routines and components.
-  @PROJECT_DESC             A set of routines, classes and components for
-                            processing Windows shell folders. Includes:
-                            + Component that provides information about a
-                              specified special shell folder.
-                            + Class that enumerates all the special shell
-                              folders.
-                            + Routines to manipulate special shell folder
-                              information.
-                            + Component that encapsulates the Windows Browse for
-                              Folder dialog box.
-  @FILE                     PJShellFoldersDsgn.pas
-  @COMMENTS                 Component registration code and property editor for
-                            TPJBrowseDialog and TPJSpecialFolderInfo components
-                            defined in PJShellFolders.pas.
-  @LEGAL_NOTICE             These components are distributed under the Mozilla
-                            Public License - see below.
-  @EMAIL                    peter.johnson@openlink.org
-  @WEBSITE                  http://www.delphidabbler.com/
-  @AUTHOR                   Peter D Johnson, Llanarth, Ceredigion, Wales, UK.
-  @COPYRIGHT                Copyright © 2003-2005, P.D.Johnson, Llanarth,
-                            Ceredigion, Wales UK.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 15/06/2003
-      @COMMENTS             Original version.
-    )
-    @REVISION(
-      @VERSION              1.1
-      @DATE                 09/01/2005
-      @COMMENTS             Fixed bug in special folder id property editor that
-                            ignoring user's changes to the property value.
-                            Removed editor's read-only attribute.
-    )
-    @REVISION(
-      @VERSION              1.2
-      @DATE                 22/12/2005
-      @COMMENTS             Revised compiler directives to enable support for
-                            Delphi 2005/6.
-    )
-  )
-}
-
-
 {
+ * PJShellFoldersDsgn.pas
+ *
+ * Component registration code and property editor for TPJBrowseDialog and
+ * TPJSpecialFolderInfo components defined in PJShellFolders.pas.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -57,12 +19,12 @@
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
  * the specific language governing rights and limitations under the License.
  *
- * The Original Code is Shell Folders Unit.
+ * The Original Code is PJShellFoldersDsgn.pas
  *
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2003-2005 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2003-2010 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):

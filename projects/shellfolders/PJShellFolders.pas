@@ -1,134 +1,11 @@
-{ ##
-  @PROJECT_NAME             Windows shell folders routines and components.
-  @PROJECT_DESC             A set of routines, classes and components for
-                            processing Windows shell folders. Includes:
-                            + Component that provides information about a
-                              specified special shell folder.
-                            + Class that enumerates all the special shell
-                              folders.
-                            + Routines to manipulate special shell folder
-                              information.
-                            + Component that encapsulates the Windows Browse for
-                              Folder dialog box.
-  @FILE                     PJShellFolders.pas
-  @COMMENTS                 Run time unit that defines shell folders components,
-                            classes and routines.
-  @LEGAL_NOTICE             These components are distributed under the Mozilla
-                            Public License - see below.
-  @EMAIL                    peter.johnson@openlink.org
-  @WEBSITE                  http://www.delphidabbler.com/
-  @OWNER                    DelphiDabbler
-  @AUTHOR                   Peter D Johnson, Llanarth, Ceredigion, Wales, UK.
-  @COPYRIGHT                Copyright © 2001-2006, P.D.Johnson, Llanarth,
-                            Ceredigion, Wales UK.
-  @CREDITS                  + Thanks to Philippe Lucarz for code that removes
-                              warnings when compiling under Delphi 6 and 7.
-                              Implemented in v2.1.
-                            + Thanks to Ryan Fischbach for suggesting code that
-                              enables adds the new dialog style to
-                              TPJBrowseDialog. Implemented with changes in v2.2.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 01/04/2001
-      @COMMENTS             Original version.
-    )
-    @REVISION(
-      @VERSION              2.0
-      @DATE                 15/06/2003
-      @COMMENTS             + Removed registration procedure and TPJFolderIDPE
-                              property editor to new PJShellFoldersDsgn unit and
-                              removed DsgnIntf unit reference.
-                            + Added boDirsOnly option to TPJBrowseDialog.Options
-                              property - user can now specify if browse dialog
-                              displays and accepts virtual folders or just those
-                              in file system (previously the latter was only
-                              option available).
-                            + Added new EPJShellFolders exception and used in
-                              place of Exception. Added helper routines to raise
-                              exceptions and moved all error message strings to
-                              resource strings.
-                            + Renamed GetFolderDisplayName as
-                              PIDLToFolderDisplayName, made public, and rewrote
-                              code to get display names properly under WinNT and
-                              Win9x.
-                            + Renamed GetFolderPath function as PIDLToFolderPath
-                              and made public.
-                            + Added TPJBrowseDialog.OnSelChangeEx event to give
-                              access to PIDL of selected folder.
-                            + TPJBrowseDialog now displays help button as
-                              disabled when HelpContext = 0.
-                            + Moved conditionally compiled additional shell
-                              folder constants missing from Delphi 3 to
-                              interface section to make available to users.
-    )
-    @REVISION(
-      @VERSION              2.1
-      @DATE                 29/07/2003
-      @COMMENTS             + Prevented warnings when compiling unit with Delphi
-                              6 & 7 using conditional compilation. (Thanks to
-                              Philippe Lucarz).
-                            + Conditionally added extra CSIDL_ constants that
-                              are declared in Delphi 6's ShlObj unit.
-    )
-    @REVISION(
-      @VERSION              2.2
-      @DATE                 22/08/2004
-      @COMMENTS             + Added support for new dialog style - selected
-                              using a new option in the Options property. Based
-                              on code suggested by Ryan Fischbach.
-                            + Provided default specifier of 0 for HelpContext
-                              property. Thanks to Ryan Fischbach for suggesting.
-                            + Added support for more new special folder (CSIDL_)
-                              identifiers per MSDN documentation.
-    )
-    @REVISION(
-      @VERSION              2.3
-      @DATE                 22/12/2005
-      @COMMENTS             + Revised compiler directives to enable support for
-                              Delphi 2005/6.
-                            + Removed Delphi 3 specific code since no longer
-                              compiles with Delphi 3.
-    )
-    @REVISION(
-      @VERSION              2.4
-      @DATE                 12/04/2006
-      @COMMENTS             + Added new CSIDL_* special folder constants
-                              including some slated for Windows Vista.
-                            + Added CSIDL_FLAG_CREATE create flag for forcing
-                              creation of new folder. This flag is not provided
-                              on early Delphis.
-    )
-    @REVISION(
-      @VERSION              2.5
-      @DATE                 03/07/2007
-      @COMMENTS             + Removed CSIDL_ constants that were provisioanally
-                              slated for Windows Vista but were removed from
-                              MSDN documentation.
-                            + Changed tests for valid folder ids to ignore any
-                              CSIDL_FLAG_ values that may have been included
-                              with the folder id.
-                            + Added various additional CSIDL_FLAG_ constants.
-                            + Changed TPJBrowseDialog.Options property to permit
-                              any combination of values. Certain options are now
-                              ignored when used in combination with others.
-                            + Added TPJBrowseDlgOption enumeration that provides
-                              basis of TPJBrowseDlgOptions set. Previously
-                              enumeration was defined in set declaration.
-                            + Changed to always initialise COM regardless of
-                              whether code used to display new style browser for
-                              folder. Previous code that selectively initialised
-                              COM was buggy.
-                            + Refactored some duplicated code.
-                            + Fixed code that enables / disables browser dialog
-                              box OK button to work with new style dialog.
-                            + Made help button caption localisable.
-    )
-  )
-}
-
-
 {
+ * PJShellFolders.pas
+ *
+ * Run time unit that defines shell folders components, classes and routines.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -146,7 +23,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2001-2007 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2001-2010 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
