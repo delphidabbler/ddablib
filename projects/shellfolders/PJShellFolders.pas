@@ -49,6 +49,8 @@ interface
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$DEFINE DELPHI7ANDUP}
+    {$WARN UNSAFE_CODE OFF}
+    {$WARN UNSAFE_CAST OFF}
   {$IFEND}
 {$ENDIF}
 
@@ -302,7 +304,7 @@ type
         called. May be set true to enable OK button or false to disable it.
   }
   TPJBrowseSelChangeEvent = procedure(Sender: TObject;
-    FolderName, DisplayName: AnsiString; var StatusText: AnsiString;
+    FolderName, DisplayName: string; var StatusText: string;
     var OKEnabled: Boolean) of object;
 
 
@@ -319,7 +321,7 @@ type
         called. May be set true to enable OK button or false to disable it.
   }
   TPJBrowseSelChangeEventEx = procedure(Sender: TObject;
-    PIDL: PItemIDList; var StatusText: AnsiString;
+    PIDL: PItemIDList; var StatusText: string;
     var OKEnabled: Boolean) of object;
 
 
