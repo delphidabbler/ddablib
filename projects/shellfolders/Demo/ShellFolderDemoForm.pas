@@ -45,6 +45,7 @@ type
     lblFolder: TLabel;
     imgFolderSmall: TImage;
     ilSmall: TImageList;
+    chkHideMakeFolderBtn: TCheckBox;
     procedure btnBrowseClick(Sender: TObject);
     procedure BrowseDlgClose(Sender: TObject);
     procedure BrowseDlgInitialise(Sender: TObject);
@@ -267,11 +268,13 @@ begin
   chkStatusText.Tag := Ord(boStatusText);
   chkDirsOnly.Tag := Ord(boDirsOnly);
   chkNewDlgStyle.Tag := Ord(boNewDlgStyle);
+  chkHideMakeFolderBtn.Tag := Ord(boHideMakeFolderBtn);
   SetOptionCheckState(chkShowHelp);
   SetOptionCheckState(chkContextHelp);
   SetOptionCheckState(chkStatusText);
   SetOptionCheckState(chkDirsOnly);
   SetOptionCheckState(chkNewDlgStyle);
+  SetOptionCheckState(chkHideMakeFolderBtn);
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
