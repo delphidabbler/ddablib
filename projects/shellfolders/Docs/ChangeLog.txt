@@ -4,6 +4,14 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v2.2.5 of 27 January 2010
++ Fixed shell folders unit to compile with Unicode Delphis.
++ Fixed bug that can freeze program if exception occurs when help system called when no help system installed in Delphi.
++ Switched off some compilation warnings on Delphi 7 and later.
++ Simplified compiler directives.
++ Updated documentation.
++ Included copy of MPL in release.
+
 Release v2.2.4 of 03 July 2007
 + Removed CSIDL_ constants that were provisioanally slated for Windows Vista but were removed from MSDN documentation.
 + Changed tests for valid folder ids to ignore any CSIDL_FLAG_ values that may have been included with the folder id.
