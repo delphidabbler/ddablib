@@ -100,7 +100,7 @@ const
 
 const
   //
-  // Further CSIDL constants from MSDN not known to be defined in Delphi
+  // Further CSIDL constants from MSDN not defined in all Delphis
   //
 
   // Folder ids
@@ -150,6 +150,8 @@ const
   {$EXTERNALSYM CSIDL_FLAG_NO_ALIAS}
   CSIDL_FLAG_DONT_VERIFY          = $4000;
   {$EXTERNALSYM CSIDL_FLAG_DONT_VERIFY}
+  CSIDL_FLAG_DONT_UNEXPAND        = $2000;
+  {$EXTERNALSYM CSIDL_FLAG_DONT_UNEXPAND}
   CSIDL_FLAG_MASK                 = $FF00;
   {$EXTERNALSYM CSIDL_FLAG_MASK}
 
@@ -585,21 +587,6 @@ end;
 
 
 // -----------------------------------------------------------------------------
-// General PIDL management routines
-// -----------------------------------------------------------------------------
-
-procedure FreePIDL(PIDL: PItemIDList);
-  {Helper procedure that frees the memory used by a given PIDL using the Shell's
-  allocator}
-var
-  Malloc: IMalloc;  // shell's allocator
-begin
-  if Succeeded(SHGetMalloc(Malloc)) then
-    Malloc.Free(PIDL);
-end;
-
-
-// -----------------------------------------------------------------------------
 // PIDL information routines
 // -----------------------------------------------------------------------------
 
@@ -731,7 +718,7 @@ var
 begin
   Result := False;
   for Idx := Low(cFolders) to High(cFolders) do
-    if cFolders[Idx].ID = ID then
+    if (cFolders[Idx].ID and not CSIDL_FLAG_CREATE) = ID then
     begin
       Result := True;
       Break;
@@ -870,7 +857,7 @@ begin
       fDisplayName := PIDLToFolderDisplayName(PIDL);
       fIsVirtual := (fPath = '');
     finally
-      FreePIDL(PIDL);
+      CoTaskMemFree(PIDL);
     end;
   end
   else
@@ -1136,7 +1123,7 @@ begin
         fDisplayName := BI.pszDisplayName;
       finally
         // Release the selected folder PIDL's memory
-        FreePIDL(pidlFolder);
+        CoTaskMemFree(pidlFolder);
       end;
     end
     else
@@ -1145,7 +1132,7 @@ begin
   finally
     // Release any root folder PIDL memory
     if pidlRootFolder <> nil then
-      FreePIDL(pidlRootFolder);
+      CoTaskMemFree(pidlRootFolder);
   end;
 end;
 
