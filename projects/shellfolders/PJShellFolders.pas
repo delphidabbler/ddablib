@@ -205,7 +205,6 @@ type
       }
   end;
 
-
   {
   TPJSpecialFolderEnum
     Class that enumerates the indentifiers for the Shell's special folders.
@@ -237,7 +236,6 @@ type
         @return Number of folders ids.
       }
   end;
-
 
   {
   TPJSpecialFolderInfo:
@@ -292,7 +290,6 @@ type
       only properties to be updated to provide information about the folder}
   end;
 
-
   {
   TPJBrowseSelChangeEvent:
     Type of event triggered by TPJBrowseDialog when selected folder changes.
@@ -308,7 +305,6 @@ type
   TPJBrowseSelChangeEvent = procedure(Sender: TObject;
     FolderName, DisplayName: string; var StatusText: string;
     var OKEnabled: Boolean) of object;
-
 
   {
   TPJBrowseSelChangeEventEx:
@@ -326,26 +322,28 @@ type
     PIDL: PItemIDList; var StatusText: string;
     var OKEnabled: Boolean) of object;
 
-
   {
   TPJBrowseDlgOption:
     Enumeration of options available to Options property of TPJBrowseDlg.
   }
   TPJBrowseDlgOption = (
     boShowHelp,           // show help button
+                          // (old style dialog only)
     boContextHelp,        // show context help icon in title
     boStatusText,         // show status text in dlg box
+                          // (old style dialog only)
     boDirsOnly,           // only allow selection of items in file system
-    boNewDlgStyle         // use new dialog style
+    boNewDlgStyle,        // use new dialog style
+                          // (requires shlobj.dll v5 or later)
+    boHideMakeFolderBtn   // hide Make New Folder button
+                          // (new style dialog only)
   );
-
 
   {
   TPJBrowseDlgOptions:
     Set of options available to Options property of TPJBrowseDlg.
   }
   TPJBrowseDlgOptions = set of TPJBrowseDlgOption;
-
 
   {
   TPJBrowseDialog:
@@ -429,6 +427,10 @@ type
       that an old style dialog box is to be displayed. Other buttons are
       rearranged.
       }
+    procedure HideMakeNewFolderButton;
+      {Hides the dialog's Make New Folder button, providing that a new style
+      dialog box is to be displayed.
+      }
   public
     constructor Create(AOwner: TComponent); override;
       {Class constructor. Sets up component and creates window procedure used to
@@ -497,13 +499,11 @@ type
       be accessed via the Handle property}
   end;
 
-
   {
   EPJShellFolders:
     Class used for exceptions raised within this unit.
   }
   EPJShellFolders = class(Exception);
-
 
 { Special folder routines }
 
@@ -532,7 +532,6 @@ function NumSpecialFolderIds: Integer;
     @return Number of special folders.
   }
 
-
 { PIDL information routines }
 
 function PIDLToFolderPath(PIDL: PItemIDList): string;
@@ -556,9 +555,7 @@ uses
   ActiveX, Forms, ShellAPI;
 
 
-// -----------------------------------------------------------------------------
-// Error handling
-// -----------------------------------------------------------------------------
+{ Error handling }
 
 resourcestring
   {Error messages}
@@ -585,10 +582,7 @@ begin
   Error(Format(Msg, Args));
 end;
 
-
-// -----------------------------------------------------------------------------
-// PIDL information routines
-// -----------------------------------------------------------------------------
+{ PIDL information routines }
 
 function PIDLToFolderPath(PIDL: PItemIDList): string;
   {Gets the path of a folder from a PIDL.
@@ -626,10 +620,7 @@ begin
   Result := FileInfo.szDisplayName;
 end;
 
-
-// -----------------------------------------------------------------------------
-// Special folder identifier constants and routines
-// -----------------------------------------------------------------------------
+{ Special folder identifier constants and routines }
 
 const
 
@@ -771,10 +762,7 @@ begin
     ErrorFmt(sBadSpecialFolderIDStr, [IDStr]);
 end;
 
-
-// -----------------------------------------------------------------------------
-// TPJSpecialFolderEnum
-// -----------------------------------------------------------------------------
+{ TPJSpecialFolderEnum }
 
 function TPJSpecialFolderEnum.AtEnd: Boolean;
   {Checks if at end of enumeration.
@@ -822,10 +810,7 @@ begin
     Result := -1;
 end;
 
-
-// -----------------------------------------------------------------------------
-// TPJSpecialFolderInfo
-// -----------------------------------------------------------------------------
+{ TPJSpecialFolderInfo }
 
 constructor TPJSpecialFolderInfo.Create(AOwner: TComponent);
   {Class constructor. Sets up object and reads information about default special
@@ -885,10 +870,7 @@ begin
   end;
 end;
 
-
-// -----------------------------------------------------------------------------
-// TPJBrowseDialog
-// -----------------------------------------------------------------------------
+{ TPJBrowseDialog }
 
 type
   {
@@ -932,7 +914,7 @@ const
   // added by this component
   cHelpBtnID = $1000;
 
-  
+
 function BrowseCallbackProc(HWnd: THandle; Msg: LongWord;
   LParam, Data: LongInt): Integer; stdcall;
   {Callback function called by browse dialog box. This function has two
@@ -1156,6 +1138,14 @@ begin
     Result := 0;
 end;
 
+procedure TPJBrowseDialog.HideMakeNewFolderButton;
+  {Hides the dialog's Make New Folder button, providing that a new style dialog
+  box is to be displayed.
+  }
+begin
+  ShowWindow(GetDlgItem(Self.Handle, cNewFolderBtnId), SW_HIDE);
+end;
+
 procedure TPJBrowseDialog.IncludeHelpButton;
   {Creates a help button and displays it in the browse dlg box, providing
   that an old style dialog box is to be displayed. Other buttons are
@@ -1262,6 +1252,12 @@ begin
   // Install help button if required (must have old style dlg)
   if (boShowHelp in fOptions) and not IsNewStyle then
     IncludeHelpButton;
+  // Hide Make New Folder button if required (must have new style dlg)
+  if (boHideMakeFolderBtn in fOptions) and IsNewStyle then
+    // we handle hiding of Make New Folder button directly rather than using
+    // BIF_NONEWFOLDERBUTTON flag since the flag required shlobj.dll v6 and we
+    // want this feature on earlier versions
+    HideMakeNewFolderButton;
   // Hide context help window caption icon if required
   if not (boContextHelp in fOptions) then
     SetWindowLong(Handle, GWL_EXSTYLE,
