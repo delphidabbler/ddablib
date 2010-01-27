@@ -1940,7 +1940,7 @@ BM
 ContextHelp.bmp
 1
 1
-5902
+6345
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fmodern \fcharset0 Courier New;}{\f3\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs20\cf1 \protect <NS 341>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJBrowseDialog.Options\plain\f0\fs22\cf2 
 \par \plain\f0\fs12\cf2 
@@ -1959,7 +1959,7 @@ ContextHelp.bmp
 \par \plain\f0\fs8\cf2 
 \par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf2\b Value\tab Meaning\plain\f0\fs20\cf2 
 \par \plain\f0\fs20\cf1 \protect <BD 343>\plain\f0\fs8\cf2  \plain\f0\fs20\cf1 \protect </BD 343>\plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2\i boShowHelp\plain\f0\fs18\cf2 \tab Displays a help button in the dialog box. When the user clicks the button the application's help file is activated at the topic given by the component's \plain\f0\fs18\cf1 \protect <HS 345>\plain\f0\fs18\cf2 HelpContext\plain\f0\fs18\cf1 \protect </HS 345>\plain\f0\fs18\cf2  property. When HelpContext is 0 the button is \plain\f3\fs18\cf2 disabled\plain\f0\fs18\cf2 . If \plain\f0\fs18\cf2\i Options \plain\f0\fs18\cf2 does not include \plain\f0\fs18\cf2\i boContextHelp\plain\f0\fs18\cf2  then pressing F1 has the same effect as clicking the Help button.\plain\f3\fs18\cf2  This option is not compatible with \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  and \plain\f3\fs18\cf2\i boShowHelp\plain\f3\fs18\cf2  is ignored when \plain\f3\fs18\cf2\i boNewStyleDlg\plain\f3\fs18\cf2  is included in \plain\f3\fs18\cf2\i Options\plain\f3\fs18\cf2 .\plain\f0\fs20\cf2 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f0\fs18\cf2\i boShowHelp\plain\f0\fs18\cf2 \tab Displays a help button in the dialog box. When the user clicks the button the application's help file is activated at the topic given by the component's \plain\f0\fs18\cf1 \protect <HS 345>\plain\f0\fs18\cf2 HelpContext\plain\f0\fs18\cf1 \protect </HS 345>\plain\f0\fs18\cf2  property. When HelpContext is 0 the button is \plain\f3\fs18\cf2 disabled\plain\f0\fs18\cf2 . If \plain\f0\fs18\cf2\i Options \plain\f0\fs18\cf2 does not include \plain\f0\fs18\cf2\i boContextHelp\plain\f0\fs18\cf2  then pressing F1 has the same effect as clicking the Help button.\plain\f3\fs18\cf2  This option is not compatible with \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  and \plain\f3\fs18\cf2\i boShowHelp\plain\f3\fs18\cf2  is ignored when \plain\f3\fs18\cf2\i boNewStyleDlg\plain\f3\fs18\cf2  is included in \plain\f3\fs18\cf2\i Options\plain\f3\fs18\cf2 .\plain\f0\fs20\cf2 
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i boContextHelp\plain\f0\fs18\cf2 \tab Displays the \plain\f0\fs18\cf1 \protect <BM 379>\plain\f0\fs18\cf2  button in the dialog's title bar. Clicking this button and the\plain\f3\fs18\cf2 n\plain\f0\fs18\cf2  clicking a control in the dialog brings up context sensitive popup help on each control in a window. Pressing F1 has the same effect. In this case the help relates to the currently active control.\plain\f3\fs18\cf2  \plain\f3\fs18\cf2\b Note: \plain\f3\fs18\cf2 this option only works on some operating systems. It does not work on Windows Vista, for example.\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
@@ -1967,8 +1967,10 @@ ContextHelp.bmp
 \par \plain\f0\fs8\cf2 
 \par \plain\f3\fs18\cf2\i boDirsOnly\plain\f3\fs18\cf2 \tab Causes dialog box to display only folders in the file system. The OK button is disabled if the selected folder is virtual. If this option is omitted then file system and virtual folders are provided and any folder can be selected. Note that if \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  is specified executing the dialog box with a virtual folder specified as the root folder can cause an error message to be displayed.
 \par \plain\f0\fs8\cf2 
-\par \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2 \tab Displays dialog using "new style" - i.e. the dialog is resizable and displays a "New Folder" button. This option is not compatible with \plain\f3\fs18\cf2\i boShowHelp\plain\f3\fs18\cf2  and \plain\f3\fs18\cf2\i boStatusText\plain\f3\fs18\cf2 . and these options are ignored id \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  is included in \plain\f3\fs18\cf2\i Options\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
-\par \plain\f0\fs18\cf1 \protect <BD 344>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 344>\plain\f0\fs8\cf2 
+\par \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2 \tab Displays dialog using "new style" - i.e. the dialog is resizable and displays a "New Folder" button. This option is not compatible with \plain\f3\fs18\cf2\i boShowHelp\plain\f3\fs18\cf2  and \plain\f3\fs18\cf2\i boStatusText\plain\f3\fs18\cf2 . and these options are ignored is \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  is included in \plain\f3\fs18\cf2\i Options\plain\f3\fs18\cf2 .
+\par \plain\f3\fs8\cf2 
+\par \plain\f0\fs18\cf2\i boHideMakeFolderBtn\plain\f3\fs18\cf2\i \tab \plain\f3\fs18\cf2 Hides the "Make New Folder" button that is displayed by default in the "new style" dialog box. This option is ignored if \plain\f3\fs18\cf2\i boNewDlgStyle\plain\f3\fs18\cf2  is not set since the button is never displayed in "old style" versions of the dialog box.\plain\f0\fs18\cf2 
+\par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf1 \protect <BD 344>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 344>\plain\f0\fs8\cf2 
 \par 
 \par \plain\f3\fs18\cf2 The default value for this property is \plain\f3\fs18\cf2\i [boContextHelp, boDirsOnly]\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
 \par }
