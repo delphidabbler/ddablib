@@ -1077,7 +1077,11 @@ procedure TPJBrowseDialog.DoHelp;
   }
 begin
   if fHelpContext <> 0 then
-    Application.HelpContext(fHelpContext);
+    try
+      Application.HelpContext(fHelpContext);
+    except
+      Application.HandleException(ExceptObject);
+    end;
 end;
 
 function TPJBrowseDialog.Execute: Boolean;
