@@ -259,6 +259,22 @@
 				default on the new style dialog. This option is ignored if
 				<em>New Style Dialog</em> is not checked.
 			</li>
+			<li>
+				<em>Display Edit Box</em><br />
+				Displays an edit control in the dialog box. Enter a path in this
+				control. A valid path will be used as the selected folder when
+				the dialog box is closed. If the entered path is not valid it
+				will be ignored and the <em>OnValidationFailed</em> event will
+				be triggered, if assigned.
+			</li>
+			<li>
+				<em>Display Usage Hint</em><br />
+				Causes a usage hint to appear in the dialog box when checked.
+				<em>New Style Dialog</em> must be checked and <em>Display Edit
+				Box</em> must be cleared for this to take effect. Furthermore
+				<code>shlobj.dll</code> v6.0 or later is also required for this
+				option to take effect.
+			</li>
 		</ul>
 	</li>
 	<li>
@@ -287,6 +303,14 @@
 		small and large icons are displayed in the main window. This event
 		handler does not display status text when the <em>New Style Dialog</em>
 		is check box is checked.
+	</li>
+	<li>
+		<em>Use OnValidationFailed</em> check box:<br />
+		When this check box is checked the browse dialog component uses the
+		demo's <em>OnValidationFailed</em> event handler when an invalid path is
+		entered in any edit control in the dialog box. The invalid path is
+		displayed and the user is asked to decide whether the dialog box is
+		closed.
 	</li>
 </ul>
 
@@ -357,6 +381,15 @@
 		</ul>
 	</li>
 	<li>
+		The <var>BrowseDlgValidationFailed</var> event handler handles any
+		<var>TPJBrowseDialog.OnValidationFailed</var> events if the
+		<em>Use OnValidationFailed</em> check box is checked. It reports the
+		name of the invalid folder entered into the browse dialog's edit control
+		then asks the user if the dialog box is to be closed. The <em>Display
+		Edit Box</em> option check boxes must be checked to include the required
+		edit control in the dialog box.
+	</li>
+	<li>
 		When the browse dialog is closed, the <var>TPJBrowseDialog.OnClose</var>
 		event is triggered and handled by the <var>BrowseDlgClose</var> event
 		handler. This simply ensures that any icons and path displayed in the
@@ -365,8 +398,8 @@
 </ul>
 
 <p>
-	Please run the program and examine the source code to get an idea about how
-	to use the <code>PJShellFolders</code> unit.
+	You should run the program and examine the source code to get an idea about
+	how to use the <code>PJShellFolders</code> unit.
 </p>
 
 
@@ -375,8 +408,9 @@
 		Please <a
 			href="http://www.delphidabbler.com/contact"
 		>let me know</a> if you have any comments about the component, but
-		please use the Issue Tracker noted above to report bugs and request new
-		features.
+		please use the <a
+			href="http://www.delphidabbler.com/url/ddlib-issues"
+		>Issue Tracker</a> to report bugs and request new features.
 	</div>
 	<div class="copyright">
 		This document is copyright &copy; 2005-2010, P D Johnson, <a

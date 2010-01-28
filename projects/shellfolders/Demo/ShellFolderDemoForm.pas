@@ -1,4 +1,4 @@
-{ 
+{
  * ShellFolderDemoForm.pas
  *
  * Main form and code for Shell Folders Unit demo program.
@@ -46,6 +46,9 @@ type
     imgFolderSmall: TImage;
     ilSmall: TImageList;
     chkHideMakeFolderBtn: TCheckBox;
+    chkEditBox: TCheckBox;
+    chkHint: TCheckBox;
+    chkOnValidationFailed: TCheckBox;
     procedure btnBrowseClick(Sender: TObject);
     procedure BrowseDlgClose(Sender: TObject);
     procedure BrowseDlgInitialise(Sender: TObject);
@@ -61,6 +64,9 @@ type
     procedure LVSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
     procedure DlgOptionsClick(Sender: TObject);
+    procedure BrowseDlgValidationFailed(Sender: TObject; const EditText: string;
+      var CanClose: Boolean);
+    procedure chkOnValidationFailedClick(Sender: TObject);
   private
     fPJFont: TFont;
     procedure DisplaySpecialFolders;
@@ -159,8 +165,23 @@ begin
   lblFolder.Caption := 'PATH: ' + Path;
 end;
 
+procedure TForm1.BrowseDlgValidationFailed(Sender: TObject;
+  const EditText: string; var CanClose: Boolean);
+  {Handles event triggered when an invalid path is entered in the browse for
+  folders dialog box and an attempt is made to close the dialog box}
+begin
+  CanClose := MessageDlg(
+    Format(
+      'Folder "%s" does not exist.'#10#10'Close the dialog anyway?', [EditText]
+    ),
+    mtConfirmation,
+    [mbYes, mbNo],
+    0
+  ) = mrYes;
+end;
+
 procedure TForm1.btnBrowseClick(Sender: TObject);
-  {Display browse for folder dlg box for selected folder}
+  {Display browse for folder dlg box for selected folder}         
 var
   Item: TListItem;
   Msg: string;
@@ -181,6 +202,16 @@ begin
     // display info about selected folder
     ShowMessage(Msg);
   end;
+end;
+
+procedure TForm1.chkOnValidationFailedClick(Sender: TObject);
+  {Toggles whether browse dialog's OnValidationFailed event has a handler
+  assigned}
+begin
+  if chkOnValidationFailed.Checked then
+    BrowseDlg.OnValidationFailed := BrowseDlgValidationFailed
+  else
+    BrowseDlg.OnValidationFailed := nil;
 end;
 
 procedure TForm1.DisplaySpecialFolders;
@@ -250,7 +281,7 @@ procedure TForm1.FormCreate(Sender: TObject);
   end;
 
 begin
-  // Make image list contain large system images
+  // Make image lists containing large and small system images
   ilLarge.Handle := SysImgListHandle(True);
   ilSmall.Handle := SysImgListHandle(False);
 
@@ -269,12 +300,19 @@ begin
   chkDirsOnly.Tag := Ord(boDirsOnly);
   chkNewDlgStyle.Tag := Ord(boNewDlgStyle);
   chkHideMakeFolderBtn.Tag := Ord(boHideMakeFolderBtn);
+  chkEditBox.Tag := Ord(boEditBox);
+  chkHint.Tag := Ord(boHint);
   SetOptionCheckState(chkShowHelp);
   SetOptionCheckState(chkContextHelp);
   SetOptionCheckState(chkStatusText);
   SetOptionCheckState(chkDirsOnly);
   SetOptionCheckState(chkNewDlgStyle);
   SetOptionCheckState(chkHideMakeFolderBtn);
+  SetOptionCheckState(chkEditBox);
+  SetOptionCheckState(chkHint);
+
+  // Set up other controls
+  chkOnValidationFailed.Checked := Assigned(BrowseDlg.OnValidationFailed);
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
