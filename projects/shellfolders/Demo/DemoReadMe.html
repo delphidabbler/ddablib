@@ -159,8 +159,8 @@
 </p>
 
 <p>
-	The project was created with Delphi 4, Delphi 7 and Delphi 2006 and compiles
-	on all Win32 Delphis from v4 to 2010.
+	The program should compile with all Win32 Ansi and Unicode Delphis from v4
+	and has been tested on Delphi 4, 6, 7, 2006 and 2010.
 </p>
 
 
@@ -172,7 +172,7 @@
 	The demo project is provided in the same zip file as the <em>Shell Folders
 	Unit</em>. Ensure the unit's components are installed before trying to
 	compile this demo. Copy the code from the <code>Demo</code> subfolder of
-	the zip drive to some suitable location on your hard drive then open the
+	the zip file to some suitable location on your hard drive then open the
 	<code>ShellFolderDemo.dpr</code> project in Delphi.
 </p>
 
@@ -182,7 +182,7 @@
 </h2>
 
 <p>
-	The demo program exercises much of the main code in
+	The program exercises much of the main code in
 	<code>PJShellFolders.pas</code>. On starting the program displays
 	information about each of the supported special shell folders in the main
 	part of the window. This information is:
@@ -251,7 +251,13 @@
 			<li>
 				<em>New Style Dialog</em>:<br />
 				Displays the dialog in the new style. It is resizeable and
-				displays a <em>New Folder</em> button.
+				displays a <em>Make New Folder</em> button.
+			</li>
+			<li>
+				<em>Hide &quot;Make Folder&quot; Button</em>:<br />
+				Hides the <em>Make New Folder</em> button that appears by
+				default on the new style dialog. This option is ignored if
+				<em>New Style Dialog</em> is not checked.
 			</li>
 		</ul>
 	</li>
