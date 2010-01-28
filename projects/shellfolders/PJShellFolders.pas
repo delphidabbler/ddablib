@@ -1244,6 +1244,8 @@ procedure TPJBrowseDialog.InitBrowseWindow;
   {Initialises the browse dialog box. This method is called from the dialog's
   callback function.
   }
+var
+  pidlRootFolder: PItemIDList;  // PIDL of root folder
 begin
   // Sub class the browse window using new wnd proc
   fOldBrowseWndProc := Pointer(
@@ -1271,6 +1273,15 @@ begin
   // Trigger OnInitialise event
   if Assigned(fOnInitialise) then
     fOnInitialise(Self);
+  // Make sure selection change event is triggered for root folder. We need
+  // this to disable new style dlg OK button if error triggered when displayed.
+  if fRootFolderID <> CSIDL_DESKTOP then
+  begin
+    if Succeeded(
+      SHGetSpecialFolderLocation(0, fRootFolderID, pidlRootFolder)
+    ) then
+      SelectionChanged(pidlRootFolder);
+  end;
 end;
 
 function TPJBrowseDialog.IsDlgBtnEnabled(const BtnID: Integer): Boolean;
