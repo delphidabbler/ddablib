@@ -70,7 +70,6 @@ const
   //
   // CSIDL_ constants provided in SHFolder unit in Delphi 6 and later
   //
-
   // Folder ids
   CSIDL_LOCAL_APPDATA             = $001C;
   {$EXTERNALSYM CSIDL_LOCAL_APPDATA}
@@ -92,7 +91,6 @@ const
   {$EXTERNALSYM CSIDL_COMMON_ADMINTOOLS}
   CSIDL_ADMINTOOLS                = $0030;
   {$EXTERNALSYM CSIDL_ADMINTOOLS}
-
   // Flag
   CSIDL_FLAG_CREATE               = $8000;
   {$EXTERNALSYM CSIDL_FLAG_CREATE}
@@ -102,7 +100,6 @@ const
   //
   // Further CSIDL constants from MSDN not defined in all Delphis
   //
-
   // Folder ids
   CSIDL_CDBURN_AREA               = $003B;
   {$EXTERNALSYM CSIDL_CDBURN_AREA}
@@ -140,7 +137,6 @@ const
   {$EXTERNALSYM CSIDL_RESOURCES_LOCALIZED}
   CSIDL_COMMON_OEM_LINKS          = $003A;
   {$EXTERNALSYM CSIDL_COMMON_OEM_LINKS}
-
   // Flags
   CSIDL_FOLDER_MASK               = $00FF;
   {$EXTERNALSYM CSIDL_FOLDER_MASK}
@@ -155,32 +151,16 @@ const
   CSIDL_FLAG_MASK                 = $FF00;
   {$EXTERNALSYM CSIDL_FLAG_MASK}
 
-{
-  The following CSIDL_ constants were provisionally slated to be used in Windows
-  Vista but were removed from MSDN documentation when Vista was released and so
-  have been removed from this unit:
-  CSIDL_PHOTOALBUMS               = $0045;
-  CSIDL_PLAYLISTS                 = $003F;
-  CSIDL_SAMPLE_MUSIC              = $0040;
-  CSIDL_SAMPLE_PLAYLISTS          = $0041;
-  CSIDL_SAMPLE_PICTURES           = $0042;
-  CSIDL_SAMPLE_VIDEOS             = $0043;
-}
-
-
-//
-// Browse dialog customisation flags
-//
-{$IFNDEF DELPHI7ANDUP}
-const
-  // New dialog style
-  BIF_NEWDIALOGSTYLE = $0040; // Defined in ShlObj for Delphi 7 and later
+  //
+  // Browse dialog customisation flags
+  //
+  BIF_NEWDIALOGSTYLE = $0040;
   {$EXTERNALSYM BIF_NEWDIALOGSTYLE}
-{$ENDIF}
+  BIF_UAHINT         = $0100;
+  {$EXTERNALSYM BIF_UAHINT}
 
 
 type
-
   {
   IPJSpecialFolderEnum:
     Interface to enumerator of the identifiers of the Shell's special folders.
@@ -213,8 +193,7 @@ type
     IPJSpecialFolderEnum
   )
   private
-    fIndex: Integer;
-      {Index of current folder in folder lookup table}
+    fIndex: Integer;  // Index of current folder in folder lookup table
   public
     constructor Create;
       {Class constructor. Sets up object and intialises enumeration.
@@ -243,16 +222,11 @@ type
   }
   TPJSpecialFolderInfo = class(TComponent)
   private
-    fFolderID: Integer;
-      {Value of FolderID property}
-    fPath: string;
-      {Value of Path property}
-    fDisplayName: string;
-      {Value of DisplayName property}
-    fIsVirtual: Boolean;
-      {Value of IsVirtual property}
-    fIsSupported: Boolean;
-      {Value of IsSupported property}
+    fFolderID: Integer;     // Value of FolderID property
+    fPath: string;          // Value of Path property
+    fDisplayName: string;   // Value of DisplayName property
+    fIsVirtual: Boolean;    // Value of IsVirtual property
+    fIsSupported: Boolean;  // Value of IsSupported property
     procedure SetFolderID(const Value: Integer);
       {Write accessor method for FolderID property. Reads information about
       specified folder.
@@ -323,6 +297,18 @@ type
     var OKEnabled: Boolean) of object;
 
   {
+  TPJBrowseValidationFailedEvent:
+    Type of event triggered by TPJBrowseDialog when an invalid folder path is
+    entered in the dialog's edit control and the dialog is closed.
+      @param Sender [in] Reference to component triggering event.
+      @param EditText [in] Text entered in browse dialog's edit control.
+      @param CanClose [in/out] True when handler called: permits dialog box to
+        close. Change to False to prevent dialog from closing.
+  }
+  TPJBrowseValidationFailedEvent = procedure(Sender: TObject;
+    const EditText: string; var CanClose: Boolean) of object;
+
+  {
   TPJBrowseDlgOption:
     Enumeration of options available to Options property of TPJBrowseDlg.
   }
@@ -330,13 +316,18 @@ type
     boShowHelp,           // show help button
                           // (old style dialog only)
     boContextHelp,        // show context help icon in title
+                          // (not available on Vista & later)
     boStatusText,         // show status text in dlg box
                           // (old style dialog only)
     boDirsOnly,           // only allow selection of items in file system
     boNewDlgStyle,        // use new dialog style
                           // (requires shlobj.dll v5 or later)
-    boHideMakeFolderBtn   // hide Make New Folder button
+    boHideMakeFolderBtn,   // hide Make New Folder button
                           // (new style dialog only)
+    boEditBox,            // display folder edit box
+    boHint                // display usage hint
+                          // (new style dialog only, no boEditBox)
+                          // (requires v6 of shlobj.dll)
   );
 
   {
@@ -350,36 +341,26 @@ type
     Displays browse dialog box.
   }
   TPJBrowseDialog = class(TComponent)
-  private // properties
-    fFolderName: string;
-      {Value of FolderName property}
-    fHeadline: string;
-      {Value of Headline property}
-    fDisplayName: string;
-      {Value of DisplayName property}
-    fRootFolderID: Integer;
-      {Value of RootFolderID property}
-    fTitle: TCaption;
-      {Value of Title property}
-    fOptions: TPJBrowseDlgOptions;
-      {Value of Options property}
-    fHelpContext: THelpContext;
-      {Value of HelpContext property}
-    fOnInitialise: TNotifyEvent;
-      {References OnInitialise event handler}
-    fOnSelChange: TPJBrowseSelChangeEvent;
-      {References OnSelChange event handler}
-    fOnSelChangeEx: TPJBrowseSelChangeEventEx;
-      {References OnSelChangeEx event handler}
-    fOnClose: TNotifyEvent;
-      {References OnClose event handler}
-    fData: array[1..SizeOf(THandle) + SizeOf(Pointer)] of Byte;
-      {Storage for information passed to and from browse dlg box callback
-      function: this is cast to required type on use}
-    fOldBrowseWndProc: Pointer;
-      {Address of Browse dialog's original window procedure}
-    fNewBrowseWndProc: Pointer;
-      {Address of new window procedure used to subclass browse dialog box}
+  private
+    fFolderName: string;            // Value of FolderName property
+    fHeadline: string;              // Value of Headline property
+    fDisplayName: string;           // Value of DisplayName property
+    fRootFolderID: Integer;         // Value of RootFolderID property
+    fTitle: TCaption;               // Value of Title property
+    fOptions: TPJBrowseDlgOptions;  // Value of Options property
+    fHelpContext: THelpContext;     // Value of HelpContext property
+    fOnInitialise: TNotifyEvent;    // References OnInitialise event handler
+    fOnSelChange:                   // References OnSelChange event handler
+      TPJBrowseSelChangeEvent;
+    fOnSelChangeEx:                 // References OnSelChangeEx event handler
+      TPJBrowseSelChangeEventEx;
+    fOnClose: TNotifyEvent;         // References OnClose event handler
+    fOnValidationFailed:            // Ref to OnValidationFailed event handler
+      TPJBrowseValidationFailedEvent;
+    fData:                          // Info passed to and from callback proc
+      array[1..SizeOf(THandle) + SizeOf(Pointer)] of Byte;
+    fOldBrowseWndProc: Pointer;     // Address of dialog's original winproc
+    fNewBrowseWndProc: Pointer;     // Address of dialog's new window procedure
     function GetHandle: THandle;
       {Read accessor for Handle property.
         @return Handle to browse dialog box while Execute method is running or 0
@@ -421,6 +402,13 @@ type
       from the event handler. This method is called from the dialog's callback
       function.
         @param PIDL [in] PIDL representing currently selected folder.
+      }
+    function ValidationFailed(const EditText: string): Boolean;
+      {Triggers browse dialog's OnValidationFailed event, if assigned and
+      returns value indicating if dialog can close.
+        @param EditText [in] Text from browser's edit control that references an
+          invalid path.
+        @return True if dialog box can close, False if not.
       }
     procedure IncludeHelpButton;
       {Creates a help button and displays it in the browse dlg box, providing
@@ -497,6 +485,11 @@ type
       read fOnClose write fOnClose;
       {Event triggered when the browse dialog closes. The dialog's window can
       be accessed via the Handle property}
+    property OnValidationFailed: TPJBrowseValidationFailedEvent
+      read fOnValidationFailed write fOnValidationFailed;
+      {Event triggered to check if browse dialog can close after user enters an
+      invalid path in its edit control. Only triggered when boEditBox is
+      included in Options}
   end;
 
   {
@@ -623,7 +616,6 @@ end;
 { Special folder identifier constants and routines }
 
 const
-
   // Table mapping all special folder identifiers defined by Windows to string
   // representations of the constants
   cFolders: array[1..58] of record    // table of special folder IDs
@@ -631,64 +623,64 @@ const
     Name: string;     // constant used to represent special folder
   end =
   (
-    (ID: CSIDL_ADMINTOOLS; Name: 'CSIDL_ADMINTOOLS';),
-    (ID: CSIDL_ALTSTARTUP; Name: 'CSIDL_ALTSTARTUP';),
-    (ID: CSIDL_APPDATA; Name: 'CSIDL_APPDATA';),
-    (ID: CSIDL_BITBUCKET; Name: 'CSIDL_BITBUCKET';),
-    (ID: CSIDL_CDBURN_AREA; Name: 'CSIDL_CDBURN_AREA';),
-    (ID: CSIDL_COMMON_ADMINTOOLS; Name: 'CSIDL_COMMON_ADMINTOOLS';),
-    (ID: CSIDL_COMMON_ALTSTARTUP; Name: 'CSIDL_COMMON_ALTSTARTUP';),
-    (ID: CSIDL_COMMON_APPDATA; Name: 'CSIDL_COMMON_APPDATA';),
+    (ID: CSIDL_ADMINTOOLS;              Name: 'CSIDL_ADMINTOOLS';),
+    (ID: CSIDL_ALTSTARTUP;              Name: 'CSIDL_ALTSTARTUP';),
+    (ID: CSIDL_APPDATA;                 Name: 'CSIDL_APPDATA';),
+    (ID: CSIDL_BITBUCKET;               Name: 'CSIDL_BITBUCKET';),
+    (ID: CSIDL_CDBURN_AREA;             Name: 'CSIDL_CDBURN_AREA';),
+    (ID: CSIDL_COMMON_ADMINTOOLS;       Name: 'CSIDL_COMMON_ADMINTOOLS';),
+    (ID: CSIDL_COMMON_ALTSTARTUP;       Name: 'CSIDL_COMMON_ALTSTARTUP';),
+    (ID: CSIDL_COMMON_APPDATA;          Name: 'CSIDL_COMMON_APPDATA';),
     (ID: CSIDL_COMMON_DESKTOPDIRECTORY; Name: 'CSIDL_COMMON_DESKTOPDIRECTORY';),
-    (ID: CSIDL_COMMON_DOCUMENTS; Name: 'CSIDL_COMMON_DOCUMENTS';),
-    (ID: CSIDL_COMMON_FAVORITES; Name: 'CSIDL_COMMON_FAVORITES';),
-    (ID: CSIDL_COMMON_MUSIC; Name: 'CSIDL_COMMON_MUSIC';),
-    (ID: CSIDL_COMMON_OEM_LINKS; Name: 'CSIDL_COMMON_OEM_LINKS';),
-    (ID: CSIDL_COMMON_PICTURES; Name: 'CSIDL_COMMON_PICTURES';),
-    (ID: CSIDL_COMMON_PROGRAMS; Name: 'CSIDL_COMMON_PROGRAMS';),
-    (ID: CSIDL_COMMON_STARTMENU; Name: 'CSIDL_COMMON_STARTMENU';),
-    (ID: CSIDL_COMMON_STARTUP; Name: 'CSIDL_COMMON_STARTUP';),
-    (ID: CSIDL_COMMON_TEMPLATES; Name: 'CSIDL_COMMON_TEMPLATES';),
-    (ID: CSIDL_COMMON_VIDEO; Name: 'CSIDL_COMMON_VIDEO';),
-    (ID: CSIDL_COMPUTERSNEARME; Name: 'CSIDL_COMPUTERSNEARME';),
-    (ID: CSIDL_CONNECTIONS; Name: 'CSIDL_CONNECTIONS';),
-    (ID: CSIDL_CONTROLS; Name: 'CSIDL_CONTROLS';),
-    (ID: CSIDL_COOKIES; Name: 'CSIDL_COOKIES';),
-    (ID: CSIDL_DESKTOP; Name: 'CSIDL_DESKTOP';),
-    (ID: CSIDL_DESKTOPDIRECTORY; Name: 'CSIDL_DESKTOPDIRECTORY';),
-    (ID: CSIDL_DRIVES; Name: 'CSIDL_DRIVES';),
-    (ID: CSIDL_FAVORITES; Name: 'CSIDL_FAVORITES';),
-    (ID: CSIDL_FONTS; Name: 'CSIDL_FONTS';),
-    (ID: CSIDL_HISTORY; Name: 'CSIDL_HISTORY';),
-    (ID: CSIDL_INTERNET; Name: 'CSIDL_INTERNET';),
-    (ID: CSIDL_INTERNET_CACHE; Name: 'CSIDL_INTERNET_CACHE';),
-    (ID: CSIDL_LOCAL_APPDATA; Name: 'CSIDL_LOCAL_APPDATA';),
-    (ID: CSIDL_MYDOCUMENTS; Name: 'CSIDL_MYDOCUMENTS';),
-    (ID: CSIDL_MYMUSIC; Name: 'CSIDL_MYMUSIC';),
-    (ID: CSIDL_MYPICTURES; Name: 'CSIDL_MYPICTURES';),
-    (ID: CSIDL_MYVIDEO; Name: 'CSIDL_MYVIDEO';),
-    (ID: CSIDL_NETHOOD; Name: 'CSIDL_NETHOOD';),
-    (ID: CSIDL_NETWORK; Name: 'CSIDL_NETWORK';),
-    (ID: CSIDL_PERSONAL; Name: 'CSIDL_PERSONAL';),
-    (ID: CSIDL_PRINTERS; Name: 'CSIDL_PRINTERS';),
-    (ID: CSIDL_PRINTHOOD; Name: 'CSIDL_PRINTHOOD';),
-    (ID: CSIDL_PROFILE; Name: 'CSIDL_PROFILE';),
-    (ID: CSIDL_PROFILES; Name: 'CSIDL_PROFILES';),
-    (ID: CSIDL_PROGRAM_FILES; Name: 'CSIDL_PROGRAM_FILES';),
-    (ID: CSIDL_PROGRAM_FILESX86; Name: 'CSIDL_PROGRAM_FILESX86';),
-    (ID: CSIDL_PROGRAM_FILES_COMMON; Name: 'CSIDL_PROGRAM_FILES_COMMON';),
+    (ID: CSIDL_COMMON_DOCUMENTS;        Name: 'CSIDL_COMMON_DOCUMENTS';),
+    (ID: CSIDL_COMMON_FAVORITES;        Name: 'CSIDL_COMMON_FAVORITES';),
+    (ID: CSIDL_COMMON_MUSIC;            Name: 'CSIDL_COMMON_MUSIC';),
+    (ID: CSIDL_COMMON_OEM_LINKS;        Name: 'CSIDL_COMMON_OEM_LINKS';),
+    (ID: CSIDL_COMMON_PICTURES;         Name: 'CSIDL_COMMON_PICTURES';),
+    (ID: CSIDL_COMMON_PROGRAMS;         Name: 'CSIDL_COMMON_PROGRAMS';),
+    (ID: CSIDL_COMMON_STARTMENU;        Name: 'CSIDL_COMMON_STARTMENU';),
+    (ID: CSIDL_COMMON_STARTUP;          Name: 'CSIDL_COMMON_STARTUP';),
+    (ID: CSIDL_COMMON_TEMPLATES;        Name: 'CSIDL_COMMON_TEMPLATES';),
+    (ID: CSIDL_COMMON_VIDEO;            Name: 'CSIDL_COMMON_VIDEO';),
+    (ID: CSIDL_COMPUTERSNEARME;         Name: 'CSIDL_COMPUTERSNEARME';),
+    (ID: CSIDL_CONNECTIONS;             Name: 'CSIDL_CONNECTIONS';),
+    (ID: CSIDL_CONTROLS;                Name: 'CSIDL_CONTROLS';),
+    (ID: CSIDL_COOKIES;                 Name: 'CSIDL_COOKIES';),
+    (ID: CSIDL_DESKTOP;                 Name: 'CSIDL_DESKTOP';),
+    (ID: CSIDL_DESKTOPDIRECTORY;        Name: 'CSIDL_DESKTOPDIRECTORY';),
+    (ID: CSIDL_DRIVES;                  Name: 'CSIDL_DRIVES';),
+    (ID: CSIDL_FAVORITES;               Name: 'CSIDL_FAVORITES';),
+    (ID: CSIDL_FONTS;                   Name: 'CSIDL_FONTS';),
+    (ID: CSIDL_HISTORY;                 Name: 'CSIDL_HISTORY';),
+    (ID: CSIDL_INTERNET;                Name: 'CSIDL_INTERNET';),
+    (ID: CSIDL_INTERNET_CACHE;          Name: 'CSIDL_INTERNET_CACHE';),
+    (ID: CSIDL_LOCAL_APPDATA;           Name: 'CSIDL_LOCAL_APPDATA';),
+    (ID: CSIDL_MYDOCUMENTS;             Name: 'CSIDL_MYDOCUMENTS';),
+    (ID: CSIDL_MYMUSIC;                 Name: 'CSIDL_MYMUSIC';),
+    (ID: CSIDL_MYPICTURES;              Name: 'CSIDL_MYPICTURES';),
+    (ID: CSIDL_MYVIDEO;                 Name: 'CSIDL_MYVIDEO';),
+    (ID: CSIDL_NETHOOD;                 Name: 'CSIDL_NETHOOD';),
+    (ID: CSIDL_NETWORK;                 Name: 'CSIDL_NETWORK';),
+    (ID: CSIDL_PERSONAL;                Name: 'CSIDL_PERSONAL';),
+    (ID: CSIDL_PRINTERS;                Name: 'CSIDL_PRINTERS';),
+    (ID: CSIDL_PRINTHOOD;               Name: 'CSIDL_PRINTHOOD';),
+    (ID: CSIDL_PROFILE;                 Name: 'CSIDL_PROFILE';),
+    (ID: CSIDL_PROFILES;                Name: 'CSIDL_PROFILES';),
+    (ID: CSIDL_PROGRAM_FILES;           Name: 'CSIDL_PROGRAM_FILES';),
+    (ID: CSIDL_PROGRAM_FILESX86;        Name: 'CSIDL_PROGRAM_FILESX86';),
+    (ID: CSIDL_PROGRAM_FILES_COMMON;    Name: 'CSIDL_PROGRAM_FILES_COMMON';),
     (ID: CSIDL_PROGRAM_FILES_COMMONX86; Name: 'CSIDL_PROGRAM_FILES_COMMONX86';),
-    (ID: CSIDL_PROGRAMS; Name: 'CSIDL_PROGRAMS';),
-    (ID: CSIDL_RECENT; Name: 'CSIDL_RECENT';),
-    (ID: CSIDL_RESOURCES; Name: 'CSIDL_RESOURCES';),
-    (ID: CSIDL_RESOURCES_LOCALIZED; Name: 'CSIDL_RESOURCES_LOCALIZED'),
-    (ID: CSIDL_SENDTO; Name: 'CSIDL_SENDTO';),
-    (ID: CSIDL_STARTMENU; Name: 'CSIDL_STARTMENU';),
-    (ID: CSIDL_STARTUP; Name: 'CSIDL_STARTUP';),
-    (ID: CSIDL_SYSTEM; Name: 'CSIDL_SYSTEM';),
-    (ID: CSIDL_SYSTEMX86; Name: 'CSIDL_SYSTEMX86';),
-    (ID: CSIDL_TEMPLATES; Name: 'CSIDL_TEMPLATES';),
-    (ID: CSIDL_WINDOWS; Name: 'CSIDL_WINDOWS';)
+    (ID: CSIDL_PROGRAMS;                Name: 'CSIDL_PROGRAMS';),
+    (ID: CSIDL_RECENT;                  Name: 'CSIDL_RECENT';),
+    (ID: CSIDL_RESOURCES;               Name: 'CSIDL_RESOURCES';),
+    (ID: CSIDL_RESOURCES_LOCALIZED;     Name: 'CSIDL_RESOURCES_LOCALIZED'),
+    (ID: CSIDL_SENDTO;                  Name: 'CSIDL_SENDTO';),
+    (ID: CSIDL_STARTMENU;               Name: 'CSIDL_STARTMENU';),
+    (ID: CSIDL_STARTUP;                 Name: 'CSIDL_STARTUP';),
+    (ID: CSIDL_SYSTEM;                  Name: 'CSIDL_SYSTEM';),
+    (ID: CSIDL_SYSTEMX86;               Name: 'CSIDL_SYSTEMX86';),
+    (ID: CSIDL_TEMPLATES;               Name: 'CSIDL_TEMPLATES';),
+    (ID: CSIDL_WINDOWS;                 Name: 'CSIDL_WINDOWS';)
   );
 
 function NumSpecialFolderIds: Integer;
@@ -914,7 +906,6 @@ const
   // added by this component
   cHelpBtnID = $1000;
 
-
 function BrowseCallbackProc(HWnd: THandle; Msg: LongWord;
   LParam, Data: LongInt): Integer; stdcall;
   {Callback function called by browse dialog box. This function has two
@@ -942,12 +933,17 @@ begin
   Obj := TPJBrowseDialog(PDataRec^.Obj);
   // Process event notifications
   case Msg of
-    BFFM_INITIALIZED: // Perform initialisation
+    BFFM_INITIALIZED:     // Perform initialisation
       // hand off to component
       Obj.InitBrowseWindow;
-    BFFM_SELCHANGED:  // Perform any selection change processing
+    BFFM_SELCHANGED:      // Perform any selection change processing
       // hand off to component: LParam contains PIDL of selected folder
       Obj.SelectionChanged(PItemIDList(LParam));
+    BFFM_VALIDATEFAILED:  // Entry in edit box is invalid path
+      // hand off to component: LParam contains text box entry. Return from Obj
+      // is true if dialog can close, false if not. Return from this callback
+      // must be non-zero to keep dialog open, 0 to close.
+      Result := Ord(not Obj.ValidationFailed(PChar(LParam)));
   end;
 end;
 
@@ -1086,8 +1082,18 @@ begin
         ulFlags := ulFlags or BIF_RETURNONLYFSDIRS;
       if boNewDlgStyle in fOptions then
         ulFlags := ulFlags or BIF_NEWDIALOGSTYLE;
-      if not IsNewStyle and (boStatusText in fOptions) then
-        ulFlags :=  ulFlags or BIF_STATUSTEXT;
+      if boEditBox in fOptions then
+        ulFlags := ulFlags or BIF_EDITBOX or BIF_VALIDATE;
+      if IsNewStyle then
+      begin
+        if (boHint in fOptions) and not (boEditBox in fOptions) then
+          ulFlags := ulFlags or BIF_UAHINT;
+      end
+      else
+      begin
+        if boStatusText in fOptions then
+          ulFlags := ulFlags or BIF_STATUSTEXT;
+      end;
       lpfn := @BrowseCallbackProc;         // callback function to handle events
       lParam := Integer(@fData);         // reference to this component instance
       iImage := 0;                                                     // unused
@@ -1335,6 +1341,19 @@ begin
       Error(sBadSpecialFolderID);
     fRootFolderID := Value;
   end;
+end;
+
+function TPJBrowseDialog.ValidationFailed(const EditText: string): Boolean;
+  {Triggers browse dialog's OnValidationFailed event, if assigned and returns
+  value indicating if dialog can close.
+    @param EditText [in] Text from browser's edit control that references an
+      invalid path.
+    @return True if dialog box can close, False if not.
+  }
+begin
+  Result := True;
+  if Assigned(fOnValidationFailed) then
+    fOnValidationFailed(Self, EditText, Result);
 end;
 
 initialization
