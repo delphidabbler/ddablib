@@ -650,9 +650,13 @@ A{\footnote {A}TPJBrowseDialog_Options;Options_property;Options}
 \par \plain\f0\fs8\cf0 
 \par \plain\f1\fs18\cf0\i boDirsOnly\plain\f1\fs18\cf0 \tab Causes dialog box to display only folders in the file system. The OK button is disabled if the selected folder is virtual. If this option is omitted then file system and virtual folders are provided and any folder can be selected. Note that if \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  is specified executing the dialog box with a virtual folder specified as the root folder can cause an error message to be displayed.
 \par \plain\f0\fs8\cf0 
-\par \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0 \tab Displays dialog using "new style" - i.e. the dialog is resizable and displays a "New Folder" button. This option is not compatible with \plain\f1\fs18\cf0\i boShowHelp\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i boStatusText\plain\f1\fs18\cf0 . and these options are ignored is \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  is included in \plain\f1\fs18\cf0\i Options\plain\f1\fs18\cf0 .
+\par \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0 \tab Displays dialog using "new style" - i.e. the dialog is resizable and displays a "New Folder" button, by default. This option is not compatible with \plain\f1\fs18\cf0\i boShowHelp\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i boStatusText\plain\f1\fs18\cf0 . and these options are ignored when \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  is included in \plain\f1\fs18\cf0\i Options\plain\f1\fs18\cf0 . This option requires \plain\f5\fs18\cf0 shlobj.dll\plain\f1\fs18\cf0  v5.0 or later.
 \par \plain\f1\fs8\cf0 
-\par \plain\f0\fs18\cf0\i boHideMakeFolderBtn\plain\f1\fs18\cf0\i \tab \plain\f1\fs18\cf0 Hides the "Make New Folder" button that is displayed by default in the "new style" dialog box. This option is ignored if \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  is not set since the button is never displayed in "old style" versions of the dialog box.\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\i boHideMakeFolderBtn\plain\f1\fs18\cf0\i \tab \plain\f1\fs18\cf0 Hides the "Make New Folder" button that is displayed by default in the "new style" dialog box. This option is ignored if \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  is not set since the button is never displayed in "old style" versions of the dialog box.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0\i boEditBox\plain\f1\fs18\cf0 \tab Displays an edit control in the dialog box that allows the user to type the name of an item. The entered text is validated when the user presses OK and if valid the entered text is used as the name of the required folder. If the text is invalid the default action is for the dialog box to close but to ignore the entered text. To override this provide an {\strike OnValidationFailed}{\v IDH_BD_ONVALIDATIONFAILED} event handler. If this option is specified the \plain\f1\fs18\cf0\i boHint\plain\f1\fs18\cf0  option is ignored.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0\i boHint\plain\f1\fs18\cf0 \tab Adds a usage hint to the dialog box, in place of any edit box. \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  must be set for this option to work, and \plain\f1\fs18\cf0\i boEditBox\plain\f1\fs18\cf0  must not be set. Also requires \plain\f5\fs18\cf0 shlobj.dll\plain\f1\fs18\cf0  v6.0 or later.\plain\f0\fs18\cf0 
 \par \pard \fi-1600 \li1600 \tx1600 \brdrb \brdrs \plain\f0\fs8\cf0  
 \par \pard \fi-1600 \li1600 \tx1600 
 \par \plain\f1\fs18\cf0 The default value for this property is \plain\f1\fs18\cf0\i [boContextHelp, boDirsOnly]\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
@@ -737,6 +741,7 @@ ${\footnote {$}TPJBrowseDialog Events}
 \par \tab {\strike OnInitialise}{\v IDH_BD_ONINITIALISE}
 \par \tab {\strike OnSelChange}{\v IDH_BD_ONSELCHANGE}
 \par \plain\f1\fs18\cf0 \tab {\strike OnSelChangeEx}{\v IDH_BD_ONSELCHANGEEX}\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 \tab {\strike OnValidationFailed}{\v IDH_BD_ONVALIDATIONFAILED}\plain\f0\fs18\cf0 
 \par \page 
 #{\footnote {#}IDH_BD_ONCLOSE}
 ${\footnote {$}TPJBrowseDialog.OnClose}
@@ -839,6 +844,29 @@ A{\footnote {A}TPJBrowseDialog_OnSelChangeEx;OnSelChangeEx_event;OnSelChangeEx}
 \par \plain\f0\fs18\cf0\i OKEnabled\plain\f0\fs18\cf0  will be True if the dialog's OK button is presently enabled and False if it is disabled. Setting \plain\f0\fs18\cf0\i OKEnabled\plain\f0\fs18\cf0  to a different value will change the state of the OK button accordingly. \plain\f1\fs18\cf0 The default state of the OK button depends on whether \plain\f1\fs18\cf0\i boDirsOnly\plain\f1\fs18\cf0  is included in the {\strike Options}{\v IDH_BD_OPTIONS} property. If \plain\f1\fs18\cf0\i boDirsOnly\plain\f1\fs18\cf0  is included in Options then the \plain\f0\fs18\cf0 OK button will be enabled when a physical folder is selected and disabled when a virtual folder is selected.\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 When OnSelChange\plain\f1\fs18\cf0 Ex\plain\f0\fs18\cf0  is triggered the dialog's window handle is available via the {\strike Handle}{\v IDH_BD_HANDLE} property.
+\par \page 
+#{\footnote {#}IDH_BD_ONVALIDATIONFAILED}
+${\footnote {$}TPJBrowserDialog.OnValidationFailed}
+K{\footnote {K}TPJBrowseDialog,OnValidationFailed;OnValidationFailed,TPJBrowseDialog;OnValidationFailed}
+A{\footnote {A}TPJBrowseDialog_OnValidationFailed;OnValidationFailed_event;OnValidationFailed}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.OnValidationFailed\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_Options)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Event that occurs whenever \plain\f1\fs18\cf0 an invalid folder name is entered in the browse dialog's edit control and an attempt is made to close the dialog box.\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f4\fs18\cf0 TPJBrowseValidationFailedEvent = \plain\f4\fs18\cf0\b procedure(\plain\f4\fs18\cf0 Sender: TObject;
+\par     const EditText: string; var CanClose: Boolean) \plain\f4\fs18\cf0\b of object;\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  OnValidationFailed: TPJBrowseValidationFailedEvent;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This event is triggered whenever \plain\f1\fs18\cf0 an invalid folder is entered in the browser dialog's edit control and the user OKs. The event is only ever triggered if TPJBrowseDialog's {\strike Options}{\v IDH_BD_OPTIONS} property contains both the \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i boEditBox\plain\f1\fs18\cf0  options.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0\i Sender\plain\f1\fs18\cf0  contains a reference to the dialog box component that triggers the event. \plain\f1\fs18\cf0\i EditText\plain\f1\fs18\cf0  contains the erroneous text entered in the edit control. \plain\f1\fs18\cf0\i CanClose\plain\f1\fs18\cf0  indicates whether the dialog box is permitted to close: it is true when the event is triggered but can be changed to False in the event handler to prevent the dialog box from closing. The event handler can also be used to take any required action, such as displaying an error message.\plain\f0\fs18\cf0 
 \par \page 
 #{\footnote {#}IDH_SFIROUTINES}
 ${\footnote {$}Special Folder Identifier Routines}
@@ -964,9 +992,9 @@ K{\footnote {K}special folder identifier routines}
 @{\footnote {@}List of PIDL information routines.}
 
 \pard \plain \pard \keepn \plain\f0\fs8\cf2\b  
-\par \plain\f1\fs22\cf2\b Special Folder Identifier Routines\plain\f0\fs20\cf0 
+\par \plain\f1\fs22\cf2\b PIDL Information Routines\plain\f0\fs20\cf0 
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
-\par \pard \plain\f1\fs18\cf0 The {\strike PJShellFolders}{\v IDH_SF_UNIT} unit defines two routines that provide information a given PIDL structure. They are:
+\par \pard \plain\f1\fs18\cf0 The {\strike PJShellFolders}{\v IDH_SF_UNIT} unit defines two routines that provide information about a given PIDL structure. They are:
 \par \plain\f1\fs12\cf0 
 \par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike PIDLToFolderPath}{\v IDH_PIDLTOFOLDERPATH}
 \par \plain\f2\fs18\cf0 \'A7\plain\f1\fs18\cf0 \tab {\strike PIDLToFolderDisplayName}{\v IDH_PIDLTOFOLDERDISPLAYNAME}

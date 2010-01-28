@@ -45,6 +45,8 @@ onselchange
 onselchange_event
 onselchangeex
 onselchangeex_event
+onvalidationfailed
+onvalidationfailed_event
 options
 options_property
 path
@@ -84,6 +86,7 @@ tpjbrowsedialog_onclose
 tpjbrowsedialog_oninitialise
 tpjbrowsedialog_onselchange
 tpjbrowsedialog_onselchangeex
+tpjbrowsedialog_onvalidationfailed
 tpjbrowsedialog_options
 tpjbrowsedialog_rootfolderid
 tpjbrowsedialog_title
