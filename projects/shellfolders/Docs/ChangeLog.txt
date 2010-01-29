@@ -4,6 +4,18 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v2.3 of 29 January 2010
++ Changes to TPJBrowseDialg:
+  - New display options for hiding "make new folder" button, displaying UA hints and including edit box to use to enter folder names.
+  - New events: OnValidationFailed, for when entry in edit box is not valid and OnHelp triggered when help requested to provide custom help handling.
+  - New HelpType and HelpKeywords properties (compiled in for Delphi 6 and later only).
+  - Modified dialog initialisation to ensure OnSelectChangeXXX events triggered for default selection.
++ Updated demo program to demonstrate new options and and OnValidationFailed event.
++ Improved checks for valid special folder IDs to allow for use of CSIDL_FLAG_CREATE mask.
++ Refactored code that frees PIDLs
++ Added new CSIDL_FLAG_ and BIF_ constants.
++ Updated help file and other documentation.
+
 Release v2.2.5 of 27 January 2010
 + Fixed shell folders unit to compile with Unicode Delphis.
 + Fixed bug that can freeze program if exception occurs when help system called when no help system installed in Delphi.
@@ -17,7 +29,7 @@ Release v2.2.4 of 03 July 2007
 + Changed tests for valid folder ids to ignore any CSIDL_FLAG_ values that may have been included with the folder id.
 + Added various additional CSIDL_FLAG_ constants.
 + Changed TPJBrowseDialog.Options property to permit any combination of values. Certain options are now ignored when used in combination with others.
-+ Added TPJBrowseDlgOption enumeration that provides basis of TPJBrowseDlgOptions set.  Previously enumeration was defined in set declaration.
++ Added TPJBrowseDlgOption enumeration that provides basis of TPJBrowseDlgOptions set. Previously enumeration was defined in set declaration.
 + Changed to always initialise COM regardless of whether code used to display new style browser for folder. Previous code that selectively initialised COM was buggy.
 + Refactored some duplicated code.
 + Fixed code that enables / disables browser dialog box OK button to work with new style dialog.
