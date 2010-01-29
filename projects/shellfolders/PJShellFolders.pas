@@ -309,6 +309,18 @@ type
     const EditText: string; var CanClose: Boolean) of object;
 
   {
+  TPJBrowseHelpEvent:
+    Type of event triggered by TPJBrowserDialg when help is requested.
+      @param Sender [in] Reference to component triggering event.
+      @param Cancel [in/out] False when handler called: permits help request to
+        be passed to help system via Application object. Change to True to
+        prevent Application object handling help request: request must be
+        handled in event handler.
+  }
+  TPJBrowseHelpEvent = procedure(Sender: TObject; var Cancel: Boolean)
+    of object;
+
+  {
   TPJBrowseDlgOption:
     Enumeration of options available to Options property of TPJBrowseDlg.
   }
@@ -349,6 +361,10 @@ type
     fTitle: TCaption;               // Value of Title property
     fOptions: TPJBrowseDlgOptions;  // Value of Options property
     fHelpContext: THelpContext;     // Value of HelpContext property
+    {$IFDEF DELPHI6ANDUP}
+    fHelpType: THelpType;           // Value of HelpType property
+    fHelpKeyword: string;           // Value of HelpKeyword property
+    {$ENDIF}
     fOnInitialise: TNotifyEvent;    // References OnInitialise event handler
     fOnSelChange:                   // References OnSelChange event handler
       TPJBrowseSelChangeEvent;
@@ -357,6 +373,7 @@ type
     fOnClose: TNotifyEvent;         // References OnClose event handler
     fOnValidationFailed:            // Ref to OnValidationFailed event handler
       TPJBrowseValidationFailedEvent;
+    fOnHelp: TPJBrowseHelpEvent;    // Reference to OnHelp event handler
     fData:                          // Info passed to and from callback proc
       array[1..SizeOf(THandle) + SizeOf(Pointer)] of Byte;
     fOldBrowseWndProc: Pointer;     // Address of dialog's original winproc
@@ -381,8 +398,14 @@ type
       {Checks if a browse dialog button is enabled.
         @return True if button enabled, False if disabled.
       }
+    function IsHelpAvailable: Boolean;
+      {Checks if any help is available per component's properties.
+        @return True if help is available.
+      }
     procedure DoHelp;
-      {Calls WinHelp if HelpContext property is non zero.
+      {Triggers a help request if help is available. OnHelp event handler is
+      called if assigned. Application help is called if request not cancelled in
+      any OnHelp event handler.
       }
     function GetHWND: THandle;
       {Gets window handle of any TWinControl that owns this component.
@@ -464,10 +487,21 @@ type
       {Set of options that customise the appearance of the dialog box}
     property HelpContext: THelpContext
       read fHelpContext write fHelpContext default 0;
-      {Help context used to access windows help topic. The property is used when
-      either the Help button is displayed and button is pressed, or when the
-      context help icon is not displayed and F1 is pressed. When the Help button
-      is displayed it is disabled when HelpContext=0}
+      {Numeric ID for components's context-sensitive help topic. Used when
+      Options does not contain boContextHelp and F1 is pressed or when a help
+      button is displayed and pressed. On supporting compilers HelpType must
+      also be set to htContext}
+    {$IFDEF DELPHI6ANDUP}
+    property HelpKeyword: string
+      read fHelpKeyword write fHelpKeyword;
+      {Keyword for component's context-sensitive help topic. Used when HelpType
+      is htKeyword and Options does not contain boContextHelp and F1 is pressed
+      or when a help button is displayed and pressed}
+    property HelpType: THelpType
+      read fHelpType write fHelpType default htContext;
+      {Indicates whether the component's context sensitive help topic is
+      identified by context ID or by keyword}
+    {$ENDIF}
     property OnInitialise: TNotifyEvent
       read fOnInitialise write fOnInitialise;
       {Event triggered when browse dlg box is initialised. This occurs after the
@@ -490,6 +524,11 @@ type
       {Event triggered to check if browse dialog can close after user enters an
       invalid path in its edit control. Only triggered when boEditBox is
       included in Options}
+    property OnHelp: TPJBrowseHelpEvent
+      read fOnHelp write fOnHelp;
+      {Event triggered when help is requested and is available. User can handle
+      help request in this handler and either prevent or permit request to be
+      passed to Application object}
   end;
 
   {
@@ -1007,6 +1046,9 @@ begin
   // Set default values
   fRootFolderID := CSIDL_DESKTOP;
   fOptions := [boContextHelp, boDirsOnly];
+  {$IFDEF DELPHI6ANDUP}
+  fHelpType := htContext;
+  {$ENDIF}
   with TCBData(fData) do
   begin
     Handle := 0;
@@ -1038,15 +1080,34 @@ begin
 end;
 
 procedure TPJBrowseDialog.DoHelp;
-  {Calls WinHelp if HelpContext property is non zero.
+  {Triggers a help request if help is available. OnHelp event handler is called
+  if assigned. Application help is called if request not cancelled in any OnHelp
+  event handler.
   }
+var
+  Cancelled: Boolean;  // flag telling whether to cancel calling help system
 begin
-  if fHelpContext <> 0 then
+  if IsHelpAvailable then
+  begin
     try
-      Application.HelpContext(fHelpContext);
+      Cancelled := False;
+      if Assigned(fOnHelp) then
+        fOnHelp(Self, Cancelled);
+      if not Cancelled then
+      begin
+        {$IFDEF DELPHI6ANDUP}
+        case fHelpType of
+          htKeyword: Application.HelpKeyword(fHelpKeyword);
+          htContext: Application.HelpContext(fHelpContext);
+        end;
+        {$ELSE}
+        Application.HelpContext(fHelpContext);
+        {$ENDIF}
+      end;
     except
       Application.HandleException(ExceptObject);
     end;
+  end;
 end;
 
 function TPJBrowseDialog.Execute: Boolean;
@@ -1217,9 +1278,9 @@ begin
   SetWindowPos(HCancelBtn, 0, CancelLeft, BtnTop, 0, 0,
     SWP_NOCOPYBITS or SWP_NOOWNERZORDER or SWP_NOSIZE	or SWP_NOZORDER);
   // Create the help button in the required place
-  // set style flags - help button disabled if HelpContext = 0
+  // set style flags - help button disabled if help not available
   StyleFlags := WS_VISIBLE or WS_CHILD or BS_PUSHBUTTON or WS_TABSTOP;
-  if fHelpContext = 0 then
+  if not IsHelpAvailable then
     StyleFlags := StyleFlags or WS_DISABLED;
   // create the window
   HHelpBtn := CreateWindowEx(
@@ -1290,6 +1351,23 @@ function TPJBrowseDialog.IsDlgBtnEnabled(const BtnID: Integer): Boolean;
   }
 begin
   Result := IsWindowEnabled(GetDlgItem(Handle, BtnID));
+end;
+
+function TPJBrowseDialog.IsHelpAvailable: Boolean;
+  {Checks if any help is available per component's properties.
+    @return True if help is available.
+  }
+begin
+  // Help is available if relevant properties have non-nul values
+  {$IFDEF DELPHI6ANDUP}
+  case HelpType of
+    htContext: Result := HelpContext <> 0;
+    htKeyword: Result := HelpKeyword <> '';
+    else Result := False; // keep compiler happy!
+  end;
+  {$ELSE}
+  Result := HelpContext <> 0;
+  {$ENDIF}
 end;
 
 function TPJBrowseDialog.IsNewStyle: Boolean;
