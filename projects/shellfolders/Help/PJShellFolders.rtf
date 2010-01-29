@@ -506,6 +506,8 @@ ${\footnote {$}TPJBrowseDialog Properties}
 \par >\tab {\strike Handle}{\v IDH_BD_HANDLE}
 \par \tab {\strike Headline}{\v IDH_BD_HEADLINE}
 \par \tab {\strike HelpContext}{\v IDH_BD_HELPCONTEXT}
+\par \plain\f1\fs18\cf0 \tab {\strike HelpKeyword}{\v IDH_BD_HELPKEYWORD}
+\par \tab {\strike HelpType}{\v IDH_BD_HELPTYPE}\plain\f0\fs18\cf0 
 \par \tab {\strike Name}{\v !AL(TComponent_Name,1)}
 \par \tab {\strike Options}{\v IDH_BD_OPTIONS}
 \par \tab {\strike RootFolderID}{\v IDH_BD_ROOTFOLDERID}
@@ -604,20 +606,73 @@ A{\footnote {A}TPJBrowseDialog_HelpContext;HelpContext_property;HelpContext}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b TPJBrowseDialog.HelpContext\plain\f0\fs22\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_Options)}
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_HelpKeyword;TPJBrowseDialog_HelpType)}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
-\par \pard Specifies the context number for online Help.
+\par \pard Numeric ID for \plain\f1\fs18\cf0 the \plain\f0\fs18\cf0 components's context-sensitive help topic.
 \par 
-\par \pard \keep \plain\f4\fs18\cf0\b 
-\par type \plain\f4\fs18\cf0 THelpContext = -MaxLongInt..MaxLongInt;
+\par \pard \keep \plain\f4\fs18\cf0\b type \plain\f4\fs18\cf0 THelpContext = -MaxLongInt..MaxLongInt;
 \par \plain\f4\fs8\cf0\b 
 \par \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  HelpContext: THelpContext;\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 The HelpContext property is an integer value that determines which Help screen appears when the user requests context-sensitive online Help. If HelpContext is set to the default value of 0 then any request for help is ignored\plain\f1\fs18\cf0  and the dialog's help button (when displayed) is disabled.\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 This \plain\f0\fs18\cf0 property is an integer value that determines which \plain\f1\fs18\cf0 help topic\plain\f0\fs18\cf0  appears when the user requests \plain\f1\fs18\cf0 help\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 HelpContext is only used if the following conditions are met:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab \plain\f1\fs18\cf0 The {\strike HelpType}{\v IDH_BD_HELPTYPE} property is set to \plain\f1\fs18\cf0\i htContext\plain\f1\fs18\cf0 . (Delphi 6 and later only).
+\par \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab \plain\f1\fs18\cf0 T\plain\f0\fs18\cf0 he \plain\f1\fs18\cf0 dialog's h\plain\f0\fs18\cf0 elp button is \plain\f1\fs18\cf0 displayed, enabled \plain\f0\fs18\cf0 and is clicked\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab \plain\f1\fs18\cf0 T\plain\f0\fs18\cf0 he F1 key \plain\f1\fs18\cf0 if \plain\f0\fs18\cf0 pressed and the {\strike Options}{\v IDH_BD_OPTIONS} property does not include \plain\f0\fs18\cf0\i boContextHelp\plain\f0\fs18\cf0 .
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If HelpContext is set to the default value of 0\plain\f1\fs18\cf0 , and HelpType = \plain\f1\fs18\cf0\i htContext\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 then \plain\f1\fs18\cf0 the help button (when displayed) is disabled.\plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_HELPKEYWORD}
+${\footnote {$}TPJBrowseDialog.HelpKeyword}
+K{\footnote {K}TPJBrowseDialog,HelpKeyword;HelpKeyword,TPJBrowseDialog;HelpKeyword}
+A{\footnote {A}TPJBrowseDialog_HelpKeyword;HelpKeyword_property;HelpKeyword}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.HelpKeyword\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_HelpContext;TPJBrowseDialog_HelpType)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Keyword for the component's context-sensitive help topic\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  HelpKeyword: \plain\f6\fs18\cf0\b string\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 The value of HelpContext is used when the \plain\f1\fs18\cf0 dialog's h\plain\f0\fs18\cf0 elp button is \plain\f1\fs18\cf0 displayed \plain\f0\fs18\cf0 and is clicked, or when the F1 key pressed and the {\strike Options}{\v IDH_BD_OPTIONS} property does not include \plain\f0\fs18\cf0\i boContextHelp\plain\f0\fs18\cf0 .\plain\f0\fs20\cf0 
+\par \plain\f1\fs18\cf0 This \plain\f0\fs18\cf0 property is a\plain\f1\fs18\cf0  string\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 value containing a keyword that \plain\f0\fs18\cf0 determines which \plain\f1\fs18\cf0 help topic\plain\f0\fs18\cf0  appears when the user requests \plain\f1\fs18\cf0 help\plain\f0\fs18\cf0 . \plain\f1\fs18\cf0 HelpKeyword is only used if the following conditions are met:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab \plain\f1\fs18\cf0 The {\strike HelpType}{\v IDH_BD_HELPTYPE} property is set to \plain\f1\fs18\cf0\i htKeyword\plain\f1\fs18\cf0 .
+\par \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab \plain\f1\fs18\cf0 T\plain\f0\fs18\cf0 he \plain\f1\fs18\cf0 dialog's h\plain\f0\fs18\cf0 elp button is \plain\f1\fs18\cf0 displayed, enabled \plain\f0\fs18\cf0 and is clicked\plain\f1\fs18\cf0 .
+\par \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab \plain\f1\fs18\cf0 T\plain\f0\fs18\cf0 he F1 key \plain\f1\fs18\cf0 if \plain\f0\fs18\cf0 pressed and the\plain\f1\fs18\cf0  {\strike Options}{\v IDH_BD_OPTIONS} \plain\f0\fs18\cf0 property does not include \plain\f0\fs18\cf0\i boContextHelp\plain\f0\fs18\cf0 .
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 If Help\plain\f1\fs18\cf0 Keyword \plain\f0\fs18\cf0 is set to the default value of \plain\f1\fs18\cf0 the empty string, and HelpType = \plain\f1\fs18\cf0\i htKeyword\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 then \plain\f1\fs18\cf0 the help button (when displayed) is disabled.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0\b Note:\plain\f1\fs18\cf0  This property is only available when the unit is compiled with Delphi 6 or later.\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_HELPTYPE}
+${\footnote {$}TPJBrowseDialog.HelpType}
+K{\footnote {K}TPJBrowseDialog,HelpType;HelpType,TPJBrowseDialog;HelpType}
+A{\footnote {A}TPJBrowseDialog_HelpType;HelpType_property;HelpType}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.HelpType\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_HelpContext;TPJBrowseDialog_HelpKeyword)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Indicates whether the component's context sensitive help topic is identified by context ID or by keyword.\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f4\fs18\cf0\b type \plain\f6\fs18\cf0 THelpType\plain\f4\fs18\cf0  = \plain\f6\fs18\cf0 (htKeyword, htContext)\plain\f4\fs18\cf0 ;
+\par \plain\f4\fs8\cf0\b 
+\par \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  HelpType: \plain\f6\fs18\cf0 THelpType\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This property determines whether the {\strike HelpContext}{\v IDH_BD_HELPCONTEXT} or {\strike HelpKeyword}{\v IDH_BD_HELPKEYWORD} properties are used to identify the associated help topic.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 When HelpType = \plain\f1\fs18\cf0\i htKeyword\plain\f1\fs18\cf0 , the HelpKeyword property is used and HelpContext is ignored. Conversely when HelpType = \plain\f1\fs18\cf0\i htContext\plain\f1\fs18\cf0 , HelpContext is used and HelpKeyword is ignored.\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0\b Note:\plain\f1\fs18\cf0  This property is only available when the unit is compiled with Delphi 6 or later.\plain\f0\fs20\cf0 
 \par \page 
 #{\footnote {#}IDH_BD_OPTIONS}
 ${\footnote {$}TPJBrowseDialog.Options}
@@ -627,7 +682,7 @@ A{\footnote {A}TPJBrowseDialog_Options;Options_property;Options}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b TPJBrowseDialog.Options\plain\f0\fs22\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_HelpContext;TPJBrowseDialog_OnSelChange;TPJBrowseDialog_OnSelChangeEx)}
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_HelpContext;TPJBrowseDialog_HelpKeyword;TPJBrowseDialog_OnSelChange;TPJBrowseDialog_OnSelChangeEx)}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Determines the appearance and behavior of the Browse for Folders dialog box.
 \par 
@@ -642,7 +697,7 @@ A{\footnote {A}TPJBrowseDialog_Options;Options_property;Options}
 \par \plain\f0\fs8\cf0 
 \par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf0\b Value\tab Meaning\plain\f0\fs20\cf0 
 \par \pard \fi-1600 \li1600 \tx1600 \brdrt \brdrs \plain\f0\fs8\cf0  
-\par \pard \fi-2000 \li2000 \tx2000 \plain\f0\fs18\cf0\i boShowHelp\plain\f0\fs18\cf0 \tab Displays a help button in the dialog box. When the user clicks the button the application's help file is activated at the topic given by the component's {\strike HelpContext}{\v IDH_BD_HELPCONTEXT} property. When HelpContext is 0 the button is \plain\f1\fs18\cf0 disabled\plain\f0\fs18\cf0 . If \plain\f0\fs18\cf0\i Options \plain\f0\fs18\cf0 does not include \plain\f0\fs18\cf0\i boContextHelp\plain\f0\fs18\cf0  then pressing F1 has the same effect as clicking the Help button.\plain\f1\fs18\cf0  This option is not compatible with \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i boShowHelp\plain\f1\fs18\cf0  is ignored when \plain\f1\fs18\cf0\i boNewStyleDlg\plain\f1\fs18\cf0  is included in \plain\f1\fs18\cf0\i Options\plain\f1\fs18\cf0 .\plain\f0\fs20\cf0 
+\par \pard \fi-2000 \li2000 \tx2000 \plain\f0\fs18\cf0\i boShowHelp\plain\f0\fs18\cf0 \tab Displays a help button in the dialog box. When the user clicks the button the application's help file is activated at the topic given by the component's {\strike HelpContext}{\v IDH_BD_HELPCONTEXT} \plain\f1\fs18\cf0 or {\strike HelpKeyword}{\v IDH_BD_HELPKEYWORD} \plain\f0\fs18\cf0 propert\plain\f1\fs18\cf0 ies\plain\f0\fs18\cf0 . When HelpContext is 0 \plain\f1\fs18\cf0 or HelpKeyword is the empty string \plain\f0\fs18\cf0 the button is \plain\f1\fs18\cf0 disabled\plain\f0\fs18\cf0 . If \plain\f0\fs18\cf0\i Options \plain\f0\fs18\cf0 does not include \plain\f0\fs18\cf0\i boContextHelp\plain\f0\fs18\cf0  then pressing F1 has the same effect as clicking the Help button.\plain\f1\fs18\cf0  This option is not compatible with \plain\f1\fs18\cf0\i boNewDlgStyle\plain\f1\fs18\cf0  and \plain\f1\fs18\cf0\i boShowHelp\plain\f1\fs18\cf0  is ignored when \plain\f1\fs18\cf0\i boNewStyleDlg\plain\f1\fs18\cf0  is included in \plain\f1\fs18\cf0\i Options\plain\f1\fs18\cf0 .\plain\f0\fs20\cf0 
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0\i boContextHelp\plain\f0\fs18\cf0 \tab Displays the \{bmct ContextHelp.bmp\} button in the dialog's title bar. Clicking this button and the\plain\f1\fs18\cf0 n\plain\f0\fs18\cf0  clicking a control in the dialog brings up context sensitive popup help on each control in a window. Pressing F1 has the same effect. In this case the help relates to the currently active control.\plain\f1\fs18\cf0  \plain\f1\fs18\cf0\b Note: \plain\f1\fs18\cf0 this option only works on some operating systems. It does not work on Windows Vista, for example.\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -738,6 +793,7 @@ ${\footnote {$}TPJBrowseDialog Events}
 \pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
 \par 
 \par \pard \tx200 \tab {\strike OnClose}{\v IDH_BD_ONCLOSE}
+\par \plain\f1\fs18\cf0 \tab {\strike OnHelp}{\v IDH_BD_ONHELP}\plain\f0\fs18\cf0 
 \par \tab {\strike OnInitialise}{\v IDH_BD_ONINITIALISE}
 \par \tab {\strike OnSelChange}{\v IDH_BD_ONSELCHANGE}
 \par \plain\f1\fs18\cf0 \tab {\strike OnSelChangeEx}{\v IDH_BD_ONSELCHANGEEX}\plain\f0\fs18\cf0 
@@ -761,6 +817,31 @@ A{\footnote {A}TPJBrowseDialog_OnClose;OnClose_event;OnClose}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 Write an OnClose event handler to perform special processing when the dialog closes. The dialog's window handle is still available via the {\strike Handle}{\v IDH_BD_HANDLE} property.
 \par \plain\f0\fs20\cf0 
+\par \page 
+#{\footnote {#}IDH_BD_ONHELP}
+${\footnote {$}TPJBrowseDialog.OnHelp}
+K{\footnote {K}TPJBrowseDialog,OnHelp;OnHelp,TPJBrowseDialog;OnHelp}
+A{\footnote {A}TPJBrowseDialog_OnHelp;OnHelp_event;OnHelp}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJBrowseDialog.\plain\f1\fs22\cf2\b OnHelp\plain\f0\fs22\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJBrowseDialog}{\v IDH_BD_CLASS}          {\strike See also}{\v !AL(TPJBrowseDialog_HelpContext;TPJBrowseDialog_HelpKeyword;TPJBrowseDialog_HelpType;TPJBrowseDialog_Options)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard Event that occurs whenever \plain\f1\fs18\cf0 help is requested from the browse for folders dialog box and is available.\plain\f0\fs18\cf0 
+\par 
+\par \pard \keep \plain\f6\fs18\cf0\b type\plain\f6\fs18\cf0  \plain\f4\fs18\cf0 TPJBrowseHelpEvent = \plain\f4\fs18\cf0\b procedure\plain\f4\fs18\cf0 (Sender: TObject;
+\par \plain\f6\fs18\cf0   \plain\f4\fs18\cf0\b var \plain\f4\fs18\cf0 Cancel: Boolean)\plain\f6\fs18\cf0  \plain\f4\fs18\cf0\b of object\plain\f4\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  \plain\f6\fs18\cf0 OnHelp\plain\f4\fs18\cf0 : TPJBrowseHelpEvent;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This event is triggered whenever help is requested and is available. Its purpose id to enable the user to intercept help requests before they are passed to the Application object for processing and, optionally, to prevent the Application object from receiving the request.
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 Help can be requested by clicking any visible and enabled help button or by pressing F1 whenever \plain\f1\fs18\cf0\i boContextHelp\plain\f1\fs18\cf0  is not included in the {\strike Options}{\v IDH_BD_OPTIONS} property.\plain\f1\fs8\cf0   \plain\f1\fs18\cf0 Help is available when either {\strike HelpContext}{\v IDH_BD_HELPCONTEXT} is non-zero or {\strike HelpKeyword}{\v IDH_BD_HELPKEYWORD} is not the empty string, depending on the value of the {\strike HelpType}{\v IDH_BD_HELPTYPE} property. (On Delphis that don't support HelpType, HelpContext must be non-zero).
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0 The \plain\f1\fs18\cf0\i Sender\plain\f1\fs18\cf0  parameter provides a reference to the calling component and can be cast to TPJBrowseDialog to gain access to the HelpContext, HelpKeyword and HelpType properties. \plain\f1\fs18\cf0\i Cancel\plain\f1\fs18\cf0  is False when the event handler is called which means the help request will be passed to the Application object. To prevent this set \plain\f1\fs18\cf0\i Cancel\plain\f1\fs18\cf0  to True.
 \par \page 
 #{\footnote {#}IDH_BD_ONINITIALISE}
 ${\footnote {$}TPJBrowseDialog.OnInitialise}
@@ -846,7 +927,7 @@ A{\footnote {A}TPJBrowseDialog_OnSelChangeEx;OnSelChangeEx_event;OnSelChangeEx}
 \par \plain\f0\fs18\cf0 When OnSelChange\plain\f1\fs18\cf0 Ex\plain\f0\fs18\cf0  is triggered the dialog's window handle is available via the {\strike Handle}{\v IDH_BD_HANDLE} property.
 \par \page 
 #{\footnote {#}IDH_BD_ONVALIDATIONFAILED}
-${\footnote {$}TPJBrowserDialog.OnValidationFailed}
+${\footnote {$}TPJBrowseDialog.OnValidationFailed}
 K{\footnote {K}TPJBrowseDialog,OnValidationFailed;OnValidationFailed,TPJBrowseDialog;OnValidationFailed}
 A{\footnote {A}TPJBrowseDialog_OnValidationFailed;OnValidationFailed_event;OnValidationFailed}
 
@@ -858,7 +939,7 @@ A{\footnote {A}TPJBrowseDialog_OnValidationFailed;OnValidationFailed_event;OnVal
 \par \pard Event that occurs whenever \plain\f1\fs18\cf0 an invalid folder name is entered in the browse dialog's edit control and an attempt is made to close the dialog box.\plain\f0\fs18\cf0 
 \par 
 \par \pard \keep \plain\f4\fs18\cf0 TPJBrowseValidationFailedEvent = \plain\f4\fs18\cf0\b procedure(\plain\f4\fs18\cf0 Sender: TObject;
-\par     const EditText: string; var CanClose: Boolean) \plain\f4\fs18\cf0\b of object;\plain\f0\fs18\cf0 
+\par   \plain\f4\fs18\cf0\b const\plain\f4\fs18\cf0  EditText: \plain\f4\fs18\cf0\b string\plain\f4\fs18\cf0 ; \plain\f4\fs18\cf0\b var\plain\f4\fs18\cf0  CanClose: Boolean) \plain\f4\fs18\cf0\b of object;\plain\f0\fs18\cf0 
 \par \pard \plain\f0\fs8\cf0 
 \par \pard \keep \plain\f4\fs18\cf0\b property\plain\f4\fs18\cf0  OnValidationFailed: TPJBrowseValidationFailedEvent;
 \par \pard \plain\f0\fs18\cf0 

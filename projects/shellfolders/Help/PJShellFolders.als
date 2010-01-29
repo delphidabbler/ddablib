@@ -18,6 +18,10 @@ headline
 headline_property
 helpcontext
 helpcontext_property
+helpkeyword
+helpkeyword_property
+helptype
+helptype_property
 init
 init_method
 ipjspecialfolderenum
@@ -39,6 +43,8 @@ numspecialfolderids
 numspecialfolderids_function
 onclose
 onclose_event
+onhelp
+onhelp_event
 oninitialise
 oninitialise_event
 onselchange
@@ -81,8 +87,11 @@ tpjbrowsedialog_foldername
 tpjbrowsedialog_handle
 tpjbrowsedialog_headline
 tpjbrowsedialog_helpcontext
+tpjbrowsedialog_helpkeyword
+tpjbrowsedialog_helptype
 tpjbrowsedialog_object
 tpjbrowsedialog_onclose
+tpjbrowsedialog_onhelp
 tpjbrowsedialog_oninitialise
 tpjbrowsedialog_onselchange
 tpjbrowsedialog_onselchangeex
