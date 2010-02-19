@@ -37,38 +37,16 @@
 unit PJEnvVars;
 
 
-// Find if we have a Delphi 6 and Delphi 7 or higher compilers
-// We don't bother with anything below Delphi 3 since component doesn't compile
-// on lower versions
-{$DEFINE DELPHI6ANDUP}
-{$DEFINE DELPHI7ANDUP}
-{$IFDEF VER100} // Delphi 3
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER110} // C++ Builder 3
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER120} // Delphi 4
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER125} // C++ Builder 4
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER130} // Delphi 5 & C++ Builder 5
-  {$UNDEF DELPHI6ANDUP}
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-{$IFDEF VER140} // Delphi 6 & C++ Builder 6
-  {$UNDEF DELPHI7ANDUP}
-{$ENDIF}
-
-// Switch off unsafe type warnings (supported by Delphi 7 and later)
-{$IFDEF DELPHI7ANDUP}
-  {$WARN UNSAFE_TYPE OFF}
+// Determine compiler & switch off unsafe warnings if supported
+{$UNDEF DELPHI6ANDUP}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 14.0} // >= Delphi 6
+    {$DEFINE DELPHI6ANDUP}
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+    {$WARN UNSAFE_TYPE OFF}
+    {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
 {$ENDIF}
 
 
@@ -111,7 +89,8 @@ function CreateEnvBlock(const NewEnv: TStrings; const IncludeCurrent: Boolean;
     @param Buffer [in] Buffer that receives new environment block. Pass nil to
       to find required buffer size without creating a block.
     @param BufSize [in] Size of Buffer in bytes. Pass 0 if Buffer is nil.
-    @return Size (or required size) of environment block.
+    @return Size (or required size) of environment block in characters.
+      NOTE: multiply this by SizeOf(Char) to get buffer size in bytes.
   }
 
 function ExpandEnvVars(const Str: string): string;
@@ -126,7 +105,8 @@ function GetAllEnvVars(const Vars: TStrings): Integer;
     @param Vars [in] String list that receives all environment variables in
       Name=Value format. Set to nil if all you need is the size of the
       environment block.
-    @return Size of environment block that contains all environment variables.
+    @return Size of environment block that contains all environment variables
+      in characters. Multiply by SizeOf(Char) to get size in bytes.
   }
 
 
@@ -170,7 +150,7 @@ type
         @param AOwner [in] Owning component. May be nil if no owner.
       }
     procedure EnumNames(Callback: TPJEnvVarsEnum; Data: Pointer);
-      {Enumerates names of all environment variable in current process.
+      {Enumerates names of all environment variables in current process.
         @param Callback [in] Callback function called once for each environment
           variable, passing name and value of Data parameter.
         @param Data [in] User specified data passed to callback function.
@@ -229,9 +209,8 @@ function GetEnvVarValue(const VarName: string): string;
     @return Environment variable or '' if the variable does not exist.
   }
 var
-  BufSize: Integer;  // buffer size required for value (including terminal #0)
+  BufSize: Integer;  // size (in chars) required for value including terminal #0
 begin
-  // Get required buffer size (includes space for terminal #0)
   BufSize := GetEnvironmentVariable(PChar(VarName), nil, 0);
   if BufSize > 0 then
   begin
@@ -252,7 +231,6 @@ function SetEnvVarValue(const VarName, VarValue: string): Integer;
     @return 0 on success or a Windows error code on error.
   }
 begin
-  // Simply call SetEnvironmentVariable API function
   if SetEnvironmentVariable(PChar(VarName), PChar(VarValue)) then
     Result := 0
   else
@@ -265,7 +243,6 @@ function DeleteEnvVar(const VarName: string): Integer;
     @return 0 on success or a Windows error code on error.
   }
 begin
-  // Call SetEnvironmentVariable API function with nil value to delete var
   if SetEnvironmentVariable(PChar(VarName), nil) then
     Result := 0
   else
@@ -284,6 +261,7 @@ function CreateEnvBlock(const NewEnv: TStrings; const IncludeCurrent: Boolean;
       to find required buffer size without creating a block.
     @param BufSize [in] Size of Buffer in bytes. Pass 0 if Buffer is nil.
     @return Size (or required size) of environment block.
+      NOTE: multiply this by SizeOf(Char) to get buffer size in bytes.
   }
 var
   EnvVars: TStringList; // list of env vars in new block
@@ -296,7 +274,7 @@ begin
     // include copy of current environment block if required
     if IncludeCurrent then
       GetAllEnvVars(EnvVars);
-    // appends given environment vars to list
+    // add any additional environment strings
     if Assigned(NewEnv) then
       EnvVars.AddStrings(NewEnv);
     // Calculate size of new environment block: block consists of #0 separated
@@ -333,13 +311,19 @@ function ExpandEnvVars(const Str: string): string;
     @return Converted string.
   }
 var
-  BufSize: Integer; // size required for expanded string (excluding #0)
+  BufSize: Integer; // size of expanded string
 begin
-  // Get required buffer size (excludes space for terminal #0)
+  // Get required buffer size
   BufSize := ExpandEnvironmentStrings(PChar(Str), nil, 0);
-  // Read expanded string into result string
-  SetLength(Result, BufSize); // space for #0 automatically added
-  ExpandEnvironmentStrings(PChar(Str), PChar(Result), BufSize);
+  if BufSize > 0 then
+  begin
+    // Read expanded string into result string
+    SetLength(Result, BufSize);
+    ExpandEnvironmentStrings(PChar(Str), PChar(Result), BufSize);
+  end
+  else
+    // Trying to expand empty string
+    Result := '';
 end;
 
 function GetAllEnvVars(const Vars: TStrings): Integer;
@@ -347,7 +331,8 @@ function GetAllEnvVars(const Vars: TStrings): Integer;
     @param Vars [in] String list that receives all environment variables in
       Name=Value format. Set to nil if all you need is the size of the
       environment block.
-    @return Size of environment block that contains all environment variables.
+    @return Size of environment block that contains all environment variables
+      in characters. Multiply by SizeOf(Char) to get size in bytes.
   }
 var
   PEnvVars: PChar;    // pointer to start of environment block
@@ -374,7 +359,7 @@ begin
       Result := (PEnvEntry - PEnvVars) + 1;
     finally
       // Dispose of the memory block
-      FreeEnvironmentStrings(PEnvEntry);
+      FreeEnvironmentStrings(PEnvVars);
     end;
   end
   else
@@ -440,7 +425,7 @@ begin
 end;
 
 procedure TPJEnvVars.EnumNames(Callback: TPJEnvVarsEnum; Data: Pointer);
-  {Enumerates names of all environment variable in current process.
+  {Enumerates names of all environment variables in current process.
     @param Callback [in] Callback function called once for each environment
       variable, passing name and value of Data parameter.
     @param Data [in] User specified data passed to callback function.
@@ -453,7 +438,7 @@ begin
   // Create list to hold env vars
   EnvList := TStringList.Create;
   try
-    // Read all env vars from environment into list
+    // Get environment and call callback with name of each variable
     GetAllEnvVars(EnvList);
     // Call callback proc for each name in environment, with user supplied data
     for Idx := 0 to Pred(EnvList.Count) do
@@ -470,7 +455,6 @@ function TPJEnvVars.GetCount: Integer;
 var
   EnvList: TStringList; // list of all environment variables
 begin
-  // Get all env vars in string list and return number of items in list
   EnvList := TStringList.Create;
   try
     GetAllEnvVars(EnvList);
@@ -500,3 +484,4 @@ begin
 end;
 
 end.
+
