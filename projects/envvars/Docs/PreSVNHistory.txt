@@ -1,0 +1,151 @@
+================================================================================
+
+Environment Variables Unit: Historical update information from v1.0 to v1.3
+
+================================================================================
+
+This file records known changes to files in the Environment Variables Unit from
+v1.0 to and v1.3. before the project was placed was placed under version control
+with Subversion.
+
+There are two sections:
+
+  1: Releases: Lists all the releases of the project and notes which files were
+     added, updated or deleted in each release.
+
+  2: Files: Lists all source code and development tools and provides details of
+     changes to these files.
+
+
+================================================================================
+1: RELEASES
+================================================================================
+
+This section lists all releases of the project from the first version (1.0) to 
+release 1.3. For each release the following is noted:
+
+  + Version and date
+  + List of new, updated and deleted files.
+  
+For details of changes to each release see ChangeLog.txt
+
+--------------------------------------------------------------------------------
+v1.0 - 02 Sep 2001
+--------------------------------------------------------------------------------
+New     - PJEnvVars.pas 1.0
+New     - PJEnvVars.dcr of 02 Sep 2001
+New     - Help\PJEnvVars.hap of 02 Sep 2001
+New     - Help\PJEnvVars.hpj 1.0
+New     - Help\PJEnvVars.bmp of 02 Sep 2001
+
+--------------------------------------------------------------------------------
+v1.1 - 31 Jul 2003
+--------------------------------------------------------------------------------
+Updated - PJEnvVars.pas 1.1
+Updated - Help\PJEnvVars.hpj 1.1 
+Updated - Help\PJEnvVars.hap of 31 Jul 2003
+
+--------------------------------------------------------------------------------
+v1.2 - 10 Aug 2003
+--------------------------------------------------------------------------------
+Updated - PJEnvVars.pas 1.2
+
+--------------------------------------------------------------------------------
+v1.3 - 17 Aug 2008
+--------------------------------------------------------------------------------
+Updated - PJEnvVars.pas 1.3
+New     - Help\PJEnvVars.als of 17 Aug 2008
+Updated - Help\PJEnvVars.hap of 17 Aug 2008
+Updated - Help\PJEnvVars.hpj 1.2
+
+
+================================================================================
+2: FILES
+================================================================================
+
+This section lists all files for which an update history is known between v1 and
+and v1.3, inclusive.
+
+--------------------------------------------------------------------------------
+PJEnvVars.dcr
+--------------------------------------------------------------------------------
+        02 Sep 2001   - Original resource file containg component glyph.
+        19 Feb 2010   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+PJEnvVars.pas
+--------------------------------------------------------------------------------
+v1.0 of 02 Sep 2001  - Original version.
+v1.1 of 31 Jul 2003   - Changed component palette name from "PJ Stuff" to
+                        "DelphiDabbler".
+                      - Made EPJEnvVars exception derive from EOSError rather
+                        than deprecated EWin32Error in Delphi 6 and later using 
+                        conditional compilation. In earlier versions of Delphi
+                        EWin32Error is still used.
+v1.2 of 10 Aug 2003   - Fixed bug that was causing an error when a non-existant
+                        environment variable is accessed.
+v1.3 of 17 Aug 2008   - Fixed potential conditional compilation problem causing
+                        compilers after Delphi 7 to use deprecated EWin32Error
+                        exception instead of EOSError.
+                      - Added assertion to check callback procedure passed to
+                        TPJEnvVars.EnumNames is assigned as intended in v1.1.
+                      - Fixed bug in TPJEnvVars constructor where passing a nil
+                        owner would cause an access violation.
+                      - Switched off UNSAFE_TYPE warnings on Delphi 7 and later.
+                      - Changed to Mozilla Public License.
+        19 Feb 2010   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+DevTools/BuildHelp.bat
+--------------------------------------------------------------------------------
+v1.0 of 17 Aug 2008   - First version.
+        19 Feb 2010   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+DevTools/Release.bat
+--------------------------------------------------------------------------------
+v1.0 of 17 Aug 2008   - First version.
+        19 Feb 2010   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+DevTools/Tidy.bat
+--------------------------------------------------------------------------------
+v1.0 of 17 Aug 2008   - First version.
+        19 Feb 2010   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help/PJEnvVars.als
+--------------------------------------------------------------------------------
+        17 Aug 2008   - New A-link keyword file.
+        19 Feb 2010   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help/PJEnvVars.bmp
+--------------------------------------------------------------------------------
+        02 Sep 2001   - Original component glyph for inclusion in help file.
+        19 Feb 2010   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help/PJEnvVars.hap
+--------------------------------------------------------------------------------
+        02 Sep 2001   - Original help topic file.
+        31 Jul 2003   - Updated heirachy for EPJEnvVars exception to show
+                        EOSError ancestor class for Delphi 6 and later.
+        17 Aug 2008   - Made minor modifications and expansions to various
+                        topics.
+                      - Fixed typos and formatting errors.
+                      - Added note that EPJEnvVars derives from EOSError from
+                        Delphi 6.
+        19 Feb 2010   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
+Help/PJEnvVars.hpj
+--------------------------------------------------------------------------------
+v1.0 of 02 Sep 2001   - Original version.
+v1.1 of 31 Jul 2003   - Updated copyright date to include 2003.
+                      - Changed references to PJSoft to DelphiDabbler.
+v1.2 of 17 Aug 2008   - Updated copyright date to include 2008.
+                      - Changed to Mozilla Public License.
+        19 Feb 2010   - IMPORTED TO SVN.
+
+--------------------------------------------------------------------------------
