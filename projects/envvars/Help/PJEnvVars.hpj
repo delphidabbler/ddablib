@@ -1,0 +1,45 @@
+; PJEnvVars.hpj
+;
+; Help project file for Environment Variables unit.
+;
+; v1.0 of 02 Sep 2001  - Original version.
+; v1.1 of 31 Jul 2003  - Updated copyright date to include 2003.
+;                      - Changed references to PJSoft to DelphiDabbler.
+; v1.2 of 17 Aug 2008  - Updated copyright date to include 2008.
+;                      - Changed to Mozilla Public License.
+;
+;
+; ***** BEGIN LICENSE BLOCK *****
+;
+; Version: MPL 1.1
+;
+; The contents of this file are subject to the Mozilla Public License Version
+; 1.1 (the "License"); you may not use this file except in compliance with the
+; License. You may obtain a copy of the License at http://www.mozilla.org/MPL/
+;
+; Software distributed under the License is distributed on an "AS IS" basis,
+; WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+; the specific language governing rights and limitations under the License.
+;
+; The Original Code is PJEnvVars.hpj
+;
+; The Initial Developer of the Original Code is Peter Johnson
+; (http://www.delphidabbler.com/).
+;
+; Portions created by the Initial Developer are Copyright (C) 2001-2008 Peter
+; Johnson. All Rights Reserved.
+;
+; ***** END LICENSE BLOCK *****
+
+
+[OPTIONS]
+HCW=0
+LCID=0x809 0x0 0x0 ;English (United Kingdom)
+REPORT=Yes
+TITLE=DelphiDabbler Environment Variables Unit Help
+COPYRIGHT=DelphiDabbler Environment Variables Unit - copyright © P D Johnson 2001-2008
+HLP=.\PJEnvVars.hlp
+
+[FILES]
+.\PJEnvVars.rtf
+

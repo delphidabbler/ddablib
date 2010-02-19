@@ -1,0 +1,520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+	<title>
+		Environment Variables Unit Demo Code
+	</title>
+
+	<style type="text/css">
+		<!--
+		body {
+			margin: 1em;
+			padding: 0;
+			font-family: Verdana, Arial, sans-serif;
+			font-size: 9pt;
+			line-height: 150%;
+		}
+		h1 {
+			margin: 0 0 1em 0;
+			padding: 0.5em;
+			border: 1px silver solid;
+			background-color: #eee;
+			font-size: 13pt;
+			font-weight: bold;
+			text-align: center;
+		}
+		h1 .subtitle {
+			font-style: italic;
+			color: #336;
+		}
+		h2 {
+			margin: 1em 0 0 0;
+			padding: 0;
+			padding-bottom: 6px;
+			border-bottom: 1px silver solid;
+			font-size: 11pt;
+			font-weight: bold;
+		}
+		h3 {
+			margin: 0.5em 0 0 0;
+			padding: 0;
+			font-size: 9pt;
+			font-weight: bold;
+		}
+		p {
+			margin: 0.5em 0 0 0;
+			padding: 0;
+		}
+		ul, ol {
+			margin: 0.5em 0 0 3em;
+			padding: 0;
+		}
+		ul {
+			list-style-type: square;
+		}
+		ul.spaced li,
+		ol.spaced li {
+			margin-top: 0.5em;
+		}
+		ul.spaced li,
+		ol.spaced li {
+			margin-top: 0.5em;
+		}
+		ul.unspaced li,
+		ol.unspaced li {
+			margin-top: 0;
+		}
+		ul.unspaced li.first,
+		ol.unspaced li.first {
+			margin-top: 0.5em;
+		}
+		code,
+		kbd {
+			font-family: "Courier New", Courier, monospace;
+		}
+		pre.source {
+			font-family: "Courier New", Courier, monospace;
+			background-color: #ffc;
+			border: 1px silver dotted;
+			padding: 0.25em;
+		}
+		a:link {
+			color: #336;
+			text-decoration: underline;
+		}
+		a:visited {
+			color: #669;
+			text-decoration: underline;
+		}
+		a:active {
+			color: #336;
+			text-decoration: underline;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+		.gototop {
+			margin: 1em 0 0 0;
+			padding: 0.3em 0 0 0;
+			text-align: center;
+			position: relative;
+			float: right;
+			font-weight: bold;
+		}
+		.pullout {
+			border-left: 8px silver solid;
+			xborder-bottom: 2px silver solid;
+			xborder-top: 2px silver solid;
+			background-color: #eee;
+			margin: 0.5em 0 0 0;
+			padding: 0.25em 0.5em;
+			font-style: italic;
+		}
+		.indent {
+			margin-left: 3em;
+		}
+		.highlight {
+			color: #336;
+			font-style: italic;
+			font-weight: bold;
+		}
+		.endnotes {
+			margin: 1.5em 0 0 0;
+			padding: 1em 0 0 0;
+			border-top: 1px silver solid;
+		}
+		.comments {
+			font-style: italic;
+		}
+		.copyright,
+		.copyright a:link,
+		.copyright a:visited,
+		.copyright a:active {
+			margin: 1em 0 0 0;
+			color: gray;
+			font-size: 8pt;
+			text-align: right;
+		}
+		-->
+	</style>
+
+</head>
+
+
+<body>
+
+<h1 id="top">
+	<div>Environment Variables Unit</div>
+	<div class="subtitle">Demo Code</div>
+</h1>
+
+<p>
+	This document contains four examples of how to use the code in the
+	Environment Variables Unit. They are:
+</p>
+
+<ol>
+	<li>
+		<a href="#eg1">Example 1</a>: using the <var>TPJEnvVars</var> component.
+	</li>
+	<li>
+		<a href="#eg2">Example 2</a>: using the <var>GetEnvVarValue</var>,
+		<var>SetEnvVarValue</var>, <var>DeleteEnvVar</var> and
+		<var>GetAllEnvVars</var> routines.
+	</li>
+	<li>
+		<a href="#eg3">Example 3</a>: using the <var>ExpandEnvVars</var>
+		function.
+	</li>
+	<li>
+		<a href="#eg4">Example 4</a>: using the <var>CreateEnvBlock</var>
+		function.
+	</li>
+</ol>
+
+
+<p class="gototop">
+	&raquo; <a href="#top">Go to top</a>
+</p>
+
+<h2 id="eg1">
+	Example 1
+</h2>
+
+<p>
+	This example demonstrates the use of the <var>TPJEnvVars</var> component.
+</p>
+
+<p>
+	Drop a <var>TPJEnvVars</var> component, a list box, a label, two edit boxes
+	and two buttons on a form. Add the following private methods and event
+	handlers:
+</p>
+
+<pre class="source">procedure TForm1.EnvNamesEnum(const VarName: string; Data: Pointer);
+  // Private callback method of type TPJEnvVarsEnum adds env var names to
+  // list box
+begin
+  TStrings(Data).Add(VarName);
+end;
+
+procedure TForm1.UpdateList;
+  // Displays all environment vars in list box
+begin
+  ListBox1.Clear;
+  PJEnvVars1.EnumNames(EnvNamesEnum, ListBox1.Items);
+  Label1.Caption := Format('%d environment variables', [PJEnvVars1.Count]);
+  Edit1.Text := '';
+  Edit2.Text := '';
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+  // Display program's environment vars in list
+begin
+  UpdateList;
+end;
+
+procedure TForm1.ListBox1Click(Sender: TObject);
+  // Display selected env var name and value
+begin
+  Edit1.Text := ListBox1.Items[ListBox1.ItemIndex];
+  Edit2.Text := PJEnvVars1.Values[Edit1.Text];
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+  // Update or create env var named in Edit1 with new  value per Edit2 (empty
+  // string in Edit2 deletes var)
+begin
+  if Edit1.Text <> '' then
+  begin
+    PJEnvVars1.Values[Edit1.Text] := Edit2.Text;
+    UpdateList;
+  end;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+  // Delete env var named in Edit1
+begin
+  if Edit1.Text <> '' then
+  begin
+    PJEnvVars1.DeleteVar(Edit1.Text);
+    UpdateList;
+  end;
+end;</pre>
+
+<p>
+	The program behaves as follows:
+</p>
+
+<ul>
+	<li>
+		On startup the list box is populated with all the available environment
+		variable names and the number of evironment variables is displayed in
+		the label.
+	</li>
+	<li>
+		Selecting a variable name from the list displays it in <var>Edit1</var>
+		and places its value in <var>Edit2</var>.
+	</li>
+	<li>
+		Entering or editing a name in <var>Edit1</var> and a value in
+		<var>Edit2</var> then clicking <var>Button1</var> causes the environment
+		variable named in <var>Edit1</var> to be updated with the new value
+		contained in <var>Edit2</var>. If the environment variable does not
+		exist then it is created. If no text is entered in <var>Edit2</var> then
+		the environment variable is deleted. The list is updated after this
+		change.
+	</li>
+	<li>
+		Clicking <var>Button2</var> deletes the environment variable named in
+		<var>Edit1</var> and updates the list.
+	</li>
+</ul>
+
+<p>
+	<strong>Note:</strong>  This example is similar to <a href="#eg2">Example
+	2</a> which accomplishes a similar task using the environment variable
+	manipulation routines instead of the component.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#top">Go to top</a>
+</p>
+
+<h2 id="eg2">
+	Example 2
+</h2>
+
+<p>
+	This example demonstrates the use of the <var>GetEnvVarValue</var>,
+	<var>SetEnvVarValue</var>, <var>DeleteEnvVar</var> and
+	<var>GetAllEnvVars</var> routines. 
+</p>
+
+<p>
+	Drop a list box, two edit boxes and two buttons on a form and add 
+	<code>PJEnvVars</code> to your uses clause. Now enter the following code: 
+</p>
+
+<pre class="source">procedure TForm1.UpdateList;
+  // Displays all environment vars in list box
+var
+  SL: TStringList;
+  Idx: Integer;
+begin
+  ListBox1.Clear;
+  SL := TStringList.Create;
+  try
+    GetAllEnvVars(SL);
+    for Idx := 0 to Pred(SL.Count) do
+      ListBox1.Items.Add(SL.Names[Idx]);
+    Edit1.Text := '';
+    Edit2.Text := '';
+  finally
+    SL.Free;
+  end;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+  // Display program's environment vars in list
+begin
+  UpdateList;
+end;
+
+procedure TForm1.ListBox1Click(Sender: TObject);
+  // Display selected env var name and value
+begin
+  Edit1.Text := ListBox1.Items[ListBox1.ItemIndex];
+  Edit2.Text := GetEnvVarValue(Edit1.Text);
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+  // Update or create env var named in Edit1 with new  value per Edit2 (empty
+  // string in Edit2 deletes var)
+begin
+  if Edit1.Text <> '' then
+  begin
+    SetEnvVarValue(Edit1.Text, Edit2.Text);
+    UpdateList;
+  end;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+  // Delete env var named in Edit1
+begin
+  if Edit1.Text <> '' then
+  begin
+    DeleteEnvVar(Edit1.Text);
+    UpdateList;
+  end;
+end;</pre>
+
+<p>
+	The program behaves identically to <a href="#eg1">Example 1</a> which
+	accomplishes a similar task using the <var>TPJEnvVars</var> component.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#top">Go to top</a>
+</p>
+
+<h2 id="eg3">
+	Example 3
+</h2>
+
+<p>
+	This example demonstrates the use of the <var>ExpandEnvVars</var> function.
+</p>
+
+<p>
+	Drop two memo controls and one button on a form and add
+	<code>PJEnvVars</code> to your uses clause. Now add the event handlers
+	listed below:
+</p>
+
+<pre class="source">procedure TForm1.FormCreate(Sender: TObject);
+begin
+  Memo1.Text := 'This is my temp folder: "%TEMP%"';
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  Memo2.Text := ExpandEnvVars(Memo1.Text);
+end;</pre>
+
+<p>
+	Enter some text, including environment variable references (such as
+	<kbd>%TEMP%</kbd>), in the first memo. Clicking the button replaces the
+	environment variable names with their values and displays the expanded
+	string in the second memo.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#top">Go to top</a>
+</p>
+
+<h2 id="eg4">
+	Example 4
+</h2>
+
+<p>
+	This example demonstrates the use of the <var>CreateEnvBlock</var> function.
+	It involves creating two programs:
+</p>
+
+<ol>
+	<li>
+		A slave program that simply displays its environment variables.
+	</li>
+	<li>
+		A master program that sets up an environment block and spawns a child
+		process that uses the new block.
+	</li>
+</ol>
+
+<h3>
+	Slave program
+</h3>
+
+<p>
+	Create a new application with a main form named <var>SlaveForm</var>. Drop
+	a memo control onto the form, and set its <var>Align</var> property to
+	<var>alClient</var>. Make sure the <code>PJEnvVars</code> unit is in your
+	uses clause. Give the form the following <var>OnCreate</var> handler:
+</p>
+
+<pre class="source">procedure TSlaveForm.FormCreate(Sender: TObject);
+begin
+  GetAllEnvVars(Memo1.Lines);
+end;</pre>
+
+<p>
+	Save the project as <code>SlaveApp</code> and compile. The memo will display
+	all of <code>SlaveApp</code>'s environment variables when the program is
+	executed.
+</p>
+
+<h3>
+	Master program
+</h3>
+
+<p>
+	Create a new application with a main form named <var>MasterForm</var>. Drop
+	a memo control onto the form, setting its align property to <var>alTop</var>
+	and clear its text. Add a button and a check box below the memo. Ensure
+	the <code>PJEnvVars</code> unit is referenced in the uses clause. Add the
+	following helper procedure and button event handler:
+</p>
+
+<pre class="source">procedure ExecProg(ProgName: string; EnvBlock: Pointer);
+  // Creates a new process for given program passing any given environment block
+var
+  SI: TStartupInfo;
+  PI: TProcessInformation;
+begin
+  // Set up startup info record: all default values
+  FillChar(SI, SizeOf(SI), 0);
+  SI.cb := SizeOf(SI);
+  // Execute the program
+  CreateProcess(nil, PChar(ProgName), nil, nil, True, 0, EnvBlock, nil, SI, PI);
+end;
+
+procedure TMasterForm.Button1Click(Sender: TObject);
+var
+  EnvBlock: Pointer;
+  BlockSize: Integer;
+begin
+  // Create the environment block
+  BlockSize := CreateEnvBlock(Memo1.Lines, CheckBox1.Checked, nil, 0);
+  GetMem(EnvBlock, BlockSize);
+  CreateEnvBlock(Memo1.Lines, CheckBox1.Checked, EnvBlock, BlockSize);
+  // Execute the slave app
+  ExecProg('SlaveApp.exe', EnvBlock);
+end;</pre>
+
+<p>
+	Save the project as <code>MasterApp</code> in the same folder as 
+	<code>SlaveApp</code> and compile. When <code>MasterApp</code> is run, enter
+	some environment variables in <kbd>NAME=VALUE</kbd> format in the memo
+	control. Place each <kbd>NAME=VALUE</kbd> pair on a different line.
+</p>
+
+<p>
+	Now click the button. A copy of <code>SlaveApp</code> should run, displaying
+	just the environment variables you entered.
+</p>
+
+<p>
+	Return to <code>MasterApp</code> and check the check box. Click the button
+	again to spawn another instance of <code>SlaveApp</code>. This new instance
+	will have a copy of <code>MasterApp</code>'s environment variables along
+	with the new ones you entered in <code>MasterApp</code>'s memo control.
+</p>
+
+
+<div class="endnotes">
+
+	<div class="comments">
+		Please
+		<a href="http://www.delphidabbler.com/contact">let me know</a> if you
+		have any comments about this demo code, if you have found a bug, or you
+		want to suggest any updates.
+	</div>
+
+	<div class="copyright">
+		This document is copyright &copy; 2008, P D Johnson,
+		<a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>
+	</div>
+
+</div>
+
+</body>
+
+</html>
