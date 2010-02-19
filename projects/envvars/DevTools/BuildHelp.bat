@@ -1,12 +1,13 @@
 @rem ---------------------------------------------------------------------------
 @rem Script used to create help file for Environment Variables Unit.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008-2010
 @rem
-@rem v1.0 of 17 Aug 2008 - First version.
+@rem Requires evironment variable HC set to full file path to MS WinHelp
+@rem compiler (HCRTF.exe).
 @rem
-@rem Requires the DELPHI7 environment variable to store the Delphi 7 install
-@rem directory.
+@rem $Rev$
+@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 
@@ -15,19 +16,18 @@
 setlocal
 
 set HelpDir=..\Help
-
-rem Check that required files exist
-
+set HelpFile=PJEnvVars.hlp
 set ErrorMsg=
 
-rem Build help file
-%DELPHI7%\Help\Tools\HCRTF.exe -x %HelpDir%\PJEnvVars.hlp
+if "%HC%" == "" set ErrorMsg=Environment variable HC not set
+if not "%ErrorMsg%" == "" goto error
+
+%HC% -x %HelpDir%\%HelpFile%
 if errorlevel 1 set ErrorMsg=Compilation failed
 if not "%ErrorMsg%"=="" goto error
 goto success
 
 :error
-rem Display error message
 echo *** ERROR: %ErrorMsg%
 goto end
 
@@ -35,6 +35,5 @@ goto end
 echo Succeeded
 
 :end
-rem All done
 
 endlocal

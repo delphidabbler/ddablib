@@ -1,9 +1,12 @@
 @rem ---------------------------------------------------------------------------
-@rem Script used to delete Environment Variables Unit's backup files.
+@rem Environment Variables Unit
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008
+@rem Script used to delete temporary files and directories.
 @rem
-@rem v1.0 of 17 Aug 2008 - First version.
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008-2010
+@rem
+@rem $Rev$
+@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 @echo off
@@ -13,10 +16,19 @@ echo Tidying
 echo ~~~~~~~
 echo.
 
-set SrcDir=..
+set RootDir=..
 
-echo Deleting *.~* from "%SrcDir%" and subfolders
-del /S %SrcDir%\*.~* 
+echo Deleting temporary files
+del /S %RootDir%\*.~* 
+del /S %RootDir%\*.dcu 
+del /S %RootDir%\*.dsk 
+del /S %RootDir%\*.bak
+del /S /AH %RootDir%\*.GID 
+echo.
+
+echo Deleting temporary directories
+if exist %RootDir%\Release rmdir /S /Q %RootDir%\Release
+for /F "usebackq" %%i in (`dir /S /B /A:D %RootDir%\__history*`) do rmdir /S /Q %%i
 echo.
 
 echo Done.
