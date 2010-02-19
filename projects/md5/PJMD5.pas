@@ -22,18 +22,18 @@
  *
  * Software distributed under the License is distributed on an "AS IS" basis,
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
- * the specific language governing rights and limitations under the License.                                                              
+ * the specific language governing rights and limitations under the License.
  *
  * Portions of the code are based on the reference implementation from the RFC,
  * translated into Pascal from the original C. The MD5 algorithm and the
  * reference implementation are Copyright (C) 1991-2, RSA Data Security, Inc.
  * Created 1991. All rights reserved.
  *
- * The Original Pascal Code is PJMD5.pas.                                                               
+ * The Original Pascal Code is PJMD5.pas.
  *
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
- * 
+ *
  * Portions created by the Initial Developer are Copyright (C) 2010 Peter
  * Johnson. All Rights Reserved.
  *
