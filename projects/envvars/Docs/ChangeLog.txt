@@ -1,6 +1,10 @@
-Release 1.3 of 17 August 2008
-PJEnvVars v1.3 of 17 August 2008
+; ------------------------------------------------------------------------------
+; Change Log for Environment Variables Unit
+; $Rev$
+; $Date$
+; ------------------------------------------------------------------------------
 
+Release v1.3 of 17 August 2008
 + Fixed bugs in component:
   - Compilers later than Delphi 7 used deprecated Win32Error instead of EOSError.
   - Passing nil as owner to component's constructor caused an access violation.
@@ -9,21 +13,13 @@ PJEnvVars v1.3 of 17 August 2008
 + Expanded and corrected help file content and updated copyright date.
 + Changed to Mozilla Public License.
 
-
-Release 1.2 of 10 August 2003
-PJEnvVars v1.2 of 10 August 2003
-
+Release v1.2 of 10 August 2003
 + Fixed bug causing error when attempting to access an environment variable that does not exist.
 
-
-Not released
-PJEnvVars v1.1 of 31 July 2003
-
+Un-released v1.1 of 31 July 2003
 + Updated component palette from "PJ Stuff" to "DelphiDabbler".
 + Changed references to EWin32Error exception to EOSError in components compiled with Delphi 6 and later.
 + Updated copyright date and owner in help file.
 
-Release 1.0 of 02 September 2001
-PJEnvVars v1.0 of 02 September 2001
-
+Release v1.0 of 02 September 2001
 + Original version.
