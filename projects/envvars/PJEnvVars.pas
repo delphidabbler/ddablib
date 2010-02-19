@@ -4,26 +4,8 @@
  * Source code for environment variable routines and component for processing
  * and managing environment variables.
  *
- * v1.0 of 02 Sep 2001  - Original version.
- * v1.1 of 31 Jul 2003  - Changed component palette name from "PJ Stuff" to
- *                        "DelphiDabbler".
- *                      - Made EPJEnvVars exception derive from EOSError rather
- *                        than deprecated EWin32Error in Delphi 6 and later
- *                        using conditional compilation. In earlier versions of
- *                        Delphi EWin32Error is still used.
- * v1.2 of 10 Aug 2003  - Fixed bug that was causing an error when a
- *                        non-existant environment variable is accessed.
- * v1.3 of 17 Aug 2008  - Fixed potential conditional compilation problem
- *                        causing compilers after Delphi 7 to use deprecated
- *                        EWin32Error exception instead of EOSError.
- *                      - Added assertion to check callback procedure passed to
- *                        TPJEnvVars.EnumNames is assigned as intended in v1.1.
- *                      - Fixed bug in TPJEnvVars constructor where passing a
- *                        nil owner would cause an access violation.
- *                      - Switched off UNSAFE_TYPE warnings on Delphi 7 and
- *                        later.
- *                      - Changed to Mozilla Public License.
- *
+ * $Rev$
+ * $Date$
  *
  * ***** BEGIN LICENSE BLOCK *****                           
  *
@@ -42,8 +24,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2001-2008 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2001-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }

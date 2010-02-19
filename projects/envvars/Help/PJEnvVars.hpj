@@ -2,12 +2,8 @@
 ;
 ; Help project file for Environment Variables unit.
 ;
-; v1.0 of 02 Sep 2001  - Original version.
-; v1.1 of 31 Jul 2003  - Updated copyright date to include 2003.
-;                      - Changed references to PJSoft to DelphiDabbler.
-; v1.2 of 17 Aug 2008  - Updated copyright date to include 2008.
-;                      - Changed to Mozilla Public License.
-;
+; $Rev$
+; $Date$
 ;
 ; ***** BEGIN LICENSE BLOCK *****
 ;
@@ -26,8 +22,11 @@
 ; The Initial Developer of the Original Code is Peter Johnson
 ; (http://www.delphidabbler.com/).
 ;
-; Portions created by the Initial Developer are Copyright (C) 2001-2008 Peter
+; Portions created by the Initial Developer are Copyright (C) 2001-2010 Peter
 ; Johnson. All Rights Reserved.
+;
+; Conreibutor(s):
+;   NONE
 ;
 ; ***** END LICENSE BLOCK *****
 
