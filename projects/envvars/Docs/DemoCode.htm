@@ -1,16 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!--
+ * Sample demo code for Environment Variables Unit
+ *
+ * $Rev$
+ * $Date$
+-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
 
 	<title>
-		Environment Variables Unit Demo Code
+		DelphiDabbler Environment Variables Unit Demo Code
 	</title>
-
+	
 	<style type="text/css">
-		<!--
 		body {
 			margin: 1em;
 			padding: 0;
@@ -139,7 +143,6 @@
 			font-size: 8pt;
 			text-align: right;
 		}
-		-->
 	</style>
 
 </head>
@@ -229,7 +232,7 @@ procedure TForm1.Button1Click(Sender: TObject);
   // Update or create env var named in Edit1 with new  value per Edit2 (empty
   // string in Edit2 deletes var)
 begin
-  if Edit1.Text <> '' then
+  if Edit1.Text &lt;&gt; '' then
   begin
     PJEnvVars1.Values[Edit1.Text] := Edit2.Text;
     UpdateList;
@@ -239,7 +242,7 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
   // Delete env var named in Edit1
 begin
-  if Edit1.Text <> '' then
+  if Edit1.Text &lt;&gt; '' then
   begin
     PJEnvVars1.DeleteVar(Edit1.Text);
     UpdateList;
@@ -337,7 +340,7 @@ procedure TForm1.Button1Click(Sender: TObject);
   // Update or create env var named in Edit1 with new  value per Edit2 (empty
   // string in Edit2 deletes var)
 begin
-  if Edit1.Text <> '' then
+  if Edit1.Text &lt;&gt; '' then
   begin
     SetEnvVarValue(Edit1.Text, Edit2.Text);
     UpdateList;
@@ -347,7 +350,7 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
   // Delete env var named in Edit1
 begin
-  if Edit1.Text <> '' then
+  if Edit1.Text &lt;&gt; '' then
   begin
     DeleteEnvVar(Edit1.Text);
     UpdateList;
@@ -380,7 +383,7 @@ end;</pre>
 
 <pre class="source">procedure TForm1.FormCreate(Sender: TObject);
 begin
-  Memo1.Text := 'This is my temp folder: "%TEMP%"';
+  Memo1.Text := 'This is my temp folder: &quot;%TEMP%&quot;';
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -426,8 +429,9 @@ end;</pre>
 <p>
 	Create a new application with a main form named <var>SlaveForm</var>. Drop
 	a memo control onto the form, and set its <var>Align</var> property to
-	<var>alClient</var>. Make sure the <code>PJEnvVars</code> unit is in your
-	uses clause. Give the form the following <var>OnCreate</var> handler:
+	<var>alClient</var> and clear the <var>Lines</var> property. Make sure the
+	<code>PJEnvVars</code> unit is in your uses clause. Give the form the
+	following <var>OnCreate</var> handler:
 </p>
 
 <pre class="source">procedure TSlaveForm.FormCreate(Sender: TObject);
@@ -447,23 +451,37 @@ end;</pre>
 
 <p>
 	Create a new application with a main form named <var>MasterForm</var>. Drop
-	a memo control onto the form, setting its align property to <var>alTop</var>
-	and clear its text. Add a button and a check box below the memo. Ensure
-	the <code>PJEnvVars</code> unit is referenced in the uses clause. Add the
-	following helper procedure and button event handler:
+	a memo control onto the form and clear its text. Add a button and a check
+	box below the memo. Ensure the <code>PJEnvVars</code> unit is referenced in
+	the uses clause. Add the following helper procedure and button event
+	handler:
 </p>
 
-<pre class="source">procedure ExecProg(ProgName: string; EnvBlock: Pointer);
+<pre class="source">procedure ExecProg(const ProgName: string; EnvBlock: Pointer);
   // Creates a new process for given program passing any given environment block
 var
   SI: TStartupInfo;
   PI: TProcessInformation;
+  CreateFlags: DWORD;
+  SafeProgName: string;
 begin
-  // Set up startup info record: all default values
+  // ensure ProgName has ref count of 1: its memory is writeable
+  // re issue with CreateProcessW: see http://bit.ly/bTRc7D
+  SafeProgName := ProgName;
+  UniqueString(SafeProgName);
+  // set up for CreateProcess
   FillChar(SI, SizeOf(SI), 0);
   SI.cb := SizeOf(SI);
-  // Execute the program
-  CreateProcess(nil, PChar(ProgName), nil, nil, True, 0, EnvBlock, nil, SI, PI);
+  // set flags according to if unicode environment block
+  {$IFDEF UNICODE}
+  CreateFlags := CREATE_UNICODE_ENVIRONMENT;
+  {$ELSE}
+  CreateFlags := 0;
+  {$ENDIF}
+  CreateProcess(
+    nil, PChar(SafeProgName), nil, nil, True,
+    CreateFlags, EnvBlock, nil, SI, PI
+  );
 end;
 
 procedure TMasterForm.Button1Click(Sender: TObject);
@@ -473,17 +491,55 @@ var
 begin
   // Create the environment block
   BlockSize := CreateEnvBlock(Memo1.Lines, CheckBox1.Checked, nil, 0);
-  GetMem(EnvBlock, BlockSize);
-  CreateEnvBlock(Memo1.Lines, CheckBox1.Checked, EnvBlock, BlockSize);
-  // Execute the slave app
-  ExecProg('SlaveApp.exe', EnvBlock);
+  // BlockSize is in Characters, not bytes: so needs converting to bytes
+  GetMem(EnvBlock, BlockSize * SizeOf(Char));
+  try
+    CreateEnvBlock(Memo1.Lines, CheckBox1.Checked, EnvBlock, BlockSize);
+    // Execute the slave app
+    ExecProg('SlaveApp.exe', EnvBlock);
+  finally
+    FreeMem(EnvBlock);
+  end;
 end;</pre>
 
 <p>
 	Save the project as <code>MasterApp</code> in the same folder as 
-	<code>SlaveApp</code> and compile. When <code>MasterApp</code> is run, enter
-	some environment variables in <kbd>NAME=VALUE</kbd> format in the memo
-	control. Place each <kbd>NAME=VALUE</kbd> pair on a different line.
+	<code>SlaveApp</code> and compile.
+</p>
+
+<div class="pullout">
+	There is some interesting code in both <var>ExecProg</var> and
+	<var>Button1Click</var> to watch out for.
+	<ul>
+		<li>
+			<strong>Important:</strong> notice the <var>GetMem</var> call in
+			<var>Button1Click</var>. The block size has been multiplied by the
+			character size. This is because <var>CreateEnvBlock</var> returns
+			the size of the environment in characters, not in bytes. And for
+			Unicode Delphis these are not the same. Miss this and you'll get an
+			access violation at some point.
+		</li>
+		<li>
+			In <var>ExecProg</var> I've used <var>UniqueString</var> to get
+			round a peculiarity of <var>CreateProcessW</var> from the Windows
+			Unicode API. This is best explained by <a
+				href="http://bit.ly/bTRc7D"
+			>this post</a> on the Embarcadero forums.
+		</li>
+		<li>
+			Also in <var>ExecProg</var> note the use of the
+			<var>CREATE_UNICODE_ENVIRONMENT</var> flag. I have discussed this on
+			<a
+				href="http://bit.ly/cWgjXH"
+			>my blog</a>.
+		</li>
+	</ul>
+</div>
+
+<p>
+	When <code>MasterApp</code> is run, enter some environment variables in
+	<kbd>NAME=VALUE</kbd> format in the memo control. Place each
+	<kbd>NAME=VALUE</kbd> pair on a different line.
 </p>
 
 <p>
@@ -509,7 +565,7 @@ end;</pre>
 	</div>
 
 	<div class="copyright">
-		This document is copyright &copy; 2008, P D Johnson,
+		This document is copyright &copy; 2008-2010, P D Johnson,
 		<a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>
 	</div>
 
