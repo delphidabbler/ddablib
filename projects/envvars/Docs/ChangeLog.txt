@@ -4,6 +4,12 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v1.3.1 of 20 February 2010
++ Fixed bug in GetAllEnvVars routine (issue #3: http://code.google.com/p/ddab-lib/issues/detail?id=3).
++ Fixed bug in ExpandEnvironmentStrings  (issue #4: http://code.google.com/p/ddab-lib/issues/detail?id=4).
++ Updated help file and example code document for compatibility when unicode Delphis. Example code stripped from help file.
++ Updated documentation.
+
 Release v1.3 of 17 August 2008
 + Fixed bugs in component:
   - Compilers later than Delphi 7 used deprecated Win32Error instead of EOSError.
