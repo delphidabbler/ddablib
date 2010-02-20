@@ -1,6 +1,6 @@
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
-{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fnil \fcharset0 Courier New;}{\f4\fnil \fcharset2 WingDings;}}
-{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue128;\red128\green0\blue0;}
+{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset0 Courier New;}{\f3\fmodern Courier New;}{\f4\fnil \fcharset2 WingDings;}}
+{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}
 ${\footnote {$}PJEnvVars unit}
 #{\footnote {#}IDH_EV_UNIT}
 @{\footnote {@}Description of PJEnvVars unit.}
@@ -13,6 +13,8 @@ A{\footnote {A}PJEnvVars}
 \par \pard This unit contains a {\strike set of functions and procedures}{\v IDH_ENVVARROUTINES} that can manipulate \plain\f1\fs18\cf0 a process'\plain\f0\fs18\cf0  environment block and the variables contained in it.
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 It also defines a component, {\strike TPJEnvVars}{\v IDH_EV_CLASS},  that encapsu\plain\f1\fs18\cf0 la\plain\f0\fs18\cf0 tes a process' environment variables and provides an easy way to change their values, \plain\f1\fs18\cf0 create then and \plain\f0\fs18\cf0 delete them.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 To see examples of using the code see the file \plain\f2\fs18\cf0 DemoCode.htm\plain\f1\fs18\cf0  that is distributed with the unit.\plain\f0\fs18\cf0 
 \par \page 
 ${\footnote {$}TPJEnvVars}
 #{\footnote {#}IDH_EV_CLASS}
@@ -23,7 +25,7 @@ A{\footnote {A}TPJEnvVars;TPJEnvVars_object}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \{bmlt PJEnvVars.bmp\}\plain\f0\fs22\cf2\b  TPJEnvVars\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_EV_HEIRACHY}          {\ul Properties}{\v IDH_EV_PROPERTIES}          {\ul Methods}{\v IDH_EV_METHODS}          {\strike Example}{\v IDH_EG_4}
+\par \plain\f0\fs18\cf0 {\ul Heirachy}{\v IDH_EV_HEIRACHY}          {\ul Properties}{\v IDH_EV_PROPERTIES}          {\ul Methods}{\v IDH_EV_METHODS}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard The TPJEnvVars component provides easy access to environment variables.
 \par 
@@ -72,11 +74,11 @@ A{\footnote {A}TPJEnvVars_Count;Count_property;Count}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b TPJEnvVars.Count\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}          {\strike Example}{\v IDH_EG_4}
+\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard The number of environment variables.
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  Count: Integer;\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b property\plain\f3\fs18\cf0  Count: Integer;\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -91,11 +93,11 @@ A{\footnote {A}TPJEnvVars_Values;Values_property;Values}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b TPJEnvVars.Values\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}          {\strike See also}{\v !AL(TPJEnvVars_EnumNames;TPJEnvVars_DeleteVar)}          {\strike Example}{\v IDH_EG_4}
+\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}          {\strike See also}{\v !AL(TPJEnvVars_EnumNames;TPJEnvVars_DeleteVar)}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard \plain\f1\fs18\cf0 Provides\plain\f0\fs18\cf0  read write access to environment variables.
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  Values[Name: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ]: \plain\f2\fs18\cf0\b string\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b property\plain\f3\fs18\cf0  Values[Name: \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 ]: \plain\f3\fs18\cf0\b string\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -134,7 +136,7 @@ A{\footnote {A}TPJEnvVars_Create;Create_method;Create}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Class constructor.
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b constructor\plain\f2\fs18\cf0  Create(AOwner: TComponent);\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b constructor\plain\f3\fs18\cf0  Create(AOwner: TComponent);\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -151,15 +153,15 @@ A{\footnote {A}TPJEnvVars_DeleteVar;DeleteVar_method;DeleteVar}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b TPJEnvVars.DeleteVar\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}          {\strike See also}{\v !AL(PJEnvVars_DeleteEnvVar)}          {\strike Example}{\v IDH_EG_4}
+\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}          {\strike See also}{\v !AL(PJEnvVars_DeleteEnvVar)}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Deletes an environment variable.
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  DeleteVar(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Name: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 );\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b procedure\plain\f3\fs18\cf0  DeleteVar(\plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  Name: \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 );\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Deletes the named environment variable. Does nothing if the environment variable does not exist. \plain\f1\fs18\cf0 This is functionally the same as setting \plain\f3\fs18\cf0 Values[Name] := '';\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0 Deletes the named environment variable. Does nothing if the environment variable does not exist. \plain\f1\fs18\cf0 This is functionally the same as setting \plain\f2\fs18\cf0 Values[Name] := '';\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 A {\strike EPJEnvVars}{\v IDH_EEV_CLASS} exception is raised if it is not possible to delete the variable.
 \par \page 
@@ -172,14 +174,14 @@ A{\footnote {A}TPJEnvVars_EnumNames;EnumNames_method;EnumNames}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b TPJEnvVars.EnumNames\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}          {\strike See also}{\v !AL(TPJEnvVars_Values;PJEnvVars_GetAllEnvVars)}          {\strike Example}{\v IDH_EG_4}
+\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}          {\strike See also}{\v !AL(TPJEnvVars_Values;PJEnvVars_GetAllEnvVars)}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Enumerates all environment variables.
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJEnvVarsEnum = \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0 (\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  VarName: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ; 
-\par   Data: Pointer) \plain\f2\fs18\cf0\b of object\plain\f2\fs18\cf0 ;
+\par \pard \keep \plain\f3\fs18\cf0\b type\plain\f3\fs18\cf0  TPJEnvVarsEnum = \plain\f3\fs18\cf0\b procedure\plain\f3\fs18\cf0 (\plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  VarName: \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 ; 
+\par   Data: Pointer) \plain\f3\fs18\cf0\b of object\plain\f3\fs18\cf0 ;
 \par \pard \plain\f0\fs8\cf0 
-\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  EnumNames(Callback: TPJEnvVarsEnum; Data: Pointer);\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b procedure\plain\f3\fs18\cf0  EnumNames(Callback: TPJEnvVarsEnum; Data: Pointer);\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -265,8 +267,8 @@ A{\footnote {A}TPJEnvVarsEnum}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 This procedural type is the type of the callback method that has to be passed to the {\strike EnumNames}{\v IDH_EV_ENUMNAMES} method of the {\strike TPJEnvVars }{\v IDH_EV_CLASS}component. It is declared as:
 \par \plain\f0\fs8\cf0 
-\par \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJEnvVarsEnum = \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0 (\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  VarName: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ; 
-\par   Data: Pointer) \plain\f2\fs18\cf0\b of object\plain\f2\fs18\cf0 ;
+\par \plain\f3\fs18\cf0\b type\plain\f3\fs18\cf0  TPJEnvVarsEnum = \plain\f3\fs18\cf0\b procedure\plain\f3\fs18\cf0 (\plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  VarName: \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 ; 
+\par   Data: Pointer) \plain\f3\fs18\cf0\b of object\plain\f3\fs18\cf0 ;
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 EnumNames calls this method for each environment variable in the environment block. The variable's name is passed in VarName and \plain\f1\fs18\cf0 the\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 D\plain\f0\fs18\cf0 ata pointer passed to EnumNames by the user is passed in the Data parameter.\plain\f1\fs18\cf0  Data is not processed by EnumNames.\plain\f0\fs18\cf0 
 \par \page 
@@ -296,7 +298,7 @@ A{\footnote {A}PJEnvVars_GetEnvVarValue;GetEnvVarValue}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b GetEnvVarValue\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJEnvVars_SetEnvVarValue;PJEnvVars_DeleteEnvVar;PJEnvVars_GetAllEnvVars;TPJEnvVars_Values)}          {\strike Group}{\v IDH_ENVVARROUTINES}          {\strike Example}{\v IDH_EG_1}
+\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJEnvVars_SetEnvVarValue;PJEnvVars_DeleteEnvVar;PJEnvVars_GetAllEnvVars;TPJEnvVars_Values)}          {\strike Group}{\v IDH_ENVVARROUTINES}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Returns the value of an environment variable.
 \par 
@@ -304,7 +306,7 @@ A{\footnote {A}PJEnvVars_GetEnvVarValue;GetEnvVarValue}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 {\strike PJEnvVars}{\v IDH_EV_UNIT}
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b function\plain\f2\fs18\cf0  GetEnvVarValue(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  VarName: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ): \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b function\plain\f3\fs18\cf0  GetEnvVarValue(\plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  VarName: \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 ): \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 ;\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -320,7 +322,7 @@ A{\footnote {A}PJEnvVars_SetEnvVarValue;SetEnvVarValue}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b SetEnvVarValue\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJEnvVars_GetEnvVarValue;PJEnvVars_DeleteEnvVar;TPJEnvVars_Values)}          {\strike Group}{\v IDH_ENVVARROUTINES}          {\strike Example}{\v IDH_EG_1}
+\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJEnvVars_GetEnvVarValue;PJEnvVars_DeleteEnvVar;TPJEnvVars_Values)}          {\strike Group}{\v IDH_ENVVARROUTINES}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Sets the value of the given environment variable.
 \par 
@@ -328,8 +330,8 @@ A{\footnote {A}PJEnvVars_SetEnvVarValue;SetEnvVarValue}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 {\strike PJEnvVars}{\v IDH_EV_UNIT}
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b function\plain\f2\fs18\cf0  SetEnvVarValue(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  VarName, 
-\par   VarValue: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ): Integer;\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b function\plain\f3\fs18\cf0  SetEnvVarValue(\plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  VarName, 
+\par   VarValue: \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 ): Integer;\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -346,7 +348,7 @@ A{\footnote {A}PJEnvVars_DeleteEnvVar;DeleteEnvVar}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b DeleteEnvVar\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJEnvVars_SetEnvVarValue;TPJEnvVars_DeleteVar)}          {\strike Group}{\v IDH_ENVVARROUTINES}          {\strike Example}{\v IDH_EG_1}
+\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(PJEnvVars_SetEnvVarValue;TPJEnvVars_DeleteVar)}          {\strike Group}{\v IDH_ENVVARROUTINES}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Deletes the given environment variable.
 \par 
@@ -354,7 +356,7 @@ A{\footnote {A}PJEnvVars_DeleteEnvVar;DeleteEnvVar}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 {\strike PJEnvVars}{\v IDH_EV_UNIT}
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b function\plain\f2\fs18\cf0  DeleteEnvVar(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  VarName: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ): Integer;\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b function\plain\f3\fs18\cf0  DeleteEnvVar(\plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  VarName: \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 ): Integer;\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -371,7 +373,7 @@ A{\footnote {A}PJEnvVars_GetAllEnvVars;GetAllEnvVars}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b GetAllEnvVars\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(TPJEnvVars.EnumNames)}          {\strike Group}{\v IDH_ENVVARROUTINES}          {\strike Example}{\v IDH_EG_1}
+\par \plain\f0\fs18\cf0 {\strike See also}{\v !AL(TPJEnvVars.EnumNames)}          {\strike Group}{\v IDH_ENVVARROUTINES}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Fills a string list with all the environment variables.
 \par 
@@ -379,7 +381,7 @@ A{\footnote {A}PJEnvVars_GetAllEnvVars;GetAllEnvVars}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 {\strike PJEnvVars}{\v IDH_EV_UNIT}
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b function\plain\f2\fs18\cf0  GetAllEnvVars(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Vars: TStrings): Integer;\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b function\plain\f3\fs18\cf0  GetAllEnvVars(\plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  Vars: TStrings): Integer;\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -398,7 +400,7 @@ A{\footnote {A}PJEnvVars_ExpandEnvVars;ExpandEnvVars}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b ExpandEnvVars\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike Example}{\v IDH_EG_2}          {\strike Group}{\v IDH_ENVVARROUTINES}
+\par \plain\f0\fs18\cf0 {\strike Group}{\v IDH_ENVVARROUTINES}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Replaces environment variables with their values.
 \par 
@@ -406,7 +408,7 @@ A{\footnote {A}PJEnvVars_ExpandEnvVars;ExpandEnvVars}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 {\strike PJEnvVars}{\v IDH_EV_UNIT}
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b function\plain\f2\fs18\cf0  ExpandEnvVars(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Str: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ): \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b function\plain\f3\fs18\cf0  ExpandEnvVars(\plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  Str: \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 ): \plain\f3\fs18\cf0\b string\plain\f3\fs18\cf0 ;\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -422,7 +424,7 @@ A{\footnote {A}PJEnvVars_CreateEnvBlock;CreateEnvBlock}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b CreateEnvBlock\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike Example}{\v IDH_EG_3}          {\strike Group}{\v IDH_ENVVARROUTINES}
+\par \plain\f0\fs18\cf0 {\strike Group}{\v IDH_ENVVARROUTINES}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Creates a new environment block for passing to a new process.
 \par 
@@ -430,255 +432,25 @@ A{\footnote {A}PJEnvVars_CreateEnvBlock;CreateEnvBlock}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 {\strike PJEnvVars}{\v IDH_EV_UNIT}
 \par 
-\par \pard \keep \plain\f2\fs18\cf0\b function\plain\f2\fs18\cf0  CreateEnvBlock(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  NewEnv: TStrings;
-\par   \plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  IncludeCurrent: Boolean; \plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  Buffer: Pointer;
-\par   \plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  BufSize: Integer): Integer;\plain\f0\fs18\cf0 
+\par \pard \keep \plain\f3\fs18\cf0\b function\plain\f3\fs18\cf0  CreateEnvBlock(\plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  NewEnv: TStrings;
+\par   \plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  IncludeCurrent: Boolean; \plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  Buffer: Pointer;
+\par   \plain\f3\fs18\cf0\b const\plain\f3\fs18\cf0  BufSize: Integer): Integer;\plain\f0\fs18\cf0 
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 CreateEnvBlock creates a new environment block which can be used to pass to another process. 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 The new environment block is stored in the memory pointed to by Buffer, which is taken to be at least BufSize bytes. The actual size of the environment block is returned by CreateEnvBlock. If the buffer provided is nil or is too small then no block is created and the return value is the required buffer size.
+\par \plain\f0\fs18\cf0 The new environment block is stored in the memory pointed to by Buffer, which is taken to be at least BufSize \plain\f1\fs18\cf0 characters\plain\f0\fs18\cf0 . The actual size of the environment block is returned by CreateEnvBlock. If the buffer provided is nil or is too small then no block is created and the return value is the required buffer size\plain\f1\fs18\cf0  in characters\plain\f0\fs18\cf0 .
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 The NewEnv and IncludeCurrent parameters determine what is included in the new environment block. If the NewEnv string list is not nil then it should contain a list of environment variables in the form NAME=VALUE. The new environment block will contain these values. If IncludeCurrent is true then the new environment block will also include a copy of the current process's environment block.
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 The usual way to call CreateEnvBlock is to use it once with a nil buffer to get the required buffer size, allocate the buffer and then call \plain\f1\fs18\cf0 CreateEnvBlock \plain\f0\fs18\cf0 again\plain\f1\fs18\cf0 , this time passing the actual buffer and its size (see the {\strike example}{\v IDH_EG_3} for details).\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0 The usual way to call CreateEnvBlock is to use it once with a nil buffer to get the required buffer size, allocate the buffer and then call \plain\f1\fs18\cf0 CreateEnvBlock \plain\f0\fs18\cf0 again\plain\f1\fs18\cf0 , this time passing the actual buffer and its size.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0\b Warning: \plain\f1\fs18\cf0 It is important to note that CreateEnvBlock treats buffer sizes in \plain\f1\fs18\cf0\i characters\plain\f1\fs18\cf0 , not bytes, which is not the same thing on Unicode Delphis. When allocating buffers in bytes (e.g. with GetMem) you must multiply the required size returned from CreateEnvBlock by SizeOf(Char). Alternatively, use a routine such as StrAlloc that automatically takes account of the character size.
 \par \plain\f0\fs8\cf0 
 \par \plain\f1\fs18\cf0 The format of the environment block stored in Buffer is a #0 separated list of environment variables in NAME=VALUE form, terminated by #0#0. E.g.:
 \par \plain\f1\fs8\cf0 
-\par \pard \li400 \plain\f3\fs18\cf0 Name1=Value1#0Name2=Value2#Name3=Value3#0#0
+\par \pard \li400 \plain\f2\fs18\cf0 Name1=Value1#0Name2=Value2#Name3=Value3#0#0
 \par \pard \plain\f0\fs18\cf0 
-\par \page 
-${\footnote {$}Example 1}
-#{\footnote {#}IDH_EG_1}
-@{\footnote {@}Example of using GetEnvVarValue, SetEnvVarValue and DeleteEnvVar and GetAllEnvVars.}
-
-\pard \plain \pard \keepn \plain\f0\fs8\cf0 
-\par \plain\f0\fs22\cf2\b Example 1\plain\f0\fs18\cf0 
-\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
-\par \pard This example demonstrates the use of the {\strike GetEnvVarValue}{\v IDH_GETENVVARVALUE}, {\strike SetEnvVarValue}{\v IDH_SETENVVARVALUE}\plain\f1\fs18\cf0 ,\plain\f0\fs18\cf0  {\strike DeleteEnvVar }{\v IDH_DELETEENVVAR}and {\strike GetAllEnvVars}{\v IDH_GETALLENVVARS} routines. 
-\par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Drop a list box, two edit boxes and two buttons on a form \plain\f1\fs18\cf0 and add PJEnvVars to your uses clause. Now \plain\f0\fs18\cf0 enter the following code: 
-\par 
-\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.UpdateList;
-\par \plain\f2\fs18\cf3   // Displays all environment vars in list box
-\par \plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0 
-\par   SL: TStringList;
-\par   Idx: Integer;
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   ListBox1.Clear;
-\par   SL := TStringList.Create;
-\par   \plain\f2\fs18\cf0\b try\plain\f2\fs18\cf0 
-\par     {\strike GetAllEnvVars}{\v IDH_GETALLENVVARS}(SL);
-\par     \plain\f2\fs18\cf0\b for\plain\f2\fs18\cf0  Idx := 0 \plain\f2\fs18\cf0\b to\plain\f2\fs18\cf0  Pred(SL.Count) \plain\f2\fs18\cf0\b do\plain\f2\fs18\cf0 
-\par       ListBox1.Items.Add(SL.Names[Idx]);
-\par     Edit1.Text := \plain\f2\fs18\cf4 ''\plain\f2\fs18\cf0 ;
-\par     Edit2.Text := \plain\f2\fs18\cf4 ''\plain\f2\fs18\cf0 ;
-\par   \plain\f2\fs18\cf0\b finally\plain\f2\fs18\cf0 
-\par     SL.Free;
-\par   \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.FormCreate(Sender: TObject);
-\par \plain\f2\fs18\cf3   // Display program's environment vars in list\plain\f2\fs18\cf0 
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   UpdateList;
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.ListBox1Click(Sender: TObject);
-\par \plain\f2\fs18\cf3   // Display selected env var name and value\plain\f2\fs18\cf0 
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   Edit1.Text := ListBox1.Items[ListBox1.ItemIndex];
-\par   Edit2.Text := {\strike GetEnvVarValue}{\v IDH_GETENVVARVALUE}(Edit1.Text);
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.Button1Click(Sender: TObject);
-\par \plain\f2\fs18\cf3   // Update or create env var named in Edit1 with new 
-\par   // value per Edit2 (empty string in Edit2 deletes var)\plain\f2\fs18\cf0 
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf0\b if\plain\f2\fs18\cf0  Edit1.Text <> \plain\f2\fs18\cf4 ''\plain\f2\fs18\cf0  \plain\f2\fs18\cf0\b then\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par     {\strike SetEnvVarValue}{\v IDH_SETENVVARVALUE}(Edit1.Text, Edit2.Text);
-\par     UpdateList;
-\par   \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.Button2Click(Sender: TObject);
-\par \plain\f2\fs18\cf3   // Delete env var named in Edit1\plain\f2\fs18\cf0 
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf0\b if\plain\f2\fs18\cf0  Edit1.Text <> \plain\f2\fs18\cf4 ''\plain\f2\fs18\cf0  \plain\f2\fs18\cf0\b then\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par     {\strike DeleteEnvVar}{\v IDH_DELETEENVVAR}(Edit1.Text);
-\par     UpdateList;
-\par   \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par \pard 
-\par \plain\f0\fs18\cf0 The program behaves as follows:
-\par \plain\f0\fs8\cf0 
-\par \pard \fi-400 \li400 \tx400 \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab On startup the list box is populated with all the available environment variable names.
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab Selecting a variable name from the list displays it in Edit1 and places it's value in Edit2. 
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab Entering or editing a name in Edit1 and a value in Edit2 then clicking Button1 causes the environment variable named in Edit1 to be updated with \plain\f1\fs18\cf0 the \plain\f0\fs18\cf0 new value \plain\f1\fs18\cf0 from\plain\f0\fs18\cf0  Edit2. If the environment variable does not exist then it is created. \plain\f1\fs18\cf0 If no text is entered in Edit2 then the environment variable is deleted. \plain\f0\fs18\cf0 The list is updated after this change.\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab Clicking Button2 deletes the environment variable named in Edit1 and updates the list.
-\par \pard \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0\i Note: \plain\f0\fs18\cf0 This example is similar to {\strike Example 4}{\v IDH_EG_4} which accomplishes a similar task using the {\strike TPJEnvVars}{\v IDH_EV_CLASS} component.
-\par \page 
-${\footnote {$}Example 2}
-#{\footnote {#}IDH_EG_2}
-@{\footnote {@}Example of using ExpandEnvVars.}
-
-\pard \plain \pard \keepn \plain\f0\fs8\cf0 
-\par \plain\f0\fs22\cf2\b Example 2\plain\f0\fs18\cf0 
-\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
-\par \pard This example demonstrates the use of the {\strike ExpandEnvVars}{\v IDH_EXPANDENVVARS} function.
-\par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Drop two memo controls and one button on a form\plain\f1\fs18\cf0  and add PJEnvVars to your uses clause. Now add the event handlers listed below:\plain\f0\fs18\cf0 
-\par 
-\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.FormCreate(Sender: TObject);
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   Memo1.Text := \plain\f2\fs18\cf4 'This is my temp folder: "%TEMP%"'\plain\f2\fs18\cf0 ;
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.Button1Click(Sender: TObject);
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   Memo2.Text := {\strike ExpandEnvVars}{\v IDH_EXPANDENVVARS}(Memo1.Text);
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;\plain\f0\fs18\cf0 
-\par \pard 
-\par Enter some text\plain\f1\fs18\cf0 ,\plain\f0\fs18\cf0  including environment variable references\plain\f1\fs18\cf0  (such as %TEMP%),\plain\f0\fs18\cf0  in the first memo. Clicking the button replaces the environment variable names by their values and \plain\f1\fs18\cf0 displays\plain\f0\fs18\cf0  the expanded string in the second memo.
-\par \page 
-${\footnote {$}Example 3}
-#{\footnote {#}IDH_EG_3}
-@{\footnote {@}Example of using CreateEnvBlock.}
-
-\pard \plain \pard \keepn \plain\f0\fs8\cf0 
-\par \plain\f0\fs22\cf2\b Example 3\plain\f0\fs18\cf0 
-\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
-\par \pard This example demonstrates the use of the {\strike CreateEnvBlock}{\v IDH_CREATEENVBLOCK} function. It involves creating two programs:
-\par \plain\f0\fs8\cf0 
-\par \pard \fi-400 \li400 \tx400 \plain\f0\fs18\cf0 1)\tab A slave program that simply displays its environment variables.
-\par 2)\tab A master program that sets up an environment block and spawns \plain\f1\fs18\cf0 a\plain\f0\fs18\cf0  child process that uses the new block.
-\par \pard 
-\par \plain\f0\fs18\cf0\b 1) Slave program\plain\f0\fs18\cf0 
-\par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Create a new application with a main form named SlaveForm. Drop a memo control onto \plain\f1\fs18\cf0 the\plain\f0\fs18\cf0  form, and set its Align property to alClient. \plain\f1\fs18\cf0 Include the \plain\f0\fs18\cf0 PJEnvVars unit \plain\f1\fs18\cf0 in your uses clause. G\plain\f0\fs18\cf0 ive \plain\f1\fs18\cf0 SlaveForm\plain\f0\fs18\cf0  the following OnCreate handler:
-\par 
-\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TSlaveForm.FormCreate(Sender: TObject);
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   {\strike GetAllEnvVars}{\v IDH_GETALLENVVARS}(Memo1.Lines);
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;\plain\f0\fs18\cf0 
-\par \pard 
-\par Save the project as 'SlaveApp' and compile. The memo will display all \plain\f1\fs18\cf0 of\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 SlaveApp\plain\f0\fs18\cf0 '\plain\f1\fs18\cf0 s\plain\f0\fs18\cf0  environment variables when the program is executed.
-\par 
-\par \plain\f0\fs18\cf0\b 2) Master program\plain\f0\fs18\cf0 
-\par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Create a new application with a main form named MasterForm. Drop a memo control onto the form, setting its align property to alTop and clear its text. Add a \plain\f1\fs18\cf0 button\plain\f0\fs18\cf0  and a \plain\f1\fs18\cf0 check box\plain\f0\fs18\cf0  below the memo. Ensure the PJEnvVars \plain\f1\fs18\cf0 unit \plain\f0\fs18\cf0 is \plain\f1\fs18\cf0 included in the uses clause\plain\f0\fs18\cf0 . Add the following helper procedure and button event handler:
-\par 
-\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  ExecProg(ProgName: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ; EnvBlock: Pointer);
-\par \plain\f2\fs18\cf3   // Creates a new process for given program passing any
-\par   // given environment block
-\par \plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0 
-\par   SI: TStartupInfo;
-\par   PI: TProcessInformation;
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf3 // Set up startup info record: all default values\plain\f2\fs18\cf0 
-\par   FillChar(SI, SizeOf(SI), 0);
-\par   SI.cb := SizeOf(SI);
-\par   \plain\f2\fs18\cf3 // Execute the program\plain\f2\fs18\cf0 
-\par   CreateProcess(\plain\f2\fs18\cf0\b nil\plain\f2\fs18\cf0 , PChar(ProgName), \plain\f2\fs18\cf0\b nil\plain\f2\fs18\cf0 , \plain\f2\fs18\cf0\b nil\plain\f2\fs18\cf0 ,
-\par     True, 0, EnvBlock, \plain\f2\fs18\cf0\b nil\plain\f2\fs18\cf0 , SI, PI);
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TMasterForm.Button1Click(Sender: TObject);
-\par \plain\f2\fs18\cf0\b var\plain\f2\fs18\cf0 
-\par   EnvBlock: Pointer;
-\par   BlockSize: Integer;
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf3 // Create the environment block\plain\f2\fs18\cf0 
-\par   BlockSize := {\strike CreateEnvBlock}{\v IDH_CREATEENVBLOCK}(Memo1.Lines, 
-\par     CheckBox1.Checked, \plain\f2\fs18\cf0\b nil\plain\f2\fs18\cf0 , 0);
-\par   GetMem(EnvBlock, BlockSize);
-\par   {\strike CreateEnvBlock}{\v IDH_CREATEENVBLOCK}(Memo1.Lines, CheckBox1.Checked,
-\par     EnvBlock, BlockSize);
-\par   \plain\f2\fs18\cf3 // Execute the slave app\plain\f2\fs18\cf0 
-\par   ExecProg(\plain\f2\fs18\cf4 'SlaveApp.exe'\plain\f2\fs18\cf0 , EnvBlock);
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;\plain\f0\fs18\cf0 
-\par \pard 
-\par Save the \plain\f1\fs18\cf0 project\plain\f0\fs18\cf0  as 'MasterApp' in the same folder as SlaveApp and compile. When MasterApp is run, enter some environment variables in the form NAME=VALUE in the memo control. Place each NAME=VALUE pair on a different line.
-\par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Now click the button. \plain\f1\fs18\cf0 A\plain\f0\fs18\cf0  copy of\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 SlaveApp \plain\f1\fs18\cf0 should run,\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 displaying\plain\f0\fs18\cf0  just the environment variables you entered.
-\par \plain\f0\fs8\cf0 
-\par \plain\f1\fs18\cf0 R\plain\f0\fs18\cf0 eturn to\plain\f1\fs18\cf0  \plain\f0\fs18\cf0 MasterApp and check the check box. Click the button again \plain\f1\fs18\cf0 to \plain\f0\fs18\cf0 spawn another instance of SlaveApp, \plain\f1\fs18\cf0 This new instance will have a copy of MasterApp's environment variables along with the \plain\f0\fs18\cf0 new \plain\f1\fs18\cf0 ones you entered in MasterApp's memo control.\plain\f0\fs18\cf0 
-\par \page 
-${\footnote {$}Example 4}
-#{\footnote {#}IDH_EG_4}
-@{\footnote {@}Example of using the TPJEnvVars component.}
-
-\pard \plain \pard \keepn \plain\f0\fs8\cf0 
-\par \plain\f0\fs22\cf2\b Example 4\plain\f0\fs18\cf0 
-\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
-\par \pard This example demonstrates the use of the {\strike TPJEnvVars}{\v IDH_EV_CLASS} component.
-\par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Drop a TPJEnvVars component, a list box, a label, two edit boxes and two buttons on the form. Add the following private methods and event handlers:
-\par 
-\par \pard \keep \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.EnvNamesEnum(\plain\f2\fs18\cf0\b const\plain\f2\fs18\cf0  VarName: \plain\f2\fs18\cf0\b string\plain\f2\fs18\cf0 ;
-\par   Data: Pointer);
-\par   \plain\f2\fs18\cf3 // Private callback method of type TPJEnvVarsEnum
-\par   // adds env var names to list box
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   TStrings(Data).Add(VarName);
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.UpdateList;
-\par \plain\f2\fs18\cf3   // Displays all environment vars in list box
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   ListBox1.Clear;
-\par   PJEnvVars1.{\strike EnumNames}{\v IDH_EV_ENUMNAMES}(EnvNamesEnum, ListBox1.Items);
-\par   Label1.Caption := Format(\plain\f2\fs18\cf4 '%d environment variables'\plain\f2\fs18\cf0 ,
-\par     [PJEnvVars1.{\strike Count}{\v IDH_EV_COUNT}]);
-\par   Edit1.Text := \plain\f2\fs18\cf4 ''\plain\f2\fs18\cf0 ;
-\par   Edit2.Text := \plain\f2\fs18\cf4 ''\plain\f2\fs18\cf0 ;
-\par end;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.FormCreate(Sender: TObject);
-\par \plain\f2\fs18\cf3   // Display program's environment vars in list\plain\f2\fs18\cf0 
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   UpdateList;
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.ListBox1Click(Sender: TObject);
-\par \plain\f2\fs18\cf3   // Display selected env var name and value\plain\f2\fs18\cf0 
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   Edit1.Text := ListBox1.Items[ListBox1.ItemIndex];
-\par   Edit2.Text := PJEnvVars1.{\strike Values}{\v IDH_EV_VALUES}[Edit1.Text];
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.Button1Click(Sender: TObject);
-\par \plain\f2\fs18\cf3   // Update or create env var named in Edit1 with new 
-\par   // value per Edit2 (empty string in Edit2 deletes var)\plain\f2\fs18\cf0 
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf0\b if\plain\f2\fs18\cf0  Edit1.Text <> \plain\f2\fs18\cf4 ''\plain\f2\fs18\cf0  \plain\f2\fs18\cf0\b then\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par     PJEnvVars1.{\strike Values}{\v IDH_EV_VALUES}[Edit1.Text] := Edit2.Text;
-\par     UpdateList;
-\par   \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par 
-\par \plain\f2\fs18\cf0\b procedure\plain\f2\fs18\cf0  TForm1.Button2Click(Sender: TObject);
-\par \plain\f2\fs18\cf3   // Delete env var named in Edit1\plain\f2\fs18\cf0 
-\par \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf0\b if\plain\f2\fs18\cf0  Edit1.Text <> \plain\f2\fs18\cf4 ''\plain\f2\fs18\cf0  \plain\f2\fs18\cf0\b then\plain\f2\fs18\cf0 
-\par   \plain\f2\fs18\cf0\b begin\plain\f2\fs18\cf0 
-\par     PJEnvVars1.{\strike DeleteVar}{\v IDH_EV_DELETEVAR}(Edit1.Text);
-\par     UpdateList;
-\par   \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;
-\par \plain\f2\fs18\cf0\b end\plain\f2\fs18\cf0 ;\plain\f0\fs18\cf0 
-\par \pard 
-\par The program behaves as follows:
-\par \plain\f0\fs8\cf0 
-\par \pard \fi-400 \li400 \tx400 \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab On startup the list box is populated with all the available environment variable names and the number of evironment variables is displayed in the label.
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab Selecting a variable name from the list displays it in Edit1 and places its value in Edit2. 
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab Entering or editing a name in Edit1 and a value in Edit2 then clicking Button1 causes the environment variable named in Edit1 to be updated with \plain\f1\fs18\cf0 the \plain\f0\fs18\cf0 new value \plain\f1\fs18\cf0 from\plain\f0\fs18\cf0  Edit2. If the environment variable does not exist then it is created.\plain\f1\fs18\cf0  If no text is entered in Edit2 then the environment variable is deleted.\plain\f0\fs18\cf0  The list is updated after this change.
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab Clicking Button2 deletes the environment variable named in Edit1 and updates the list.
-\par \pard \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0\i Note: \plain\f0\fs18\cf0 This example is similar to {\strike Example 1}{\v IDH_EG_1} which accomplishes a similar task using the {\strike environment variable manipulation routines}{\v IDH_ENVVARROUTINES} instead of the component.
 \par \page 
 }
