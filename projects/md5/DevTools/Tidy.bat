@@ -29,6 +29,7 @@ del /S %RootDir%\*.ini
 del /S %RootDir%\*.tmp
 del /S %RootDir%\*.local
 del /S %RootDir%\*.tmp
+del /S %RootDir%\*.identcache
 del /S /AH %RootDir%\*.GID 
 echo.
 
