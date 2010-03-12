@@ -94,7 +94,7 @@ type
     // ** NOTE: Order of these tests is important **
 
     // Tests Process(TBytes, Cardinal) and Calculate(TBytes, Cardinal) methods
-    // and Digest and DigestString properties.
+    // and Digest property.
     // Process(TBytes, Cardinal) is called internally by all other
     // Process... methods, so is tested first. The method is also called by some
     // test methods.
@@ -346,8 +346,8 @@ begin
         'RFC Test #' + Test.ID + ' Failed - Digest property wrong value'
       );
       Check(
-        Test.IsEqualResult(MD5.DigestAsString),
-        'RFC Test #' + Test.ID + ' Failed - DigestAsString property wrong value'
+        Test.IsEqualResult(MD5.Digest),
+        'RFC Test #' + Test.ID + ' Failed - Digest property wrong string value'
       );
     finally
       MD5.Free;
@@ -551,7 +551,7 @@ begin
   try
     MD5.ReadBufferSize := 16;
     MD5.ProcessFile(TestFilePath + TestFileName);
-    Check(SameStr(MD5.DigestAsString, TestFileRes), 'File ' + TestFileName);
+    Check(SameStr(MD5.Digest, TestFileRes), 'File ' + TestFileName);
   finally
     MD5.Free;
   end;
@@ -587,7 +587,7 @@ begin
   try
     MD5.Process(ASCIITestString);
     Check(
-      SameStr(MD5.DigestAsString, ASCIITestStringRes),
+      SameStr(MD5.Digest, ASCIITestStringRes),
       'Unicode ASCII string test (default encoding)'
     );
   finally
@@ -605,13 +605,13 @@ begin
   try
     MD5.Process(ASCIITestString, TEncoding.ASCII);
     Check(
-      SameStr(MD5.DigestAsString, ASCIITestStringRes),
+      SameStr(MD5.Digest, ASCIITestStringRes),
       'Unicode ASCII string test (ASCII encoding)'
     );
     MD5.Reset;
     MD5.Process(UnicodeTestString, TEncoding.Unicode);
     Check(
-      SameStr(MD5.DigestAsString, UnicodeTestStringRes),
+      SameStr(MD5.Digest, UnicodeTestStringRes),
       'Unicode string test (Unicode encoding)'
     );
   finally
@@ -630,7 +630,7 @@ begin
       RFCTests[DefaultRFCTest].SizeOfData
     );
     Check(
-      not SameStr(MD5.DigestAsString, NoProcessingRes), 'Unexpected digest'
+      not SameStr(MD5.Digest, NoProcessingRes), 'Unexpected digest'
     );
     Check(MD5.Finalized, TPJMD5.ClassName + '.Finalized should be True');
     MD5.Reset;
@@ -638,13 +638,12 @@ begin
       not MD5.Finalized, TPJMD5.ClassName + '.Finalized should be False'
     );
     Check(
-      SameStr(MD5.DigestAsString, NoProcessingRes), 'Digest not reset correctly'
+      SameStr(MD5.Digest, NoProcessingRes), 'Digest not reset correctly'
     );
   finally
     MD5.Free;
   end;
 end;
-
 
 { TRFCTest }
 

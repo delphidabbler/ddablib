@@ -141,7 +141,6 @@ type
       fReadBufferSize: Cardinal;
     function GetDigest: TPJMD5Digest;
     procedure Transform(const Bytes: array of Byte; const StartIdx: Cardinal);
-    function GetDigestString: string;
     procedure Update(const X: array of Byte; const Size: Cardinal);
     class function DoCalculate(const DoProcess: TProc<TPJMD5>): TPJMD5Digest;
   public
@@ -170,7 +169,6 @@ type
     procedure Reset;
     procedure Finalize;
     property Digest: TPJMD5Digest read GetDigest;
-    property DigestAsString: string read GetDigestString;
     property ReadBufferSize: Cardinal
       read fReadBufferSize write fReadBufferSize default DEFREADBUFFERSIZE;
     property Finalized: Boolean read fFinalized;
@@ -430,11 +428,6 @@ begin
   if not fFinalized then
     Finalize;
   Result := fDigest;
-end;
-
-function TPJMD5.GetDigestString: string;
-begin
-  Result := GetDigest;  // uses Implicit operator of TPJMD5Digest
 end;
 
 procedure TPJMD5.Process(const S: UnicodeString; const Encoding: TEncoding);
