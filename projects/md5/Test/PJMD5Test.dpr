@@ -42,16 +42,12 @@ program PJMD5Test;
 {$ENDIF}
 
 uses
-  {$IFDEF CONSOLE_TESTRUNNER}
-  TextTestRunner,
-  {$ELSE}
   Forms,
   GUITestRunner,
   XPMan,
-  {$ENDIF}
   TestFramework,
-  PJMD5 in 'PJMD5.pas',
-  TestPJMD5 in 'TestPJMD5.pas';
+  TestPJMD5 in 'TestPJMD5.pas',
+  PJMD5 in '..\PJMD5.pas';
 
 {$R *.RES}
 

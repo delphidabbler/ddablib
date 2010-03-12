@@ -27,8 +27,8 @@
 			<DelphiCompile Include="PJMD5Test.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="PJMD5.pas"/>
 			<DCCReference Include="TestPJMD5.pas"/>
+			<DCCReference Include="..\PJMD5.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
