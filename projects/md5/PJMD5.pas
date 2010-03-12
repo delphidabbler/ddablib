@@ -58,7 +58,7 @@
 unit PJMD5;
 
 // Delphi 2009 or later is required to compile: requires Unicode support
-// TODO: Removed requirement for Unicode compiler
+// TODO: Remove requirement for Unicode compiler
 {$UNDEF CANCOMPILE}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 20.0}
@@ -82,7 +82,22 @@ type
 
   EPJMD5 = class(Exception);
 
-  TPJMD5Digest = array[0..15] of Byte;
+  TPJMD5Digest = record
+  strict private
+    function GetLongWord(Idx: Integer): LongWord;
+  public
+    class operator Equal(const D1, D2: TPJMD5Digest): Boolean;
+    class operator NotEqual(const D1, D2: TPJMD5Digest): Boolean;
+    class operator Implicit(const D: TPJMD5Digest): string;
+    class operator Implicit(const S: string): TPJMD5Digest;
+    class operator Implicit(const D: TPJMD5Digest): TBytes;
+    class operator Implicit(const B: TBytes): TPJMD5Digest;
+    property Parts[Idx: Integer]: LongWord read GetLongWord; default;
+    case Integer of
+      0: (Bytes: packed array[0..15] of Byte);
+      1: (LongWords: packed array[0..3] of LongWord);
+      2: (A, B, C, D: LongWord);
+  end;
 
   TPJMD5 = class(TObject)
   strict private
@@ -105,12 +120,6 @@ type
           const Size: Cardinal);
         procedure Clear;
       end;
-      // record of state of digest
-      TMDState = packed record
-        case Boolean of
-          False: (A, B, C, D: LongWord);
-          True: (LongWords: array[0..3] of LongWord);
-      end;
       TMDReadBuffer = record
         Buffer: Pointer;
         Size: Cardinal;
@@ -119,7 +128,7 @@ type
       end;
     var
       // state of digest
-      fState: TMDState;
+      fState: TPJMD5Digest;
       // digest that is output
       fDigest: TPJMD5Digest;
       // whether digest has been finalised or not
@@ -267,6 +276,8 @@ const
 
 resourcestring
   sAlreadyFinalized = 'Can''t update a finalised digest';
+  sBadMD5StrLen = 'Can''t cast string of length %d to TPJMD5Digest';
+  sBadMD5StrChars = 'Can''t cast string %s to TPJMD5Digest: invalid hex digits';
 
 { TPJMD5 }
 
@@ -325,7 +336,7 @@ begin
 
   Assert(fBuffer.IsEmpty);
 
-  LongWordsToBytes(fState.LongWords, fDigest);
+  fDigest := fState;
   fFinalized := True;
 end;
 
@@ -337,17 +348,8 @@ begin
 end;
 
 function TPJMD5.GetDigestString: string;
-var
-  B: Byte;
-const
-  Digits: array[0..15] of Char = (
-    '0', '1', '2', '3', '4', '5', '6', '7',
-    '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-  );
 begin
-  Result := '';
-  for B in GetDigest do
-    Result := Result + Digits[(B shr 4) and $0f] + Digits[B and $0f];
+  Result := GetDigest;  // uses Implicit operator of TPJMD5Digest
 end;
 
 procedure TPJMD5.Process(const S: UnicodeString; const Encoding: TEncoding);
@@ -655,6 +657,85 @@ begin
     FreeMem(Buffer);
     Size := 0;
   end;
+end;
+
+{ TPJMD5Digest }
+
+class operator TPJMD5Digest.Equal(const D1, D2: TPJMD5Digest): Boolean;
+var
+  Idx: Integer;
+begin
+  Result := True;
+  for Idx := Low(D1.LongWords) to High(D1.LongWords) do
+    if D1.LongWords[Idx] <> D2.LongWords[Idx] then
+    begin
+      Result := False;
+      Exit;
+    end;
+end;
+
+class operator TPJMD5Digest.Implicit(const D: TPJMD5Digest): string;
+var
+  B: Byte;
+const
+  Digits: array[0..15] of Char = (
+    '0', '1', '2', '3', '4', '5', '6', '7',
+    '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+  );
+begin
+  Result := '';
+  for B in D.Bytes do
+    Result := Result + Digits[(B shr 4) and $0f] + Digits[B and $0f];
+end;
+
+function TPJMD5Digest.GetLongWord(Idx: Integer): LongWord;
+begin
+  Assert((Idx >= Low(LongWords)) and (Idx <= High(LongWords)));
+  Result := Self.LongWords[Idx];
+end;
+
+class operator TPJMD5Digest.Implicit(const S: string): TPJMD5Digest;
+var
+  Idx: Integer;
+  B: Integer;
+  ByteStr: string;
+begin
+  FillChar(Result, SizeOf(Result), 0);
+  if Length(S) <> 2 * Length(Result.Bytes) then
+    raise EPJMD5.CreateFmt(sBadMD5StrLen, [Length(S)]);
+  // we know string is correct length (32)
+  for Idx := 0 to Pred(Length(Result.Bytes)) do
+  begin
+    ByteStr := S[2 * Idx + 1] + S[2 * Idx + 2];
+    if not TryStrToInt('$' + ByteStr, B) then
+      raise EPJMD5.CreateFmt(sBadMD5StrChars, [S]);
+    Result.Bytes[Idx] := Byte(B);
+  end;
+end;
+
+class operator TPJMD5Digest.Implicit(const B: TBytes): TPJMD5Digest;
+var
+  Idx: Integer;
+begin
+  Assert(Length(B) = Length(Result.Bytes));
+  Assert(Low(B) = Low(Result.Bytes));
+  for Idx := Low(B) to High(B) do
+    Result.Bytes[Idx] := B[Idx];
+end;
+
+class operator TPJMD5Digest.Implicit(const D: TPJMD5Digest): TBytes;
+var
+  Idx: Integer;
+begin
+  SetLength(Result, Length(D.Bytes));
+  Assert(Low(D.Bytes) = Low(Result));
+  for Idx := Low(D.Bytes) to High(D.Bytes) do
+    Result[Idx] := D.Bytes[Idx];
+end;
+
+class operator TPJMD5Digest.NotEqual(const D1, D2: TPJMD5Digest): Boolean;
+begin
+  Result := not (D1 = D2);
 end;
 
 end.
