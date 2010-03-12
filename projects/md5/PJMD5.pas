@@ -58,7 +58,6 @@
 unit PJMD5;
 
 // Delphi 2009 or later is required to compile: requires Unicode support
-// TODO: Remove requirement for Unicode compiler
 {$UNDEF CANCOMPILE}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 20.0}
@@ -287,6 +286,8 @@ resourcestring
   sAlreadyFinalized = 'Can''t update a finalised digest';
   sBadMD5StrLen = 'Can''t cast string of length %d to TPJMD5Digest';
   sBadMD5StrChars = 'Can''t cast string %s to TPJMD5Digest: invalid hex digits';
+  sByteArrayTooSmall = 'Can''t cast TBytes array to TPJMD5Digest: '
+    + 'not enough bytes';
 
 { TPJMD5 }
 
@@ -744,6 +745,12 @@ begin
     end;
 end;
 
+function TPJMD5Digest.GetLongWord(Idx: Integer): LongWord;
+begin
+  Assert((Idx >= Low(LongWords)) and (Idx <= High(LongWords)));
+  Result := Self.LongWords[Idx];
+end;
+
 class operator TPJMD5Digest.Implicit(const D: TPJMD5Digest): string;
 var
   B: Byte;
@@ -756,12 +763,6 @@ begin
   Result := '';
   for B in D.Bytes do
     Result := Result + Digits[(B shr 4) and $0f] + Digits[B and $0f];
-end;
-
-function TPJMD5Digest.GetLongWord(Idx: Integer): LongWord;
-begin
-  Assert((Idx >= Low(LongWords)) and (Idx <= High(LongWords)));
-  Result := Self.LongWords[Idx];
 end;
 
 class operator TPJMD5Digest.Implicit(const S: string): TPJMD5Digest;
@@ -787,9 +788,10 @@ class operator TPJMD5Digest.Implicit(const B: TBytes): TPJMD5Digest;
 var
   Idx: Integer;
 begin
-  Assert(Length(B) = Length(Result.Bytes));
   Assert(Low(B) = Low(Result.Bytes));
-  for Idx := Low(B) to High(B) do
+  if Length(B) < Length(Result.Bytes) then
+    raise EPJMD5.Create(sByteArrayTooSmall);
+  for Idx := Low(Result.Bytes) to High(Result.Bytes) do
     Result.Bytes[Idx] := B[Idx];
 end;
 
