@@ -57,6 +57,19 @@ type
   TProcessMethodCall = reference to procedure(const MD5: TPJMD5;
     const RFCTest: TRFCTest);
 
+  // Tests TPJMD5Digest record
+  TestTPJMD5Digest = class(TTestCase)
+  private
+    function ByteArrayToBytes(const A: array of Byte): TBytes;
+  published
+    procedure TestVariantRecordParts;
+    procedure TestDefaultProperty;
+    procedure TestImplicitCasts;
+    procedure TestEquality;
+    procedure TestInEquality;
+  end;
+
+  // Tests TPJMD5 object
   TestTPJMD5 = class(TTestCase)
   strict private
     // Provides path file used in TestProcessFile
@@ -214,6 +227,41 @@ const
 
   // Default test
   DefaultRFCTest = 6;
+
+  // Tests for TPJMD5Digest
+  MD5Str1 = 'd174ab98d277d9f5a5611c2c9f419d9f';
+  MD5Bytes1: array[0..15] of Byte = (
+    $D1, $74, $AB, $98, $D2, $77, $D9, $F5,
+    $A5, $61, $1C, $2C, $9F, $41, $9D, $9F
+  );
+  Digest1: TPJMD5Digest = (
+    Bytes: (
+      $D1, $74, $AB, $98, $D2, $77, $D9, $F5,
+      $A5, $61, $1C, $2C, $9F, $41, $9D, $9F
+    )
+  );
+  MD5Str2 = 'f96b697d7cb7938d525a2f31aaf161d0';
+  MD5Bytes2: array[0..15] of Byte = (
+    $F9, $6B, $69, $7D, $7C, $B7, $93, $8D,
+    $52, $5A, $2F, $31, $AA, $F1, $61, $D0
+  );
+  Digest2: TPJMD5Digest = (
+    Bytes: (
+      $F9, $6B, $69, $7D, $7C, $B7, $93, $8D,
+      $52, $5A, $2F, $31, $AA, $F1, $61, $D0
+    )
+  );
+  MD5Str3 = 'd174ab98d277d9f5a5611c2c9f419d9f';
+  MD5Bytes3: array[0..15] of Byte = (
+    $D1, $74, $AB, $98, $D2, $77, $D9, $F5,
+    $A5, $61, $1C, $2C, $9F, $41, $9D, $9F
+  );
+  Digest3: TPJMD5Digest = (
+    Bytes: (
+      $D1, $74, $AB, $98, $D2, $77, $D9, $F5,
+      $A5, $61, $1C, $2C, $9F, $41, $9D, $9F
+    )
+  );
 
 procedure TestTPJMD5.RunFinalizeTest;
 var
@@ -484,8 +532,108 @@ begin
   Result := Length(Data);
 end;
 
+{ TestTPJMD5Digest }
+
+function TestTPJMD5Digest.ByteArrayToBytes(const A: array of Byte): TBytes;
+var
+  Idx: Integer;
+begin
+  SetLength(Result, Length(A));
+  for Idx := Low(A) to High(A) do
+    Result[Idx - Low(A)] := A[Idx];
+end;
+
+procedure TestTPJMD5Digest.TestDefaultProperty;
+var
+  Digest: TPJMD5Digest;
+begin
+  Digest.A := 42;
+  Digest.B := $42;
+  Digest.C := High(LongWord);
+  Digest.D := 1000000000;
+  Check(Digest.Parts[0] = Digest.A, '.A <> .Parts[0]');
+  Check(Digest.Parts[1] = Digest.B, '.B <> .Parts[1]');
+  Check(Digest.Parts[2] = Digest.C, '.C <> .Parts[2]');
+  Check(Digest.Parts[3] = Digest.D, '.D <> .Parts[3]');
+  Check(Digest[0] = Digest.A, '.A <> [0]');
+  Check(Digest[1] = Digest.B, '.B <> [1]');
+  Check(Digest[2] = Digest.C, '.C <> [2]');
+  Check(Digest[3] = Digest.D, '.D <> [3]');
+end;
+
+procedure TestTPJMD5Digest.TestEquality;
+var
+  B3: TBytes;
+begin
+  Check(Digest1 = Digest3, 'Digest direct equality test failed');
+  Check(Digest1 = MD5Str3, 'Digest string equality test failed');
+  Check(MD5Str3 = Digest1, 'Digest string equality test failed');
+  B3 := ByteArrayToBytes(MD5Bytes3);
+  Check(Digest1 = B3, 'Digest TBytes equality test failed');
+  Check(B3 = Digest1, 'Digest TBytes equality test failed');
+end;
+
+procedure TestTPJMD5Digest.TestImplicitCasts;
+var
+  S: string;
+  B: TBytes;
+  D: TPJMD5Digest;
+begin
+  S := Digest1; // implicit string cast
+  CheckEqualsString(S, MD5Str1);
+  D := MD5Str2;
+  CheckEqualsMem(@D.Bytes[0], @MD5Bytes2[0], Length(MD5Bytes2));
+  B := Digest1; // implicit TBytes cast
+  CheckEqualsMem(@B[0], @MD5Bytes1[0], Length(MD5Bytes1));
+  D := ByteArrayToBytes(MD5Bytes2); // cast from TBytes
+  CheckEqualsMem(@D.Bytes[0], @MD5Bytes2[0], Length(MD5Bytes2));
+end;
+
+procedure TestTPJMD5Digest.TestInEquality;
+var
+  B2: TBytes;
+begin
+  Check(Digest1 <> Digest2, 'Digest direct inequality test failed');
+  Check(Digest1 <> MD5Str2, 'Digest string inequality test failed');
+  Check(MD5Str2 <> Digest1, 'Digest string inequality test failed');
+  B2 := ByteArrayToBytes(MD5Bytes2);
+  Check(Digest1 <> B2, 'Digest TBytes inequality test failed');
+  Check(B2 <> Digest1, 'Digest TBytes inequality test failed');
+end;
+
+procedure TestTPJMD5Digest.TestVariantRecordParts;
+var
+  Digest: TPJMD5Digest;
+begin
+  Digest.A := 42;
+  Digest.B := $42;
+  Digest.C := High(LongWord);
+  Digest.D := 1000000000;
+  Check(Digest.LongWords[0] = Digest.A, '.A <> .LongWords[0]');
+  Check(Digest.LongWords[1] = Digest.B, '.B <> .LongWords[1]');
+  Check(Digest.LongWords[2] = Digest.C, '.C <> .LongWords[2]');
+  Check(Digest.LongWords[3] = Digest.D, '.D <> .LongWords[3]');
+  Check(Digest.Bytes[0] = (Digest.A shr 0) and $FF);
+  Check(Digest.Bytes[1] = (Digest.A shr 8) and $FF);
+  Check(Digest.Bytes[2] = (Digest.A shr 16) and $FF);
+  Check(Digest.Bytes[3] = (Digest.A shr 24) and $FF);
+  Check(Digest.Bytes[4] = (Digest.B shr 0) and $FF);
+  Check(Digest.Bytes[5] = (Digest.B shr 8) and $FF);
+  Check(Digest.Bytes[6] = (Digest.B shr 16) and $FF);
+  Check(Digest.Bytes[7] = (Digest.B shr 24) and $FF);
+  Check(Digest.Bytes[8] = (Digest.C shr 0) and $FF);
+  Check(Digest.Bytes[9] = (Digest.C shr 8) and $FF);
+  Check(Digest.Bytes[10] = (Digest.C shr 16) and $FF);
+  Check(Digest.Bytes[11] = (Digest.C shr 24) and $FF);
+  Check(Digest.Bytes[12] = (Digest.D shr 0) and $FF);
+  Check(Digest.Bytes[13] = (Digest.D shr 8) and $FF);
+  Check(Digest.Bytes[14] = (Digest.D shr 16) and $FF);
+  Check(Digest.Bytes[15] = (Digest.D shr 24) and $FF);
+end;
+
 initialization
   // Register any test cases with the test runner
   RegisterTest(TestTPJMD5.Suite);
+  RegisterTest(TestTPJMD5Digest.Suite);
 end.
 
