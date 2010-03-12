@@ -112,7 +112,6 @@ type
       TMDBuffer = record
         Data: TMDChunk;
         Cursor: Byte;
-        procedure MakeEmpty;
         function IsEmpty: Boolean;
         function IsFull: Boolean;
         function SpaceRemaining: Byte;
@@ -171,9 +170,7 @@ implementation
 uses
   Math, Windows;
 
-// TODO: Check if BytesToLongWords can be replaced by a cast (per RFC).
-
-// Copies the bytes of a long word array into an array bytes, low order bytes
+// Copies the bytes of a long word array into an array of bytes, low order bytes
 // first. The size of Bytes must be the same as the size of LWords in bytes.
 procedure LongWordsToBytes(const LWords: array of LongWord;
   out Bytes: array of Byte);
@@ -420,7 +417,7 @@ begin
   fState.C := $98badcfe;
   fState.D := $10325476;
   FillChar(fDigest, SizeOf(fDigest), 0);
-  fBuffer.MakeEmpty;  // flags buffer as empty
+  fBuffer.Clear;  // flags buffer as empty
   fFinalized := False;
   fByteCount := 0;
 end;
@@ -526,7 +523,7 @@ begin
   Inc(fState.C, C);
   Inc(fState.D, D);
 
-  // TODO: check if following is necessary
+  // For security
   FillChar(Block, SizeOf(Block), 0);
 end;
 
@@ -553,7 +550,7 @@ begin
     begin
       // if we filled buffer we Transform the digest from it and empty it
       Transform(fBuffer.Data, 0);
-      fBuffer.MakeEmpty;
+      fBuffer.Clear;
     end;
   end;
   // if we have more than a buffers worth of data we Transform the digest from it
@@ -585,7 +582,7 @@ begin
     if fBuffer.IsFull then
     begin
       Transform(fBuffer.Data, 0);
-      fBuffer.MakeEmpty;
+      fBuffer.Clear;
     end;
   end;
 end;
@@ -622,12 +619,6 @@ end;
 function TPJMD5.TMDBuffer.IsFull: Boolean;
 begin
   Result := SpaceRemaining = 0;
-end;
-
-procedure TPJMD5.TMDBuffer.MakeEmpty;
-// todo: remove this and replace with calls to Clear
-begin
-  Clear;
 end;
 
 function TPJMD5.TMDBuffer.SpaceRemaining: Byte;
