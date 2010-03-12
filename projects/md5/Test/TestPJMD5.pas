@@ -57,6 +57,9 @@ type
   TProcessMethodCall = reference to procedure(const MD5: TPJMD5;
     const RFCTest: TRFCTest);
 
+  TCalculateMethodCall = reference to function(
+    const RFCTest: TRFCTest): TPJMD5Digest;
+
   // Tests TPJMD5Digest record
   TestTPJMD5Digest = class(TTestCase)
   private
@@ -76,6 +79,10 @@ type
     function TestFilePath: string;
     // Runs one of the RFC tests on a specified Process... method
     procedure RunRFCTests(MethodCall: TProcessMethodCall);
+    // Runs of the the RFC tests on a specified Calculate... method
+    procedure RunRFCCalcTests(MethodCall: TCalculateMethodCall);
+    // Checks if two digests are equal (doesn't use TPJMD5Digest = operator)
+    function SameDigests(const D1, D2: TPJMD5Digest): Boolean;
   public
     // Sets up test: creates file used by TestProcessFile
     procedure SetUp; override;
@@ -86,13 +93,14 @@ type
   published
     // ** NOTE: Order of these tests is important **
 
-    // Tests Process(array of Byte, Cardinal) method and Digest and DigestString
-    // properties.
-    // Process(array of Byte, Cardinal) is called internally by all other
+    // Tests Process(TBytes, Cardinal) and Calculate(TBytes, Cardinal) methods
+    // and Digest and DigestString properties.
+    // Process(TBytes, Cardinal) is called internally by all other
     // Process... methods, so is tested first. The method is also called by some
     // test methods.
     // This test runs all RFC tests
     procedure TestProcessArrayOfByteSize;
+    procedure TestCalculateArrayOfByteSize;
 
     // Tests Finalize method and Finalized property
     // This test calls Process(array of Byte, Cardinal) so should be run after
@@ -104,40 +112,49 @@ type
     // TestProcessArrayOfByteSize
     procedure TestReset;
 
-    // Tests Process(array of Byte) method.
+    // Tests Process(TBytes) and Calculate(TBytes) methods.
     // This test runs all RFC tests
     procedure TestProcessArrayOfByte;
+    procedure TestCalculateArrayOfByte;
 
-    // Tests Process(Untyped, Cardinal) method
+    // Tests Process(Untyped, Cardinal) and Calculate(Untyped, Cardinal) methods
     // This test runs all RFC tests
     procedure TestProcessBuf;
+    procedure TestCalculateBuf;
 
-    // Tests Process(AnsiString) method
+    // Tests Process(AnsiString) and Calculate(AnsiString) methods
     // This test runs all RFC tests
     procedure TestProcessAnsiString;
+    procedure TestCalculateAnsiString;
 
-    // Tests Process(UnicodeString) method
-    // RFC Tests cannot be used with Process(UnicodeString). A special unicode
-    // test string is used.
+    // Tests Process(UnicodeString) and Calculate(UnicodeString) methods
+    // RFC Tests cannot be used with these methods. A special unicode test
+    // string is used.
     procedure TestProcessUnicodeString;
+    procedure TestCalculateUnicodeString;
 
-    // Tests Process(UnicodeString, TEncoding) method
-    // RFC Tests cannot be used with Process(UnicodeString, TEncoding). A
-    // special unicode test string is used.
+    // Tests Process(UnicodeString, TEncoding) and
+    // Calculate(UnicodeString, TEncoding) methods
+    // RFC Tests cannot be used with these methods. Special unicode test strings
+    // are used.
     procedure TestProcessUnicodeStringWithEncoding;
+    procedure TestCalculateUnicodeStringWithEncoding;
 
-    // Tests Process(TStream) method
+    // Tests Process(TStream) and Calculate(TStream) methods
     // This test runs all RFC tests
     procedure TestProcessStream;
+    procedure TestCalculateStream;
 
-    // Tests ProcessFile method
+    // Tests ProcessFile(TFileName) and Calculate(TFileName) methods
     // RFC Tests are not used in this test. Test file has same contents as the
     // unicode test string
     procedure TestProcessFile;
+    procedure TestCalculateFile;
 
   end;
 
 implementation
+
 
 const
   // RFC 1321 Test cases
@@ -213,9 +230,22 @@ const
   // test string for unicode encoding
   UnicodeTestString = 'QWERTY - '#$0444#$1D42' - qwerty - '#$2030' - end.';
   UnicodeTestStringRes = 'a65a476239c6806880acde8ba93fa4a8';
+  UnicodeTestResultDigest: TPJMD5Digest = (
+    Bytes: (
+      $a6, $5a, $47, $62, $39, $c6, $80, $68,
+      $80, $ac, $de, $8b, $a9, $3f, $a4, $a8
+    )
+  );
+
   // test string for ASCII encoding
   ASCIITestString = 'QWERTYUIOPASDFGHJKLZXCVBNM0123456789';
   ASCIITestStringRes = '79d291b4afd040c2a18f69e9c832fa1b';
+  ASCIITestResultDigest: TPJMD5Digest = (
+    Bytes: (
+      $79, $d2, $91, $b4, $af, $d0, $40, $c2,
+      $a1, $8f, $69, $e9, $c8, $32, $fa, $1b
+    )
+  );
 
   // Tests for files
   // test file containing same content as UnicodeTestString const
@@ -229,6 +259,7 @@ const
   DefaultRFCTest = 6;
 
   // Tests for TPJMD5Digest
+
   MD5Str1 = 'd174ab98d277d9f5a5611c2c9f419d9f';
   MD5Bytes1: array[0..15] of Byte = (
     $D1, $74, $AB, $98, $D2, $77, $D9, $F5,
@@ -285,6 +316,21 @@ begin
   end;
 end;
 
+procedure TestTPJMD5.RunRFCCalcTests(MethodCall: TCalculateMethodCall);
+var
+  Test: TRFCTest;
+  ResultDigest: TPJMD5Digest;
+begin
+  for Test in RFCTests do
+  begin
+    ResultDigest := MethodCall(Test); // calls a CalculateXXX method
+    Check(
+      Test.IsEqualResult(ResultDigest),
+      'RFC Test #' + Test.ID + ' Failed - Digest property wrong value'
+    );
+  end;
+end;
+
 procedure TestTPJMD5.RunRFCTests(MethodCall: TProcessMethodCall);
 var
   Test: TRFCTest;
@@ -309,6 +355,11 @@ begin
   end;
 end;
 
+function TestTPJMD5.SameDigests(const D1, D2: TPJMD5Digest): Boolean;
+begin
+  Result := (D1.A = D2.A) and (D1.B = D2.B) and (D1.C = D2.C) and (D1.D = D2.D);
+end;
+
 procedure TestTPJMD5.SetUp;
 var
   FS: TFileStream;
@@ -328,6 +379,115 @@ procedure TestTPJMD5.TearDown;
 begin
 end;
 
+procedure TestTPJMD5.TestCalculateAnsiString;
+var
+  Fn: TCalculateMethodCall;
+begin
+  Fn := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    Result := TPJMD5.Calculate(Test.Data);
+  end;
+  RunRFCCalcTests(Fn);
+end;
+
+procedure TestTPJMD5.TestCalculateArrayOfByte;
+var
+  Fn: TCalculateMethodCall;
+begin
+  Fn := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    Result := TPJMD5.Calculate(Test.DataAsByteArray);
+  end;
+  RunRFCCalcTests(Fn);
+end;
+
+procedure TestTPJMD5.TestCalculateArrayOfByteSize;
+var
+  Fn: TCalculateMethodCall;
+begin
+  Fn := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    Result := TPJMD5.Calculate(Test.DataAsByteArray, Test.SizeOfData);
+  end;
+  RunRFCCalcTests(Fn);
+end;
+
+procedure TestTPJMD5.TestCalculateBuf;
+var
+  Fn: TCalculateMethodCall;
+begin
+  Fn := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    Result := TPJMD5.Calculate(Test.PointerToData^, Test.SizeOfData);
+  end;
+  RunRFCCalcTests(Fn);
+end;
+
+procedure TestTPJMD5.TestCalculateFile;
+var
+  ResultDigest: TPJMD5Digest;
+  ExpectedDigest: TPJMD5Digest;
+begin
+  ExpectedDigest := UnicodeTestResultDigest;  // file === unicode test string
+  ResultDigest := TPJMD5.CalculateFile(TestFilePath + TestFileName);
+  Check(SameDigests(ExpectedDigest, ResultDigest), 'File ' + TestFileName);
+end;
+
+procedure TestTPJMD5.TestCalculateStream;
+var
+  Fn: TCalculateMethodCall;
+  Stream: TStream;
+begin
+  Fn := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    Stream.Size := 0;
+    Test.CopyDataToStream(Stream);
+    Result := TPJMD5.Calculate(Stream);
+  end;
+  Stream := TMemoryStream.Create;
+  try
+    RunRFCCalcTests(Fn);
+  finally
+    Stream.Free;
+  end;
+end;
+
+procedure TestTPJMD5.TestCalculateUnicodeString;
+var
+  ResultDigest: TPJMD5Digest;
+  ExpectedDigest: TPJMD5Digest;
+begin
+  // tests using default encoding: assumes default encoding writes same bytes
+  // as ansi string
+  ExpectedDigest := ASCIITestResultDigest;
+  ResultDigest :=  TPJMD5.Calculate(ASCIITestString);
+  Check(
+    SameDigests(ResultDigest, ExpectedDigest),
+    'Calculate(UnicodeString): ASCII string'
+  );
+end;
+
+procedure TestTPJMD5.TestCalculateUnicodeStringWithEncoding;
+var
+  ResultDigest: TPJMD5Digest;
+  ExpectedDigest: TPJMD5Digest;
+begin
+  // tests using default encoding: assumes default encoding writes same bytes
+  // as ansi string
+  ExpectedDigest := ASCIITestResultDigest;
+  ResultDigest :=  TPJMD5.Calculate(ASCIITestString, TEncoding.ASCII);
+  Check(
+    SameDigests(ResultDigest, ExpectedDigest),
+    'Calculate(UnicodeString, TEncoding): ASCII string'
+  );
+  ExpectedDigest := UnicodeTestResultDigest;
+  ResultDigest :=  TPJMD5.Calculate(UnicodeTestString, TEncoding.Unicode);
+  Check(
+    SameDigests(ResultDigest, ExpectedDigest),
+    'Calculate(UnicodeString, TEncoding): Unicode string'
+  );
+end;
+
 function TestTPJMD5.TestFilePath: string;
 begin
   Result := ExtractFilePath(ParamStr(0));
@@ -335,7 +495,8 @@ end;
 
 procedure TestTPJMD5.TestFinalize;
 begin
-  CheckException(RunFinalizeTest, EPJMD5, EPJMD5.ClassName + ' Exception expected');
+  CheckException(RunFinalizeTest, EPJMD5,
+    EPJMD5.ClassName + ' Exception expected');
 end;
 
 procedure TestTPJMD5.TestProcessAnsiString;
@@ -483,6 +644,7 @@ begin
     MD5.Free;
   end;
 end;
+
 
 { TRFCTest }
 
