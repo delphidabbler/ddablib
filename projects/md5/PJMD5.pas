@@ -144,18 +144,30 @@ type
     procedure Transform(const Bytes: array of Byte; const StartIdx: Cardinal);
     function GetDigestString: string;
     procedure Update(const X: array of Byte; const Size: Cardinal);
+    class function DoCalculate(const DoProcess: TProc<TPJMD5>): TPJMD5Digest;
   public
     constructor Create;
     destructor Destroy; override;
-    procedure Process(const X: array of Byte; const Size: Cardinal); overload;
-    procedure Process(const X: array of Byte); overload;
+    procedure Process(const X: TBytes; const Size: Cardinal); overload;
+    class function Calculate(const X: TBytes;
+      const Size: Cardinal): TPJMD5Digest; overload;
+    procedure Process(const X: TBytes); overload;
+    class function Calculate(const X: TBytes): TPJMD5Digest; overload;
     procedure Process(const Buf; const Size: Cardinal); overload;
+    class function Calculate(const Buf; const Size: Cardinal): TPJMD5Digest;
+      overload;
     procedure Process(const S: AnsiString); overload;
+    class function Calculate(const S: AnsiString): TPJMD5Digest; overload;
     procedure Process(const S: UnicodeString; const Encoding: TEncoding);
       overload;
+    class function Calculate(const S: UnicodeString;
+      const Encoding: TEncoding): TPJMD5Digest; overload;
     procedure Process(const S: UnicodeString); overload;
+    class function Calculate(const S: UnicodeString): TPJMD5Digest; overload;
     procedure Process(const Stream: TStream); overload;
+    class function Calculate(const Stream: TStream): TPJMD5Digest; overload;
     procedure ProcessFile(const FileName: TFileName);
+    class function CalculateFile(const FileName: TFileName): TPJMD5Digest;
     procedure Reset;
     procedure Finalize;
     property Digest: TPJMD5Digest read GetDigest;
@@ -278,6 +290,68 @@ resourcestring
 
 { TPJMD5 }
 
+class function TPJMD5.Calculate(const Buf; const Size: Cardinal): TPJMD5Digest;
+begin
+  with Create do
+    try
+      Process(Buf, Size);
+      Result := Digest;
+    finally
+      Free;
+    end;
+end;
+
+class function TPJMD5.Calculate(const S: AnsiString): TPJMD5Digest;
+begin
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.Process(S); end
+  );
+end;
+
+class function TPJMD5.Calculate(const X: TBytes;
+  const Size: Cardinal): TPJMD5Digest;
+begin
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.Process(X, Size); end
+  );
+end;
+
+class function TPJMD5.Calculate(const X: TBytes): TPJMD5Digest;
+begin
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.Process(X); end
+  );
+end;
+
+class function TPJMD5.Calculate(const Stream: TStream): TPJMD5Digest;
+begin
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.Process(Stream); end
+  );
+end;
+
+class function TPJMD5.Calculate(const S: UnicodeString): TPJMD5Digest;
+begin
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.Process(S); end
+  );
+end;
+
+class function TPJMD5.Calculate(const S: UnicodeString;
+  const Encoding: TEncoding): TPJMD5Digest;
+begin
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.Process(S, Encoding); end
+  );
+end;
+
+class function TPJMD5.CalculateFile(const FileName: TFileName): TPJMD5Digest;
+begin
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.ProcessFile(FileName); end
+  );
+end;
+
 constructor TPJMD5.Create;
 begin
   inherited Create;
@@ -291,6 +365,19 @@ begin
   fBuffer.Clear;
   fReadBuffer.Release;
   inherited;
+end;
+
+class function TPJMD5.DoCalculate(const DoProcess: TProc<TPJMD5>): TPJMD5Digest;
+var
+  Instance: TPJMD5;
+begin
+  Instance := TPJMD5.Create;
+  try
+    DoProcess(Instance);
+    Result := Instance.Digest;
+  finally
+    Instance.Free;
+  end;
 end;
 
 procedure TPJMD5.Finalize;
@@ -361,7 +448,7 @@ end;
 
 procedure TPJMD5.Process(const Buf; const Size: Cardinal);
 begin
-  Process(PByteArray(@Buf)^, Size);
+  Process(TBytes(@Buf), Size);
 end;
 
 procedure TPJMD5.Process(const S: AnsiString);
@@ -381,12 +468,12 @@ begin
   end;
 end;
 
-procedure TPJMD5.Process(const X: array of Byte);
+procedure TPJMD5.Process(const X: TBytes);
 begin
   Process(X, Length(X));
 end;
 
-procedure TPJMD5.Process(const X: array of Byte; const Size: Cardinal);
+procedure TPJMD5.Process(const X: TBytes; const Size: Cardinal);
 begin
   Update(X, Size);
 end;
@@ -428,7 +515,7 @@ var
   A, B, C, D: LongWord;
 begin
   Assert(SizeOf(Block) = SizeOf(TMDChunk));
-  Assert(Word(Length(Bytes)) - StartIdx >= SizeOf(TMDChunk));
+  Assert(UInt64(Length(Bytes)) - StartIdx >= SizeOf(TMDChunk));
 
   // Store states
   A := fState.A;
