@@ -168,7 +168,7 @@ type
 implementation
 
 uses
-  Math, Windows;
+  Math;
 
 // Copies the bytes of a long word array into an array of bytes, low order bytes
 // first. The size of Bytes must be the same as the size of LWords in bytes.
@@ -351,25 +351,21 @@ end;
 
 procedure TPJMD5.Process(const S: UnicodeString; const Encoding: TEncoding);
 begin
-  OutputDebugString('Process(UnicodeString, TEncoding)');
   Process(Encoding.GetBytes(S));
 end;
 
 procedure TPJMD5.Process(const S: UnicodeString);
 begin
-  OutputDebugString('Process(UnicodeString)');
   Process(S, TEncoding.Default);
 end;
 
 procedure TPJMD5.Process(const Buf; const Size: Cardinal);
 begin
-  OutputDebugString('Process(Buf)');
   Process(PByteArray(@Buf)^, Size);
 end;
 
 procedure TPJMD5.Process(const S: AnsiString);
 begin
-  OutputDebugString('Process(AnsiString)');
   Process(Pointer(S)^, Length(S));
 end;
 
@@ -377,7 +373,6 @@ procedure TPJMD5.Process(const Stream: TStream);
 var
   BytesRead: Cardinal;
 begin
-  OutputDebugString('Process(TStream)');
   fReadBuffer.Alloc(fReadBufferSize);
   while Stream.Position < Stream.Size do
   begin
@@ -388,13 +383,11 @@ end;
 
 procedure TPJMD5.Process(const X: array of Byte);
 begin
-  OutputDebugString('Process(array of Byte)');
   Process(X, Length(X));
 end;
 
 procedure TPJMD5.Process(const X: array of Byte; const Size: Cardinal);
 begin
-  OutputDebugString('Process(array of Byte, Size)');
   Update(X, Size);
 end;
 
@@ -532,7 +525,6 @@ var
   BytesLeft: Cardinal;
   BytesToCopy: Cardinal;
 begin
-  OutputDebugString('Update');
   if fFinalized then
     raise EPJMD5.Create(sAlreadyFinalized);
   BytesLeft := Size;
