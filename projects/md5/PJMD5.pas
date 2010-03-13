@@ -98,12 +98,20 @@ type
     function GetLongWord(Idx: Integer): LongWord;
   public
     // ** NOTE XML Doc can't see doc comments for these operator overloads
-    // Tests two TPJMD5Digest records for equality. Because of Implicit cast
-    // overloads, this also permits comparisons with string and TBytes.
+    // Tests all combinations of TPJMD5Digest, string and TBytes records for
+    // equality.
     class operator Equal(const D1, D2: TPJMD5Digest): Boolean;
-    // Tests two TPJMD5Digest records for inequality. Because of Implicit cast
-    // overloads, this also permits comparisons with string and TBytes.
+    class operator Equal(const D: TPJMD5Digest; const B: TBytes): Boolean;
+    class operator Equal(const B: TBytes; const D: TPJMD5Digest): Boolean;
+    class operator Equal(const D: TPJMD5Digest; const S: string): Boolean;
+    class operator Equal(const S: string; const D: TPJMD5Digest): Boolean;
+    // Tests all combinations of TPJMD5Digest, string and TBytes records for
+    // inequality.
     class operator NotEqual(const D1, D2: TPJMD5Digest): Boolean;
+    class operator NotEqual(const D: TPJMD5Digest; const B: TBytes): Boolean;
+    class operator NotEqual(const B: TBytes; const D: TPJMD5Digest): Boolean;
+    class operator NotEqual(const D: TPJMD5Digest; const S: string): Boolean;
+    class operator NotEqual(const S: string; const D: TPJMD5Digest): Boolean;
     // Converts a TPJMD5Digest record to a string.
     class operator Implicit(const D: TPJMD5Digest): string;
     // Creates a TPJMD5Digest record by decoding string string, which must
@@ -462,8 +470,8 @@ resourcestring
   sAlreadyFinalized = 'Can''t update a finalised digest';
   sBadMD5StrLen = 'Can''t cast string of length %d to TPJMD5Digest';
   sBadMD5StrChars = 'Can''t cast string %s to TPJMD5Digest: invalid hex digits';
-  sByteArrayTooSmall = 'Can''t cast TBytes array to TPJMD5Digest: '
-    + 'not enough bytes';
+  sByteArrayTooShort = 'Can''t cast TBytes array of length %d to TPJMD5Digest: '
+    + 'it is too short';
 
 { TPJMD5 }
 
@@ -912,10 +920,50 @@ begin
   Result := True;
   for Idx := Low(D1.LongWords) to High(D1.LongWords) do
     if D1.LongWords[Idx] <> D2.LongWords[Idx] then
-    begin
-      Result := False;
-      Exit;
-    end;
+      Exit(False);
+end;
+
+class operator TPJMD5Digest.Equal(const B: TBytes;
+  const D: TPJMD5Digest): Boolean;
+begin
+  Result := D = B;
+end;
+
+class operator TPJMD5Digest.Equal(const D: TPJMD5Digest;
+  const B: TBytes): Boolean;
+var
+  DB: TPJMD5Digest;
+begin
+  if Length(B) <> Length(D.Bytes) then
+    Exit(False);
+  DB := B;
+  Result := DB = D;
+end;
+
+class operator TPJMD5Digest.Equal(const D: TPJMD5Digest;
+  const S: string): Boolean;
+var
+  Idx: Integer;
+  B: Integer;
+  DS: TPJMD5Digest;
+begin
+  if Length(S) <> 2 * Length(D.Bytes) then
+    Exit(False);
+  Idx := 1;
+  while Idx < Length(S) do
+  begin
+    if not TryStrToInt('$' + S[Idx] + S[Idx + 1], B) then
+      Exit(False);
+    Inc(Idx, 2);
+  end;
+  DS := S;
+  Result := DS = D;
+end;
+
+class operator TPJMD5Digest.Equal(const S: string;
+  const D: TPJMD5Digest): Boolean;
+begin
+  Result := D = S;
 end;
 
 function TPJMD5Digest.GetLongWord(Idx: Integer): LongWord;
@@ -963,7 +1011,7 @@ var
 begin
   Assert(Low(B) = Low(Result.Bytes));
   if Length(B) < Length(Result.Bytes) then
-    raise EPJMD5.Create(sByteArrayTooSmall);
+    raise EPJMD5.CreateFmt(sByteArrayTooShort, [Length(B)]);
   for Idx := Low(Result.Bytes) to High(Result.Bytes) do
     Result.Bytes[Idx] := B[Idx];
 end;
@@ -978,9 +1026,33 @@ begin
     Result[Idx] := D.Bytes[Idx];
 end;
 
+class operator TPJMD5Digest.NotEqual(const D: TPJMD5Digest;
+  const B: TBytes): Boolean;
+begin
+  Result := not (D = B);
+end;
+
+class operator TPJMD5Digest.NotEqual(const B: TBytes;
+  const D: TPJMD5Digest): Boolean;
+begin
+  Result := not (B = D);
+end;
+
 class operator TPJMD5Digest.NotEqual(const D1, D2: TPJMD5Digest): Boolean;
 begin
   Result := not (D1 = D2);
+end;
+
+class operator TPJMD5Digest.NotEqual(const D: TPJMD5Digest;
+  const S: string): Boolean;
+begin
+  Result := not (D = S);
+end;
+
+class operator TPJMD5Digest.NotEqual(const S: string;
+  const D: TPJMD5Digest): Boolean;
+begin
+  Result := not (S = D);
 end;
 
 end.

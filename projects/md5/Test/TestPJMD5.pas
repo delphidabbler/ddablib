@@ -63,7 +63,9 @@ type
   // Tests TPJMD5Digest record
   TestTPJMD5Digest = class(TTestCase)
   private
+    fErrorImplicitCastId: Integer;
     function ByteArrayToBytes(const A: array of Byte): TBytes;
+    procedure ErrorImplicitCast;
   published
     procedure TestVariantRecordParts;
     procedure TestDefaultProperty;
@@ -292,6 +294,9 @@ const
       $D1, $74, $AB, $98, $D2, $77, $D9, $F5,
       $A5, $61, $1C, $2C, $9F, $41, $9D, $9F
     )
+  );
+  cLongArray: array[0..17] of Byte = (
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
   );
 
 procedure TestTPJMD5.RunFinalizeTest;
@@ -704,6 +709,31 @@ begin
     Result[Idx - Low(A)] := A[Idx];
 end;
 
+procedure TestTPJMD5Digest.ErrorImplicitCast;
+var
+  D: TPJMD5Digest;
+  B: TBytes;
+  S1, S2: string;
+begin
+  case fErrorImplicitCastId of
+    0:
+    begin
+      SetLength(B, 12);
+      D := B;   // too small error
+    end;
+    1:
+    begin
+      S1 := 'foo';
+      D := S1;  // wrong size
+    end;
+    2:
+    begin
+      S2 := 'd174ab98d27Xd9f5a5611c2c9f419d9f';
+      D := S2;  // bad hex
+    end;
+  end;
+end;
+
 procedure TestTPJMD5Digest.TestDefaultProperty;
 var
   Digest: TPJMD5Digest;
@@ -724,14 +754,33 @@ end;
 
 procedure TestTPJMD5Digest.TestEquality;
 var
-  B3: TBytes;
+  B: TBytes;
+  S: string;
 begin
+  // comparing two digests
   Check(Digest1 = Digest3, 'Digest direct equality test failed');
+
+  // comparing valid byte array with digest
+  B := ByteArrayToBytes(MD5Bytes3);
+  Check(Digest1 = B, 'Digest TBytes equality test failed');
+  Check(B = Digest1, 'Digest TBytes equality test failed');
+
+  // comparing invalid byte array with digest: array wrong size
+  B := ByteArrayToBytes(cLongArray);
+  Check(not (B = Digest1), 'Digest TBytes equality test failed');
+  Check(not (Digest1 = B), 'Digest TBytes equality test failed');
+
+  // comparing valid string with digest
   Check(Digest1 = MD5Str3, 'Digest string equality test failed');
   Check(MD5Str3 = Digest1, 'Digest string equality test failed');
-  B3 := ByteArrayToBytes(MD5Bytes3);
-  Check(Digest1 = B3, 'Digest TBytes equality test failed');
-  Check(B3 = Digest1, 'Digest TBytes equality test failed');
+
+  // comparing invalid strings with digest: string wrong size and bad hex
+  S := 'foo'; // too short
+  Check(not (S = Digest1), 'Digest string equality test failed');
+  Check(not (Digest1 = S), 'Digest string equality test failed');
+  S := 'd174ab98d27Xd9f5a5611c2c9f419d9f';  // bad hex
+  Check(not (S = Digest1), 'Digest string equality test failed');
+  Check(not (Digest1 = S), 'Digest string equality test failed');
 end;
 
 procedure TestTPJMD5Digest.TestImplicitCasts;
@@ -748,18 +797,45 @@ begin
   CheckEqualsMem(@B[0], @MD5Bytes1[0], Length(MD5Bytes1));
   D := ByteArrayToBytes(MD5Bytes2); // cast from TBytes
   CheckEqualsMem(@D.Bytes[0], @MD5Bytes2[0], Length(MD5Bytes2));
+
+  fErrorImplicitCastId := 0;
+  CheckException(ErrorImplicitCast, EPJMD5, 'TBytes too long');
+  fErrorImplicitCastId := 1;
+  CheckException(ErrorImplicitCast, EPJMD5, 'String too long');
+  fErrorImplicitCastId := 2;
+  CheckException(ErrorImplicitCast, EPJMD5, 'String bad hex');
+
 end;
 
 procedure TestTPJMD5Digest.TestInEquality;
 var
-  B2: TBytes;
+  B: TBytes;
+  S: string;
 begin
+  // comparing two digests
   Check(Digest1 <> Digest2, 'Digest direct inequality test failed');
+
+  // comparing valid byte array with digest
+  B := ByteArrayToBytes(MD5Bytes2);
+  Check(Digest1 <> B, 'Digest TBytes inequality test failed');
+  Check(B <> Digest1, 'Digest TBytes inequality test failed');
+
+  // comparing invalid byte array with digest: array wrong size
+  B := ByteArrayToBytes(cLongArray);
+  Check(B <> Digest1, 'Digest TBytes inequality test failed');
+  Check(Digest1 <> B, 'Digest TBytes inequality test failed');
+
+  // comparing valid string with digest
   Check(Digest1 <> MD5Str2, 'Digest string inequality test failed');
   Check(MD5Str2 <> Digest1, 'Digest string inequality test failed');
-  B2 := ByteArrayToBytes(MD5Bytes2);
-  Check(Digest1 <> B2, 'Digest TBytes inequality test failed');
-  Check(B2 <> Digest1, 'Digest TBytes inequality test failed');
+
+  // comparing invalid strings with digest: string wrong size and bad hex
+  S := 'foo'; // too short
+  Check(S <> Digest1, 'Digest string equality test failed');
+  Check(Digest1 <> S, 'Digest string equality test failed');
+  S := 'd174ab98d27Xd9f5a5611c2c9f419d9f';  // bad hex
+  Check(S <> Digest1, 'Digest string equality test failed');
+  Check(Digest1 <> S, 'Digest string equality test failed');
 end;
 
 procedure TestTPJMD5Digest.TestVariantRecordParts;
