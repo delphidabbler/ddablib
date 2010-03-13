@@ -144,14 +144,14 @@ type
   TPJMD5 = class(TObject)
   strict private
     ///  Number of LongWord blocks of data processed at a time
-    const BLOCKSIZE = 16;
+    const BlockSize = 16;
     ///  Size of buffer in which data is processed in bytes
-    const BUFFERSIZE = SizeOf(LongWord) * BLOCKSIZE;
+    const BufferSize = SizeOf(LongWord) * BlockSize;
     ///  Default size of buffer for block reads from streams
-    const DEFREADBUFFERSIZE = 64 * 1024;
+    const DefReadBufferSize = 64 * 1024;
     type
       ///  Array of bytes to be processed.
-      TMDChunk = array[0..Pred(BUFFERSIZE)] of Byte;
+      TMDChunk = array[0..Pred(BufferSize)] of Byte;
       ///  Buffer storing bytes to be processed.
       TMDBuffer = record
         ///  Stores data being (or to be) processed
@@ -260,12 +260,12 @@ type
     ///  <summary>
     ///  Calculates a digest from the bytes from the current position to the
     ///  end of the given Stream. The stream is read in chunks of size
-    ///  DEFREADBUFFERSIZE.
+    ///  DefReadBufferSize.
     ///  </summary>
     class function Calculate(const Stream: TStream): TPJMD5Digest; overload;
     ///  <summary>
     ///  Calculates a digest from all the bytes of the named file. The file is
-    ///  read in chunks of size DEFREADBUFFERSIZE.
+    ///  read in chunks of size DefReadBufferSize.
     ///  </summary>
     class function CalculateFile(const FileName: TFileName): TPJMD5Digest;
 
@@ -338,7 +338,7 @@ type
     ///  Sets the size of buffer used when reading from stream or files.
     ///  </summary>
     property ReadBufferSize: Cardinal
-      read fReadBufferSize write fReadBufferSize default DEFREADBUFFERSIZE;
+      read fReadBufferSize write fReadBufferSize default DefReadBufferSize;
     ///  <summary>
     ///  Informs if the digest has been finalized.
     ///  </summary>
@@ -536,7 +536,7 @@ begin
   inherited Create;
   Reset;
   fReadBuffer.Release;
-  fReadBufferSize := DEFREADBUFFERSIZE;
+  fReadBufferSize := DefReadBufferSize;
 end;
 
 destructor TPJMD5.Destroy;
@@ -685,7 +685,7 @@ const
   S31 =  4;   S32 = 11;   S33 = 16;   S34 = 23;
   S41 =  6;   S42 = 10;   S43 = 15;   S44 = 21;
 var
-  Block: array[0..Pred(BLOCKSIZE)] of LongWord;
+  Block: array[0..Pred(BlockSize)] of LongWord;
   A, B, C, D: LongWord;
 begin
   Assert(SizeOf(Block) = SizeOf(TMDChunk));
@@ -808,21 +808,21 @@ begin
   end;
   // if we have more than a buffers worth of data we Transform the digest from it
   // until there's less than a buffer's worth left
-  while BytesLeft >= BUFFERSIZE do
+  while BytesLeft >= BufferSize do
   begin
     Transform(X, Size - BytesLeft);
-    Inc(fByteCount, BUFFERSIZE);
-    Dec(BytesLeft, BUFFERSIZE);
+    Inc(fByteCount, BufferSize);
+    Dec(BytesLeft, BufferSize);
   end;
   // the following assertion must be true because:
   // case 1: buffer is empty and above loop only terminates when X has less
-  //         than BUFFERSIZE bytes remaining
+  //         than BufferSize bytes remaining
   // case 2: X had less than enough bytes to fill buffer so they were all copied
   //         there => X has no bytes left
-  Assert((BytesLeft = 0) or (fBuffer.IsEmpty and (BytesLeft < BUFFERSIZE)));
+  Assert((BytesLeft = 0) or (fBuffer.IsEmpty and (BytesLeft < BufferSize)));
   // above assertion implies following (this is redundant) because:
   // case 1: if ByteLeft = 0 it must be LTE space remaining in buffer
-  // case 2: if ByteLeft <> 0 it is less than BUFFERSIZE which is equal to
+  // case 2: if ByteLeft <> 0 it is less than BufferSize which is equal to
   //         buffer space remaining since buffer is empty
   Assert(BytesLeft <= fBuffer.SpaceRemaining);
   if BytesLeft > 0 then
