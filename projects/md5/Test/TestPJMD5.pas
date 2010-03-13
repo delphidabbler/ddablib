@@ -1,15 +1,17 @@
 ﻿{
  * Delphi DUnit Test Case for PJMD5.pas
  * ------------------------------------
- * This unit contains a test case class for the TPJMD5 class in PJMD5.pas. The
- * MD5 algorithm is tested against all seven test cases from RFC 1321 plus some
- * others.
+ * This unit contains a test case class for the TPJMD5 class and the
+ * TPJMD5Digest record in PJMD5.pas.
+ *
+ * The MD5 algorithm is tested against all seven test cases from RFC 1321 plus
+ * some others.
  *
  * The expected results were obtained from either the RFC or by running a third
  * party MD5 console app on the required input data.
  *
- * Delphi 2009 or later is required to compile: requires Unicode support and
- * anonymous methods.
+ * Delphi 2009 or later is required to compile: Unicode support and anonymous
+ * methods are required.
  *
  * -----------------------------------------------------------------------------
  * $Rev$
