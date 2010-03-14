@@ -267,10 +267,21 @@ type
     class function Calculate(const S: UnicodeString): TPJMD5Digest; overload;
     ///  <summary>
     ///  Calculates a digest from the bytes from the current position to the
-    ///  end of the given Stream. The stream is read in chunks of size
-    ///  DefReadBufferSize.
+    ///  end of the given Stream.
     ///  </summary>
+    ///  <remarks>
+    ///  Stream is read in chunks of size given by ReadBufferSize.
+    ///  </remarks>
     class function Calculate(const Stream: TStream): TPJMD5Digest; overload;
+    ///  <summary>
+    ///  Calculates a digest from up to Count bytes from the current position in
+    ///  the given stream.
+    ///  </summary>
+    ///  <remarks>
+    ///  Stream is read in chunks of size given by ReadBufferSize.
+    ///  </remarks>
+    class function Calculate(const Stream: TStream;
+      const Count: Int64): TPJMD5Digest; overload;
     ///  <summary>
     ///  Calculates a digest from all the bytes of the named file. The file is
     ///  read in chunks of size DefReadBufferSize.
@@ -306,13 +317,21 @@ type
     ///  </summary>
     procedure Process(const S: UnicodeString); overload;
     ///  <summary>
-    ///  Adds bytes to the digest from a stream strating from the current
+    ///  Adds bytes to the digest from a stream starting from the current
     ///  position up to the end of the stream.
     ///  </summary>
     ///  <remarks>
     ///  Stream is read in chunks of size given by ReadBufferSize.
     ///  </remarks>
     procedure Process(const Stream: TStream); overload;
+    ///  <summary>
+    ///  Adds up to Count bytes from to the digest from a stream starting from
+    //   the current position.
+    ///  </summary>
+    ///  <remarks>
+    ///  Stream is read in chunks of size given by ReadBufferSize.
+    ///  </remarks>
+    procedure Process(const Stream: TStream; const Count: Int64); overload;
     ///  <summary>
     ///  Adds all the bytes from the named file to the digest.
     ///  </summary>
@@ -517,6 +536,14 @@ begin
   );
 end;
 
+class function TPJMD5.Calculate(const Stream: TStream;
+  const Count: Int64): TPJMD5Digest;
+begin
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.Process(Stream, Count); end
+  );
+end;
+
 class function TPJMD5.Calculate(const S: UnicodeString): TPJMD5Digest;
 begin
   Result := DoCalculate(
@@ -639,14 +666,24 @@ begin
 end;
 
 procedure TPJMD5.Process(const Stream: TStream);
+begin
+  Process(Stream, Stream.Size - Stream.Position);
+end;
+
+procedure TPJMD5.Process(const Stream: TStream; const Count: Int64);
 var
   BytesRead: Cardinal;
+  BytesToRead: Int64;
 begin
+  BytesToRead := Min(Count, Stream.Size - Stream.Position);
   fReadBuffer.Alloc(fReadBufferSize);
-  while Stream.Position < Stream.Size do
+  while BytesToRead > 0 do
   begin
-    BytesRead := Stream.Read(fReadBuffer.Buffer^, fReadBuffer.Size);
+    BytesRead := Stream.Read(
+      fReadBuffer.Buffer^, Min(fReadBuffer.Size, BytesToRead)
+    );
     Process(fReadBuffer.Buffer^, BytesRead);
+    Dec(BytesToRead, BytesRead);
   end;
 end;
 

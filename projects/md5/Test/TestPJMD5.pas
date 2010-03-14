@@ -66,7 +66,6 @@ type
   TestTPJMD5Digest = class(TTestCase)
   private
     fErrorImplicitCastId: Integer;
-    function ByteArrayToBytes(const A: array of Byte): TBytes;
     procedure ErrorImplicitCast;
   published
     procedure TestVariantRecordParts;
@@ -87,6 +86,10 @@ type
     procedure RunRFCCalcTests(MethodCall: TCalculateMethodCall);
     // Checks if two digests are equal (doesn't use TPJMD5Digest = operator)
     function SameDigests(const D1, D2: TPJMD5Digest): Boolean;
+    // Copies an indeterminate number of byte arrays to a stream, which is first
+    // emptied
+    procedure BytesArraysToStream(const BAs: array of TBytes;
+      const Stm: TStream);
   public
     // Sets up test: creates file used by TestProcessFile
     procedure SetUp; override;
@@ -144,6 +147,11 @@ type
     procedure TestProcessUnicodeStringWithEncoding;
     procedure TestCalculateUnicodeStringWithEncoding;
 
+    // Tests Process(TStream, Int64) and Calculate(TStream, Int64) methods
+    // This test runs all RFC tests
+    procedure TestProcessStreamCount;
+    procedure TestCalculateStreamCount;
+
     // Tests Process(TStream) and Calculate(TStream) methods
     // This test runs all RFC tests
     procedure TestProcessStream;
@@ -158,6 +166,8 @@ type
   end;
 
 implementation
+
+uses WINDOWS; (* TODO: DEBUG *)
 
 
 const
@@ -262,6 +272,9 @@ const
   // Default test
   DefaultRFCTest = 6;
 
+  // Padding bytes (used when testing streams)
+  PaddingBytes: array[0..7] of Byte = (1, 2, 3, 4, 5, 6, 7, 8);
+
   // Tests for TPJMD5Digest
 
   MD5Str1 = 'd174ab98d277d9f5a5611c2c9f419d9f';
@@ -300,6 +313,25 @@ const
   cLongArray: array[0..17] of Byte = (
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
   );
+
+function ByteArrayToBytes(const A: array of Byte): TBytes;
+var
+  Idx: Integer;
+begin
+  SetLength(Result, Length(A));
+  for Idx := Low(A) to High(A) do
+    Result[Idx - Low(A)] := A[Idx];
+end;
+
+procedure TestTPJMD5.BytesArraysToStream(const BAs: array of TBytes;
+  const Stm: TStream);
+var
+  Idx: Integer;
+begin
+  Stm.Size := 0;  // empties stream
+  for Idx := 0 to Pred(Length(BAs)) do
+    Stm.WriteBuffer(BAs[Idx][0], Length(BAs[Idx]));
+end;
 
 procedure TestTPJMD5.RunFinalizeTest;
 var
@@ -459,6 +491,38 @@ begin
   end;
 end;
 
+procedure TestTPJMD5.TestCalculateStreamCount;
+var
+  Fn: TCalculateMethodCall;
+  Stream: TStream;
+  Count: Int64;
+begin
+  // Required data is sandwiched in between two blocks of padding. Stream start
+  // position is just after first block of padding. Count = length of test data
+  Fn := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    // Stream is Padding + TestData + Padding
+    BytesArraysToStream(
+      [
+        ByteArrayToBytes(PaddingBytes),
+        Test.DataAsByteArray,
+        ByteArrayToBytes(PaddingBytes)
+      ],
+      Stream
+    );
+    Count := Test.SizeOfData;
+    Stream.Position := Length(PaddingBytes);
+    Count := Test.SizeOfData;
+    Result := TPJMD5.Calculate(Stream, Count);
+  end;
+  Stream := TMemoryStream.Create;
+  try
+    RunRFCCalcTests(Fn);
+  finally
+    Stream.Free;
+  end;
+end;
+
 procedure TestTPJMD5.TestCalculateUnicodeString;
 var
   ResultDigest: TPJMD5Digest;
@@ -584,6 +648,62 @@ begin
   end;
 end;
 
+procedure TestTPJMD5.TestProcessStreamCount;
+var
+  Fn, Fn2, Fn3: TProcessMethodCall;
+  Stream: TStream;
+  Count: Int64;
+begin
+  Fn := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    // stream is TestData + Padding
+    MD5.ReadBufferSize := 48;
+    BytesArraysToStream(
+      [Test.DataAsByteArray, ByteArrayToBytes(PaddingBytes)], Stream
+    );
+    Count := Test.SizeOfData;
+    Stream.Position := 0;
+    MD5.Process(Stream, Count);
+  end;
+  Fn2 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    // Stream is Padding + TestData + Padding
+    BytesArraysToStream(
+      [
+        ByteArrayToBytes(PaddingBytes),
+        Test.DataAsByteArray,
+        ByteArrayToBytes(PaddingBytes)
+      ],
+      Stream
+    );
+    Count := Test.SizeOfData;
+    Stream.Position := Length(PaddingBytes);
+    MD5.Process(Stream, Count);
+  end;
+  Fn3 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    // Stream is Padding + TestData
+    BytesArraysToStream(
+      [
+        ByteArrayToBytes(PaddingBytes),
+        Test.DataAsByteArray
+      ],
+      Stream
+    );
+    Count := Stream.Size; // count is too big
+    Stream.Position := Length(PaddingBytes);
+    MD5.Process(Stream, Count);
+  end;
+  Stream := TMemoryStream.Create;
+  try
+    RunRFCTests(Fn);
+    RunRFCTests(Fn2);
+    RunRFCTests(Fn3);
+  finally
+    Stream.Free;
+  end;
+end;
+
 procedure TestTPJMD5.TestProcessUnicodeString;
 var
   MD5: TPJMD5;
@@ -701,15 +821,6 @@ begin
 end;
 
 { TestTPJMD5Digest }
-
-function TestTPJMD5Digest.ByteArrayToBytes(const A: array of Byte): TBytes;
-var
-  Idx: Integer;
-begin
-  SetLength(Result, Length(A));
-  for Idx := Low(A) to High(A) do
-    Result[Idx - Low(A)] := A[Idx];
-end;
 
 procedure TestTPJMD5Digest.ErrorImplicitCast;
 var
