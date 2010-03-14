@@ -236,19 +236,21 @@ type
     destructor Destroy; override;
 
     ///  <summary>
-    ///  Calculates a digest from Size bytes read from byte array X.
+    ///  Calculates a digest from Count bytes read from byte array X. If Count
+    ///  is greater than the number of elements in X an EPJMD5 exception is
+    ///  raised.
     ///  </summary>
     class function Calculate(const X: TBytes;
-      const Size: Cardinal): TPJMD5Digest; overload;
+      const Count: Cardinal): TPJMD5Digest; overload;
     ///  <summary>
     ///  Calculates a digest from all the bytes of byte array X.
     ///  </summary>
     class function Calculate(const X: TBytes): TPJMD5Digest; overload;
     ///  <summary>
-    ///  Calculates a digest from Size bytes read from untyped buffer Buf.
-    ///  Buf must contain at least Size bytes.
+    ///  Calculates a digest from Count bytes read from untyped buffer Buf.
+    ///  Buf must contain at least Count bytes.
     ///  </summary>
-    class function Calculate(const Buf; const Size: Cardinal): TPJMD5Digest;
+    class function Calculate(const Buf; const Count: Cardinal): TPJMD5Digest;
       overload;
     ///  <summary>
     ///  Calculates a digest from the characters of AnsiString S.
@@ -290,18 +292,19 @@ type
     class function CalculateFile(const FileName: TFileName): TPJMD5Digest;
 
     ///  <summary>
-    ///  Addes Size bytes from a byte array X to the digest.
+    ///  Adds Count bytes from a byte array X to the digest. If Count is greater
+    ///  than the size of the array an EPJMD5 exception is raised.
     ///  </summary>
-    procedure Process(const X: TBytes; const Size: Cardinal); overload;
+    procedure Process(const X: TBytes; const Count: Cardinal); overload;
     ///  <summary>
     ///  Adds all the bytes from a byte array X to the digest.
     ///  </summary>
     procedure Process(const X: TBytes); overload;
     ///  <summary>
-    ///  Adds Size bytes from untyped buff Buf to the digest. Buf must contain
+    ///  Adds Count bytes from untyped buff Buf to the digest. Buf must contain
     ///  sufficient data.
     ///  </summary>
-    procedure Process(const Buf; const Size: Cardinal); overload;
+    procedure Process(const Buf; const Count: Cardinal); overload;
     ///  <summary>
     ///  Adds all the characters from AnsiString S as bytes to the digest.
     ///  </summary>
@@ -495,16 +498,17 @@ resourcestring
     + 'it is too short';
   sStreamTooShort = 'Can''t read %0:d bytes from stream. '
     + 'Only %1:d bytes remaining';
+  sTBytesTooShort = 'Can''t read %0:d bytes from array of length %1:d';
 
 { TPJMD5 }
 
-class function TPJMD5.Calculate(const Buf; const Size: Cardinal): TPJMD5Digest;
+class function TPJMD5.Calculate(const Buf; const Count: Cardinal): TPJMD5Digest;
 begin
   // Can't call DoCalculate with callback anonymous method because Buf is not
   // recognised by the compiler in the callback.
   with Create do
     try
-      Process(Buf, Size);
+      Process(Buf, Count);
       Result := Digest;
     finally
       Free;
@@ -519,10 +523,10 @@ begin
 end;
 
 class function TPJMD5.Calculate(const X: TBytes;
-  const Size: Cardinal): TPJMD5Digest;
+  const Count: Cardinal): TPJMD5Digest;
 begin
   Result := DoCalculate(
-    procedure(Instance: TPJMD5) begin Instance.Process(X, Size); end
+    procedure(Instance: TPJMD5) begin Instance.Process(X, Count); end
   );
 end;
 
@@ -659,9 +663,9 @@ begin
   Process(S, TEncoding.Default);
 end;
 
-procedure TPJMD5.Process(const Buf; const Size: Cardinal);
+procedure TPJMD5.Process(const Buf; const Count: Cardinal);
 begin
-  Process(TBytes(@Buf), Size);
+  Process(TBytes(@Buf), Count);
 end;
 
 procedure TPJMD5.Process(const S: AnsiString);
@@ -683,7 +687,7 @@ begin
     raise EPJMD5.CreateFmt(
       sStreamTooShort, [Count, Stream.Size - Stream.Position]
     );
-  BytesToRead := Count;
+  BytesToRead := Max(Count, 0); // prevent Count < 0: use 0 in this case
   fReadBuffer.Alloc(fReadBufferSize);
   while BytesToRead > 0 do
   begin
@@ -700,9 +704,11 @@ begin
   Process(X, Length(X));
 end;
 
-procedure TPJMD5.Process(const X: TBytes; const Size: Cardinal);
+procedure TPJMD5.Process(const X: TBytes; const Count: Cardinal);
 begin
-  Update(X, Size);
+  if Count > Cardinal(Length(X)) then
+    raise EPJMD5.CreateFmt(sTBytesTooShort, [Count, Length(X)]);
+  Update(X, Count);
 end;
 
 procedure TPJMD5.ProcessFile(const FileName: TFileName);
