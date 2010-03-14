@@ -275,7 +275,8 @@ type
     class function Calculate(const Stream: TStream): TPJMD5Digest; overload;
     ///  <summary>
     ///  Calculates a digest from up to Count bytes from the current position in
-    ///  the given stream.
+    ///  the given stream. If Count is greater than available bytes in stream,
+    ///  an exception is raised.
     ///  </summary>
     ///  <remarks>
     ///  Stream is read in chunks of size given by ReadBufferSize.
@@ -326,7 +327,8 @@ type
     procedure Process(const Stream: TStream); overload;
     ///  <summary>
     ///  Adds up to Count bytes from to the digest from a stream starting from
-    //   the current position.
+    ///  the current position. If Count is greater than available bytes in
+    ///  stream, an exception is raised.
     ///  </summary>
     ///  <remarks>
     ///  Stream is read in chunks of size given by ReadBufferSize.
@@ -491,6 +493,8 @@ resourcestring
   sBadMD5StrChars = 'Can''t cast string %s to TPJMD5Digest: invalid hex digits';
   sByteArrayTooShort = 'Can''t cast TBytes array of length %d to TPJMD5Digest: '
     + 'it is too short';
+  sStreamTooShort = 'Can''t read %0:d bytes from stream. '
+    + 'Only %1:d bytes remaining';
 
 { TPJMD5 }
 
@@ -675,7 +679,11 @@ var
   BytesRead: Cardinal;
   BytesToRead: Int64;
 begin
-  BytesToRead := Min(Count, Stream.Size - Stream.Position);
+  if Count > Stream.Size - Stream.Position then
+    raise EPJMD5.CreateFmt(
+      sStreamTooShort, [Count, Stream.Size - Stream.Position]
+    );
+  BytesToRead := Count;
   fReadBuffer.Alloc(fReadBufferSize);
   while BytesToRead > 0 do
   begin

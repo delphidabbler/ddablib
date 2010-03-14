@@ -97,6 +97,10 @@ type
     procedure TearDown; override;
     // Runs Finalize test that raises exception
     procedure RunFinalizeTest;
+    // Runs test for TestProcessStreamCount that should raise exception
+    procedure ErrorProcessStreamCount;
+    // Runs test for TestCalculateStreamCount that should raise exception
+    procedure ErrorCalculateStreamCount;
   published
     // ** NOTE: Order of these tests is important **
 
@@ -166,8 +170,6 @@ type
   end;
 
 implementation
-
-uses WINDOWS; (* TODO: DEBUG *)
 
 
 const
@@ -331,6 +333,43 @@ begin
   Stm.Size := 0;  // empties stream
   for Idx := 0 to Pred(Length(BAs)) do
     Stm.WriteBuffer(BAs[Idx][0], Length(BAs[Idx]));
+end;
+
+procedure TestTPJMD5.ErrorCalculateStreamCount;
+var
+  Stm: TBytesStream;
+  Count: Int64;
+  D: TPJMD5Digest;
+begin
+  Stm := TBytesStream.Create(RFCTests[DefaultRFCTest].DataAsByteArray);
+  try
+    Stm.Position := 0;
+    Count := Stm.Size + 1; // even with start Stm.Position = 0, Count is too big
+    D := TPJMD5.Calculate(Stm, Count); // should get exception here
+  finally
+    Stm.Free;
+  end;
+end;
+
+procedure TestTPJMD5.ErrorProcessStreamCount;
+var
+  Stm: TBytesStream;
+  MD5: TPJMD5;
+  Count: Int64;
+begin
+  Stm := TBytesStream.Create(RFCTests[DefaultRFCTest].DataAsByteArray);
+  try
+    Stm.Position := 8;
+    MD5 := TPJMD5.Create;
+    try
+      Count := Stm.Size; // with start Stm.Position = 8, Count is too big
+      MD5.Process(Stm, Count);  // should get exception here
+    finally
+      MD5.Free;
+    end;
+  finally
+    Stm.Free;
+  end;
 end;
 
 procedure TestTPJMD5.RunFinalizeTest;
@@ -521,6 +560,7 @@ begin
   finally
     Stream.Free;
   end;
+  CheckException(ErrorCalculateStreamCount, EPJMD5);
 end;
 
 procedure TestTPJMD5.TestCalculateUnicodeString;
@@ -665,6 +705,7 @@ begin
     Stream.Position := 0;
     MD5.Process(Stream, Count);
   end;
+
   Fn2 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
   begin
     // Stream is Padding + TestData + Padding
@@ -680,28 +721,15 @@ begin
     Stream.Position := Length(PaddingBytes);
     MD5.Process(Stream, Count);
   end;
-  Fn3 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
-  begin
-    // Stream is Padding + TestData
-    BytesArraysToStream(
-      [
-        ByteArrayToBytes(PaddingBytes),
-        Test.DataAsByteArray
-      ],
-      Stream
-    );
-    Count := Stream.Size; // count is too big
-    Stream.Position := Length(PaddingBytes);
-    MD5.Process(Stream, Count);
-  end;
+
   Stream := TMemoryStream.Create;
   try
     RunRFCTests(Fn);
     RunRFCTests(Fn2);
-    RunRFCTests(Fn3);
   finally
     Stream.Free;
   end;
+  CheckException(ErrorProcessStreamCount, EPJMD5);
 end;
 
 procedure TestTPJMD5.TestProcessUnicodeString;
