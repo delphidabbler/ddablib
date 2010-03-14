@@ -101,6 +101,10 @@ type
     procedure ErrorProcessStreamCount;
     // Runs test for TestCalculateStreamCount that should raise exception
     procedure ErrorCalculateStreamCount;
+    // Runs test for TestProcessArrayOfByteSize that should raise exception
+    procedure ErrorProcessArrayOfByteSize;
+    // Runs test for TestCalculateArrayOfByteSize that should raise exception
+    procedure ErrorCalculateArrayOfByteSize;
   published
     // ** NOTE: Order of these tests is important **
 
@@ -335,6 +339,17 @@ begin
     Stm.WriteBuffer(BAs[Idx][0], Length(BAs[Idx]));
 end;
 
+procedure TestTPJMD5.ErrorCalculateArrayOfByteSize;
+var
+  Bytes: TBytes;
+  D: TPJMD5Digest;
+  Count: Cardinal;
+begin
+  Bytes := RFCTests[DefaultRFCTest].DataAsByteArray;
+  Count := Length(Bytes) + 1; // count is too large
+  D := TPJMD5.Calculate(Bytes, Count); // should raise exception
+end;
+
 procedure TestTPJMD5.ErrorCalculateStreamCount;
 var
   Stm: TBytesStream;
@@ -348,6 +363,22 @@ begin
     D := TPJMD5.Calculate(Stm, Count); // should get exception here
   finally
     Stm.Free;
+  end;
+end;
+
+procedure TestTPJMD5.ErrorProcessArrayOfByteSize;
+var
+  Bytes: TBytes;
+  Count: Cardinal;
+  MD5: TPJMD5;
+begin
+  Bytes := RFCTests[DefaultRFCTest].DataAsByteArray;
+  Count := Length(Bytes) + 1; // count is too large
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(Bytes, Count);  // should raise exception
+  finally
+    MD5.Free;
   end;
 end;
 
@@ -488,6 +519,7 @@ begin
     Result := TPJMD5.Calculate(Test.DataAsByteArray, Test.SizeOfData);
   end;
   RunRFCCalcTests(Fn);
+  CheckException(ErrorCalculateArrayOfByteSize, EPJMD5);
 end;
 
 procedure TestTPJMD5.TestCalculateBuf;
@@ -641,6 +673,7 @@ begin
     MD5.Process(Test.DataAsByteArray, Test.SizeOfData);
   end;
   RunRFCTests(Fn);
+  CheckException(ErrorProcessArrayOfByteSize, EPJMD5);
 end;
 
 procedure TestTPJMD5.TestProcessBuf;
@@ -680,6 +713,7 @@ begin
     MD5.ReadBufferSize := 48;
     MD5.Process(Stream);
   end;
+
   Stream := TMemoryStream.Create;
   try
     RunRFCTests(Fn);
@@ -690,7 +724,7 @@ end;
 
 procedure TestTPJMD5.TestProcessStreamCount;
 var
-  Fn, Fn2, Fn3: TProcessMethodCall;
+  Fn, Fn2: TProcessMethodCall;
   Stream: TStream;
   Count: Int64;
 begin
