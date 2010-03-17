@@ -1,0 +1,1096 @@
+<!--
+This file designed to be used either as include file on website for user
+guide tab of resfile page OR as stand alone HTML user guide for distribution
+with source code.
+Simply comment out all sections labelled "for stand-alone file" by removing
+closing gt symbol of comment tag. Also comment out appropriate achor tag in
+link to articles.php: either local (include file) or remote (HTML doc)
+Also need to comment out some of styles for include file version.
+Also need to comment out appropriate bullet image references in method-xxx
+CSS classes.
+-->
+<!-- For stand-alone file -->
+<html>
+<head>
+<title>DelphiDabbler.com: PJResFile User Guide</title>
+<!-- Common -->
+<style type="text/css">
+<!--
+.method-def {
+	font-family: "Courier New", Courier, mono;
+	font-size: 10pt;
+	margin-bottom: 4px;
+}
+.method-desc {
+	margin-left: 24px;
+	margin-top: 4px;
+	margin-bottom: 0px;
+}
+ul.method {
+	margin-top: 4px;
+}
+.method-params {
+	/* For stand-alone file */
+	list-style-image: url(bullet_p.gif);
+	/* For include file *
+	list-style-image: url(/img/sw/resfile-1.gif);
+	/* Common */
+	list-style-position: outside;
+	padding-top: 0px;
+	padding-bottom: 2px;
+	margin-left: 24px;
+	margin-top: 0px;
+}
+.method-return {
+	/* For stand-alone file */
+	list-style-image: url(bullet_r.gif);
+	/* For include file *
+	list-style-image: url(/img/sw/resfile-2.gif);
+	/* Common */
+	list-style-position: outside;
+	padding-top: 0px;
+	padding-bottom: 2px;
+	margin-left: 24px;
+}
+.method-except {
+	/* For stand-alone file */
+	list-style-image: url(bullet_e.gif);
+	/* For include file *
+	list-style-image: url(/img/sw/resfile-3.gif);
+	/* Common */
+	list-style-position: outside;
+	padding-top: 0px;
+	padding-bottom: 2px;
+	margin-left: 24px;
+}
+.gototop {
+	text-align: center;
+	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+.pascal-kw {
+	font-family: "Courier New", Courier, mono;
+	font-size: 10pt;
+	font-weight: bold;
+}
+.pascal-comment {
+	font-family: "Courier New", Courier, mono;
+	font-size: 10pt;
+	color: blue;
+}
+/* For stand alone file */
+body {
+	background-color : White;
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size : 10pt;
+}
+table {
+	font-size : 10pt;
+}
+h1 {
+	padding-bottom: 4px;
+	text-align: center;
+	background-color: #CCCCCC;
+	border: 1px #999999 solid;
+}
+h2 {
+	text-align: center;
+	padding-bottom: 4px;
+	border-bottom: 2px #999999 solid;
+}
+.bodytableframe {
+	background-color : #CCCCCC;
+	color : White;
+}
+.bodytablebody {
+	background-color : White;
+	color : Black;
+}
+/* End */
+-->
+</style>
+<!-- For stand-alone file -->
+</head>
+<body>
+<h1>Resource File Classes<br />by DelphiDabbler</h1>
+<h2>User Guide</h2>
+<!-- Common -->
+<h3><a name="Top"></a>Overview</h3>
+<p>These classes support read and writing 32 bit binary resource files. Some routines 
+	are also included that assist in manipulating resource identifiers.</p>
+
+<p>The code encapsulates the high-level structure of a resource file and
+its resources. It deals only with raw resource data - the actual format
+of the raw data depends on the resource type. This code does not provide
+any support for specific resource types or their data formats.</p>
+
+<p>This document is divided into various sections:</p>
+
+<ul class="method">
+	<li><a href="#Classes">Classes</a> - description of the provided classes 
+		<ul class="method">
+			<li><a href="#TPJResourceFile">TPJResourceFile</a> - details of usage, methods 
+				and properties of the resource file class</li>
+			<li><a href="#TPJResourceEntry">TPJResourceEntry</a> - details of usage, 
+				methods and properties of the resource entry class</li>
+			<li><a href="#EPJResourceFile">EPJResourceFile</a> - description of this 
+				exception class</li>
+		</ul>
+	</li>
+	<li><a href="#Routines">Routines</a> - description of the helper routines</li>
+	<li><a href="#Constants">Constants</a> - description of constants defined for 
+		use with the classes</li>
+	<li><a href="#Examples">Examples</a> - examples of using the classes 
+		<ul>
+			<li><a href="#eg1">#1</a> - Loading a resource file</li>
+			<li><a href="#eg2">#2</a> - Accessing all resources in a file</li>
+			<li><a href="#eg3">#3</a> - Finding a resource</li>
+			<li><a href="#eg4">#4</a> - Listing specific resources from a file</li>
+			<li><a href="#eg5">#5</a> - Adding or modifying a resource's data</li>
+			<li><a href="#eg6">#6</a> - Adding a new resources to a file</li>
+			<li><a href="#eg7">#7</a> - Checking is a resource exists</li>
+			<li><a href="#eg8">#8</a> - Deleting resources</li>
+			<li><a href="#eg9">#9</a> - Saving a resource file</li>
+			<li><a href="#eg10">#10</a> - A practical example</li>
+		</ul>
+	</li>
+</ul>
+<h3><a name="Classes"></a>Classes</h3>
+<p>The classes included in this release are as follows:</p>
+<table border="0" width="100%" class="bodytableframe" cellspacing="1" cellpadding="3">
+	<tr> 
+		<th width="17%" valign="top">Class</th>
+		<th width="83%" valign="top">Description</th>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="17%" valign="top"><em>TPJResourceFile</em></td>
+		<td width="83%" valign="top">Encapsulates a 32 bit binary resource file and 
+			exposes the entries within it. The class allows resources within the file 
+			to be accessed, created, read and searched for.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="17%" valign="top"><em>TPJResourceEntry</em></td>
+		<td width="83%" valign="top">Encapsulates a single resource within a resource 
+			file. Permits access to the resource type, name and language. Other header 
+			data can be modified. Provides read/write access to the raw resource data 
+			through a <em>TStream</em>.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="17%" valign="top"><em>EPJResourceFile</em></td>
+		<td width="83%" valign="top">Class of exception raised by the above classes 
+			to report errors.</td>
+	</tr>
+</table>
+<p>Although we use the word &quot;file&quot; in these notes, this term also covers 
+	binary resource data stored in a stream.</p>
+<p>Detailed descriptions of the classes now follow.</p>
+<h4><a name="TPJResourceFile"></a>TPJResourceFile</h4>
+<p>This class is used to encapsulate a 32 bit resource file, to find which resources 
+	in contains and to add new and delete existing resources. The number of resources 
+	in the file is given by the <em>EntryCount</em> property while the <em>Entries[]</em> 
+	property provides access to them. Resource entries are not created directly 
+	by the user but via the <em>AddEntry()</em> method of this class.</p>
+<p>Resource entries accessed via this class are <em>TPJResourceEntry</em> objects 
+	and have methods and properties that can be used to interogate and update them.</p>
+<h5>Methods</h5>
+<pre class="method-def"><span class="pascal-kw">constructor</span> Create;</pre>
+<p class="method-desc">Class constructor. Creates a new empty resource file object.</p>
+<pre class="method-def"><span class="pascal-kw">destructor</span> Destroy;</pre>
+<p class="method-desc">Class destructor. Usually called via the <em>Free</em> 
+	method. Destroying the object frees all the resource entries currently in the 
+	file.</p>
+<pre class="method-def"><span class="pascal-kw">procedure</span> Clear;</pre>
+<p class="method-params">Clears all resources from the file object. The resources 
+	are freed.</p>
+<pre class="method-def"><span class="pascal-kw">function</span> DeleteEntry(<span class="pascal-kw">const</span> Entry: TPJResourceEntry): Boolean;</pre>
+<p class="method-desc">Deletes a resource entry from the resource file object 
+	if it exists. The entry object is not freed and must be freed by the user since 
+	it will no longer be freed by the <em>Clear</em> or <em>Destroy</em> methods. 
+	The recommended way to delete and free a resource entry is to free the entry 
+	object since this automatically unlinks it from the resource.</p>
+<ul class="method">
+	<li class="method-params"><em>Entry</em> - reference to resource entry object 
+		to be deleted.</li>
+	<li class="method-return">Returns true if entry was in the resource list and 
+		was deleted and false otherwise.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">function</span> IndexOfEntry(<span class="pascal-kw">const</span> Entry: TPJResourceEntry): Integer;</pre>
+<p class="method-desc">Gets the index number of the given resource entry in the 
+	resource file's <em>Entries[]</em> property.</p>
+<ul class="method">
+	<li class="method-params"><em>Entry</em> - reference to resource entry to be 
+		found.</li>
+	<li class="method-return">Returns index number if entry was found and -1 if 
+		entry is not in the resource file. </li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">procedure</span> LoadFromFile(<span class="pascal-kw">const</span> FileName: TFileName);</pre>
+<p class="method-desc">Loads a resource file from the named file, replacing any 
+	existing resource.</p>
+<ul class="method">
+	<li class="method-params"><em>FileName</em> - the name of the file from which 
+		to load the resource</li>
+	<li class="method-except">Exceptions are raised if the file does not exist or 
+		does not contain a valid resource. </li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">procedure</span> LoadFromStream(<span class="pascal-kw">const</span> Stm: TStream);</pre>
+<p class="method-desc">Loads a resource &quot;file&quot; from the current location 
+	in the given stream.</p>
+<ul class="method">
+	<li class="method-params"><em>Stm</em> - the stream from which to load the resource</li>
+	<li class="method-except">Exceptions are raised if the stream does not contain 
+		a valid resource file. </li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">procedure</span> SaveToFile(<span class="pascal-kw">const</span> FileName: TFileName);</pre>
+<p class="method-desc">Saves data as a 32 bit resource file.</p>
+<ul class="method">
+	<li class="method-params"><em>FileName</em> - the name of the file.</li>
+	<li class="method-except">Exceptions are raised if the file cannot be created.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">procedure</span> SaveToStream(<span class="pascal-kw">const</span> Stm: TStream);</pre>
+<p class="method-desc">Saves data in resource file format on the given stream 
+	at the current location.</p>
+<ul class="method">
+	<li class="method-except">Exceptions are raised if the stream does not support 
+		writing.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">class function</span> IsValidResourceStream(<span class="pascal-kw">const</span> Stm: TStream): Boolean;</pre>
+<p class="method-desc">Checks if the given stream contains data representing a 
+	valid 32 bit resource file starting at the current location. This method checks 
+	that a 32 bit resource file header is present but does not validate the whole 
+	of the file. Note that the stream is not rewound to the starting position after 
+	the check is made.</p>
+<ul class="method">
+	<li class="method-params"><em>Stm</em> - the stream containing the resource 
+		file.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">function</span> AddEntry(<span class="pascal-kw">const</span> ResType, ResName: PChar;<span class="pascal-kw">
+  const</span> LangID: Word = 0): TPJResourceEntry;</pre>
+<p class="method-desc">Adds a new, empty, resource to the current &quot;file&quot; 
+	object.</p>
+<ul class="method">
+	<li class="method-params"><em>ResType</em> - the type of the new resource (ordinal 
+		or string).</li>
+	<li class="method-params"><em>ResName</em> - the name of the new resource (ordinal 
+		or string)</li>
+	<li class="method-params"><em>LangID</em> - optional language id of the resource 
+		(a language neutral value of 0 is used if this parameter is not provided).</li>
+	<li class="method-return">Returns a reference to the new resource entry. This 
+		reference should be used to set the resource headers and to store the raw 
+		data.</li>
+	<li class="method-except">Exception raised if an entry already exists with same 
+		type, name and language id.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">function</span> AddEntry(<span class="pascal-kw">const</span> Entry: TPJResourceEntry; <span class="pascal-kw">const</span> ResName: PChar;<span class="pascal-kw">
+  const</span> LangID: Word = 0): TPJResourceEntry;</pre>
+<p class="method-desc">Adds a copy of the given resource entry to the current 
+	&quot;file&quot; object with a new resource name and language id. The new entry 
+	has the same resource type as the one being copied.</p>
+<ul class="method">
+	<li class="method-params"><em>Entry</em> - reference to the resource entry to 
+		be copied.</li>
+	<li class="method-params"><em>ResName</em> - name of the new resource.</li>
+	<li class="method-params"><em>LangID</em> - optional language id of the resource 
+		(a language neutral value of 0 is used if this parameter is not provided).</li>
+	<li class="method-return">Returns a reference to the new resource entry that 
+		has the same header information and data as the one being copied except for 
+		resource name and language id.</li>
+	<li class="method-except">Exception raised if an entry already exists with same 
+		type, name and language id.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">function</span> FindEntry(<span class="pascal-kw">const</span> ResType, ResName: PChar;
+  <span class="pascal-kw">const</span> LangID: WORD = $FFFF): TPJResourceEntry;</pre>
+<p class="method-desc">Finds a resource entry with the given type, name and language 
+	id. The search can ignore the resource name and or language id in which case 
+	first entry that matches the provided information is found.</p>
+<ul class="method">
+	<li class="method-params"><em>ResType</em> - the type of the resource to be 
+		found (ordinal or string) - required.</li>
+	<li class="method-params"><em>ResName</em> - the name of the resource to be 
+		found (ordinal or string). If just the first resource of the given type is 
+		required then nil can be specified here.</li>
+	<li class="method-params"><em>LangID</em> - the language id of the required 
+		resource (optional). If only the first matching resource for the given type 
+		and name is required this parameter can be left out (or $FFFF supplied). To 
+		find a language neutral resource specify 0 for this parameter.</li>
+	<li class="method-return">Returns a reference to the found resource or nil if 
+		no resource was found.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">function</span> FindEntryIndex(<span class="pascal-kw">const</span> ResType, ResName: PChar;
+  <span class="pascal-kw">const</span> LangID: WORD = $FFFF): Integer;</pre>
+<p class="method-desc">Finds the <em>Entries[]</em> property index of a resource 
+	entry with the given type, name and language id. The search can ignore resource 
+	name or language id in which case first entry that matches the provided information 
+	is found.</p>
+<ul class="method">
+	<li class="method-params"><em>ResType</em> - the type of the resource to be 
+		found (ordinal or string) - required.</li>
+	<li class="method-params"><em>ResName</em> - the name of the resource to be 
+		found (ordinal or string). If just the first resource of the given type is 
+		required then nil can be specified here.</li>
+	<li class="method-params"><em>LangID</em> - the language id of the required 
+		resource (optional). If only the first matching resource for the given type 
+		and name is required this parameter can be left out (or $FFFF supplied). To 
+		find a language neutral resource specify 0 for this parameter.</li>
+	<li class="method-return"> Returns the index of the found resource in the <em>Entries[]</em> 
+		property or -1 if no resource was found.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">function</span> EntryExists(<span class="pascal-kw">const</span> ResType, ResName: PChar;
+  <span class="pascal-kw">const</span> LangID: WORD = $FFFF): Boolean;</pre>
+<p class="method-desc">Checks whether a resource entry matching given search criteria 
+	exists.</p>
+<ul class="method">
+	<li class="method-params"><em>ResType</em> - the type of the resource to be 
+		found (ordinal or string) - required.</li>
+	<li class="method-params"><em>ResName</em> - the name of the resource to be 
+		found (ordinal or string). If just the first resource of the given type is 
+		required then nil can be specified here.</li>
+	<li class="method-params"><em>LangID</em> - the language id of the required 
+		resource (optional). If only the first matching resource for the given type 
+		and name is required this parameter can be left out (or $FFFF supplied). To 
+		find a language neutral resource specify 0 for this parameter.</li>
+	<li class="method-return">Returns true if a resource matching the search criteria 
+		exists and false if not. </li>
+</ul>
+<h5>Properties</h5>
+<pre class="method-def"><span class="pascal-kw">property</span> EntryCount: Integer;</pre>
+<p class="method-desc">Read-only property that provides the number of resources 
+	in the resource file (i.e. the number of entries in the <em>Entries[]</em> property).</p>
+<pre class="method-def"><span class="pascal-kw">property</span> Entries[Idx: Integer]: TPJResourceEntry;</pre>
+<p class="method-desc">Read-only property that provides access to all the resources 
+	in the resource file by index. </p>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="TPJResourceEntry"></a>TPJResourceEntry</h4>
+<p>Encapsulates a resource within a resource file. Object of this class must not 
+	be directly instantiated. <em>TPJResourceFile</em> automatically creates the 
+	required objects when they are read from a file or can create new instances 
+	in its <em>AddEntry</em> methods. <em>TPJResourceFile</em> is actually an abstract 
+	class that provides the required interface for manipulating resource entries. 
+	The actual concrete class that implements the resource entry is private. Therefore 
+	all valid resource objects are accessed via <em>TPJResourceFile</em>.</p>
+<p><em>TPJResourceEntry</em> objects are used to manipulate and interogate resource 
+	entries. This is done mainly via properties which give access to resource header 
+	information, allow some header information to be set and give read/write access 
+	to the raw resource data via a <em>TStream</em>.</p>
+<p>Care should be taken not to use a resource entry after the resource file object 
+	has been cleared or destroyed or a new resource file has been read since all 
+	these actions free previous resource entries. A <em>TPJResourceEntry</em> object 
+	can be freed directly - doing so removes the entry from any resource file object 
+	it belongs to.</p>
+<h5>Methods</h5>
+<pre class="method-def"><span class="pascal-kw">function</span> IsMatching(<span class="pascal-kw">const </span>ResType, ResName: PChar;
+  <span class="pascal-kw">const</span> LangID: Word = $FFFF): Boolean;</pre>
+<p class="method-desc">Checks if the resource entry has the given type, name and 
+	language id. The resource name and/or language id can be ignored in which case 
+	only the values provided will be matched. For example to match only a resource 
+	type use <code>IsMatching(MyResType, nil)</code>;</p>
+<ul class="method">
+	<li class="method-params"><em>ResType</em> - the resource type (ordinal or string) 
+		- required.</li>
+	<li class="method-params"><em>ResName</em> - the resource name (ordinal or string) 
+		- if nil is passed as this parameter then it is ignored when matching.</li>
+	<li class="method-params"><em>LangID</em> - the language id of the resource 
+		- if this is left out or $FFFF is passed then it is ingored in the match. 
+		To test for a language neutral resource specify 0 in this parameter.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">function</span> IsMatching(<span class="pascal-kw">const</span> Entry: TPJResourceEntry): Boolean;</pre>
+<p class="method-desc">Checks if the resource entry has the same type, name and 
+	language ID as the given resource entry.</p>
+<ul class="method">
+	<li class="method-params"><em>Entry</em> - the resource entry to match against.</li>
+	<li class="method-return">Returns true if the entries match and false otherwise.</li>
+</ul>
+<h5>Properties</h5>
+<pre class="method-def"><span class="pascal-kw">property</span> DataSize: DWORD;</pre>
+<p class="method-desc">Read-only. Provides the size of the resource data (same 
+	as calling <em>Data.Size</em>).</p>
+<pre class="method-def"><span class="pascal-kw">property</span> HeaderSize: DWORD;</pre>
+<p class="method-desc">Read-only. Provides the size of the resource header (which 
+	varies depending on the type and size of the resource type and name).</p>
+<pre class="method-def"><span class="pascal-kw">property</span> DataVersion: DWORD;</pre>
+<p class="method-desc">Gets or sets the predefined data resource version information.</p>
+<pre class="method-def"><span class="pascal-kw">property</span> MemoryFlags: Word;</pre>
+<p class="method-desc">Gets or sets the attribute bitmask that specifies the state 
+	of resource.</p>
+<pre class="method-def"><span class="pascal-kw">property</span> LanguageID: Word;</pre>
+<p class="method-desc">Read-only. Gets the language used by the resource (value 
+	of 0 is language-neutral).</p>
+<pre class="method-def"><span class="pascal-kw">property</span> Version: DWORD;</pre>
+<p class="method-desc">Gets or sets the user specified version number for resource 
+	data.</p>
+<pre class="method-def"><span class="pascal-kw">property</span> Characteristics: DWORD;</pre>
+<p class="method-desc">Gets or sets the user specified characteristics of the 
+	resource.</p>
+<pre class="method-def"><span class="pascal-kw">property</span> ResName: PChar;</pre>
+<p class="method-desc">Read-only. Gets the name of the resource. This value is 
+	either a pointer to a zero-terminated string or an ordinal value as returned 
+	from <em>MakeIntResource()</em>.</p>
+<pre class="method-def"><span class="pascal-kw">property</span> ResType: PChar;</pre>
+<p class="method-desc">Read-only. Gets the type of the resource. This value is 
+	either a pointer to a zero-terminated string or an ordinal value as returned 
+	from <em>MakeIntResource()</em>.</p>
+<pre class="method-def"><span class="pascal-kw">property</span> Data: TStream;</pre>
+<p class="method-desc">Read-only. Gets a reference to the stream that contains 
+	the resource's raw data. The stream can be used to read or write the data. Any 
+	padding bytes that follow the resource's data are not included in the stream. 
+</p>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="EPJResourceFile"></a>EPJResourceFile</h4>
+<p>This is the class of exceptions that are raised directly by <em>TPJResourceFile</em> 
+	and <em>TPJResourceEntry</em>. Note that some methods may raise exceptions of 
+	other classes.</p>
+<p>The class defines no new methods or properties.</p>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h3><a name="Routines"></a>Routines</h3>
+<p>The helper routines provided with this code can be used to assist in manipulating 
+	resource identifiers. They can be useful for working with Windows API routines 
+	as well as the classes presented here. Here are the routines.</p>
+<pre class="method-def"><span class="pascal-kw">function</span> IsIntResource(<span class="pascal-kw">const</span> ResID: PChar): Boolean;</pre>
+<p class="method-desc">A clone of the IS_<em>INTRESOURCE</em> macro defined on 
+	MSDN that checks if a resource identifier is ordinal or a string. Complements 
+	the <em>MakeIntResource</em> &quot;macro&quot; defined in <code>Windows.pas</code>.</p>
+<ul class="method">
+	<li class="method-params"><em>ResID</em> - the resource identifier to check.</li>
+	<li class="method-return">Returns true if the indentifier is numeric (as produced 
+		by <em>MakeIntResource</em>) or false if it is a pointer to a null terminated 
+		string.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">function</span> IsEqualResID(<span class="pascal-kw">const</span> R1, R2: PChar): Boolean;</pre>
+<p class="method-desc">Checks for equality of two resource identifiers. To be 
+	equal the identifiers either be ordinal and have the same value or must both 
+	point to strings that have the same text when case is ignored.</p>
+<ul class="method">
+	<li class="method-params"><em>R1</em> - the first resource identifier to check.</li>
+	<li class="method-params"><em>R2</em> - the second resource identifier to check.</li>
+	<li class="method-return">Returns true if the identifiers are equal and false 
+		otherwise.</li>
+</ul>
+<pre class="method-def"><span class="pascal-kw">function</span> ResIDToStr(<span class="pascal-kw">const</span> ResID: PChar): <span class="pascal-kw">string</span>;</pre>
+<p class="method-desc">Converts a resource identifier into its string representation 
+	as defined on MSDN.</p>
+<ul class="method">
+	<li class="method-params"><em>ResID</em> - the resource identifier to convert.</li>
+	<li class="method-return">Returns the string representation. If the identifier 
+		is a string pointer then the string itself is returned. If the identifier 
+		is ordinal then the returned string is the integer value preceeded by a # 
+		character.</li>
+</ul>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h3><a name="Constants"></a>Constants</h3>
+<p>Some constants are defined to assist in setting some of the class properties.</p>
+<h4>Memory Flags Constants</h4>
+<p>The following flags are used to form the bitmask in a resource entry's <em>MemoryFlags</em> 
+	property. The first four constants in the table can or ORd together to form 
+	the bitmask. The final three constants are complements of the first three and 
+	are ANDed againgst the bitmask to remove their complement from the bitmask.</p>
+<table border="0" width="100%" cellspacing="1" cellpadding="3" class="bodytableframe">
+	<tr> 
+		<th width="24%" valign="top">Constant</th>
+		<th width="8%" valign="top" align="center">Value</th>
+		<th width="68%" valign="top">Description</th>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="24%" valign="top"><code>RES_MF_MOVEABLE</code></td>
+		<td width="8%" valign="top" align="center"><code>$0010</code></td>
+		<td width="68%" valign="top">The system can move the resource in memory. If 
+			this flag is not present the resource is fixed in memory.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="24%" valign="top"><code>RES_MF_PURE</code></td>
+		<td width="8%" valign="top" align="center"><code>$0020</code></td>
+		<td width="68%" valign="top">The resource contains DWORD aligned data so that 
+			padding is not required. If this flag is not present the resource is not 
+			DWORD aligned and must be padded.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="24%" valign="top"><code>RES_MF_PRELOAD</code></td>
+		<td width="8%" valign="top" align="center"><code>$0040</code></td>
+		<td width="68%" valign="top">The resource is to be loaded in memory just after 
+			the application itself has been loaded. If not present then loading of the 
+			resource may be deferred until required by the application.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="24%" valign="top"><code>RES_MF_DISCARDABLE</code></td>
+		<td width="8%" valign="top" align="center"><code>$1000</code></td>
+		<td width="68%" valign="top">If set then on low memory conditions, the resource 
+			can be removed from memory and then reloaded when the application needs 
+			it, otherwise the resource must remain in memory.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="24%" valign="top"><code>RES_MF_FIXED</code></td>
+		<td width="8%" valign="top" align="center"><code>$FFEF</code></td>
+		<td width="68%" valign="top">Complement of <code>RES_MF_MOVEABLE</code>: used 
+			to remove this flag from the bitmask.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="24%" valign="top"><code>RES_MF_IMPURE</code></td>
+		<td width="8%" valign="top" align="center"><code>$FFDF</code></td>
+		<td width="68%" valign="top">Complement of <code>RES_MF_IMPURE</code>: used 
+			to remove this flag from the bitmask.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td width="24%" valign="top"><code>RES_MF_LOADONCALL</code></td>
+		<td width="8%" valign="top" align="center"><code>$FFBF</code></td>
+		<td width="68%" valign="top">Complement of <code>RES_MF_LOADONCALL</code>: 
+			used to remove this flag from the bitmask.</td>
+	</tr>
+</table>
+<p>Note that Windows NT ignores <span class="method-def">RES_MF_MOVEABLE</span>, 
+	<span class="method-def">RES_MF_IMPURE</span> and <span class="method-def">RES_MF_PRELOAD</span>.</p>
+<h4>Predefined Resource Types</h4>
+<p>Delphi's Windows unit defines all the predefined resources types known at the 
+	time of writing except <code>RT_HTML</code> and <code>RT_MANIFEST</code>. Therefore 
+	these two type identifiers are defined in this unit for convenience:</p>
+<blockquote>
+	<p><code>RT_HTML = MakeIntResource(23);<br>
+		RT_MANIFEST = MakeIntResource(24);</code></p>
+</blockquote>
+<p>See Appendix 1 for a description of all the predefined resource types. </p>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h3><a name="Examples"></a>Examples</h3>
+<h4><a name="eg1"></a>Example 1: Loading a resource file</h4>
+<p>In this first example we demonstrate how to create a resource file object and 
+	how to load a file into it. The following code fragment shows how this is done. 
+</p>
+<pre><span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+  ...
+<span class="pascal-kw">begin</span>
+  ResFile := TPJResourceFile.Create;
+  <span class="pascal-kw">try</span>
+    ResFile.LoadFromFile('MyResFile.res');
+    ...
+    <span class="pascal-comment">// Do something with resource file object</span>
+    ...
+  <span class="pascal-kw">finally</span>
+    ResFile.Free;
+  <span class="pascal-kw">end</span>;
+<span class="pascal-kw">end</span>;</pre>
+<p>First we create a <em>TPJResourceFile</em> object and then use its <em>LoadFromFile</em> 
+	method read a file from disk. We then process the file in some way and once 
+	we are finished we free the resource file object. That's all there is to it. 
+	Note that if the given file does not contain a valid 32 bit resource file an 
+	exception will be raised.</p>
+<p>We can also read resource data from a stream rather than loading from file 
+	by using the <em>LoadFromStream</em> method of <em>TPJResourceFile</em> in place 
+	of <em>LoadFromFile</em>. </p>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="eg2"></a>Example 2: Accessing all resources in a file</h4>
+<p>In our next example we show how to scan through all the resources in a file 
+	and how to list some information about each one. The following example assumes 
+	we have created a resource files object <em>ResFile</em> and have loaded a resource 
+	file into it (as in example 1). We also assume that the form contains a memo 
+	named <em>Memo1</em>. Here is the code: </p>
+<pre><span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+  ResEntry: TPJResourceEntry;
+  EntryIdx: Integer;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Assume ResFile contains a loaded resource file</span>
+  ...
+  Memo1.Clear;
+  <span class="pascal-kw">for</span> EntryIdx := 0 <span class="pascal-kw">to</span> Pred(ResFile.EntryCount) <span class="pascal-kw">do</span>
+  <span class="pascal-kw">begin</span>
+    ResEntry := ResFile.Entries[EntryIdx];
+    Memo1.Lines.Add(
+      Format(
+        'Type: "%s"   Name: "%s"   LanguageID: %0.4X',
+        [ResIDToStr(ResEntry.ResType), ResIDToStr(ResEntry.ResName),
+        ResEntry.LanguageID]
+      )
+    );
+  <span class="pascal-kw">end</span>;
+  ... 
+  <span class="pascal-comment">// Don't forget to free ResFile at some stage.</span>
+<span class="pascal-kw">end</span>;</pre>
+<p>This code uses both <em>TPJResourceFile</em> and <em>TPJResourceEntry</em> 
+	objects. The resource file's <em>EntryCount</em> property tells us how many 
+	resources there are in the file. Each resource is represented by a <em>TPJResourceEntry</em> 
+	object made available from the integer indexed <em>Entries[]</em> array property. 
+	So we loop through all the valid indexes in <em>Entries[]</em> and store a reference 
+	to each resource entry in turn. Having got the resource entry object we now 
+	access its <em>ResType</em>, <em>ResName</em> and <em>LanguageID</em> properties 
+	to get the information we want to display.</p>
+<p>The details of each entry are formatted by Delphi's <em>Format</em> function 
+	and added to <em>Memo1</em>. Note that we use the <em>ResIDToStr</em> helper 
+	function to get a string representation of the resource type and name. We display 
+	the language ID as a four digit hex number since the value is a Word.</p>
+<p>You may have noticed that we have not freed any of the resource entry objects. 
+	This is not necessary since they are all freed automatically when the resource 
+	files object is freed (as shown in example 1). </p>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="eg3"></a>Example 3: Finding a resource </h4>
+<p>To find a resource we use either the <em>FindEntry</em> or <em>FindEntryIndex</em> 
+	methods. The difference is that <em>FindEntry</em> returns the <em>TPJResourceEntry</em> 
+	object for the entry (or nil if not found) while <em>FindEntryIndex</em> returns 
+	the index of the entry in the <em>Entries[]</em> property.</p>
+<p>Let's assume a resource file is loaded into the <em>TPJResourceFile</em> variable 
+	<em>ResFile</em>. We want to find a <code>RT_HTML</code> resource named <code>INDEX_HTML</code>. 
+	The following code checks if such a resource exists and displays its data size 
+	in a message box, or a message saying the reosurce doesn't exist. This first 
+	version of the code uses <em>FindEntry</em>:</p>
+<pre><span class="pascal-comment">// Version using FindEntry</span>
+<span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+  Entry: TPJResourceEntry;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Assume ResFile contains a loaded resource file</span>
+  ...
+  Entry := ResFile.FindEntry(RT_HTML, 'INDEX_HTML', $0809);
+  <span class="pascal-kw">if</span> Assigned(Entry) <span class="pascal-kw">then</span>
+    ShowMessageFmt(
+      'Data size for INDEX_HTML is %d',
+      [Entry.DataSize]
+    )
+  <span class="pascal-kw">else</span>
+    ShowMessage('Can''t find resource');
+  ... 
+  <span class="pascal-comment">// Don't forget to free ResFile at some stage.</span>
+<span class="pascal-kw">end</span>;</pre>
+<p> This second version of the code shows how the same result is obtained with 
+	<em>FindEntryIndex</em>:</p>
+<pre><span class="pascal-comment">// Version using FindEntryIdex</span>
+<span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+  Entry: TPJResourceEntry;
+  Idx: Integer;
+<span class="pascal-kw">begin</span>
+  ...
+  Idx := fResFile.FindEntryIndex(RT_HTML, 'INDEX_HTML');
+  <span class="pascal-kw">if</span> Idx >= 0 <span class="pascal-kw">then</span>
+  <span class="pascal-kw">begin</span>
+    Entry := fResFile.Entries[Idx];
+    ShowMessageFmt(
+      'Data size for INDEX_HTML is %d', [Entry.DataSize]
+    );
+  <span class="pascal-kw">end</span>
+  ...
+<span class="pascal-kw">end</span>;</pre>
+<p>Note that we have used the &quot;short form&quot; of the <em>FindEntry</em> 
+	and <em>FindEntryIndex</em> methods above: they find the first resource with 
+	the given type and name, irrespective of language. The long version of the methods 
+	finds a specific resource type, name and language. For example the following 
+	code finds a <code>RT_HTML</code> resource named <code>INDEX_HTML</code> with 
+	language $0809:</p>
+<pre><span class="pascal-comment">// "Full" version of FindEntry</span>
+<span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+  Entry: TPJResourceEntry;
+<span class="pascal-kw">begin</span>
+  ...
+  Entry := ResFile.FindEntryIndex(
+    RT_HTML, 'HTMLRES_HTML', $0809
+  );
+  <span class="pascal-kw">if</span> Assigned(Entry) <span class="pascal-kw">then</span>
+    ... etc ...
+<span class="pascal-kw">end</span>;</pre>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="eg4"></a>Example 4: Listing specific resources from a file </h4>
+<p>We can use the <em>IsMatching</em> method of <em>TPJResourceEntry</em> to check 
+	if a specific resource matches given criteria. <em>IsMatching</em> can match 
+	just a resource type, and resource type and name or can uniquely identify a 
+	resource in a file by matching its type, name and language. Like <em>TPJResourceFile.FindEntry</em>, 
+	the language ID parameter is optional. The resource name parameter can be nil 
+	if we don't want to specify the name in the match.</p>
+<p>Given the above description of <em>IsMatching</em>, we can list all the <code>RT_HTML</code> 
+	resources in a resource file in a <em>TMemo</em> with this code:</p>
+<pre><span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+  Entry: TPJResourceEntry;
+  Idx: Integer;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Assume ResFile contains a loaded resource file</span>
+  ...
+  <span class="pascal-kw">for</span> Idx := 0 to Pred(ResFile.EntryCount) <span class="pascal-kw">do</span>
+  <span class="pascal-kw">begin</span>
+    Entry := ResFile.Entries[Idx];
+    <span class="pascal-kw">if</span> Entry.IsMatching(RT_HTML, <span class="pascal-kw">nil</span>) <span class="pascal-kw">then</span>
+      Memo1.Lines.Add(
+        Format('%s', [ResIDToStr(Entry.ResName)])
+      );
+  <span class="pascal-kw">end</span>;
+  ...
+<span class="pascal-kw">end</span>;</pre>
+<p>To list only all the different language versions of the <code>RT_HTML</code> 
+	resource named <code>INDEX_HTML</code> we simply change the <em>IsMatching</em> 
+	method call in the for loop to:</p>
+<pre>Entry.IsMatching(RT_HTML, 'INDEX_HTML')</pre>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="eg5"></a>Example 5: Adding or modifying a resource's data</h4>
+<p>While the code in this unit does not understand the various resource data formats 
+	it does assist in reading, adding, updating and deleting the raw resource data. 
+	The <em>TPJResourceEntry</em> class's <em>Data</em> object exposes the resource 
+	data as a <em>TStream</em> which means that we can use normal stream handling 
+	techniques to access the data.</p>
+<h5>Reading the data</h5>
+<p>The following code fragment shows how to read all the data from the resource 
+	to a buffer.</p>
+<pre><span class="pascal-kw">var</span>
+  Entry: TPJResourceEntry;
+  Buf: PByte;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Make sure Entry references a resource object</span>
+  ...
+  <span class="pascal-comment">// Create buffer of required size</span>
+  GetMem(Buf, Entry.DataSize);
+  <span class="pascal-kw">try</span>
+    <span class="pascal-comment">// Make sure resource data stream at start</span>
+    Entry.Data.Position := 0;
+    <span class="pascal-comment">// Read all resource data into buffer</span>
+    Entry.Data.ReadBuffer(Buf^, Entry.DataSize);
+    <span class="pascal-comment">// Rewind data stream again</span>
+    Entry.Data.Position := 0;
+    ...
+    <span class="pascal-comment">// Do something with Buf</span>
+    ...
+  <span class="pascal-kw">finally</span>
+    <span class="pascal-comment">// Release buffer</span>
+    FreeMem(Buf);
+  <span class="pascal-kw">end</span>;
+<span class="pascal-kw">end</span>;</pre>
+<p>We first set the buffer to the required size using <em>TPJResourceEntry</em>'s 
+	<em>DataSize</em> property (The <em>Data</em> property's own <em>Size</em> property 
+	also gives this information). We now ensure the data stream is positioned at 
+	the start (you can't assume this!) and then read al the data into the buffer 
+	using <em>TStream</em>'s <em>ReadBuffer</em> method, and finally reposition 
+	the stream again ready for the next use. Having processed the data in the buffer 
+	in some way we finally free the buffer.</p>
+<p>It may be more convenient to copy the data stream to another stream. The next 
+	example illustrates this by storing the resource data in a file named 'ResEntry.dat':</p>
+<pre><span class="pascal-kw">var</span>
+  Entry: TPJResourceEntry;
+  FS: TFileStream;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Make sure Entry references a resource object</span>
+  ...
+  <span class="pascal-comment">// Open stream onto new file</span>
+  FS := TFileStream.Create('ResEntry.dat', fmCreate);
+  <span class="pascal-kw">try</span>
+    <span class="pascal-comment">// Copy resource data to file</span>
+    FS.CopyFrom(Entry.Data, 0);
+    Entry.Data.Position := 0;
+  <span class="pascal-kw">finally</span>
+    <span class="pascal-comment">// Close the file</span>
+    FS.Free;
+  <span class="pascal-kw">end</span>;
+<span class="pascal-kw">end</span>;</pre>
+<p>Here we first open a stream onto a new file. We then use <em>TStream</em>'s 
+	<em>CopyFrom</em> method to copy the whole of the resource data to the file 
+	stream. Note by specifying a size of 0 to the <em>CopyFrom</em> method, <em>TStream</em> 
+	automatically positions the resource data stream to the start and copies the 
+	whole stream, so we don't need to position it first. Once again we reset the 
+	resource data stream once we are done.</p>
+<h5>Deleting data</h5>
+<p>It is very easy to delete all the data in a resource: simply set the data stream's 
+	size to 0 as follows.</p>
+<pre><span class="pascal-kw">var</span>
+  Entry: TPJResourceEntry;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Make sure Entry references a resource object</span>
+  ...
+  Entry.Data.Size := 0;
+  ...
+<span class="pascal-kw">end</span>;</pre>
+<p>Note that you must set the <em>Size</em> property of the entry's <em>Data</em> 
+	property here: you can't set the <em>DataSize</em> property since it is read 
+	only.</p>
+<h5>Writing data</h5>
+<p>We can add data to an exisiting resource simply. Let's first look at how to 
+	overwrite the existing data and then show how to append data to an existing 
+	resource. For the purposes of this example, assume we have a user defined resource 
+	that stores some plain text. Again, Entry is a <em>TPJResourceEntry</em> object 
+	that references our resource. We will replace any existing data with the text 
+	&quot;Hello World&quot;.</p>
+<pre><span class="pascal-kw">var</span>
+  Entry: TPJResourceEntry;
+  Text: string;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Make sure Entry references a resource object</span>
+  ...
+  <span class="pascal-comment">// Delete any existing data</span>
+  Entry.Data.Size := 0;
+  <span class="pascal-comment">// Write the required text</span>
+  Text := 'Hello World';
+  Entry.Data.WriteBuffer(Text[1], Length(Text));
+  <span class="pascal-comment">// Position data ready for reading</span>
+  Entry.Data.Position := 0;
+  ...
+<span class="pascal-kw">end</span>;</pre>
+<p>The only point of note here is the use of one of the normal idioms is writing 
+	a string to a stream: we can't just do <code>WriteBuffer(Text, Length(Text))</code>, 
+	but must either specify <code>Text[1]</code> or <code>PChar(Text)^</code>. Since 
+	this is an attribute of <em>TStream</em> rather than the resource file code, 
+	it is outside the scope of this document to discuss why!</p>
+<p>Now let's look at how we add more text to the end of the resource data:</p>
+<pre><span class="pascal-kw">var</span>
+  Entry: TPJResourceEntry;
+  Text: string;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Make sure Entry references a resource object</span>
+  ...
+  <span class="pascal-comment">// Move to end of existing data</span>
+  Entry.Data.Seek(0, soFromEnd);
+  <span class="pascal-comment">// Write new text</span>
+  Text := ' From DelphiDabbler';
+  Entry.Data.WriteBuffer(Text[1], Length(Text));
+  Text := #13#10'www.delphidabbler.com';
+  Entry.Data.WriteBuffer(Text[1], Length(Text));
+  <span class="pascal-comment">// Reposition stream to start</span>
+  Entry.Data.Position := 0;
+  ...
+<span class="pascal-kw">end</span>;</pre>
+<p>Here we move the stream pointer to the end of the stream so the text we write 
+	is appended to any existing data. Given the two examples above the data ends 
+	up holding the following two lines of text:</p>
+<pre>Hello World from DelphiDabbler
+www.delphidabbler.com</pre>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="eg6"></a>Example 6: Adding a new resources to a file </h4>
+<p>We can add a new resource to an existing file using <em>TPJResourceFile</em>'s 
+	<em>AddEntry</em> method. The new resource must be unqiuely named within the 
+	resource file (i.e. its combined resource type, name and language id must be 
+	unique) otherwise an exception will be raised. There are two versions of the 
+	<em>AddEntry</em> method - the first simply adds a new empty resource with zeroed 
+	header properties while the second version adds a renamed copy of an existing 
+	resource. Both versions of <em>AddEntry</em> take an optional language identifier. 
+	If this is not specified the resource is language neutral (<em>LanguageID</em> 
+	= 0).</p>
+<p>The following code snippet adds four new resource to an existing resource file 
+	object:</p>
+<ol>
+	<li>An empty, language neutral, <code>RCDATA</code> resource with ordinal name 
+		42. The <em>MemoryFlags</em> property is then set to &quot;Discardable&quot; 
+		and its data is set to &quot;Hello World&quot;</li>
+	<li>A new language neutral <code>RCDATA</code> resource that is a copy of the 
+		first entry but named <code>FORTYTWO</code>. This resource has the same <em>MemoryFlags</em> 
+		and <em>Data</em>.</li>
+	<li>A new <code>RCDATA</code> resource also named <code>FORTYTWO</code> but 
+		with language ID of $0809. Again this resource is a copy of the first resource.</li>
+	<li>A new empty <code>RCDATA</code> resource named 42 with language ID of $0809.</li>
+</ol>
+<pre><span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+  Entry1, Entry2,
+  Entry3, Entry4: TPJResourceEntry;
+<span class="pascal-kw">const</span>
+  s42 = 'FORTYTWO';
+  ord42 = MakeIntResource(42);
+  sHello = 'Hello World';
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Assume ResFile references a valid object</span>
+  ...
+  <span class="pascal-comment">// Create 1st entry: empty</span>
+  Entry1 := fResFile.AddEntry(RT_RCDATA, ord42);
+  <span class="pascal-comment">// now set mem flags and data</span>
+  Entry1.MemoryFlags := RES_MF_DISCARDABLE;
+  Entry1.Data.WriteBuffer(PChar(sHello)^, Length(sHello));
+  Entry1.Data.Position := 0;
+  <span class="pascal-comment">// Create 2nd entry as copy of entry 1</span>
+  Entry2 := fResFile.AddEntry(Entry1, s42);
+  <span class="pascal-comment">// Create 3rd entry as copy of entry 1 with language id</span>
+  Entry3 := fResFile.AddEntry(Entry1, s42, $0809);
+  <span class="pascal-comment">// Create 4th entry: empty with language id</span>
+  Entry4 := fResFile.AddEntry(RT_RCDATA, ord42, $0809);
+  ...
+  <span class="pascal-comment">// Do something with the entries</span>
+  ...
+<span class="pascal-kw">end</span>;</pre>
+<p>The entries we have created have the following properties:</p>
+<table border="0" cellspacing="1" cellpadding="3" class="bodytableframe">
+	<tr> 
+		<th align="left">&nbsp;</th>
+		<th>Entry 1</th>
+		<th>Entry 2</th>
+		<th>Entry 3</th>
+		<th>Entry 4</th>
+	</tr>
+	<tr class="bodytablebody"> 
+		<th align="left">Type</th>
+		<td><code>RT_RCDATA</code></td>
+		<td><code>RT_RCDATA</code></td>
+		<td><code>RT_RCDATA</code></td>
+		<td><code>RT_RCDATA</code></td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<th align="left">Name</th>
+		<td>42</td>
+		<td><code>FORTYTWO</code></td>
+		<td><code>FORTYTWO</code></td>
+		<td>42</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<th align="left">LanguageID</th>
+		<td>0</td>
+		<td>0</td>
+		<td>$0809</td>
+		<td>$0809</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<th align="left">MemoryFlags</th>
+		<td>$0100</td>
+		<td>$0100</td>
+		<td>$0100</td>
+		<td>0</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<th align="left">Data</th>
+		<td>&quot;Hello World&quot;</td>
+		<td>&quot;Hello World&quot;</td>
+		<td>&quot;Hello World&quot;</td>
+		<td>&lt;empty&gt;</td>
+	</tr>
+</table>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="eg7"></a>Example 7: Checking is a resource exists </h4>
+<p>We noted above that an exception is raised in a duplicate resource is added 
+	to a file. To prevent this we may need to check if a resource exists and we 
+	can do this with the <em>EntryExists</em> method of <em>TPJResourceFile</em> 
+	as follows:</p>
+<pre><span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+  Entry: TPJResourceEntry;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Assume ResFile references a valid object</span>
+  ...
+  <span class="pascal-kw">if not</span> ResFile.EntryExists(RT_RCDATA, 'FORTYTWO', $0809) <span class="pascal-kw">then</span>
+    Entry := ResFile.AddEntry(RT_RCDATA, 'FORTYTWO', $0809);
+  ...
+<span class="pascal-kw">end</span>;</pre>
+<p>Note that the language id parameter to <em>EntryExists</em> is optional and 
+	if ommitted the function checks if any resource with the given type and name 
+	exists. Furthermore, specifying nil for the resource name makes the routine 
+	check if any resource of the given type exists. So to check if a resource file 
+	contains any <code>RCDATA</code> resources use:</p>
+<pre><span class="pascal-kw">if</span> ResFile.EntryExists(RT_RCDATA, <span class="pascal-kw">nil</span>) <span class="pascal-kw">then</span>
+  <span class="pascal-comment">// We have RCDATA resources in the file</span></pre>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="eg8"></a>Example 8: Deleting resources</h4>
+<p>We can delete all resources from a resource file simply by calling the <em>Clear</em> 
+	method of <em>TPJResourceFile</em>. In addition to deleting the resources it 
+	also frees all the <em>TPJResourceEntry</em> instances.</p>
+<pre><span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Assume ResFile is a valid resource file object</span>
+  ...
+  <span class="pascal-comment">// Delete all resources</span>
+  ResFile.Clear;
+  ...
+<span class="pascal-kw">end</span>;</pre>
+<p>A single resource can be deleted from the resource file using the <em>TPJResourceFile.DeleteEntry</em> 
+	method. This checks if the file contains the resource and deletes it if so. 
+	However, the resource entry object is not freed. While this behaviour may be 
+	useful, it is not recommended. The preferred method is simply to free the resource 
+	entry instance. Freeing a <em>TPJResourceEntry</em> object autmatically removes 
+	it from the resource file.</p>
+<p>So, to remove a single resource <em>ResEntry</em> from the resource file use 
+	the following code:</p>
+<pre><span class="pascal-kw">var</span>
+  Entry: TPJResourceEntry;
+<span class="pascal-kw">begin</span>
+  ...
+  <span class="pascal-comment">// Assume ResEntry references a valid object</span>
+  ...
+  <span class="pascal-comment">// Delete the object from its resource file</span>
+  Entry.Free;
+  ...
+<span class="pascal-kw">end</span>;</pre>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="eg9"></a>Example 9: Saving a resource file </h4>
+<p>Now that we have learned how to modify a resource file, it's time to know how 
+	to save it. We simply use the <em>SaveToFile</em> or <em>SaveToStream</em> methods 
+	of <em>TPJResourceFile</em>. The following code shows how to use <em>SaveToFile</em>:</p>
+<pre><span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile;
+<span class="pascal-kw">begin</span>
+  <span class="pascal-comment">// Assume ResFile references a valid object</span>
+  ...
+  <span class="pascal-comment">// Save the file to 'MyResource.res'</span>
+  ResFile.SaveToFile('MyResource.res');
+<span class="pascal-kw">end</span>;</pre>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<h4><a name="eg10"></a>Example 10: A practical example </h4>
+<p>Having given some contrived examples of most of the functionality in the <em>PJResFile</em> 
+	unit, let us close by presenting a useful example that uses several of the methods 
+	we have reviewed.</p>
+<p>We will create a routine that takes a list of HTML and related files and create 
+	a resource file which has a unique resource HTML resource for each file. Such 
+	resources can be used for display in Internet Explorer, using the res:// protocol. 
+	See my article &quot;<a href="http://www.delphidabbler.com/articles.php?article=10"><!--<a href="/articles.php?article=10">-->How
+	to create and use HTML resource files</a>&quot; for more information on this subject.</p>
+<p>Here is the code of the routine: </p>
+<pre><span class="pascal-kw">procedure</span> BuildHTMLResFile(<span class="pascal-kw">const</span> Files: TStrings;
+  <span class="pascal-kw">const</span> ResFileName: <span class="pascal-kw">string</span>);
+<span class="pascal-kw">var</span>
+  ResFile: TPJResourceFile; <span class="pascal-comment">// res file object</span>
+  Entry: TPJResourceEntry;  <span class="pascal-comment">// a resource entry</span>
+  ResName: string;          <span class="pascal-comment">// a resource name</span>
+  SrcFileName: string;      <span class="pascal-comment">// a source file name</span>
+  SrcStm: TFileStream;      <span class="pascal-comment">// source file stream</span>
+  FileIdx: Integer;         <span class="pascal-comment">// loops thru Files</span>
+<span class="pascal-kw">begin</span>
+  <span class="pascal-comment">// Create new empty resource file object</span>
+  ResFile := TPJResourceFile.Create;
+  <span class="pascal-kw">try</span>
+    <span class="pascal-comment">// Loop thru all source files</span>
+    <span class="pascal-kw">for</span> FileIdx := 0 <span class="pascal-kw">to</span> Pred(Files.Count) <span class="pascal-kw">do</span>
+    <span class="pascal-kw">begin</span>
+      <span class="pascal-comment">// Record source file name</span>
+      SrcFileName := Files[FileIdx];
+      <span class="pascal-comment">// Get resource name from source name</span>
+      ResName := ExtractFileName(SrcFileName);
+      <span class="pascal-comment">// Ensure res name is not a duplicate</span>
+      <span class="pascal-kw">while</span> ResFile.EntryExists(
+        RT_HTML, PChar(ResName), $0809
+      ) <span class="pascal-kw">do</span>
+        ResName := '_' + ResName;
+      <span class="pascal-comment">// Create new resource</span>
+      Entry := ResFile.AddEntry(
+        RT_HTML, PChar(ResName), $0809
+      );
+      <span class="pascal-comment">// Copy source file into resource data</span>
+      SrcStm := TFileStream.Create(SrcFileName, fmOpenRead);
+      <span class="pascal-kw">try</span>
+        Entry.Data.CopyFrom(SrcStm, 0);
+        Entry.Data.Position := 0;
+      <span class="pascal-kw">finally</span>
+        SrcStm.Free;
+      <span class="pascal-kw">end</span>;
+    <span class="pascal-kw">end</span>;
+    <span class="pascal-comment">// Save resource file</span>
+    ResFile.SaveToFile(ResFileName);
+  <span class="pascal-kw">finally</span>
+    <span class="pascal-comment">// Free resource file object</span>
+    ResFile.Free;
+  <span class="pascal-kw">end</span>;
+<span class="pascal-kw">end</span>;</pre>
+<p>This routine is passed a list of files that are to be included in the resource 
+	file (as a string list). The name of the output file is also provided. We first 
+	create a new resource file object to store the HTML resources. We then loop 
+	through all the files in the list and add a new resource for each file. The 
+	resource is named with the name of the file (file name only, no path). To ensure 
+	the resource names are not duplicated we repeatedly append underscore characters 
+	to duplicate names until they are unique. Having got a unique resource name 
+	we create a new entry with the required name and then copy the file's contents 
+	into the resource data. Finally we save the resource file and free the resource 
+	file object.</p>
+<p class="gototop"><a href="#Top">Back to top</a></p>
+<!-- for stand-alone file -->
+<p>This user guide and the software it refers to are copyright &copy; Peter
+Johnson,2004.
+<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.</p>
+</body>
+</html>
+<!-- END -->

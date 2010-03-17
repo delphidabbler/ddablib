@@ -1,0 +1,301 @@
+<html>
+<head>
+<title>DelphiDabbler.com: Resource File Structure</title>
+<style type="text/css">
+<!--
+.pascal-kw {font-family: "Courier New", Courier, mono; font-size: 10pt; font-weight: bold;}
+.pascal-comment {font-family: "Courier New", Courier, mono; font-size: 10pt; color: blue;}
+body {
+	background-color : White;
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size : 10pt;
+}
+table {
+	font-size : 10pt;
+}
+h1 {
+	padding-bottom: 4px;
+	text-align: center;
+	background-color: #CCCCCC;
+	border: 1px #999999 solid;
+}
+.bodytableframe {
+	background-color : #CCCCCC;
+	color : White;
+}
+.bodytablebody {
+	background-color : White;
+	color : Black;
+}
+-->
+</style>
+</head>
+<body>
+<h1>Resource File Structure Notes</h1>
+<h2>Overview</h2>
+<p>A 32 bit resource file is comprised as follows:</p>
+<blockquote> 
+	<table border="0" width="106" cellspacing="0" cellpadding="3">
+		<tr> 
+			<td align="center" style="border: 1px #999999 solid;">File header</td>
+		</tr>
+		<tr> 
+			<td align="center" style="border: 1px #999999 solid; border-top: none;">Resource 1</td>
+		</tr>
+		<tr> 
+			<td align="center" style="border: 1px #999999 solid; border-top: none;">Padding</td>
+		</tr>
+		<tr> 
+			<td align="center" style="border: 1px #999999 solid; border-top: none;">Resource 2</td>
+		</tr>
+		<tr> 
+			<td align="center" style="border: 1px #999999 solid; border-top: none;">Padding</td>
+		</tr>
+		<tr> 
+			<td align="center" style="border-left: 1px #999999 dashed; border-right: 1px #999999 dashed;">- - -</td>
+		</tr>
+		<tr> 
+			<td align="center" style="border: 1px #999999 solid;">Resource N</td>
+		</tr>
+		<tr>
+			<td align="center" style="border: 1px #999999 solid; border-top: none;">Padding</td>
+		</tr>
+	</table>
+</blockquote>
+<h2>File Header</h2>
+<p>The File header is a "pseudo-resource" that identifies the file as a 32 bit 
+	resource file (rather than 16 bit). This is a 32 byte structure, the first 8 
+	bytes of which are $00, $00, $00, $00, $20, $00, $00, $00.</p>
+<h2>Resource Header</h2>
+<p>Each resource is made up of a variable length header record followed the resource 
+	data. The variable length header is made up of the following fields:</p>
+<blockquote> 
+  <pre>DataSize: DWORD;          <span class="pascal-comment">// size of resource data (excl end padding)</span>
+HeaderSize: DWORD;<span class="pascal-comment">        // size of resource data header</span>
+Type: Unicode or Ordinal;<span class="pascal-comment"> // type of resource</span>
+Name: Unicode or Ordinal;<span class="pascal-comment"> // name of resource</span>
+[Padding: Word];<span class="pascal-comment">          // optional padding to DWORD boundary</span>
+DataVersion: DWORD;<span class="pascal-comment">       // version of the data resource</span>
+MemoryFlags: Word;<span class="pascal-comment">        // describes the state of the resource</span>
+LanguageId: Word;<span class="pascal-comment">         // language for the resource</span>
+Version: DWORD;<span class="pascal-comment">           // user defined resource version</span>
+Characteristics: DWORD;<span class="pascal-comment">   // user defined info about resource</span></pre>
+</blockquote>
+<p>Here is a description of the resource header fields.</p>
+<table border="0" width="100%" cellspacing="1" cellpadding="3" class="bodytableframe">
+	<tr> 
+		<th valign="top">Field</th>
+		<th valign="top">Description</th>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>DataSize</em></td>
+		<td valign="top">The size of the resource data that follows the header in 
+			bytes, excluding any padding that follows that data.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>HeaderSize</em></td>
+		<td valign="top">The size of the resource header record, including <em>DataSize</em> 
+			and <em>HeaderSize</em> fields.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>Type</em></td>
+		<td valign="top">Variable length field that specifies the resource type either 
+			as an ordinal value or as a Unicode string. If the first Word of Type is 
+			$FFFF the second word is the ordinal value. Otherwise the value is a zero 
+			terminated Unicode string. Ordinals less than 255 are reserved by Windows. 
+			See below for a list of predefined resource types. </td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>Name</em></td>
+		<td valign="top">Variable length field that specifies the resource name either 
+			as an ordinal value or as a Unicode string. If the first Word of Name is 
+			$FFFF the second word is the ordinal value. Otherwise the value is a zero 
+			terminated Unicode string. Note that some resources may not have string 
+			names - for example string tables must have ordinal resource ids, all version 
+			information resource I have seen have resource id 1 and the resource id 
+			of an XP manifest is significant to the system.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>[Padding]</em></td>
+		<td valign="top">Optional padding to ensure the following fields begin on 
+			a DWORD boundary.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>DataVersion</em></td>
+		<td valign="top">Determines the format of the information within the resource 
+			header that follows. Often zero. Reserved for use by the system.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>MemoryFlags</em></td>
+		<td valign="top">A bitmask of flags that describe the state of the resource. 
+			See the <code>RES_MF_XXX</code> flags described in the Constants section 
+			for details.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>LanguageID</em></td>
+		<td valign="top">Specifies the language used for any strings in the resource 
+			or 0 if language neutral. Bits 0-9 of this Word contain the primary language 
+			ID while bits 11-15 contain the sub language ID (dialect or variation).</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>Version</em></td>
+		<td valign="top">Stores custom version information - sometimes used by the 
+			resource compiler. Ignored by the system and stripped out on linking into 
+			the application.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><em>Characteristics</em></td>
+		<td valign="top">Stores custom information about the resource - sometimes 
+			used by the resource compiler. Ignored by the system and stripped out on 
+			linking into the application.</td>
+	</tr>
+</table>
+<h3>Predefined Resource Types</h3>
+<p>The following table lists the predefined resource types known at the time of 
+	writing. <code>RT_HTML</code> and <code>RT_MANIFEST</code> are not defined in 
+	Delphi's Windows unit.</p>
+<table border="0" width="100%" cellspacing="1" cellpadding="3" class="bodytableframe">
+	<tr> 
+		<th valign="middle">Resource Name</th>
+		<th align="center" valign="middle">Ordinal value</th>
+		<th valign="middle">Description </th>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_ACCELERATOR</code></td>
+		<td align="center" valign="top"><code>9</code></td>
+		<td valign="top">Accelerator table</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_ANICURSOR</code></td>
+		<td align="center" valign="top"><code>21</code></td>
+		<td valign="top">Animated cursor</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_ANIICON</code></td>
+		<td align="center" valign="top"><code>22</code></td>
+		<td valign="top">Animated icon</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_BITMAP</code></td>
+		<td align="center" valign="top"><code>2</code></td>
+		<td valign="top">Bitmap resource</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_CURSOR</code></td>
+		<td align="center" valign="top"><code>1</code></td>
+		<td valign="top">Hardware dependent cursor resource</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_DIALOG</code></td>
+		<td align="center" valign="top"><code>5</code></td>
+		<td valign="top">Dialog box</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_DLGINCLUDE</code></td>
+		<td align="center" valign="top"><code>17</code></td>
+		<td valign="top">Allows a resource editing tool to associate a string with 
+			an .rc file. Typically, the string is the name of the header file that provides 
+			symbolic names. The resource compiler parses the string but otherwise ignores 
+			the value. For example: 
+			<blockquote style="margin-top: 0px; margin-bottom: 0px;">
+				<pre style="margin-top: 4px; margin-bottom: 0px;">/* file foo.dlg */
+1 DLGINCLUDE "foo.h&quot;</pre>
+			</blockquote>
+		</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_FONT</code></td>
+		<td align="center" valign="top"><code>8</code></td>
+		<td valign="top">Font resource</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_FONTDIR</code></td>
+		<td align="center" valign="top"><code>7</code></td>
+		<td valign="top">Font directory resource</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_GROUP_CURSOR</code></td>
+		<td align="center" valign="top"><code>12</code></td>
+		<td valign="top">Hardware independent cursor resource - refers to <code>RT_CURSOR</code></td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_GROUP_ICON</code></td>
+		<td align="center" valign="top"><code>14</code></td>
+		<td valign="top">Hardware independent icon resource - refers to <code>RT_ICON</code></td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_HTML</code></td>
+		<td align="center" valign="top"><code>23</code></td>
+		<td valign="top">HTML "Documents": .html, .gif, .css code etc.</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_ICON</code></td>
+		<td align="center" valign="top"><code>3</code></td>
+		<td valign="top">Hardware dependant icon resource</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_MANIFEST</code></td>
+		<td align="center" valign="top"><code>24</code></td>
+		<td valign="top">Side-by-side assembly XML manifest (Windows XP)</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_MENU</code></td>
+		<td align="center" valign="top"><code>4</code></td>
+		<td valign="top">Menu resource</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_MESSAGETABLE</code></td>
+		<td align="center" valign="top"><code>11</code></td>
+		<td valign="top">Message table entry</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_PLUGPLAY</code></td>
+		<td align="center" valign="top"><code>19</code></td>
+		<td valign="top">Plug and play resource</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_RCDATA</code></td>
+		<td align="center" valign="top"><code>10</code></td>
+		<td valign="top">Application or user defined resource - raw data</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_STRING</code></td>
+		<td align="center" valign="top"><code>6</code></td>
+		<td valign="top">String table entry</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_VERSION</code></td>
+		<td align="center" valign="top"><code>16</code></td>
+		<td valign="top">Version information</td>
+	</tr>
+	<tr class="bodytablebody"> 
+		<td valign="top"><code>RT_VXD</code></td>
+		<td align="center" valign="top"><code>20</code></td>
+		<td valign="top">VXD</td>
+	</tr>
+</table>
+<p>Note that the <code>RT_XXX</code> constants are not assigned the ordinal values 
+	directly but are set using <em>MakeIntResource</em>. So, for example, <code>RT_VERSION 
+	= MakeIntResource(16)</code>.</p>
+<h3>Resource Data</h3>
+<p>Each new resource starts on a DWORD boundary, so there may be padding bytes 
+	following the end of each resource if the resource data is not a multiple of 
+	4 bytes in length.</p>
+<p>The format of the actual resource data depends on the resource type. We do 
+	not go into that detail here since this code only provides high-level access 
+	to resources in a file and deals only with raw data.</p>
+<h2>Credits / Bibliography</h2>
+<p>Various documents were used in creating this document. Key documents were:</p>
+<ul>
+	<li>&quot;Win32 Binary Resource Formats&quot; by Floyd Rogers - text file edited 
+		and released by Microsoft Developer Support as ResFmt.txt.</li>
+	<li>&quot;Windows Resource (.RES) Files&quot; by Ray Lischner, <a href="http://www.tempest-sw.com/">Tempest 
+		Software</a> - web page.</li>
+	<li>&quot;Win32 Resource File Format&quot; by Marco Cocco, <a href="http://www.mdlive.com/d3k/">d3k 
+		- The Artisan Of Ware</a> - web page.</li>
+</ul>
+<p style="border-top: 1px #CCCCCC solid; font-size: 8pt; padding-top: 4px;">The 
+	original work in this document is copyright &copy; Peter Johnson, 2004. <a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>. 
+	Please contact the author via the web site for permission to republish.</p>
+</body>
+</html>
