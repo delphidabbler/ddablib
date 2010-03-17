@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+ * Read-me file for Resource File Unit
+ *
+ * $Rev$
+ * $Date$
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+<title>
+	DelphiDabbler Resource File Unit ReadMe
+</title>
+
+<style type="text/css">
+	body {
+		margin: 1em;
+		padding: 0;
+		font-family: Verdana, Arial, sans-serif;
+		font-size: 9pt;
+		line-height: 150%;
+	}
+	h1 {
+		margin: 0 0 1em 0;
+		padding: 0.5em;
+		border: 1px silver solid;
+		background-color: #eee;
+		font-size: 13pt;
+		font-weight: bold;
+		text-align: center;
+	}
+	h1 .subtitle {
+		font-style: italic;
+		color: #336;
+	}
+	h2 {
+		margin: 1em 0 0 0;
+		padding: 0;
+		padding-bottom: 6px;
+		border-bottom: 1px silver solid;
+		font-size: 11pt;
+		font-weight: bold;
+	}
+	h3 {
+		margin: 0.5em 0 0 0;
+		padding: 0;
+		font-size: 9pt;
+		font-weight: bold;
+	}
+	p {
+		margin: 0.5em 0 0 0;
+		padding: 0;
+	}
+	ul, ol {
+		margin: 0.5em 0 0 3em;
+		padding: 0;
+	}
+	ul {
+		list-style-type: square;
+	}
+	ul.spaced li,
+	ol.spaced li {
+		margin-top: 0.5em;
+	}
+	ul.spaced li,
+	ol.spaced li {
+		margin-top: 0.5em;
+	}
+	ul.unspaced li,
+	ol.unspaced li {
+		margin-top: 0;
+	}
+	ul.unspaced li.first,
+	ol.unspaced li.first {
+		margin-top: 0.5em;
+	}
+	code {
+		font-family: "Courier New", Courier, monospace;
+	}
+	a:link {
+		color: #336;
+		text-decoration: underline;
+	}
+	a:visited {
+		color: #669;
+		text-decoration: underline;
+	}
+	a:active {
+		color: #336;
+		text-decoration: underline;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	.gototop {
+		margin: 1em 0 0 0;
+		padding: 0.3em 0 0 0;
+		text-align: center;
+		position: relative;
+		float: right;
+		font-weight: bold;
+	}
+	.pullout {
+		border-left: 8px silver solid;
+		xborder-bottom: 2px silver solid;
+		xborder-top: 2px silver solid;
+		background-color: #eee;
+		margin: 0.5em 0 0 0;
+		padding: 0.25em 0.5em;
+		font-style: italic;
+	}
+	.indent {
+		margin-left: 3em;
+	}
+	.highlight {
+		color: #336;
+		font-style: italic;
+		font-weight: bold;
+	}
+	.endnotes {
+		margin: 1.5em 0 0 0;
+		padding: 1em 0 0 0;
+		border-top: 1px silver solid;
+	}
+	.comments {
+		font-style: italic;
+	}
+	.copyright,
+	.copyright a:link,
+	.copyright a:visited,
+	.copyright a:ac	tive {
+		margin: 1em 0 0 0;
+		color: gray;
+		font-size: 8pt;
+		text-align: right;
+	}
+</style>
+
+</head>
+
+<body>
+
+<h1>
+	<div>Resource File Unit</div>
+	<span class="subtitle">ReadMe</span>
+</h1>
+
+<h2 id="description">
+	Description
+</h2>
+
+<p>
+	 This unit contains classes that encapsulate Windows 32 bit binary resource
+	 files and the resources contained in them. The main functionality is
+	 provided by two classes:
+</p>
+
+<ul>
+	<li>
+		<var>TPJResourceFile</var> &ndash; encapsulates the contents of a whole
+		resource file and provides methods and properties for reading, finding,
+		editing, adding and deleting resources. Resource files can be read from
+		and written to files or streams.
+	</li>
+	<li>
+		<div>
+			<var>TPJResourceEntry</var> &ndash; encapsulates a single resource
+			within the file and provides properties to access its header record
+			and its raw data. The class also has methods to check the identity
+			of the resource. The resource's raw data is made available as a
+			<var>TStream</var> and so is easily read and written using familiar
+			<var>TStream</var> methods.
+		</div>
+		<div class="pullout">
+			This class has no knowledge of resource data formats and sees the
+			data simply as a raw sequence of bytes. It is for the user of the
+			class to interpret the data correctly.
+		</div>
+	</li>
+</ul>
+
+<p>
+	In addition to the two main classes, some helper functions, constants and an
+	exception class are also provided.
+</p>
+
+<p>
+	The unit is maintained as part of the <a
+		href="http://code.google.com/p/ddab-lib/"
+	>Delphi Dabbler Code Library</a> project on GoogleCode.
+</p>
+
+<h2 id="compatibility">
+	Compatibility
+</h2>
+
+<p>
+	The unit works with Delphi and later.
+</p>
+
+<h2 id="installation">
+	Installation
+</h2>
+
+<p>
+	The Resource File Unit and documentation are supplied in a zip file. Before
+	installing you need to extract all the files from the zip file, preserving
+	the directory structure. The following files will be extracted:
+</p>
+
+<ul>
+	<li>
+		<code><strong>PJResFile.pas</strong></code> &ndash; Main source code.
+	</li>
+	<li>
+		<code>ReadMe.htm</code> &ndash; This file.
+	</li>
+	<li>
+		<code>ChangeLog.txt</code> &ndash; The unit's change log.
+	</li>
+	<li>
+		<code>MPL-1.1.txt</code> &ndash; Mozilla Public Licence v1.1.
+	</li>
+	<li>
+		<code>Wiki.url</code> &ndash; Shortcut to the online Wiki that documents
+		the unit. 
+	</li>
+</ul>
+
+<p>
+	There are three possible ways to use the unit.
+</p>
+
+<ol class="spaced">
+	<li>
+		The simplest way is to add <code>PJResFile.pas</code> to your projects
+		as you need it.
+	</li>
+	<li>
+		To make the unit easier to re-use you can either copy it to a folder
+		on your Delphi search path, or add the folder where you extracted the
+		unit to the Delphi Search path. You then simply use the unit as
+		required without needing to add it to your project.
+	</li>
+	<li>
+		For maximum portability you can add the unit to a Delphi design time
+		package. If you need help doing this <a
+			href="http://www.delphidabbler.com/url/install-comp"
+		>see here</a>.
+	</li>
+</ol>
+
+<h2 id="update">
+	Update History
+</h2>
+
+<p>
+	 A complete change log is provided in the file <code>ChangeLog.txt</code>
+	 that is included in the download.
+</p>
+
+<h2 id="license">
+	License and Disclaimer
+</h2>
+
+<p>
+	This product, <em>Resource File Unit</em>, is subject to the Mozilla Public
+	License Version 1.1 (the &quot;License&quot;). You may not use this Product
+	except in compliance with the License. You may obtain a copy of the License
+	at <a
+		href="http://www.mozilla.org/MPL/MPL-1.1"
+	>http://www.mozilla.org/MPL/MPL-1.1</a>.
+</p>
+
+<p>
+	Software distributed under the License is distributed on an &quot;AS
+	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+	the License for the specific language governing rights and limitations under
+	the License.
+</p>
+
+<p>
+	The Initial Developer of <em>Resource File Unit</em> is Peter D Johnson.
+	Portions created by the Initial Developer are Copyright &copy; 2004-2010
+	Peter D Johnson (www.delphidabbler.com). All Rights	Reserved.
+</p>
+
+<p>All relevant trademarks are acknowledged.</p>
+
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
+
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
+</p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
+
+<p>
+	Please change the <code>Project-unspecified</code> label to
+	<code>Project-resfile</code>.
+</p>
+
+<h2 id="author">
+	About the Author
+</h2>
+
+<p>
+	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
+	Wales,  UK, writing write mainly in Delphi. My programs and code are
+	available from:
+	<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+</p>
+
+<p>
+	I can be <a href="http://www.delphidabbler.com/contact">contacted via the
+	website.</a>
+</p> 
+
+<div class="endnotes">
+	<div class="comments">
+		Please
+		<a href="http://www.delphidabbler.com/contact">
+		let me know</a> if you have any comments about the classes, but please
+		use the Issue Tracker above to report bugs and request new features.
+	</div>
+	<div class="copyright">
+		This document is copyright &copy; 2010, P D Johnson,
+		<a href="http://www.delphidabbler.com/">
+		www.delphidabbler.com</a>
+	</div>
+</div>
+
+</body>
+
+</html>
