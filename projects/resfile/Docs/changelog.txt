@@ -1,3 +1,8 @@
-Release 1.0 of 17 September 2004
-PJResFile v1.0 of 17 September 2004
+; ------------------------------------------------------------------------------
+; Change Log for Resource File Unit
+; $Rev$
+; $Date$
+; ------------------------------------------------------------------------------
+
+Release v1.0 of 17 September 2004
 + Original version.
