@@ -1,0 +1,18 @@
+================================================================================
+
+Resource File Unit: Pre-Subversion update information
+
+================================================================================
+
+The Resource File Unit was first released as v1.0 of 18 Sep 2004. The only
+source file was PJResFile.pas v1.0 of the same date. The source was never
+changed before the project was placed under version control with Subversion on
+17 Mar 2010 at r475.
+
+A Subversion branch of the imported v1.0 release was made (r477). Therefore,
+other than file date stamp changes, the version of PJResFile.pas at r477 is the
+same as the first release.
+
+Therefore there is no earlier history to record here.
+
+--------------------------------------------------------------------------------
