@@ -1,27 +1,13 @@
-{ ##
-  @FILE                     PJResFile.pas
-  @COMMENTS                 Defines resource file encapsulation classes,
-                            supporting routines and constants.
-  @PROJECT_NAME             Resource File Unit
-  @PROJECT_DESC             Classes that encapsulate 32 bit Windows resource
-                            files with supporting routines.
-  @AUTHOR                   Peter Johnson, LLANARTH, Ceredigion, Wales, UK
-  @EMAIL                    peter.johnson@openlink.org
-  @WEBSITE                  http://www.delphidabbler.com/
-  @COPYRIGHT                © Peter D Johnson, 2004.
-  @LEGAL_NOTICE             This code is distributed under the Mozilla Public
-                            License - see below.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 18/09/2004
-      @COMMENTS             Original version.
-    )
-  )
-}
-
-
 {
+ * PJResFile.pas
+ *
+ * Defines classes that encapsulate 32 bit binary resource files and the
+ * individual resources within them. Also provides supporting routines and
+ * constants.
+ *
+ * $Rev$
+ * $Dev$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -34,15 +20,16 @@
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
  * the specific language governing rights and limitations under the License.
  *
- * The Original Code is Resource File Unit.
+ * The Original Code is PJResFile.pas
  *
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2004 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2004-2010 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }
@@ -55,8 +42,8 @@ unit PJResFile;
   NOTES
   =====
 
-  This unit defines classes and records that encapsulate the Windows 32 bit
-  resource file format.
+  This unit defines classes that encapsulate the Windows 32 bit resource file
+  format.
 
   BINARY RESOURCE FILE FORMAT
   ---------------------------
@@ -84,7 +71,7 @@ unit PJResFile;
   resource file (rather than a 16 bit file). This is a 32 byte structure, the
   first 8 bytes of which are $00, $00, $00, $00, $20, $00, $00, $00.
 
-  Each resource is made up of a variable length header record followed the
+  Each resource is made up of a variable length header record followed by the
   resource data.
 
   A resource file header is made up of the following fields:
@@ -93,7 +80,7 @@ unit PJResFile;
     HeaderSize: DWORD;          // size of resource data header
     Type: Unicode or Ordinal;   // type of resource
     Name: Unicode or Ordinal;   // name of resource
-    [Padding: Word];            // optional padding so next field DWORD aligned
+    [Padding: Word];            // padding to DWORD boundary, if needed
     DataVersion: DWORD;         // version of the data resource
     MemoryFlags: Word;          // describes the state of the resource
     LanguageId: Word;           // language for the resource
@@ -103,27 +90,31 @@ unit PJResFile;
   The resource name and type can either be a #0#0 terminated Unicode string or
   can be an ordinal word value (preceeded by a $FFFF word). If Type or Name is a
   Unicode string then an additional padding word may be needed after the Name
-  "field" to ensure the following field start on a DWORD boundary. (We don't
-  have to DWORD align the Name field so there is no padding between the Type and
-  Name "fields").
+  "field" to ensure the following field start on a DWORD boundary. (The name
+  field doesn't have to be DWORD aligned so there is no padding between the Type
+  and Name "fields").
 
-  Each new resource starts on a DWORD boundary, so there may be padding bytes
+  Each resource starts on a DWORD boundary, so there may be padding bytes
   following the resource data if it is not a multiple of 4 bytes in length.
 
   IMPLEMENTATION NOTES
   --------------------
 
-  Although we use the word "file" in these notes, this term also covers binary
+  Although the word "file" is used in these notes, this term also covers binary
   resource data stored in a stream.
 
   Two classes are used to encapsulate a resource file:
-    + TPJResourceFile encapsulates the whole file and has methods to load and
-      save resource files, to add and delete resources and to find out
-      information about the resources contained in the file.
-    + TPJResourceEntry encapsulates a single resource with a resource file. It
-      exposes properties that give access to all the fields of the resource
-      header and provides a stream onto the resource's data. Methods to check
-      whether the resource matches certain criteria are also provided.
+
+    + TPJResourceFile
+      Encapsulates the whole file and has methods to load and save resource
+      files, to add and delete resources and to find out information about the
+      resources contained in the file.
+
+    + TPJResourceEntry
+      Encapsulates a single resource with a resource file. It exposes properties
+      that give access to all the fields of the resource header and provides a
+      stream onto the resource's data. Methods to check whether the resource
+      matches certain criteria are also provided.
 
   While TPJResourceFile is a concrete class, TPJResourceEntry is abstract - it
   is used as an interface to actual concrete resource entry instances maintained
@@ -144,11 +135,10 @@ unit PJResFile;
   or as ordinal values as returned from the MakeIntResource "macro". This
   convention is also used by the TPJResourceFile and TPJResourceEntry classes -
   the methods that take resource identifiers as parameters all expect them to be
-  in this form. Note that the 32 bit resource file uses the Unicode or Ordinal
+  in this form. Note that 32 bit resource files use the Unicode or Ordinal
   format described in the Binary Resource File Format section above. The classes
   convert from the resource file format to and from the API format on saving and
-  loading resource files. There is potential for data loss on Delphis that don't
-  support Unicode (i.e. Delphi 2007 and earlier).
+  loading resource files.
 }
 
 
@@ -163,6 +153,7 @@ unit PJResFile;
     {$WARN UNSAFE_CODE OFF}
   {$IFEND}
 {$ENDIF}
+
 
 interface
 
@@ -185,7 +176,8 @@ const
   RES_MF_LOADONCALL   = not RES_MF_PRELOAD;   // load only when app accesses
   // NOTE: RES_MF_MOVEABLE, RES_MF_IMPURE and RES_MF_PRELOAD ignored by Win NT
 
-  // System resource types not defined in Delphi Windows unit
+  // System resource types not defined in Delphi Windows unit for some supported
+  // Delphis
   RT_HTML             = MakeIntResource(23);  // HTML resources
   RT_MANIFEST         = MakeIntResource(24);  // XP manifest resource
 
@@ -201,87 +193,95 @@ type
     resource files.
   }
   TPJResourceFile = class(TObject)
-  private // properties
+  private
     fEntries: TList;  // Maintains list of all resource entries.
     function GetEntry(Idx: Integer): TPJResourceEntry;
-      {Entries[] property read access method}
+      {Read accessor for Entries[] property.
+        @param Idx [in] Index of wanted entry.
+        @return Wanted entry.
+      }
     function GetEntryCount: Integer;
-      {EntryCount property read access method}
+      {Read accessor for EntryCount property.
+        @return Number of entries in resource.
+      }
   public
     constructor Create;
-      {Creates a new empty resource file object}
+      {Creates a new empty resource file object.
+      }
     destructor Destroy; override;
-      {Destroys resource file object}
+      {Destroys resource file object.
+      }
     procedure Clear;
-      {Clears all resources from file object}
+      {Clears all resources from file object.
+      }
     function DeleteEntry(const Entry: TPJResourceEntry): Boolean;
       {Deletes an entry from the resource file object if it exists.
-        @param Entry resource entry object to delete.
-        @return true if entry deleted, false if entry not in resource file.
+        @param Entry [in] Resource entry object to delete.
+        @return True if entry deleted, False if entry not in resource file.
       }
     function IndexOfEntry(const Entry: TPJResourceEntry): Integer;
       {Returns index number of a resource entry in resource file.
-        @param Entry resource entry object to find.
-        @return index of entry in resource file object or -1 if not found.
+        @param Entry [in] Resource entry object to find.
+        @return Index of entry in resource file object or -1 if not found.
       }
     procedure LoadFromFile(const FileName: TFileName);
       {Loads resource file from given file
-        @param FileName the resource file.
-        @exception if file doesn't exist.
-        @exception if resource file invalid.
+        @param FileName [in] Resource file name.
+        @except Raised if file doesn't exist.
+        @except Raised if resource file invalid.
       }
     procedure LoadFromStream(const Stm: TStream);
-      {Loads resource file from given stream.
-        @param Stm the stream containing the resource file.
-        @exception if resource file invalid.
+      {Loads resource data from given stream.
+        @param Stm [in] Stream containing the resource file.
+        @except Raised if resource file invalid.
       }
     procedure SaveToFile(const FileName: TFileName);
       {Saves resource to given file.
-        @param FileName the file where resource is saved.
+        @param FileName [in] File where resource is to be saved.
       }
     procedure SaveToStream(const Stm: TStream);
-      {Saves resource file onto given stream.
-        @param Stm the stream where resource file will be saved.
+      {Saves resource data to given stream.
+        @param Stm [in] Stream where resource data will be saved.
       }
     class function IsValidResourceStream(const Stm: TStream): Boolean;
       {Checks if the given stream contains a valid resource file at the current
       location.
-        @return true if stream contains valid 32 bit resource file header at
-        current location, false if not.
+        @return True if stream contains valid 32 bit resource file header at
+          current location, False if not.
       }
     function AddEntry(const ResType, ResName: PChar;
       const LangID: Word = 0): TPJResourceEntry; overload;
       {Adds new empty resource entry to resource file that has given type, name
       and language and returns reference to it.
-        @param ResType the resource type (ordinal or string).
-        @param ResName the resource name (ordinal or string).
-        @param LangID optional language ID - 0 (language neutral) used by
-        default.
-        @return reference to new entry.
-        @exception raised if an entry already exists with same type, name and
-        language id.
+        @param ResType [in] Resource type (ordinal or string).
+        @param ResName [in] Resource name (ordinal or string).
+        @param LangID [in] Pptional language ID - 0 (language neutral) used by
+          default.
+        @return Reference to new entry.
+        @except Raised if an entry already exists with same type, name and
+          language id.
       }
     function AddEntry(const Entry: TPJResourceEntry; const ResName: PChar;
       const LangID: Word = 0): TPJResourceEntry; overload;
       {Adds a copy of the given resource entry of the same type with the given
       name and language ID.
-        @param Entry the resource entry to be copied.
-        @param ResName the name of the new resource.
-        @param LangID optional language ID of the new entry.
-        @return referenec to new resource entry.
-        @exception raised if an entry already exists with same type, name and
-        language id.
+        @param Entry [in] Resource entry to be copied.
+        @param ResName [in] Name of the new resource.
+        @param LangID [in] Optional language ID of the new entry.
+        @return Reference to new resource entry.
+        @except Raised if an entry already exists with same type, name and
+          language id.
       }
     function FindEntry(const ResType, ResName: PChar;
       const LangID: Word = $FFFF): TPJResourceEntry;
       {Finds a resource entry with the given type, name and language id and
       returns a reference to it. Search can ignore resource name and or language
       id in which case first entry that matches is returned.
-        @param ResType the resource type (ordinal or string) - required.
-        @param ResName the resource name (ordinal or string) - if ResName is nil
-        it is not used in match.
-        @param LangID optional language ID of entry to find - if not supplied
-        (or $FFFF) supplied it is not used in match.
+        @param ResType [in] Resource type (ordinal or string) - required.
+        @param ResName [in] Resource name (ordinal or string) - if ResName is
+          nil it is not used in match.
+        @param LangID [in] Optional language ID of entry to find - if not
+          supplied (or is $FFFF) it is not used in match.
         @return Reference to found resource entry or nil if there is no match.
       }
     function FindEntryIndex(const ResType, ResName: PChar;
@@ -290,22 +290,22 @@ type
       returns the index of the entry in the Entries[] property. Search can
       ignore resource name or language id in which case first entry that matches
       is returned.
-        @param ResType the resource type (ordinal or string) - required.
-        @param ResName the resource name (ordinal or string) - if ResName is nil
-        it is not used in match.
-        @param LangID optional language ID of entry to find - if not supplied
-        (or $FFFF) supplied it is not used in match.
+        @param ResType [in] Resource type (ordinal or string) - required.
+        @param ResName [in] Resource name (ordinal or string) - if ResName is
+          nil it is not used in match.
+        @param LangID [in] Pptional language ID of entry to find - if not
+          supplied (or is $FFFF) it is not used in match.
         @return Index of entry in Entries[] or -1 if no matching entry.
       }
     function EntryExists(const ResType, ResName: PChar;
       const LangID: Word = $FFFF): Boolean;
       {Returns whether a resource entry matching given search criteria exists.
-        @param ResType the resource type (ordinal or string) - required.
-        @param ResName the resource name (ordinal or string) - if ResName is nil
-        it is not used in match.
-        @param LangID optional language ID of entry to find - if not supplied
-        (or $FFFF) supplied it is not used in match.
-        @return true if a matching entry exists in the resource file.
+        @param ResType [in] Resource type (ordinal or string) - required.
+        @param ResName [in] Resource name (ordinal or string) - if ResName is
+          nil it is not used in match.
+        @param LangID [in] Optional language ID of entry to find - if not
+          supplied (or is $FFFF) it is not used in match.
+        @return True if a matching entry exists in the resource file.
       }
     property EntryCount: Integer read GetEntryCount;
       {Number of resource entries in the resource file}
@@ -321,7 +321,7 @@ type
     and allow resource's data to be read & written. The resource data is treated
     as raw binary bytes and it is for the user to interpret the meaning of the
     data. This class should not be directly instantiated but should be used to
-    interface to resource entry objects created internally by TPJResourceFile.
+    reference resource entry objects created internally by TPJResourceFile.
   }
   TPJResourceEntry = class(TObject)
   protected // abstract property access methods
@@ -345,17 +345,17 @@ type
       {Returns true if the resource entry has the given type, name and language
       id. Name and language ID can be omitted from the match but resource Type
       is required.
-        @param ResType the matching resource type.
-        @param ResName the matching resource name (ignored if nil).
-        @param LangID the matching language id (ignored if $FFFF).
-        @return true if a match is found, false otherwise.
+        @param ResType [in] Matching resource type.
+        @param ResName [in] Matching resource name (ignored if nil).
+        @param LangID [in] Matching language id (ignored if $FFFF).
+        @return True if a match is found, False otherwise.
       }
     function IsMatching(const Entry: TPJResourceEntry): Boolean; overload;
       virtual; abstract;
       {Returns true if the resource entry has the same resource type, name and
       language Id as the given enrty.
-        @param Entry the resource entry to match
-        @return true if the entries match, false otherwise.
+        @param Entry [in] Resource entry to match
+        @return True if the entries match, False otherwise.
       }
     property DataSize: DWORD
       read GetDataSize;
@@ -392,31 +392,31 @@ type
 
   {
   EPJResourceFile:
-    Class of exceptions raised by objects in this unit.
+    Class of exception raised by objects in this unit.
   }
   EPJResourceFile = class(Exception);
 
 
 function IsIntResource(const ResID: PChar): Boolean;
-  {Tells if a resource id (name or type) is numeric.
-    @param ResID the id to test.
-    @return true if id is numeric, false if it is a string value.
+  {Informs if a resource id (name or type) is numeric.
+    @param ResID [in] Id to test.
+    @return True if id is numeric, False if it is a string value.
   }
 
 function IsEqualResID(const R1, R2: PChar): Boolean;
-  {Checks whether given resource ids are equal.
-    @param R1 first resource id to test.
-    @param R2 second resource id to test.
-    @return true if R1 and R2 are same type (ordinal or string) and have same
-    value (case insensitive for string types).
+  {Checks whether two resource ids are equal.
+    @param R1 [in] First resource id to test.
+    @param R2 [in] Second resource id to test.
+    @return True if R1 and R2 are same type (ordinal or string) and have same
+      value (case insensitive for string types).
   }
 
 function ResIDToStr(const ResID: PChar): string;
-  {Converts given resource ID into its string representation.
-    @param ResID the resource ID to be converted.
-    @return string representation of ResID - if resource id is ordinal string
-    representation of ordinal number preceeded by '#' is returned, otherwise
-    just the string itself is returned.
+  {Converts a resource ID into its string representation.
+    @param ResID [in] Resource ID to be converted.
+    @return String representation of ResID - if resource id is an ordinal the
+      ordinal number preceeded by '#' is returned, otherwise the string itself
+      is returned.
   }
 
 
@@ -467,26 +467,26 @@ type
     fOwner: TPJResourceFile;
       {Resource file instance that owns this entry}
     procedure Init(const Owner: TPJResourceFile);
-      {Helper method of constructors that initialises new resource entry object.
-        @param Owner the owning TPJResourceFile instance.
+      {Helper method for constructors. Initialises new resource entry object.
+        @param Owner [in] Owning TPJResourceFile instance.
       }
     procedure FinaliseResID(var ResID: PChar);
-      {Finalises a given resource identifier and sets it to nil. If the
-      identifier points to a string the string's memory is first released.
-        @param Owner the TPJResourceFile instance that owns new resource entry.
+      {Finalises a resource identifier and sets it to nil. If the identifier
+      points to a string the string's memory is first released.
+        @param Owner [in] TPJResourceFile instance that owns new resource entry.
       }
     procedure CopyResID(var Dest: PChar; const Src: PChar);
       {Copies one resource identifier to another taking care of memory
       allocations.
-        @param Dest the identifier receiving the resource identifier - if the
-        identifier is ordinal Dest is set to its value but if it is a string
-        then the string is copied and Dest is set to point to it.
-        @param Src the identifier to be copied.
+        @param Dest [in] Identifier receiving the resource identifier. If the
+          identifier is ordinal Dest is set to its value but if Dest is a string
+          then the string is copied and Dest is set to point to it.
+        @param Src [in] Identifier to be copied.
       }
   protected
     function GetCharacteristics: DWORD; override;
       {Gets user defined resource characteristics.
-        @return value of Characteristics field from resource header.
+        @return Value of Characteristics field from resource header.
       }
     procedure SetCharacteristics(const Value: DWORD); override;
       {Sets value of Characteristics field of resource header.
@@ -494,15 +494,15 @@ type
       }
     function GetData: TStream; override;
       {Gets reference to raw data stream.
-        @return reference to stream used to store raw resource data.
+        @return Reference to stream used to store raw resource data.
       }
     function GetDataSize: DWORD; override;
       {Gets size of resource data (excluding any padding).
-        @return value of DataSize field from resource header.
+        @return Value of DataSize field from resource header.
       }
     function GetDataVersion: DWORD; override;
       {Gets predefined data resource version number.
-        @return value of DataVersion field from resource header.
+        @return Value of DataVersion field from resource header.
       }
     procedure SetDataVersion(const Value: DWORD); override;
       {Sets value of DataVersion field of header.
@@ -510,11 +510,11 @@ type
       }
     function GetHeaderSize: DWORD; override;
       {Calculates size of variable length resource header.
-         @return size of resource header in bytes.
+         @return Size of resource header in bytes.
       }
     function GetLanguageID: Word; override;
       {Gets resource's Language ID.
-       @return value of LanguageID field of resource header.
+        @return Value of LanguageID field of resource header.
       }
     function GetMemoryFlags: Word; override;
       {Gets bitmask of attributes giving state of resource.
@@ -525,60 +525,60 @@ type
         @param Value the new MemoryFlags bitmask.
       }
     function GetResName: PChar; override;
-      {Returns resource name.
-       @return either pointer to resource name string or its ordinal value.
+      {Gets resource name.
+        @return Either pointer to resource name string or its ordinal value.
       }
     function GetResType: PChar; override;
-      {Returns resource type.
-        @return either pointer to resource name string or its ordinal value.
+      {Gets resource type.
+        @return Either pointer to resource name string or its ordinal value.
       }
     function GetVersion: DWORD; override;
       {Gets user specified version number for resource data.
-        @return value of Version field of resource header.
+        @return Value of Version field of resource header.
       }
     procedure SetVersion(const Value: DWORD); override;
       {Sets value of Version field of resource header.
-       @param Value the new Version number.
+        @param Value the new Version number.
       }
   public
     constructor Create(const Owner: TPJResourceFile;
       const ResType, ResName: PChar; LangID: Word); overload;
-      {Class constructor called by owning TPJResourceFile instance to create a
-      new empty resource entry with specified language id.
-        @param Owner the owning TPJResourceFile instance.
-        @param ResType the new entry's resource type.
-        @param ResName the new entry's resource name.
-        @param LangID the new entry's language id.
+      {Class constructor. Called by owning TPJResourceFile instance to create a
+      new empty resource entry.
+        @param Owner [in] Owning TPJResourceFile instance.
+        @param ResType [in] New entry's resource type.
+        @param ResName [in] New entry's resource name.
+        @param LangID [in] New entry's language id.
       }
     constructor Create(const Owner: TPJResourceFile;
       const Stm: TStream); overload;
-      {Class constructor called by owning TPJResourceFile instance to create a
+      {Class constructor. Called by owning TPJResourceFile instance to create a
       new resource entry from the data in a stream.
-        @param Owner the owning TPJResourceFile instance.
-        @param Stm the stream containing the binary resource entry data.
+        @param Owner [in] Owning TPJResourceFile instance.
+        @param Stm [in] Stream containing the binary resource entry data.
       }
     destructor Destroy; override;
-      {Class destructor}
+      {Class destructor.
+      }
     procedure WriteToStream(Stm: TStream);
-      {Writes the resource entry to a given stream.
-       @param Stm the stream where the entry is written.
+      {Writes resource entry to a stream.
+        @param Stm [in] Stream where the entry is written.
       }
     function IsMatching(const ResType, ResName: PChar;
       const LangID: Word = $FFFF): Boolean; overload; override;
-      {Returns true if the resource entry has the given type, name and language
-      id. Name and language ID can be omitted from the match but resource Type
-      is required.
-        @param ResType the matching resource type.
-        @param ResName the matching resource name (ignored if nil).
-        @param LangID the matching language id (ignored if $FFFF).
-        @return true if a match is found, false otherwise.
+      {Checks if a resource entry has a required type, name and language id.
+      Name and LangID can be omitted from the match. ResType is required.
+        @param ResType [in] Matching resource type.
+        @param ResName [in] Matching resource name (ignored if nil).
+        @param LangID [in] Matching language id (ignored if $FFFF).
+        @return True if a match is found, False otherwise.
       }
     function IsMatching(const Entry: TPJResourceEntry): Boolean; overload;
       override;
-      {Returns true if the resource entry has the same resource type, name and
-      language Id as the given entry.
-        @param Entry the resource entry to match
-        @return true if the entries match, false otherwise.
+      {Checks if a resource entry has the same resource type, name and language
+      Id as another entry.
+        @param Entry [in] Resource entry to match
+        @return True if the entries match, False otherwise.
       }
   end;
 
@@ -629,7 +629,7 @@ function IsEqualResID(const R1, R2: PChar): Boolean;
 
 begin
   if IsIntResource(R1) then
-    // R1 is ordinal: R2 must also be ordinal with same value to match
+    // R1 is ordinal: R2 must also be ordinal with same value
     Result := IsIntResource(R2) and (LoWord(DWORD(R1)) = LoWord(DWORD(R2)))
   else
     // R1 is string: R2 must also be string with same text (ignoring case)
@@ -658,9 +658,9 @@ constructor TInternalResEntry.Create(const Owner: TPJResourceFile;
   procedure Read(out Value; const Size: Integer; var BytesRead: Integer);
     {Reads a value from the stream and raises exception if all required bytes
     can't be read. Updates count of total bytes read.
-      @param Value the value to be read.
-      @param Size the size of the value to be read.
-      @param BytesRead updated total of all bytes read.
+      @param Value [out] Value to be read from stream.
+      @param Size [in] Size of the value to be read.
+      @param BytesRead [in/out] Updated total of all bytes read.
     }
   begin
     // Read stream and check all expected bytes read
@@ -671,9 +671,9 @@ constructor TInternalResEntry.Create(const Owner: TPJResourceFile;
   end;
 
   procedure SkipToBoundary(var BytesRead: Integer);
-    {Reads bytes from the stream to ensure the number of bytes read is a
-    multiple of the size of a DWORD.
-      @param BytesRead number of bytes read.
+    {Reads bytes from the stream as necessary to ensure the number of bytes read
+    is a multiple of the size of a DWORD.
+      @param BytesRead [in/out] Updated number of bytes read.
     }
   var
     SkipBytes: Integer; // number of bytes to skip
@@ -688,8 +688,8 @@ constructor TInternalResEntry.Create(const Owner: TPJResourceFile;
 
   procedure ReadResID(out ResID: PChar; var BytesRead: Integer);
     {Reads a resource identifier from the stream and updates total bytes read.
-      @param ResID the resource identifier.
-      @param BytesRead total of bytes read to date.
+      @param ResID [out] Resource identifier read from stream.
+      @param BytesRead [in/out] Updated total of bytes read.
     }
   var
     Ch: WideChar;     // store wide chars read from stream
@@ -718,7 +718,7 @@ constructor TInternalResEntry.Create(const Owner: TPJResourceFile;
       end;
       // we now copy resource string, converted to string, to resource id
       // *** there would be a shorter way than this when string = UnicodeString,
-      //     but this works and is needed for string = AnsiString
+      //     but this is needed for string = AnsiString and works for both.
       CopyResID(ResID, PChar(WideCharToString(PWideChar(Str))));
     end;
   end;
@@ -822,8 +822,8 @@ function TInternalResEntry.GetHeaderSize: DWORD;
   // ---------------------------------------------------------------------------
   function ResIDSize(const ResID: PChar): Integer;
     {Calculates size of a resource identifier when stored.
-      @param ResID the resource identifier we want size of.
-      @return the resource id size.
+      @param ResID [in] Resource identifier we want size of.
+      @return The required size.
     }
   begin
     if IsIntResource(ResID) then
@@ -927,11 +927,11 @@ procedure TInternalResEntry.WriteToStream(Stm: TStream);
 
   // ---------------------------------------------------------------------------
   procedure Write(const Value; const Size: Integer; var BytesWritten: Integer);
-    {Writes a value to the stream and raises exception if all required bytes
-    can't be written. Updates count of bytes written.
-      @param Value the value to be written.
-      @param Size the size of the value to be written.
-      @param BytesWritten updated total of all bytes written.
+    {Writes a value to the stream. Raises exception if all required bytes can't
+    be written. Updates count of bytes written.
+      @param Value [in] Value to be written.
+      @param Size [in] Size of the value to be written.
+      @param BytesWritten [in/out] Updated total of all bytes written.
     }
   begin
     // Write stream and check all expected bytes read
@@ -944,8 +944,8 @@ procedure TInternalResEntry.WriteToStream(Stm: TStream);
   procedure WriteResID(ResID: PChar; var BytesWritten: Integer);
     {Writes a resource identifier to the stream and updates total of bytes
     written.
-      @param ResID the resource identifier.
-      @param BytesWritten total of bytes written to date.
+      @param ResID [in] Resource identifier to be written.
+      @param BytesWritten [in/out] Updated total of bytes written to date.
     }
   var
     OrdValue: DWORD;        // resource id ordinal value
@@ -970,7 +970,7 @@ procedure TInternalResEntry.WriteToStream(Stm: TStream);
   procedure WriteToBoundary(var BytesWritten: Integer);
     {Write bytes to the stream to ensure the number of bytes written is a
     multiple of the size of a DWORD.
-      @param BytesWritten number of bytes written.
+      @param BytesWritten [in/out] Updated number of bytes written.
     }
   const
     cPadding: DWORD = 0;  // stores zero bytes for writing out as padding
@@ -1088,9 +1088,7 @@ end;
 
 destructor TPJResourceFile.Destroy;
 begin
-  // Clear entries list, freeing entries
   Clear;
-  // Free entries TList object
   fEntries.Free;
   inherited;
 end;
@@ -1152,9 +1150,8 @@ const
   // Expected bytes in the header record that introduces a 32 bit resource file
   DummyHeader: array[0..7] of Byte = ($00, $00, $00, $00, $20, $00, $00, $00);
 var
-  HeaderBuf: array[0..31] of Byte;  // stores in introductory header
+  HeaderBuf: array[0..31] of Byte;  // stores introductory header
 begin
-  // Try to read in header
   if Stm.Read(HeaderBuf, SizeOf(HeaderBuf)) = SizeOf(HeaderBuf) then
     // Check if header is equivalent to dummy header that starts resource files
     Result := CompareMem(@HeaderBuf, @DummyHeader, SizeOf(DummyHeader))
@@ -1182,7 +1179,7 @@ begin
   // Test for header of 32 bit resource file: exception if invalid
   if not IsValidResourceStream(Stm) then
     raise EPJResourceFile.Create(sErrBadResFile);
-  // We have 32 bit resource file and we've passed header: read the resources
+  // This is valid 32 bit resource file. We've passed header: read the resources
   while Stm.Position < Stm.Size do
     fEntries.Add(TInternalResEntry.Create(Self, Stm));  // increments stream pos
 end;
@@ -1218,3 +1215,4 @@ begin
 end;
 
 end.
+
