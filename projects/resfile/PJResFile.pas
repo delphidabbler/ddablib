@@ -6,7 +6,7 @@
  * constants.
  *
  * $Rev$
- * $Dev$
+ * $Date$
  *
  * ***** BEGIN LICENSE BLOCK *****
  *
