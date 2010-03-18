@@ -140,16 +140,29 @@ unit PJResFile;
   We handle the resource type and name "fields" (and any padding) separately.
 
   When interogating or accessing Windows resources using the Windows API
-  resource types and names are specified either as #0 terminated ANSI strings
+  resource types and names are specified either as #0 terminated strings
   or as ordinal values as returned from the MakeIntResource "macro". This
   convention is also used by the TPJResourceFile and TPJResourceEntry classes -
   the methods that take resource identifiers as parameters all expect them to be
   in this form. Note that the 32 bit resource file uses the Unicode or Ordinal
   format described in the Binary Resource File Format section above. The classes
   convert from the resource file format to and from the API format on saving and
-  loading resource files.
+  loading resource files. There is potential for data loss on Delphis that don't
+  support Unicode (i.e. Delphi 2007 and earlier).
 }
 
+
+{$UNDEF UseAnsiStrIComp}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
+    {$DEFINE UseAnsiStrIComp}
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
+    {$WARN UNSAFE_TYPE OFF}
+    {$WARN UNSAFE_CAST OFF}
+    {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
+{$ENDIF}
 
 interface
 
@@ -597,13 +610,30 @@ begin
 end;
 
 function IsEqualResID(const R1, R2: PChar): Boolean;
+
+  function IsEqualStrResID(const R1, R2: PChar): Boolean;
+    {Compares two string resources ids
+      @param R1 [in] 1st resource id to compare.
+      @param R2 [in] 2nd resource id to compare.
+      @return True if resource ids are equal.
+    }
+  begin
+    Assert(not IsIntResource(R1) and not IsIntResource(R2));
+    {$IFDEF UseAnsiStrIComp}
+    Result := AnsiStrIComp(R1, R2) = 0;
+    {$ELSE}
+    // There's a problem with AnsiStrICmp on some early Delphis
+    Result := StrIComp(R1, R2) = 0;
+    {$ENDIF}
+  end;
+
 begin
   if IsIntResource(R1) then
     // R1 is ordinal: R2 must also be ordinal with same value to match
     Result := IsIntResource(R2) and (LoWord(DWORD(R1)) = LoWord(DWORD(R2)))
   else
     // R1 is string: R2 must also be string with same text (ignoring case)
-    Result := not IsIntResource(R2) and (StrIComp(R1, R2) = 0);
+    Result := not IsIntResource(R2) and IsEqualStrResID(R1, R2)
 end;
 
 
@@ -625,7 +655,7 @@ constructor TInternalResEntry.Create(const Owner: TPJResourceFile;
   const Stm: TStream);
 
   // ---------------------------------------------------------------------------
-  procedure Read(var Value; const Size: Integer; var BytesRead: Integer);
+  procedure Read(out Value; const Size: Integer; var BytesRead: Integer);
     {Reads a value from the stream and raises exception if all required bytes
     can't be read. Updates count of total bytes read.
       @param Value the value to be read.
@@ -656,16 +686,17 @@ constructor TInternalResEntry.Create(const Owner: TPJResourceFile;
     end;
   end;
 
-  procedure ReadResID(var ResID: PChar; var BytesRead: Integer);
+  procedure ReadResID(out ResID: PChar; var BytesRead: Integer);
     {Reads a resource identifier from the stream and updates total bytes read.
       @param ResID the resource identifier.
       @param BytesRead total of bytes read to date.
     }
   var
-    Ch: WChar;        // store wide chars read from stream
+    Ch: WideChar;     // store wide chars read from stream
     Str: WideString;  // string resource id
   begin
-    // Read first WChar: determines type of resource id
+    Assert(SizeOf(Word) = SizeOf(WideChar));
+    // Read first WideChar: determines type of resource id
     Read(Ch, SizeOf(Ch), BytesRead);
     if Ord(Ch) = $FFFF then
     begin
@@ -685,7 +716,9 @@ constructor TInternalResEntry.Create(const Owner: TPJResourceFile;
         Str := Str + Ch;
         Read(Ch, SizeOf(Ch), BytesRead);
       end;
-      // we now copy resource string, converted to ANSI string, to resource id
+      // we now copy resource string, converted to string, to resource id
+      // *** there would be a shorter way than this when string = UnicodeString,
+      //     but this works and is needed for string = AnsiString
       CopyResID(ResID, PChar(WideCharToString(PWideChar(Str))));
     end;
   end;
@@ -794,16 +827,17 @@ function TInternalResEntry.GetHeaderSize: DWORD;
     }
   begin
     if IsIntResource(ResID) then
-      // Ordinal resource id: a DWORD
+      // Ordinal resource id: want size of a DWORD
       Result := SizeOf(DWORD)
     else
-      // String resource id: length of string i WChars + terminating #0#0 char
-      Result := (StrLen(ResID) + 1) * SizeOf(WChar);
+      // String resource id: want length of string in WideChars + terminating
+      // zero WideChar
+      Result := (StrLen(ResID) + 1) * SizeOf(WideChar);
   end;
   // ---------------------------------------------------------------------------
 
 begin
-  Assert(SizeOf(WChar) = SizeOf(Word));
+  Assert(SizeOf(WideChar) = SizeOf(Word));
   // Add up size of fixed and variable parts of header
   Result := SizeOf(TResEntryHdrPrefix) + SizeOf(TResEntryHdrSuffix) +
     ResIDSize(fResType) + ResIDSize(fResName);
@@ -927,7 +961,9 @@ procedure TInternalResEntry.WriteToStream(Stm: TStream);
     begin
       // This is string: create and write out required wide string
       StrValue := WideString(string(ResID));
-      Write(StrValue[1], (Length(StrValue) + 1) * SizeOf(WChar), BytesWritten);
+      Write(
+        StrValue[1], (Length(StrValue) + 1) * SizeOf(WideChar), BytesWritten
+      );
     end;
   end;
 
@@ -987,7 +1023,6 @@ begin
     WriteToBoundary(BytesWritten);
   end;
 end;
-
 
 { TPJResourceFile }
 
