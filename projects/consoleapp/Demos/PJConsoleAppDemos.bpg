@@ -1,0 +1,54 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = Timed.exe Echoer.exe Demo1.exe Demo2.exe Demo3.exe Demo4.exe \
+  Demo5.exe Demo6.exe Demo7.exe Demo8.exe Demo9.exe Demo10.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+Timed.exe: TestApps\Timed\Timed.dpr
+  $(DCC)
+
+Demo1.exe: Demo1\Demo1.dpr
+  $(DCC)
+
+Demo2.exe: Demo2\Demo2.dpr
+  $(DCC)
+
+Demo3.exe: Demo3\Demo3.dpr
+  $(DCC)
+
+Demo4.exe: Demo4\Demo4.dpr
+  $(DCC)
+
+Demo5.exe: Demo5\Demo5.dpr
+  $(DCC)
+
+Echoer.exe: TestApps\Echoer\Echoer.dpr
+  $(DCC)
+
+Demo6.exe: Demo6\Demo6.dpr
+  $(DCC)
+
+Demo7.exe: Demo7\Demo7.dpr
+  $(DCC)
+
+Demo8.exe: Demo8\Demo8.dpr
+  $(DCC)
+
+Demo9.exe: Demo9\Demo9.dpr
+  $(DCC)
+
+Demo10.exe: Demo10\Demo10.dpr
+  $(DCC)
+
+

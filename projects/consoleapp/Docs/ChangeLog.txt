@@ -1,0 +1,7 @@
+Release 1.0.1 of 30 March 2008
++ Made constants defining application errors public.
++ Did some minor refactoring.
++ Updated and corrected documentation.
+
+Release 1.0 of 04 October 2007
++ Original version.
