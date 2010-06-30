@@ -1,0 +1,305 @@
+================================================================================
+
+Console Application Runner Classes : Historical update information from v1.0 to
+v1.0.1
+
+================================================================================
+
+This file records known changes to files in the Console Application Runner
+Classes  from v1.0 to and v1.0.1. before the project was placed was placed under
+version control with Subversion.
+
+There are two sections:
+
+  1: Releases: Lists all the releases of the project and notes which files were
+     added, updated or deleted in each release.
+
+  2: Files: Lists all source code and development tools and provides details of
+     changes to these files.
+
+
+================================================================================
+1: RELEASES
+================================================================================
+
+This section lists all releases of the project from the first version (1.0) to 
+release 1.0.1. For each release the following is noted:
+
+  + Version and date
+  + List of new, updated and deleted files.
+  
+For details of changes to each release see ChangeLog.txt
+
+--------------------------------------------------------------------------------
+v1.0 of 04 Oct 2007
+--------------------------------------------------------------------------------
+New     - PJConsoleApp.pas 1.0
+New     - PJPipe.pas 1.0
+New     - Demos\PJConsoleAppDemos.bpg of 02 Oct 2007
+New     - Demos\DemoReadMe.htm of 03 Oct 2007
+New     - Demos\Demo1\Demo1.dpr 1.0
+New     - Demos\Demo1\FmDemo1.pas 1.0
+New     - Demos\Demo2\Demo2.dpr 1.0
+New     - Demos\Demo2\FmDemo2.pas 1.0
+New     - Demos\Demo3\Demo3.dpr 1.0
+New     - Demos\Demo3\FmDemo3.pas 1.0
+New     - Demos\Demo4\Demo4.dpr 1.0
+New     - Demos\Demo4\FmDemo4.pas 1.0
+New     - Demos\Demo5\Demo5.dpr 1.0
+New     - Demos\Demo5\FmDemo5.pas 1.0
+New     - Demos\Demo6\Demo6.dpr 1.0
+New     - Demos\Demo6\FmDemo6.pas 1.0
+New     - Demos\Demo7\Demo7.dpr 1.0
+New     - Demos\Demo7\FmDemo7.pas 1.0
+New     - Demos\Demo8\Demo8.dpr 1.0
+New     - Demos\Demo8\FmDemo8.pas 1.0
+New     - Demos\Demo9\Demo9.dpr 1.0
+New     - Demos\Demo9\FmDemo9.pas 1.0
+New     - Demos\Demo9\UConsoleAppEx.pas 1.0
+New     - Demos\Demo10\Demo10.dpr 1.0
+New     - Demos\Demo10\UMain.pas 1.0
+New     - Demos\TestApps\Echoer\Echoer.dpr 1.0
+New     - Demos\TestApps\Timed\Timed.dpr 1.0
+New     - DevTools\Release.bat 1.0
+New     - DevTools\ReleaseDocs.bat 1.0
+New     - DevTools\Tidy.bat 1.0
+New     - Docs\ChangeLog.txt of 04 Oct 2007
+New     - Docs\MPL.txt of 29 May 2006
+New     - Docs\ReadMe.htm of 04 Oct 2007
+New     - Docs\UserGuide.pdf of 04 Oct 2007
+
+--------------------------------------------------------------------------------
+v1.0.1 of 30 Mar 2008 --------------------------------------------------------------------------------
+Updated - PJConsoleApp.pas 1.1
+Updated - Demos\DemoReadMe.htm of 30 Mar 2008
+Updated - Docs\ChangeLog.txt of 30 Mar 2008
+Updated - Docs\ReadMe.htm of 30 Mar 2008
+Updated - Docs\UserGuide.pdf of 30 Mar 2008
+
+
+================================================================================
+2: FILES
+================================================================================
+
+This section lists all files for which an update history is known between v1 and
+and v1.0.1, inclusive.
+
+--------------------------------------------------------------------------------
+PJConsoleApp.pas
+--------------------------------------------------------------------------------
+v1.0 of 04 Oct 2007  - Original version.
+v1.1 of 30 Mar 2008  - Made application error constants public.
+                     - Modified code that sets application errors.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+PJPipe.pas
+--------------------------------------------------------------------------------
+v1.0 of 04 Oct 2007  - Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\PJConsoleAppDemos.bpg
+--------------------------------------------------------------------------------
+        02 Oct 2007  - Original version referencing all demo and helper
+                       programs.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\DemoReadMe.htm
+--------------------------------------------------------------------------------
+        03 Oct 2007  - Original read-me file for demo applications.
+        30 Mar 2008  - Corrected and updated document copyright date.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo1\Demo1.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 1 project file. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo1\FmDemo1.pas
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 1 main form. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo2\Demo2.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 2 project file. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo2\FmDemo2.pas
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 2 main form. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo3\Demo3.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 3 project file. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo3\FmDemo3.pas --------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 3 main form. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo4\Demo4.dpr
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 4 project file. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo4\FmDemo4.pas 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 4 main form. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo5\Demo5.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 5 project file. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo5\FmDemo5.pas 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 5 main form. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo6\Demo6.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 6 project file. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo6\FmDemo6.pas 
+--------------------------------------------------------------------------------
+ 1.0 of 03 Oct 2007  - Demo 6 main form. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo7\Demo7.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 7 project file. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo7\FmDemo7.pas 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 7 main form. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo8\Demo8.dpr 
+--------------------------------------------------------------------------------#
+v1.0 of 03 Oct 2007  - Demo 8 project file. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo8\FmDemo8.pas 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 8 main form. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo9\Demo9.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 9 project file. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo9\FmDemo9.pas 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 9 main form. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo9\UConsoleAppEx.pas 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Implements class that extends TPJConsoleApp for demo 9.
+                       Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo10\Demo10.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Demo 10 project file for command line application.
+                       Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\Demo10\UMain.pas 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Implements class that encapsulates main demo 10 program
+                       functionality. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\TestApps\Echoer\Echoer.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Whole echoer application. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Demos\TestApps\Timed\Timed.dpr 
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Whole timed application. Original version.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+DevTools\Release.bat
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Original version of script used to create zip file
+                       containing release files.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+DevTools\ReleaseDocs.bat
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Original version of script used to create zip file
+                       containing PDF documentation.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+DevTools\Tidy.bat
+--------------------------------------------------------------------------------
+v1.0 of 03 Oct 2007  - Original version of script used to delete temp and backup
+                       source files.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Docs\ChangeLog.txt
+--------------------------------------------------------------------------------
+        04 Oct 2007  - Original change log for release 1.0.
+        30 Mar 2008  - Updated with details release 1.0.1.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Docs\MPL.txt
+--------------------------------------------------------------------------------
+        29 May 2006  - Mozilla Public License v1.1.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Docs\ReadMe.htm
+--------------------------------------------------------------------------------
+        04 Oct 2007  - Read-me file for the classes. Original version.
+        30 Mar 2008  - Fixed minor errors and corrected and updated copyright
+                       dates.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
+Docs\UserGuide.pdf
+--------------------------------------------------------------------------------
+        04 Oct 2007  - Original version of user guide.
+        30 Mar 2008  - Corrected some errors and updated information about
+                       application constants.
+        30 Jun 2010  - MOVED TO SVN.
+        
+--------------------------------------------------------------------------------
