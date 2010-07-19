@@ -646,7 +646,13 @@ var
   StartInfo: TStartupInfo;  // information about process from OS
   CurDir: PChar;            // stores current directory
   CreateFlags: DWORD;       // creation flags
+  SafeCmdLine: string;      // stores unique string containing command line
 begin
+  // Prepare work-around for Unicode CreateProcess API function "feature"
+  // See http://bit.ly/adgQ8H
+  SafeCmdLine := CmdLine;
+  UniqueString(SafeCmdLine);
+  
   // Set up startup information structure
   FillChar(StartInfo, Sizeof(StartInfo),#0);
   with StartInfo do
@@ -679,7 +685,7 @@ begin
   // Try to create the process
   Result := CreateProcess(
     nil,                  // no application name: we use command line instead
-    PChar(CmdLine),       // command line
+    PChar(SafeCmdLine),   // command line
     fProcessAttrs,        // security attributes for process
     fThreadAttrs,         // security attributes for thread
     True,                 // we inherit inheritable handles from calling process
