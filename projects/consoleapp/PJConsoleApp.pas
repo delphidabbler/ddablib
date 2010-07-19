@@ -730,16 +730,6 @@ procedure TPJCustomConsoleApp.ZeroProcessInfo;
   }
 begin
   FillChar(fProcessInfo, SizeOf(fProcessInfo), 0);
-(*
-    hProcess: THandle;
-    hThread: THandle;
-    dwProcessId: DWORD;
-    dwThreadId: DWORD;
-  fProcessInfo.hProcess := 0;
-  fProcessInfo.hThread := 0;
-  fProcessInfo.dwProcessId := 0;
-  fProcessInfo.dwThreadId := 0;
-*)
 end;
 
 end.
