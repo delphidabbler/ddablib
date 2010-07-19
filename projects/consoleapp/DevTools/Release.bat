@@ -26,6 +26,7 @@ zip %OutFile% -9 PJPipe.pas
 zip %OutFile% -j -9 Docs\ChangeLog.txt
 zip %OutFile% -j -9 Docs\MPL.txt
 zip %OutFile% -j -9 Docs\ReadMe.htm
+zip %OutFile% -j -9 Docs\Wiki.URL
 
 zip %OutFile% -r -9 Demos\*.*
 
