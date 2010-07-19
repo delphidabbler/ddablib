@@ -47,6 +47,7 @@ uses
   Sun, 30 Sep 2007 16:00:24 GMT. It is made available on an "AS IS" basis,
   WITHOUT WARRANTY OF ANY KIND, either express or implied. The code is used
   entirely at your own risk.
+  Modified to work with Unicode versions of CreateProcess, 19 Jul 2010.
 }
 function ExecAndWait(const CommandLine: string) : Boolean;
   {Executes the given command line and waits for the program started by the
@@ -56,14 +57,19 @@ var
   StartupInfo: Windows.TStartupInfo;        // start-up info passed to process
   ProcessInfo: Windows.TProcessInformation; // info about the process
   ProcessExitCode: Windows.DWord;           // process's exit code
+  SafeCommandLine: string;                  // unique copy of CommandLine
 begin
+  // Modification to work round "feature" in CreateProcessW API function used
+  // by Unicode Delphis. See http://bit.ly/adgQ8H.
+  SafeCommandLine := CommandLine;
+  UniqueString(SafeCommandLine);
   // Set default error result
   Result := False;
   // Initialise startup info structure to 0, and record length
   FillChar(StartupInfo, SizeOf(StartupInfo), 0);
   StartupInfo.cb := SizeOf(StartupInfo);
   // Execute application commandline
-  if Windows.CreateProcess(nil, PChar(CommandLine),
+  if Windows.CreateProcess(nil, PChar(SafeCommandLine),
     nil, nil, False, 0, nil, nil,
     StartupInfo, ProcessInfo) then
   begin
