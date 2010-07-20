@@ -1,10 +1,11 @@
 @rem ---------------------------------------------------------------------------
-@rem Script used to delete temp and backup source files in the Console
-@rem Application Runner classes.
+@rem Script used to delete temporary and backup source files in the Console
+@rem Application Runner classes source tree.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007-2010
 @rem
-@rem v1.0 of 03 Oct 2007 - Original version.
+@rem $Rev$
+@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 @echo off

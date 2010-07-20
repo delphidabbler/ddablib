@@ -1,11 +1,11 @@
 @rem ---------------------------------------------------------------------------
-@rem Console Application Runner Classes.
+@rem Script used to create zip file containing PDF documentation for Console
+@rem Application Runner Classes.
 @rem
-@rem Script used to create zip file containing PDF documentation.
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007-2010
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007
-@rem
-@rem v1.0 of 03 Oct 2007 - First version.
+@rem $Rev$
+@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 @echo off
