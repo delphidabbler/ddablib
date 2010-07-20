@@ -7,6 +7,7 @@
 Release 1.0.2 of 20 July 2010
 + Fixed problem with programs failing to execute when compiled with Unicode versions of Delphi due to strange "feature" of Unicode version of Windows CreateProcess API function.
 + Fixed similar Unicode CreateProcess problem in demo #1.
++ Switched off unsafe code warnings in PJConsoleApp.pas and PJPipe.pas.
 + Updated user guide to note that demos #7, #8 & #9 do not work with Unicode versions of Delphi.
 + Updated other documentation.
 
