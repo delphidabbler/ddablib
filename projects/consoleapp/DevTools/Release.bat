@@ -14,20 +14,25 @@ setlocal
 
 call Tidy.bat
 
-cd ..
+cd .\..
 
 set OutFile=Release\dd-consoleapp.zip
+set DocsDir=Docs
+set DemosDir=Demos
 
-del %OutFile%
+if not exist Release mkdir Release
+if exist %OutFile% del %OutFile%
 
 zip %OutFile% -9 PJConsoleApp.pas
 zip %OutFile% -9 PJPipe.pas
 
-zip %OutFile% -j -9 Docs\ChangeLog.txt
-zip %OutFile% -j -9 Docs\MPL.txt
-zip %OutFile% -j -9 Docs\ReadMe.htm
-zip %OutFile% -j -9 Docs\Wiki.URL
+zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
+zip %OutFile% -j -9 %DocsDir%\MPL.txt
+zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
+zip %OutFile% -j -9 %DocsDir%\Wiki.URL
 
-zip %OutFile% -r -9 Demos\*.*
+zip %OutFile% -r -9 %DemosDir%\*.*
+zip %OutFile% -d %DemosDir%\*.svn\*
+
 
 endlocal
