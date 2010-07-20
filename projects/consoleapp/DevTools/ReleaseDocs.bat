@@ -12,13 +12,12 @@
 
 setlocal
 
-call Tidy.bat
-
-cd ..
+cd .\..
 
 set OutFile=Release\dd-consoleapp-docs.zip
 
-del %OutFile%
+if not exist Release mkdir Release
+if exist %OutFile% del %OutFile%
 
 zip %OutFile% -j -9 Docs\UserGuide.pdf
 
