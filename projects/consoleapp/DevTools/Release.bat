@@ -12,8 +12,6 @@
 
 setlocal
 
-call Tidy.bat
-
 cd .\..
 
 set OutFile=Release\dd-consoleapp.zip
