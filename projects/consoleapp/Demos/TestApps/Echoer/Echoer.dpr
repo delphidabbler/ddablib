@@ -1,26 +1,24 @@
 {
-  DelphiDabbler Console Application Runner Classes
-
-  Demo helper program: Echoer.exe.
-
-  Echoer.dpr
-    v1.0 of 03 Oct 2007  - Whole application. Original version.
-
-  Written by Peter Johnson (www.delphidabbler.com).
-  This demo program and its source code is placed in the public domain with no
-  restrictions as to use.
-
-  THE PROGRAM IS PROVIDED "AS-IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTY. IN
-  NO EVENT SHALL THE AUTHOR BE HELD LIABLE FOR ANY DAMAGES ARISING FROM THE USE
-  OF THIS LIBRARY.
+ * Echoer.dpr
+ *
+ * Whole source code for Echoer.exe helper program for DelphiDabbler Console
+ * Application Runner Classes Demos. Echoes text from standard input onto
+ * standard output with a given prefix to each line.
+ *
+ * $Rev$
+ * $Date$
+ *
+ * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2007-2010.
+ * It may be used without restriction. This code distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 }
 
 program Echoer;
 
 {
-  Application that echoes text on standard input to standard output prefixed
-  by text passed as 1st parameter on command line. If no parameter is provided
-  text is prefixed by '>' character
+  Echoes text on standard input to standard output prefixed by text passed as
+  1st parameter on command line. If no parameter is provided text is prefixed by
+  '>' character.
 
   Program exit code is always 0.
 

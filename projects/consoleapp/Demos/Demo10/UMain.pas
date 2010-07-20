@@ -1,19 +1,16 @@
 {
-  DelphiDabbler Console Application Runner Classes
-
-  Demo Program 10: TPJConsoleApp & Console Applications.
-
-  UMain.dpr
-    v1.0 of 03 Oct 2007  - Implements class that encapsulates main program
-                           functionality. Original version.
-
-  Written by Peter Johnson (www.delphidabbler.com).
-  This demo program and its source code is placed in the public domain with no
-  restrictions as to use.
-
-  THE PROGRAM IS PROVIDED "AS-IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTY. IN
-  NO EVENT SHALL THE AUTHOR BE HELD LIABLE FOR ANY DAMAGES ARISING FROM THE USE
-  OF THIS LIBRARY.
+ * UMain.pas
+ *
+ * Class implementing main program functionality for DelphiDabbler Console
+ * Application Runner Classes demo program #10: TPJConsoleApp & Console
+ * Applications.
+ *
+ * $Rev$
+ * $Date$
+ *
+ * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2007-2010.
+ * It may be used without restriction. This code distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 }
 
 unit UMain;
