@@ -32,9 +32,9 @@
  * ***** END LICENSE BLOCK *****
 }
 
-
 unit PJPipe;
 
+{$WARN UNSAFE_CODE OFF}
 
 interface
 

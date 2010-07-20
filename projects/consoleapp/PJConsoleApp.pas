@@ -36,6 +36,7 @@
 
 unit PJConsoleApp;
 
+{$WARN UNSAFE_CODE OFF}
 
 interface
 
