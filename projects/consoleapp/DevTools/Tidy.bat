@@ -9,27 +9,28 @@
 @rem ---------------------------------------------------------------------------
 
 @echo off
-
 setlocal
 
-set SrcDir=..
-set DocsDir=..\Docs
-set ExeDir=..\Demos\Exe
-
-echo Deleting *.~*, *.dcu, *.dsk and *.ddp from "%SrcDir%" and subfolders
-del /S %SrcDir%\*.~* 
-del /S %SrcDir%\*.dsk
-del /S %SrcDir%\*.dcu
-del /S %SrcDir%\*.ddp
+echo Tidying
+echo ~~~~~~~
 echo.
 
-echo Deleting *.exe from Demos executable directory
-del /S %ExeDir%\*.exe
+set RootDir=..
 
-echo Deleting *.~* from "%DocsDir%" and subfolders
-del /S %DocsDir%\*.~*
+echo Deleting temporary files
+del /S %RootDir%\*.~* 
+del /S %RootDir%\*.ddp 
+del /S %RootDir%\*.dcu 
+del /S %RootDir%\*.exe 
+del /S %RootDir%\*.dsk 
+del /S %RootDir%\*.bak
 echo.
 
-echo Done
+echo Deleting temporary directories
+if exist %RootDir%\Release rmdir /S /Q %RootDir%\Release
+for /F "usebackq" %%i in (`dir /S /B /A:D %RootDir%\__history*`) do rmdir /S /Q %%i
+echo.
+
+echo Done.
 
 endlocal
