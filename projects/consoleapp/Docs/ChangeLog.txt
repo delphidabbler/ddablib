@@ -1,3 +1,7 @@
+Release 1.0.2 of XXXXXXX
++ Fixed problem with programs failing to execute when compiled with Unicode versions of Delphi due to strange "feature" of Unicode version of Windows CreateProcess API function.
++ Updated documentation.
+
 Release 1.0.1 of 30 March 2008
 + Made constants defining application errors public.
 + Did some minor refactoring.
