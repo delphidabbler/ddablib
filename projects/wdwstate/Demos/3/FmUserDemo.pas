@@ -1,12 +1,12 @@
 {
  * FmUserDemo.pas
  *
- * Main form for Version Information Component UserDemo demo program.
+ * Main form for the Window State Components UserDemo demo program.
  *
  * $Rev$
  * $Date$
  *
- * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2006-2009.
+ * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2006-2010.
  * It may be used without restriction. This code distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 }
