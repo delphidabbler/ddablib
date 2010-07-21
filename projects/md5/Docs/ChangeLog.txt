@@ -4,5 +4,9 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v0.2 beta of 21 July 2010
++ Changed AnsiString overloads of TPJMD5.Calculate and TPJMD5.Process methods to take RawByteString parameter instead.
++ Updated DUnit tests re changes in TPJMD5.
+
 Release v0.1 beta of 17 March 2010
 + Initial beta release. 
