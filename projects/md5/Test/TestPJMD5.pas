@@ -139,8 +139,8 @@ type
 
     // Tests Process(AnsiString) and Calculate(AnsiString) methods
     // This test runs all RFC tests
-    procedure TestProcessAnsiString;
-    procedure TestCalculateAnsiString;
+    procedure TestProcessRawByteString;
+    procedure TestCalculateRawByteString;
 
     // Tests Process(UnicodeString) and Calculate(UnicodeString) methods
     // RFC Tests cannot be used with these methods. A special unicode test
@@ -488,17 +488,6 @@ procedure TestTPJMD5.TearDown;
 begin
 end;
 
-procedure TestTPJMD5.TestCalculateAnsiString;
-var
-  Fn: TCalculateMethodCall;
-begin
-  Fn := function(const Test: TRFCTest): TPJMD5Digest
-  begin
-    Result := TPJMD5.Calculate(Test.Data);
-  end;
-  RunRFCCalcTests(Fn);
-end;
-
 procedure TestTPJMD5.TestCalculateArrayOfByte;
 var
   Fn: TCalculateMethodCall;
@@ -541,6 +530,17 @@ begin
   ExpectedDigest := UnicodeTestResultDigest;  // file === unicode test string
   ResultDigest := TPJMD5.CalculateFile(TestFilePath + TestFileName);
   Check(SameDigests(ExpectedDigest, ResultDigest), 'File ' + TestFileName);
+end;
+
+procedure TestTPJMD5.TestCalculateRawByteString;
+var
+  Fn: TCalculateMethodCall;
+begin
+  Fn := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    Result := TPJMD5.Calculate(Test.Data);
+  end;
+  RunRFCCalcTests(Fn);
 end;
 
 procedure TestTPJMD5.TestCalculateStream;
@@ -642,17 +642,6 @@ begin
     EPJMD5.ClassName + ' Exception expected');
 end;
 
-procedure TestTPJMD5.TestProcessAnsiString;
-var
-  Fn: TProcessMethodCall;
-begin
-  Fn := procedure(const MD5: TPJMD5; const Test: TRFCTest)
-  begin
-    MD5.Process(Test.Data);
-  end;
-  RunRFCTests(Fn);
-end;
-
 procedure TestTPJMD5.TestProcessArrayOfByte;
 var
   Fn: TProcessMethodCall;
@@ -699,6 +688,17 @@ begin
   finally
     MD5.Free;
   end;
+end;
+
+procedure TestTPJMD5.TestProcessRawByteString;
+var
+  Fn: TProcessMethodCall;
+begin
+  Fn := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    MD5.Process(Test.Data);
+  end;
+  RunRFCTests(Fn);
 end;
 
 procedure TestTPJMD5.TestProcessStream;
