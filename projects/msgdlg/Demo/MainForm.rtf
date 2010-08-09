@@ -1,0 +1,39 @@
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
+{\fonttbl{\f0\fswiss \fcharset0 Arial;}{\f1\fnil \fcharset2 WingDings;}{\f2\fswiss Arial;}{\f3\fnil \fcharset0 Arial;}{\f4\fnil Arial;}}
+{\colortbl\red0\green0\blue0;\red0\green128\blue0;}
+${\footnote {$}PJMessageDialog Demo Help}
+#{\footnote {#}CONTENTS}
+
+\pard \plain \plain\f0\fs24\cf1\b PJMessageDialog Components Demo Help
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 This demo exercises the various components provided in PJMessageDialog.pas. 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 To use, select the tab for the component you wish to try out and then fill in the properties from the controls on the page. The controls for properties that are not available for the selected component are disabled. Once all properties have been entered press the \plain\f0\fs18\cf0\b Store Properties & Execute\plain\f0\fs18\cf0  button.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 To get help on any of the properties, select the associated control and press F1. To get help on the Execute method select the \plain\f0\fs18\cf0\b Store Properties & Execute\plain\f0\fs18\cf0  button and press F1.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 The controls representing the various properties fall into distinct types as follows:
+\par \pard \fi-400 \li400 \tx400 \plain\f1\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab All controls for properties with enumerated values are drop-down lists containing available values.
+\par \plain\f1\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab Set properties are represented using check list boxes - simply check the values that are to be included in the property.
+\par \plain\f1\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab Numeric properties are often represented by edit boxes that will only take numeric input. A special case is the HelpContext property which can take either an inputed value or a value can be selected from a drop-down list. The values in the drop down list are valid help context ids for the supplied demo help files.
+\par \plain\f1\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab Text properties are usually represented by single or mutli line edit boxes. Exceptions are:
+\par \pard \fi-400 \li800 \tx400 \plain\f1\fs18\cf0 \'Fc\plain\f0\fs18\cf0 \tab The HelpFile property - where the name of a help file can be entered directly or selected from a dialog using the Browse button. Alternatively the names of the demo help files can be selected from the drop down list. Entering no value means that the help file associated with the form is used - that is this help file.
+\par \plain\f1\fs18\cf0 \'Fc\plain\f0\fs18\cf0 \tab The IconResource property uses a drop-down list of resource names that are contained in the demo executable. The empty string and an unknown resource are also provided.
+\par \pard \fi-400 \li400 \tx400 \plain\f0\fs8\cf0 
+\par \pard \plain\f0\fs18\cf0 The \plain\f0\fs18\cf0\b Help\plain\f0\fs18\cf0  button accesses this help file which is associated with the form's HelpFile property.\plain\f2\fs24\cf0 
+\par \page 
+${\footnote {$}MainForm - Demo Topic 1}
+#{\footnote {#}IDH_ONE}
+
+\pard \plain \plain\fs28\cf1 MainForm - Topic 1\plain\fs18\cf0 
+\par 
+\par This is the demo topic with id 1 in MainForm.hlp\plain\f4\fs18\cf0 
+\par \page 
+${\footnote {$}MainForm - Demo Topic 2}
+#{\footnote {#}IDH_TWO}
+
+\pard \plain \plain\fs28\cf1 MainForm - Topic 2\plain\fs18\cf0 
+\par 
+\par This is the demo topic with id 2 in MainForm.hlp\plain\f4\fs18\cf0 
+\par \page 
+}

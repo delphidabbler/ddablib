@@ -1,0 +1,666 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+	<title>
+		DelphiDabbler.com Info Sheet: Message Dialog Components
+	</title>
+
+	<style type="text/css">
+		<!--
+		body {
+			margin: 1em;
+			padding: 0;
+			font-family: Verdana, Arial, sans-serif;
+			font-size: 9pt;
+			line-height: 150%;
+		}
+		h1 {
+			margin: 0 0 1em 0;
+			padding: 0.5em;
+			border: 1px silver solid;
+			background-color: #eee;
+			font-size: 13pt;
+			font-weight: bold;
+			text-align: center;
+		}
+		h1 .subtitle {
+			font-style: italic;
+			color: #336;
+		}
+		h2 {
+			margin: 1em 0 0 0;
+			padding: 0;
+			padding-bottom: 6px;
+			border-bottom: 1px silver solid;
+			font-size: 11pt;
+			font-weight: bold;
+		}
+		h3 {
+			margin: 0.5em 0 0 0;
+			padding: 0;
+			font-size: 9pt;
+			font-weight: bold;
+		}
+		p {
+			margin: 0.5em 0 0 0;
+			padding: 0;
+		}
+		ul, ol {
+			margin: 0.5em 0 0 3em;
+			padding: 0;
+		}
+		ul {
+			list-style-type: square;
+		}
+		ul.spaced li,
+		ol.spaced li {
+			margin-top: 0.5em;
+		}
+		ul.spaced li,
+		ol.spaced li {
+			margin-top: 0.5em;
+		}
+		ul.unspaced li,
+		ol.unspaced li {
+			margin-top: 0;
+		}
+		ul.unspaced li.first,
+		ol.unspaced li.first {
+			margin-top: 0.5em;
+		}
+		code {
+			font-family: "Courier New", Courier, monospace;
+		}
+		a:link {
+			color: #336;
+			text-decoration: underline;
+		}
+		a:visited {
+			color: #669;
+			text-decoration: underline;
+		}
+		a:active {
+			color: #336;
+			text-decoration: underline;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+		.gototop {
+			margin: 1em 0 0 0;
+			padding: 0.3em 0 0 0;
+			text-align: center;
+			position: relative;
+			float: right;
+			font-weight: bold;
+		}
+		.pullout {
+			border-left: 8px silver solid;
+			xborder-bottom: 2px silver solid;
+			xborder-top: 2px silver solid;
+			background-color: #eee;
+			margin: 0.5em 0 0 0;
+			padding: 0.25em 0.5em;
+			font-style: italic;
+		}
+		.indent {
+			margin-left: 3em;
+		}
+		.highlight {
+			color: #336;
+			font-style: italic;
+			font-weight: bold;
+		}
+		.endnotes {
+			margin: 1.5em 0 0 0;
+			padding: 1em 0 0 0;
+			border-top: 1px silver solid;
+		}
+		.comments {
+			font-style: italic;
+		}
+		.copyright,
+		.copyright a:link,
+		.copyright a:visited,
+		.copyright a:active {
+			margin: 1em 0 0 0;
+			color: gray;
+			font-size: 8pt;
+			text-align: right;
+		}
+		-->
+	</style>
+
+</head>
+
+<body>
+
+<h1>
+	Message Dialog Components<br />
+	<span class="subtitle">Information Sheet</span>
+</h1>
+
+
+<h2 id="contents">
+	Contents
+</h2>
+
+<ul>
+	<li><a href="#overview">Overview</a></li>
+	<li><a href="#compatibility">Compatibility</a></li>
+	<li><a href="#installation">Installation</a></li>
+	<li><a href="#bugs">Bugs</a></li>
+	<li><a href="#changelog">Change log</a></li>
+	<li><a href="#license">License</a></li>
+	<li><a href="#author">About the author</a></li>
+</ul>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="overview">
+	Overview
+</h2>
+
+<p>
+	This unit provides various customisable message dialog box components. Three
+	components are installed on the component palette. The installed components
+	are:
+</p>
+	
+<ul class="spaced">
+	<li>
+		<span class="highlight">TPJWinMsgDlg</span><br />
+		This component wraps the Windows <em>MessageBoxIndirect</em> API call
+		and displays a message box based on that provided by Windows. This
+		component will be suitable for most purposes and has the lighter
+		footprint.
+	</li>
+
+	<li>
+		<span class="highlight">TPJVCLMsgDlg</span><br />
+		This component uses the Delphi VCL <var>CreateMessageDialog</var>
+		function to create a form based message box.
+		(<var>CreateMessageDialog</var is used by the standard Delphi
+		<var>MessageDlgXXX</var> functions). The component provides more
+		flexibility than either the Delphi functions or <var>TPJWinMsgDlg</var>.
+		It should be used when it is necessary to display buttons or
+		combinations of buttons that are not supported by the Windows API
+		message box or when a finer degree of control over the appearance and
+		behaviour of the message box is required. <var>TPJVCLMsgDlg</var>
+		supports all the features of <var>TPJWinMsgDlg</var> and extends
+		them. The dialog box component's form can been customised by handling
+		the <var>OnShow</var> and <var>OnHide</var> events added in v2.2.
+	</li>
+	
+	<li>
+		<span class="highlight">TPJMessageDialog</span>
+		<strong>(deprecated)</strong><br />
+		This is an updated version of the component supplied in release 1 of
+		this unit. Various bugs have been fixed and the handling of user icons
+		improved. This component is only provided for backwards compatibility
+		with existing projects that use the old version. It exposes the same
+		properties as the old component. Some of these properties vary from
+		those common to <var>TPJWinMsgDlg</var> and <var>TPJVCLMsgDlg</var>. It
+		is recommended that <var>TPJWinMsgDlg</var> or <var>TPJVCLMsgDlg</var>
+		are used in new projects in preference.
+	</li>
+</ul>
+
+
+<h3>
+	Help file
+</h3>
+
+<p>
+	A OpenHelp compatible help file is supplied that provides help on all the
+	components. The help file integrates with the help system of Delphi 4 to 7.
+	Although it does not integrate with the Delphi 2005 and later IDE it can be
+	used independently of the IDE, albeit with some loss of functionality.
+</p>
+
+<p>
+	A <code>.als</code> file is also supplied to assist in integration with
+	Delphi 6 and 7.
+</p>
+
+
+<h3>
+	Demo program
+</h3>
+
+<p>
+	A demo program with associated explanatory help file is included in the
+	download. The demo exercises each of the three components. It comes supplied
+	with demo help files to enable experimentation with the components'
+	<var>HelpFile</var> and <var>HelpContext</var> properties.
+</p>
+
+	
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="compatibility">
+   Compatibility
+</h2>
+
+<p>
+	The Message Dialog Components compile with Delphi 4 and later. They have
+	been tested with Delphi 4, 6, 7 and 2006.
+</p>
+
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="installation">
+	Installation
+</h2>
+
+<p>
+	The Message Dialog Components, documentation and demo program are supplied
+	in a zip file. Before installing you need to extract all the files from the
+	zip file, preserving the directory structure. The following files will be
+	extracted:
+</p>
+
+<ul>
+
+	<li class="first">
+		<strong><code>PJMessageDialog.pas</code></strong> &ndash; classes,
+		routines and component source code.
+	</li>
+
+	<li>
+		<strong><code>PJMessageDialog.dcr</code></strong> &ndash; resource file
+		containing component palette glyphs.
+	</li>
+
+	<li>
+		<code>PJMessageDialog.hlp</code> &ndash; help file that integrates with
+		the Delphi 3 to 7 OpenHelp system.
+	</li>
+
+	<li>
+		<code>PJMessageDialog.als</code> &ndash; a-link keyword file for
+		integration with the Delphi 6 or 7 OpenHelp system.
+	</li>
+
+	<li>
+		<code>ReadMe.htm</code> &ndash; this file.
+	</li>
+	
+	<li>
+		<code>ChangeLog.txt</code> &ndash; component's change log.
+	</li>
+
+	<li>
+		<code>Demo\PJMessageDialogDemo.dpr</code> &ndash; demo program project
+		file.
+	</li>
+
+	<li>
+		<code>Demo\PJMessageDialogDemo.cfg</code> &ndash; demo project
+		configuration  file.
+	</li>
+
+	<li>
+		<code>Demo\PJMessageDialogDemo.res</code> &ndash; resource file
+		containing demo project's MAINICON resource. 
+	</li>
+
+	<li>
+		<code>Demo\Icons.res</code> &ndash; resource file containing additional
+		icons required by demo program.
+	</li>
+
+	<li>
+		<code>Demo\FmPJMessageDialogDemo.pas</code> &ndash; source code for demo
+		main form, including all demo logic.
+	</li>
+
+	<li>
+		<code>Demo\FmPJMessageDialogDemo.dfm</code> &ndash; demo main form.
+	</li>
+
+	<li>
+		<code>Demo\DelphiDabbler.ico</code> &ndash; demo program's icon file.
+	</li>
+
+	<li>
+		<code>Demo\MainForm.hlp</code> &ndash; help file for demo, also
+		containing some sample topics for use with dialogs.
+	</li>
+
+	<li>
+		<code>Demo\DemoHelp1.hlp</code> &ndash; 1st demo help file with sample
+		topics for display from dialogs.
+	</li>
+
+	<li>
+		<code>Demo\DemoHelp2.hlp</code> &ndash; 2nd demo help file with sample
+		topics for display from dialogs.
+	</li>
+
+</ul>
+
+<p>
+	You can now proceed to install the components and property editor using the
+	<strong>emphasised</strong> files above. Installation methods vary between
+	Delphi versions, so follow the instructions that apply to your version
+	below. Note that <code><strong>$(DELPHI)</strong></code> represents the
+	path where the appropriate version of Delphi was installed. Similarly
+	<code><strong>$(BDS)</strong></code> refers to the installation path of a
+	version of the Borland Development System.
+</p>
+
+<ul>
+	<li><a href="#bds">Installation with Delphi 2005 &amp; 2006</a></li>
+	<li><a href="#d4">Installation with Delphi 4 to 7</a></li>
+</ul>
+
+
+
+<h3 id="bds">
+	Installation with Delphi 2005 &amp; 2006
+</h3>
+
+<p>
+	The components must be installed into a Delphi Win32 design package. It is
+	assumed that you will be installing into an existing package. You may decide
+	to install into the &quot;user&quot; package:
+	<code>$(BDS)\Lib\dclusr.dpk</code>.
+</p>
+
+<ol class="spaced">
+
+	<li>
+		Decide upon a suitable location into which to install the components.
+		This may be a subdirectory of your <code>Borland Studio Projects</code>
+		or <code>$(BDS)\lib</code> folders.
+	</li>
+	
+	<li>
+		Copy <code>PJMessageDialog.pas</code> and
+		<code>PJMessageDialog.dcr</code> to the chosen installation folder.
+	</li>
+	
+	<li>
+		Start the Development System (selecting the Delphi Win32 personality if
+		appropriate) then:
+
+		<ul>
+
+			<li>
+				Open the required package. Select <em>File | Open</em> menu and
+				choose a suitable package source file.
+			</li>
+
+			<li>
+				The package will now be displayed in the Project Manager with a
+				<code>.bpl</code> extension. Right click the package's entry and
+				select <em>Add</em> to display the <em>Add</em> dialog box.
+				Enter the full path to <code>PJMessageDialog.pas</code> in the
+				<em>Unit file name</em> edit box (use the <em>Browse</em> button
+				to navigate to the file). Click <em>OK</em> to add the component
+				to the package.
+			</li>
+			
+			<li>
+				Back in the Project Manager, check that all the added files
+				appear under the package's <em>Contains</em> node. If so, right
+				click the package's entry again and select <em>Compile</em>. If
+				the resulting compilation succeeds a message should be displayed
+				confirming that <var>TPJMessageDialog</var>,
+				<var>TPJWinMsgDlg</var> and <var>TPJVCLMsgDlg</var> have been
+				registered. The components should now appear in the
+				&quot;DelphiDabbler&quot; section of the Tool Palette. (Note
+				this will only appear when a form is selected in the designer).
+			</li>
+			
+			<li>
+				If the components do not appear the package may not have been
+				installed. Install it from the Project Manager by selecting the
+				package's <em>Install</em> right click menu option.
+			</li>
+
+			<li>
+				Close the package project using the <em>File | Close</em> menu
+				item. Accept any prompt that offers to save the package project.
+			</li>
+			
+		</ul>
+		
+	</li>
+
+	<li>
+		If you wish you can now delete <code>PJMessageDialog.pas</code> from the
+		chosen installation folder.
+	</li>
+	
+	<li>
+		The supplied help file cannot be integrated with the IDE's help system.
+		However it can be used independently of the IDE, albeit with reduced
+		functionality.
+	</li>
+
+	<li>
+		The demo program can be loaded into Delphi and compiled and run as
+		required.
+	</li>
+
+</ol>
+
+
+<h3 id="d4">
+	Installation with Delphi 4 to 7
+</h3>
+
+<p>
+	The components must be installed into a design package. It is assumed that
+	you will be installing into an existing package. You may wish to use the
+	&quot;user&quot; package named <code>dclusr.dpk</code> or
+	<code>dclusrXX.dpk</code> (where <code>XX</code> is a version number). This
+	package can be found in <code>$(DELPHI)\Lib</code>. 
+</p>
+
+<ol class="spaced">
+
+	<li>
+		Decide upon a suitable location into which to install the components.
+		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
+	</li>
+	
+	<li>
+		Copy <code>PJMessageDialog.pas</code> and
+		<code>PJMessageDialog.pas</code> to the chosen installation folder.
+	</li>
+
+	<li>	
+		Start Delphi then:
+		
+		<ul>
+			
+			<li>
+				Choose the <em>Component | Install Component</em> menu option to
+				display the <em>Install Component</em> dialog box. Ensure the
+				<em>Into existing package</em> tab is selected. Enter the full
+				path to <code>PJMessageDialog.pas</code> in the <em>Unit file
+				name</em> edit box (use the adjacent <em>Browse</em> button to
+				navigate to the file). Choose the required package from the
+				<em>Package description</em> combo box, or by navigating to the
+				package using <em>Browse</em>. Click <em>OK</em> to confirm your
+				selections. 
+			</li>
+
+			<li>
+				A confirmation dialog box may displayed, querying whether it is
+				OK to rebuild and reinstall the package. Click <em>Yes</em> to
+				proceed.
+			</li>
+			
+			<li>
+				The package will now be built and a dialog box should be
+				displayed stating that the <var>TPJMessageDialog</var>,
+				<var>TPJWinMsgDlg</var> and <var>TPJVCLMsgDlg</var> components
+				have been installed. Click <em>OK</em> to dismiss the dialog
+				box.
+			</li>
+
+			<li>
+				The components will appear on the &quot;DelphiDabbler&quot;
+				palette.
+			</li>
+
+		</ul>
+
+	</li>
+
+	<li>
+		If you wish you can now delete <code>PJMessageDialog.pas.pas</code> from
+		the chosen installation folder.
+	</li>
+	
+	<li>
+		The provided help file can be integrated with the IDE's OpenHelp system.
+		Delphi 6 and 7 also require the use of the supplied <code>.als</code>
+		file. The simplest way to install help is to use my
+		<a href="http://www.delphidabbler.com/software?id=chi">Component Help
+		Installer Expert</a> (v2.2.1 or later). If you prefer to install
+		manually,
+		<a href="http://www.delphidabbler.com/articles?article=15">this
+		article</a> explains the process.
+	</li>
+
+	<li>
+		The demo program can be loaded into Delphi and compiled and run as
+		required.
+	</li>
+
+</ol>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="bugs">Bugs</h2>
+
+<p>
+	The <var>OnHelp</var> event introduced in v2.2 does not work correctly with
+	<var>TPJVCLMsgDlg</var> on Delphi 6 in that it does not always inhibit help
+	from being automatically displayed. The event works correctly on all other
+	tested compiler versions.
+</p>
+
+<p>
+	There was a problem with <var>TPJVCLMsgDlg</var> displaying help in later
+	versions of Delphi. This was fixed in v2.1.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="changelog">
+	Change log
+</h2>
+
+<p>
+	A complete change log is provided in a text file that is included in the
+	download.
+</p>
+
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="license">
+	License
+</h2>
+
+<p>
+	This source code is subject to the Mozilla Public License Version 1.1 (the
+	&quot;License&quot;); you may not use this program except in compliance with
+	the License. You may obtain a copy of the License at
+	<a href="http://www.mozilla.org/MPL/">http://www.mozilla.org/MPL/</a>.
+</p>
+
+<p>
+	Software distributed under the License is distributed on an &quot;AS
+	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+	the License for the specific language governing rights and limitations under
+	the License.
+</p>
+
+<p>
+	The Original Code is Message Dialog Components.
+</p>
+
+<p>
+	The Initial Developer of the Original Code is Peter Johnson
+	<a href="http://www.delphidabbler.com/">(http://www.delphidabbler.com/)</a>.
+</p>
+
+<p>
+	Portions created by the Initial Developer are Copyright &copy; 2001-2006
+	Peter Johnson. All Rights Reserved.
+</p>
+
+<p>
+	All relevant trademarks are acknowledged.
+</p>
+
+
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="author">
+	About the author
+</h2>
+
+<p>
+	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
+	Wales,  UK, writing write mainly in Delphi. My programs are available for
+	download from:
+	<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+</p>
+
+
+
+<div class="endnotes">
+
+	<div class="comments">
+		Please
+		<a href="http://www.delphidabbler.com/contact">
+		let me know</a> if you have any comments about the components, if you
+		have found a bug, or you want to suggest any updates.
+	</div>
+
+	<div class="copyright">
+		This info sheet is copyright &copy; 2005, P D Johnson,
+		<a href="http://www.delphidabbler.com/">
+		www.delphidabbler.com</a>
+	</div>
+
+</div>
+
+</body>
+
+</html>

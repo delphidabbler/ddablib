@@ -1,0 +1,38 @@
+Release 2.2 of 31 March 2006
+PJMessageDialog v2.2 of 27 March 2006
++ Added new OnShow and OnHide events to TPJVCLMsgDlg that expose dialog box's form to permit customisation.
++ Added new TPJVCLMsgDlgFormEvent type for TPJVCLMsgDlg's OnShow and OnHide events.
++ Added new OnHelp event to TPJVCLMsgDlg and TPJWinMsgDlg.
++ Enabled TPJVCLMsgDlg to trigger help when F1 pressed.
++ Updated help file re new TPJVCLMdgDlg features and added example of customising dialog box.
++ Updated demo program to show use of new OnHelp event and new TPJVCLMsgDlg for customization.
+
+Release 2.1 of 28 December 2005
+PJMessageDialog v2.1 of 28 December 2005
++ Removed separate design unit and multi-line property editor. The separate extended string property editor can now be used instead.
++ Fixed bug in later Delphis handling help button click in TPJVCLMsgDlg.
++ Removal of property editor means that the components will install in Delphi 2005 and later.
++ Updated help file re removal of property editor.
++ Added new a-link keyword file for use with Delphi 6/7.
++ Fixed problem displaying help in demo program in later versions of Delphi.
++ Changed to Mozilla public license.
+
+Release 2.0 of 05 October 2003
+PJMessageDialog v2.0 of 05 October 2003
++ Added new base classes for all components.
++ Modified TPJMessageDialog to descend from common base class with new TPJWinMsgDlg.
++ Fixed the following bugs in TPJMessageDialog:
+  - Setting the IconKind property to miUser and leaving the IconResource property empty now displays MAINICON rather than nothing.
+  - Failure to to display user icons under Win NT fixed by referencing resources in Unicode when NT used.
+  - MakeSound property now works for all values of IconKind rather than just miUser.
++ Added new TPJWinMsgDlg component that also wraps the Windows MessageBoxIndirect call. This new component is compatible with, and has properties that are a subset of, those of TPJVCLMsgDlg.
++ Added new TPJVCLMsgDlg component that wraps the Delphi VCL CreateMessageDialog function call that is used to implement the MessageDlgXXXX Delphi functions. This component permits finer control over buttons and positioning than is avaiable from the MessageBoxIndirect API call.
++ Added new design time unit for new property editor and component regsitration.
++ Added new property editor to permit entry of multi-line text for dialog boxes.
++ Moved component registration to new design time unit.
++ Complete rewrite of help file adding information about new components and property editor.
++ Added demo project.
+
+Release 1.0 of 06 April 2001
+PJMessageDialog v1.0 of 30 March 2001
++ Original version with help file and HTML documentation.
