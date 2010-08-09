@@ -1,5 +1,10 @@
-Release 2.2 of 31 March 2006
-PJMessageDialog v2.2 of 27 March 2006
+; ------------------------------------------------------------------------------
+; Change Log for Message Dialog Components
+; $Rev$
+; $Date$
+; ------------------------------------------------------------------------------
+
+Release v2.2 of 31 March 2006
 + Added new OnShow and OnHide events to TPJVCLMsgDlg that expose dialog box's form to permit customisation.
 + Added new TPJVCLMsgDlgFormEvent type for TPJVCLMsgDlg's OnShow and OnHide events.
 + Added new OnHelp event to TPJVCLMsgDlg and TPJWinMsgDlg.
@@ -7,8 +12,7 @@ PJMessageDialog v2.2 of 27 March 2006
 + Updated help file re new TPJVCLMdgDlg features and added example of customising dialog box.
 + Updated demo program to show use of new OnHelp event and new TPJVCLMsgDlg for customization.
 
-Release 2.1 of 28 December 2005
-PJMessageDialog v2.1 of 28 December 2005
+Release v2.1 of 28 December 2005
 + Removed separate design unit and multi-line property editor. The separate extended string property editor can now be used instead.
 + Fixed bug in later Delphis handling help button click in TPJVCLMsgDlg.
 + Removal of property editor means that the components will install in Delphi 2005 and later.
@@ -17,8 +21,7 @@ PJMessageDialog v2.1 of 28 December 2005
 + Fixed problem displaying help in demo program in later versions of Delphi.
 + Changed to Mozilla public license.
 
-Release 2.0 of 05 October 2003
-PJMessageDialog v2.0 of 05 October 2003
+Release v2.0 of 05 October 2003
 + Added new base classes for all components.
 + Modified TPJMessageDialog to descend from common base class with new TPJWinMsgDlg.
 + Fixed the following bugs in TPJMessageDialog:
@@ -33,6 +36,5 @@ PJMessageDialog v2.0 of 05 October 2003
 + Complete rewrite of help file adding information about new components and property editor.
 + Added demo project.
 
-Release 1.0 of 06 April 2001
-PJMessageDialog v1.0 of 30 March 2001
+Release v1.0 of 06 April 2001
 + Original version with help file and HTML documentation.
