@@ -4,7 +4,7 @@ Message Dialog Components : Historical update information from v1.0 to v2.2
 
 ================================================================================
 
-This file records known changes to files in the Message Dialog Components from 
+This file records known changes to files in the Message Dialog Components from
 v1.0 to v2.0. before the project was placed was placed under version control
 with Subversion.
 
@@ -21,12 +21,12 @@ There are two sections:
 1: RELEASES
 ================================================================================
 
-This section lists all releases of the project from the first version (1.0) to 
+This section lists all releases of the project from the first version (1.0) to
 release 2.2. For each release the following is noted:
 
   + Version and date
   + List of new, updated and deleted files.
-  
+
 For details of changes to each release see ChangeLog.txt
 
 --------------------------------------------------------------------------------
@@ -34,9 +34,14 @@ v1.0 of 06 Apr 2001
 --------------------------------------------------------------------------------
 New     - PJMessageDialog.pas v1.0
 New     - PJMessageDialog.dcr of 25 Mar 2001
+New     - Help\IDIApplication.bmp of 30 Mar 2001
+New     - Help\IDIAsterisk.bmp of 30 Mar 2001
+New     - Help\IDIExclamation.bmp of 30 Mar 2001
+New     - Help\IDIHand.bmp of 30 Mar 2001
+New     - Help\IDIQuestion.bmp of 30 Mar 2001
+New     - Help\IDIWinLogo.bmp of 30 Mar 2001
 New     - Help\PJMessageDialog.hpj v1.0
-New     - Help\PJMessageDialog.hap of 30 Mar 2001
-
+New     - Help\TPJMessageDialog.bmp of 29 Mar 2001
 
 --------------------------------------------------------------------------------
 v2.0 of 05 Oct 2003
@@ -44,36 +49,38 @@ v2.0 of 05 Oct 2003
 Updated - PJMessageDialog.pas v2.0
 New     - PJMessageDialogDsgn.pas 1.0
 Updated - PJMessageDialog.dcr of 17 Sep 2003
-Updated - Help\PJMessageDialog.hpj v1.1
-Updated - Help\PJMessageDialog.hap of 05 Oct 2003
-New     - Demo\PJMessageDialogDemo.dpr v1.0
-New     - Demo\PJMessageDialogDemo.dpr v1.0
-New     - Demo\Icons.res of 22 Sep 2003
-New     - Demo\MainForm.hap of 05 Oct 2003
-New     - Demo\MainForm.hpj of 05 Oct 2003
 New     - Demo\DemoHelp1.hap of 05 Oct 2003
 New     - Demo\DemoHelp1.hpj of 05 Oct 2003
 New     - Demo\DemoHelp2.hap of 05 Oct 2003
 New     - Demo\DemoHelp2.hpj of 05 Oct 2003
+New     - Demo\FmPJMessageDialogDemo.dpr v1.0
+New     - Demo\Icons.res of 22 Sep 2003
+New     - Demo\MainForm.hap of 05 Oct 2003
+New     - Demo\MainForm.hpj of 05 Oct 2003
+New     - Demo\PJMessageDialogDemo.dpr v1.0
+Updated - Help\PJMessageDialog.hap of 05 Oct 2003
+Updated - Help\PJMessageDialog.hpj v1.1
+New     - Help\TPJVCLMsgDlg.bmp of 18 Sep 2003
+New     - Help\TPJWinMsgDlg.bmp of 18 Sep 2003
 
 --------------------------------------------------------------------------------
 v2.1 of 28 Dec 2005
 --------------------------------------------------------------------------------
 Removed - PJMessageDialogDsgn.pas
 Updated - PJMessageDialog.pas v2.1
-Updated - Help\PJMessageDialog.hpj v1.2
-Updated - Help\PJMessageDialog.hap of 24 Dec 2005
-New     - Help\PJMessageDialog.als of 24 Dec 2005
 Updated - Demo\FmPJMessageDialogDemo.pas v1.1
+New     - Help\PJMessageDialog.als of 24 Dec 2005
+Updated - Help\PJMessageDialog.hap of 24 Dec 2005
+Updated - Help\PJMessageDialog.hpj v1.2
 
 --------------------------------------------------------------------------------
 v2.2 of 31 Mar 2006
 --------------------------------------------------------------------------------
 Updated - PJMessageDialog.pas v2.2
-Updated - Help\PJMessageDialog.hpj v1.3
-Updated - Help\PJMessageDialog.hap of 25 Mar 2006
-Updated - Help\PJMessageDialog.als of 25 Mar 2006
 Updated - Demo\FmPJMessageDialogDemo.pas v1.24
+Updated - Help\PJMessageDialog.als of 25 Mar 2006
+Updated - Help\PJMessageDialog.hap of 25 Mar 2006
+Updated - Help\PJMessageDialog.hpj v1.3
 
 
 ================================================================================
@@ -91,17 +98,17 @@ v2.0 of 05 Oct 2003  - Complete re-write adding new components and rewriting the
                        v1 TPJMessageDialog component. Changes are:
                        - Added new base classes for all components.
                        - Modified TPJMessageDialog to descend from common base
-                         class with new TPJWinMsgDlg. In effect this makes 
-                         TPJMessageDialog a new component that emulates the 
+                         class with new TPJWinMsgDlg. In effect this makes
+                         TPJMessageDialog a new component that emulates the
                          previous version.
-                       - Setting IconKind to miUser and leaving IconResource 
+                       - Setting IconKind to miUser and leaving IconResource
                          empty now displays MAINICON rather than nothing.
                        - Fixed bug in TPJMessageDialog that failed to display
                          user icons under Win NT. We now reference resources in
                          Unicode under Win NT.
                        - MakeSound property of TPJMessageDialog now works for
                          all values of IconKind rather than just miUser.
-                       - Added new TPJWinMsgDlg component that also wraps 
+                       - Added new TPJWinMsgDlg component that also wraps
                          Windows MessageBoxIndirect call. This new component is
                          compatible with, and has properties that are a subset
                          of TPJVCLMsgDlg.
@@ -109,35 +116,35 @@ v2.0 of 05 Oct 2003  - Complete re-write adding new components and rewriting the
                          VCL CreateMessageDialog function call that is used to
                          implement the MessageDlgXXXX Delphi functions. This
                          component provides a superset of the properties of
-                         TPJWinMsgDlg and permits finer control over the buttons 
-                         that can appear. It also allows the dialog to be 
+                         TPJWinMsgDlg and permits finer control over the buttons
+                         that can appear. It also allows the dialog to be
                          positioned relative to screen or owner form.
-                       - Moved component registration to new PJMessageDialogDsgn 
+                       - Moved component registration to new PJMessageDialogDsgn
                          unit.
-v2.1 of 28 Dec 2005  - Moved component regsitration back to this unit since 
-                       design time unit no longer required following removal of 
+v2.1 of 28 Dec 2005  - Moved component regsitration back to this unit since
+                       design time unit no longer required following removal of
                        property editor.
-                     - Fixed bug in TPJVCLMsgDlg that was causing exception when 
+                     - Fixed bug in TPJVCLMsgDlg that was causing exception when
                        displaying help from help button in later Delphi
-                       versions. Did this by providing OnClick handler for help 
+                       versions. Did this by providing OnClick handler for help
                        button.
                      - Set default values for properties where this had been
                        omitted.
-v2.2 of 27 Mar 2006  - Added new OnShow and OnHide events to TPJVCLMsgDlg. These 
-                       provide access to dialog box's form to permit further 
+v2.2 of 27 Mar 2006  - Added new OnShow and OnHide events to TPJVCLMsgDlg. These
+                       provide access to dialog box's form to permit further
                        customisation.
-                     - Added new protected FormHide and FormShow event handlers 
+                     - Added new protected FormHide and FormShow event handlers
                        for dialog box form on TPJVCLMsgDlg.
                      - Changed code that sets default button to work with new
                        TPJVCLMsgDlg.FormShow method.
-                     - Added new TPJVCLMsgDlgFormEvent type for TPJVCLMsgDlg's 
+                     - Added new TPJVCLMsgDlgFormEvent type for TPJVCLMsgDlg's
                        OnShow and OnHide events.
-                     - Added new OnHelp event to TPJVCLMsgDlg and TPJWinMsgDlg 
-                       that is triggered when a help button is clicked. If this 
+                     - Added new OnHelp event to TPJVCLMsgDlg and TPJWinMsgDlg
+                       that is triggered when a help button is clicked. If this
                        event is assigned default help handling is inhibited.
                      - Enabled TPJVCLMsgDlg to trigger help when F1 pressed.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 PJMessageDialog.dcr
 --------------------------------------------------------------------------------
@@ -145,81 +152,117 @@ PJMessageDialog.dcr
         17 Sep 2003  - Added new component images for new TPJWinMsgDlg and
                        TPJVCLMsgDlg components.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 PJMessageDialogDsgn.pas
 --------------------------------------------------------------------------------
 v1.0 of 05 Oct 2003  - New design time code for Message Dialog Components that
-                       provides a multi line string property editor. 
+                       provides a multi line string property editor.
         28 Dec 2005  - Deleted.
-        
+
 --------------------------------------------------------------------------------
 Demo\DemoHelp1.hap
 --------------------------------------------------------------------------------
         05 Oct 2003  - New help topic file for 1st demo project supplementary
                        help file.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Demo\DemoHelp1.hpj
 --------------------------------------------------------------------------------
         05 Oct 2003  - New help project file for 1st demo project supplementary
                        help file.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Demo\DemoHelp2.hap
 --------------------------------------------------------------------------------
         05 Oct 2003  - New help topic file for 2nd demo project supplementary
                        help file.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Demo\DemoHelp2.hpj
 --------------------------------------------------------------------------------
         05 Oct 2003  - New help topic file for 2nd demo project supplementary
                        help file.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Demo\FmPJMessageDialogDemo.pas
 --------------------------------------------------------------------------------
 v1.0 of 05 Oct 2003  - Original version.
-v1.1 of 24 Dec 2005  - Fixed problem accessing main form help in later versions 
-                       of Delphi by avoiding use of Delphi's built in help 
+v1.1 of 24 Dec 2005  - Fixed problem accessing main form help in later versions
+                       of Delphi by avoiding use of Delphi's built in help
                        management.
-v1.2 of 27 Mar 2006  - Added controls and support code to test new OnHelp, 
+v1.2 of 27 Mar 2006  - Added controls and support code to test new OnHelp,
                        OnShow and OnHide events added in release 2.2 of the
                        components.
-                     - Added event handler methods to demonstrate a complex 
-                       customisation of TPJVCLMsgDlg using the OnShow and OnHide 
+                     - Added event handler methods to demonstrate a complex
+                       customisation of TPJVCLMsgDlg using the OnShow and OnHide
                        events.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Demo\Icons.res
 --------------------------------------------------------------------------------
         22 Sep 2003  - New file containing additional icons for demo program.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Demo\MainForm.hap
 --------------------------------------------------------------------------------
         05 Oct 2003  - New help topic file for main demo form.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Demo\MainForm.hpj
 --------------------------------------------------------------------------------
         05 Oct 2003  - New help project file for main demo form help.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Demo\PJMessageDialogDemo.dpr
 --------------------------------------------------------------------------------
-v1.0 of 05 Oct 2003  - Original version.                 
+v1.0 of 05 Oct 2003  - Original version.
         09 Aug 2010  - MOVED TO SVN.
-        
+
+--------------------------------------------------------------------------------
+Help\IDIApplication.bmp
+--------------------------------------------------------------------------------
+        30 Mar 2001  - IDI_APPLICATION bitmap for inclusion in help file.
+        09 Aug 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\IDIAsterisk.bmp
+--------------------------------------------------------------------------------
+        30 Mar 2001  - IDI_ASTERISK bitmap for inclusion in help file.
+        09 Aug 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\IDIExclamation.bmp
+--------------------------------------------------------------------------------
+        30 Mar 2001  - IDI_EXCLAMATION bitmap for inclusion in help file.
+        09 Aug 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\IDIHand.bmp
+--------------------------------------------------------------------------------
+        30 Mar 2001  - IDI_HAND bitmap for inclusion in help file.
+        09 Aug 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\IDIQuestion.bmp
+--------------------------------------------------------------------------------
+        30 Mar 2001  - IDI_QUESTION bitmap for inclusion in help file.
+        09 Aug 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\IDIWinLogo.bmp
+--------------------------------------------------------------------------------
+        30 Mar 2001  - IDI_WINLOGO bitmap for inclusion in help file.
+        09 Aug 2010  - MOVED TO SVN.
+
 --------------------------------------------------------------------------------
 Help\PJMessageDialog.als
 --------------------------------------------------------------------------------
@@ -227,7 +270,7 @@ Help\PJMessageDialog.als
         25 Mar 2006  - Regenerated a-link keyword file to collect any keyword
                        changes in revised help topic file.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Help\PJMessageDialog.hap
 --------------------------------------------------------------------------------
@@ -246,7 +289,7 @@ Help\PJMessageDialog.hap
                      - Added new example of dialog customisation using
                        TPJVCLMsgDlg.
         09 Aug 2010  - MOVED TO SVN.
-        
+
 --------------------------------------------------------------------------------
 Help\PJMessageDialog.hpj
 --------------------------------------------------------------------------------
@@ -254,5 +297,24 @@ v1.0 of 30 Mar 2001  - Original version.
 v1.1 of 05 Oct 2003  - Updated window title and copyright message.
 v1.2 of 24 Dec 2005  - Updated copyright date range to include 2005.
         09 Aug 2010  - MOVED TO SVN.
-        
+
+--------------------------------------------------------------------------------
+Help\TPJMessageDialog.bmp
+--------------------------------------------------------------------------------
+        29 Mar 2001  - TPJMessageDialog component glyph for inclusion in help
+                       file.
+        09 Aug 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\TPJVCLMsgDlg.bmp
+--------------------------------------------------------------------------------
+        18 Sep 2003  - TPJVCLMsgDlg component glyph for inclusion in help file.
+        09 Aug 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\TPJWinMsgDlg.bmp
+--------------------------------------------------------------------------------
+        18 Sep 2003  - TPJWinMsgDlg component glyph for inclusion in help file.
+        09 Aug 2010  - MOVED TO SVN.
+
 --------------------------------------------------------------------------------
