@@ -296,6 +296,7 @@ Help\PJMessageDialog.hpj
 v1.0 of 30 Mar 2001  - Original version.
 v1.1 of 05 Oct 2003  - Updated window title and copyright message.
 v1.2 of 24 Dec 2005  - Updated copyright date range to include 2005.
+v1.3 of 25 Mar 2006  - Updated copyright date range to include 2006.
         09 Aug 2010  - MOVED TO SVN.
 
 --------------------------------------------------------------------------------
