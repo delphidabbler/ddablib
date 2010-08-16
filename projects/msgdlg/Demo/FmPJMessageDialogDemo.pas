@@ -1,65 +1,14 @@
-{ ##
-  @PROJECT_NAME             PJMessageDialogDemo
-  @PROJECT_DESC             Message dialog demo program.
-  @FILE                     FmPJMessageDialogDemo.pas
-  @COMMENTS                 Main form and code for demo program.
-  @LEGAL_NOTICE             This demo program is distributed under the Mozilla
-                            Public License - see below.
-  @AUTHOR                   Peter D Johnson, LLANARTH, Ceredigion, Wales, UK.
-  @OWNER                    DelphiDabbler
-  @EMAIL                    peter.johnson@openlink.org
-  @WEBSITE                  http://www.delphidabbler.com/
-  @COPYRIGHT                © Peter D Johnson, 2003-2006.
-  @DEPENDENCIES             PJMessageDialog components v2.2 or later.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 05/10/2003
-      @COMMENTS             Original version.
-    )
-    @REVISION(
-      @VERSION              1.1
-      @DATE                 24/12/2005
-      @COMMENTS             Fixed problem accessing main form help in later
-                            versions of Delphi by avoiding use of Delphi's built
-                            in help management.
-    )
-    @REVISION(
-      @VERSION              1.2
-      @DATE                 27/03/2006
-      @COMMENTS             + Added controls and support code to test new
-                              OnHelp, OnShow and OnHide events added in release
-                              2.2 of components.
-                            + Added event handler methods to demonstrate a
-                              complex customisation of TPJVCLMsgDlg using the
-                              OnShow and OnHide events.
-    )
-  )
-}
-
-
-{
- * ***** BEGIN LICENSE BLOCK *****
+{ 
+ * PJMessageDialogDemo.dpr
  *
- * Version: MPL 1.1
+ * Main form demo program that demonstrates use of Message Dialog Components.
  *
- * The contents of this file are subject to the Mozilla Public License Version
- * 1.1 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at http://www.mozilla.org/MPL/
+ * $Rev$
+ * $Date$
  *
- * Software distributed under the License is distributed on an "AS IS" basis,
- * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
- * the specific language governing rights and limitations under the License.
- *
- * The Original Code is FmPJMessageDialogDemo.pas.
- *
- * The Initial Developer of the Original Code is Peter Johnson
- * (http://www.delphidabbler.com/).
- *
- * Portions created by the Initial Developer are Copyright (C) 2003-2006 Peter
- * Johnson. All Rights Reserved.
- *
- * ***** END LICENSE BLOCK *****
+ * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2003-2010.
+ * It may be used without restriction. This code distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 }
 
 
