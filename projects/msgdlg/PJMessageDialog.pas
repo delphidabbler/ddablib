@@ -38,6 +38,14 @@
 unit PJMessageDialog;
 
 
+// Switch off unsafe warnings if supported
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+    {$WARN UNSAFE_CAST OFF}
+  {$IFEND}
+{$ENDIF}
+
+
 interface
 
 
