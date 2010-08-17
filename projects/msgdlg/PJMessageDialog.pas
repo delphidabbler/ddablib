@@ -885,6 +885,7 @@ procedure TPJVCLMsgDlg.FocusDefaultButton(const Dlg: TForm);
 var
   Idx: Integer; // loops thru all components on form
   Btn: TButton; // reference to button on form
+const
   // Captions used for buttons of various kinds. Captions from Consts.pas
   cButtonCaptions: array[TMsgDlgBtn] of string = (
     sMsgDlgYes, sMsgDlgNo, sMsgDlgOK, sMsgDlgCancel, sMsgDlgAbort,
