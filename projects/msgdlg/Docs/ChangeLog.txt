@@ -4,6 +4,12 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v2.2.1 of 17 August 2010
++ Fixed problems that were preventing compilation with Delphi 2010.
++ Ensured Unicode supported.
++ Switched off unsafe warnings for Delphi 7 and later.
++ Updated documentation.
+
 Release v2.2 of 31 March 2006
 + Added new OnShow and OnHide events to TPJVCLMsgDlg that expose dialog box's form to permit customisation.
 + Added new TPJVCLMsgDlgFormEvent type for TPJVCLMsgDlg's OnShow and OnHide events.
