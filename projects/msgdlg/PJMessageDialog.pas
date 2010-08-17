@@ -1,95 +1,13 @@
-{ ##
-  @PROJECT_NAME             Message Dialog Components
-  @PROJECT_DESC             Components that provide customisable message dialog
-                            boxes that wrap the Windows MessageBoxIndirect API
-                            call and the Delphi VCL CreateMessageDialog
-                            function.
-  @FILE                     PJMessageDialog.pas
-  @COMMENTS                 Component source code.
-  @LEGAL_NOTICE             This component is distributed under the Mozilla
-                            Public License - see below.
-  @AUTHOR                   Peter D Johnson, LLANARTH, Ceredigion, Wales, UK.
-  @OWNER                    DelphiDabbler
-  @EMAIL                    peter.johnson@openlink.org
-  @WEBSITE                  http://www.delphidabbler.com/
-  @COPYRIGHT                © Peter D Johnson, 2001-2006.
-  @HISTORY(
-    @REVISION(
-      @VERSION              1.0
-      @DATE                 26/03/2001
-      @COMMENTS             Original version.
-    )
-    @REVISION(
-      @VERSION              2.0
-      @DATE                 05/10/2003
-      @COMMENTS             Complete re-write adding new components and
-                            rewriting the v1 TPJMessageDialog component. Changes
-                            are:
-                            + Added new base classes for all components.
-                            + Modified TPJMessageDialog to descend from common
-                              base class with new TPJWinMsgDlg. In effect this
-                              makes TPJMessageDialog a new component that
-                              emulates the previous version.
-                            + Setting IconKind to miUser and leaving
-                              IconResource empty now displays MAINICON rather
-                              than nothing.
-                            + Fixed bug in TPJMessageDialog that failed to
-                              display user icons under Win NT. We now reference
-                              resources in Unicode under Win NT.
-                            + MakeSound property of TPJMessageDialog now works
-                              for all values of IconKind rather than just
-                              miUser.
-                            + Added new TPJWinMsgDlg component that also wraps
-                              Windows MessageBoxIndirect call. This new
-                              component is compatible with, and has properties
-                              that are a subset of TPJVCLMsgDlg.
-                            + Added new TPJVCLMsgDlg component that wraps the
-                              Delphi VCL CreateMessageDialog function call that
-                              is used to implement the MessageDlgXXXX Delphi
-                              functions. This component provides a superset of
-                              the properties of TPJWinMsgDlg and permits finer
-                              control over the buttons that can appear. It also
-                              allows the dialog to be positioned relative to
-                              screen or owner form.
-                            + Moved component registration to new
-                              PJMessageDialogDsgn unit.
-    )
-    @REVISION(
-      @VERSION              2.1
-      @DATE                 28/12/2005
-      @COMMENTS             + Moved component regsitration back to this unit
-                              since design time unit no longer required
-                              following removal of property editor.
-                            + Fixed bug in TPJVCLMsgDlg that was causing
-                              exception when displaying help from help button
-                              in later Delphi versions. Did this by providing
-                              OnClick handler for help button.
-                            + Set default values for properties where this had
-                              been omitted.
-    )
-    @REVISION(
-      @VERSION              2.2
-      @DATE                 27/03/2006
-      @COMMENTS             + Added new OnShow and OnHide events to
-                              TPJVCLMsgDlg. These provide access to dialog box's
-                              form to permit further customisation.
-                            + Added new protected FormHide and FormShow event
-                              handlers for dialog box form on TPJVCLMsgDlg.
-                            + Changed code that sets default button to work
-                              with new TPJVCLMsgDlg.FormShow method.
-                            + Added new TPJVCLMsgDlgFormEvent type for
-                              TPJVCLMsgDlg's OnShow and OnHide events.
-                            + Added new OnHelp event to TPJVCLMsgDlg and
-                              TPJWinMsgDlg that is triggered when a help button
-                              is clicked. If this event is assigned default
-                              help handling is inhibited.
-                            + Enabled TPJVCLMsgDlg to trigger help when F1
-                              pressed.
-  )
-}
-
-
 {
+ * PJMessageDialog.pas
+ *
+ * Components that provide customisable message dialog boxes that wrap the
+ * Windows MessageBoxIndirect API call and the Delphi VCL CreateMessageDialog
+ * function.
+ *
+ * $Rev$
+ * $Date$
+ *
  * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
@@ -107,8 +25,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2001-2006 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2001-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s)
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }
