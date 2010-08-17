@@ -1,5 +1,5 @@
-{ 
- * PJMessageDialogDemo.dpr
+{
+ * FmPJMessageDialogDemo.dpr
  *
  * Main form demo program that demonstrates use of Message Dialog Components.
  *
@@ -126,8 +126,13 @@ end;
 procedure TDemoForm.edNumKeyPress(Sender: TObject; var Key: Char);
   // Prevents non-numeric entry into edit boxes used to enter numbers
 begin
+  {$IFDEF UNICODE}
+  if not CharInSet(Key, ['0'..'9', #8]) then
+    Key := #0;
+  {$ELSE}
   if not (Key in ['0'..'9', #8]) then
     Key := #0;
+  {$ENDIF}
 end;
 
 procedure TDemoForm.tabCtrlChange(Sender: TObject);
@@ -550,7 +555,7 @@ begin
       else
       begin
         dlgVCLMsg.OnShow := nil;
-        dlgVCLMsg.OnHide := nil; 
+        dlgVCLMsg.OnHide := nil;
       end;
       dlgVCLMsg.Execute;
     end;
