@@ -567,10 +567,14 @@ function TPJWinMsgDlgCustom.GetIconResNameFromStr(const Str: string): PChar;
   MessageBoxIndirect API call: this is a PChar pointer to a wide char string
   under Windows NT and a PChar pointer to an ansi char string under Windows 9x}
 begin
+  {$IFDEF UNICODE}
+  Result := PChar(Str);
+  {$ELSE}
   if SysUtils.Win32Platform = VER_PLATFORM_WIN32_NT then
     Result := PChar(PWChar(WideString(Str)))
   else
     Result := PChar(Str);
+  {$ENDIF}
 end;
 
 function TPJWinMsgDlgCustom.Show: Integer;
@@ -881,12 +885,17 @@ procedure TPJVCLMsgDlg.FocusDefaultButton(const Dlg: TForm);
 var
   Idx: Integer; // loops thru all components on form
   Btn: TButton; // reference to button on form
-const
   // Captions used for buttons of various kinds. Captions from Consts.pas
   cButtonCaptions: array[TMsgDlgBtn] of string = (
     sMsgDlgYes, sMsgDlgNo, sMsgDlgOK, sMsgDlgCancel, sMsgDlgAbort,
     sMsgDlgRetry, sMsgDlgIgnore, sMsgDlgAll, sMsgDlgNoToAll, sMsgDlgYesToAll,
-    sMsgDlgHelp);
+    sMsgDlgHelp
+    {$IFDEF CONDITIONALEXPRESSIONS}
+    {$IF High(TMsgDlgBtn) > mbHelp}
+    , sMsgDlgClose
+    {$IFEND}
+    {$ENDIF}
+    );
 begin
   if not (DefButton in Buttons) then
     // No valid default button specified: do nothing (this means that default
