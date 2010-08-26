@@ -54,6 +54,12 @@ uses
   Windows, Classes, Controls, StdCtrls, Dialogs, Forms;
 
 
+const
+  // Windows message dialog flag missing from Windows unit
+  {$EXTERNALSYM MB_CANCELTRYCONTINUE}
+  MB_CANCELTRYCONTINUE = $00000006;
+
+
 type
 
   {
@@ -68,7 +74,10 @@ type
     bgRetryCancel,      // Retry and Cancel buttons
     bgYesNo,            // Yes and No buttons
     bgYesNoCancel,      // Yes, No and Cancel buttons
-    bgUnknown           // An unsupported or unknown group of buttons
+    bgUnknown,          // An unsupported or unknown group of buttons
+    bgCancelTryContinue // Cancel, Try Again and Continue buttons
+                        // Same as bgAbortRetryIgnore in TPJVCLMsgDlg or
+                        // in TPJWinMsgDlg on OSs that don't support it
   );
 
   {
@@ -592,13 +601,12 @@ const
   // Table mapping TPJMsgDlgButtonGroup to API flags
   cButtonFlags: array[TPJMsgDlgButtonGroup] of Integer = (
     MB_ABORTRETRYIGNORE, MB_OK, MB_OKCANCEL, MB_RETRYCANCEL,
-    MB_YESNO, MB_YESNOCANCEL, 0
+    MB_YESNO, MB_YESNOCANCEL, 0, MB_CANCELTRYCONTINUE
   );
 var
   MsgBoxParams: TMsgBoxParams;  // params passed to MessageBoxIndirect fn
 begin
   // Set up TMsgBoxParams structure
-  // zero the structure
   FillChar(MsgBoxParams, SizeOf(MsgBoxParams), 0);
   with MsgBoxParams do
   begin
@@ -608,15 +616,23 @@ begin
     lpszIcon := GetIconResourceName;
     lpszText := PChar(Text);
     lpszCaption := PChar(GetWindowTitle);
-    // set style flags for window: and note user defined icon
-    dwStyle := cButtonFlags[fButtonGroup] or MB_USERICON;
-    // if user supplied help context record it, set help button and callback
+    // Set style flags for window: mapping unsupported flags per OS
+    if ((SysUtils.Win32Platform <> VER_PLATFORM_WIN32_NT) or
+      (SysUtils.Win32MajorVersion < 5)) and
+      (fButtonGroup = bgCancelTryContinue) then
+      // CancelTryContinue requires NT system with Win 2K or later. If we don't
+      // have it we use AbortRetryIgnore instead
+      dwStyle := MB_ABORTRETRYIGNORE
+    else
+      dwStyle := cButtonFlags[fButtonGroup];
+    dwStyle := dwStyle or MB_USERICON;  // always use user specified icon
+    // If user supplied help context record it, set help button and callback
     if HelpContext <> 0 then
     begin
-      // .. we *subvert* the dwContextHelpId field to store a reference to this
-      //    object so we can reference it in help callback - this reference is
-      //    then used to call the Help method
       dwStyle := dwStyle + MB_HELP;
+      // We *subvert* the dwContextHelpId field to store a reference to this
+      // object so we can reference it in help callback. This reference is then
+      // used to call the Help method.
       dwContextHelpId := DWORD(Self);
       lpfnMsgBoxCallback := @HelpCallback;
     end;
@@ -1004,13 +1020,20 @@ procedure TPJVCLMsgDlg.SetButtonGroup(const Value: TPJMsgDlgButtonGroup);
 begin
   inherited;
   case Value of
-    bgAbortRetryIgnore: fButtons := [mbAbort, mbRetry, mbIgnore];
-    bgOK: fButtons := [mbOK];
-    bgOKCancel: fButtons := [mbOK, mbCancel];
-    bgRetryCancel: fButtons := [mbRetry, mbCancel];
-    bgYesNo: fButtons := [mbYes, mbNo];
-    bgYesNoCancel: fButtons := [mbYes, mbNo, mbCancel];
-    bgUnknown: fButtons := [];
+    bgAbortRetryIgnore, bgCancelTryContinue:
+      fButtons := [mbAbort, mbRetry, mbIgnore];
+    bgOK:
+      fButtons := [mbOK];
+    bgOKCancel:
+      fButtons := [mbOK, mbCancel];
+    bgRetryCancel:
+      fButtons := [mbRetry, mbCancel];
+    bgYesNo:
+      fButtons := [mbYes, mbNo];
+    bgYesNoCancel:
+      fButtons := [mbYes, mbNo, mbCancel];
+    bgUnknown:
+      fButtons := [];
   end;
 end;
 
@@ -1051,4 +1074,3 @@ begin
 end;
 
 end.
-
