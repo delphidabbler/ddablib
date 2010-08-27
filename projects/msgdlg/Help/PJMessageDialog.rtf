@@ -97,7 +97,7 @@ A{\footnote {A}TPJMsgDlgBase_ButtonGroup;ButtonGroup_property;ButtonGroup}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Determines which buttons appear in the dialog box.
 \par 
-\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJMsgDlgButtonGroup = (bgAbortRetryIgnore, bgOK,\plain\f3\fs18\cf0  \plain\f2\fs18\cf0 bgOKCancel, bgRetryCancel, bgYesNo, bgYesNoCancel);
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJMsgDlgButtonGroup = (bgAbortRetryIgnore, bgOK,\plain\f3\fs18\cf0  \plain\f2\fs18\cf0 bgOKCancel, bgRetryCancel, bgYesNo, bgYesNoCancel\plain\f3\fs18\cf0 , bgUnknown, bgCancelTryContinue\plain\f2\fs18\cf0 );
 \par \pard \plain\f2\fs8\cf0 
 \par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  ButtonGroup: TPJMsgDlgButtonGroup;
 \par \pard \plain\f0\fs18\cf0 
@@ -105,11 +105,11 @@ A{\footnote {A}TPJMsgDlgBase_ButtonGroup;ButtonGroup_property;ButtonGroup}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 The buttons which appear in the dialog box depend on the value of this property. The possibilities are:
 \par \plain\f0\fs8\cf0 
-\par \pard \fi-1800 \li1800 \tx1800 \plain\f0\fs18\cf0\b Value\plain\f0\fs18\cf0 \tab \plain\f0\fs18\cf0\b Buttons used\plain\f0\fs18\cf0 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f0\fs18\cf0\b Value\plain\f0\fs18\cf0 \tab \plain\f0\fs18\cf0\b Buttons used\plain\f0\fs18\cf0 
 \par \pard \fi-1800 \li1800 \tx1800 \brdrt \brdrs \plain\f0\fs8\cf0  
-\par \pard \fi-1800 \li1800 \tx1800 \plain\f0\fs18\cf0\i bgAbortRetryIgnore\plain\f0\fs18\cf0 \tab Abort, Retry and Ignore buttons\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
-\par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0\i bgOK\plain\f0\fs18\cf0 \tab A single OK button (default value)\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f0\fs18\cf0\i bgAbortRetryIgnore\plain\f1\fs18\cf0 \tab \plain\f0\fs18\cf0 Abort, Retry and Ignore buttons\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \pard \fi-1800 \li1800 \tx3000 \plain\f0\fs8\cf0 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f0\fs18\cf0\i bgOK\plain\f0\fs18\cf0 \tab A single OK button (default value)\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0\i bgOKCancel\plain\f0\fs18\cf0 \tab An OK and a Cancel button\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -119,7 +119,9 @@ A{\footnote {A}TPJMsgDlgBase_ButtonGroup;ButtonGroup_property;ButtonGroup}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0\i bgYesNoCancel\plain\f0\fs18\cf0 \tab Yes, No and Cancel buttons.
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0\i bg\plain\f1\fs18\cf0\i Unkown\plain\f0\fs18\cf0 \tab An unsupported or unknown group of buttons\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\i bg\plain\f1\fs18\cf0\i Unknown\plain\f0\fs18\cf0 \tab An unsupported or unknown group of buttons\plain\f1\fs18\cf0 .
+\par \plain\f1\fs8\cf0 
+\par \plain\f0\fs18\cf0\i bgCancelTryContinue\plain\f1\fs18\cf0 \tab Cancel, Try Again and Continue buttons if supported, otherwise equivalent to \plain\f0\fs18\cf0\i bgAbortRetryIgnore\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
 \par \pard \fi-1800 \li1800 \tx1800 \brdrb \brdrs \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \page 
 #{\footnote {#}IDH_BASE_HELPCONTEXT}
@@ -498,7 +500,7 @@ A{\footnote {A}TPJWinMsgDlg_ButtonGroup;ButtonGroup_property;ButtonGroup}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Determines which buttons appear in the dialog box.
 \par 
-\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJMsgDlgButtonGroup = (bgAbortRetryIgnore, bgOK, bgOKCancel, bgRetryCancel, bgYesNo, bgYesNoCancel);
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJMsgDlgButtonGroup = (bgAbortRetryIgnore, bgOK, bgOKCancel, bgRetryCancel, bgYesNo, bgYesNoCancel\plain\f3\fs18\cf0 , bgUnknown, bgCancelTryContinue\plain\f2\fs18\cf0 );
 \par \pard \plain\f2\fs8\cf0 
 \par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  ButtonGroup: TPJMsgDlgButtonGroup;
 \par \pard \plain\f0\fs18\cf0 
@@ -506,9 +508,9 @@ A{\footnote {A}TPJWinMsgDlg_ButtonGroup;ButtonGroup_property;ButtonGroup}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 The buttons which appear in the dialog box depend on the value of this property. The possibilities are:
 \par \plain\f0\fs8\cf0 
-\par \pard \fi-1800 \li1800 \tx1800 \plain\f0\fs18\cf0\b Value\plain\f0\fs18\cf0 \tab \plain\f0\fs18\cf0\b Buttons used\plain\f0\fs18\cf0 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f0\fs18\cf0\b Value\plain\f0\fs18\cf0 \tab \plain\f0\fs18\cf0\b Buttons used\plain\f0\fs18\cf0 
 \par \pard \fi-1800 \li1800 \tx1800 \brdrt \brdrs \plain\f0\fs8\cf0  
-\par \pard \fi-1800 \li1800 \tx1800 \plain\f0\fs18\cf0\i bgAbortRetryIgnore\plain\f0\fs18\cf0 \tab Abort, Retry and Ignore buttons\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f0\fs18\cf0\i bgAbortRetryIgnore\plain\f0\fs18\cf0 \tab Abort, Retry and Ignore buttons\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0\i bgOK\plain\f0\fs18\cf0 \tab A single OK button (default value)\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -520,7 +522,9 @@ A{\footnote {A}TPJWinMsgDlg_ButtonGroup;ButtonGroup_property;ButtonGroup}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0\i bgYesNoCancel\plain\f0\fs18\cf0 \tab Yes, No and Cancel buttons.
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0\i bg\plain\f1\fs18\cf0\i Unkown\plain\f0\fs18\cf0 \tab An unsupported or unknown group of buttons\plain\f1\fs18\cf0 . This item is for use in {\strike TPJVCLMsgDlg}{\v IDH_VMD_CLASS} and should not be selected in TPJWinMsgDlg. If it is selected it has the same effect as \plain\f1\fs18\cf0\i bgOK\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\i bg\plain\f1\fs18\cf0\i Unknown\plain\f0\fs18\cf0 \tab An unsupported or unknown group of buttons\plain\f1\fs18\cf0 . This item is for use in {\strike TPJVCLMsgDlg}{\v IDH_VMD_CLASS} and should not be selected in TPJWinMsgDlg. If it is selected it has the same effect as \plain\f1\fs18\cf0\i bgOK\plain\f1\fs18\cf0 .
+\par \plain\f1\fs8\cf0 
+\par \plain\f0\fs18\cf0\i bgCancelTryContinue\plain\f1\fs18\cf0 \tab Cancel, Try Again and Continue buttons. This button group requires the Windows NT platform and Windows 2000 or later. Behaves as \plain\f1\fs18\cf0\i bgAbortRetryIgnore \plain\f1\fs18\cf0 when specified on OSs that do not support this button group. \plain\f0\fs18\cf0 
 \par \pard \fi-1800 \li1800 \tx1800 \brdrb \brdrs \plain\f0\fs8\cf0  
 \par \pard 
 \par \plain\f0\fs18\cf0 To include a help button in the dialog box, set the {\strike HelpContext}{\v IDH_WMD_HELPCONTEXT} property to some non-zero value.
@@ -741,19 +745,23 @@ A{\footnote {A}TPJWinMsgDlg_Execute;Execute_property;Execute}
 \par \plain\f0\fs8\cf0 
 \par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf0\b Button clicked\tab Return value\plain\f0\fs18\cf0 
 \par \pard \fi-1600 \li1600 \tx1600 \brdrt \brdrs \plain\f0\fs8\cf0  
-\par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf0 Abort\tab \plain\f0\fs18\cf0\i IDABORT\plain\f0\fs18\cf0 \tab 
+\par \pard \fi-1600 \li1600 \tx1600 \plain\f0\fs18\cf0 Abort\tab \plain\f0\fs18\cf0\i IDABORT\plain\f1\fs18\cf0\i  (3)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Cancel\tab \plain\f0\fs18\cf0\i IDCANCEL\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0 Cancel\tab \plain\f0\fs18\cf0\i IDCANCEL\plain\f1\fs18\cf0\i  (2)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Ignore\tab \plain\f0\fs18\cf0\i IDIGNORE\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 Continue\plain\f0\fs18\cf0 \tab \plain\f0\fs18\cf0\i ID\plain\f1\fs18\cf0\i CONTINUE (11)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 No\tab \plain\f0\fs18\cf0\i IDNO\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0 Ignore\tab \plain\f0\fs18\cf0\i IDIGNORE\plain\f1\fs18\cf0\i  (5)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 OK\tab \plain\f0\fs18\cf0\i IDOK\plain\f0\fs18\cf0 \tab 
+\par \plain\f0\fs18\cf0 No\tab \plain\f0\fs18\cf0\i IDNO\plain\f1\fs18\cf0\i  (7)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Retry\tab \plain\f0\fs18\cf0\i IDRETRY\plain\f0\fs18\cf0 \tab 
+\par \plain\f0\fs18\cf0 OK\tab \plain\f0\fs18\cf0\i IDO\plain\f1\fs18\cf0\i K (1)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Yes\tab \plain\f0\fs18\cf0\i IDYES\plain\f0\fs18\cf0 \tab 
+\par \plain\f0\fs18\cf0 Retry\tab \plain\f0\fs18\cf0\i IDRETR\plain\f1\fs18\cf0\i Y (4)
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Try Again\plain\f0\fs18\cf0 \tab \plain\f0\fs18\cf0\i ID\plain\f1\fs18\cf0\i TRYAGAIN (10)\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Yes\tab \plain\f0\fs18\cf0\i IDYES\plain\f1\fs18\cf0\i  (6)\plain\f0\fs18\cf0 
 \par \pard \fi-1600 \li1600 \tx1600 \brdrb \brdrs \plain\f0\fs8\cf0  
 \par \pard \fi-1600 \li1600 \tx1600 
 \par \pard \plain\f0\fs18\cf0 Use the {\strike ButtonGroup}{\v IDH_WMD_BUTTONGROUP} property to determine which buttons are displayed in the dialog box. The return values are defined in the Windows unit.
@@ -1070,19 +1078,19 @@ A{\footnote {A}TPJMessageDialog_Execute;Execute_property;Execute}
 \par \plain\f0\fs8\cf0 
 \par \pard \fi-1600 \li1600 \tx1600 \keep \plain\f0\fs18\cf0\b Button clicked\tab Return value\plain\f0\fs18\cf0 
 \par \pard \fi-1600 \li1600 \tx1600 \brdrt \brdrs \plain\f0\fs8\cf0  
-\par \pard \fi-1600 \li1600 \tx1600 \keep \plain\f0\fs18\cf0 Abort\tab \plain\f0\fs18\cf0\i IDABORT\plain\f0\fs18\cf0 \tab 
+\par \pard \fi-1600 \li1600 \tx1600 \keep \plain\f0\fs18\cf0 Abort\tab \plain\f0\fs18\cf0\i IDABORT\plain\f1\fs18\cf0\i  (3)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Cancel\tab \plain\f0\fs18\cf0\i IDCANCEL\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0 Cancel\tab \plain\f0\fs18\cf0\i IDCANCEL\plain\f1\fs18\cf0\i  (2)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Ignore\tab \plain\f0\fs18\cf0\i IDIGNORE\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0 Ignore\tab \plain\f0\fs18\cf0\i IDIGNORE\plain\f1\fs18\cf0\i  (5)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 No\tab \plain\f0\fs18\cf0\i IDNO\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0 No\tab \plain\f0\fs18\cf0\i IDNO\plain\f1\fs18\cf0\i  (7)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 OK\tab \plain\f0\fs18\cf0\i IDOK\plain\f0\fs18\cf0 \tab 
+\par \plain\f0\fs18\cf0 OK\tab \plain\f0\fs18\cf0\i IDOK\plain\f1\fs18\cf0\i  (1)\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Retry\tab \plain\f0\fs18\cf0\i IDRETRY\plain\f0\fs18\cf0 \tab 
+\par \plain\f0\fs18\cf0 Retry\tab \plain\f0\fs18\cf0\i IDRETRY\plain\f1\fs18\cf0\i  (4)\plain\f0\fs18\cf0 \tab 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 Yes\tab \plain\f0\fs18\cf0\i IDYES\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0 Yes\tab \plain\f0\fs18\cf0\i IDYES\plain\f1\fs18\cf0\i  (6)\plain\f0\fs18\cf0 
 \par \pard \fi-1600 \li1600 \tx1600 \brdrb \brdrs \plain\f0\fs8\cf0  
 \par \pard \fi-1600 \li1600 \tx1600 
 \par \pard \plain\f0\fs18\cf0 Use the {\strike ButtonGroup}{\v IDH_MD_BUTTONGROUP} property to determine which buttons are displayed in the dialog box. The return values are defined in the Windows unit.
@@ -1197,7 +1205,7 @@ A{\footnote {A}TPJVCLMsgDlg_ButtonGroup;ButtonGroup_property;ButtonGroup}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Determines which buttons appear in the dialog box.
 \par 
-\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJMsgDlgButtonGroup = (bgAbortRetryIgnore, bgOK, bgOKCancel, bgRetryCancel, bgYesNo, bgYesNoCancel);
+\par \pard \fi-200 \li200 \plain\f2\fs18\cf0\b type\plain\f2\fs18\cf0  TPJMsgDlgButtonGroup = (bgAbortRetryIgnore, bgOK, bgOKCancel, bgRetryCancel, bgYesNo, bgYesNoCancel\plain\f3\fs18\cf0 , bgUnknown, bgCancelTryContinue\plain\f2\fs18\cf0 );
 \par \pard \plain\f2\fs8\cf0 
 \par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  ButtonGroup: TPJMsgDlgButtonGroup;
 \par \pard \plain\f0\fs18\cf0 
@@ -1209,9 +1217,9 @@ A{\footnote {A}TPJVCLMsgDlg_ButtonGroup;ButtonGroup_property;ButtonGroup}
 \par \plain\f1\fs8\cf0 
 \par \plain\f0\fs18\cf0 The \plain\f1\fs18\cf0 possible values of ButtonGroup\plain\f0\fs18\cf0  are\plain\f1\fs18\cf0  as follows:\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \pard \fi-1800 \li1800 \tx1800 \plain\f0\fs18\cf0\b Value\plain\f0\fs18\cf0 \tab \plain\f0\fs18\cf0\b Buttons used\plain\f0\fs18\cf0 
-\par \pard \fi-1800 \li1800 \tx1800 \brdrt \brdrs \plain\f0\fs8\cf0  
-\par \pard \fi-1800 \li1800 \tx1800 \plain\f0\fs18\cf0\i bgAbortRetryIgnore\plain\f0\fs18\cf0 \tab Abort, Retry and Ignore buttons\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f0\fs18\cf0\b Value\plain\f0\fs18\cf0 \tab \plain\f0\fs18\cf0\b Buttons used\plain\f0\fs18\cf0 
+\par \pard \fi-2400 \li2400 \tx2400 \brdrt \brdrs \plain\f0\fs8\cf0  
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f0\fs18\cf0\i bgAbortRetryIgnore\plain\f0\fs18\cf0 \tab Abort, Retry and Ignore buttons\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0\i bgOK\plain\f0\fs18\cf0 \tab A single OK button (default value)\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
@@ -1223,7 +1231,9 @@ A{\footnote {A}TPJVCLMsgDlg_ButtonGroup;ButtonGroup_property;ButtonGroup}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0\i bgYesNoCancel\plain\f0\fs18\cf0 \tab Yes, No and Cancel buttons.
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0\i bg\plain\f1\fs18\cf0\i Unkown\plain\f0\fs18\cf0 \tab An unsupported or unknown group of buttons\plain\f1\fs18\cf0 . This item should not be selected explicitly. If it is selected it has the same effect as \plain\f1\fs18\cf0\i bgOK\plain\f1\fs18\cf0 .\plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\i bg\plain\f1\fs18\cf0\i Unknown\plain\f0\fs18\cf0 \tab An unsupported or unknown group of buttons\plain\f1\fs18\cf0 . This item should not be selected explicitly. If it is selected it has the same effect as \plain\f1\fs18\cf0\i bgOK\plain\f1\fs18\cf0 .
+\par \plain\f1\fs8\cf0 
+\par \plain\f0\fs18\cf0\i bgCancelTryContinue\plain\f1\fs18\cf0 \tab Synonym for \plain\f1\fs18\cf0\i bgAbortRetryIgnore \plain\f1\fs18\cf0 with same effect. (Note that in TPJWinMsgDlg \plain\f1\fs18\cf0\i bgCancelTryContinue \plain\f1\fs18\cf0 behaves differently to bgAbortRetryIgnore.) \plain\f0\fs18\cf0 
 \par \pard \fi-1800 \li1800 \tx1800 \brdrb \brdrs \plain\f0\fs8\cf0  
 \par \pard 
 \par \plain\f0\fs18\cf0 To include a help button in the dialog box\plain\f1\fs18\cf0  do one of two things:
@@ -1659,7 +1669,10 @@ A{\footnote {A}TPJVCLMsgDlg_Execute;Execute_property;Execute}
 \par NoToAll\tab \plain\f1\fs18\cf0\i mrNoToAll\plain\f1\fs18\cf0 \tab N/a
 \par YesToAll\tab \plain\f1\fs18\cf0\i mrYesToAll\plain\f1\fs18\cf0 \tab N/a
 \par Help\tab N/a (doesn't close dialog)
+\par Close *\tab \plain\f1\fs18\cf0\i mrClose\plain\f1\fs18\cf0 \tab N/a
 \par \pard \tx1600 \tx3200 \brdrb \brdrs \plain\f1\fs8\cf0  \plain\f0\fs8\cf0 
+\par \pard \tx1600 \tx3200 
+\par \plain\f1\fs18\cf0 * Supported on later Delphi's only.\plain\f0\fs18\cf0 
 \par \page 
 #{\footnote {#}IDH_VMD_EVENTS}
 ${\footnote {$}TPJVCLMsgDlg events}
