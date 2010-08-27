@@ -59,6 +59,15 @@ const
   {$EXTERNALSYM MB_CANCELTRYCONTINUE}
   MB_CANCELTRYCONTINUE = $00000006;
 
+  // Flags for use with DlgType property to test for features that are not
+  // supported by API constants and cannot be displayed natively by MessageBox
+  // family of functions.
+  UNKNOWN_BUTTONGROUP = $0000000F;
+    // No API const for button group. Test for this using
+    //   if DlgType and MB_TYPEMASK = UNKNOWN_BUTTONGROUP then ...
+  UNKNOWN_ICON = $000000F0;
+    // No API const for dialog kind. Test for this using
+    //   if DlgType and MB_ICONMASK = UNKNOWN_ICON then ...
 
 type
 
@@ -117,10 +126,16 @@ type
     fOnHelp: TNotifyEvent;
   protected // property methods
     procedure SetButtonGroup(const Value: TPJMsgDlgButtonGroup); virtual;
+    function GetDlgType: LongWord; virtual;
+    procedure SetDlgType(const Value: LongWord); virtual;
   protected // properties
     property ButtonGroup: TPJMsgDlgButtonGroup
       read fButtonGroup write SetButtonGroup default bgOK;
       {Determines group of buttons displayed in dialog box}
+    property DlgType: LongWord
+      read GetDlgType write SetDlgType stored False;
+      {Dialog type in terms of a bitmask approximating to the flags passed to
+      the Windows MessageBox API function to create a similar dialog box}
     property HelpContext: THelpContext
       read fHelpContext write fHelpContext default 0;
       {ID of help topic accessed when Help button clicked or F1 pressed}
@@ -194,6 +209,9 @@ type
   }
   TPJWinMsgDlgCustom = class(TPJMsgDlgBase)
   protected
+    function GetDlgType: LongWord; override;
+      {Override of read accessor for DlgType property. Includes MB_HELP in
+      bitmask if help button displayed}
     function Show: Integer; override;
       {Configure and display dialog box and return code representing button
       pressed by user}
@@ -215,6 +233,7 @@ type
   published
     { Publishing inherited protected properties }
     property ButtonGroup;
+    property DlgType;
     property HelpContext;
     property HelpFile;
     property IconResource;
@@ -319,6 +338,9 @@ type
     fOnShow: TPJVCLMsgDlgFormEvent;
     procedure SetButtons(const Value: TMsgDlgButtons);
   protected // properties
+    function GetDlgType: LongWord; override;
+      {Override of read accessor for DlgType property. Includes MB_HELP in
+      bitmask if help button displayed}
     procedure SetButtonGroup(const Value: TPJMsgDlgButtonGroup); override;
   private
     fOldAppHelpHandler: THelpEvent;
@@ -367,6 +389,7 @@ type
   published
     { Publishing inherited protected properties }
     property ButtonGroup; // property interacts with new Buttons property
+    property DlgType;
     property HelpContext;
     property HelpFile;
     property IconResource;
@@ -434,7 +457,6 @@ begin
   );
 end;
 
-
 { TPJMsgDlgBase }
 
 constructor TPJMsgDlgBase.Create(AOwner: TComponent);
@@ -473,6 +495,21 @@ begin
   Result := cDefTitles[Kind];
   if Result = '' then
     Result := Application.Title;    // use application title if no default
+end;
+
+function TPJMsgDlgBase.GetDlgType: LongWord;
+const
+  // Tables mapping TPJMsgDlgButtonGroup and TPJMsgDlgKind to API flags
+  cButtonFlags: array[TPJMsgDlgButtonGroup] of LongWord = (
+    MB_ABORTRETRYIGNORE, MB_OK, MB_OKCANCEL, MB_RETRYCANCEL,
+    MB_YESNO, MB_YESNOCANCEL, UNKNOWN_BUTTONGROUP, MB_CANCELTRYCONTINUE
+  );
+  cKindFlags: array[TPJMsgDlgKind] of LongWord = (
+    MB_ICONWARNING, MB_ICONINFORMATION, MB_ICONQUESTION, MB_ICONERROR,
+    MB_USERICON, UNKNOWN_ICON, UNKNOWN_ICON
+  );
+begin
+  Result := cButtonFlags[ButtonGroup] or cKindFlags[Kind];
 end;
 
 function TPJMsgDlgBase.GetHelpFileName: string;
@@ -563,6 +600,32 @@ begin
   fButtonGroup := Value;
 end;
 
+procedure TPJMsgDlgBase.SetDlgType(const Value: LongWord);
+  {Virtual write accessor for DlgType property. Value is not recorded but sets
+  values of ButtonGroup and Kind properties}
+begin
+  // Set button group
+  case Value and MB_TYPEMASK of
+    MB_OK: ButtonGroup := bgOK;
+    MB_OKCANCEL: ButtonGroup := bgOKCancel;
+    MB_ABORTRETRYIGNORE: ButtonGroup := bgAbortRetryIgnore;
+    MB_YESNOCANCEL: ButtonGroup := bgYesNoCancel;
+    MB_YESNO: ButtonGroup := bgYesNo;
+    MB_RETRYCANCEL: ButtonGroup := bgRetryCancel;
+    MB_CANCELTRYCONTINUE: ButtonGroup := bgCancelTryContinue;
+    else ButtonGroup := bgUnknown;
+  end;
+  // Set dialog kind
+  case Value and MB_ICONMASK of
+    MB_ICONEXCLAMATION {= MB_ICONWARNING}: Kind := mkWarning;
+    MB_ICONINFORMATION {= MB_ICONASTERISK}: Kind := mkInformation;
+    MB_ICONQUESTION: Kind := mkQuery;
+    MB_ICONSTOP {= MB_ICONERROR, MB_ICONHAND}: Kind := mkError;
+    MB_USERICON: Kind := mkUser;
+    else Kind := mkUser;
+  end;
+  // Note: MB_HELP is ignored: help handled specially and differently to API
+end;
 
 { TPJWinMsgDlgCustom }
 
@@ -577,6 +640,15 @@ begin
   Cmp := TPJMsgDlgBase(HelpInfo.dwContextId);
   // call Help method of owner object
   Cmp.Help;
+end;
+
+function TPJWinMsgDlgCustom.GetDlgType: LongWord;
+  {Override of read accessor for DlgType property. Includes MB_HELP in bitmask
+  if help button displayed}
+begin
+  Result := inherited GetDlgType;
+  if HelpContext <> 0 then
+    Result := Result or MB_HELP;
 end;
 
 function TPJWinMsgDlgCustom.GetIconResNameFromStr(const Str: string): PChar;
@@ -629,7 +701,7 @@ begin
     // If user supplied help context record it, set help button and callback
     if HelpContext <> 0 then
     begin
-      dwStyle := dwStyle + MB_HELP;
+      dwStyle := dwStyle or MB_HELP;
       // We *subvert* the dwContextHelpId field to store a reference to this
       // object so we can reference it in help callback. This reference is then
       // used to call the Help method.
@@ -640,7 +712,6 @@ begin
   // Display dlg and return result
   Result := Integer(MessageBoxIndirect(MsgBoxParams));
 end;
-
 
 { TPJMessageDialog }
 
@@ -667,7 +738,6 @@ begin
   // is safe
   Kind := TPJMsgDlgKind(Ord(Value));
 end;
-
 
 { TPJVCLMsgDlg }
 
@@ -984,6 +1054,23 @@ begin
   // Trigger component's OnShow event
   if Assigned(fOnShow) then
     fOnShow(Self, Sender as TForm);
+end;
+
+function TPJVCLMsgDlg.GetDlgType: LongWord;
+  {Override of read accessor for DlgType property. Includes MB_HELP in bitmask
+  if help button displayed}
+begin
+  Result := inherited GetDlgType;
+  if mdoAutoHelpBtn in Options then
+  begin
+    if HelpContext <> 0 then
+      Result := Result or MB_HELP;
+  end
+  else
+  begin
+    if mbHelp in Buttons then
+      Result := Result or MB_HELP;
+  end;
 end;
 
 function TPJVCLMsgDlg.GetIconResNameFromStr(const Str: string): PChar;
