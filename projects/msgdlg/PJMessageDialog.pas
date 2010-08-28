@@ -73,8 +73,8 @@ type
 
   {
   TPJMsgDlgButtonGroup:
-    The various groups of buttons that can be displayed in the various message
-    boxes implemented by each component in this unit.
+    Various groups of buttons that can be displayed in the message boxes
+    implemented by each component in this unit.
   }
   TPJMsgDlgButtonGroup = (
     bgAbortRetryIgnore, // Abort, Retry and Ignore buttons
@@ -91,10 +91,10 @@ type
 
   {
   TPJMsgDlgKind:
-    The kinds of dialog boxes (icons, sounds, titles) that can be displayed by
+    Kinds of dialog boxes (icons, sounds, titles) that can be displayed by
     message dialog components that export the Kind property. Note that the
-    appearance of the icons depends on the underlying OS. On Win XP
-    mkApplication and mkWinLogo are the same.
+    appearance of the icons depends on the underlying OS. For example, on
+    Windows XP mkApplication and mkWinLogo display the same icon.
   }
   TPJMsgDlgKind = (     // Icon         Default Title     Sound
     mkWarning,          // warning      "Warning"         MB_ICONEXCLAMATION
@@ -127,8 +127,15 @@ type
     fOnHelp: TNotifyEvent;
   protected // property methods
     procedure SetButtonGroup(const Value: TPJMsgDlgButtonGroup); virtual;
+      {Virtual write access method for ButtonGroup property. Simply sets field
+      value. May be overridden by descendant classes}
     function GetDlgType: LongWord; virtual;
+      {Virtual read accessor for the DlgType property. Provides functionality
+      common to all message boxes}
     procedure SetDlgType(const Value: LongWord); virtual;
+      {Virtual write accessor for DlgType property. Provides functionality
+      common to all message boxes. Value is not recorded but sets values of
+      ButtonGroup and Kind properties}
   protected // properties
     property ButtonGroup: TPJMsgDlgButtonGroup
       read fButtonGroup write SetButtonGroup default bgOK;
@@ -196,7 +203,7 @@ type
       return code representing button pressed by user}
   public
     constructor Create(AOwner: TComponent); override;
-      {Class constructor: sets default property values}
+      {Constructor. Sets default property values}
     function Execute: Integer;
       {Plays any required sound then displays the message box and returns a
       value relating to the button pressed to close the dialog box}
@@ -204,9 +211,8 @@ type
 
   {
   TPJWinMsgDlgCustom:
-    Base class for the two components that create a message dialog using the
-    Windows MessageBoxIndirect API. This class implements the framework provided
-    by the parent class using the Windows API.
+    Base class for components that create a message dialog using the Windows
+    MessageBoxIndirect API.
   }
   TPJWinMsgDlgCustom = class(TPJMsgDlgBase)
   protected
@@ -214,13 +220,11 @@ type
       {Override of read accessor for DlgType property. Includes MB_HELP in
       bitmask if help button displayed}
     function Show: Integer; override;
-      {Configure and display dialog box and return code representing button
+      {Configures and displays dialog box and returns code representing button
       pressed by user}
     function GetIconResNameFromStr(const Str: string): PChar; override;
       {Returns a pointer to given string resource name in the format expected by
-      the MessageBoxIndirect API call: this is a PChar pointer to a wide char
-      string under Windows NT and a PChar pointer to an ansi char string under
-      Windows 9x}
+      the MessageBoxIndirect API call}
   end;
 
   {
@@ -269,7 +273,11 @@ type
   TPJMessageDialog = class(TPJWinMsgDlgCustom)
   private // properties
     function GetIconKind: TPJMsgDlgIconKind;
+      {Read access method for IconKind: we read the corresponding value from the
+      protected Kind property and convert it into the required type}
     procedure SetIconKind(const Value: TPJMsgDlgIconKind);
+      {Write access method for IconKind property: we write an equivalent value
+      to the protected Kind property after converting to the required type}
   published
     { Publishing required inherited protected properties }
     property ButtonGroup;
@@ -317,7 +325,7 @@ type
   {
   TPJVCLMsgDlgFormEvent:
     Type of event triggered when TPJVCLMsgDlg is shown. Provides access to
-    dialog box TForm.
+    dialog box form object.
   }
   TPJVCLMsgDlgFormEvent = procedure(Sender: TObject; Dlg: TForm) of object;
 
@@ -325,8 +333,7 @@ type
   TPJVCLMsgDlg:
     Implements a customisable dialog that is created using the VCL's
     CreateMessageDialog function. The properties of the component are a superset
-    of those exposed by TPJWinMsgDlg. This class implements the framework
-    provided by the parent class using the underlying VCL code.
+    of those exposed by TPJWinMsgDlg.
   }
   TPJVCLMsgDlg = class(TPJMsgDlgBase)
   private // properties
@@ -382,8 +389,8 @@ type
       event, passing reference to dialog box form}
     procedure FormKeyDownHandler(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-      {OnKeyDown event handler for dialog box form. Triggers help if key is F1 and
-      dialog box contains a help button}
+      {OnKeyDown event handler for dialog box form. Triggers help if key is F1
+      and dialog box contains a help button}
     procedure HelpClickHandler(Sender: TObject); virtual;
       {OnClick handler for Help button. Overrides VCL message box's own help
       handling to enable us to handle display of help}
@@ -391,12 +398,12 @@ type
       {Finds reference to dialog box form's help button}
     function AppHelpHandler(Command: Word; Data: Longint;
       var CallHelp: Boolean): Boolean;
-      {Event handler for Application.OnHint that prevents default help system
-      being used while dialog is displayed, to enable us to handle help
+      {Event handler for Application.OnHelp event that prevents default help
+      system being used while dialog is displayed, to enable us to handle help
       ourselves}
   public
     constructor Create(AOwner: TComponent); override;
-      {Class constructor: sets default property values}
+      {Constructor. Sets default property values}
     function CreateDialog: TForm;
       {Creates instance of dialog and returns it: caller is responsible for
       displaying and freeing dialog instance}
@@ -475,7 +482,7 @@ end;
 { TPJMsgDlgBase }
 
 constructor TPJMsgDlgBase.Create(AOwner: TComponent);
-  {Class constructor: sets default property values}
+  {Class constructor. Sets default property values}
 begin
   inherited;
   ButtonGroup := bgOK;
@@ -513,6 +520,8 @@ begin
 end;
 
 function TPJMsgDlgBase.GetDlgType: LongWord;
+  {Virtual read accessor for the DlgType property. Provides functionality common
+  to all message boxes}
 const
   // Tables mapping TPJMsgDlgButtonGroup and TPJMsgDlgKind to API flags
   cButtonFlags: array[TPJMsgDlgButtonGroup] of LongWord = (
@@ -616,8 +625,9 @@ begin
 end;
 
 procedure TPJMsgDlgBase.SetDlgType(const Value: LongWord);
-  {Virtual write accessor for DlgType property. Value is not recorded but sets
-  values of ButtonGroup and Kind properties}
+  {Virtual write accessor for DlgType property. Provides functionality common to
+  all message boxes. Value is not recorded but sets values of ButtonGroup and
+  Kind properties}
 begin
   // Set button group
   case Value and MB_TYPEMASK of
@@ -668,22 +678,21 @@ end;
 
 function TPJWinMsgDlgCustom.GetIconResNameFromStr(const Str: string): PChar;
   {Returns a pointer to given string resource name in the format expected by the
-  MessageBoxIndirect API call: this is a PChar pointer to a wide char string
-  under Windows NT and a PChar pointer to an ansi char string under Windows 9x}
+  MessageBoxIndirect API call}
 begin
   {$IFDEF UNICODE}
-  Result := PChar(Str);
+  Result := PChar(Str);                      // Pointer to Unicode string
   {$ELSE}
   if SysUtils.Win32Platform = VER_PLATFORM_WIN32_NT then
-    Result := PChar(PWChar(WideString(Str)))
+    Result := PChar(PWChar(WideString(Str))) // PAnsiChar pointer to wide string
   else
-    Result := PChar(Str);
+    Result := PChar(Str);                    // PAnsiChar pointer to ANSI string
   {$ENDIF}
 end;
 
 function TPJWinMsgDlgCustom.Show: Integer;
-  {Configure and display dialog box and return code representing button pressed
-  by user}
+  {Configures and displays dialog box and returns code representing button
+  pressed by user}
 const
   // Table mapping TPJMsgDlgButtonGroup to API flags
   cButtonFlags: array[TPJMsgDlgButtonGroup] of Integer = (
@@ -758,16 +767,15 @@ end;
 
 function TPJVCLMsgDlg.AppHelpHandler(Command: Word; Data: Integer;
   var CallHelp: Boolean): Boolean;
-  {Event handler for Application.OnHint that prevents default help system
-  being used while dialog is displayed, to enable us to handle help
-  ourselves}
+  {Event handler for Application.OnHelp event that prevents default help system
+  being used while dialog is displayed, to enable us to handle help ourselves}
 begin
   CallHelp := False;
   Result := True;
 end;
 
 constructor TPJVCLMsgDlg.Create(AOwner: TComponent);
-  {Class constructor: sets default property values}
+  {Constructor. Sets default property values}
 begin
   inherited;
   fAlign := mdaScreenCentre;
@@ -1075,33 +1083,8 @@ end;
 function TPJVCLMsgDlg.GetDlgType: LongWord;
   {Override of read accessor for DlgType property. Includes MB_HELP in bitmask
   if help button displayed}
-
-{
-  procedure ReplaceBGFlag(const Flag: LongWord);
-  begin
-    Result := (Result and not MB_TYPEMASK) or Flag;
-  end;
-}
-
 begin
   Result := inherited GetDlgType;
-{
-  if Result and MB_TYPEMASK = UNKNOWN_BUTTONGROUP then
-  begin
-    if Buttons = [mbAbort, mbRetry, mbIgnore, mbHelp] then
-      ReplaceBGFlag(MB_ABORTRETRYIGNORE)
-    else if Buttons = [mbOK, mbHelp] then
-      ReplaceBGFlag(MB_OK)
-    else if Buttons = [mbOK, mbCancel, mbHelp] then
-      ReplaceBGFlag(MB_OKCANCEL)
-    else if Buttons = [mbRetry, mbCancel, mbHelp] then
-      ReplaceBGFlag(MB_RETRYCANCEL)
-    else if Buttons = [mbYes, mbNo, mbHelp] then
-      ReplaceBGFlag(MB_YESNO)
-    else if Buttons = [mbYes, mbNo, mbCancel, mbHelp] then
-      ReplaceBGFlag(MB_YESNOCANCEL);
-  end;
-}
   if mdoAutoHelpBtn in Options then
   begin
     if HelpContext <> 0 then
@@ -1174,13 +1157,18 @@ procedure TPJVCLMsgDlg.SetButtons(const Value: TMsgDlgButtons);
   ButtonGroup property to appropriate matching group (if any) or bgUnknown if
   Buttons set does not correspond to any predefined group}
 
+  // ---------------------------------------------------------------------------
   function CheckValidButtonGroup(const Btns: TMsgDlgButtons): Boolean;
+    {Checks buttons specified by Value form a recognised button group}
   begin
     if mdoGroupIgnoresHelp in Options then
+      // group can optionally include help button
       Result := (Value = Btns) or (Value = Btns + [mbHelp])
     else
+      // must be an exact match to group
       Result := Value = Btns;
   end;
+  // ---------------------------------------------------------------------------
 
 begin
   fButtons := Value;
@@ -1200,24 +1188,6 @@ begin
     fButtonGroup := bgYesNoCancel
   else
     fButtonGroup := bgUnknown;
-{
-  if Value = [mbAbort, mbRetry, mbIgnore] then
-    fButtonGroup := bgAbortRetryIgnore
-  else if Value = [mbOK] then
-    fButtonGroup := bgOK
-  else if Value = [mbOK, mbCancel] then
-    fButtonGroup := bgOKCancel
-  else if Value = [mbRetry, mbCancel] then
-    fButtonGroup := bgRetryCancel
-  else if Value = [mbYes, mbNo] then
-    fButtonGroup := bgYesNo
-  else if Value = [mbYes, mbNo, mbCancel] then
-    fButtonGroup := bgYesNoCancel
-  else if Value = [mbYes, mbNo, mbCancel] then
-    fButtonGroup := bgYesNoCancel
-  else
-    fButtonGroup := bgUnknown;
-}
 end;
 
 procedure TPJVCLMsgDlg.SetDlgType(const Value: LongWord);
