@@ -302,9 +302,10 @@ type
     Permitted values for inclusion in TPJMsgDlgOptions set.
   }
   TPJMsgDlgOption = (
-    mdoInhibitCancel, // dialog can't cancel: no close & cancel btn or ESC key
-    mdoAutoHelpBtn,   // help button displayed if HelpContext is non zero
-    mdoShowCustomIcon // program icon is displayed when Kind=mtCustom
+    mdoInhibitCancel,   // dialog can't cancel: no close & cancel btn or ESC key
+    mdoAutoHelpBtn,     // help button displayed if HelpContext is non zero
+    mdoShowCustomIcon,  // program icon is displayed when Kind=mtCustom
+    mdoGroupIgnoresHelp // help btn in Buttons has no effect on ButtonGroup
   );
 
   {
@@ -338,11 +339,23 @@ type
     fOnHide: TPJVCLMsgDlgFormEvent;
     fOnShow: TPJVCLMsgDlgFormEvent;
     procedure SetButtons(const Value: TMsgDlgButtons);
+      {Write access method for Buttons property. Records value and updates
+      ButtonGroup property to appropriate matching group (if any) or bgUnknown
+      if Buttons set does not correspond to any predefined group}
+    procedure SetOptions(const Value: TPJMsgDlgOptions);
+      {Write accessor for Options property. Updates other properties when side
+      effects occur}
   protected // properties
     function GetDlgType: LongWord; override;
       {Override of read accessor for DlgType property. Includes MB_HELP in
       bitmask if help button displayed}
+    procedure SetDlgType(const Value: LongWord); override;
+      {Write accessor for DlgType property. Adds support for MB_HELP which
+      includes help button in Buttons property}
     procedure SetButtonGroup(const Value: TPJMsgDlgButtonGroup); override;
+      {Write access method override for inherited ButtonGroup property. Records
+      value (in inherited method) and updates Buttons property to store set of
+      buttons in group}
   private
     fOldAppHelpHandler: THelpEvent;
       {Records reference to any existing Application.OnHelp event handler to
@@ -421,7 +434,8 @@ type
       {Vertical offset of dialog box relative to screen or owner form, depending
       on Align property. Ignored if Align is mdaFormCentre or mdaScreenCentre}
     property Options: TPJMsgDlgOptions
-      read fOptions write fOptions default [mdoAutoHelpBtn, mdoShowCustomIcon];
+      read fOptions write SetOptions
+      default [mdoAutoHelpBtn, mdoShowCustomIcon];
       {Component options: for explanation see TPJMsgDlgOptions type definition
       above}
     property OnShow: TPJVCLMsgDlgFormEvent
@@ -1061,17 +1075,46 @@ end;
 function TPJVCLMsgDlg.GetDlgType: LongWord;
   {Override of read accessor for DlgType property. Includes MB_HELP in bitmask
   if help button displayed}
+
+{
+  procedure ReplaceBGFlag(const Flag: LongWord);
+  begin
+    Result := (Result and not MB_TYPEMASK) or Flag;
+  end;
+}
+
 begin
   Result := inherited GetDlgType;
+{
+  if Result and MB_TYPEMASK = UNKNOWN_BUTTONGROUP then
+  begin
+    if Buttons = [mbAbort, mbRetry, mbIgnore, mbHelp] then
+      ReplaceBGFlag(MB_ABORTRETRYIGNORE)
+    else if Buttons = [mbOK, mbHelp] then
+      ReplaceBGFlag(MB_OK)
+    else if Buttons = [mbOK, mbCancel, mbHelp] then
+      ReplaceBGFlag(MB_OKCANCEL)
+    else if Buttons = [mbRetry, mbCancel, mbHelp] then
+      ReplaceBGFlag(MB_RETRYCANCEL)
+    else if Buttons = [mbYes, mbNo, mbHelp] then
+      ReplaceBGFlag(MB_YESNO)
+    else if Buttons = [mbYes, mbNo, mbCancel, mbHelp] then
+      ReplaceBGFlag(MB_YESNOCANCEL);
+  end;
+}
   if mdoAutoHelpBtn in Options then
   begin
     if HelpContext <> 0 then
-      Result := Result or MB_HELP;
+      Result := Result or MB_HELP
+    else
+      Result := Result and not MB_HELP;
   end
   else
   begin
     if mbHelp in Buttons then
-      Result := Result or MB_HELP;
+      Result := Result or MB_HELP
+    else
+      Result := Result and not MB_HELP;
   end;
 end;
 
@@ -1130,8 +1173,34 @@ procedure TPJVCLMsgDlg.SetButtons(const Value: TMsgDlgButtons);
   {Write access method for Buttons property. Records value and updates
   ButtonGroup property to appropriate matching group (if any) or bgUnknown if
   Buttons set does not correspond to any predefined group}
+
+  function CheckValidButtonGroup(const Btns: TMsgDlgButtons): Boolean;
+  begin
+    if mdoGroupIgnoresHelp in Options then
+      Result := (Value = Btns) or (Value = Btns + [mbHelp])
+    else
+      Result := Value = Btns;
+  end;
+
 begin
   fButtons := Value;
+  if CheckValidButtonGroup([mbAbort, mbRetry, mbIgnore]) then
+    fButtonGroup := bgAbortRetryIgnore
+  else if CheckValidButtonGroup([mbOK]) then
+    fButtonGroup := bgOK
+  else if CheckValidButtonGroup([mbOK, mbCancel]) then
+    fButtonGroup := bgOKCancel
+  else if CheckValidButtonGroup([mbRetry, mbCancel]) then
+    fButtonGroup := bgRetryCancel
+  else if CheckValidButtonGroup([mbYes, mbNo]) then
+    fButtonGroup := bgYesNo
+  else if CheckValidButtonGroup([mbYes, mbNo, mbCancel]) then
+    fButtonGroup := bgYesNoCancel
+  else if CheckValidButtonGroup([mbYes, mbNo, mbCancel]) then
+    fButtonGroup := bgYesNoCancel
+  else
+    fButtonGroup := bgUnknown;
+{
   if Value = [mbAbort, mbRetry, mbIgnore] then
     fButtonGroup := bgAbortRetryIgnore
   else if Value = [mbOK] then
@@ -1148,6 +1217,29 @@ begin
     fButtonGroup := bgYesNoCancel
   else
     fButtonGroup := bgUnknown;
+}
+end;
+
+procedure TPJVCLMsgDlg.SetDlgType(const Value: LongWord);
+  {Write accessor for DlgType property. Adds support for MB_HELP which includes
+  help button in Buttons property}
+begin
+  inherited;
+  if Value and MB_HELP = MB_HELP then
+    Buttons := Buttons + [mbHelp];
+end;
+
+procedure TPJVCLMsgDlg.SetOptions(const Value: TPJMsgDlgOptions);
+  {Write accessor for Options property. Updates other properties when side
+  effects occur}
+var
+  GroupIgnoresHelpChanged: Boolean; // whether named flag changes in Options
+begin
+  GroupIgnoresHelpChanged := (mdoGroupIgnoresHelp in (fOptions - Value))
+    or (mdoGroupIgnoresHelp in (Value - fOptions));
+  fOptions := Value;
+  if GroupIgnoresHelpChanged then
+    SetButtons(Buttons);  // causes ButtonGroup to update
 end;
 
 function TPJVCLMsgDlg.Show: Integer;
