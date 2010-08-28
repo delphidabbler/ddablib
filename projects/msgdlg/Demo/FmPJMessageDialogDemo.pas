@@ -77,6 +77,7 @@ type
       Shift: TShiftState);
     procedure btnHelpClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure lbOptionsClickCheck(Sender: TObject);
   private
     fLastHelpKW: string;
     fOldKeyDownEvent: TMethod;
@@ -86,6 +87,7 @@ type
     procedure HideEventHandler(Sender: TObject; Dlg: TForm);
     procedure CustomKeyDownHandler(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure UpdateOptions;
   end;
 
 var
@@ -445,6 +447,17 @@ begin
 
 end;
 
+procedure TDemoForm.UpdateOptions;
+var
+  Idx: Integer;
+begin
+  for Idx := 0 to Pred(lbOptions.Items.Count) do
+    if lbOptions.Checked[Idx] then
+      dlgVCLDummy.Options := dlgVCLDummy.Options + [TPJMsgDlgOption(Idx)]
+    else
+      dlgVCLDummy.Options := dlgVCLDummy.Options - [TPJMsgDlgOption(Idx)];
+end;
+
 procedure TDemoForm.FormCreate(Sender: TObject);
 begin
   Self.HelpFile := ExtractFilePath(ParamStr(0)) + 'MainForm.hlp';
@@ -457,6 +470,7 @@ var
   TD: PTypeData;
   Idx: Integer;
 begin
+  UpdateOptions;
   if tabCtrl.TabIndex = cPJVCLMsgDlgId then
   begin
     dlgVCLDummy.ButtonGroup :=
@@ -479,6 +493,7 @@ procedure TDemoForm.lbButtonsClickCheck(Sender: TObject);
 var
   Idx: Integer;
 begin
+  UpdateOptions;
   if tabCtrl.TabIndex = cPJVCLMsgDlgId then
   begin
     dlgVCLDummy.Buttons := [];
@@ -489,6 +504,11 @@ begin
       cbButtonGroup.Items, Pointer(dlgVCLDummy.ButtonGroup)
     );
   end;
+end;
+
+procedure TDemoForm.lbOptionsClickCheck(Sender: TObject);
+begin
+  lbButtonsClickCheck(lbButtons);      
 end;
 
 procedure TDemoForm.btnHelpFileClick(Sender: TObject);
