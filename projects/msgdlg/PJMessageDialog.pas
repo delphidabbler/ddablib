@@ -103,7 +103,8 @@ type
     mkError,            // error        "Error"           MB_ICONHAND
     mkUser,             // user-defined Application.Title MB_OK
     mkApplication,      // application  Application.Title MB_OK
-    mkWinLogo           // Windows logo Application.Title MB_OK
+    mkWinLogo,          // Windows logo Application.Title MB_OK
+    mkUnknown           // An unknown or unsupported dialog type
   );
 
   {
@@ -477,7 +478,7 @@ const
   // Table mapping dialog box kinds to API flags for sound to be played
   cSounds: array[TPJMsgDlgKind] of Integer = (
     MB_ICONEXCLAMATION, MB_ICONASTERISK, MB_ICONQUESTION, MB_ICONHAND,
-    MB_OK, MB_OK, MB_OK);
+    MB_OK, MB_OK, MB_OK, MB_OK);
 begin
   if MakeSound then
     MessageBeep(cSounds[Kind]);
@@ -490,7 +491,7 @@ const
   // Table mapping dialog box kinds to default window titles
   cDefTitles: array[TPJMsgDlgKind] of string = (
     sMsgDlgWarning, sMsgDlgInformation, sMsgDlgConfirm, sMsgDlgError,
-    '', '', '');
+    '', '', '', '');
 begin
   Result := cDefTitles[Kind];
   if Result = '' then
@@ -506,7 +507,7 @@ const
   );
   cKindFlags: array[TPJMsgDlgKind] of LongWord = (
     MB_ICONWARNING, MB_ICONINFORMATION, MB_ICONQUESTION, MB_ICONERROR,
-    MB_USERICON, UNKNOWN_ICON, UNKNOWN_ICON
+    MB_USERICON, UNKNOWN_ICON, UNKNOWN_ICON, UNKNOWN_ICON
   );
 begin
   Result := cButtonFlags[ButtonGroup] or cKindFlags[Kind];
@@ -556,7 +557,7 @@ const
   // Table mapping IconKind to icon API flags
   cIcons: array[TPJMsgDlgKind] of PChar = (
     IDI_EXCLAMATION, IDI_ASTERISK, IDI_QUESTION, IDI_HAND,
-    nil, IDI_APPLICATION, IDI_WINLOGO
+    nil, IDI_APPLICATION, IDI_WINLOGO, nil
   );
 begin
   // Check to see if icon resource is predefined
@@ -622,7 +623,7 @@ begin
     MB_ICONQUESTION: Kind := mkQuery;
     MB_ICONSTOP {= MB_ICONERROR, MB_ICONHAND}: Kind := mkError;
     MB_USERICON: Kind := mkUser;
-    else Kind := mkUser;
+    else Kind := mkUnknown;
   end;
   // Note: MB_HELP is ignored: help handled specially and differently to API
 end;
@@ -853,7 +854,8 @@ const
     mtError,          // dialog has error icon
     mtCustom,         // dialog has user defined icon
     mtCustom,         // dialog has Windows application icon
-    mtCustom          // dialog has Windows logo
+    mtCustom,         // dialog has Windows logo
+    mtCustom          // dialog has user defined icon
   );
 
 var
