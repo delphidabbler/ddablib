@@ -4,6 +4,14 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v2.3 of 28 August 2010
++ Added new DlgType property to TPJVCLMsgDlg and TPJWinMsgDlg that allows button group and dialog box type to be specified using same flags that are passed to Windows MessageBox API function. (Issue #9).
++ Added new mkUnknown value to TPJMsgDlgKind to handle dialog type error conditions in DlgType property.
++ Added new ButtonGroup value that displays "Cancel", "Try Again" and "Continue" buttons when using TPJWinMsgDlg and Windows 2000 or later.
++ Added new option to TPJVCLMsgDlg that ignores help buttons when matching Buttons property to ButtonGroup property.
++ Modified demo program to work correctly with new mdoGroupIgnoresHelp Options value in TPJVCLMsgDlg.
++ Updated help file re changes and regenerated a-link keywords file.
+
 Release v2.2.1 of 17 August 2010
 + Fixed problems that were preventing compilation with Delphi 2010.
 + Ensured Unicode supported.
