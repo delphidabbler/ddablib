@@ -36,7 +36,7 @@ HCW=0
 LCID=0x809 0x0 0x0 ;English (United Kingdom)
 REPORT=Yes
 TITLE=DelphiDabbler Message Dialog Components Help
-COPYRIGHT=DelphiDabbler Message Dialogs Copyright © P D Johnson, 2001-2006
+COPYRIGHT=DelphiDabbler Message Dialogs Copyright © P D Johnson, 2001-2010
 HLP=.\PJMessageDialog.hlp
 
 [FILES]
