@@ -8,6 +8,8 @@ createdialog
 createdialog_property
 defbutton
 defbutton_property
+dlgtype
+dlgtype_property
 execute
 execute_property
 helpcontext
@@ -51,6 +53,7 @@ tpjmessagedialog_text
 tpjmessagedialog_title
 tpjmsgdlgbase
 tpjmsgdlgbase_buttongroup
+tpjmsgdlgbase_dlgtype
 tpjmsgdlgbase_execute
 tpjmsgdlgbase_helpcontext
 tpjmsgdlgbase_helpfile
@@ -67,6 +70,7 @@ tpjvclmsgdlg_buttongroup
 tpjvclmsgdlg_buttons
 tpjvclmsgdlg_createdialog
 tpjvclmsgdlg_defbutton
+tpjvclmsgdlg_dlgtype
 tpjvclmsgdlg_execute
 tpjvclmsgdlg_helpcontext
 tpjvclmsgdlg_helpfile
@@ -84,6 +88,7 @@ tpjvclmsgdlg_text
 tpjvclmsgdlg_title
 tpjwinmsgdlg
 tpjwinmsgdlg_buttongroup
+tpjwinmsgdlg_dlgtype
 tpjwinmsgdlg_execute
 tpjwinmsgdlg_helpcontext
 tpjwinmsgdlg_helpfile

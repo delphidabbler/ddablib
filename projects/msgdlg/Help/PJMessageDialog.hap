@@ -1,6 +1,6 @@
 <*HelpAuthor HTA1.9*>
 AK
-73
+76
 [Footnotes]
 #=IDH_UNIT
 $=PJMessageDialog unit
@@ -191,7 +191,7 @@ AL(TObject_object,1)
 $=TPJMsgDlgBase properties
 @=List of properties of message box base class
 [End]
-10
+11
 HS
 1
 0
@@ -262,10 +262,18 @@ HS
 0
 IDH_BASE_TITLE
 
-1872
+HS
+11
+0
+
+0
+IDH_BASE_DLGTYPE
+
+2002
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties\plain\f0\fs18\cf1 
 \par 
-\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 ButtonGroup\plain\f0\fs18\cf2 \protect </HS 2>\plain\f1\fs18\cf1  *\plain\f0\fs18\cf1 
+\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 ButtonGroup\plain\f0\fs18\cf2 \protect </HS 2>\plain\f1\fs18\cf1  *
+\par \tab \plain\f1\fs18\cf2 \protect <HS 11>\plain\f1\fs18\cf1 DlgType\plain\f1\fs18\cf2 \protect </HS 11>\plain\f1\fs18\cf1  *\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 4>\plain\f0\fs18\cf1 HelpContext\plain\f0\fs18\cf2 \protect </HS 4>\plain\f1\fs18\cf1  *\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 5>\plain\f1\fs18\cf1 HelpFile\plain\f1\fs18\cf2 \protect </HS 5>\plain\f1\fs18\cf1  *\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 6>\plain\f0\fs18\cf1 IconResource\plain\f0\fs18\cf2 \protect </HS 6>\plain\f1\fs18\cf1  *\plain\f0\fs18\cf1 
@@ -286,7 +294,14 @@ K=TPJMsgDlgBase,ButtonGroup;ButtonGroup,TPJMsgDlgBase;ButtonGroup
 A=TPJMsgDlgBase_ButtonGroup;ButtonGroup_property;ButtonGroup
 @=Description of base class's ButtonGroup property
 [End]
-6
+7
+HS
+1
+0
+
+0
+IDH_BASE_DLGTYPE
+
 NS
 9
 HS
@@ -313,7 +328,7 @@ HS
 0
 
 AL(TPJMsgDlgBase_HelpContext;TPJMsgDlgBase_Execute)
-3403
+3630
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fmodern \fcharset0 Courier New;}{\f3\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 9>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJMsgDlgBase.ButtonGroup
 \par \plain\f0\fs12\cf2 
@@ -347,6 +362,290 @@ AL(TPJMsgDlgBase_HelpContext;TPJMsgDlgBase_Execute)
 \par \plain\f3\fs8\cf2 
 \par \plain\f0\fs18\cf2\i bgCancelTryContinue\plain\f3\fs18\cf2 \tab Cancel, Try Again and Continue buttons if supported, otherwise equivalent to \plain\f0\fs18\cf2\i bgAbortRetryIgnore\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
 \par \pard \fi-1800 \li1800 \tx1800 \plain\f0\fs18\cf1 \protect <BD 47>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 47>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Setting ButtonGroup also updates the \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf2 DlgType\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf2  property and vice versa.
+\par }
+
+[Footnotes]
+#=IDH_BASE_DLGTYPE
+$=TPJMsgDlgBase.DlgType
+K=TPJMsgDlgBase,DlgType;DlgType,TPJMsgDlgBase;DlgType
+A=TPJMsgDlgBase_DlgType;DlgType_property;DlgType
+@=Description of base class's DlgType property
+[End]
+30
+HS
+1
+0
+
+0
+IDH_BASE_BUTTONGROUP
+
+HS
+2
+0
+
+0
+IDH_BASE_KIND
+
+KP
+3
+HS
+4
+0
+
+0
+IDH_BASE_BUTTONGROUP
+
+BM
+5
+IDIExclamation.bmp
+1
+1
+BM
+6
+IDIExclamation.bmp
+1
+1
+BM
+7
+IDIAsterisk.bmp
+1
+1
+BM
+8
+IDIAsterisk.bmp
+1
+1
+NS
+9
+HS
+10
+0
+
+0
+IDH_BASE_CLASS
+
+BM
+11
+IDIQuestion.bmp
+1
+1
+BM
+12
+IDIHand.bmp
+1
+1
+BM
+13
+IDIHand.bmp
+1
+1
+BM
+14
+IDIHand.bmp
+1
+1
+HS
+15
+0
+
+0
+IDH_BASE_ICONRESOURCE
+
+KP
+16
+BD
+17
+2
+0
+BD
+18
+2
+0
+HS
+20
+0
+
+0
+IDH_BASE_BUTTONGROUP
+
+HS
+21
+0
+
+0
+IDH_BASE_KIND
+
+BD
+22
+2
+0
+HS
+24
+0
+
+0
+IDH_BASE_KIND
+
+BD
+25
+2
+0
+BD
+26
+2
+0
+KP
+27
+BD
+29
+2
+0
+KP
+44
+BD
+46
+2
+0
+BD
+47
+3
+0
+HS
+48
+0
+
+0
+
+AL(TPJMsgDlgBase_ButtonGroup;TPJMsgDlgBase_Kind)
+12174
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 9>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJMsgDlgBase.\plain\f1\fs22\cf3\b DlgType\plain\f0\fs22\cf3\b 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 10>\plain\f0\fs18\cf2 TPJMsgDlgBase\plain\f0\fs18\cf1 \protect </HS 10>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 48>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 48>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 9>\plain\f0\fs18\cf2 
+\par Determines\plain\f1\fs18\cf2  the appearance and use of the dialog box\plain\f0\fs18\cf2 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 44>\plain\f2\fs18\cf2\b property\plain\f2\fs18\cf2  DlgType: LongWord;\plain\f2\fs18\cf1 \protect </KP 44>\plain\f2\fs18\cf2 
+\par \plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This property provides an alternative method to setting the \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf2 ButtonGroup\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf2  and \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 Kind\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2  properties using a subset of the constants used to customise the MessageBox Windows API function via its uType parameter. However, not all the API flags are supported.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 DlgType is never stored in a form file - its value is determined by the ButtonGroup and Kind property values and whether a help button is displayed. Changing any of these values modifies the value of DlgType. Conversely, setting DlgType can update one or more of the ButtonGroup\plain\f1\fs18\cf2  \plain\f0\fs18\cf2 and Kind properties.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Often the value of DlgType will change as soon as it is set because of the presence of any unsupported values, whether a help button is displayed or if a required value has not been provided.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Reading and writing the property are dealt with separately below. 
+\par 
+\par \plain\f1\fs18\cf2\i\b Setting DlgType\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f0\fs18\cf2 DlgType supports a combination of various categories of constants that are ORd together. 
+\par 
+\par \plain\f1\fs18\cf2\i\ul Button Group\plain\f1\fs18\cf2\i 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf2 The buttons displayed in the dialog box can be determined by specifying one, and only one, of the following constants. Setting one of these values also updates the ButtonGroup property\plain\f1\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \pard \fi-2800 \li2800 \tx2800 \tx5600 \plain\f1\fs18\cf1\b \protect <KP 3>\plain\f1\fs18\cf2\b Constant\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf2\b Buttons \plain\f1\fs18\cf2\b Displayed\tab New ButtonGroup Value\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf1 \protect <BD 46>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 46>\plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_OK \tab \plain\f1\fs18\cf2 A single OK button\plain\f1\fs18\cf2\i \tab bgOK
+\par MB_OKCANCEL\tab \plain\f1\fs18\cf2 OK and Cancel\plain\f1\fs18\cf2\i \tab bgOKCancel
+\par MB_ABORTRETRYIGNORE\tab \plain\f1\fs18\cf2 Abort, Retry and Cancel\tab \plain\f1\fs18\cf2\i bgAbortRetryIgnore
+\par MB_YESNOCANCEL\tab \plain\f1\fs18\cf2 Yes, No and Cancel\tab \plain\f1\fs18\cf2\i bgYesNoCancel
+\par MB_YESNO\tab \plain\f1\fs18\cf2 Yes and No\plain\f1\fs18\cf2\i \tab bgYesNo
+\par MB_RETRYCANCEL\tab \plain\f1\fs18\cf2 Retry and Cancel\tab \plain\f1\fs18\cf2\i bgRetryCancel
+\par MB_CANCELTRYCONTINUE \tab \plain\f1\fs18\cf2 Cancel, Try Again and Continue\plain\f1\fs18\cf2\i \tab bgCancelTryContinue
+\par \pard \fi-2400 \li2400 \tx2400 \tx5200 \plain\f0\fs18\cf1 \protect <BD 47>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 47></KP 3>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \pard \plain\f0\fs18\cf2 If any other value in the range $00000000 to $0000000F is specified then ButtonGroup is set to bgUnknown and the value in DlgType is replaced by \plain\f0\fs18\cf2\i UNKNOWN_BUTTONGROUP\plain\f0\fs18\cf2  (defined in \plain\f0\fs18\cf2\i PJMessageDialog.pas\plain\f0\fs18\cf2 ).
+\par 
+\par \plain\f0\fs18\cf2\i\ul Dialog Kind\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The kind of dialog box (its icon, default title, etc.) is specified by ORing one of the following constants with one of those used to determine the button group. Setting one of these values updates the Kind property.
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-2800 \li2800 \tx2800 \tx4400 \tx6400 \plain\f1\fs18\cf1\b \protect <KP 16>\plain\f1\fs18\cf2\b Constant\tab Icon used\tab Default Title\tab New Kind Value
+\par \plain\f1\fs18\cf1 \protect <BD 17>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 17>\plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONEXCLAMATION\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 5>\plain\f1\fs18\cf2 \tab "Warning"\tab \plain\f1\fs18\cf2\i mkWarning
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONWARNING\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 6>\plain\f1\fs18\cf2 \tab "Warning"\tab \plain\f1\fs18\cf2\i mkWarning
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONINFORMATION\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 7>\plain\f1\fs18\cf2 \tab "Information"\tab \plain\f1\fs18\cf2\i mkInformation
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONASTERISK\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 8>\plain\f1\fs18\cf2 \tab "Information"\tab \plain\f1\fs18\cf2\i mkInformation
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONQUESTION\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 11>\plain\f1\fs18\cf2 \tab "Confirm"\tab \plain\f1\fs18\cf2\i mkQuery
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONSTOP\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 12>\plain\f1\fs18\cf2 \tab "Error"\tab \plain\f1\fs18\cf2\i mkError\plain\f1\fs18\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONERROR\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 13>\plain\f1\fs18\cf2 \tab "Error"\tab \plain\f1\fs18\cf2\i mkError\plain\f1\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2\i MB_ICONHAND\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 14>\plain\f1\fs18\cf2 \tab "Error"\tab \plain\f1\fs18\cf2\i mkError
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_USERICON\plain\f1\fs18\cf2  \tab \plain\f1\fs18\cf1 \protect <HS 15>\plain\f1\fs18\cf2 IconResource\plain\f1\fs18\cf1 \protect </HS 15>\plain\f1\fs18\cf2 \tab Application.Title\tab \plain\f1\fs18\cf2\i mkUser\plain\f1\fs18\cf1\i \protect </KP 16>\plain\f1\fs18\cf2 
+\par \plain\f1\fs8\cf2 
+\par \pard \plain\f1\fs18\cf1 \protect <BD 18>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 18>\plain\f1\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2 If any other value in the range $00000010 to $000000F0 is specified then Kind is set to \plain\f1\fs18\cf2\i mkUnknown\plain\f1\fs18\cf2  and the value in DlgType is replaced by \plain\f1\fs18\cf2\i UNKNOWN_ICON\plain\f1\fs18\cf2  (defined in \plain\f1\fs18\cf2\i PJMessageDialog.pas\plain\f1\fs18\cf2 ).
+\par 
+\par \plain\f1\fs18\cf2\i\ul Help Button\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 If \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  is included in DlgType it is ignored by this base class. Descendant classes override this behaviour.
+\par 
+\par \plain\f1\fs18\cf2\i\b Reading DlgType\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The value returned when DlgType is read does not directly relate to the value set. This is because the value of DlgType is not stored and its value when read is calculated from the values of various other properties. Consequently any unsupported flags are stripped away. Furthermore DlgType introduces some new flags to indicate errors.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Factors that determine the value of DlgType are:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-400 \li800 \tx800 \plain\f1\fs18\cf2 1.\tab The \plain\f1\fs18\cf1 \protect <HS 20>\plain\f1\fs18\cf2 ButtonGroup\plain\f1\fs18\cf1 \protect </HS 20>\plain\f1\fs18\cf2  property.
+\par 2.\tab The \plain\f1\fs18\cf1 \protect <HS 21>\plain\f1\fs18\cf2 Kind\plain\f1\fs18\cf1 \protect </HS 21>\plain\f1\fs18\cf2  property.
+\par 3.\tab Whether a help button will be displayed by the dialog. 
+\par \pard \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Each of these factors is discussed separately below.
+\par 
+\par \plain\f1\fs18\cf2\i\ul Button Group\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The button group component of DlgType is set according to the value of the \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf2 ButtonGroup\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf2  property as per the following table:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f1\fs18\cf2\b ButtonGroup Value \tab Flag included in DlgType
+\par \plain\f1\fs18\cf1 \protect <BD 29>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 29>\plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i bgAbortRetryIgnore \tab MB_ABORTRETRYIGNORE
+\par bgOK \tab MB_OK
+\par bgOKCancel \tab MB_OKCANCEL
+\par bgRetryCancel \tab MB_RETRYCANCEL
+\par bgYesNo \tab MB_YESNO
+\par bgYesNoCancel \tab MB_YESNOCANCEL
+\par bgUnknown \tab UNKNOWN_BUTTONGROUP
+\par bgCancelTryContinue \tab MB_CANCELTRYCONTINUE
+\par \plain\f1\fs18\cf1\i \protect <BD 22>\plain\f1\fs8\cf2\i  \plain\f1\fs18\cf1\i \protect </BD 22>\plain\f1\fs8\cf2\i 
+\par \pard 
+\par  \plain\f1\fs18\cf2\i UNKNOWN_BUTTONGROUP\plain\f1\fs18\cf2  and \plain\f1\fs18\cf2\i MB_CANCELTRYCONTINUE\plain\f1\fs18\cf2  are both defined in the \plain\f1\fs18\cf2\i PJMessageDialog\plain\f1\fs18\cf2  unit and the remaining values are defined in the Windows unit.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 The button group values are ORd with other values stored in DlgType.
+\par 
+\par \plain\f1\fs18\cf2\i\ul Dialog Kind\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The component of DlgType that identifies the kind of dialog box displayed is set according to the value of the \plain\f1\fs18\cf1 \protect <HS 24>\plain\f1\fs18\cf2 Kind\plain\f1\fs18\cf1 \protect </HS 24>\plain\f1\fs18\cf2  property as per the following table:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f1\fs18\cf1\b \protect <KP 27>\plain\f1\fs18\cf2\b Kind Value \tab Flag included in DlgType\plain\f1\fs18\cf2 
+\par \plain\f1\fs18\cf1 \protect <BD 25>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 25>\plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i mkWarning \tab MB_ICONWARNING
+\par mkInformation \tab MB_ICONINFORMATION
+\par mkQuery \tab MB_ICONQUESTION
+\par mkError \tab MB_ICONERROR
+\par mkUser \tab MB_USERICON
+\par mkApplication \tab UNKNOWN_ICON
+\par mkWinLogo \tab UNKNOWN_ICON
+\par mkUnknown \tab UNKNOWN_ICON\plain\f1\fs18\cf2 
+\par \pard \plain\f1\fs18\cf1 \protect <BD 26>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 26></KP 27>\plain\f1\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2\i UNKNOWN_ICON\plain\f1\fs18\cf2  is defined in the \plain\f1\fs18\cf2\i PJMessageDialog \plain\f1\fs18\cf2 unit. Note that \plain\f1\fs18\cf2\i mkWinLogo \plain\f1\fs18\cf2 and \plain\f1\fs18\cf2\i mkApplication \plain\f1\fs18\cf2 have no equivalent in the MessageBox API function and are therefore flagged as unknown.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 The dialog kind values are ORd with other values stored in DlgType.
+\par 
+\par \plain\f1\fs18\cf2\i\ul Help Button\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 If the dialog box will show a help button when displayed then \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  is included in DlgType.
 \par }
 
 [Footnotes]
@@ -382,7 +681,7 @@ IDH_BASE_CLASS
 
 KP
 37
-1649
+1623
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 11>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJMsgDlgBase\plain\f1\fs22\cf3\b .\plain\f0\fs22\cf3\b HelpContext
 \par \plain\f0\fs12\cf2 
@@ -396,8 +695,7 @@ KP
 \par \plain\f0\fs18\cf2 
 \par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 Set the HelpContext property to the help context nunber of the relevant topic in the help file\plain\f1\fs18\cf2  determined by the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf2 HelpFile\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf2  property\plain\f0\fs18\cf2 .\plain\f1\fs18\cf2  The help file must contain a topic with the given help context.\plain\f0\fs18\cf2 
-\par \plain\f0\fs20\cf2 
+\par \plain\f0\fs18\cf2 Set the HelpContext property to the help context nunber of the relevant topic in the help file\plain\f1\fs18\cf2  determined by the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf2 HelpFile\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf2  property\plain\f0\fs18\cf2 .\plain\f1\fs18\cf2  The help file must contain a topic with the given help context.\plain\f0\fs20\cf2 
 \par }
 
 [Footnotes]
@@ -519,7 +817,7 @@ K=TPJMsgDlgBase,Kind;Kind,TPJMsgDlgBase;Kind
 A=TPJMsgDlgBase_Kind;Kind_property;Kind
 @=Description of base class's Kind property
 [End]
-20
+21
 BM
 1
 IDIApplication.bmp
@@ -543,6 +841,13 @@ HS
 
 0
 IDH_MD_ICONKIND
+
+HS
+5
+0
+
+0
+IDH_BASE_DLGTYPE
 
 NS
 13
@@ -627,7 +932,7 @@ HS
 0
 IDH_BASE_MAKESOUND
 
-5603
+6212
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 13>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJMsgDlgBase.Kind
 \par \plain\f0\fs12\cf2 
@@ -654,16 +959,21 @@ IDH_BASE_MAKESOUND
 \par \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i Query\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 54>\plain\f0\fs18\cf2 \tab "Confirm"\tab MB_ICONQUESTION
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i Error\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 55>\plain\f0\fs18\cf2 \tab "Error"\tab MB_ICONHAND
-\par \plain\f0\fs26\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i User\plain\f0\fs18\cf2 \tab IconResource *\tab Application.Title **\tab MB_OK
-\par \plain\f0\fs26\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i mkApplication\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 1>\plain\f0\fs18\cf2 \tab Application.Title **\tab MB_OK
-\par \plain\f0\fs26\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i mkWinLogo\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 2>\plain\f0\fs18\cf2 \tab Application.Title **\tab MB_OK
-\par 
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2\i mkUnknown \plain\f1\fs18\cf2 ***\tab None\tab Application.Title **\tab MB_OK\plain\f0\fs18\cf2 
 \par \plain\f0\fs18\cf1 \protect <BD 58>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 58></KP 61>\plain\f0\fs8\cf2 
+\par 
 \par \pard \fi-300 \li300 \tx300 \plain\f0\fs18\cf2 *\tab Icon is loaded from the resource specified by the \plain\f0\fs18\cf1 \protect <HS 64>\plain\f0\fs18\cf2 IconResource\plain\f0\fs18\cf1 \protect </HS 64>\plain\f0\fs18\cf2  property.
 \par **\tab The default title is set to the same value as the \plain\f0\fs18\cf1 \protect <HS 62>\plain\f0\fs18\cf2 Application\plain\f0\fs18\cf1 \protect </HS 62>\plain\f0\fs18\cf2  object's \plain\f0\fs18\cf1 \protect <HS 63>\plain\f0\fs18\cf2 Title\plain\f0\fs18\cf1 \protect </HS 63>\plain\f0\fs18\cf2  property.
+\par \plain\f1\fs18\cf2 ***\tab \plain\f1\fs18\cf2\i mkUnknown\plain\f1\fs18\cf2  should not be selected explicitly. It is present to signal that an invalid dialog kind has been specified when setting the DlgType property. 
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Setting Kind also updates the \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf2 DlgType\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf2  property and vice versa.\plain\f0\fs18\cf2 
 \par \pard \plain\f0\fs8\cf2 
 \par \plain\f1\fs18\cf2 The default value of the property is\plain\f0\fs18\cf2  \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i Information\plain\f0\fs18\cf2 .
 \par \plain\f0\fs8\cf2 
@@ -1392,7 +1702,7 @@ AL(TObject_object,1)
 $=TPJWinMsgDlg properties
 @=List of properties of TPJWinMsgDlg
 [End]
-10
+11
 HS
 1
 0
@@ -1463,10 +1773,18 @@ HS
 0
 IDH_WMD_TITLE
 
-1574
+HS
+11
+0
+
+0
+IDH_WMD_DLGTYPE
+
+1721
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties\plain\f0\fs18\cf1 
 \par 
 \par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 ButtonGroup\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 11>\plain\f1\fs18\cf1 DlgType\plain\f1\fs18\cf2 \protect </HS 11>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 4>\plain\f0\fs18\cf1 HelpContext\plain\f0\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 5>\plain\f1\fs18\cf1 HelpFile\plain\f1\fs18\cf2 \protect </HS 5>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 6>\plain\f0\fs18\cf1 IconResource\plain\f0\fs18\cf2 \protect </HS 6>\plain\f0\fs18\cf1 
@@ -1485,7 +1803,7 @@ K=TPJWinMsgDlg,ButtonGroup;ButtonGroup,TPJWinMsgDlg;ButtonGroup
 A=TPJWinMsgDlg_ButtonGroup;ButtonGroup_property;ButtonGroup
 @=Description of the ButtonGroup property from the perspective of TPJWinMsgDlg
 [End]
-9
+10
 HS
 1
 0
@@ -1506,6 +1824,13 @@ HS
 
 0
 IDH_VMD_CLASS
+
+HS
+4
+0
+
+0
+IDH_WMD_DLGTYPE
 
 NS
 9
@@ -1533,7 +1858,7 @@ HS
 0
 
 AL(TPJWinMsgDlg_HelpContext;TPJWinMsgDlg_Execute)
-4386
+4613
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 9>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJWinMsgDlg.ButtonGroup
 \par \plain\f0\fs12\cf2 
@@ -1568,11 +1893,355 @@ AL(TPJWinMsgDlg_HelpContext;TPJWinMsgDlg_Execute)
 \par \plain\f0\fs18\cf2\i bgCancelTryContinue\plain\f1\fs18\cf2 \tab Cancel, Try Again and Continue buttons. This button group requires the Windows NT platform and Windows 2000 or later. Behaves as \plain\f1\fs18\cf2\i bgAbortRetryIgnore \plain\f1\fs18\cf2 when specified on OSs that do not support this button group. \plain\f0\fs18\cf2 
 \par \pard \fi-1800 \li1800 \tx1800 \plain\f0\fs18\cf1 \protect <BD 47>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 47>\plain\f0\fs8\cf2 
 \par \pard 
+\par \plain\f0\fs18\cf2 Setting ButtonGroup also updates the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 DlgType\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property and vice versa.
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 To include a help button in the dialog box, set the \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf2 HelpContext\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf2  property to some non-zero value.
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 A value associated with the button that was clicked is returned from the \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 Execute\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2  method depends on which button was clicked.
 \par \plain\f0\fs8\cf2 
 \par \plain\f1\fs18\cf2 The default value of the property is \plain\f1\fs18\cf2\i bgOK\plain\f1\fs18\cf2 .\plain\f0\fs18\cf2 
+\par }
+
+[Footnotes]
+#=IDH_WMD_DLGTYPE
+$=TPJWinMsgDlg.DlgType
+K=TPJWinMsgDlg,DlgType;DlgType,TPJWinMsgDlg;DlgType
+A=TPJWinMsgDlg_DlgType;DlgType_property;DlgType
+@=Description of the DlgType property from the perspective of TPJWinMsgDlg
+[End]
+38
+HS
+1
+0
+
+0
+IDH_WMD_BUTTONGROUP
+
+HS
+2
+0
+
+0
+IDH_WMD_KIND
+
+KP
+3
+KP
+4
+BM
+5
+IDIExclamation.bmp
+1
+1
+BM
+6
+IDIExclamation.bmp
+1
+1
+BM
+7
+IDIAsterisk.bmp
+1
+1
+BM
+8
+IDIAsterisk.bmp
+1
+1
+NS
+9
+HS
+10
+0
+
+0
+IDH_WMD_CLASS
+
+BM
+11
+IDIQuestion.bmp
+1
+1
+BM
+12
+IDIHand.bmp
+1
+1
+BM
+13
+IDIHand.bmp
+1
+1
+BM
+14
+IDIHand.bmp
+1
+1
+HS
+15
+0
+
+0
+IDH_WMD_ICONRESOURCE
+
+KP
+16
+BD
+17
+2
+0
+BD
+18
+2
+0
+KP
+19
+HS
+20
+0
+
+0
+IDH_WMD_BUTTONGROUP
+
+HS
+21
+0
+
+0
+IDH_WMD_KIND
+
+BD
+22
+2
+0
+KP
+23
+HS
+24
+0
+
+0
+IDH_WMD_KIND
+
+BD
+25
+2
+0
+BD
+26
+2
+0
+KP
+27
+KP
+28
+BD
+29
+2
+0
+HS
+30
+0
+
+0
+IDH_WMD_CLASS
+
+HS
+31
+0
+
+0
+IDH_WMD_HELPCONTEXT
+
+HS
+32
+0
+
+0
+IDH_WMD_BUTTONGROUP
+
+KP
+33
+HS
+34
+0
+
+0
+IDH_WMD_HELPCONTEXT
+
+KP
+44
+BD
+46
+2
+0
+BD
+47
+3
+0
+HS
+48
+0
+
+0
+
+AL(TPJWinMsgDlg_ButtonGroup;TPJWinMsgDlg_Kind)
+14875
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 9>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJWinMsgDlg.\plain\f1\fs22\cf3\b DlgType\plain\f0\fs22\cf3\b 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 10>\plain\f0\fs18\cf2 TPJWinMsgDlg\plain\f0\fs18\cf1 \protect </HS 10>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 48>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 48>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 9>\plain\f0\fs18\cf2 
+\par Determines\plain\f1\fs18\cf2  the appearance and use of the dialog box\plain\f0\fs18\cf2 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 44>\plain\f2\fs18\cf2\b property\plain\f2\fs18\cf2  DlgType: LongWord;\plain\f2\fs18\cf1 \protect </KP 44>\plain\f2\fs18\cf2 
+\par \plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This property provides an alternative method to setting the \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf2 ButtonGroup\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf2  and \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 Kind\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2  properties using a subset of the constants used to customise the MessageBox Windows API function via its uType parameter. However, not all the API flags are supported.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 DlgType is never stored in a form file - its value is determined by the ButtonGroup and Kind property values and whether a help button is displayed. Changing any of these values modifies the value of DlgType. Conversely, setting DlgType can update one or more of the ButtonGroup\plain\f1\fs18\cf2  \plain\f0\fs18\cf2 and Kind properties.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Often the value of DlgType will change as soon as it is set because of the presence of any unsupported values, whether a help button is displayed or if a required value has not been provided.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Reading and writing the property are dealt with separately below. 
+\par 
+\par \plain\f1\fs18\cf2\i\b Setting DlgType\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f0\fs18\cf2 DlgType supports a combination of various categories of constants that are ORd together. 
+\par 
+\par \plain\f1\fs18\cf2\i\ul Button Group\plain\f1\fs18\cf2\i 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf2 The buttons displayed in the dialog box can be determined by specifying one, and only one, of the following constants. Setting one of these values also updates the ButtonGroup property\plain\f1\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \pard \fi-2800 \li2800 \tx2800 \tx5600 \plain\f1\fs18\cf1\b \protect <KP 3>\plain\f1\fs18\cf2\b Constant\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf2\b Buttons \plain\f1\fs18\cf2\b Displayed\tab New ButtonGroup Value\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf1 \protect <BD 46>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 46>\plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_OK \tab \plain\f1\fs18\cf2 A single OK button\plain\f1\fs18\cf2\i \tab bgOK
+\par MB_OKCANCEL\tab \plain\f1\fs18\cf2 OK and Cancel\plain\f1\fs18\cf2\i \tab bgOKCancel
+\par MB_ABORTRETRYIGNORE\tab \plain\f1\fs18\cf2 Abort, Retry and Cancel\tab \plain\f1\fs18\cf2\i bgAbortRetryIgnore
+\par MB_YESNOCANCEL\tab \plain\f1\fs18\cf2 Yes, No and Cancel\tab \plain\f1\fs18\cf2\i bgYesNoCancel
+\par MB_YESNO\tab \plain\f1\fs18\cf2 Yes and No\plain\f1\fs18\cf2\i \tab bgYesNo
+\par MB_RETRYCANCEL\tab \plain\f1\fs18\cf2 Retry and Cancel\tab \plain\f1\fs18\cf2\i bgRetryCancel
+\par MB_CANCELTRYCONTINUE \tab \plain\f1\fs18\cf2 Cancel, Try Again and Continue\plain\f1\fs18\cf2\i \tab bgCancelTryContinue
+\par \plain\f0\fs18\cf1 \protect <BD 47>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 47></KP 3>\plain\f0\fs8\cf2 
+\par \pard \fi-2400 \li2400 \tx2400 \tx5200 
+\par \pard \plain\f0\fs18\cf2 If any other value in the range $00000000 to $0000000F is specified then ButtonGroup is set to bgUnknown and the value in DlgType is replaced by \plain\f0\fs18\cf2\i UNKNOWN_BUTTONGROUP\plain\f0\fs18\cf2  (defined in \plain\f0\fs18\cf2\i PJMessageDialog.pas\plain\f0\fs18\cf2 ). To check for an unknown or invalid button group first set DlgType then perform the following test:
+\par \plain\f0\fs8\cf2 
+\par \pard \li400 \plain\f3\fs18\cf1 \protect <KP 4>\plain\f3\fs18\cf2 begin
+\par   if PJWinMsgDlg1.DlgType and MB_TYPEMASK = UNKNOWN_BUTTONGROUP then
+\par     // button group unknown or unsupported
+\par end;\plain\f0\fs18\cf1 \protect </KP 4>\plain\f0\fs18\cf2 
+\par \pard 
+\par \plain\f0\fs18\cf2\i\ul Dialog Kind\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The kind of dialog box (its icon, default title, etc.) is specified by ORing one of the following constants with one of those used to determine the button group. Setting one of these values updates the Kind property.
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-2800 \li2800 \tx2800 \tx4400 \tx6400 \plain\f1\fs18\cf1\b \protect <KP 16>\plain\f1\fs18\cf2\b Constant\tab Icon used\tab Default Title\tab New Kind Value
+\par \plain\f1\fs18\cf1 \protect <BD 17>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 17>\plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONEXCLAMATION\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 5>\plain\f1\fs18\cf2 \tab "Warning"\tab \plain\f1\fs18\cf2\i mkWarning
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONWARNING\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 6>\plain\f1\fs18\cf2 \tab "Warning"\tab \plain\f1\fs18\cf2\i mkWarning
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONINFORMATION\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 7>\plain\f1\fs18\cf2 \tab "Information"\tab \plain\f1\fs18\cf2\i mkInformation
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONASTERISK\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 8>\plain\f1\fs18\cf2 \tab "Information"\tab \plain\f1\fs18\cf2\i mkInformation
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONQUESTION\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 11>\plain\f1\fs18\cf2 \tab "Confirm"\tab \plain\f1\fs18\cf2\i mkQuery
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONSTOP\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 12>\plain\f1\fs18\cf2 \tab "Error"\tab \plain\f1\fs18\cf2\i mkError\plain\f1\fs18\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONERROR\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 13>\plain\f1\fs18\cf2 \tab "Error"\tab \plain\f1\fs18\cf2\i mkError\plain\f1\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2\i MB_ICONHAND\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 14>\plain\f1\fs18\cf2 \tab "Error"\tab \plain\f1\fs18\cf2\i mkError
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_USERICON\plain\f1\fs18\cf2  \tab \plain\f1\fs18\cf1 \protect <HS 15>\plain\f1\fs18\cf2 IconResource\plain\f1\fs18\cf1 \protect </HS 15>\plain\f1\fs18\cf2 \tab Application.Title\tab \plain\f1\fs18\cf2\i mkUser\plain\f1\fs18\cf1\i \protect </KP 16>\plain\f1\fs18\cf2 
+\par \plain\f1\fs8\cf2 
+\par \pard \plain\f1\fs18\cf1 \protect <BD 18>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 18>\plain\f1\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2 If any other value in the range $00000010 to $000000F0 is specified then Kind is set to \plain\f1\fs18\cf2\i mkUnknown\plain\f1\fs18\cf2  and the value in DlgType is replaced by \plain\f1\fs18\cf2\i UNKNOWN_ICON\plain\f1\fs18\cf2  (defined in\plain\f1\fs18\cf2\i  PJMessageDialog.pas\plain\f1\fs18\cf2 ). To check for an unknown or invalid dialog kind first set DlgType then perform the following test:
+\par \plain\f1\fs8\cf2 
+\par \pard \li400 \plain\f3\fs18\cf1 \protect <KP 19>\plain\f3\fs18\cf2 begin
+\par   if PJWinMsgDlg1.DlgType and MB_ICONMASK = UNKNOWN_ICON then
+\par     // dialog kind unknown or not supported
+\par end;\plain\f1\fs18\cf1 \protect </KP 19>\plain\f1\fs18\cf2 
+\par \pard 
+\par \plain\f1\fs18\cf2\i\ul Help Button\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 In the standard Windows API call specifying \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  causes a help button to be displayed. However, \plain\f1\fs18\cf1 \protect <HS 30>\plain\f1\fs18\cf2 TPJWinMsgDlg\plain\f1\fs18\cf1 \protect </HS 30>\plain\f1\fs18\cf2  only displays a help button when the \plain\f1\fs18\cf1 \protect <HS 31>\plain\f1\fs18\cf2 HelpContext\plain\f1\fs18\cf1 \protect </HS 31>\plain\f1\fs18\cf2  property is non-zero, so supporting \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  would break the component's normal behaviour. Consequently if DlgType is set to a value that includes \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2 , the flag is ignored.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Note though that \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  may be included in DlgType when it is read, depending on if a Help button will be displayed. See below for details. 
+\par 
+\par \plain\f1\fs18\cf2\i\b Reading DlgType\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The value returned when DlgType is read does not directly relate to the value set. This is because the value of DlgType is not stored and its value when read is calculated from the values of various other properties. Consequently any unsupported flags are stripped away. Furthermore DlgType introduces some new flags to indicate errors.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Factors that determine the value of DlgType are:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-400 \li800 \tx800 \plain\f1\fs18\cf2 1.\tab The \plain\f1\fs18\cf1 \protect <HS 20>\plain\f1\fs18\cf2 ButtonGroup\plain\f1\fs18\cf1 \protect </HS 20>\plain\f1\fs18\cf2  property.
+\par 2.\tab The \plain\f1\fs18\cf1 \protect <HS 21>\plain\f1\fs18\cf2 Kind\plain\f1\fs18\cf1 \protect </HS 21>\plain\f1\fs18\cf2  property.
+\par 3.\tab Whether a help button will be displayed by the dialog. 
+\par \pard \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Each of these factors is discussed separately below.
+\par 
+\par \plain\f1\fs18\cf2\i\ul Button Group\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The button group component of DlgType is set according to the value of the \plain\f1\fs18\cf1 \protect <HS 32>\plain\f1\fs18\cf2 ButtonGroup\plain\f1\fs18\cf1 \protect </HS 32>\plain\f1\fs18\cf2  property as per the following table:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f1\fs18\cf2\b ButtonGroup Value \tab Flag included in DlgType
+\par \plain\f1\fs18\cf1 \protect <BD 29>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 29>\plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i bgAbortRetryIgnore \tab MB_ABORTRETRYIGNORE
+\par bgOK \tab MB_OK
+\par bgOKCancel \tab MB_OKCANCEL
+\par bgRetryCancel \tab MB_RETRYCANCEL
+\par bgYesNo \tab MB_YESNO
+\par bgYesNoCancel \tab MB_YESNOCANCEL
+\par bgUnknown \tab UNKNOWN_BUTTONGROUP
+\par bgCancelTryContinue \tab MB_CANCELTRYCONTINUE
+\par \plain\f1\fs18\cf1\i \protect <BD 22>\plain\f1\fs8\cf2\i  \plain\f1\fs18\cf1\i \protect </BD 22>\plain\f1\fs8\cf2\i 
+\par \pard 
+\par  \plain\f1\fs18\cf2\i UNKNOWN_BUTTONGROUP\plain\f1\fs18\cf2  and \plain\f1\fs18\cf2\i MB_CANCELTRYCONTINUE\plain\f1\fs18\cf2  are both defined in the \plain\f1\fs18\cf2\i PJMessageDialog\plain\f1\fs18\cf2  unit and the remaining values are defined in the Windows unit.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 The button group values are ORd with other values stored in DlgType. To extract them AND the value of DlgType with MB_TYPEMASK. E.g.
+\par \plain\f1\fs8\cf2 
+\par \pard \li400 \plain\f3\fs18\cf1 \protect <KP 23>\plain\f3\fs18\cf2 var
+\par   BG: LongWord;
+\par begin
+\par   BG := PJWinMsgDlg1.DlgType and MB_TYPEMASK;
+\par end;\plain\f3\fs18\cf1 \protect </KP 23>\plain\f1\fs18\cf2 
+\par \pard 
+\par \plain\f1\fs18\cf2\i\ul Dialog Kind\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The component of DlgType that identifies the kind of dialog box displayed is set according to the value of the \plain\f1\fs18\cf1 \protect <HS 24>\plain\f1\fs18\cf2 Kind\plain\f1\fs18\cf1 \protect </HS 24>\plain\f1\fs18\cf2  property as per the following table:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f1\fs18\cf1\b \protect <KP 27>\plain\f1\fs18\cf2\b Kind Value \tab Flag included in DlgType\plain\f1\fs18\cf2 
+\par \plain\f1\fs18\cf1 \protect <BD 25>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 25>\plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i mkWarning \tab MB_ICONWARNING
+\par mkInformation \tab MB_ICONINFORMATION
+\par mkQuery \tab MB_ICONQUESTION
+\par mkError \tab MB_ICONERROR
+\par mkUser \tab MB_USERICON
+\par mkApplication \tab UNKNOWN_ICON
+\par mkWinLogo \tab UNKNOWN_ICON
+\par mkUnknown \tab UNKNOWN_ICON\plain\f1\fs18\cf2 
+\par \pard \plain\f1\fs18\cf1 \protect <BD 26>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 26></KP 27>\plain\f1\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2\i UNKNOWN_ICON\plain\f1\fs18\cf2  is defined in the \plain\f1\fs18\cf2\i PJMessageDialog \plain\f1\fs18\cf2 unit. Note that \plain\f1\fs18\cf2\i mkWinLogo \plain\f1\fs18\cf2 and \plain\f1\fs18\cf2\i mkApplication \plain\f1\fs18\cf2 have no equivalent in the MessageBox API function and are therefore flagged as unknown.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 The dialog kind values are ORd with other values stored in DlgType. To extract them AND the value of DlgType with MB_ICONMASK. E.g.
+\par \plain\f1\fs8\cf2 
+\par \pard \li400 \plain\f1\fs18\cf1 \protect <KP 28>\plain\f3\fs18\cf2 var
+\par   K: LongWord;
+\par begin
+\par   K := PJWinMsgDlg1.DlgType and MB_ICONMASK;
+\par end;\plain\f1\fs18\cf1 \protect </KP 28>\plain\f1\fs18\cf2 
+\par \pard 
+\par \plain\f1\fs18\cf2\i\ul Help Button\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 If the dialog box will show a help button (which is the case if and only if \plain\f1\fs18\cf1 \protect <HS 34>\plain\f1\fs18\cf2 HelpContext\plain\f1\fs18\cf1 \protect </HS 34>\plain\f1\fs18\cf2  is non zero) then \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  is included in DlgType. Check for the presence of \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  like this:
+\par \plain\f1\fs8\cf2 
+\par \pard \li400 \plain\f3\fs18\cf1 \protect <KP 33>\plain\f3\fs18\cf2 begin
+\par   if PJWinMsgDlg1.DlgType and MB_HELP = MB_HELP then
+\par     // MB_HELP present
+\par end;\plain\f3\fs18\cf1 \protect </KP 33>\plain\f1\fs18\cf2 
 \par }
 
 [Footnotes]
@@ -1582,7 +2251,7 @@ K=TPJWinMsgDlg,HelpContext;HelpContext,TPJWinMsgDlg;HelpContext
 A=TPJWinMsgDlg_HelpContext;HelpContext_property;HelpContext
 @=Description of the inherited HelpContext property from the perspective of TPJWinMsgDlg
 [End]
-5
+7
 HS
 1
 0
@@ -1597,6 +2266,20 @@ HS
 0
 
 AL(TPJWinMsgDlg_HelpFile;TPJWinMsgDlg_OnHelp)
+HS
+3
+0
+
+0
+IDH_WMD_ONHELP
+
+HS
+4
+0
+
+0
+IDH_WMD_DLGTYPE
+
 NS
 11
 HS
@@ -1608,7 +2291,7 @@ IDH_WMD_CLASS
 
 KP
 37
-1902
+2366
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 11>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJWinMsgDlg.HelpContext
 \par \plain\f0\fs12\cf2 
@@ -1624,7 +2307,9 @@ KP
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 Set the HelpContext property to the help context nunber of the relevant topic in the help file\plain\f1\fs18\cf2  determined by the \plain\f1\fs18\cf1 \protect <HS 1>\plain\f1\fs18\cf2 HelpFile\plain\f1\fs18\cf1 \protect </HS 1>\plain\f1\fs18\cf2  property\plain\f0\fs18\cf2 . When a non-zero help context number is specified a Help button is displayed in the dialog box which calls context sensitive help with the given help context\plain\f1\fs18\cf2  when pressed\plain\f0\fs18\cf2 .
 \par \plain\f0\fs8\cf2 
-\par \plain\f1\fs18\cf2\b Note:\plain\f1\fs18\cf2  the help file must contain a topic with a matching context number.\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2 Changing the value of HelpContext from zero to non-zero and back again changes the value of the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 DlgType\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\b Note:\plain\f0\fs18\cf2  This property requires that WinHelp is available, which it is not by default on Windows Vista and later. To use alternative help systems you must handle the \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf2 OnHelp\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf2  event. 
 \par \plain\f0\fs20\cf2 
 \par }
 
@@ -1739,7 +2424,7 @@ K=TPJWinMsgDlg,Kind;Kind,TPJWinMsgDlg;Kind
 A=TPJWinMsgDlg_Kind;Kind_property;Kind
 @=Description of the inherited Kind property from the perspective of TPJWinMsgDlg
 [End]
-18
+19
 BM
 1
 IDIApplication.bmp
@@ -1750,6 +2435,13 @@ BM
 IDIWinLogo.bmp
 1
 1
+HS
+3
+0
+
+0
+IDH_WMD_DLGTYPE
+
 NS
 13
 HS
@@ -1833,7 +2525,7 @@ HS
 0
 IDH_WMD_MAKESOUND
 
-5104
+5716
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 13>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJWinMsgDlg.Kind
 \par \plain\f0\fs12\cf2 
@@ -1860,17 +2552,22 @@ IDH_WMD_MAKESOUND
 \par \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i Query\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 54>\plain\f0\fs18\cf2 \tab "Confirm"\tab MB_ICONQUESTION
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i Error\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 55>\plain\f0\fs18\cf2 \tab "Error"\tab MB_ICONHAND
-\par \plain\f0\fs26\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i User\plain\f0\fs18\cf2 \tab IconResource *\tab Application.Title **\tab MB_OK
-\par \plain\f0\fs26\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i mkApplication\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 1>\plain\f0\fs18\cf2 \tab Application.Title **\tab MB_OK
-\par \plain\f0\fs26\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i mkWinLogo\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 2>\plain\f0\fs18\cf2 \tab Application.Title **\tab MB_OK
-\par 
+\par \plain\f1\fs8\cf2\i 
+\par \plain\f1\fs18\cf2\i mkUnknown \plain\f1\fs18\cf2 ***\tab None\tab Application.Title **\tab MB_OK\plain\f0\fs18\cf2 
 \par \plain\f0\fs18\cf1 \protect <BD 58>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 58></KP 61>\plain\f0\fs8\cf2 
+\par 
 \par \pard \fi-300 \li300 \tx300 \plain\f0\fs18\cf2 *\tab Icon is loaded from the resource specified by the \plain\f0\fs18\cf1 \protect <HS 64>\plain\f0\fs18\cf2 IconResource\plain\f0\fs18\cf1 \protect </HS 64>\plain\f0\fs18\cf2  property.
 \par **\tab The default title is set to the same value as the \plain\f0\fs18\cf1 \protect <HS 62>\plain\f0\fs18\cf2 Application\plain\f0\fs18\cf1 \protect </HS 62>\plain\f0\fs18\cf2  object's \plain\f0\fs18\cf1 \protect <HS 63>\plain\f0\fs18\cf2 Title\plain\f0\fs18\cf1 \protect </HS 63>\plain\f0\fs18\cf2  property.
+\par \plain\f1\fs18\cf2 ***\tab \plain\f1\fs18\cf2\i mkUnknown\plain\f1\fs18\cf2  should not be selected explicitly. It is present to signal that an invalid dialog kind has been specified when setting the DlgType property. \plain\f0\fs18\cf2 
 \par \pard \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2 Setting Kind also updates the \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf2 DlgType\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf2  property and vice versa. 
+\par \plain\f1\fs8\cf2 
 \par \plain\f1\fs18\cf2 The default value of the property is\plain\f0\fs18\cf2  \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i Information\plain\f0\fs18\cf2 .
 \par }
 
@@ -2467,7 +3164,7 @@ K=TPJMessageDialog,ButtonGroup;ButtonGroup,TPJMessageDialog;ButtonGroup
 A=TPJMessageDialog_ButtonGroup;ButtonGroup_property;ButtonGroup
 @=Description of the inherited ButtonGroup property from the perspective of TPJMessageDialog.
 [End]
-8
+9
 HS
 1
 0
@@ -2481,6 +3178,13 @@ HS
 
 0
 IDH_MD_EXECUTE
+
+HS
+3
+0
+
+0
+IDH_VMD_CLASS
 
 NS
 9
@@ -2508,15 +3212,15 @@ HS
 0
 
 AL(TPJMessageDialog_HelpContext;TPJMessageDialog_Execute)
-3636
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 9>\plain\f0\fs8\cf2 
+4577
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fmodern \fcharset0 Courier New;}{\f3\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 9>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJMessageDialog.ButtonGroup
 \par \plain\f0\fs12\cf2 
 \par \plain\f0\fs18\cf1 \protect <HS 10>\plain\f0\fs18\cf2 TPJMessageDialog\plain\f0\fs18\cf1 \protect </HS 10>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 48>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 48>\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 9>\plain\f0\fs18\cf2 
 \par Determines which buttons appear in the dialog box.
 \par 
-\par \pard \fi-200 \li200 \plain\f1\fs18\cf2\b type\plain\f1\fs18\cf2  TPJMsgDlgButtonGroup = (bgAbortRetryIgnore, bgOK, bgOKCancel, bgRetryCancel, bgYesNo, bgYesNoCancel);
+\par \pard \fi-200 \li200 \plain\f1\fs18\cf2\b type\plain\f1\fs18\cf2  TPJMsgDlgButtonGroup = (bgAbortRetryIgnore, bgOK, bgOKCancel, bgRetryCancel, bgYesNo, bgYesNoCancel\plain\f2\fs18\cf2 , bgUnknown, bgCancelTryContinue\plain\f1\fs18\cf2 );
 \par \pard \plain\f1\fs8\cf2 
 \par \plain\f1\fs18\cf1\b \protect <KP 44>\plain\f1\fs18\cf2\b property\plain\f1\fs18\cf2  ButtonGroup: TPJMsgDlgButtonGroup;\plain\f1\fs18\cf1 \protect </KP 44>\plain\f1\fs18\cf2 
 \par \plain\f0\fs18\cf2 
@@ -2524,28 +3228,33 @@ AL(TPJMessageDialog_HelpContext;TPJMessageDialog_Execute)
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 The buttons which appear in the dialog box depend on the value of this property. The possibilities are:
 \par \plain\f0\fs8\cf2 
-\par \pard \fi-1800 \li1800 \tx1800 \plain\f0\fs18\cf2\b Value\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf2\b Buttons used\plain\f0\fs18\cf2 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f0\fs18\cf2\b Value\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf2\b Buttons used\plain\f0\fs18\cf2 
 \par \plain\f0\fs18\cf1 \protect <BD 46>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 46>\plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2\i bgAbortRetryIgnore\plain\f0\fs18\cf2 \tab Abort, Retry and Ignore buttons\plain\f2\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\i bgAbortRetryIgnore\plain\f0\fs18\cf2 \tab Abort, Retry and Ignore buttons\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2\i bgOK\plain\f0\fs18\cf2 \tab A single OK button (default value)\plain\f2\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\i bgOK\plain\f0\fs18\cf2 \tab A single OK button (default value)\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2\i bgOKCancel\plain\f0\fs18\cf2 \tab An OK and a Cancel button\plain\f2\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\i bgOKCancel\plain\f0\fs18\cf2 \tab An OK and a Cancel button\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2\i bgRetryCancel\plain\f0\fs18\cf2 \tab A Retry and a Cancel button\plain\f2\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\i bgRetryCancel\plain\f0\fs18\cf2 \tab A Retry and a Cancel button\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2\i bgYesNo\plain\f0\fs18\cf2 \tab A Yes and a No button\plain\f2\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\i bgYesNo\plain\f0\fs18\cf2 \tab A Yes and a No button\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i bgYesNoCancel\plain\f0\fs18\cf2 \tab Yes, No and Cancel buttons.
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2\i bg\plain\f2\fs18\cf2\i Unkown\plain\f0\fs18\cf2 \tab An unsupported or unknown group of buttons\plain\f2\fs18\cf2 . This item should not be selected in TPJMessageDialog. If it is selected it has the same effect as bgOK.\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\i bg\plain\f3\fs18\cf2\i Unkown\plain\f0\fs18\cf2 \tab An unsupported or unknown group of buttons\plain\f3\fs18\cf2 . This item should not be selected in TPJMessageDialog. If it is selected it has the same effect as bgOK.
+\par \plain\f3\fs8\cf2 
+\par \plain\f0\fs18\cf2\i bg\plain\f3\fs18\cf2\i Unknown\plain\f0\fs18\cf2 \tab An unsupported or unknown group of buttons\plain\f3\fs18\cf2 . This item is for use in \plain\f3\fs18\cf1 \protect <HS 3>\plain\f3\fs18\cf2 TPJVCLMsgDlg\plain\f3\fs18\cf1 \protect </HS 3>\plain\f3\fs18\cf2  and should not be selected in TPJMessageDialog. If it is selected it has the same effect as \plain\f3\fs18\cf2\i bgOK\plain\f3\fs18\cf2 .
+\par \plain\f3\fs8\cf2 
+\par \plain\f0\fs18\cf2\i bgCancelTryContinue\plain\f3\fs18\cf2 \tab Cancel, Try Again and Continue buttons. This button group requires the Windows NT platform and Windows 2000 or later. Behaves as \plain\f3\fs18\cf2\i bgAbortRetryIgnore \plain\f3\fs18\cf2 when specified on OSs that do not support this button group. \plain\f0\fs18\cf2 
+\par \pard \fi-1800 \li1800 \tx1800 
 \par \plain\f0\fs18\cf1 \protect <BD 47>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 47>\plain\f0\fs8\cf2 
 \par \pard 
 \par \plain\f0\fs18\cf2 To include a help button in the dialog box, set the \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf2 HelpContext\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf2  property to some non-zero value.
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 A value associated with the button that was clicked is returned from the \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 Execute\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2  method depends on which button was clicked.
-\par \plain\f2\fs8\cf2 
-\par \plain\f2\fs18\cf2 The default value of the property is \plain\f2\fs18\cf2\i bgOK\plain\f2\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f3\fs8\cf2 
+\par \plain\f3\fs18\cf2 The default value of the property is \plain\f3\fs18\cf2\i bgOK\plain\f3\fs18\cf2 .\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]
@@ -2984,7 +3693,7 @@ HS
 0
 IDH_MD_BUTTONGROUP
 
-2993
+3314
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 23>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJMessageDialog.Execute
 \par \plain\f0\fs12\cf2 
@@ -3004,15 +3713,20 @@ IDH_MD_BUTTONGROUP
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 Cancel\tab \plain\f0\fs18\cf2\i IDCANCEL\plain\f1\fs18\cf2\i  (2)\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2 Continue\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf2\i ID\plain\f1\fs18\cf2\i CONTINUE (11)\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 Ignore\tab \plain\f0\fs18\cf2\i IDIGNORE\plain\f1\fs18\cf2\i  (5)\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 No\tab \plain\f0\fs18\cf2\i IDNO\plain\f1\fs18\cf2\i  (7)\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 OK\tab \plain\f0\fs18\cf2\i IDOK\plain\f1\fs18\cf2\i  (1)\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2 OK\tab \plain\f0\fs18\cf2\i IDO\plain\f1\fs18\cf2\i K (1)\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 Retry\tab \plain\f0\fs18\cf2\i IDRETRY\plain\f1\fs18\cf2\i  (4)\plain\f0\fs18\cf2 \tab 
+\par \plain\f0\fs18\cf2 Retry\tab \plain\f0\fs18\cf2\i IDRETR\plain\f1\fs18\cf2\i Y (4)
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 Yes\tab \plain\f0\fs18\cf2\i IDYES\plain\f1\fs18\cf2\i  (6)\plain\f0\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf2 
+\par \plain\f1\fs18\cf2 Try Again\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf2\i ID\plain\f1\fs18\cf2\i TRYAGAIN (10)\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Yes\tab \plain\f0\fs18\cf2\i IDYES\plain\f1\fs18\cf2\i  (6)\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf1 \protect </KP 1>\plain\f0\fs18\cf2 
 \par \plain\f0\fs18\cf1 \protect <BD 78>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 78>\plain\f0\fs8\cf2 
 \par 
 \par \pard \plain\f0\fs18\cf2 Use the \plain\f0\fs18\cf1 \protect <HS 80>\plain\f0\fs18\cf2 ButtonGroup\plain\f0\fs18\cf1 \protect </HS 80>\plain\f0\fs18\cf2  property to determine which buttons are displayed in the dialog box. The return values are defined in the Windows unit.
@@ -3238,7 +3952,7 @@ AL(TObject_object,1)
 $=TPJVCLMsgDlg properties
 @=List of properties of TPJVCLMsgDlg
 [End]
-16
+17
 HS
 1
 0
@@ -3351,13 +4065,21 @@ HS
 0
 IDH_VMD_OPTIONS
 
-2404
+HS
+17
+0
+
+0
+IDH_VMD_DLGTYPE
+
+2551
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties\plain\f0\fs18\cf1 
 \par 
 \par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 11>\plain\f1\fs18\cf1 Align\plain\f1\fs18\cf2 \protect </HS 11>\plain\f1\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 ButtonGroup\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 12>\plain\f1\fs18\cf1 Buttons\plain\f1\fs18\cf2 \protect </HS 12>\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 13>\plain\f1\fs18\cf1 DefButton\plain\f1\fs18\cf2 \protect </HS 13>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 17>\plain\f1\fs18\cf1 DlgType\plain\f1\fs18\cf2 \protect </HS 17>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 4>\plain\f0\fs18\cf1 HelpContext\plain\f0\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 5>\plain\f1\fs18\cf1 HelpFile\plain\f1\fs18\cf2 \protect </HS 5>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 6>\plain\f0\fs18\cf1 IconResource\plain\f0\fs18\cf2 \protect </HS 6>\plain\f0\fs18\cf1 
@@ -3472,7 +4194,7 @@ K=TPJVCLMsgDlg,ButtonGroup;ButtonGroup,TPJVCLMsgDlg;ButtonGroup
 A=TPJVCLMsgDlg_ButtonGroup;ButtonGroup_property;ButtonGroup
 @=Description of the ButtonGroup property from the perspective of TPJVCLMsgDlg
 [End]
-12
+14
 HS
 1
 0
@@ -3515,6 +4237,20 @@ HS
 0
 IDH_VMD_OPTIONS
 
+HS
+7
+0
+
+0
+IDH_VMD_OPTIONS
+
+HS
+8
+0
+
+0
+IDH_VMD_DLGTYPE
+
 NS
 9
 HS
@@ -3541,7 +4277,7 @@ HS
 0
 
 AL(TPJVCLMsgDlg_Buttons;TPJVCLMsgDlg_HelpContext;TPJVCLMsgDlg_Options;TPJVCLMsgDlg_Execute)
-5965
+7060
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fmodern \fcharset0 Courier New;}{\f3\fswiss \fcharset0 Arial;}{\f4\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 9>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJVCLMsgDlg.ButtonGroup
 \par \plain\f0\fs12\cf2 
@@ -3555,9 +4291,13 @@ AL(TPJVCLMsgDlg_Buttons;TPJVCLMsgDlg_HelpContext;TPJVCLMsgDlg_Options;TPJVCLMsgD
 \par \plain\f0\fs18\cf2 
 \par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The buttons which appear in the dialog box depend on the value of this property\plain\f3\fs18\cf2  and on the associated \plain\f3\fs18\cf1 \protect <HS 3>\plain\f3\fs18\cf2 Buttons\plain\f3\fs18\cf1 \protect </HS 3>\plain\f3\fs18\cf2  property. 
-\par \plain\f3\fs8\cf2 
-\par \plain\f3\fs18\cf2 When the value of the Buttons property is changed the to the set of buttons contained in the group. Setting ButtonGroup to \plain\f3\fs18\cf2\i bgUnkown\plain\f3\fs18\cf2  sets Buttons to the empty set [ ]. Conversely, when the Buttons property is changed ButtonGroup is set to any matching group, or to \plain\f3\fs18\cf2\i bgUnknown\plain\f3\fs18\cf2  if the set of buttons in the Buttons property is not a valid button group.
+\par \plain\f0\fs18\cf2 The buttons which appear in the dialog box depend on the value of this property and on the associated \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf2 Buttons\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf2  property.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 When the value of ButtonGroup is changed the Buttons property is updated the to the set of buttons contained in the button group. Setting ButtonGroup to \plain\f0\fs18\cf2\i bgUnkown\plain\f0\fs18\cf2  sets Buttons to the empty set. Conversely, when the Buttons property is changed ButtonGroup is set to any matching group, or to \plain\f0\fs18\cf2\i bgUnknown\plain\f0\fs18\cf2  if the set of buttons in the Buttons property is not a valid button group.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\b Note:\plain\f0\fs18\cf2  Normally, setting ButtonGroup to a value other than \plain\f0\fs18\cf2\i bgUnkown\plain\f0\fs18\cf2  and then adding \plain\f0\fs18\cf2\i mbHelp\plain\f0\fs18\cf2  to the resulting Buttons set causes ButtonGroup to change to \plain\f0\fs18\cf2\i bgUnknown\plain\f0\fs18\cf2 . To prevent this include \plain\f0\fs18\cf2\i mdoGroupIgnoresHelp\plain\f0\fs18\cf2  in the \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 Options\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2  property. Setting this option means that \plain\f0\fs18\cf2\i mbHelp\plain\f0\fs18\cf2  is ignored when trying to match Buttons to a valid button group and, in the case above, ButtonGroup will remain unchanged when \plain\f0\fs18\cf2\i mbHelp\plain\f0\fs18\cf2  is added to Buttons.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Setting ButtonGroup also updates the \plain\f0\fs18\cf1 \protect <HS 8>\plain\f0\fs18\cf2 DlgType\plain\f0\fs18\cf1 \protect </HS 8>\plain\f0\fs18\cf2  property and vice versa. \plain\f3\fs18\cf2 
 \par \plain\f3\fs8\cf2 
 \par \plain\f0\fs18\cf2 The \plain\f3\fs18\cf2 possible values of ButtonGroup\plain\f0\fs18\cf2  are\plain\f3\fs18\cf2  as follows:\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
@@ -3599,7 +4339,7 @@ K=TPJVCLMsgDlg,Buttons;Buttons,TPJVCLMsgDlg;Buttons
 A=TPJVCLMsgDlg_Buttons;Buttons_property;Buttons
 @=Description of Buttons property introduced  in TPJVCLMsgDlg
 [End]
-13
+15
 KP
 1
 KP
@@ -3655,6 +4395,20 @@ HS
 0
 IDH_VMD_CLASS
 
+HS
+11
+0
+
+0
+IDH_VMD_OPTIONS
+
+HS
+12
+0
+
+0
+IDH_VMD_DLGTYPE
+
 KP
 44
 BD
@@ -3665,7 +4419,7 @@ BD
 47
 3
 0
-6039
+7016
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 9>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJVCLMsgDlg.Buttons
 \par \plain\f0\fs12\cf2 
@@ -3685,6 +4439,10 @@ BD
 \par \plain\f1\fs18\cf2 The Buttons property records the set of buttons that are to appear in the dialog box. This property is more flexible that the related \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf2 ButtonGroup\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf2  property - it supports additional buttons in any combination.
 \par \plain\f1\fs8\cf2 
 \par \plain\f1\fs18\cf2 Setting the Buttons property causes ButtonGroup to be updated. If the combination of buttons required is not supported by the ButtonGroup property, that property is set to \plain\f1\fs18\cf2\i bgUnknown\plain\f1\fs18\cf2 . Conversely setting the ButtonGroup property causes the Buttons property to be updated to the set of buttons in the selected group.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\b Note:\plain\f1\fs18\cf2  Normally, setting Buttons to a set of buttons supported by ButtonGroup and then including \plain\f1\fs18\cf2\i mbHelp\plain\f1\fs18\cf2  in Buttons will cause ButtonGroup to revert to \plain\f1\fs18\cf2\i bgUnknown\plain\f1\fs18\cf2 . To prevent this include \plain\f1\fs18\cf2\i mdoGroupIgnoresHelp\plain\f1\fs18\cf2  in the \plain\f1\fs18\cf1 \protect <HS 11>\plain\f1\fs18\cf2 Options\plain\f1\fs18\cf1 \protect </HS 11>\plain\f1\fs18\cf2  property. When this option is included \plain\f1\fs18\cf2\i mbHelp\plain\f1\fs18\cf2  is ignored when trying to match Buttons to a valid button group.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Because of the link between Buttons and ButtonGroup and its linkage with \plain\f1\fs18\cf1 \protect <HS 12>\plain\f1\fs18\cf2 DlgType\plain\f1\fs18\cf1 \protect </HS 12>\plain\f1\fs18\cf2 , setting Buttons can affect the value of DlgType and vice versa. 
 \par \plain\f1\fs8\cf2 
 \par \plain\f1\fs18\cf2 The set of available buttons (TMsgDlgButtons) is defined in the Dialogs unit and is as follows:\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
@@ -3780,13 +4538,392 @@ KP
 \par }
 
 [Footnotes]
+#=IDH_VMD_DLGTYPE
+$=TPJVCLMsgDlg.DlgType
+K=TPJVCLMsgDlg,DlgType;DlgType,TPJVCLMsgDlg;DlgType
+A=TPJVCLMsgDlg_DlgType;DlgType_property;DlgType
+@=Description of the DlgType property from the perspective of TPJVCLMsgDlg
+[End]
+42
+HS
+1
+0
+
+0
+IDH_VMD_BUTTONGROUP
+
+HS
+2
+0
+
+0
+IDH_VMD_KIND
+
+KP
+3
+KP
+4
+BM
+5
+IDIExclamation.bmp
+1
+1
+BM
+6
+IDIExclamation.bmp
+1
+1
+BM
+7
+IDIAsterisk.bmp
+1
+1
+BM
+8
+IDIAsterisk.bmp
+1
+1
+NS
+9
+HS
+10
+0
+
+0
+IDH_VMD_CLASS
+
+BM
+11
+IDIQuestion.bmp
+1
+1
+BM
+12
+IDIHand.bmp
+1
+1
+BM
+13
+IDIHand.bmp
+1
+1
+BM
+14
+IDIHand.bmp
+1
+1
+HS
+15
+0
+
+0
+IDH_VMD_ICONRESOURCE
+
+KP
+16
+BD
+17
+2
+0
+BD
+18
+2
+0
+KP
+19
+HS
+20
+0
+
+0
+IDH_VMD_BUTTONGROUP
+
+HS
+21
+0
+
+0
+IDH_VMD_KIND
+
+BD
+22
+2
+0
+KP
+23
+HS
+24
+0
+
+0
+IDH_VMD_KIND
+
+BD
+25
+2
+0
+BD
+26
+2
+0
+KP
+27
+KP
+28
+BD
+29
+2
+0
+HS
+30
+0
+
+0
+IDH_VMD_BUTTONS
+
+HS
+31
+0
+
+0
+IDH_VMD_OPTIONS
+
+HS
+32
+0
+
+0
+IDH_VMD_BUTTONGROUP
+
+KP
+33
+HS
+34
+0
+
+0
+IDH_VMD_OPTIONS
+
+HS
+35
+0
+
+0
+IDH_VMD_BUTTONS
+
+HS
+36
+0
+
+0
+IDH_VMD_HELPCONTEXT
+
+HS
+37
+0
+
+0
+IDH_VMD_OPTIONS
+
+HS
+38
+0
+
+0
+IDH_VMD_BUTTONS
+
+KP
+44
+BD
+46
+2
+0
+BD
+47
+3
+0
+HS
+48
+0
+
+0
+
+AL(TPJVCLMsgDlg_ButtonGroup;TPJVCLMsgDlg_Kind)
+16706
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fnil \fcharset0 Courier New;}{\f4\fnil \fcharset2 WingDings;}{\f5\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 9>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJVCLMsgDlg.\plain\f1\fs22\cf3\b DlgType\plain\f0\fs22\cf3\b 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 10>\plain\f0\fs18\cf2 TPJVCLMsgDlg\plain\f0\fs18\cf1 \protect </HS 10>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 48>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 48>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 9>\plain\f0\fs18\cf2 
+\par Determines\plain\f1\fs18\cf2  the appearance and use of the dialog box\plain\f0\fs18\cf2 .
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 44>\plain\f2\fs18\cf2\b property\plain\f2\fs18\cf2  DlgType: LongWord;\plain\f2\fs18\cf1 \protect </KP 44>\plain\f2\fs18\cf2 
+\par \plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This property provides an alternative method to setting the \plain\f0\fs18\cf1 \protect <HS 1>\plain\f0\fs18\cf2 ButtonGroup\plain\f0\fs18\cf1 \protect </HS 1>\plain\f0\fs18\cf2  and \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 Kind\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2  properties using a subset of the constants used to customise the MessageBox Windows API function via its uType parameter. However, not all the API flags are supported.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 DlgType is never stored in a form file - its value is determined by the ButtonGroup and Kind property values and whether a help button is displayed. Changing any of these values modifies the value of DlgType. Conversely, setting DlgType can update one or more of the ButtonGroup\plain\f1\fs18\cf2 , \plain\f1\fs18\cf1 \protect <HS 35>\plain\f1\fs18\cf2 Buttons\plain\f1\fs18\cf1 \protect </HS 35>\plain\f1\fs18\cf2  \plain\f0\fs18\cf2 and Kind properties.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Often the value of DlgType will change as soon as it is set because of the presence of any unsupported values, whether a help button is displayed or if a required value has not been provided.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Reading and writing the property are dealt with separately below. 
+\par 
+\par \plain\f1\fs18\cf2\i\b Setting DlgType\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f0\fs18\cf2 DlgType supports a combination of various categories of constants that are ORd together. 
+\par 
+\par \plain\f1\fs18\cf2\i\ul Button Group\plain\f1\fs18\cf2\i 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf2 The buttons displayed in the dialog box can be determined by specifying one, and only one, of the following constants. Setting one of these values also updates the ButtonGroup property\plain\f1\fs18\cf2 , which in turn updates the Buttons property.\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \pard \fi-2800 \li2800 \tx2800 \tx5600 \plain\f1\fs18\cf1\b \protect <KP 3>\plain\f1\fs18\cf2\b Constant\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf2\b Buttons \plain\f1\fs18\cf2\b Displayed\tab New ButtonGroup Value\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf1 \protect <BD 46>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 46>\plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_OK \tab \plain\f1\fs18\cf2 A single OK button\plain\f1\fs18\cf2\i \tab bgOK
+\par MB_OKCANCEL\tab \plain\f1\fs18\cf2 OK and Cancel\plain\f1\fs18\cf2\i \tab bgOKCancel
+\par MB_ABORTRETRYIGNORE\tab \plain\f1\fs18\cf2 Abort, Retry and Cancel\tab \plain\f1\fs18\cf2\i bgAbortRetryIgnore
+\par MB_YESNOCANCEL\tab \plain\f1\fs18\cf2 Yes, No and Cancel\tab \plain\f1\fs18\cf2\i bgYesNoCancel
+\par MB_YESNO\tab \plain\f1\fs18\cf2 Yes and No\plain\f1\fs18\cf2\i \tab bgYesNo
+\par MB_RETRYCANCEL\tab \plain\f1\fs18\cf2 Retry and Cancel\tab \plain\f1\fs18\cf2\i bgRetryCancel
+\par MB_CANCELTRYCONTINUE \tab \plain\f1\fs18\cf2 Cancel, Try Again and Continue\plain\f1\fs18\cf2\i \tab bgCancelTryContinue
+\par \plain\f0\fs18\cf1 \protect <BD 47>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 47></KP 3>\plain\f0\fs8\cf2 
+\par \pard \fi-2400 \li2400 \tx2400 \tx5200 
+\par \pard \plain\f0\fs18\cf2 If any other value in the range $00000000 to $0000000F is specified then ButtonGroup is set to bgUnknown and the value in DlgType is replaced by \plain\f0\fs18\cf2\i UNKNOWN_BUTTONGROUP\plain\f0\fs18\cf2  (defined in \plain\f0\fs18\cf2\i PJMessageDialog.pas\plain\f0\fs18\cf2 ). To check for an unknown or invalid button group first set DlgType then perform the following test:
+\par \plain\f0\fs8\cf2 
+\par \pard \li400 \plain\f3\fs18\cf1 \protect <KP 4>\plain\f3\fs18\cf2 begin
+\par   if PJVCLMsgDlg1.DlgType and MB_TYPEMASK = UNKNOWN_BUTTONGROUP then
+\par     // button group unknown or unsupported
+\par end;\plain\f0\fs18\cf1 \protect </KP 4>\plain\f0\fs18\cf2 
+\par \pard 
+\par \plain\f0\fs18\cf2\i\ul Dialog Kind\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The kind of dialog box (its icon, default title, etc.) is specified by ORing one of the following constants with one of those used to determine the button group. Setting one of these values updates the Kind property.
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-2800 \li2800 \tx2800 \tx4400 \tx6400 \plain\f1\fs18\cf1\b \protect <KP 16>\plain\f1\fs18\cf2\b Constant\tab Icon used\tab Default Title\tab New Kind Value
+\par \plain\f1\fs18\cf1 \protect <BD 17>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 17>\plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONEXCLAMATION\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 5>\plain\f1\fs18\cf2 \tab "Warning"\tab \plain\f1\fs18\cf2\i mkWarning
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONWARNING\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 6>\plain\f1\fs18\cf2 \tab "Warning"\tab \plain\f1\fs18\cf2\i mkWarning
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONINFORMATION\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 7>\plain\f1\fs18\cf2 \tab "Information"\tab \plain\f1\fs18\cf2\i mkInformation
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONASTERISK\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 8>\plain\f1\fs18\cf2 \tab "Information"\tab \plain\f1\fs18\cf2\i mkInformation
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONQUESTION\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 11>\plain\f1\fs18\cf2 \tab "Confirm"\tab \plain\f1\fs18\cf2\i mkQuery
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONSTOP\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 12>\plain\f1\fs18\cf2 \tab "Error"\tab \plain\f1\fs18\cf2\i mkError\plain\f1\fs18\cf2 
+\par \plain\f1\fs18\cf2\i MB_ICONERROR\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 13>\plain\f1\fs18\cf2 \tab "Error"\tab \plain\f1\fs18\cf2\i mkError\plain\f1\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2\i MB_ICONHAND\plain\f1\fs18\cf2 \tab \plain\f1\fs18\cf1 \protect <BM 14>\plain\f1\fs18\cf2 \tab "Error"\tab \plain\f1\fs18\cf2\i mkError
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i MB_USERICON\plain\f1\fs18\cf2  \tab \plain\f1\fs18\cf1 \protect <HS 15>\plain\f1\fs18\cf2 IconResource\plain\f1\fs18\cf1 \protect </HS 15>\plain\f1\fs18\cf2 \tab Application.Title\tab \plain\f1\fs18\cf2\i mkUser\plain\f1\fs18\cf1\i \protect </KP 16>\plain\f1\fs18\cf2 
+\par \plain\f1\fs8\cf2 
+\par \pard \plain\f1\fs18\cf1 \protect <BD 18>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 18>\plain\f1\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2 If any other value in the range $00000010 to $000000F0 is specified then Kind is set to \plain\f1\fs18\cf2\i mkUnknown\plain\f1\fs18\cf2  and the value in DlgType is replaced by \plain\f1\fs18\cf2\i UNKNOWN_ICON\plain\f1\fs18\cf2  (defined in\plain\f1\fs18\cf2\i  PJMessageDialog.pas\plain\f1\fs18\cf2 ). To check for an unknown or invalid dialog kind first set DlgType then perform the following test:
+\par \plain\f1\fs8\cf2 
+\par \pard \li400 \plain\f3\fs18\cf1 \protect <KP 19>\plain\f3\fs18\cf2 begin
+\par   if PJVCLMsgDlg1.DlgType and MB_ICONMASK = UNKNOWN_ICON then
+\par     // dialog kind unknown or not supported
+\par end;\plain\f1\fs18\cf1 \protect </KP 19>\plain\f1\fs18\cf2 
+\par \pard 
+\par \plain\f1\fs18\cf2\i\ul Help Button\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 In the standard Windows API call specifying \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  causes a help button to be displayed. In this component including \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  in DlgType causes \plain\f1\fs18\cf2\i mbHelp\plain\f1\fs18\cf2  to be included in the \plain\f1\fs18\cf1 \protect <HS 30>\plain\f1\fs18\cf2 Buttons\plain\f1\fs18\cf1 \protect </HS 30>\plain\f1\fs18\cf2  property. This may or may not cause a help button to be displayed, according to whether \plain\f1\fs18\cf2\i mdoAutoHelpBtn\plain\f1\fs18\cf2  is included in the \plain\f1\fs18\cf1 \protect <HS 31>\plain\f1\fs18\cf2 Options\plain\f1\fs18\cf1 \protect </HS 31>\plain\f1\fs18\cf2  property.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Including \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  in DlgType does not necessarily mean it will be included in the property when read. See the "Help Button" description in the "Reading DlgType" section below for details.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\b Note:\plain\f1\fs18\cf2  Because of the way the Buttons and ButtonGroup properties interact, including \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  in DlgType can cause ButtonGroup to be set to \plain\f1\fs18\cf2\i bgUnknown\plain\f1\fs18\cf2 . To avoid this make sure you include \plain\f1\fs18\cf2\i mdoGroupIgnoresHelp\plain\f1\fs18\cf2  in the Options property. 
+\par 
+\par \plain\f1\fs18\cf2\i\b Reading DlgType\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The value returned when DlgType is read does not directly relate to the value set. This is because the value of DlgType is not stored and its value when read is calculated from the values of various other properties. Consequently any unsupported flags are stripped away. Furthermore DlgType introduces some new flags to indicate errors.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Factors that determine the value of DlgType are:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-400 \li800 \tx800 \plain\f1\fs18\cf2 1.\tab The \plain\f1\fs18\cf1 \protect <HS 20>\plain\f1\fs18\cf2 ButtonGroup\plain\f1\fs18\cf1 \protect </HS 20>\plain\f1\fs18\cf2  property.
+\par 2.\tab The \plain\f1\fs18\cf1 \protect <HS 21>\plain\f1\fs18\cf2 Kind\plain\f1\fs18\cf1 \protect </HS 21>\plain\f1\fs18\cf2  property.
+\par 3.\tab Whether a help button will be displayed by the dialog. 
+\par \pard \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Each of these factors is discussed separately below.
+\par 
+\par \plain\f1\fs18\cf2\i\ul Button Group\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The button group component of DlgType is set according to the value of the \plain\f1\fs18\cf1 \protect <HS 32>\plain\f1\fs18\cf2 ButtonGroup\plain\f1\fs18\cf1 \protect </HS 32>\plain\f1\fs18\cf2  property as per the following table:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f1\fs18\cf2\b ButtonGroup Value \tab Flag included in DlgType
+\par \plain\f1\fs18\cf1 \protect <BD 29>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 29>\plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i bgAbortRetryIgnore \tab MB_ABORTRETRYIGNORE
+\par bgOK \tab MB_OK
+\par bgOKCancel \tab MB_OKCANCEL
+\par bgRetryCancel \tab MB_RETRYCANCEL
+\par bgYesNo \tab MB_YESNO
+\par bgYesNoCancel \tab MB_YESNOCANCEL
+\par bgUnknown \tab UNKNOWN_BUTTONGROUP
+\par bgCancelTryContinue \tab MB_CANCELTRYCONTINUE
+\par \plain\f1\fs18\cf1\i \protect <BD 22>\plain\f1\fs8\cf2\i  \plain\f1\fs18\cf1\i \protect </BD 22>\plain\f1\fs8\cf2\i 
+\par \pard 
+\par  \plain\f1\fs18\cf2\i UNKNOWN_BUTTONGROUP\plain\f1\fs18\cf2  and \plain\f1\fs18\cf2\i MB_CANCELTRYCONTINUE\plain\f1\fs18\cf2  are both defined in the \plain\f1\fs18\cf2\i PJMessageDialog\plain\f1\fs18\cf2  unit and the remaining values are defined in the \plain\f1\fs18\cf2\i Windows\plain\f1\fs18\cf2  unit.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 The button group values are ORd with other values stored in DlgType. To extract them AND the value of DlgType with MB_TYPEMASK. E.g.
+\par \plain\f1\fs8\cf2 
+\par \pard \li400 \plain\f3\fs18\cf1 \protect <KP 23>\plain\f3\fs18\cf2 var
+\par   BG: LongWord;
+\par begin
+\par   BG := PJVCLMsgDlg1.DlgType and MB_TYPEMASK;
+\par end;\plain\f3\fs18\cf1 \protect </KP 23>\plain\f1\fs18\cf2 
+\par \pard 
+\par \plain\f1\fs18\cf2\i\ul Dialog Kind\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 The component of DlgType that identifies the kind of dialog box displayed is set according to the value of the \plain\f1\fs18\cf1 \protect <HS 24>\plain\f1\fs18\cf2 Kind\plain\f1\fs18\cf1 \protect </HS 24>\plain\f1\fs18\cf2  property as per the following table:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-2400 \li2400 \tx2400 \plain\f1\fs18\cf1\b \protect <KP 27>\plain\f1\fs18\cf2\b Kind Value \tab Flag included in DlgType\plain\f1\fs18\cf2 
+\par \plain\f1\fs18\cf1 \protect <BD 25>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 25>\plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\i mkWarning \tab MB_ICONWARNING
+\par mkInformation \tab MB_ICONINFORMATION
+\par mkQuery \tab MB_ICONQUESTION
+\par mkError \tab MB_ICONERROR
+\par mkUser \tab MB_USERICON
+\par mkApplication \tab UNKNOWN_ICON
+\par mkWinLogo \tab UNKNOWN_ICON
+\par mkUnknown \tab UNKNOWN_ICON\plain\f1\fs18\cf2 
+\par \pard \plain\f1\fs18\cf1 \protect <BD 26>\plain\f1\fs8\cf2  \plain\f1\fs18\cf1 \protect </BD 26></KP 27>\plain\f1\fs8\cf2 
+\par 
+\par \plain\f1\fs18\cf2\i UNKNOWN_ICON\plain\f1\fs18\cf2  is defined in the \plain\f1\fs18\cf2\i PJMessageDialog \plain\f1\fs18\cf2 unit. Note that \plain\f1\fs18\cf2\i mkWinLogo \plain\f1\fs18\cf2 and \plain\f1\fs18\cf2\i mkApplication \plain\f1\fs18\cf2 have no equivalent in the MessageBox API function and are therefore flagged as unknown.
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 The dialog kind values are ORd with other values stored in DlgType. To extract them AND the value of DlgType with MB_ICONMASK. E.g.
+\par \plain\f1\fs8\cf2 
+\par \pard \li400 \plain\f1\fs18\cf1 \protect <KP 28>\plain\f3\fs18\cf2 var
+\par   K: LongWord;
+\par begin
+\par   K := PJVCLMsgDlg1.DlgType and MB_ICONMASK;
+\par end;\plain\f1\fs18\cf1 \protect </KP 28>\plain\f1\fs18\cf2 
+\par \pard 
+\par \plain\f1\fs18\cf2\i\ul Help Button\plain\f1\fs18\cf2 
+\par \plain\f1\fs12\cf2 
+\par \plain\f1\fs18\cf2 If the dialog box will show a help button when displayed then MB_HELP is included in DlgType. This occurs in the following circumstances, depending on the Options property:
+\par \plain\f1\fs8\cf2 
+\par \pard \fi-400 \li400 \tx400 \plain\f4\fs18\cf2 \'A7\plain\f5\fs18\cf2 \tab \plain\f1\fs18\cf2\i mdoAutoHelpBtn\plain\f1\fs18\cf2  is included in \plain\f1\fs18\cf1 \protect <HS 34>\plain\f1\fs18\cf2 Options\plain\f1\fs18\cf1 \protect </HS 34>\plain\f1\fs18\cf2  and \plain\f1\fs18\cf1 \protect <HS 36>\plain\f1\fs18\cf2 HelpContext\plain\f1\fs18\cf1 \protect </HS 36>\plain\f1\fs18\cf2  is non-zero.
+\par \plain\f4\fs18\cf2 \'A7\plain\f5\fs18\cf2 \tab \plain\f1\fs18\cf2\i mdoAutoHelpBtn\plain\f1\fs18\cf2  is not included in \plain\f1\fs18\cf1 \protect <HS 37>\plain\f1\fs18\cf2 Options\plain\f1\fs18\cf1 \protect </HS 37>\plain\f1\fs18\cf2  and \plain\f1\fs18\cf2\i mbHelp\plain\f1\fs18\cf2  is included in \plain\f1\fs18\cf1 \protect <HS 38>\plain\f1\fs18\cf2 Buttons\plain\f1\fs18\cf1 \protect </HS 38>\plain\f1\fs18\cf2 . 
+\par \pard \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 These rules mean that the presence of \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  when setting DlgType does not necessarily mean \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  will be present when reading the property. 
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Check for the presence of \plain\f1\fs18\cf2\i MB_HELP\plain\f1\fs18\cf2  like this:
+\par \plain\f1\fs8\cf2 
+\par \pard \li400 \plain\f3\fs18\cf1 \protect <KP 33>\plain\f3\fs18\cf2 begin
+\par   if PJVCLMsgDlg1.DlgType and MB_HELP = MB_HELP then
+\par     // MB_HELP present
+\par end;\plain\f3\fs18\cf1 \protect </KP 33>\plain\f1\fs18\cf2 
+\par }
+
+[Footnotes]
 #=IDH_VMD_HELPCONTEXT
 $=TPJVCLMsgDlg.HelpContext
 K=TPJVCLMsgDlg,HelpContext;HelpContext,TPJVCLMsgDlg;HelpContext
 A=TPJVCLMsgDlg_HelpContext;HelpContext_property;HelpContext
 @=Description of the inherited HelpContext property from the perspective of TPJVCLMsgDlg
 [End]
-7
+9
 HS
 1
 0
@@ -3815,6 +4952,20 @@ HS
 0
 
 AL(TPJVCLMsgDlg_HelpFile;TPJVCLMsgDlg_OnHelp;TPJVCLMsgDlg_Buttons;TPJVCLMsgDlg_Options)
+HS
+5
+0
+
+0
+IDH_VMD_OPTIONS
+
+HS
+6
+0
+
+0
+IDH_VMD_ONHELP
+
 NS
 11
 HS
@@ -3826,7 +4977,7 @@ IDH_VMD_CLASS
 
 KP
 37
-2508
+2971
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 11>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJVCLMsgDlg.HelpContext
 \par \plain\f0\fs12\cf2 
@@ -3844,10 +4995,10 @@ KP
 \par \plain\f1\fs8\cf2 
 \par \plain\f1\fs18\cf2 There are two ways the dialog can display a help button that accesses the help topic:
 \par \plain\f1\fs8\cf2 
-\par \pard \fi-400 \li400 \tx400 \plain\f1\fs18\cf2 1)\tab By including \plain\f1\fs18\cf2\i mbHelp\plain\f1\fs18\cf2  in the \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf2 Buttons\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf2  set property\plain\f0\fs18\cf2 .
-\par \plain\f1\fs18\cf2 2)\tab By setting the \plain\f1\fs18\cf2\i mdoAutoHelpBtn\plain\f1\fs18\cf2  value of the \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf2 Options\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf2  set property.\plain\f0\fs18\cf2 
+\par \pard \fi-400 \li400 \tx400 \plain\f1\fs18\cf2 1)\tab By including \plain\f1\fs18\cf2\i mbHelp\plain\f1\fs18\cf2  in the \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf2 Buttons\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf2  set property and clearing the \plain\f1\fs18\cf2\i mdoAutoHelpBtn \plain\f1\fs18\cf2 value of the \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf2 Options\plain\f1\fs18\cf1 \protect </HS 5>\plain\f1\fs18\cf2  property. \plain\f0\fs18\cf2 
+\par \plain\f1\fs18\cf2 2)\tab By setting the \plain\f1\fs18\cf2\i mdoAutoHelpBtn\plain\f1\fs18\cf2  value of the \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf2 Options\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf2  set property and giving HelpContext a non-zero value. \plain\f0\fs18\cf2 
 \par \pard \plain\f0\fs8\cf2 
-\par \plain\f1\fs18\cf2\b Note:\plain\f1\fs18\cf2  the help file must contain a topic with a matching context number.\plain\f0\fs18\cf2 
+\par \plain\f1\fs18\cf2\b Note:\plain\f1\fs18\cf2  This property requires that WinHelp is available, which it is not by default on Windows Vista and later. To use alternative help systems you must handle the \plain\f1\fs18\cf1 \protect <HS 6>\plain\f1\fs18\cf2 OnHelp\plain\f1\fs18\cf1 \protect </HS 6>\plain\f1\fs18\cf2  event. \plain\f0\fs18\cf2 
 \par 
 \par \plain\f0\fs20\cf2 
 \par }
@@ -3969,7 +5120,7 @@ K=TPJVCLMsgDlg,Kind;Kind,TPJVCLMsgDlg;Kind
 A=TPJVCLMsgDlg_Kind;Kind_property;Kind
 @=Description of the inherited Kind property from the perspective of TPJVCLMsgDlg
 [End]
-19
+20
 BM
 1
 IDIApplication.bmp
@@ -3980,6 +5131,13 @@ BM
 IDIWinLogo.bmp
 1
 1
+HS
+3
+0
+
+0
+IDH_VMD_DLGTYPE
+
 HS
 4
 0
@@ -4070,7 +5228,7 @@ HS
 0
 IDH_VMD_MAKESOUND
 
-5353
+5943
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 13>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJVCLMsgDlg.Kind
 \par \plain\f0\fs12\cf2 
@@ -4097,16 +5255,21 @@ IDH_VMD_MAKESOUND
 \par \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i Query\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 54>\plain\f0\fs18\cf2 \tab "Confirm"\tab MB_ICONQUESTION
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i Error\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 55>\plain\f0\fs18\cf2 \tab "Error"\tab MB_ICONHAND
-\par \plain\f0\fs26\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i User\plain\f0\fs18\cf2 \tab IconResource *\tab Application.Title **\tab MB_OK
-\par \plain\f0\fs26\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i mkApplication\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 1>\plain\f0\fs18\cf2 \tab Application.Title **\tab MB_OK
-\par \plain\f0\fs26\cf2 
+\par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2\i mkWinLogo\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <BM 2>\plain\f0\fs18\cf2 \tab Application.Title **\tab MB_OK
-\par 
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2\i mkUnknown \plain\f1\fs18\cf2 ***\tab None\tab Application.Title **\tab MB_OK\plain\f0\fs18\cf2 
 \par \plain\f0\fs18\cf1 \protect <BD 58>\plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </BD 58></KP 61>\plain\f0\fs8\cf2 
+\par 
 \par \pard \fi-300 \li300 \tx300 \plain\f0\fs18\cf2 *\tab Icon is loaded from the resource specified by the \plain\f0\fs18\cf1 \protect <HS 64>\plain\f0\fs18\cf2 IconResource\plain\f0\fs18\cf1 \protect </HS 64>\plain\f0\fs18\cf2  property\plain\f1\fs18\cf2  providing that \plain\f0\fs18\cf2\i mdoShowCustomIcon\plain\f1\fs18\cf2  is included in the \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf2 Options\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf2  set.\plain\f0\fs18\cf2 
 \par **\tab The default title is set to the same value as the \plain\f0\fs18\cf1 \protect <HS 62>\plain\f0\fs18\cf2 Application\plain\f0\fs18\cf1 \protect </HS 62>\plain\f0\fs18\cf2  object's \plain\f0\fs18\cf1 \protect <HS 63>\plain\f0\fs18\cf2 Title\plain\f0\fs18\cf1 \protect </HS 63>\plain\f0\fs18\cf2  property.
+\par \plain\f1\fs18\cf2 ***\tab \plain\f1\fs18\cf2\i mkUnknown\plain\f1\fs18\cf2  should not be selected explicitly. It is present to signal that an invalid dialog kind has been specified when setting the DlgType property. 
+\par \plain\f1\fs8\cf2 
+\par \plain\f0\fs18\cf2 Setting Kind also updates the \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf2 DlgType\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf2  property and vice versa.
 \par \pard \plain\f0\fs8\cf2 
 \par \plain\f1\fs18\cf2 The default value of the property is\plain\f0\fs18\cf2  \plain\f0\fs18\cf2\i m\plain\f1\fs18\cf2\i k\plain\f0\fs18\cf2\i Information\plain\f0\fs18\cf2 .
 \par }
