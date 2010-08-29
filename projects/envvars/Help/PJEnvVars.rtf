@@ -387,9 +387,9 @@ A{\footnote {A}PJEnvVars_GetAllEnvVars;GetAllEnvVars}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 Copies all the environment variables available to the current process in to the given string list. Each item in the string list represents one environment variable in the form NAME=VALUE. Any previous contents of the string list are lost. 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 The size of the environment block in bytes is returned.
+\par \plain\f0\fs18\cf0 The size of the environment block in \plain\f1\fs18\cf0\i characters\plain\f0\fs18\cf0  is returned.\plain\f1\fs18\cf0  To get the size of the environment block in bytes multiply the return value by SizeOf(Char).\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 It is permitted to pass \plain\f0\fs18\cf0\b nil\plain\f0\fs18\cf0  as the parameter to GetAllEnvVars. If this is done \plain\f1\fs18\cf0 then \plain\f0\fs18\cf0 details of the environment variables are not provided, but the size of the environment block is returned. Therefore this function can also be used to determine the size of the environment block.
+\par \plain\f0\fs18\cf0 It is permitted to pass \plain\f0\fs18\cf0\b nil\plain\f0\fs18\cf0  as the parameter to GetAllEnvVars. If this is done \plain\f1\fs18\cf0 then \plain\f0\fs18\cf0 details of the environment variables are not provided, but the size of the environment block\plain\f1\fs18\cf0  in characters\plain\f0\fs18\cf0  is returned. Therefore this function can also be used to determine the size of the environment block.
 \par \page 
 ${\footnote {$}ExpandEnvVars}
 #{\footnote {#}IDH_EXPANDENVVARS}
@@ -440,7 +440,7 @@ A{\footnote {A}PJEnvVars_CreateEnvBlock;CreateEnvBlock}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 CreateEnvBlock creates a new environment block which can be used to pass to another process. 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 The new environment block is stored in the memory pointed to by Buffer, which is taken to be at least BufSize \plain\f1\fs18\cf0 characters\plain\f0\fs18\cf0 . The actual size of the environment block is returned by CreateEnvBlock. If the buffer provided is nil or is too small then no block is created and the return value is the required buffer size\plain\f1\fs18\cf0  in characters\plain\f0\fs18\cf0 .
+\par \plain\f0\fs18\cf0 The new environment block is stored in the memory pointed to by Buffer, which is taken to be at least BufSize \plain\f1\fs18\cf0 characters\plain\f0\fs18\cf0 . The actual size of the environment block \plain\f1\fs18\cf0 in characters \plain\f0\fs18\cf0 is returned by CreateEnvBlock. If the buffer provided is nil or is too small then no block is created and the return value is the required buffer size\plain\f1\fs18\cf0  in characters\plain\f0\fs18\cf0 .
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 The NewEnv and IncludeCurrent parameters determine what is included in the new environment block. If the NewEnv string list is not nil then it should contain a list of environment variables in the form NAME=VALUE. The new environment block will contain these values. If IncludeCurrent is true then the new environment block will also include a copy of the current process's environment block.
 \par \plain\f0\fs8\cf0 
