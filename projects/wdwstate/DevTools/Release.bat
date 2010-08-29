@@ -35,7 +35,6 @@ zip %OutFile% -j -9 %DocsDir%\Wiki.URL
 zip %OutFile% -j -9 %HelpDir%\PJWdwState.hlp
 zip %OutFile% -j -9 %HelpDir%\PJWdwState.als
 
-zip %OutFile% -r -9 %DemoDir%\*.*
-zip %OutFile% -d %DemoDir%\*.svn\*
+zip %OutFile% -r -9 %DemoDir%\*.* -x *.svn\*
 
 endlocal

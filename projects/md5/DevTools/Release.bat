@@ -33,7 +33,6 @@ zip %OutFile% -j -9 %DocsDir%\MPL-1.1.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
 zip %OutFile% -j -9 %DocsDir%\Wiki.URL
 
-zip %OutFile% -r -9 %TestDir%\*.*
-zip %OutFile% -d %TestDir%\*.svn\*
+zip %OutFile% -r -9 %TestDir%\*.* -x *.svn\*
 
 endlocal
