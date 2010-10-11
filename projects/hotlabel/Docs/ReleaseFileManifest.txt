@@ -1,0 +1,42 @@
+HotLabel Component
+==================
+
+Release File Manifest
+---------------------
+
+Release 1.0 and 1.0.1
+---------------------
+hotlabel.pas            : Component source file
+hotlabel.res            : 32bit resource file containing "hand" cursor
+hotlabel.hlp            : Help file (for Delphi 1/2)
+hotlabel.kwf            : Help keyword file (for Delphi 1/2)
+hotlabel.htm            : Information sheet
+readme.txt              : Readme file pointing user to hotlabel.htm for info
+hotlabel.dcr            : 32bit resource file for component palette glyph
+
+Release 2.0
+-----------
+PJHotLabel.pas          : Component source file
+PJHotLabel.dcr          : 32bit resource file for component palette glyph
+PJHotLabel.res          : 32bit resource file containing "hand" cursor
+PJHotLabel.hlp          : Help file (for Delphi 3-7 IDE)
+pjhotlbl.htm            : Information sheet
+
+Release 2.1
+-----------
+PJHotLabel.pas          : Component source file
+PJHotLabel.dcr          : 32bit resource file for component palette glyph
+PJHotLabel.rc           : Source of PJHotLabel.res
+PJHotLabel.res          : 32bit resource file containing "hand" cursor
+PJHotLabel.hlp          : Help file (for Delphi 3-7 IDE)
+PJHotLabel.als          : A-link keyword file for Delphi 6/7 OpenHelp
+Hand.cur                : Cursor required for Delphi 2 and 3
+ReadMe.htm              : Read me file
+MPL.txt                 : Mozilla public license
+ChangeLog.txt           : Component change log
+Demo\HotLabelDemo.dpr   : Demo program project file
+Demo\HotLabelDemo.res   : Demo program's icon resource
+Demo\FmHotLabelDemo.pas : Demo program main form source code
+Demo\FmHotLabelDemo.dfm : Demo program main form resource
+Demo\DelphiDabbler.ico  : Demo program's icon
+
