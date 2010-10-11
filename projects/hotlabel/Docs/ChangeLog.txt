@@ -1,6 +1,10 @@
-Release 2.1 of 17 March 2007
-HotLabel v2.1 of 17 March 2007
-HotLabelDemo v1.0 of 17 March 2007
+; ------------------------------------------------------------------------------
+; Change Log for Hot Label Component
+; $Rev$
+; $Date$
+; ------------------------------------------------------------------------------
+
+Release v2.1 of 17 March 2007
 + Fixed design time bug that could change font colour if mouse was moved over label in designer.
 + Added .als keyword file for use with Delphi 6 and 7.
 + Changed name of cursor resource.
@@ -9,8 +13,7 @@ HotLabelDemo v1.0 of 17 March 2007
 + Changed to use Mozilla Public License for component's source code.
 + Added HotLabelDemo demo program.
 
-Release 2.0 of 02 November 2003
-HotLabel v2.0 of 02 November 2003
+Release v2.0 of 02 November 2003
 + Added separate URL property to enable caption to be different to URL accessed.
 + Added ability to highlight label text when cursor passes over it.
 + Added ability to display URL in hint or to display custom hints set by handling the new OnCustomHint event.
@@ -20,10 +23,8 @@ HotLabel v2.0 of 02 November 2003
 + Changed default URL to http://localhost/.
 + Rewrote help file to be compatible with Delphi 3 and later IDEs. Help file is no longer compatible with Delphi 2 IDE.
 
-Release 1.0.1 of 28 November 1999
-HotLabel v1.0 of 25 October 1999
+Release v1.0.1 of 28 November 1999
 + Updated HTML documentation to include installation notes for Delphi 3/4 and added update history.
 
-Release 1.0 of 25 October 1999
-HotLabel v1.0 of 25 October 1999
-+ Original version with HTML documentation.
+Release v1.0 of 25 October 1999
++ Original version.
