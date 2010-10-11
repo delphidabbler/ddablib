@@ -12,33 +12,32 @@
 
 @echo off
 
-cd .\..
+setlocal
 
-set OutFile=Releases\dd-hotlabel.zip
-set SrcDir=
+set ReleaseDir=Release
+set OutFile=%ReleaseDir%\dd-hotlabel.zip
+set HelpDir=Help
 set DocsDir=Docs
 set DemoDir=Demo
-set HelpDir=Help
 
-del %OutFile%
+cd .\..
 
-zip -j -9 %OutFile% PJHotLabel.pas
-zip -j -9 %OutFile% PJHotLabel.dcr
-zip -j -9 %OutFile% PJHotLabel.rc
-zip -j -9 %OutFile% PJHotLabel.res
-zip -j -9 %OutFile% Hand.cur
+if exist %ReleaseDir% rmdir /S /Q %ReleaseDir%
+mkdir %ReleaseDir%
 
-zip -j -9 %OutFile% %HelpDir%\PJHotLabel.hlp
-zip -j -9 %OutFile% %HelpDir%\PJHotLabel.als
+zip %OutFile% -j -9 PJHotLabel.pas
+zip %OutFile% -j -9 PJHotLabel.dcr
+zip %OutFile% -j -9 PJHotLabel.rc
+zip %OutFile% -j -9 PJHotLabel.res
+zip %OutFile% -j -9 Hand.cur
 
-zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
-zip -j -9 %OutFile% %DocsDir%\MPL.txt
-zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
+zip %OutFile% -j -9 %HelpDir%\PJHotLabel.hlp
+zip %OutFile% -j -9 %HelpDir%\PJHotLabel.als
 
-zip -9 %OutFile% %DemoDir%\HotLabelDemo.dpr
-zip -9 %OutFile% %DemoDir%\HotLabelDemo.res
-zip -9 %OutFile% %DemoDir%\FmHotLabelDemo.pas
-zip -9 %OutFile% %DemoDir%\FmHotLabelDemo.dfm
-zip -9 %OutFile% %DemoDir%\DelphiDabbler.ico
+zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
+zip %OutFile% -j -9 %DocsDir%\MPL.txt
+zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
 
-cd DevTools
+zip %OutFile% -r -9 %DemoDir%\*.* -x *.svn\* 
+
+endlocal
