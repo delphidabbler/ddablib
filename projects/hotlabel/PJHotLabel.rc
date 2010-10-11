@@ -1,18 +1,11 @@
 /*
- * Hot Label Component
- *
  * PJHotLabel.rc
  *
- * Resource file containing a cursor resource required when compiling the
- * component for Delphi 2 and 3.
+ * Resource file containing a cursor resource required when compiling the Hot
+ * Label Component for Delphi 2 and 3.
  *
- * v1.0 of 24 Oct 1999  - Original version. Named HotLabel.rc
- * v1.1 of 02 Nov 2003  - Removed unused constant definition.
- *                      - Renamed as PJHotLabel.rc
- * v1.2 of 17 Mar 2007  - Changed cursor name from HOTLABEL_HANDCUR to
- *                        PJHOTLABEL_HANDPOINT.
- *                      - Changed to Mozilla Public License.
- *
+ * $Rev$
+ * $Date$
  *
  * ***** BEGIN LICENSE BLOCK *****
  *
@@ -31,8 +24,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1999-2007 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1999-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
  */

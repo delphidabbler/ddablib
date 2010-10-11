@@ -1,20 +1,9 @@
-; Hot Label Component
-;
 ; PJHotLabel.hpj
 ;
-; Help project file.
+; Help project file for Hot Label Component help file.
 ;
-; v1.0 of 25 Oct 1999  - Original version. Named HotLabel.hpj
-; v2.0 of 02 Nov 2004  - Total rewrite for v2 of the component.
-;                      - Changed window title to brand as DelphiDabbler.
-;                      - Updated copyright text and date.
-;                      - Changed name of output help file from hotlabel.hlp to
-;                        PJHotLabel.hlp.
-;                      - Updated [FILES] section to use PJHotLabel.rtf rather
-;                        than hotlabel.rtf.
-; v2.1 of 17/03/2007   - Changed copuright date to include 2007.
-;                      - Changed to Mozilla Public License.
-;
+; $Rev$
+; $Date$
 ;
 ; ***** BEGIN LICENSE BLOCK *****
 ;
@@ -33,8 +22,11 @@
 ; The Initial Developer of the Original Code is Peter Johnson
 ; (http://www.delphidabbler.com/).
 ;
-; Portions created by the Initial Developer are Copyright (C) 1999-2007 Peter
+; Portions created by the Initial Developer are Copyright (C) 1999-2010 Peter
 ; Johnson. All Rights Reserved.
+;
+; Contributor(s):
+;   NONE
 ;
 ; ***** BEGIN LICENSE BLOCK *****
 

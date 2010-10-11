@@ -1,12 +1,10 @@
 {
- * Hot Label Demo Program.
- *
  * HotLabelDemo.dpr
  *
- * Program project file.
+ * Program project file for Hot Label Component Demo.
  *
- * v1.0 of 17 Mar 2007  - Original version.
- *
+ * $Rev$
+ * $Date$
  *
  * ***** BEGIN LICENSE BLOCK *****
  *
@@ -25,8 +23,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2007 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2007-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }

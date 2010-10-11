@@ -1,37 +1,11 @@
 {
- * Hot Label Component
- *
  * PJHotLabel.pas
  *
- * Source of the TPJHotLabel component. TPJHotLabel is a label that when clicked
- * opens a URL in the default web browser or email client.
+ * Source of the TPJHotLabel component, which is a label that when clicked opens
+ * a URL in the default web browser or email client.
  *
- * v1.0 of 24 Oct 1999  - Original version. Named HotLabel.pas
- * v2.0 of 02 Nov 2004  - Added separate URL property to enable caption to be
- *                        different to URL accessed.
- *                      - Added ability to highlight label text when cursor
- *                        passes over it.
- *                      - Added ability to display URL in hint or to display
- *                        custom hints set by handling the new OnCustomHint
- *                        event.
- *                      - Now uses built in hand point cursor for Delphi 4 and
- *                        higher while still loading custom cursor from
- *                        resources for earlier compilers. Value of custom
- *                        cursor constant changed from $0A to $630B.
- *                      - Moved error messages to resource strings for Delphi 3
- *                        and later while using constants for Delphi 2.
- *                      - Added support for https:// protocol.
- *                      - Changed default URL to http://localhost/
- *                      - Renamed unit as PJHotLabel.pas
- * v2.1 of 17/03/2007   - Fixed bug where label's colour could be displayed
- *                        wrongly at design if mouse had been moved over the
- *                        label and highlighting was enabled. Fixed by ignoring
- *                        mouse over events at design time.
- *                      - Made some minor refactorings.
- *                      - Changed name of cursor read from resources in Delphi 2
- *                        and Delphi 3.
- *                      - Changed to Mozilla Public License.
- *
+ * $Rev$
+ * $Date$
  *
  * ***** BEGIN LICENSE BLOCK *****
  *
@@ -50,8 +24,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1999-2007 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1999-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   NONE
  *
  * ***** END LICENSE BLOCK *****
 }

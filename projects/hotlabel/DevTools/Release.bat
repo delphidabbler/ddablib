@@ -1,10 +1,12 @@
 @rem ---------------------------------------------------------------------------
-@rem Script used to create zip file containing source code of Hot Label
-@rem Component
+@rem Hot Label Component.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007
+@rem Script used to create zip file containing release files.
 @rem
-@rem v1.0 of 17 Mar 2007 - First version.
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007-2010
+@rem
+@rem $Rev$
+@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 
