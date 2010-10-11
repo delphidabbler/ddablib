@@ -1,17 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
+<!--
+ * Read-me file for Hot Label Component
+ *
+ * $Rev$
+ * $Date$
+-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
 
 	<title>
-		DelphiDabbler.com Info Sheet: Hot Label Component
+		DelphiDabbler.com Hot Label Component ReadMe
 	</title>
 
 	<style type="text/css">
-		<!--
 		body {
 			margin: 1em;
 			padding: 0;
@@ -139,7 +142,6 @@
 			font-size: 8pt;
 			text-align: right;
 		}
-		-->
 	</style>
 
 </head>
@@ -148,8 +150,8 @@
 
 
 <h1>
-	Hot Label Component<br />
-	<span class="subtitle">Information Sheet</span>
+	<div>Hot Label Component</div>
+	<div class="subtitle">ReadMe</div>
 </h1>
 
 
@@ -162,13 +164,10 @@
 		<a href="#description">Description</a>
 	</li>
 	<li>
-		<a href="#compatibility">Compiler Compatibility</a>
-	</li>
-	<li>
 		<a href="#installation">Installation</a>
 	</li>
 	<li>
-		<a href="#issues">Known Issues</a>
+		<a href="#demo">Demo Program</a>
 	</li>
 	<li>
 		<a href="#update">Update History</a>
@@ -177,22 +176,17 @@
 		<a href="#license">License and Disclaimer</a>
 	</li>
 	<li>
+		<a href="#bugs">Bugs and Feature Requests</a>
+	</li>
+	<li>
 		<a href="#author">About the Author</a>
 	</li>
 </ul>
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="description">
 	Description
 </h2>
-
-
-<h3>
-	Overview
-</h3>
 
 <p>
 	<var>TPJHotLabel</var> is a simple Delphi component that descends from
@@ -269,30 +263,9 @@
 	A help file is provided that can integrate with the IDE of Delphi 3 to 7.
 </p>
 
-
-<h3>
-	Backwards compatibility with v1
-</h3>
-
 <p>
-	This v2 release is backwards compatible with v1 of the component. All new
-	properties that are not available in v1 are either switched off by default
-	or emulate the properties available in v1.
-</p>
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="compatibility">
-	Compiler Compatibility
-</h2>
-
-<p>
-	<var>TPJHotLabel</var> has been tested Delphi 4, 6, 7 and 2006. It should
-	work with all Win32 versions of Delphi (i.e. versions 2 to 2006). The
-	component is not suitable for use with Delphi 1.
+	<var>TPJHotLabel</var> should work with all Win32 versions of Delphi (i.e.
+	versions 2 to 2010). The component is not suitable for use with Delphi 1.
 </p>
 
 
@@ -305,8 +278,8 @@
 </h2>
 
 <p>
-	<var>TPJHotLabel</var>, its help files and documentation are supplied in a
-	zip file. Before installing you need to extract all the files from the zip
+	The Hot Label Component, its documentation and demo program are supplied in
+	a zip file. Before installing you need to extract all the files from the zip
 	file, preserving the directory structure. The following files will be
 	extracted:
 </p>
@@ -349,347 +322,45 @@
 	<li>
 		<code>MPL.txt</code> &ndash; Mozilla Public License v1.1.
 	</li>
-	<li>
-		<code>Demo\HotLabelDemo.dpr</code> &ndash; Demo program project file.
-	</li>
-	<li>
-		<code>Demo\HotLabelDemo.res</code> &ndash; Demo program resource file
-		containing program icon.
-	</li>
-	<li>
-		<code>Demo\FmHotLabelDemo.pas</code> &ndash; Demo program's main form
-		source code.
-	</li>
-	<li>
-		<code>Demo\FmHotLabelDemo.dfm</code> &ndash; Demo program's main form
-		resource file.
-	</li>
-	<li>
-		<code>Demo\DelphiDabbler.ico</code> &ndash; Demo program's icon.
-	</li>
 </ul>
 
 <p>
-	You can now proceed to install the component using the
-	<strong>emphasised</strong> files above. Installation methods vary between
-	Delphi versions, so follow the instructions that apply to your version
-	below. Note that <code><strong>$(DELPHI)</strong></code> represents the path
-	where the appropriate version of Delphi was installed. Similarly
-	<code><strong>$(BDS)</strong></code> refers to the installation path of a
-	version of the Borland Development System.
+	In addition to the above files you will find the source code of the demo
+	project the <code>Demo</code> sub-directory. 
 </p>
-
-<ul>
-	<li>
-		<a href="#bds">Installation with Delphi 2005 &amp; 2006</a>
-	</li>
-	<li>
-		<a href="#d4">Installation with Delphi 4 to 7</a>
-	</li>
-	<li>
-		<a href="#d3">Installation with Delphi 3</a>
-	</li>
-	<li>
-		<a href="#d2">Installation with Delphi 2</a>
-	</li>
-</ul>
-
-<h3 id="bds">Installation with Delphi 2005 &amp; 2006</h3>
 
 <p>
-	The component must be installed into a Delphi Win32 design package. It is
-	assumed that you will be installing into an existing package. You may decide
-	to install into the &quot;user&quot; package:
-	<code>$(BDS)\Lib\dclusr.dpk</code>.
+	You can now install the components into the Delphi IDE. To do this, the
+	files <code>PJHotLabel.pas</code>, <code>PJHotLabel.dcr</code> and 
+	<code>PJHotLabel.res</code> should be added to a design time package. If you
+	need help doing this <a
+		href="http://www.delphidabbler.com/url/install-comp"
+	>see here</a>.
 </p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your Borland Studio Projects or
-		<code>$(BDS)\lib</code> folders.
-	</li>
-	<li>
-		Copy <code>PJHotLabel.pas</code> and <code>PJHotLabel.dcr</code> to
-		the chosen installation folder.
-	</li>
-	<li>
-		Start the Development System (selecting the Delphi Win32 personality if
-		appropriate) then:
-		<ol>
-			<li>
-				Open the required package. Select the <em>File | Open</em> menu
-				and choose a suitable package source file.
-			</li>
-			<li>
-				The package (with <code>.bpl</code> extension) will now be
-				displayed in the Project Manager. If the package has not been
-				installed right click the <code>.bpl</code> entry in the Project
-				Manager and select <em>Install</em>. Dismiss any resulting
-				message dialog.
-			</li>
-			
-			<li>
-				Now right click the <code>.bpl</code> entry again and select
-				<em>Add</em>. The &quot;Add&quot; dialog box will be displayed.
-				Click the dialog's <em>Browse</em> button then select
-				<code>PJHotLabel.pas</code> from the resulting file open dialog.
-				The full path to the file should now be displayed in the
-				&quot;Add&quot; dialog's <em>Unit file name</em> edit box. Click
-				<em>OK</em> to add the component to the package.
-			</li>
-			<li>
-				Back in the Project Manager, check that
-				<code>PJHotLabel.pas</code> and <code>PJHotLabel.dcr</code>
-				appear under the package's &quot;Contains&quot; node. If so,
-				right click the <code>.bpl</code> entry again and select
-				<em>Compile</em>. The package will now be recompiled and, if all
-				is well, a message should be displayed indicating that
-				<var>TPJHotLabel</var> has been registered. The component should
-				now appear in the &quot;DelphiDabbler&quot; section of the Tool
-				Palette. (Note this will only appear when a form is selected in
-				the designer).
-			</li>
-			<li>
-				Close the package project using the <em>File | Close</em> menu
-				item. If a prompt appears offering to save the package project,
-				accept this.
-			</li>
-		</ol>
-	</li>
-	<li>
-		If you wish you can now delete <code>PJHotLabel.pas</code> from the
-		place where you copied it.
-	</li>
-	<li>
-		The supplied help file <strong>does not</strong> integrate into the
-		Delphi 2005 or 2006 IDEs. The help file can be used stand-alone, but be
-		aware that it contains links into other Delphi help files that will not
-		work.
-	</li>
-	<li>
-		The demo program can be loaded into Delphi and compiled and run as
-		required.
-	</li>
-</ol>
 
 <p>
-	
+	Note that the help file included in the download can only integrate with the
+	IDE in Delphi 3-7. For information on how to do this, see <a
+		href="http://www.delphidabbler.com/articles?article=15"
+	>this article</a>. Users of other versions of Delphi can either use the help
+	file as a stand-alone file (in which case some links won't work) or you can
+	use the <a
+		href="http://www.delphidabbler.com/url/hotlabel-wiki"
+	>Hot Label Component Wiki</a>.
 </p>
-
-
-
-<h3 id="d4">
-	Installation with Delphi 4 to 7
-</h3>
-
-<p>
-	The component must be installed into a design package. It is assumed that
-	you will be installing into an existing package. You may wish to use the 
-	&quot;user&quot; package named <code>dclusr.dpk</code> or
-	<code>dclusrXX.dpk</code> (where XX is a version number). This package can
-	be found in <code>$(DELPHI)\Lib</code>.
-</p>
-
-<ol class="spaced">
-	<li>
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder. 
-	</li>
-	<li>
-		Copy <code>PJHotLabel.pas</code> and <code>PJHotLabel.dcr</code> to
-		the chosen installation folder.
-	</li>
-	<li>
-		Start Delphi then:
-		<ol>
-			<li>
-				Choose the <em>Component | Install Component</em> menu option to
-				display the <em>Install Component</em> dialog box. Ensure the
-				<em>Into existing package</em> tab is selected. Enter the full
-				path to <code>PJHotLabel.pas</code> in the <em>Unit file
-				name</em> edit box (use the adjacent <em>Browse</em> button to
-				navigate to the file). Choose the required package from the
-				<em>Package description</em> combo box, or by navigating to the
-				package using <em>Browse</em>. Click <em>OK</em> to confirm your
-				selection.
-			</li>
-			<li>
-				A confirmation dialog box may displayed, querying whether it is
-				OK to rebuild and reinstall the package. Click <em>Yes</em> to
-				proceed.
-			</li>
-			<li>
-				The package will now be built and a dialog box should be
-				displayed stating that the <var>TPJHotLabel</var> component has
-				been installed. Click <em>OK</em> to dismiss the dialog box.
-			</li>
-			<li>
-				The component should now appear in the Component Palette on the
-				&quot;DelphiDabbler&quot; tab.
-			</li>
-		</ol>
-	</li>
-	<li>
-		If you wish you can now delete <code>PJHotLabel.pas</code> from the
-		place where you copied it.
-	</li>
-	<li>
-		The provided help file can be integrated with the IDE's OpenHelp system.
-		Delphi 6 and 7 also require the use of the supplied <code>.als</code>
-		file. The simplest way to install the help file is to use my
-		<a href="http://www.delphidabbler.com/software?id=chi">Component Help
-		Installer Expert</a> (v2.2.1 or later). If you prefer to install
-		manually,
-		<a href="http://www.delphidabbler.com/articles?article=15">this
-		article</a> explains the process.
-	</li>
-	<li>
-		The demo program can be loaded into Delphi and compiled and run as
-		required. For Delphi version before v7, unsupported form properties may
-		need to be removed in order to compile the program.
-	</li>
-</ol>
-
-
-<h3 id="d3">
-	Installation with Delphi 3
-</h3>
-
-<p>
-	The component must be installed into a design package. It is assumed that
-	you will be installing into an existing package. You may wish to use the 
-	&quot;user&quot; package named <code>dclusr30.dpk</code>. This package can
-	be found in <code>$(DELPHI)\Lib</code>.
-</p>
-
-<ol class="spaced">
-	<li>
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder. 
-	</li>
-	<li>
-		Copy <code>PJHotLabel.pas</code>, <code>PJHotLabel.dcr</code> and
-		<code>PJHotLabel.res</code> to the chosen installation folder.
-	</li>
-	<li>
-		Start Delphi then:
-		<ol>
-			<li>
-				Choose the <em>Component | Install Component</em> menu option to
-				display the <em>Install Component</em> dialog box. Ensure the
-				<em>Into existing package</em> tab is selected. Enter the full
-				path to <code>PJHotLabel.pas</code> in the <em>Unit file
-				name</em> edit box (use the adjacent <em>Browse</em> button to
-				navigate to the file). Choose the required package from the
-				<em>Package description</em> combo box, or by navigating to the
-				package using <em>Browse</em>. Click <em>OK</em> to confirm your
-				selection.
-			</li>
-			<li>
-				A confirmation dialog box may displayed, querying whether it is
-				OK to rebuild and reinstall the package. Click <em>Yes</em> to
-				proceed.
-			</li>
-			<li>
-				The package will now be built and a dialog box should be
-				displayed stating that the <var>TPJHotLabel</var> component has
-				been installed. Click <em>OK</em> to dismiss the dialog box.
-			</li>
-			<li>
-				The component should now appear in the Component Palette on the
-				&quot;DelphiDabbler&quot; tab.
-			</li>
-		</ol>
-	</li>
-	<li>
-		If you wish you can now delete <code>PJHotLabel.pas</code> from the
-		place where you copied it.
-	</li>
-	<li>
-		The provided help file can be integrated with the IDE's OpenHelp system.
-		The simplest way to install the help file is to use my
-		<a href="http://www.delphidabbler.com/software?id=chi">Component Help
-		Installer Expert</a> (v2.2.1 or later). If you prefer to install
-		manually,
-		<a href="http://www.delphidabbler.com/articles?article=15">this
-		article</a> explains the process.
-	</li>
-	<li>
-		The demo program can be loaded into Delphi and compiled and run as
-		required. Unsupported form properties may need to be removed in order to
-		compile the program.
-	</li>
-</ol>
-
-
-<h3 id="d2">Installation with Delphi 2</h3>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
-	</li>
-	<li>
-		Copy <code>PJHotLabel.pas</code>, <code>PJHotLabel.dcr</code> and
-		<code>PJHotLabel.res</code> to the chosen installation folder.
-	</li>
-	<li>Start Delphi then:
-		<ol>
-			<li>
-				Select the <em>Component | Install</em> menu option to display
-				the <em>Install Components</em> dialog box.
-			</li>
-			<li>
-				Click the <em>Add</em> button to display the <em>Add Module</em>
-				dialog box.
-			</li>
-			<li>
-				Click the <em>Browse</em> button and choose
-				<code>PJHotLabel.pas</code> from the resulting standard file
-				open dialog box and click <em>Open</em>.
-			</li>
-			<li>
-				This returns you to the <em>Install Components</em> dialog box.
-				Click <em>OK</em> here to rebuild the component library.
-			</li>
-			<li>
-				<var>TPJHotLabel</var> should now appear on the
-				&quot;DelphiDabbler&quot; tab of the component palette.
-			</li>
-		</ol>
-	</li>
-	<li>
-		If you wish you can now delete <code>PJHotLabel.pas</code> from the
-		place where you copied it.
-	</li>
-	<li>
-		The supplied help file <strong>does not</strong> integrate into the
-		Delphi 2 IDE. The help file can be used stand-alone, but be aware that
-		it contains links into other Delphi help files that will not work.
-	</li>
-	<li>
-		The demo program can be loaded into Delphi and compiled and run as
-		required. Unsupported form properties may need to be removed in order to
-		compile the program.
-	</li>
-</ol>
 
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
-<h2 id="issues">
-	Known Issues
+<h2 id="demo">
+	Demo Program
 </h2>
 
 <p>
-	v2.0 had a design time bug that could, in certain circumstances, cause the
-	font to be altered if the mouse cursor passed over the component on the form
-	designer. This was fixed in release 2.1.
+	Source code for a program that demonstrates the component is included in the
+	download.
 </p>
 
 
@@ -703,7 +374,7 @@
 
 <p>
 	 A complete change log is provided in a text file that is included in the
-	 download &ndash; see <code>ChangeLog.txt</code>.
+	 download.
 </p>
 
 
@@ -716,23 +387,25 @@
 </h2>
 
 <p>
-	The original source code of for the <var>TPJHotLabel</var> component (the
-	Product) is subject to the Mozilla Public License Version 1.1 (the
-	&quot;License&quot;). You may not use this Product except in compliance with
-	the License. You may obtain a copy of the License at
-	<a href="http://www.mozilla.org/MPL/">http://www.mozilla.org/MPL/</a>,
-	or see the file <code>MPL.txt</code> included in the download.
+	This product, <em>Hot Label Component</em>, is subject to the Mozilla Public
+	License Version 1.1 (the &quot;License&quot;). You may not use this Product
+	except in compliance with the License. You may obtain a copy of the License
+	at <a
+		href="http://www.mozilla.org/MPL/MPL-1.1"
+	>http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
-	The Product is provided on an &quot;AS IS&quot; basis, WITHOUT WARRANTY OF
-	ANY KIND, either express or implied. See the License for the specific
-	language governing rights and limitations under the License.
+	Software distributed under the License is distributed on an &quot;AS
+	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+	the License for the specific language governing rights and limitations under
+	the License.
 </p>
 
 <p>
-	The original source code is copyright &copy; 1999-2007 Peter Johnson. All
-	Rights Reserved.
+	The Initial Developer of <em>Hot Label Component</em> is Peter D Johnson.
+	Portions created by the Initial Developer are Copyright &copy; 1999-2010
+	Peter D Johnson (www.delphidabbler.com). All Rights Reserved.
 </p>
 
 <p>
@@ -744,32 +417,60 @@
 	&raquo; <a href="#contents">Contents</a>
 </p>
 
+
+<p class="gototop">
+	&raquo; <a href="#contents">Contents</a>
+</p>
+
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
+
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
+</p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
+
+
 <h2 id="author">
 	About the Author
 </h2>
 
 <p>
 	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-	Wales,  UK, writing write mainly in Delphi. My programs are available for
-	download from:
-	<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+	Wales, UK, writing write mainly in Delphi. My programs and code are
+	available from <a
+		href="http://www.delphidabbler.com/"
+	>http://www.delphidabbler.com/</a>.
 </p>
 
+<p>
+	I can be <a
+		href="http://www.delphidabbler.com/contact"
+	>contacted via the website</a>.
+</p> 
+
+
 <div class="endnotes">
-
 	<div class="comments">
-		Please
-		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the components, if you
-		have found a bug, or you want to suggest any updates.
+		Please <a
+			href="http://www.delphidabbler.com/contact"
+		>let me know</a> if you have any comments about the component, but
+		please use the Issue Tracker noted above to report bugs and request new
+		features.
 	</div>
-
 	<div class="copyright">
-		This info sheet is copyright &copy; 2007, P D Johnson,
-		<a href="http://www.delphidabbler.com/">
-		www.delphidabbler.com</a>
+		This document is copyright &copy; 2007-2010, P D Johnson, <a
+			href="http://www.delphidabbler.com/"
+		>www.delphidabbler.com</a>
 	</div>
-
 </div>
 
 </body>
