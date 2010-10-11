@@ -1,0 +1,217 @@
+================================================================================
+
+Hot Label Component: Historical update information from v1.0 to v2.1
+
+================================================================================
+
+This file records known changes to files in the Hot Label Component from v1.0 to
+v2.1, before the project was placed was placed under version control with
+Subversion.
+
+There are two sections:
+
+  1: Releases: Lists all the releases of the project and notes which files were
+     added, updated or deleted in each release.
+
+  2: Files: Lists all source code and development tools and provides details of
+     changes to these files.
+
+
+================================================================================
+1: RELEASES
+================================================================================
+
+This section lists all releases of the project from the first version (1.0) to
+release 2.1. For each release the following is noted:
+
+  + Version and date
+  + List of new, updated and deleted files.
+
+For details of changes to each release see ChangeLog.txt
+
+--------------------------------------------------------------------------------
+v1.0 of 25 Oct 1999
+--------------------------------------------------------------------------------
+New     - HotLabel.pas 1.0
+New     - HotLabel.dcr of 24 Oct 1999
+New     - HotLabel.rc 1.0
+New     - Hand.cur of 24 Oct 1999
+New     - Help\HotLabel.hta of 25 Oct 1999
+New     - Help\HotLabel.kwf of 25 Oct 1999
+New     - Help\PJHotLabel.bmp of 25 Oct 1999
+
+--------------------------------------------------------------------------------
+v2.0 of 02 Nov 2003
+--------------------------------------------------------------------------------
+Updated - PJHotLabel.pas 2.0 renamed from HotLabel.pas
+Renamed - PJHotLabel.dcr from HotLabel.dcr
+Updated - PJHotLabel.rc 1.1 renamed from HotLabel.rc
+Deleted - Help\HotLabel.kwf.
+Updated - Help\PJHotLabel.hap of 02 Nov 2003 renamed from Help\HotLabel.hta
+Updated - Help\PJHotLabel.hpj 2.0 renamed from Help\HotLabel.hpj
+New     - Help\CustomCursor.bmp of 01 Nov 2003
+New     - Help\DelphiCursor.bmp of 01 Nov 2003
+
+--------------------------------------------------------------------------------
+v2.1 of 17 Mar 2007
+--------------------------------------------------------------------------------
+Updated - PJHotLabel.pas 1.1
+Updated - PJHotLabel.rc 1.2
+Updated - Help\PJHotLabel.hpj 2.1
+New     - Help\PJHotLabel.als of 17 Mar 2007
+New     - Demo\HotLabelDemo.dpr 1.0
+New     - Demo\FmHotLabelDemo.pas 1.0
+New     - Demo\DelphiDabbler.ico of 10 Oct 2003
+New     - Demo\HotLabelDemo.res of 17 Mar 2007
+
+
+================================================================================
+2: FILES
+================================================================================
+
+This section lists all files for which an update history is known between v1 and
+and v2.1, inclusive.
+
+--------------------------------------------------------------------------------
+Hand.cur
+--------------------------------------------------------------------------------
+        24 Oct 1999  - New file containing "hand point" cursor.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+PJHotLabel.dcr
+--------------------------------------------------------------------------------
+        24 Oct 1999  - 32 bit resource containing component palette glyph
+                       named HotLabel.dcr
+        02 Nov 2993  - Renamed from HotLabel.dcr to PJHotLabel.dcr.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+PJHotLabel.pas
+--------------------------------------------------------------------------------
+v1.0 of 25 Oct 1999  - Original version of component named HotLabel.pas
+v2.0 of 02 Nov 2004  - Added separate URL property to enable caption to be
+                       different to URL accessed.
+                     - Added ability to highlight label text when cursor passes
+                       over it.
+                     - Added ability to display URL in hint or to display custom
+                       custom hints set by handling the new OnCustomHint event.
+                     - Now uses built in hand point cursor for Delphi 4 and
+                       higher while still loading custom cursor from resources
+                       for earlier compilers. Value of custom cursor constant
+                       changed from $0A to $630B.
+                     - Moved error messages to resource strings for Delphi 3 and
+                        later while using constants for Delphi 2.
+                     - Added support for https:// protocol.
+                     - Changed default URL to http://localhost/
+                     - Renamed unit as PJHotLabel.pas
+v2.1 of 17/03/2007   - Fixed bug where label's colour could be displayed wrongly
+                       at design time if mouse had been moved over the label and
+                       highlighting was enabled. Fixed by ignoring mouse over
+                       events at design time.
+                     - Made some minor refactorings.
+                     - Changed name of cursor read from resources in Delphi 2
+                       and Delphi 3.
+                     - Changed to Mozilla Public License.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+PJHotLabel.rc
+--------------------------------------------------------------------------------
+v1.0 of 24 Oct 1999  - Original version named HotLabel.rc
+v1.1 of 02 Nov 2003  - Removed unused constant definition.
+                     - Renamed as PJHotLabel.rc
+v1.2 of 17 Mar 2007  - Changed cursor name from HOTLABEL_HANDCUR to
+                       PJHOTLABEL_HANDPOINT.
+                     - Changed to Mozilla Public License.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\DelphiDabbler.ico
+--------------------------------------------------------------------------------
+        10 Oct 2003  - Demo program icon.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\FmHotLabelDemo.pas
+--------------------------------------------------------------------------------
+v1.0 of 17 Mar 2007  - Original version of demo program main form.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\HotLabelDemo.dpr
+--------------------------------------------------------------------------------
+v1.0 of 17 Mar 2007  - Original version of demo program project file.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Demo\HotLabelDemo.res
+--------------------------------------------------------------------------------
+        17 Mar 2007  - New resource file containing demo program's icon.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+DevTools\Release.bat
+--------------------------------------------------------------------------------
+v1.0 of 17 Mar 2007  - New script used to create zip file containing release
+                       files.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\HotLabel.kwf
+--------------------------------------------------------------------------------
+        25 Oct 1999  - Original help keyword file for Delphi 2.
+        02 Nov 2003  - DELETED.
+
+--------------------------------------------------------------------------------
+Help\CustomCursor.bmp
+--------------------------------------------------------------------------------
+        01 Nov 2003  - New image of custom cursor for use in help file.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\DelphiCursor.bmp
+--------------------------------------------------------------------------------
+        01 Nov 2003  - New image of Delphi's hand point cursor for use in help
+                       file.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJHotLabel.als
+--------------------------------------------------------------------------------
+        17 Mar 2007  - New A-link help keyword file for Delphi 6 and 7.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJHotLabel.bmp
+--------------------------------------------------------------------------------
+        25 Oct 1999  - New image of component's glyph for use in help file.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJHotLabel.hap
+--------------------------------------------------------------------------------
+        25 Oct 1999  - Help Topic Author file for component help named
+                       HotLabel.hta.
+        02 Nov 2003  - Completely rewrote help source file for v2.0 of
+                       component. Help file is now compatible with Delphi 3 and
+                       later IDEs and no longer compatible with Delphi 2.
+                     - Renamed from HotLabel.hta.
+        10 Oct 2010  - MOVED TO SVN.
+
+--------------------------------------------------------------------------------
+Help\PJHotLabel.hpj
+--------------------------------------------------------------------------------
+v1.0 of 25 Oct 1999  - Original version named HotLabel.hpj
+v2.0 of 02 Nov 2004  - Total rewrite for v2 of the component.
+                     - Changed window title to brand as DelphiDabbler.
+                     - Updated copyright text and date.
+                     - Changed name of output help file from hotlabel.hlp to
+                       PJHotLabel.hlp.
+                     - Updated [FILES] section to use PJHotLabel.rtf rather
+                       than hotlabel.rtf.
+                     - Renamed from HotLabel.hpj to PJHotLabel.hpj.
+v2.1 of 17/03/2007   - Changed copuright date to include 2007.
+                     - Changed to Mozilla Public License.
+        10 Oct 2010  - MOVED TO SVN.
+--------------------------------------------------------------------------------
