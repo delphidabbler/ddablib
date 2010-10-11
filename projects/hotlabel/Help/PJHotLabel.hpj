@@ -36,7 +36,7 @@ HCW=0
 LCID=0x809 0x0 0x0 ;English (United Kingdom)
 REPORT=Yes
 TITLE=DelphiDabbler Hot Label Component Help
-COPYRIGHT=DelphiDabbler Hot Label Component Copyright © P.D.Johnson, 1999-2007
+COPYRIGHT=DelphiDabbler Hot Label Component Copyright © P.D.Johnson, 1999-2010
 HLP=.\PJHotLabel.hlp
 
 [FILES]
