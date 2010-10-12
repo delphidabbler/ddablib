@@ -48,13 +48,11 @@ interface
 {$IFDEF VER90}    // --- Delphi 2
   {$UNDEF DELPHI_VER_SUPPORTED}
 {$ENDIF}
+{$IFDEF VER100}   // --- Delphi 3
+  {$UNDEF DELPHI_VER_SUPPORTED}
+{$ENDIF}
 {$IFNDEF DELPHI_VER_SUPPORTED}
   This version of Delphi is not supported.
-{$ENDIF}
-
-// Determine conditional symbols based on compiler
-{$IFDEF VER100}   // --- Delphi 3
-  {$DEFINE NO_HAND_CURSOR}
 {$ENDIF}
 
 // Switch off warnings where this is supported
@@ -73,14 +71,7 @@ uses
 
 
 const
-  // We make sure the crHandPoint cursor is defined. It is not defined for all
-  // versions of Delphi.
-  {$IFDEF NO_HAND_CURSOR}
-  crHandPoint = TCursor($630B);
-  {$ENDIF}
-  // For reasons of backward compatibility we also define crHand as an alias
-  // for crHandPoint.
-  crHand = crHandPoint;
+  crHand = crHandPoint;   // for backwards compatibility
 
 
 type
@@ -286,12 +277,6 @@ uses
   Windows, ShellAPI;
 
 
-// Only link this resource for Delphi version with no built in hand point cursor
-{$IFDEF NO_HAND_CURSOR}
-  {$R PJHotLabel.res}
-{$ENDIF}
-
-
 const
   // URL used as default caption property by SetDefaultURL method
   cDefaultURL = 'http://localhost/';
@@ -419,12 +404,6 @@ constructor TPJHotLabel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
-  // Ensure crHandPoint cursor is available and use it as default
-  {$IFDEF NO_HAND_CURSOR}
-  Screen.Cursors[crHandPoint] := LoadCursor(HInstance, 'PJHOTLABEL_HANDPOINT');
-  {$ENDIF}
-  Cursor := crHandPoint;
-
   // Create backup and highlight fonts
   fBackupFont := TFont.Create;
   fHighlightFont := TFont.Create;
@@ -432,6 +411,7 @@ begin
   // Set default values
   // NOTE: various defaults have been chosen to make default behaviour of
   // component emulate earlier versions
+  Cursor := crHandPoint;
   Font.Color := clNavy; // sets ParentFont to False
   Font.Style := [fsUnderline];
   HighlightFont := Font;
