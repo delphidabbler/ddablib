@@ -4,6 +4,13 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v2.1.1 of 12 October 2010
++ Removed support for Delphi 2 and 3. Unit now generates error when compiled with these compilers.
++ Removed custom hand-point cursor.
++ Modified to compile without warnings on Delphi 2010.
++ Updated help file re changes.
++ Revised documentation and included shortcut file that links to component Wiki.
+
 Release v2.1 of 17 March 2007
 + Fixed design time bug that could change font colour if mouse was moved over label in designer.
 + Added .als keyword file for use with Delphi 6 and 7.
