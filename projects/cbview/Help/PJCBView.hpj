@@ -1,0 +1,50 @@
+; PJCBView.hpj
+;
+; Clipboard Viewer Component help project file.
+;
+; Originally named CBView.hpj. Renamed to PJCBView.hpj at v2.0
+;
+; v1.0 of 01 Aug 1999  - Original version named CBView.hpj.
+; v2.0 of 27 Jul 2003  - Rewrote for new OpenHelp compatible help file used with
+;                        release 1.1 of component.
+;                      - Changed name to PJCBView.hpj.
+; v2.1 of 11 May 2004  - Changed copyright date that appears in Help About box
+;                        to 1999-2004 from 1999-2003.
+; v2.2 of 16 Aug 2008  - Changed copyright date that appears in Help About box
+;                        to 1999-2008 from 1999-2004.
+;
+;
+; ***** BEGIN LICENSE BLOCK *****
+;
+; Version: MPL 1.1
+;
+; The contents of this file are subject to the Mozilla Public License Version
+; 1.1 (the "License"); you may not use this file except in compliance with the
+; License. You may obtain a copy of the License at http://www.mozilla.org/MPL/
+;
+; Software distributed under the License is distributed on an "AS IS" basis,
+; WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+; the specific language governing rights and limitations under the License.
+;
+; The Original Code is PJCBView.hpj
+;
+; The Initial Developer of the Original Code is Peter Johnson
+; (http://www.delphidabbler.com/).
+;
+; Portions created by the Initial Developer are Copyright (C) 1999-2008 Peter
+; Johnson. All Rights Reserved.
+;
+; ***** END LICENSE BLOCK *****
+
+
+[OPTIONS]
+HCW=0
+LCID=0x809 0x0 0x0 ;English (United Kingdom)
+REPORT=Yes
+TITLE=DelphiDabbler Clipboard Viewer Component
+COPYRIGHT=DelphiDabbler Clipboard Viewer Help - Copyright © 1999-2008 P.D.Johnson
+HLP=.\PJCBView.hlp
+
+[FILES]
+PJCBView.rtf
+

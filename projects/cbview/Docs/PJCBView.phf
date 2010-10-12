@@ -1,0 +1,156 @@
+@PROJECT_NAME           Clipboard Viewer Component
+@PROJECT_DESC           Component that monitors the Windows clipboad and
+                        triggers an event whenever the clipboard contents
+                        change.
+@ROOT                   ..\
+@AUTHOR                 Peter Johnson, LLANARTH, Ceredigion, Wales, UK
+@WEBSITE                http://www.delphidabbler.com/
+@LEGAL_NOTICE           This code is distributed under the Mozilla Public
+                        License and other open source licenses.
+@COPYRIGHT              © Peter D Johnson, 1999-2008.
+@HISTORY(
+  @REVISION(
+    @VERSION            1.0
+    @DATE               01/08/1999
+    @COMMENTS           Original version.
+    @COMPILERS          + HC31 Help Compiler
+                        + Help Topic Author
+    @FILES(
+      @NEW(
+        @FILE           CBView.pas
+        @VERSION        1.0
+      )
+      @NEW(
+        @FILE           16\CBView.dcr
+        @DATE           01/08/1999
+        @COMMENTS       16 bit resource containing component glyph.
+      )
+      @NEW(
+        @FILE           32\CBView.dcr
+        @DATE           31/07/1999
+        @COMMENTS       32 bit resource containing component glyph.
+      )
+      @NEW(
+        @FILE           Help\CBView.hpj
+        @VERSION        1.0
+      )
+      @NEW(
+        @FILE           Help\CBView.hta
+        @DATE           31/07/1999
+        @COMMENTS       Help project author file.
+      )
+      @NEW(
+        @FILE           Help\CBView.kwf
+        @DATE           31/07/1999
+        @COMMENTS       Help keyword file for Delphi 1/2
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            1.1
+    @DATE               27/07/2003
+    @COMPILERS          + Help Topic Author 1.12.4
+                        + Microsoft Help Workshop 4
+    @COMMENTS           + Updated help file to 32 bit and made compatible with
+                          Delphi OpenHelp. Help file can now be integrated with
+                          Delphi 3 onwards IDE. Delphi 1 & 2 compatibility lost.
+    @FILES(
+      @REMOVED          Help\CBView.kwf
+      @UPDATED(
+        @FILE           PJCBView.pas
+        @VERSION        1.1
+        @DATE           27/07/2003
+        @RENAMED_FROM   CBView.pas
+      )
+      @UPDATED(
+        @FILE           16\PJCBView.dcr
+        @DATE           01/08/1999
+        @COMMENTS       Not updated - simply renamed.
+        @RENAMED_FROM   16\CBView.dcr
+      )
+      @UPDATED(
+        @FILE           32\PJCBView.dcr
+        @DATE           31/07/1999
+        @COMMENTS       Not updated - simply renamed.
+        @RENAMED_FROM   32\CBView.dcr
+      )
+      @UPDATED(
+        @FILE           Help\PJCBView.hpj
+        @VERSION        2.0
+        @RENAMED_FROM   Help\CBView.hpj
+      )
+      @UPDATED(
+        @FILE           Help\PJCBView.hap
+        @DATE           27/07/2003
+        @COMMENTS       Re-wrote as OpenHelp compatible help file in style
+                        compatible with other components.
+        @RENAMED_FROM   Help\CBView.hta
+      )
+      @NEW(
+        @FILE           Help\TPJCBViewer.bmp
+        @DATE           27/07/2003
+        @COMMENTS       Component palette glyph displayed in help file.
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            1.2
+    @DATE               11/05/2004
+    @COMMENTS           + Prevented compiler warnings when compiling the
+                          component under Delphi 6 and 7.
+                        + Updated copyright information in help file.
+                        + Changed to Mozilla Public License.
+    @COMPILERS          + Help Topic Author 1.12.4
+                        + Microsoft Help Workshop 4
+    @FILES(
+      @UPDATED(
+        @FILE           PJCBView.pas
+        @VERSION        1.2
+      )
+      @UPDATED(
+        @FILE           Help\PJCBView.hpj
+        @VERSION        2.1
+      )
+    )
+  )
+  @REVISION(
+    @VERSION            1.3
+    @DATE               17/08/2008
+    @COMMENTS           + Fixed a conditional compilation bug.
+                        + Refactored main window procedure more line with MSDN
+                          clipboard viewer documentation.
+                        + Removed 16 bit support.
+                        + Made minor changes to help file.
+    @COMPILERS          + Help Topic Author 1.17
+                        + Microsoft Help Workshop 4
+    @FILES(
+      @REMOVED          16\PJCBView.dcr
+      @UPDATED(
+        @FILE           PJCBView.pas
+        @VERSION        1.3
+      )
+      @UPDATED(
+        @FILE           PJCBView.dcr
+        @DATE           01/08/1999
+        @COMMENTS       Moved unchanged.
+        @RENAMED_FROM   32\PJCBView.dcr
+      )
+      @NEW(
+        @FILE           Help\PJCBView.als
+        @DATE           17/08/2008
+        @COMMENTS       Contains list of A keywords required by Delphi 6 and 7.
+      )
+      @UPDATED(
+        @FILE           Help\PJCBView.hap
+        @DATE           17/08/2008
+        @COMMENTS       + Modified style of example code.
+                        + Fixed some typos.
+                        + Made some minor editorial changes.
+      )
+      @UPDATED(
+        @FILE           Help\PJCBView.hpj
+        @VERSION        2.2
+      )
+    )
+  )
+)
