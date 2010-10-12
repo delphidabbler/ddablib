@@ -37,11 +37,11 @@ A{\footnote {A}TPJHotLabel;TPJHotLabel_object}
 \par \plain\f0\fs8\cf0 
 \par \plain\f1\fs18\cf0 Use this component when you need a label that can be clicked to access a URL using the default browser or email client.
 \par \plain\f1\fs8\cf0 
-\par \plain\f1\fs18\cf0 In addition to the properties of {\strike TLabel}{\v !AL(TLabel_object,1)}, from which this component descends, it provides all additional properties for working with URLs. The effect of some of TLabel's properties is modified in TPJHotLabel.
+\par \plain\f1\fs18\cf0 In addition to the properties of {\strike TLabel}{\v !AL(TLabel_object,1)}, from which this component descends, it provides additional properties for working with URLs. The effect of some of TLabel's properties is modified in TPJHotLabel.
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0 The {\strike URL}{\v IDH_HL_URL} property is used for storing the URL to be accessed and the {\strike Caption}{\v IDH_HL_CAPTION} property can either store descriptive text or can reflect the URL, depending on the value of the {\strike CaptionIsURL}{\v IDH_HL_CAPTIONISURL} property. When the {\strike ValidateURL}{\v IDH_HL_VALIDATEURL} property is \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0 , URLs areautomatically validated, raising an exception if invalid.
 \par \plain\f1\fs8\cf0 
-\par \plain\f1\fs18\cf0 The label's {\strike Font}{\v IDH_HL_FONT} property defaults to a font based on the parent font at the time the component is dropped on the form, but coloured navy blue. It should be noted that the Font property does not automatically reflect changes in the parent controls's font since {\strike ParentFont}{\v IDH_HL_PARENTFONT} defaults to \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0 . The label can be highlighted when the mouse passes over it. It does this if the {\strike HighlightURL}{\v IDH_HL_HIGHLIGHTURL} property is \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0 , in which case the {\strike HighlightFont}{\v IDH_HL_HIGHLIGHTFONT} property is used when the mouse is over the label. The HighlightFont is, by default, based on the default font used by the Font property, but with a different colour. A special "hand point" cursor is used by default when the mouse is over the label. accordingly the {\strike Cursor}{\v IDH_HL_CURSOR} property defaults to \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0  rather than \plain\f1\fs18\cf0\i crDefault\plain\f1\fs18\cf0 .
+\par \plain\f1\fs18\cf0 The label's {\strike Font}{\v IDH_HL_FONT} property defaults to a font based on the parent font at the time the component is dropped on the form, but coloured navy blue. It should be noted that the Font property does not automatically reflect changes in the parent controls's font since {\strike ParentFont}{\v IDH_HL_PARENTFONT} defaults to \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0 . The label can be highlighted when the mouse passes over it. It does this if the {\strike HighlightURL}{\v IDH_HL_HIGHLIGHTURL} property is \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0 , in which case the {\strike HighlightFont}{\v IDH_HL_HIGHLIGHTFONT} property is used when the mouse is over the label. The HighlightFont is, by default, based on the default font used by the Font property, but with a different colour. The {\strike Cursor}{\v IDH_HL_CURSOR} property defaults to \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0  rather than \plain\f1\fs18\cf0\i crDefault\plain\f1\fs18\cf0  so that the expected "pointing hand" is displayed over a link by default.
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0 Useful,customisable, pop-up hints can be displayed when the mouse cursor hovers over the label. You can either display text from the Hint property as normal, display the URL (useful when the URL is not displayed in the label) or customise the hint each time it is displayed. The {\strike HintStyle}{\v IDH_HL_HINTSTYLE} property is used to determine how hints are handled and custom hints are set up by handling the {\strike OnCustomHint}{\v IDH_HL_ONCUSTOMHINT} event.
 \par \plain\f1\fs12\cf0 
@@ -57,7 +57,7 @@ A{\footnote {A}TPJHotLabel;TPJHotLabel_object}
 \par \pard \plain\f1\fs8\cf0 
 \par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab \plain\f1\fs18\cf0 Font is set to \plain\f1\fs18\cf0\i clNavy\plain\f1\fs18\cf0  by default and ParentFont is therefore \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0 .
 \par \pard \plain\f1\fs8\cf0 
-\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab Although Cursor defaults to \plain\f3\fs18\cf0\i crHandPoint\plain\f3\fs18\cf0  a constant named \plain\f3\fs18\cf0\i crHand\plain\f3\fs18\cf0  is also supplied since this was the name used for the "hand" cursor used in v1.\plain\f0\fs18\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf0 \'A7\plain\f3\fs18\cf0 \tab Although Cursor defaults to \plain\f3\fs18\cf0\i crHandPoint\plain\f3\fs18\cf0  a constant named \plain\f3\fs18\cf0\i crHand\plain\f3\fs18\cf0  is also supplied since this was the name used for this cursor used in v1.\plain\f0\fs18\cf0 
 \par \page 
 ${\footnote {$}TPJHotLabel heirachy}
 #{\footnote {#}IDH_HL_HEIRACHY}
@@ -121,7 +121,7 @@ A{\footnote {A}TPJHotLabel_Caption;Caption_property;Caption}
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f1\fs18\cf0 Use Caption to set the text displayed in the label. If the {\strike CaptionIsURL}{\v IDH_HL_CAPTIONISURL} property is \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0  then the Caption and {\strike URL}{\v IDH_HL_URL} properties are equivalent, i.e. asigning a value to one will also assign the other. This makes it easy to display the URL in the label itself. To display text on the label that is different to the to the URL make sure that the CaptionIsURL property is \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0 .
+\par \plain\f1\fs18\cf0 Use Caption to set the text displayed in the label. If the {\strike CaptionIsURL}{\v IDH_HL_CAPTIONISURL} property is \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0  then the Caption and {\strike URL}{\v IDH_HL_URL} properties are equivalent, i.e. assigning a value to one will also assign the other. This makes it easy to display the URL in the label itself. To display text on the label that is different to the to the URL make sure that the CaptionIsURL property is \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0 .
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0 For reasons of backward compatibilty with earlier versions of the component the default behaviour is for the Caption property to display the URL (i.e. CaptionIsURL is \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0 ).
 \par \plain\f1\fs8\cf0 
@@ -181,18 +181,7 @@ A{\footnote {A}TPJHotLabel_Cursor;Cursor_property;Cursor}
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0 The Cursor property of TPJHotLabel differs from the inherited property in that its default cursor is \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0  rather than \plain\f1\fs18\cf0\i crDefault\plain\f1\fs18\cf0 .
 \par \plain\f1\fs8\cf0 
-\par \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0  is not provided as a built-in cursor in earlier versions of Delphi, so a custom cursor is included when the component is compiled with these early versions. In later versions of Delphi the built-in \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0  cursor is used. The value assigned to \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0  is different depending on whether the custom or built-in cursors are used. 
-\par \plain\f1\fs8\cf0 
-\par \plain\f1\fs18\cf0 The differences between versions of Delphi are:
-\par \plain\f1\fs12\cf0 
-\par \pard \fi-2000 \li2000 \tx1200 \tx2000 \keep \brdrb \brdrs \plain\f1\fs18\cf0\i Version\tab Cursor\tab Notes
-\par \pard \fi-2000 \li2000 \tx1200 \tx2000 \plain\f1\fs8\cf0 
-\par \plain\f1\fs18\cf0 Delphi 2 & 3\tab \{bmct CustomCursor.bmp\}\tab Since the cursor is custom the \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0  constant has a positive value ($630B) and so a number is displayed in the object inspector rather than "crHandPoint".
-\par 
-\par Delphi 4 up\tab \{bmct DelphiCursor.bmp\}\tab The cursor is built in to Delphi and therefore the \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0  constant has a Delphi-defined negative value. It displays in the object inspector as "crHandPoint".
-\par \plain\f1\fs8\cf0 
-\par \pard \fi-2000 \li2000 \tx1200 \tx2000 \brdrt \brdrs \plain\f1\fs12\cf0  \plain\f1\fs18\cf0 
-\par \pard Note that earlier versions of the component used a custom cursor named \plain\f1\fs18\cf0\i crHand\plain\f1\fs18\cf0 . For backward compatibility this constant is also defined and has the same value as \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0 , although the value of the constant has changed from earlier versions (from $000A to $630B).\plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0\b Note: \plain\f1\fs18\cf0 Earlier versions of the component used a custom cursor named \plain\f1\fs18\cf0\i crHand\plain\f1\fs18\cf0 . For backward compatibility this constant is also defined and has the same value as \plain\f1\fs18\cf0\i crHandPoint\plain\f1\fs18\cf0 .\plain\f0\fs8\cf0 
 \par \page 
 ${\footnote {$}TPJHotLabel.Font}
 #{\footnote {#}IDH_HL_FONT}
@@ -314,9 +303,9 @@ A{\footnote {A}TPJHotLabel_HintStyle;HintStyle_property;HintStyle}
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0\i hsURL\plain\f1\fs18\cf0 \tab The pop-up hint displays the URL property value. The Hint property is ignored.
 \par \plain\f1\fs8\cf0 
-\par \plain\f1\fs18\cf0\i hsCustom\plain\f1\fs18\cf0 \tab The use can specify a custom hint by handling the OnCustomHint event. See the {\strike OnCustomHint}{\v IDH_HL_ONCUSTOMHINT} topic for details of how the hint is set. If the OnCustomHint is not handled then the hint's text comes from the Hint property as normal.
+\par \plain\f1\fs18\cf0\i hsCustom\plain\f1\fs18\cf0 \tab The user can specify a custom hint by handling the OnCustomHint event. See the {\strike OnCustomHint}{\v IDH_HL_ONCUSTOMHINT} topic for details of how the hint is set. If the OnCustomHint event is not handled then the hint's text comes from the Hint property as normal.
 \par \pard \brdrt \brdrs \plain\f1\fs12\cf0  \plain\f1\fs18\cf0 
-\par \pard Note that no pop-up hint will display unless hints are enabled using either the {\strike ShowHint}{\v !AL(TControl_ShowHint,1)} property or the {\strike ParentShowHint}{\v !AL(TControl_ParentShowHint,1)} property is \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0  and its parent's ShowHint property is also \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0 .\plain\f1\fs8\cf0 
+\par \pard Note that no pop-up hint will display unless hints are enabled. This is done by ensuring the {\strike ShowHint}{\v !AL(TControl_ShowHint,1)} property is \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0 .\plain\f1\fs8\cf0 
 \par 
 \par \plain\f1\fs18\cf0 The default value of HintStyle is \plain\f1\fs18\cf0\i hsNormal\plain\f1\fs18\cf0 .\plain\f0\fs8\cf0 
 \par \page 
@@ -344,7 +333,7 @@ A{\footnote {A}TPJHotLabel_ParentFont;ParentFont_property;ParentFont}
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0 To specify a different font for a particular control, change the control's Font property, and ParentFont becomes \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0  automatically.
 \par \plain\f1\fs8\cf0 
-\par \plain\f1\fs18\cf0 The ParentFont property of TPJHotLabel defaults to \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0  since the default attributes of the Font property differs from the parent to make the hot-link stand out.\plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 The ParentFont property of TPJHotLabel defaults to \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0  since the default attributes of the Font property differs from the parent in order to make the hot-link stand out.\plain\f0\fs8\cf0 
 \par \page 
 ${\footnote {$}TPJHotLabel.URL}
 #{\footnote {#}IDH_HL_URL}
@@ -393,7 +382,7 @@ A{\footnote {A}TPJHotLabel_ValidateURL;ValidateURL_property;ValidateURL}
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f1\fs18\cf0 Set this property to \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0  to cause any value assigned to the {\strike URL}{\v IDH_HL_URL} property to be validated when assigned to the property. When ValidateURL is \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0  no URLs are validated. Note that setting this property to \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0  causes the current URL to be validated.
+\par \plain\f1\fs18\cf0 Set this property to \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0  to cause any value assigned to the {\strike URL}{\v IDH_HL_URL} property to be validated. When ValidateURL is \plain\f1\fs18\cf0\i False\plain\f1\fs18\cf0  no URLs are validated. Note that setting this property to \plain\f1\fs18\cf0\i True\plain\f1\fs18\cf0  causes the current URL to be validated immediately.
 \par \plain\f0\fs8\cf0 
 \par \plain\f1\fs18\cf0 URLs are validated only by examining the protocol and checking it is supported. Valid protocols are:
 \par \plain\f0\fs8\cf0 
@@ -497,9 +486,9 @@ ${\footnote {$}Example 1 - Using Highlighting}
 \par \pard 
 \par \plain\f1\fs18\cf0 This example presents two possible designs for {\strike TPJHotLabel}{\v IDH_HL_CLASS} components that use text highlighting to indicate that the label is clickable.
 \par \plain\f1\fs12\cf0 
-\par \plain\f1\fs18\cf0\b Example 1\plain\f1\fs18\cf0 
+\par \plain\f1\fs18\cf0\b Example A\plain\f1\fs18\cf0 
 \par \plain\f1\fs8\cf0 
-\par \plain\f1\fs18\cf0 This example uses a change in text decoration to highlight the text of the label when the mouse passes over it. We set {\strike Font.}{\v IDH_HL_FONT}Style to \plain\f1\fs18\cf0\i [ ]\plain\f1\fs18\cf0  and {\strike HighlightFont}{\v IDH_HL_HIGHLIGHTFONT}.Style to \plain\f1\fs18\cf0\i [fsUnderline]\plain\f1\fs18\cf0  and make HighlightFont.Color the same as Font.Color. We use a colour that is different from the standard label font to indicate the label is clickable. The un-highlightedlabel will display with no text decoration and the label will be underlined when the mouse passes over it.
+\par \plain\f1\fs18\cf0 This example uses a change in text decoration to highlight the text of the label when the mouse passes over it. We set {\strike Font}{\v IDH_HL_FONT}.Style to \plain\f1\fs18\cf0\i [ ]\plain\f1\fs18\cf0  and {\strike HighlightFont}{\v IDH_HL_HIGHLIGHTFONT}.Style to \plain\f1\fs18\cf0\i [fsUnderline]\plain\f1\fs18\cf0  and make HighlightFont.Color the same as Font.Color. We use a colour that is different from the standard label font to indicate the label is clickable. The un-highlightedlabel will display with no text decoration and the label will be underlined when the mouse passes over it.
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0 Start a new application and place a TPJHotLabel component on the form. Double click the form to create a FormCreate event handler and enter the following code:
 \par \plain\f1\fs8\cf0 
@@ -514,7 +503,7 @@ ${\footnote {$}Example 1 - Using Highlighting}
 \par \pard \li400 \tx2000 \keep \plain\f1\fs18\cf0 Normal style:\tab \plain\f1\fs18\cf2 http://localhost/\plain\f1\fs18\cf0 
 \par Highlighted style:\tab \plain\f1\fs18\cf2\ul http://localhost/\plain\f1\fs18\cf0 
 \par \pard \plain\f1\fs12\cf0 
-\par \plain\f1\fs18\cf0\b Example 2\plain\f1\fs18\cf0 
+\par \plain\f1\fs18\cf0\b Example B\plain\f1\fs18\cf0 
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0 The second example uses a colour change to provide the highlighting. The default values of the Font and HighlightFont properties will suffice for this example - unhighlighted text is navy blue and is underlined while the highlighted text is red and is also underlined
 \par \plain\f1\fs8\cf0 
@@ -537,7 +526,7 @@ ${\footnote {$}Exmaple 2 - Using OnCustomEvent}
 \par \pard 
 \par \plain\f1\fs18\cf0 These examples show how to use the {\strike OnCustomHint}{\v IDH_HL_ONCUSTOMHINT} event of {\strike TPJHotLabel}{\v IDH_HL_CLASS}. We handle the event to display a hint containing some descriptive text and the URL in brackets.
 \par \plain\f1\fs12\cf0 
-\par \plain\f1\fs18\cf0\b Example 1\plain\f1\fs18\cf0 
+\par \plain\f1\fs18\cf0\b Example A\plain\f1\fs18\cf0 
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0 Drop a TPJHotLabel component on a form and create a FormCreate and a OnCustomHint event handler, completed as follows:
 \par \plain\f1\fs8\cf0 
@@ -555,7 +544,7 @@ ${\footnote {$}Exmaple 2 - Using OnCustomEvent}
 \par     [PJHotLabel1.URL]);
 \par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
 \par \pard \plain\f0\fs12\cf0 
-\par \plain\f1\fs18\cf0\b Example 2\plain\f1\fs18\cf0 
+\par \plain\f1\fs18\cf0\b Example B\plain\f1\fs18\cf0 
 \par \plain\f1\fs8\cf0 
 \par \plain\f1\fs18\cf0 This example is similar to the first example except we store the custom hint text in the {\strike Hint}{\v IDH_HL_HINT} property rather than entering the text in the form unit. This keeps the form's text in the form file. Drop a TPJHotLabel component on a form and create a FormCreate and a OnCustomHint event handler, as before, and comple them as follows:
 \par \plain\f1\fs8\cf0 
