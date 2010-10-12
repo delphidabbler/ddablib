@@ -40,26 +40,43 @@ unit PJHotLabel;
 interface
 
 
-// Determine conditional symbols based on compiler
-{$IFDEF VER90}    // --- Delphi 2
-  {$DEFINE NO_RES_STRINGS}
-  {$DEFINE NO_HAND_CURSOR}
+// Check Delphi version is supported
+{$DEFINE DELPHI_VER_SUPPORTED}
+{$IFDEF VER80}    // --- Delphi 1
+  {$UNDEF DELPHI_VER_SUPPORTED}
 {$ENDIF}
+{$IFDEF VER90}    // --- Delphi 2
+  {$UNDEF DELPHI_VER_SUPPORTED}
+{$ENDIF}
+{$IFNDEF DELPHI_VER_SUPPORTED}
+  This version of Delphi is not supported.
+{$ENDIF}
+
+// Determine conditional symbols based on compiler
 {$IFDEF VER100}   // --- Delphi 3
   {$DEFINE NO_HAND_CURSOR}
+{$ENDIF}
+
+// Switch off warnings where this is supported
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
 {$ENDIF}
 
 
 uses
   // Delphi
-  SysUtils, Classes, Graphics, Messages, Controls, StdCtrls;
+  // It is important that the Forms unit is declared before the Controls unit to
+  // avoid a deprecated warning on some compilers
+  SysUtils, Classes, Graphics, Messages, Forms, Controls, StdCtrls;
 
 
 const
   // We make sure the crHandPoint cursor is defined. It is not defined for all
   // versions of Delphi.
   {$IFDEF NO_HAND_CURSOR}
-  crHandPoint = TCursor($630B);   (* changed: cast to TCursor *)
+  crHandPoint = TCursor($630B);
   {$ENDIF}
   // For reasons of backward compatibility we also define crHand as an alias
   // for crHandPoint.
@@ -137,8 +154,8 @@ type
       {Message handler that intercepts hints before they are displayed and sets
       hint as required by the HintStyle property. Triggers OnCustomHint event
       when HintStyle = hsCustom.
-        @param Msg [in/out] Message parameters. Hint info structure pointed to by
-          LParam parameter may be changed.
+        @param Msg [in/out] Message parameters. Hint info structure pointed to
+          by LParam parameter may be changed.
       }
     procedure SetValidateURL(const Value: Boolean);
       {Write access method for ValidateURL property.
@@ -266,12 +283,12 @@ implementation
 
 uses
   // Delphi
-  Windows, ShellAPI, Forms;
+  Windows, ShellAPI;
 
 
 // Only link this resource for Delphi version with no built in hand point cursor
 {$IFDEF NO_HAND_CURSOR}
-{$R PJHotLabel.res}
+  {$R PJHotLabel.res}
 {$ENDIF}
 
 
@@ -280,12 +297,8 @@ const
   cDefaultURL = 'http://localhost/';
 
 
-// Message strings. Uses resource strings where supported, and const if not
-{$IFDEF NO_RES_STRINGS}
-const
-{$ELSE}
+// Message strings
 resourcestring
-{$ENDIF}
   sCantAccessURL = 'Can''t access URL "%s"';
   sBadProtocol = 'Protocol not recognised for URL "%s"';
 
