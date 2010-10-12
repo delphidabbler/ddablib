@@ -34,6 +34,7 @@ zip %OutFile% -j -9 %HelpDir%\PJHotLabel.als
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
 zip %OutFile% -j -9 %DocsDir%\MPL.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
+zip %OutFile% -j -9 %DocsDir%\Wiki.URL
 
 zip %OutFile% -r -9 %DemoDir%\*.* -x *.svn\*
 
