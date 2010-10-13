@@ -34,5 +34,6 @@ zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
 zip %OutFile% -j -9 %DocsDir%\MPL.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
 zip %OutFile% -j -9 %DocsDir%\DemoCode.htm
+zip %OutFile% -j -9 %DocsDir%\Wiki.URL
 
 endlocal
