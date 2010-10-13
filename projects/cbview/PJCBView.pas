@@ -2,8 +2,8 @@
  * PJCBView.pas
  *
  * Clipboard Viewer Component source code. Implements a component that monitors
- * the Windows clipboad and triggers an event whenever the clipboard contents
- * change.
+ * the Windows clipboard and triggers an event whenever the content of the
+ * clipboard changes.
  *
  * $Rev$
  * $Date$
@@ -43,17 +43,11 @@ interface
 
 // Determine which unit to use for AllocateHWnd and DeallocateHWnd
 // Delphi 2 to 5 use the Forms unit while Delphi 6 and later use Classes
-{$IFDEF VER90}    // Delphi 2
-  {$DEFINE ALLOCATEHWNDINFORMS}
-{$ENDIF}
-{$IFDEF VER100}   // Delphi 3
-  {$DEFINE ALLOCATEHWNDINFORMS}
-{$ENDIF}
-{$IFDEF VER120}   // Delphi 4
-  {$DEFINE ALLOCATEHWNDINFORMS}
-{$ENDIF}
-{$IFDEF VER130}   // Delphi 5
-  {$DEFINE ALLOCATEHWNDINFORMS}
+{$DEFINE ALLOCATEHWNDINFORMS}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 14.0} // >= Delphi 6
+    {$UNDEF ALLOCATEHWNDINFORMS}
+  {$IFEND}
 {$ENDIF}
 
 
@@ -66,21 +60,16 @@ type
 
   {
   TPJCBViewer:
-    Component that monitors the Windows clipboad and triggers an event whenever
+    Component that monitors the Windows clipboard and triggers an event whenever
     the clipboard contents change.
   }
   TPJCBViewer = class(TComponent)
   private
-    fOnClipboardChanged: TNotifyEvent;
-      {OnClipboardChanged event handler}
-    fTriggerOnCreation: Boolean;
-      {Value of TriggerOnCreation property}
-    fEnabled: Boolean;
-      {Value of Enabled property}
-    fHWnd: HWND;
-      {Handle of clipboard viewer window}
-    fHWndNextViewer: HWND;
-      {Handle of next clipboard viewer window in chain}
+    fOnClipboardChanged: TNotifyEvent;  // OnClipboardChanged event handler
+    fTriggerOnCreation: Boolean;        // Value of TriggerOnCreation property
+    fEnabled: Boolean;                  // Value of Enabled property
+    fHWnd: HWND;                        // Handle of clipboard viewer window
+    fHWndNextViewer: HWND;              // Next clipboard viewer handle in chain
   protected
     procedure ClipboardChanged; dynamic;
       {Triggers OnClipboardChanged event if any handler is assigned and
@@ -95,22 +84,23 @@ type
       }
   public
     constructor Create(AOwner: TComponent); override;
-      {Class constructor: Creates and registers clipboard viewer window and sets
-      default property values.
+      {Object constructor: Creates and registers clipboard viewer window and
+      sets default property values.
         @param AOwner [in] Reference to owning component.
       }
     destructor Destroy; override;
-      {Class destructor. Unregisters and destroys clipboard viewer window.
+      {Object destructor. Unregisters and destroys clipboard viewer window.
       }
   published
     property OnClipboardChanged: TNotifyEvent
       read fOnClipboardChanged write fOnClipboardChanged;
-      {Event triggered whenever clipboard contents change}
+      {Event triggered when clipboard contents change}
     property TriggerOnCreation: Boolean
       read fTriggerOnCreation write fTriggerOnCreation default True;
       {When true causes OnClipboardChanged event to be triggered as soon as
       component is created, otherwise OnClipboardChanged event only triggers
-      when clipboard actually changes}
+      when clipboard actually changes. NOTE: this property can only be set at
+      design time. It has no effect if set at run time}
     property Enabled: Boolean read fEnabled write fEnabled default True;
       {When true component triggers events when clipboard changes, when false
       these events are not triggered}
@@ -130,6 +120,15 @@ uses
   Forms;
 
 
+procedure Register;
+  {Registers component with Delphi's component palette.
+  }
+begin
+  RegisterComponents('DelphiDabbler', [TPJCBViewer]);
+end;
+
+{ TPJCBViewer }
+
 procedure TPJCBViewer.ClipboardChanged;
   {Triggers OnClipboardChanged event if any handler is assigned and component is
   enabled.
@@ -146,7 +145,7 @@ begin
 end;
 
 constructor TPJCBViewer.Create(AOwner: TComponent);
-  {Class constructor: Creates and registers clipboard viewer window and sets
+  {Object constructor: Creates and registers clipboard viewer window and sets
   default property values.
     @param AOwner [in] Reference to owning component.
   }
@@ -167,7 +166,7 @@ begin
 end;
 
 destructor TPJCBViewer.Destroy;
-  {Class destructor. Unregisters and destroys clipboard viewer window.
+  {Object destructor. Unregisters and destroys clipboard viewer window.
   }
 begin
   // Remove clipboard viewer window from chain
@@ -226,14 +225,6 @@ begin
         Result := DefWindowProc(fHWnd, Msg, WParam, LParam);
     end;
   end;
-end;
-
-
-procedure Register;
-  {Registers component with Delphi's component palette.
-  }
-begin
-  RegisterComponents('DelphiDabbler', [TPJCBViewer]);
 end;
 
 end.
