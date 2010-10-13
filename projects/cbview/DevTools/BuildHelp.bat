@@ -5,32 +5,30 @@
 @rem
 @rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008-2010.
 @rem
-@rem Requires the DELPHI7 environment variable to store the Delphi 7 install
-@rem directory.
+@rem Requires environment variable HC set to full file path to MS WinHelp
+@rem compiler (HCRTF.exe).
 @rem
 @rem $Rev$
 @rem $Date$
 @rem ---------------------------------------------------------------------------
-
 
 @echo off
 
 setlocal
 
 set HelpDir=..\Help
-
-rem Check that required files exist
-
+set HelpFile=PJCBView.hlp
 set ErrorMsg=
 
-rem Build help file
-%DELPHI7%\Help\Tools\HCRTF.exe -x %HelpDir%\PJCBView.hlp
+if "%HC%" == "" set ErrorMsg=Environment variable HC not set
+if not "%ErrorMsg%" == "" goto error
+
+%HC% -x %HelpDir%\%HelpFile%
 if errorlevel 1 set ErrorMsg=Compilation failed
 if not "%ErrorMsg%"=="" goto error
 goto success
 
 :error
-rem Display error message
 echo *** ERROR: %ErrorMsg%
 goto end
 
@@ -38,6 +36,5 @@ goto end
 echo Succeeded
 
 :end
-rem All done
 
 endlocal
