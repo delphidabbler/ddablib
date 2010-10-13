@@ -1,6 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!--
+ * Describes how to use the Clipboard Viewer Component
+ *
+ * $Rev$
+ * $Date$
+-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
@@ -10,7 +15,6 @@
 	</title>
 
 	<style type="text/css">
-		<!--
 		body {
 			margin: 1em;
 			padding: 0;
@@ -139,7 +143,6 @@
 			font-size: 8pt;
 			text-align: right;
 		}
-		-->
 	</style>
 
 </head>
@@ -158,7 +161,7 @@
 
 <p>
 	Drop a <var>TPJCBViewer</var> component, a <var>TButton</var> and a
-	<var>TMemo</var> on a form.  Add the <code>Clipbrd</code> to your uses
+	<var>TMemo</var> on a form.  Add the <code>Clipbrd</code> unit to your uses
 	clause.
 </p>
 
@@ -194,7 +197,7 @@ end;
 procedure TForm1.PJCBViewer1ClipboardChanged(Sender: TObject);
 begin
   // Clipboard has changed - emit beep and decide whether to enable button
-  // (only if text is on clipbaord)
+  // (only if text is on clipboard)
   MessageBeep(0);
   Button1.Enabled := ClipBoard.HasFormat(CF_TEXT);
 end;
@@ -202,7 +205,7 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   // We assume this button can only be clicked when there is text on clipboard,
-  // so display it
+  // so display the text
   Memo1.Text := ClipBoard.AsText;
 end;</pre>
 
@@ -221,19 +224,12 @@ end;</pre>
 
 
 <div class="endnotes">
-
-	<div class="comments">
-		Please
-		<a href="http://www.delphidabbler.com/contact">let me know</a> if you
-		have any comments about this demo code, if you have found a bug, or you
-		want to suggest any updates.
-	</div>
-
 	<div class="copyright">
-		This document is copyright &copy; 2008, P D Johnson,
-		<a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>
+		This document is copyright &copy; 2008-2010, P D Johnson,
+		<a 
+			href="http://www.delphidabbler.com/"
+		>www.delphidabbler.com</a>
 	</div>
-
 </div>
 
 </body>
