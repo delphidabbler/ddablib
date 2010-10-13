@@ -282,7 +282,7 @@ HS
 0
 IDH_CBV_EXAMPLE
 
-1546
+1824
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fnil \fcharset0 Arial;}{\f1\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\fs18\cf1 \protect <NS 1>\plain\fs8\cf2 
 \par \plain\fs22\cf3\b TPJCBViewer.TriggerOnCreation
 \par \plain\fs12\cf2 
@@ -296,6 +296,8 @@ IDH_CBV_EXAMPLE
 \par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 When TriggerOnCreation is True the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 OnClipboardChanged\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  event is triggered immediately after the component is created, regardless of whether the clipboard has changed. When the property is False the OnClipboardChanged event is only triggers when the content of the clipboard actually changes.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2\b Note: \plain\f0\fs18\cf2 This is a design-time only property. Setting it dynamically at run time will have no effect since the component will have been initialised before the user gets a chance to change the property's value.
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 The default value is True.
 \par }

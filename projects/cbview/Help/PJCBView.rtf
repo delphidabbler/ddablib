@@ -103,6 +103,8 @@ A{\footnote {A}TPJCBViewer_TriggerOnCreation;TriggerOnCreation_property;TriggerO
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 When TriggerOnCreation is True the {\strike OnClipboardChanged}{\v IDH_CBV_OnClipboardChanged} event is triggered immediately after the component is created, regardless of whether the clipboard has changed. When the property is False the OnClipboardChanged event is only triggers when the content of the clipboard actually changes.
 \par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0\b Note: \plain\f0\fs18\cf0 This is a design-time only property. Setting it dynamically at run time will have no effect since the component will have been initialised before the user gets a chance to change the property's value.
+\par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 The default value is True.
 \par \page 
 ${\footnote {$}TPJCBViewer methods}
