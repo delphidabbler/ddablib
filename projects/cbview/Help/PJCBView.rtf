@@ -1,6 +1,6 @@
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
-{\fonttbl{\f0\fnil \fcharset0 Arial;}{\f1\fnil \fcharset0 Courier New;}{\f2\fswiss \fprq2\fcharset0 Arial;}{\f3\fswiss Arial;}{\f4\fswiss \fcharset0 Arial;}{\f5\fmodern Courier New;}{\f6\fmodern \fcharset0 Courier New;}}
-{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue128;\red128\green0\blue0;}
+{\fonttbl{\f0\fnil \fcharset0 Arial;}{\f1\fnil \fcharset0 Courier New;}{\f2\fswiss \fprq2\fcharset0 Arial;}{\f3\fswiss Arial;}{\f4\fnil \fcharset2 WingDings;}{\f5\fswiss \fcharset0 Arial;}}
+{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}
 ${\footnote {$}PJCBView unit}
 #{\footnote {#}IDH_CBV_UNIT}
 @{\footnote {@}Clipboard viewer component unit}
@@ -153,34 +153,32 @@ ${\footnote {$}Example}
 \par \plain\fs22\cf2\b TPJCBViewer Example
 \par \plain\fs8\cf0  \plain\fs18\cf0 
 \par \pard \plain\fs8\cf0 
-\par \plain\f3\fs18\cf0 This example assumes that a {\strike TPJCBViewer}{\v IDH_CBV_CLASS} component, a TButton and a TLabel have been dropped a form. The TButton is enabled only if the clipboard contains text and becomes greyed out when the clipboard doesn't contain text. Clicking the button displays the clipboard text in the label. Whenever the clipboard's contents change a beep is emitted.
+\par \plain\f3\fs18\cf0 The following is an example of how to use the Clipboard Viewer Component.
 \par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 An {\strike OnClipboardChanged}{\v IDH_CBV_OnClipboardChanged} event is triggered as the program starts.
+\par \plain\f3\fs18\cf0 Drop a {\strike TPJCBViewer}{\v IDH_CBV_CLASS} component, a TButton and a TMemo on a form. Do not change any of the components' default properties. Add the Clipbrd unit to your uses clause. Using the object inspector, create the following event handlers:
 \par \plain\f3\fs8\cf0 
-\par \plain\f3\fs18\cf0 The following event\plain\f4\fs18\cf0  handler\plain\f3\fs18\cf0 s are attached to the TPJCBViewer's OnClipboardChanged event, the OnClick event of the button and the \plain\f4\fs18\cf0 form's \plain\f3\fs18\cf0 OnCreate event\plain\f4\fs18\cf0 . The code will require the use of Delphi's Clipbrd unit.\plain\f3\fs18\cf0 
-\par 
-\par \pard \keep \plain\f5\fs18\cf0\b procedure\plain\f5\fs18\cf0  TForm1.FormCreate(Sender: TObject);
-\par \plain\f5\fs18\cf0\b begin\plain\f5\fs18\cf0 
-\par   \plain\f6\fs18\cf3 // \plain\f5\fs18\cf3 Ensure that the clipboard viewer is enabled\plain\f5\fs18\cf0 
-\par   PJCBViewer1.{\strike Enabled}{\v IDH_CBV_Enabled} := True;
-\par   \plain\f6\fs18\cf3 // \plain\f5\fs18\cf3 Make the viewer trigger a\plain\f6\fs18\cf3 n\plain\f5\fs18\cf3  OnClipboardChanged\plain\f6\fs18\cf3 
-\par   // \plain\f5\fs18\cf3 event on creation\plain\f5\fs18\cf0 
-\par   PJCBViewer1.{\strike TriggerOnCreation}{\v IDH_CBV_TriggerOnCreation} := True;
-\par \plain\f5\fs18\cf0\b end\plain\f5\fs18\cf0 ;
-\par 
-\par \plain\f5\fs18\cf0\b procedure\plain\f5\fs18\cf0  TForm1.PJCBViewer1ClipboardChanged(Sender: TObject);
-\par \plain\f5\fs18\cf0\b begin\plain\f5\fs18\cf0 
-\par   \plain\f6\fs18\cf3 // \plain\f5\fs18\cf3 Clipboard has changed - emit beep and decide whether to
-\par \plain\f6\fs18\cf3   // \plain\f5\fs18\cf3 enable\plain\f6\fs18\cf3  \plain\f5\fs18\cf3 button\plain\f6\fs18\cf3  (only if text is on clipboard)\plain\f5\fs18\cf0 
-\par   MessageBeep(\plain\f5\fs18\cf4 0\plain\f5\fs18\cf0 );
+\par \pard \fi-400 \li400 \tx400 \plain\f4\fs18\cf0 \'A7\plain\f5\fs18\cf0 \tab \plain\f3\fs18\cf0 an {\strike OnClipboardChanged}{\v IDH_CBV_OnClipboardChanged} handler for the TPJCBViewer component;
+\par \plain\f4\fs18\cf0 \'A7\plain\f5\fs18\cf0 \tab \plain\f3\fs18\cf0 an OnClick handler for the button.
+\par \pard \plain\f3\fs8\cf0 
+\par \plain\f3\fs18\cf0 Implement the event handlers as follows:
+\par \plain\f3\fs8\cf0 
+\par \pard \keep \plain\f1\fs18\cf0\b procedure\plain\f1\fs18\cf0  TForm1.PJCBViewer1ClipboardChanged(Sender: TObject);
+\par \plain\f1\fs18\cf0\b begin\plain\f1\fs18\cf0 
+\par \plain\f1\fs18\cf1   // Clipboard has changed - emit beep and decide whether to enable button
+\par   // (only if text is on clipboard)
+\par \plain\f1\fs18\cf0   MessageBeep(0);
 \par   Button1.Enabled := ClipBoard.HasFormat(CF_TEXT);
-\par \plain\f5\fs18\cf0\b end\plain\f5\fs18\cf0 ;
-\par 
-\par \plain\f5\fs18\cf0\b procedure \plain\f5\fs18\cf0 TForm1.Button1Click(Sender: TObject);
-\par \plain\f5\fs18\cf0\b begin\plain\f5\fs18\cf0 
-\par   \plain\f6\fs18\cf3 // \plain\f5\fs18\cf3 We assume this button\plain\f6\fs18\cf3  can\plain\f5\fs18\cf3  only be clicked when there is
-\par \plain\f6\fs18\cf3   // \plain\f5\fs18\cf3 text on\plain\f6\fs18\cf3  \plain\f5\fs18\cf3 clipboard, so \plain\f6\fs18\cf3 it should be safe to \plain\f5\fs18\cf3 display \plain\f6\fs18\cf3 the text\plain\f5\fs18\cf0 
-\par   Label1.Caption := ClipBoard.AsText;
-\par \plain\f5\fs18\cf0\b end\plain\f5\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0\b end\plain\f1\fs18\cf0 ;
+\par \plain\f1\fs8\cf0 
+\par \plain\f1\fs18\cf0\b procedure\plain\f1\fs18\cf0  TForm1.Button1Click(Sender: TObject);
+\par \plain\f1\fs18\cf0\b begin\plain\f1\fs18\cf0 
+\par \plain\f1\fs18\cf1   // We assume this button can only be clicked when there is text on clipboard,
+\par   // so it is safe to display the text
+\par \plain\f1\fs18\cf0   Memo1.Text := ClipBoard.AsText;
+\par \plain\f1\fs18\cf0\b end\plain\f1\fs18\cf0 ;
+\par \pard \plain\f3\fs8\cf0 
+\par \plain\f3\fs18\cf0 Because TPJCBViewer's {\strike TriggerOnCreation}{\v IDH_CBV_TriggerOnCreation}\plain\f5\fs18\cf0  property\plain\f3\fs18\cf0  is true by default, an OnClipboardChanged event is triggered as the program starts.\plain\f5\fs18\cf0  The beep that is generated by the event handler proves this.\plain\f3\fs18\cf0 
+\par \plain\f3\fs8\cf0 
+\par \plain\f3\fs18\cf0 The button is enabled only if the clipboard contains text and becomes greyed out when the clipboard doesn't contain text. Clicking the button displays the clipboard text in the memo. Whenever the clipboard's contents change a beep is emitted. \plain\f0\fs18\cf0 
 \par \page 
 }

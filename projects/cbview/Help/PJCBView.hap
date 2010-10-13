@@ -410,72 +410,63 @@ $=Example
 #=IDH_CBV_EXAMPLE
 @=Example of using the TPJCBViewer component.
 [End]
-6
+5
 NS
 1
-KP
-2
 HS
-3
+2
 0
 
 0
 IDH_CBV_CLASS
 
 HS
-4
+3
 0
 
 0
 IDH_CBV_OnClipboardChanged
 
+KP
+4
 HS
 5
 0
 
 0
-IDH_CBV_Enabled
-
-HS
-6
-0
-
-0
 IDH_CBV_TriggerOnCreation
 
-3758
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fnil \fcharset0 Arial;}{\f1\fswiss Arial;}{\f2\fswiss \fcharset0 Arial;}{\f3\fmodern Courier New;}{\f4\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;\red0\green0\blue128;\red128\green0\blue0;}\pard \plain \plain\fs18\cf1 \protect <NS 1>\plain\fs8\cf2 
+3200
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fnil \fcharset0 Arial;}{\f1\fswiss Arial;}{\f2\fnil \fcharset2 WingDings;}{\f3\fswiss \fcharset0 Arial;}{\f4\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\fs18\cf1 \protect <NS 1>\plain\fs8\cf2 
 \par \plain\fs22\cf3\b TPJCBViewer Example
 \par \plain\fs8\cf2  \plain\fs18\cf1 \protect </NS 1>\plain\fs18\cf2 
 \par \plain\fs8\cf2 
-\par \plain\f1\fs18\cf2 This example assumes that a \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf2 TPJCBViewer\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf2  component, a TButton and a TLabel have been dropped a form. The TButton is enabled only if the clipboard contains text and becomes greyed out when the clipboard doesn't contain text. Clicking the button displays the clipboard text in the label. Whenever the clipboard's contents change a beep is emitted.
+\par \plain\f1\fs18\cf2 The following is an example of how to use the Clipboard Viewer Component.
 \par \plain\f1\fs8\cf2 
-\par \plain\f1\fs18\cf2 An \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf2 OnClipboardChanged\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf2  event is triggered as the program starts.
+\par \plain\f1\fs18\cf2 Drop a \plain\f1\fs18\cf1 \protect <HS 2>\plain\f1\fs18\cf2 TPJCBViewer\plain\f1\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf2  component, a TButton and a TMemo on a form. Do not change any of the components' default properties. Add the Clipbrd unit to your uses clause. Using the object inspector, create the following event handlers:
 \par \plain\f1\fs8\cf2 
-\par \plain\f1\fs18\cf2 The following event\plain\f2\fs18\cf2  handler\plain\f1\fs18\cf2 s are attached to the TPJCBViewer's OnClipboardChanged event, the OnClick event of the button and the \plain\f2\fs18\cf2 form's \plain\f1\fs18\cf2 OnCreate event\plain\f2\fs18\cf2 . The code will require the use of Delphi's Clipbrd unit.\plain\f1\fs18\cf2 
-\par 
-\par \plain\f3\fs18\cf1\b \protect <KP 2>\plain\f3\fs18\cf2\b procedure\plain\f3\fs18\cf2  TForm1.FormCreate(Sender: TObject);
-\par \plain\f3\fs18\cf2\b begin\plain\f3\fs18\cf2 
-\par   \plain\f4\fs18\cf4 // \plain\f3\fs18\cf4 Ensure that the clipboard viewer is enabled\plain\f3\fs18\cf2 
-\par   PJCBViewer1.\plain\f3\fs18\cf1 \protect <HS 5>\plain\f3\fs18\cf2 Enabled\plain\f3\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf2  := True;
-\par   \plain\f4\fs18\cf4 // \plain\f3\fs18\cf4 Make the viewer trigger a\plain\f4\fs18\cf4 n\plain\f3\fs18\cf4  OnClipboardChanged\plain\f4\fs18\cf4 
-\par   // \plain\f3\fs18\cf4 event on creation\plain\f3\fs18\cf2 
-\par   PJCBViewer1.\plain\f3\fs18\cf1 \protect <HS 6>\plain\f3\fs18\cf2 TriggerOnCreation\plain\f3\fs18\cf1 \protect </HS 6>\plain\f3\fs18\cf2  := True;
-\par \plain\f3\fs18\cf2\b end\plain\f3\fs18\cf2 ;
-\par 
-\par \plain\f3\fs18\cf2\b procedure\plain\f3\fs18\cf2  TForm1.PJCBViewer1ClipboardChanged(Sender: TObject);
-\par \plain\f3\fs18\cf2\b begin\plain\f3\fs18\cf2 
-\par   \plain\f4\fs18\cf4 // \plain\f3\fs18\cf4 Clipboard has changed - emit beep and decide whether to
-\par \plain\f4\fs18\cf4   // \plain\f3\fs18\cf4 enable\plain\f4\fs18\cf4  \plain\f3\fs18\cf4 button\plain\f4\fs18\cf4  (only if text is on clipboard)\plain\f3\fs18\cf2 
-\par   MessageBeep(\plain\f3\fs18\cf5 0\plain\f3\fs18\cf2 );
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf2 \'A7\plain\f3\fs18\cf2 \tab \plain\f1\fs18\cf2 an \plain\f1\fs18\cf1 \protect <HS 3>\plain\f1\fs18\cf2 OnClipboardChanged\plain\f1\fs18\cf1 \protect </HS 3>\plain\f1\fs18\cf2  handler for the TPJCBViewer component;
+\par \plain\f2\fs18\cf2 \'A7\plain\f3\fs18\cf2 \tab \plain\f1\fs18\cf2 an OnClick handler for the button.
+\par \pard \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Implement the event handlers as follows:
+\par \plain\f1\fs8\cf2 
+\par \plain\f4\fs18\cf1 \protect <KP 4>\plain\f4\fs18\cf2\b procedure\plain\f4\fs18\cf2  TForm1.PJCBViewer1ClipboardChanged(Sender: TObject);
+\par \plain\f4\fs18\cf2\b begin\plain\f4\fs18\cf2 
+\par \plain\f4\fs18\cf1   // Clipboard has changed - emit beep and decide whether to enable button
+\par   // (only if text is on clipboard)
+\par \plain\f4\fs18\cf2   MessageBeep(0);
 \par   Button1.Enabled := ClipBoard.HasFormat(CF_TEXT);
-\par \plain\f3\fs18\cf2\b end\plain\f3\fs18\cf2 ;
-\par 
-\par \plain\f3\fs18\cf2\b procedure \plain\f3\fs18\cf2 TForm1.Button1Click(Sender: TObject);
-\par \plain\f3\fs18\cf2\b begin\plain\f3\fs18\cf2 
-\par   \plain\f4\fs18\cf4 // \plain\f3\fs18\cf4 We assume this button\plain\f4\fs18\cf4  can\plain\f3\fs18\cf4  only be clicked when there is
-\par \plain\f4\fs18\cf4   // \plain\f3\fs18\cf4 text on\plain\f4\fs18\cf4  \plain\f3\fs18\cf4 clipboard, so \plain\f4\fs18\cf4 it should be safe to \plain\f3\fs18\cf4 display \plain\f4\fs18\cf4 the text\plain\f3\fs18\cf2 
-\par   Label1.Caption := ClipBoard.AsText;
-\par \plain\f3\fs18\cf2\b end\plain\f3\fs18\cf2 ;\plain\f3\fs18\cf1 \protect </KP 2>\plain\f0\fs18\cf2 
+\par \plain\f4\fs18\cf2\b end\plain\f4\fs18\cf2 ;
+\par \plain\f4\fs8\cf2 
+\par \plain\f4\fs18\cf2\b procedure\plain\f4\fs18\cf2  TForm1.Button1Click(Sender: TObject);
+\par \plain\f4\fs18\cf2\b begin\plain\f4\fs18\cf2 
+\par \plain\f4\fs18\cf1   // We assume this button can only be clicked when there is text on clipboard,
+\par   // so it is safe to display the text
+\par \plain\f4\fs18\cf2   Memo1.Text := ClipBoard.AsText;
+\par \plain\f4\fs18\cf2\b end\plain\f4\fs18\cf2 ;\plain\f4\fs18\cf1 \protect </KP 4>\plain\f4\fs18\cf2 
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 Because TPJCBViewer's \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf2 TriggerOnCreation\plain\f1\fs18\cf1 \protect </HS 5>\plain\f3\fs18\cf2  property\plain\f1\fs18\cf2  is true by default, an OnClipboardChanged event is triggered as the program starts.\plain\f3\fs18\cf2  The beep that is generated by the event handler proves this.\plain\f1\fs18\cf2 
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2 The button is enabled only if the clipboard contains text and becomes greyed out when the clipboard doesn't contain text. Clicking the button displays the clipboard text in the memo. Whenever the clipboard's contents change a beep is emitted. \plain\f0\fs18\cf2 
 \par }
 
