@@ -33,9 +33,9 @@ A{\footnote {A}TPJCBViewer_Object;TPJCBViewer}
 \par 
 \par \plain\fs18\cf0\b Description\plain\fs18\cf0 
 \par \plain\fs8\cf0 
-\par \plain\fs18\cf0 This component hooks itself into the Windows clipboard viewer chain and receives notifications from Windows whenever the contents of the clipboard change. Whenever a change is detected the {\strike OnClipboardChanged}{\v IDH_CBV_OnClipboardChanged} event is triggered.
+\par \plain\fs18\cf0 This component hooks itself into the Windows clipboard viewer chain and receives notifications from Windows whenever the contents of the clipboard change. When a change is detected the {\strike OnClipboardChanged}{\v IDH_CBV_OnClipboardChanged} event is triggered.
 \par \plain\fs8\cf0 
-\par \plain\fs18\cf0 The component also provides an {\strike Enabled}{\v IDH_CBV_Enabled} property which disables the triggering of \plain\fs18\cf0\i OnClipboardChanged\plain\fs18\cf0  events when false. It also has a {\strike TriggerOnCreation}{\v IDH_CBV_TriggerOnCreation} property which, when true, causes the \plain\fs18\cf0\i OnClipboardChanged\plain\fs18\cf0  event to be triggered immediately after the control has been created as well as whenever the clipboard contents change.
+\par \plain\fs18\cf0 The component also provides an {\strike Enabled}{\v IDH_CBV_Enabled} property which disables the triggering of \plain\fs18\cf0\i OnClipboardChanged\plain\fs18\cf0  events when false. It also has a {\strike TriggerOnCreation}{\v IDH_CBV_TriggerOnCreation} property which, when true, causes the \plain\fs18\cf0\i OnClipboardChanged\plain\fs18\cf0  event to be triggered immediately after the control has been created as well as when the clipboard contents change.
 \par \page 
 ${\footnote {$}TPJCBViewer heirachy}
 #{\footnote {#}IDH_CBV_Heirachy}
@@ -79,7 +79,7 @@ A{\footnote {A}TPJCBViewer_Enabled;Enabled_property;Enabled}
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \nowidctlpar \plain\f2\fs18\cf0 When Enabled is set to True the component triggers the {\strike OnClipboardChanged}{\v IDH_CBV_OnClipboardChanged} event when the content of the clipboard changes. When this property is False the events are never triggered.
+\par \nowidctlpar \plain\f2\fs18\cf0 When Enabled is set to True the component triggers the {\strike OnClipboardChanged}{\v IDH_CBV_OnClipboardChanged} event when the content of the clipboard changes. When this property is False the event is never triggered.
 \par \plain\f2\fs8\cf0 
 \par \plain\f2\fs18\cf0 The default value is True.\plain\f0\fs18\cf0 
 \par \page 
@@ -101,7 +101,7 @@ A{\footnote {A}TPJCBViewer_TriggerOnCreation;TriggerOnCreation_property;TriggerO
 \par \pard 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 When TriggerOnCreation is True the {\strike OnClipboardChanged}{\v IDH_CBV_OnClipboardChanged} event is triggered immediately after the component is created, regardless of whether the clipboard has changed. When the property is False the OnClipboardChanged event is only triggers when the contents of the clipboard actually change.
+\par \plain\f0\fs18\cf0 When TriggerOnCreation is True the {\strike OnClipboardChanged}{\v IDH_CBV_OnClipboardChanged} event is triggered immediately after the component is created, regardless of whether the clipboard has changed. When the property is False the OnClipboardChanged event is only triggers when the content of the clipboard actually changes.
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 The default value is True.
 \par \page 
@@ -140,6 +140,8 @@ A{\footnote {A}TPJCBViewer_OnClipboardChanged;OnClipboardChanged_event;OnClipboa
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 The OnClipboardChanged event is triggered whenever the clipboard contents change, providing that the {\strike Enabled}{\v IDH_CBV_Enabled} property is True. If the {\strike TriggerOnCreation}{\v IDH_CBV_Enabled} property is True then this event is also fired immediately after the component is created.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 You should handle this event to perform any processing you need to do when the clipboard content changes.
 \par \page 
 ${\footnote {$}Example}
 #{\footnote {#}IDH_CBV_EXAMPLE}
@@ -167,7 +169,7 @@ ${\footnote {$}Example}
 \par \plain\f5\fs18\cf0\b procedure\plain\f5\fs18\cf0  TForm1.PJCBViewer1ClipboardChanged(Sender: TObject);
 \par \plain\f5\fs18\cf0\b begin\plain\f5\fs18\cf0 
 \par   \plain\f6\fs18\cf3 // \plain\f5\fs18\cf3 Clipboard has changed - emit beep and decide whether to
-\par \plain\f6\fs18\cf3   // \plain\f5\fs18\cf3 enable\plain\f6\fs18\cf3  \plain\f5\fs18\cf3 button\plain\f6\fs18\cf3  (only if text is on clipbaord)\plain\f5\fs18\cf0 
+\par \plain\f6\fs18\cf3   // \plain\f5\fs18\cf3 enable\plain\f6\fs18\cf3  \plain\f5\fs18\cf3 button\plain\f6\fs18\cf3  (only if text is on clipboard)\plain\f5\fs18\cf0 
 \par   MessageBeep(\plain\f5\fs18\cf4 0\plain\f5\fs18\cf0 );
 \par   Button1.Enabled := ClipBoard.HasFormat(CF_TEXT);
 \par \plain\f5\fs18\cf0\b end\plain\f5\fs18\cf0 ;
@@ -175,7 +177,7 @@ ${\footnote {$}Example}
 \par \plain\f5\fs18\cf0\b procedure \plain\f5\fs18\cf0 TForm1.Button1Click(Sender: TObject);
 \par \plain\f5\fs18\cf0\b begin\plain\f5\fs18\cf0 
 \par   \plain\f6\fs18\cf3 // \plain\f5\fs18\cf3 We assume this button\plain\f6\fs18\cf3  can\plain\f5\fs18\cf3  only be clicked when there is
-\par \plain\f6\fs18\cf3   // \plain\f5\fs18\cf3 text on\plain\f6\fs18\cf3  \plain\f5\fs18\cf3 clipboard, so display it\plain\f5\fs18\cf0 
+\par \plain\f6\fs18\cf3   // \plain\f5\fs18\cf3 text on\plain\f6\fs18\cf3  \plain\f5\fs18\cf3 clipboard, so \plain\f6\fs18\cf3 it should be safe to \plain\f5\fs18\cf3 display \plain\f6\fs18\cf3 the text\plain\f5\fs18\cf0 
 \par   Label1.Caption := ClipBoard.AsText;
 \par \plain\f5\fs18\cf0\b end\plain\f5\fs18\cf0 ;\plain\f0\fs18\cf0 
 \par \page 

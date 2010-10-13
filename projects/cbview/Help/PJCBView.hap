@@ -97,7 +97,7 @@ BM
 TPJCBViewer.bmp
 0
 1
-2213
+2205
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fnil \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\fs18\cf1 \protect <NS 1>\plain\fs8\cf2 
 \par \plain\fs22\cf1\b \protect <BM 10>\plain\fs22\cf3\b  TPJCBViewer
 \par \plain\fs12\cf2 
@@ -112,9 +112,9 @@ TPJCBViewer.bmp
 \par 
 \par \plain\fs18\cf2\b Description\plain\fs18\cf2 
 \par \plain\fs8\cf2 
-\par \plain\fs18\cf2 This component hooks itself into the Windows clipboard viewer chain and receives notifications from Windows whenever the contents of the clipboard change. Whenever a change is detected the \plain\fs18\cf1 \protect <HS 3>\plain\fs18\cf2 OnClipboardChanged\plain\fs18\cf1 \protect </HS 3>\plain\fs18\cf2  event is triggered.
+\par \plain\fs18\cf2 This component hooks itself into the Windows clipboard viewer chain and receives notifications from Windows whenever the contents of the clipboard change. When a change is detected the \plain\fs18\cf1 \protect <HS 3>\plain\fs18\cf2 OnClipboardChanged\plain\fs18\cf1 \protect </HS 3>\plain\fs18\cf2  event is triggered.
 \par \plain\fs8\cf2 
-\par \plain\fs18\cf2 The component also provides an \plain\fs18\cf1 \protect <HS 4>\plain\fs18\cf2 Enabled\plain\fs18\cf1 \protect </HS 4>\plain\fs18\cf2  property which disables the triggering of \plain\fs18\cf2\i OnClipboardChanged\plain\fs18\cf2  events when false. It also has a \plain\fs18\cf1 \protect <HS 5>\plain\fs18\cf2 TriggerOnCreation\plain\fs18\cf1 \protect </HS 5>\plain\fs18\cf2  property which, when true, causes the \plain\fs18\cf2\i OnClipboardChanged\plain\fs18\cf2  event to be triggered immediately after the control has been created as well as whenever the clipboard contents change.
+\par \plain\fs18\cf2 The component also provides an \plain\fs18\cf1 \protect <HS 4>\plain\fs18\cf2 Enabled\plain\fs18\cf1 \protect </HS 4>\plain\fs18\cf2  property which disables the triggering of \plain\fs18\cf2\i OnClipboardChanged\plain\fs18\cf2  events when false. It also has a \plain\fs18\cf1 \protect <HS 5>\plain\fs18\cf2 TriggerOnCreation\plain\fs18\cf1 \protect </HS 5>\plain\fs18\cf2  property which, when true, causes the \plain\fs18\cf2\i OnClipboardChanged\plain\fs18\cf2  event to be triggered immediately after the control has been created as well as when the clipboard contents change.
 \par }
 
 [Footnotes]
@@ -231,7 +231,7 @@ HS
 0
 IDH_CBV_EXAMPLE
 
-1459
+1457
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fnil \fcharset0 Arial;}{\f1\fnil \fcharset0 Courier New;}{\f2\fswiss \fprq2\fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\fs18\cf1 \protect <NS 1>\plain\fs8\cf2 
 \par \plain\fs22\cf3\b TPJCBViewer.Enabled\plain\fs18\cf2 
 \par \plain\fs12\cf2 
@@ -244,7 +244,7 @@ IDH_CBV_EXAMPLE
 \par 
 \par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \nowidctlpar \plain\f2\fs18\cf2 When Enabled is set to True the component triggers the \plain\f2\fs18\cf1 \protect <HS 4>\plain\f2\fs18\cf2 OnClipboardChanged\plain\f2\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf2  event when the content of the clipboard changes. When this property is False the events are never triggered.
+\par \nowidctlpar \plain\f2\fs18\cf2 When Enabled is set to True the component triggers the \plain\f2\fs18\cf1 \protect <HS 4>\plain\f2\fs18\cf2 OnClipboardChanged\plain\f2\fs18\cf1 \protect </HS 4>\plain\f2\fs18\cf2  event when the content of the clipboard changes. When this property is False the event is never triggered.
 \par \plain\f2\fs8\cf2 
 \par \plain\f2\fs18\cf2 The default value is True.\plain\f0\fs18\cf2 
 \par }
@@ -295,7 +295,7 @@ IDH_CBV_EXAMPLE
 \par 
 \par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 When TriggerOnCreation is True the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 OnClipboardChanged\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  event is triggered immediately after the component is created, regardless of whether the clipboard has changed. When the property is False the OnClipboardChanged event is only triggers when the contents of the clipboard actually change.
+\par \plain\f0\fs18\cf2 When TriggerOnCreation is True the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 OnClipboardChanged\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  event is triggered immediately after the component is created, regardless of whether the clipboard has changed. When the property is False the OnClipboardChanged event is only triggers when the content of the clipboard actually changes.
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 The default value is True.
 \par }
@@ -385,7 +385,7 @@ HS
 0
 IDH_CBV_EXAMPLE
 
-1567
+1723
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fnil \fcharset0 Arial;}{\f1\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\fs18\cf1 \protect <NS 1>\plain\fs8\cf2 
 \par \plain\fs22\cf3\b TPJCBViewer.OnClipboardChanged
 \par \plain\fs12\cf2 
@@ -399,6 +399,8 @@ IDH_CBV_EXAMPLE
 \par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 The OnClipboardChanged event is triggered whenever the clipboard contents change, providing that the \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 Enabled\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  property is True. If the \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 TriggerOnCreation\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2  property is True then this event is also fired immediately after the component is created.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 You should handle this event to perform any processing you need to do when the clipboard content changes.
 \par }
 
 [Footnotes]
@@ -439,7 +441,7 @@ HS
 0
 IDH_CBV_TriggerOnCreation
 
-3674
+3758
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fnil \fcharset0 Arial;}{\f1\fswiss Arial;}{\f2\fswiss \fcharset0 Arial;}{\f3\fmodern Courier New;}{\f4\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;\red0\green0\blue128;\red128\green0\blue0;}\pard \plain \plain\fs18\cf1 \protect <NS 1>\plain\fs8\cf2 
 \par \plain\fs22\cf3\b TPJCBViewer Example
 \par \plain\fs8\cf2  \plain\fs18\cf1 \protect </NS 1>\plain\fs18\cf2 
@@ -462,7 +464,7 @@ IDH_CBV_TriggerOnCreation
 \par \plain\f3\fs18\cf2\b procedure\plain\f3\fs18\cf2  TForm1.PJCBViewer1ClipboardChanged(Sender: TObject);
 \par \plain\f3\fs18\cf2\b begin\plain\f3\fs18\cf2 
 \par   \plain\f4\fs18\cf4 // \plain\f3\fs18\cf4 Clipboard has changed - emit beep and decide whether to
-\par \plain\f4\fs18\cf4   // \plain\f3\fs18\cf4 enable\plain\f4\fs18\cf4  \plain\f3\fs18\cf4 button\plain\f4\fs18\cf4  (only if text is on clipbaord)\plain\f3\fs18\cf2 
+\par \plain\f4\fs18\cf4   // \plain\f3\fs18\cf4 enable\plain\f4\fs18\cf4  \plain\f3\fs18\cf4 button\plain\f4\fs18\cf4  (only if text is on clipboard)\plain\f3\fs18\cf2 
 \par   MessageBeep(\plain\f3\fs18\cf5 0\plain\f3\fs18\cf2 );
 \par   Button1.Enabled := ClipBoard.HasFormat(CF_TEXT);
 \par \plain\f3\fs18\cf2\b end\plain\f3\fs18\cf2 ;
@@ -470,7 +472,7 @@ IDH_CBV_TriggerOnCreation
 \par \plain\f3\fs18\cf2\b procedure \plain\f3\fs18\cf2 TForm1.Button1Click(Sender: TObject);
 \par \plain\f3\fs18\cf2\b begin\plain\f3\fs18\cf2 
 \par   \plain\f4\fs18\cf4 // \plain\f3\fs18\cf4 We assume this button\plain\f4\fs18\cf4  can\plain\f3\fs18\cf4  only be clicked when there is
-\par \plain\f4\fs18\cf4   // \plain\f3\fs18\cf4 text on\plain\f4\fs18\cf4  \plain\f3\fs18\cf4 clipboard, so display it\plain\f3\fs18\cf2 
+\par \plain\f4\fs18\cf4   // \plain\f3\fs18\cf4 text on\plain\f4\fs18\cf4  \plain\f3\fs18\cf4 clipboard, so \plain\f4\fs18\cf4 it should be safe to \plain\f3\fs18\cf4 display \plain\f4\fs18\cf4 the text\plain\f3\fs18\cf2 
 \par   Label1.Caption := ClipBoard.AsText;
 \par \plain\f3\fs18\cf2\b end\plain\f3\fs18\cf2 ;\plain\f3\fs18\cf1 \protect </KP 2>\plain\f0\fs18\cf2 
 \par }
