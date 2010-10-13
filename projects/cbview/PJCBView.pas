@@ -1,31 +1,12 @@
 {
  * PJCBView.pas
  *
- * Clipboard Viewer Component. Implements a component that monitors the Windows
- * clipboad and triggers an event whenever the clipboard contents change.
+ * Clipboard Viewer Component source code. Implements a component that monitors
+ * the Windows clipboad and triggers an event whenever the clipboard contents
+ * change.
  *
- * Originally named CBView.pas. Renamed to PJCBView.pas at v1.1.
- *
- * v1.0 of 01 Aug 1999  - Original version named CBView.pas.
- * v1.1 of 27 Jul 2003  - Changed component palette from "PJ Stuff" to
- *                        "DelphiDabbler".
- *                      - Moved ClipboardChanged method (that triggers
- *                        OnClipboardChanged event) from public to protected
- *                        scope and made dynamic rather than static. This was
- *                        done to make it easier to sub-class the component.
- *                      - Renamed as PJCBView.pas.
- * v1.2 of 11 May 2004  - Altered to compile without deprecation warnings on
- *                        Delphi 6 and Delphi 7 by using conditional compilation
- *                        to using AllocateHWnd and DeallocateHWnd from Classes
- *                        rather than Forms unit.
- * v1.3 of 17 Aug 2008  - Fixed bug in conditional compilation that was causing
- *                        compilers after Delphi 7 to revert to getting
- *                        AllocateHWnd and DeallocateHWnd from Forms rather than
- *                        Classes unit.
- *                      - Refactored WndMethod that provides clipboard viewer's
- *                        window procedure.
- *                      - Removed 16 bit (Delphi 1) support.
- *
+ * $Rev$
+ * $Date$
  *
  * ***** BEGIN LICENSE BLOCK *****
  *
@@ -44,8 +25,11 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1999-2008 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1999-2010 Peter
  * Johnson. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   NONE.
  *
  * ***** END LICENSE BLOCK *****
 }

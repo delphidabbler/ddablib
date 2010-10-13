@@ -1,10 +1,12 @@
 @rem ---------------------------------------------------------------------------
-@rem Script used to create zip file containing s Clipboard Viewer Component
-@rem release.
+@rem Clipboard Viewer Component.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008
+@rem Script used to create zip file containing release files.
 @rem
-@rem v1.0 of 17 Aug 2008 - First version.
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008-2010.
+@rem
+@rem $Rev$
+@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 
