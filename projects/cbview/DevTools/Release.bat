@@ -14,23 +14,25 @@
 
 setlocal
 
+set ReleaseDir=Release
+set OutFile=%ReleaseDir%\dd-cbview.zip
+set HelpDir=Help
+set DocsDir=Docs
+
 cd .\..
 
-set OutFile=Releases\dd-cbview.zip
-set DocsDir=Docs
-set HelpDir=Help
+if exist %ReleaseDir% rmdir /S /Q %ReleaseDir%
+mkdir %ReleaseDir%
 
-if exist %OutFile% del %OutFile%
+zip %OutFile% -j -9 PJCBView.pas
+zip %OutFile% -j -9 PJCBView.dcr
 
-zip -j -9 %OutFile% PJCBView.pas
-zip -j -9 %OutFile% PJCBView.dcr
+zip %OutFile% -j -9 %HelpDir%\PJCBView.hlp
+zip %OutFile% -j -9 %HelpDir%\PJCBView.als
 
-zip -j -9 %OutFile% %HelpDir%\PJCBView.hlp
-zip -j -9 %OutFile% %HelpDir%\PJCBView.als
-
-zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
-zip -j -9 %OutFile% %DocsDir%\MPL.txt
-zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
-zip -j -9 %OutFile% %DocsDir%\DemoCode.htm
+zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
+zip %OutFile% -j -9 %DocsDir%\MPL.txt
+zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
+zip %OutFile% -j -9 %DocsDir%\DemoCode.htm
 
 endlocal
