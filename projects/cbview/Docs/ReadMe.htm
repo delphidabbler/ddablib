@@ -1,16 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!--
+ * Read-me file for Clipboard Viewer Component
+ *
+ * $Rev$
+ * $Date$
+-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
 
 	<title>
-		DelphiDabbler.com Info Sheet: Clipboard Viewer Component
+		DelphiDabbler.com Clipboard Viewer Component ReadMe
 	</title>
 
 	<style type="text/css">
-		<!--
 		body {
 			margin: 1em;
 			padding: 0;
@@ -90,14 +94,6 @@
 		a:hover {
 			text-decoration: underline;
 		}
-		.gototop {
-			margin: 1em 0 0 0;
-			padding: 0.3em 0 0 0;
-			text-align: center;
-			position: relative;
-			float: right;
-			font-weight: bold;
-		}
 		.pullout {
 			border-left: 8px silver solid;
 			xborder-bottom: 2px silver solid;
@@ -132,7 +128,6 @@
 			font-size: 8pt;
 			text-align: right;
 		}
-		-->
 	</style>
 
 </head>
@@ -143,7 +138,7 @@
 
 <h1>
 	<div>Clipboard Viewer Component</div>
-	<div class="subtitle">Information Sheet</div>
+	<div class="subtitle">ReadMe</div>
 </h1>
 
 
@@ -156,13 +151,7 @@
 		<a href="#description" target="_self">Description</a>
 	</li>
 	<li>
-		<a href="#compatibility" target="_self">Compatibility</a>
-	</li>
-	<li>
 		<a href="#installation" target="_self">Installation</a>
-	</li>
-	<li>
-		<a href="#docs">Documentation</a>
 	</li>
 	<li>
 		<a href="#update" target="_self">Update History</a>
@@ -171,14 +160,13 @@
 		<a href="#license" target="_self">License and Disclaimer</a>
 	</li>
 	<li>
+		<a href="#bugs">Bugs and Feature Requests</a>
+	</li>
+	<li>
 		<a href="#author" target="_self">About the Author</a>
 	</li>
 </ul>
 
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="description">
 	Description
@@ -210,336 +198,72 @@
 	whether the clipboard has changed at that time.
 </p>
 
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="compatibility">
-	Compatibility
-</h2>
-
 <p>
-	The component should work with any 32 bit version of Delphi. It has been
-	tested with Delphi2, 3, 4, 6 and 7.
+	The component should work with any 32 bit version of Delphi. .NET versions
+	of Delphi are not supported.
 </p>
 
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="installation">
 	Installation
 </h2>
 
 <p>
-	<var>TPJCBViewer</var>, its help files and documentation are supplied in a
-	zip file. Before installing you need to extract all the files from the zip
-	file, preserving the directory structure. The following files will be
-	extracted:
+	The Clipboard Viewer Component and its documentation are supplied in a zip 
+	file. Before installing you need to extract all the files from the zip file,
+	preserving the directory structure. The following files will be extracted:
 </p>
 
 <ul>
 	<li class="first">
-		<strong><code>PJCBView.pas</code></strong> &ndash; component source
+		<strong><code>PJCBView.pas</code></strong> &ndash; Component source
 		code.
 	</li>
 	<li>
-		<strong><code>PJCBView.dcr</code></strong> &ndash; resource file
-		containing a 32 bit component palette glyph.
+		<strong><code>PJCBView.dcr</code></strong> &ndash; Component palette
+		glyph.
 	</li>
 	<li>
-		<code>PJCBView.hlp</code> &ndash; component help file that integrates
-		with the Delphi 3 to 7 OpenHelp system.
+		<code>PJCBView.hlp</code> &ndash; Help file that integrates with the
+		Delphi 3-7 IDE.
 	</li>
 	<li>
-		<code>PJCBView.als</code> &ndash; a-link keyword file for integration
-		with the Delphi 6 or 7 OpenHelp system.
+		<code>PJCBView.als</code> &ndash; Keyword file required when integrating
+		the help file with Delphi 6 and 7.
 	</li>
 	<li>
-		<code>ReadMe.htm</code> &ndash; information sheet (contains install
-		information).
+		<code>ReadMe.htm</code> &ndash; This read-me file.
 	</li>
 	<li>
-		<code>DemoCode.htm</code> &ndash; presents an example of how to use the
-		component.
+		<code>DemoCode.htm</code> &ndash; Example of how to use the component.
 	</li>
 	<li>
-		<code>ChangeLog.txt</code> &ndash; component's change log.
+		<code>ChangeLog.txt</code> &ndash; Change log.
 	</li>
 	<li>
-		<code>MPL.txt</code> &ndash; Mozilla Public License.
+		<code>MPL.txt</code> &ndash; Mozilla Public License v1.1.
 	</li>
 </ul>
 
 <p>
-	You can now proceed to install the component using the
-	<strong>emphasised</strong> files above. Installation methods vary between
-	Delphi versions, so follow the instructions that apply to your version
-	below. Note that <code><strong>$(DELPHI)</strong></code> represents the
-	path where the appropriate version of Delphi was installed. Similarly
-	<code><strong>$(BDS)</strong></code> refers to the installation path of a
-	version of the Borland Development System.
-</p>
-
-<ul>
-	<li>
-		<a href="#bds">Installation with Delphi 2005 &amp; later</a>
-	</li>
-	<li>
-		<a href="#d3">Installation with Delphi 3 to 7</a>
-	</li>
-	<li>
-		<a href="#d2">Installation with Delphi 2</a>
-	</li>
-</ul>
-
-
-<h3 id="bds">
-	Installation with Delphi 2005 &amp; later
-</h3>
-
-<p>
-	The component must be installed into a Delphi Win32 design package. It is
-	assumed that you will be installing into an existing package. You may decide
-	to install into the &quot;user&quot; package:
-	<code>$(BDS)\Lib\dclusr.dpk</code>.
-</p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your <code>Borland Studio Projects</code>
-		or <code>$(BDS)\lib</code> folders.
-	</li>
-	
-	<li>
-		Copy <code>PJCBView.pas</code> and <code>PJCBView.dcr</code> to the
-		chosen installation folder.
-	</li>
-	
-	<li>
-		Start the Development System (selecting the Delphi Win32 personality if
-		appropriate) then:
-
-		<ul>
-
-			<li>
-				Open the required package. Select the <em>File | Open</em> menu
-				and choose a suitable package source file.
-			</li>
-
-			<li>
-				The package will now be displayed in the Project Manager with a
-				<code>.bpl</code> extension. Right click the package's entry and
-				select <em>Add</em> to display the <em>Add</em> dialog box.
-				Enter the full path to <code>PJCBView.pas</code> in the
-				<em>Unit file name</em> edit box (use the <em>Browse</em> button
-				to navigate to the file). Click <em>OK</em> to add the component
-				to the package.
-			</li>
-			
-			<li>
-				Back in the Project Manager, check that the added files
-				appear under the package's <em>Contains</em> node. If so, right
-				click the package's entry again and select <em>Compile</em>. If
-				the resulting compilation succeeds a message should be displayed
-				confirming that <var>TPJCBViewer</var> has been registered. The
-				component should now appear in the &quot;DelphiDabbler&quot;
-				section of the Tool Palette. (Note this will only appear when a
-				form is selected in the designer).
-			</li>
-			
-			<li>
-				If the component does not appear the package may not have been
-				installed. Install it from the Project Manager by selecting the
-				package's <em>Install</em> right click menu option.
-			</li>
-
-			<li>
-				Close the package project using the <em>File | Close</em> menu
-				item. Accept any prompt that offers to save the package project.
-			</li>
-			
-		</ul>
-		
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJCBView.pas</code> from the chosen
-		installation folder.
-	</li>
-	
-	<li>
-		The supplied help file cannot be integrated with the IDE's help system.
-		However it can be used independently of the IDE, albeit with reduced
-		functionality. The help program will not work at all on a Windows Vista
-		system unless you have installed <em>WinHelp</em> yourself.
-	</li>
-
-</ol>
-
-<h3 id="d3">
-	Installation with Delphi 3 to 7
-</h3>
-
-<p>
-	The component must be installed into a design package. It is assumed that
-	you will be installing into an existing package. You may wish to use the
-	&quot;user&quot; package named <code>dclusr.dpk</code> or
-	<code>dclusrXX.dpk</code> (where <code>XX</code> is a version number). This
-	package can be found in <code>$(DELPHI)\Lib</code>. For Delphi 6 and 7 the
-	chosen package &quot;requires&quot; <code>designide.dcp</code>, so add it
-	if it is not already present.
-</p>
-
-<ol class="spaced">
-
-	<li>
-		Decide upon a suitable location into which to install the component.
-		This may be a subdirectory of your <code>$(DELPHI)\lib</code> folder.
-	</li>
-	
-	<li>
-		Copy <code>PJCBView.pas</code> and <code>PJCBView.dcr</code> to
-		the chosen installation folder.
-	</li>
-
-	<li>	
-		Start Delphi then:
-		
-		<ul>
-			
-			<li>
-				Choose the <em>Component | Install Component</em> menu option to
-				display the <em>Install Component</em> dialog box. Ensure the
-				<em>Into existing package</em> tab is selected. Enter the full
-				path to <code>PJCBView.pas</code> in the <em>Unit file
-				name</em> edit box (use the adjacent <em>Browse</em> button to
-				navigate to the file). Choose the required package
-				from the <em>Package description</em> combo box, or by
-				navigating to the package using <em>Browse</em>. Click
-				<em>OK</em> to confirm your selections. 
-			</li>
-
-			<li>
-				A confirmation dialog box may displayed, querying whether it is
-				OK to rebuild and reinstall the package. Click <em>Yes</em> to
-				proceed.
-			</li>
-			
-			<li>
-				The package will now be built and a dialog box should be
-				displayed stating that the <var>TPJCBViewer</var> component has
-				been installed. Click <em>OK</em> to dismiss the dialog box.
-			</li>
-
-			<li>
-				The component will appear on the &quot;DelphiDabbler&quot;
-				palette.
-			</li>
-
-		</ul>
-
-	</li>
-
-	<li>
-		If you wish you can now delete <code>PJCBView.pas</code> from the chosen
-		installation folder.
-	</li>
-
-	<li>
-		The provided help file can be integrated with the IDE's OpenHelp system.
-		Delphi 6 and 7 also require the use of the supplied <code>.als</code>
-		file. The simplest way to install help is to use my
-		<a href="http://www.delphidabbler.com/software/chi">Component Help
-		Installer Expert</a>  (v2.2.1 or later). If you prefer to install
-		manually,
-		<a href="http://www.delphidabbler.com//articles?article=15">this
-		article</a> explains the process. <strong>Note:</strong> <em>Component
-		Help Installer</em> does not work on Windows Vista and, by default the
-		help file cannot be displayed Vista.
-	</li>
-
-</ol>
-
-<h3 id="d2">
-	Installation with Delphi 2
-</h3>
-
-<ol class="spaced">
-	<li>
-		Unzip the zip file into a folder, preserving the directory structure.
-	</li>
-	<li>
-		Copy <code>PJCBView.pas</code> and <code>PJCBView.dcr</code> to the
-		folder from where you wish to install the component. This will probably
-		be a subfolder of <code>$(DELPHI)\lib</code>.
-	</li>
-	<li>
-		Start Delphi. Select the <em>Options | Install Components</em> menu
-		option. Click the <em>Add</em> button, then the <em>Browse</em> button
-		and navigate to <code>PJCBView.pas</code>. Click <em>OK</em> to
-		recompile the component library. The component will appear on the
-		&quot;DelphiDabbler&quot; palette.
-	</li>
-	<li>
-		You can now delete <code>PJCBView.pas</code> if you wish.
-	</li>
-</ol>
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="docs">
-	Documentation
-</h2>
-
-<p>
-	Full documentation for the component is provided in the help file included
-	in the download (<code>PJCBView.hlp</code>). Unfortunately, as noted above,
-	such <em>WinHelp</em> files are becoming obsolete: they can't be integrated
-	with Delphis after Delphi 7 and don't work on Windows Vista by default.
+	You can now install the components into the Delphi IDE. To do this, the
+	files <code>PJCBView.pas</code> and <code>PJCBView.dcr</code> should be
+	added to a design time package. If you need help doing this <a
+		href="http://www.delphidabbler.com/url/install-comp"
+	>see here</a>.
 </p>
 
 <p>
-	There are a couple of fixes that may be of use:
+	Note that the help file included in the download can only integrate with the
+	IDE in Delphi 4-7. For information on how to do this, see <a
+		href="http://www.delphidabbler.com/articles?article=15"
+	>this article</a>. Users of other versions of Delphi can either use the help
+	file as a stand-alone file (in which case some links won't work) or you can
+	use the <a
+		href="http://www.delphidabbler.com/url/cbview-wiki"
+	>Clipboard Viewer Component Wiki</a>.
 </p>
 
-<ol>
-	<li>
-		If you are using a Delphi after v7 and a pre-Vista OS you can use the
-		help file as a stand-alone file. All the documentation that relates to
-		the Clipboard Viewer Component will work OK. Only links that refer to 
-		other Delphi help files will fail.
-	</li>
-	<li>
-		If you are a Vista user, you can download a copy of the old
-		<em>WinHelp</em> program from Microsoft. Search MSDN for Knowledge Base
-		article KB917607.
-	</li>
-</ol>
-
-<p>
-	Finally, a project to convert all old DelphiDabbler <em>WinHelp</em> files
-	to other formats is underway &ndash; but it will take some time. Keep
-	checking the <a
-		href="http://www.delphidabbler.com/software/cbview"
-	>Clipboard Viewer Component page</a> for further information, or subscribe
-	to the <a
-		href="http://www.delphidabbler.com/subsid/maillist?list=general"
-	>DelphiDabbler Newsletter</a> to get notified about all site and software
-	updates.
-</p>
-
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="update">
 	Update History
@@ -551,10 +275,6 @@
 </p>
 
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
 <h2 id="license">
 	License and Disclaimer
 </h2>
@@ -564,7 +284,9 @@
 	Mozilla Public License Version 1.1 (the &quot;License&quot;). You may not
 	use this Product except in compliance with the License. You may obtain a
 	copy of the License at
-	<a href="http://www.mozilla.org/MPL/">http://www.mozilla.org/MPL/</a>.
+	<a
+		href="http://www.mozilla.org/MPL/MPL-1.1"
+	>http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
@@ -577,7 +299,7 @@
 <p>
 	The Initial Developer of <em>Clipboard Viewer Component</em> is
 	Peter D Johnson. Portions created by the Initial Developer are Copyright
-	&copy; 1999-2008 Peter D Johnson (www.delphidabbler.com). All Rights
+	&copy; 1999-2010 Peter D Johnson (www.delphidabbler.com). All Rights
 	Reserved.
 </p>
 
@@ -586,15 +308,22 @@
 </p>
 
 
-<p class="pullout">
-	A copy of the license is included in the download &ndash; see
-	<code>MPL.txt</code>.
-</p>
-	
+<h2 id="bugs">
+	Bugs and Feature Requests
+</h2>
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+<p>
+	Bugs can be reported or new features requested via the <a
+		href="http://www.delphidabbler.com/url/ddlib-issues"
+	>Issue Tracker</a>.
 </p>
+
+<p>
+	If no similar report or request has been recorded already, use the <em>New
+	Issue</em> link to add a new issue. Please select the most appropriate
+	template from the <em>Templates</em> drop down list.
+</p>
+
 
 <h2 id="author">
 	About the Author
@@ -602,34 +331,33 @@
 
 <p>
 	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-	Wales,  UK, writing write mainly in Delphi. My programs and code are
-	available for download from:
-	<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+	Wales, UK, writing write mainly in Delphi. My programs and code are
+	available from <a
+		href="http://www.delphidabbler.com/"
+	>http://www.delphidabbler.com/</a>.
 </p>
 
 <p>
-	I can be <a href="http://www.delphidabbler.com/contact">contacted via the
-	website.</a>
-</p> 
+	I can be <a
+		href="http://www.delphidabbler.com/contact"
+	>contacted via the website</a>.
+</p>
 
 
 <div class="endnotes">
-
 	<div class="comments">
-		Please
-		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the components, if you
-		have found a bug, or you want to suggest any updates.
+		Please <a
+			href="http://www.delphidabbler.com/contact"
+		>let me know</a> if you have any comments about the component, but
+		please use the Issue Tracker noted above to report bugs and request new
+		features.
 	</div>
-
 	<div class="copyright">
-		This document is copyright &copy; 2008, P D Johnson,
-		<a href="http://www.delphidabbler.com/">
-		www.delphidabbler.com</a>
+		This document is copyright &copy; 2008-2010, P D Johnson, <a
+			href="http://www.delphidabbler.com/"
+		>www.delphidabbler.com</a>
 	</div>
-
 </div>
-
 </body>
 
 </html>
