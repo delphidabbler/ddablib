@@ -4,7 +4,13 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
-Release v1.3 of 17 Aug 2008
+Release v1.4 of 13 October 2010
++ Updated compiler directives used to detect and act on compiler in use.
++ Added new demo project.
++ Revised help file and updated example code to match demo project.
++ Updated and corrected documentation and included shortcut file that links to component Wiki.
+
+Release v1.3 of 17 August 2008
 + Fixed a conditional compilation bug.
 + Refactored main window procedure more line with MSDN clipboard viewer documentation.
 + Removed 16 bit support.
