@@ -352,15 +352,15 @@ type
 
     ///  <summary>
     ///  Discards any current digest, whether finalized or not. Sets the
-    ///  Finalize property True
+    ///  Finalized property to False
     ///  </summary>
     procedure Reset;
     ///  <summary>
     ///  Finalizes the current digest.
     ///  </summary>
     ///  <remarks>
-    ///  An exception will be raised if any Process method is called after
-    ///  finalization. Sets the Finalized property True.
+    ///  Sets the Finalized property to True. An exception will be raised if
+    //   any Process method is called after finalization. 
     ///  </summary>
     procedure Finalize;
 
@@ -368,7 +368,8 @@ type
     ///  Returns the MD5 digest.
     ///  </summary>
     ///  <remarks>
-    ///  Referencing this property finalizes the digest by calling Finalize.
+    ///  Referencing this property finalizes the digest by calling Finalize and
+    ///  therefore setting the Finalized property to True.
     ///  </remarks>
     property Digest: TPJMD5Digest read GetDigest;
     ///  <summary>
