@@ -4,6 +4,10 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v1.3.2 of 22 October 2010
++ Fixed bug in ExpandEnvVars routine (issue #11)
++ Made minor changes to read-me file.
+
 Release v1.3.1 of 20 February 2010
 + Fixed bug in GetAllEnvVars routine (issue #3: http://code.google.com/p/ddab-lib/issues/detail?id=3).
 + Fixed bug in ExpandEnvironmentStrings  (issue #4: http://code.google.com/p/ddab-lib/issues/detail?id=4).
