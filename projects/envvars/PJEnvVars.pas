@@ -28,7 +28,7 @@
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
- *   NONE
+ *   e.e (fixed buffer size error in ExpandEnvVars function)
  *
  * ***** END LICENSE BLOCK *****
 }
@@ -82,15 +82,15 @@ function CreateEnvBlock(const NewEnv: TStrings; const IncludeCurrent: Boolean;
   const Buffer: Pointer; const BufSize: Integer): Integer;
   {Creates a new custom environment block.
     @param NewEnv [in] List of environment variables in Name=Value format to
-      include in new environment block. Passing nil no new environment variables
+      include in new environment block. If nil then no new environment variables
       are included.
     @param IncludeCurrent [in] Flag indicating whether environment variables
-      from current process's are included in the new environment block.
+      from current process are included in the new environment block.
     @param Buffer [in] Buffer that receives new environment block. Pass nil to
       to find required buffer size without creating a block.
     @param BufSize [in] Size of Buffer in bytes. Pass 0 if Buffer is nil.
-    @return Size (or required size) of environment block in characters.
-      NOTE: multiply this by SizeOf(Char) to get buffer size in bytes.
+    @return Size (or required size) of environment block in characters. Multiply
+      by SizeOf(Char) to get buffer size in bytes.
   }
 
 function ExpandEnvVars(const Str: string): string;
@@ -124,7 +124,8 @@ type
   {
   TPJEnvVars:
     Component that encapsulates environment variables available to a program,
-    permitting access to, and modification of, the variables.
+    permitting access to, and modification of, the variables. Only one instance
+    of the component can be placed on a form or owned by another control.
   }
   TPJEnvVars = class(TComponent)
   private
@@ -145,8 +146,8 @@ type
       }
   public
     constructor Create(AOwner: TComponent); override;
-      {Class contructor. Ensures only one instance of the component is placed on
-      a form or owned by another component.
+      {Object contructor. Ensures only one instance of the component is placed
+      on a form or owned by another component.
         @param AOwner [in] Owning component. May be nil if no owner.
       }
     procedure EnumNames(Callback: TPJEnvVarsEnum; Data: Pointer);
@@ -158,7 +159,7 @@ type
     procedure DeleteVar(const Name: string);
       {Deletes an environment variable.
         @param Name [in] Name of environment variable to delete.
-        @except EPJEnvVars raised if environment can't be deleted.
+        @except EPJEnvVars raised if environment variable can't be deleted.
       }
     property Count: Integer read GetCount;
       {Count of number of environment variables in current process}
@@ -172,8 +173,8 @@ type
   {
   EPJEnvVars:
     Exception raised by TPJEnvVars when an environment variable error is
-    encountered. Class derives either from EWin32Error in Delphi version < 6 or
-    from EOSError in Delphi 6 onwards (where EWin32Error is deprecated).
+    encountered. Class derives from either EWin32Error in Delphi 5 or earlier or
+    EOSError in Delphi 6 and later where EWin32Error is deprecated.
   }
   {$IFDEF DELPHI6ANDUP}
     EPJEnvVars = class(EOSError);
@@ -209,13 +210,14 @@ function GetEnvVarValue(const VarName: string): string;
     @return Environment variable or '' if the variable does not exist.
   }
 var
-  BufSize: Integer;  // size (in chars) required for value including terminal #0
+  BufSize: Integer;  // size (in chars) of value + terminal #0
 begin
+  // Get required buffer size (including terminal #0)
   BufSize := GetEnvironmentVariable(PChar(VarName), nil, 0);
   if BufSize > 0 then
   begin
     // Env var exists: read value into result string
-    SetLength(Result, BufSize - 1); // space for #0 automatically added
+    SetLength(Result, BufSize - 1); // space for terminal #0 automatically added
     GetEnvironmentVariable(PChar(VarName), PChar(Result), BufSize);
   end
   else
@@ -253,15 +255,15 @@ function CreateEnvBlock(const NewEnv: TStrings; const IncludeCurrent: Boolean;
   const Buffer: Pointer; const BufSize: Integer): Integer;
   {Creates a new custom environment block.
     @param NewEnv [in] List of environment variables in Name=Value format to
-      include in new environment block. Passing nil no new environment variables
+      include in new environment block. If nil then no new environment variables
       are included.
     @param IncludeCurrent [in] Flag indicating whether environment variables
-      from current process's are included in the new environment block.
+      from current process are included in the new environment block.
     @param Buffer [in] Buffer that receives new environment block. Pass nil to
       to find required buffer size without creating a block.
     @param BufSize [in] Size of Buffer in bytes. Pass 0 if Buffer is nil.
-    @return Size (or required size) of environment block.
-      NOTE: multiply this by SizeOf(Char) to get buffer size in bytes.
+    @return Size (or required size) of environment block in characters. Multiply
+      by SizeOf(Char) to get buffer size in bytes.
   }
 var
   EnvVars: TStringList; // list of env vars in new block
@@ -311,14 +313,14 @@ function ExpandEnvVars(const Str: string): string;
     @return Converted string.
   }
 var
-  BufSize: Integer; // size of expanded string
+  BufSize: Integer; // size of expanded string in chars + terminal #0
 begin
-  // Get required buffer size
+  // Get required buffer size (including terminal #0)
   BufSize := ExpandEnvironmentStrings(PChar(Str), nil, 0);
   if BufSize > 0 then
   begin
     // Read expanded string into result string
-    SetLength(Result, BufSize);
+    SetLength(Result, BufSize - 1); // space for terminal #0 automatically added
     ExpandEnvironmentStrings(PChar(Str), PChar(Result), BufSize);
   end
   else
@@ -396,7 +398,7 @@ end;
 { TPJEnvVars }
 
 constructor TPJEnvVars.Create(AOwner: TComponent);
-  {Class contructor. Ensures only one instance of the component is placed on a
+  {Object contructor. Ensures only one instance of the component is placed on a
   form, or owned by another component.
     @param AOwner [in] Owning component. May be nil if no owner.
   }
@@ -418,7 +420,7 @@ end;
 procedure TPJEnvVars.DeleteVar(const Name: string);
   {Deletes an environment variable.
     @param Name [in] Name of environment variable to delete.
-    @except EPJEnvVars raised if environment can't be deleted.
+    @except EPJEnvVars raised if environment variable can't be deleted.
   }
 begin
   ErrorCheck(DeleteEnvVar(Name));
