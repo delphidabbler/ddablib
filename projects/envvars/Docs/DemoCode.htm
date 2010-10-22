@@ -13,7 +13,7 @@
 	<title>
 		DelphiDabbler Environment Variables Unit Demo Code
 	</title>
-	
+
 	<style type="text/css">
 		body {
 			margin: 1em;
@@ -162,7 +162,13 @@
 
 <ol>
 	<li>
-		<a href="#eg1">Example 1</a>: using the <var>TPJEnvVars</var> component.
+		<a href="#eg1a">Example 1a</a>: using the <var>TPJEnvVars</var> component
+		with the old enumerator obtained from the <var>EnumNames</var> method.
+	</li>
+	<li>
+		<a href="#eg1b">Example 1b</a>: using the <var>TPJEnvVars</var> component
+		with its new enumerator obtained from the <var>GetEnumerator</var>
+		method.
 	</li>
 	<li>
 		<a href="#eg2">Example 2</a>: using the <var>GetEnvVarValue</var>,
@@ -190,12 +196,14 @@
 	&raquo; <a href="#top">Go to top</a>
 </p>
 
-<h2 id="eg1">
-	Example 1
+<h2 id="eg1a">
+	Example 1a
 </h2>
 
 <p>
 	This example demonstrates the use of the <var>TPJEnvVars</var> component.
+	The example uses the old <var>EnumNames</var> methods and its callback
+	method in order to enumerate all the environment variable names.
 </p>
 
 <p>
@@ -286,8 +294,108 @@ end;</pre>
 
 <p>
 	<strong>Note:</strong>  This example is similar to <a href="#eg2">Example
-	2</a> which accomplishes a similar task using the environment variable
+	2</a> which accomplishes the same task using the environment variable
 	manipulation routines instead of the component.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#top">Go to top</a>
+</p>
+
+<h2 id="eg1b">
+	Example 1b
+</h2>
+
+<p>
+	This example also demonstrates the use of the <var>TPJEnvVars</var>
+	component, but this time uses the newer <var>TPJEnvVarsEnumerator</var>
+	class to enumerate the environment variable names. This enumerator is
+	created by calling the <var>GetEnumerator</var> method. From Delphi 2005
+	onwards this enumerator enables the use of the <var>for .. in</var> loop
+	construct. <strong>Warning:</strong> If <var>GetEnumerator</var> is called
+	directly from code then the caller must free the enumerator instance.
+</p>
+
+<p>
+	Drop a <var>TPJEnvVars</var> component and a list view on a form. Add two
+	columns named &quot;Name&quot; and &quot;Value&quot; to the list view and
+	set the list view's properties as follows:
+</p>
+
+<ul>
+	<li>
+		<var>Align<var> - <code>alClient</code>
+	</li>
+	<li>
+		<var>ColumnClick<var> - <code>False</code>
+	</li>
+	<li>
+		<var>ReadOnly<var> - <code>True</code>
+	</li>
+	<li>
+		<var>ViewStyle<var> - <code>vsReport</code>
+	</li>
+</ul>
+
+<p>
+	Now an <var>OnCreate</var> event handler for the form as follows:
+</p>
+
+<pre class="source">procedure TForm1.FormCreate(Sender: TObject);
+
+  procedure AddListItem(Name: string);
+  var
+    LI: TListItem;
+  begin
+    LI := ListView1.Items.Add;
+    LI.Caption := Name;
+    LI.SubItems.Add(PJEnvVars1.Values[Name]);
+  end;
+
+var
+  Name: string;
+  {$IFNDEF FORINSUPPORTED}
+  Enum: TPJEnvVarsEnumerator;
+  {$ENDIF}
+begin
+  {$IFDEF FORINSUPPORTED}
+  for Name in PJEnvVars1 do
+    AddListItem(Name);
+  {$ELSE}
+  Enum := PJEnvVars1.GetEnumerator;
+  try
+    while Enum.MoveNext do
+    begin
+      Name := Enum.Current;
+      AddListItem(Name);
+    end;
+  finally
+    Enum.Free;
+  end;
+  {$ENDIF}
+end;</pre>
+
+<p>
+	This code detects whether <var>for .. in</var> loops are supported using
+	conditional compilation and uses the construct if available. Therefore, add
+	the following compiler directives to the unit before the definition of
+	<var>FormCreate</var>:
+</p>
+
+<pre class="source">{$UNDEF FORINSUPPORTED}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 17.0} // >= Delphi 2005
+    {$DEFINE FORINSUPPORTED}
+  {$IFEND}
+{$ENDIF}</pre>
+
+<p>
+	The demo is quite simple. It merely adds the names and values of all the
+	environment variables to the list view on start up. It uses the
+	<var>TPJEnvVarsEnumerator</var> enumerator to get all the environment
+	variable names. Note that any environment variables that have no name are
+	ignored by this enumerator.
 </p>
 
 
@@ -302,12 +410,12 @@ end;</pre>
 <p>
 	This example demonstrates the use of the <var>GetEnvVarValue</var>,
 	<var>SetEnvVarValue</var>, <var>DeleteEnvVar</var> and
-	<var>GetAllEnvVars</var> routines. 
+	<var>GetAllEnvVars</var> routines.
 </p>
 
 <p>
-	Drop a list box, two edit boxes and two buttons on a form and add 
-	<code>PJEnvVars</code> to your uses clause. Now enter the following code: 
+	Drop a list box, two edit boxes and two buttons on a form and add
+	<code>PJEnvVars</code> to your uses clause. Now enter the following code:
 </p>
 
 <pre class="source">procedure TForm1.UpdateList;
@@ -364,7 +472,7 @@ begin
 end;</pre>
 
 <p>
-	The program behaves identically to <a href="#eg1">Example 1</a> which
+	The program behaves identically to <a href="#eg1a">Example 1a</a> which
 	accomplishes a similar task using the <var>TPJEnvVars</var> component.
 </p>
 
@@ -509,7 +617,7 @@ begin
 end;</pre>
 
 <p>
-	Save the project as <code>MasterApp</code> in the same folder as 
+	Save the project as <code>MasterApp</code> in the same folder as
 	<code>SlaveApp</code> and compile.
 </p>
 
