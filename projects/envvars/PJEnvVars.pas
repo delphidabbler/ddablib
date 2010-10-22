@@ -121,6 +121,36 @@ type
   }
   TPJEnvVarsEnum = procedure(const VarName: string; Data: Pointer) of object;
 
+
+  {
+  TPJEnvVarsEnumerator:
+    Class of enumerator used to enumerator all environment names in TPJEnvVars.
+    Provided as an alternative to the EnumNames method of TPJENvVars that
+    supports the for..in construct in Delphi 2005 and later.
+  }
+  TPJEnvVarsEnumerator = class(TObject)
+  private
+    fEnvVars: TStrings;   // List of env vars being enumerated
+    fIndex: Integer;      // Index of current env var in list
+  public
+    constructor Create;
+      {Object constructor. Initialises enumeration.
+      }
+    destructor Destroy; override;
+      {Object destructor. Tidies up enumeration, freeing resources.
+      }
+    function GetCurrent: string;
+      {Gets name of current environment variable name.
+        @return Required name.
+      }
+    function MoveNext: Boolean;
+      {Moves to next environment variable name in enumeration.
+        @return True if there is a next item, False if beyond last item.
+      }
+    property Current: string read GetCurrent;
+      {Name of current environment variable}
+  end;
+
   {
   TPJEnvVars:
     Component that encapsulates environment variables available to a program,
@@ -155,6 +185,13 @@ type
         @param Callback [in] Callback function called once for each environment
           variable, passing name and value of Data parameter.
         @param Data [in] User specified data passed to callback function.
+      }
+    function GetEnumerator: TPJEnvVarsEnumerator;
+      {Creates and returns a new enumerator for all environment variable names.
+        @return Required enumerator. Caller is responsible for freeing the
+          enumerator instance.
+          NOTE: If used by for..in loop (Delphi 2005 and later) compiler takes
+          care of freeing the enumerator.
       }
     procedure DeleteVar(const Name: string);
       {Deletes an environment variable.
@@ -202,7 +239,6 @@ procedure Register;
 begin
   RegisterComponents('DelphiDabbler', [TPJEnvVars]);
 end;
-
 
 function GetEnvVarValue(const VarName: string): string;
   {Gets the value of an environment variable
@@ -369,7 +405,6 @@ begin
     Result := 0;
 end;
 
-
 resourcestring
   // Error messages
   sSingleInstanceErr = 'Only one %s component is permitted on a form: ' +
@@ -393,7 +428,6 @@ begin
     raise Err;
   end;
 end;
-
 
 { TPJEnvVars }
 
@@ -466,6 +500,17 @@ begin
   end;
 end;
 
+function TPJEnvVars.GetEnumerator: TPJEnvVarsEnumerator;
+  {Creates and returns a new enumerator for all environment variable names.
+    @return Required enumerator. Caller is responsible for freeing the
+      enumerator instance.
+      NOTE: If used by for..in loop (Delphi 2005 and later) compiler takes care
+      of freeing the enumerator.
+  }
+begin
+  Result := TPJEnvVarsEnumerator.Create;
+end;
+
 function TPJEnvVars.GetValue(Name: string): string;
   {Read access method for Values property.
     @param Name [in] Name of environment variable.
@@ -483,6 +528,58 @@ procedure TPJEnvVars.SetValue(Name: string; const Value: string);
   }
 begin
   ErrorCheck(SetEnvVarValue(Name, Value));
+end;
+
+{ TPJEnvVarsEnumerator }
+
+constructor TPJEnvVarsEnumerator.Create;
+  {Object constructor. Initialises enumeration.
+  }
+var
+  Idx: Integer;         // loops thru all env vars
+  AllEnvVars: TStrings; // list of all env vars in system
+begin
+  fEnvVars := TStringList.Create;
+  AllEnvVars := TStringList.Create;
+  try
+    GetAllEnvVars(AllEnvVars);
+    // Strip out entries with no name
+    for Idx := 0 to Pred(AllEnvVars.Count) do
+    begin
+      if Trim(AllEnvVars.Names[Idx]) <> '' then
+        fEnvVars.Add(AllEnvVars[Idx]);
+    end;
+  finally
+    AllEnvVars.Free;
+  end;
+  // Initialise enumeration
+  fIndex := -1;
+end;
+
+destructor TPJEnvVarsEnumerator.Destroy;
+  {Object destructor. Tidies up enumeration, freeing resources.
+  }
+begin
+  fEnvVars.Free;
+  inherited;
+end;
+
+function TPJEnvVarsEnumerator.GetCurrent: string;
+  {Gets name of current environment variable name.
+    @return Required name.
+  }
+begin
+  Result := fEnvVars.Names[fIndex];
+end;
+
+function TPJEnvVarsEnumerator.MoveNext: Boolean;
+  {Moves to next environment variable name in enumeration.
+    @return True if there is a next item, False if beyond last item.
+  }
+begin
+  Result := fIndex < Pred(fEnvVars.Count);
+  if Result then
+    Inc(fIndex);
 end;
 
 end.
