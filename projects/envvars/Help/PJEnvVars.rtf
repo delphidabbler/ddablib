@@ -1,6 +1,6 @@
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
-{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset0 Courier New;}{\f3\fmodern Courier New;}{\f4\fnil \fcharset2 WingDings;}}
-{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;}
+{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset0 Courier New;}{\f3\fmodern Courier New;}{\f4\fmodern \fcharset0 Courier New;}{\f5\fnil \fcharset2 WingDings;}}
+{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red255\green0\blue0;}
 ${\footnote {$}PJEnvVars unit}
 #{\footnote {#}IDH_EV_UNIT}
 @{\footnote {@}Description of PJEnvVars unit.}
@@ -14,7 +14,9 @@ A{\footnote {A}PJEnvVars}
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 It also defines a component, {\strike TPJEnvVars}{\v IDH_EV_CLASS},  that encapsu\plain\f1\fs18\cf0 la\plain\f0\fs18\cf0 tes a process' environment variables and provides an easy way to change their values, \plain\f1\fs18\cf0 create then and \plain\f0\fs18\cf0 delete them.
 \par \plain\f0\fs8\cf0 
-\par \plain\f1\fs18\cf0 To see examples of using the code see the file \plain\f2\fs18\cf0 DemoCode.htm\plain\f1\fs18\cf0  that is distributed with the unit.\plain\f0\fs18\cf0 
+\par \plain\f1\fs18\cf0 To see examples of using the code see the file \plain\f2\fs18\cf0 DemoCode.htm\plain\f1\fs18\cf0  that is distributed with the unit.
+\par 
+\par \plain\f1\fs18\cf3\b Note:\plain\f1\fs18\cf0  This help file has been superseded by the Environment Variables Unit\plain\f1\fs18\cf2  {\strike wiki}{\v *!ExecFile("http://www.delphidabbler.com/url/envvars-wiki")}\plain\f1\fs18\cf0  (http://www.delphidabbler.com/url/envvars-wiki).\plain\f0\fs18\cf0 
 \par \page 
 ${\footnote {$}TPJEnvVars}
 #{\footnote {#}IDH_EV_CLASS}
@@ -35,7 +37,7 @@ A{\footnote {A}TPJEnvVars;TPJEnvVars_object}
 \par 
 \par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
 \par \plain\f0\fs8\cf0 
-\par \plain\f0\fs18\cf0 This component \plain\f1\fs18\cf0 provides\plain\f0\fs18\cf0  access to the environment variables in the current \plain\f1\fs18\cf0 process' \plain\f0\fs18\cf0 environment block. Environment variables can be read\plain\f1\fs18\cf0 , \plain\f0\fs18\cf0 updated or created using the {\strike Values}{\v IDH_EV_VALUES} property and deleted using the {\strike DeleteVar}{\v IDH_EV_DELETEVAR} method. The names of all available environment variables can be found using the {\strike EnumNames}{\v IDH_EV_ENUMNAMES} method, while the {\strike Count}{\v IDH_EV_COUNT} property \plain\f1\fs18\cf0 returns \plain\f0\fs18\cf0 the number of variables.
+\par \plain\f0\fs18\cf0 This component \plain\f1\fs18\cf0 provides\plain\f0\fs18\cf0  access to the environment variables in the current \plain\f1\fs18\cf0 process' \plain\f0\fs18\cf0 environment block. Environment variables can be read\plain\f1\fs18\cf0 , \plain\f0\fs18\cf0 updated or created using the {\strike Values}{\v IDH_EV_VALUES} property and deleted using the {\strike DeleteVar}{\v IDH_EV_DELETEVAR} method. The names of all available environment variables can be \plain\f1\fs18\cf0 enumerated\plain\f0\fs18\cf0  using the {\strike EnumNames}{\v IDH_EV_ENUMNAMES} \plain\f1\fs18\cf0 or {\strike GetEnumerator}{\v IDH_EV_GETENUMERATOR} \plain\f0\fs18\cf0 method\plain\f1\fs18\cf0 s\plain\f0\fs18\cf0 , while the {\strike Count}{\v IDH_EV_COUNT} property \plain\f1\fs18\cf0 returns \plain\f0\fs18\cf0 the number of variables.
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 Only one instance of a TPJEnvVars component can be placed on any form. An attempt to place further instances on \plain\f1\fs18\cf0 a \plain\f0\fs18\cf0  form causes an exception to be raised.
 \par \page 
@@ -122,6 +124,7 @@ ${\footnote {$}TPJEnvVars methods}
 \par \pard \tx400 \plain\f0\fs18\cf0 \tab {\strike Create}{\v IDH_EV_CREATE}
 \par \tab {\strike DeleteVar}{\v IDH_EV_DELETEVAR}
 \par \tab {\strike EnumNames}{\v IDH_EV_ENUMNAMES}
+\par \plain\f1\fs18\cf0 \tab {\strike GetEnumerator}{\v IDH_EV_GETENUMERATOR}\plain\f0\fs18\cf0 
 \par \page 
 ${\footnote {$}TPJEnvVars.Create}
 #{\footnote {#}IDH_EV_CREATE}
@@ -174,7 +177,7 @@ A{\footnote {A}TPJEnvVars_EnumNames;EnumNames_method;EnumNames}
 \pard \plain \pard \keepn \plain\f0\fs8\cf0 
 \par \plain\f0\fs22\cf2\b TPJEnvVars.EnumNames\plain\f0\fs18\cf0 
 \par \plain\f0\fs12\cf0 
-\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}          {\strike See also}{\v !AL(TPJEnvVars_Values;PJEnvVars_GetAllEnvVars)}
+\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}          {\strike See also}{\v !AL(TPJEnvVars_GetEnumerator;TPJEnvVars_Values;PJEnvVars_GetAllEnvVars)}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard Enumerates all environment variables.
 \par 
@@ -190,6 +193,25 @@ A{\footnote {A}TPJEnvVars_EnumNames;EnumNames_method;EnumNames}
 \par \plain\f1\fs18\cf0 The user must implement Callback as a method. 
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 The values associated with the environment variables can be accessed using the {\strike Values}{\v IDH_EV_VALUES} property.
+\par \page 
+${\footnote {$}TPJEnvVars.GetEnumerator}
+#{\footnote {#}IDH_EV_GETENUMERATOR}
+@{\footnote {@}Method description.}
+K{\footnote {K}GetEnumerator,TPJEnvVars;TPJEnvVars,GetEnumerator;GetEnumerator}
+A{\footnote {A}TPJEnvVars_GetEnumerator;GetEnumerator_method;GetEnumerator}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJEnvVars.GetEnumerator\plain\f0\fs18\cf0 
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJEnvVars}{\v IDH_EV_CLASS}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f1\fs18\cf0 Creates an enumerator that enumerates all the environment variable names\plain\f0\fs18\cf0 .\plain\f3\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \pard \keep \plain\f4\fs18\cf0\b function\plain\f3\fs18\cf0  \plain\f4\fs18\cf0 GetEnumerator: TPJEnvVarsEnumerator\plain\f3\fs18\cf0 ;\plain\f0\fs18\cf0 
+\par \pard 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 This method is provided to support the \plain\f1\fs18\cf0\b for..in\plain\f1\fs18\cf0  construct supported by Delphi 2005 and later. See the\plain\f1\fs18\cf2  {\strike wiki}{\v *!ExecFile("http://code.google.com/p/ddab-lib/wiki/TPJEnvVarsGetEnumerator")}\plain\f1\fs18\cf0  (http://code.google.com/p/ddab-lib/wiki/TPJEnvVarsGetEnumerator) for details.\plain\f0\fs18\cf0 
 \par \page 
 ${\footnote {$}EPJEnvVars}
 #{\footnote {#}IDH_EEV_CLASS}
@@ -282,12 +304,12 @@ K{\footnote {K}environment variable handling routines}
 \par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
 \par \pard The {\strike PJEnvVars}{\v IDH_EV_UNIT} unit defines various environment variable handling routines. They are:
 \par \plain\f0\fs8\cf0 
-\par \pard \fi-400 \li400 \tx400 \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike GetEnvVarValue}{\v IDH_GETENVVARVALUE}
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike SetEnvVarValue}{\v IDH_SETENVVARVALUE}
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike DeleteEnvVar}{\v IDH_DELETEENVVAR}
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike GetAllEnvVars}{\v IDH_GETALLENVVARS}
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike ExpandEnvVars}{\v IDH_EXPANDENVVARS}
-\par \plain\f4\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike CreateEnvBlock}{\v IDH_CREATEENVBLOCK}
+\par \pard \fi-400 \li400 \tx400 \plain\f5\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike GetEnvVarValue}{\v IDH_GETENVVARVALUE}
+\par \plain\f5\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike SetEnvVarValue}{\v IDH_SETENVVARVALUE}
+\par \plain\f5\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike DeleteEnvVar}{\v IDH_DELETEENVVAR}
+\par \plain\f5\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike GetAllEnvVars}{\v IDH_GETALLENVVARS}
+\par \plain\f5\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike ExpandEnvVars}{\v IDH_EXPANDENVVARS}
+\par \plain\f5\fs18\cf0 \'A7\plain\f0\fs18\cf0 \tab {\strike CreateEnvBlock}{\v IDH_CREATEENVBLOCK}
 \par \page 
 ${\footnote {$}GetEnvVarValue}
 #{\footnote {#}IDH_GETENVVARVALUE}

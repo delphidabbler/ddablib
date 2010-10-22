@@ -1,6 +1,6 @@
 <*HelpAuthor HTA1.9*>
 AK
-22
+23
 [Footnotes]
 $=PJEnvVars unit
 #=IDH_EV_UNIT
@@ -8,7 +8,7 @@ $=PJEnvVars unit
 K=PJEnvVars
 A=PJEnvVars
 [End]
-3
+4
 NS
 1
 HS
@@ -25,15 +25,24 @@ HS
 0
 IDH_ENVVARROUTINES
 
-1345
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+HS
+4
+2
+
+0
+
+ExecFile("http://www.delphidabbler.com/url/envvars-wiki")
+1674
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;\red255\green0\blue0;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b PJEnvVars unit\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf2 
 \par This unit contains a \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf2 set of functions and procedures\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf2  that can manipulate \plain\f1\fs18\cf2 a process'\plain\f0\fs18\cf2  environment block and the variables contained in it.
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 It also defines a component, \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJEnvVars\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 ,  that encapsu\plain\f1\fs18\cf2 la\plain\f0\fs18\cf2 tes a process' environment variables and provides an easy way to change their values, \plain\f1\fs18\cf2 create then and \plain\f0\fs18\cf2 delete them.
 \par \plain\f0\fs8\cf2 
-\par \plain\f1\fs18\cf2 To see examples of using the code see the file \plain\f2\fs18\cf2 DemoCode.htm\plain\f1\fs18\cf2  that is distributed with the unit.\plain\f0\fs18\cf2 
+\par \plain\f1\fs18\cf2 To see examples of using the code see the file \plain\f2\fs18\cf2 DemoCode.htm\plain\f1\fs18\cf2  that is distributed with the unit.
+\par 
+\par \plain\f1\fs18\cf4\b Note:\plain\f1\fs18\cf2  This help file has been superseded by the Environment Variables Unit\plain\f1\fs18\cf3  \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf3 wiki\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf2  (http://www.delphidabbler.com/url/envvars-wiki).\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]
@@ -43,7 +52,7 @@ $=TPJEnvVars
 K=TPJEnvVars
 A=TPJEnvVars;TPJEnvVars_object
 [End]
-10
+11
 NS
 1
 HS
@@ -107,7 +116,14 @@ BM
 PJEnvVars.bmp
 0
 1
-2442
+HS
+11
+0
+
+0
+IDH_EV_GETENUMERATOR
+
+2688
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf1\b \protect <BM 10>\plain\f0\fs22\cf3\b  TPJEnvVars\plain\f0\fs18\cf2 
 \par \plain\f0\fs12\cf2 
@@ -121,7 +137,7 @@ PJEnvVars.bmp
 \par 
 \par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 This component \plain\f1\fs18\cf2 provides\plain\f0\fs18\cf2  access to the environment variables in the current \plain\f1\fs18\cf2 process' \plain\f0\fs18\cf2 environment block. Environment variables can be read\plain\f1\fs18\cf2 , \plain\f0\fs18\cf2 updated or created using the \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 Values\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  property and deleted using the \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 DeleteVar\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2  method. The names of all available environment variables can be found using the \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 EnumNames\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2  method, while the \plain\f0\fs18\cf1 \protect <HS 8>\plain\f0\fs18\cf2 Count\plain\f0\fs18\cf1 \protect </HS 8>\plain\f0\fs18\cf2  property \plain\f1\fs18\cf2 returns \plain\f0\fs18\cf2 the number of variables.
+\par \plain\f0\fs18\cf2 This component \plain\f1\fs18\cf2 provides\plain\f0\fs18\cf2  access to the environment variables in the current \plain\f1\fs18\cf2 process' \plain\f0\fs18\cf2 environment block. Environment variables can be read\plain\f1\fs18\cf2 , \plain\f0\fs18\cf2 updated or created using the \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 Values\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  property and deleted using the \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 DeleteVar\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2  method. The names of all available environment variables can be \plain\f1\fs18\cf2 enumerated\plain\f0\fs18\cf2  using the \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 EnumNames\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2  \plain\f1\fs18\cf2 or \plain\f1\fs18\cf1 \protect <HS 11>\plain\f1\fs18\cf2 GetEnumerator\plain\f1\fs18\cf1 \protect </HS 11>\plain\f1\fs18\cf2  \plain\f0\fs18\cf2 method\plain\f1\fs18\cf2 s\plain\f0\fs18\cf2 , while the \plain\f0\fs18\cf1 \protect <HS 8>\plain\f0\fs18\cf2 Count\plain\f0\fs18\cf1 \protect </HS 8>\plain\f0\fs18\cf2  property \plain\f1\fs18\cf2 returns \plain\f0\fs18\cf2 the number of variables.
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 Only one instance of a TPJEnvVars component can be placed on any form. An attempt to place further instances on \plain\f1\fs18\cf2 a \plain\f0\fs18\cf2  form causes an exception to be raised.
 \par }
@@ -311,7 +327,7 @@ $=TPJEnvVars methods
 #=IDH_EV_METHODS
 @=Methods of TPJEnvVars.
 [End]
-3
+4
 HS
 1
 0
@@ -333,7 +349,14 @@ HS
 0
 IDH_EV_ENUMNAMES
 
-837
+HS
+4
+0
+
+0
+IDH_EV_GETENUMERATOR
+
+988
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Methods\plain\f0\fs18\cf1 
 \par 
 \par In addition to the methods of TComponent, TPJEnvVars has the following \plain\f1\fs18\cf1 additional \plain\f0\fs18\cf1 public methods:
@@ -341,6 +364,7 @@ IDH_EV_ENUMNAMES
 \par \pard \tx400 \plain\f0\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 Create\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 DeleteVar\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 3>\plain\f0\fs18\cf1 EnumNames\plain\f0\fs18\cf2 \protect </HS 3>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 4>\plain\f1\fs18\cf1 GetEnumerator\plain\f1\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
 \par }
 
 [Footnotes]
@@ -463,7 +487,7 @@ HS
 
 0
 
-AL(TPJEnvVars_Values;PJEnvVars_GetAllEnvVars)
+AL(TPJEnvVars_GetEnumerator;TPJEnvVars_Values;PJEnvVars_GetAllEnvVars)
 2285
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b TPJEnvVars.EnumNames\plain\f0\fs18\cf2 
@@ -484,6 +508,47 @@ AL(TPJEnvVars_Values;PJEnvVars_GetAllEnvVars)
 \par \plain\f2\fs18\cf2 The user must implement Callback as a method. 
 \par \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 The values associated with the environment variables can be accessed using the \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 Values\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2  property.
+\par }
+
+[Footnotes]
+$=TPJEnvVars.GetEnumerator
+#=IDH_EV_GETENUMERATOR
+@=Method description.
+K=GetEnumerator,TPJEnvVars;TPJEnvVars,GetEnumerator;GetEnumerator
+A=TPJEnvVars_GetEnumerator;GetEnumerator_method;GetEnumerator
+[End]
+4
+NS
+1
+HS
+2
+0
+
+0
+IDH_EV_CLASS
+
+KP
+3
+HS
+4
+2
+
+0
+
+ExecFile("http://code.google.com/p/ddab-lib/wiki/TPJEnvVarsGetEnumerator")
+1506
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJEnvVars.GetEnumerator\plain\f0\fs18\cf2 
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJEnvVars\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf2 
+\par \plain\f1\fs18\cf2 Creates an enumerator that enumerates all the environment variable names\plain\f0\fs18\cf2 .\plain\f2\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f2\fs18\cf1\b \protect <KP 3>\plain\f3\fs18\cf2\b function\plain\f2\fs18\cf2  \plain\f3\fs18\cf2 GetEnumerator: TPJEnvVarsEnumerator\plain\f2\fs18\cf2 ;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
+\par 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2 This method is provided to support the \plain\f1\fs18\cf2\b for..in\plain\f1\fs18\cf2  construct supported by Delphi 2005 and later. See the\plain\f1\fs18\cf3  \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf3 wiki\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf2  (http://code.google.com/p/ddab-lib/wiki/TPJEnvVarsGetEnumerator) for details.\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]

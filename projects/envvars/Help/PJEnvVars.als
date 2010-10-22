@@ -12,6 +12,8 @@ epjenvvars
 epjenvvars_object
 expandenvvars
 getallenvvars
+getenumerator
+getenumerator_method
 getenvvarvalue
 pjenvvars
 pjenvvars_createenvblock
@@ -26,6 +28,7 @@ tpjenvvars_count
 tpjenvvars_create
 tpjenvvars_deletevar
 tpjenvvars_enumnames
+tpjenvvars_getenumerator
 tpjenvvars_object
 tpjenvvars_values
 tpjenvvarsenum
