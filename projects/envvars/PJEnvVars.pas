@@ -4,6 +4,9 @@
  * Source code for environment variable routines and component for processing
  * and managing environment variables.
  *
+ * Documentation of this unit is at
+ * http://www.delphidabbler.com/url/envvars-wiki
+ *
  * $Rev$
  * $Date$
  *
@@ -37,15 +40,16 @@
 unit PJEnvVars;
 
 
-// Determine compiler & switch off unsafe warnings if supported
-{$UNDEF DELPHI6ANDUP}
+// Set conditional symbols & switch off unsafe warnings where supported
+{$UNDEF SUPPORTS_EOSERROR}
 {$UNDEF HAS_TYPES_UNIT}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 14.0} // >= Delphi 6
-    {$DEFINE DELPHI6ANDUP}
-    {$DEFINE HAS_TYPES_UNIT}
+    {$DEFINE SUPPORTS_EOSERROR} // SysUtils defines EOSError
+    {$DEFINE HAS_TYPES_UNIT}    // Types unit is available
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // >= Delphi 7
+    // Switch off unsafe warnings
     {$WARN UNSAFE_TYPE OFF}
     {$WARN UNSAFE_CODE OFF}
   {$IFEND}
@@ -239,13 +243,13 @@ type
   {
   EPJEnvVars:
     Exception raised by TPJEnvVars when an environment variable error is
-    encountered. Class derives from either EWin32Error in Delphi 5 or earlier or
-    EOSError in Delphi 6 and later where EWin32Error is deprecated.
+    encountered. Class derives from either EOSError if defined in SysUtils or
+    EWin32Error otherwise.
   }
-  {$IFDEF DELPHI6ANDUP}
-    EPJEnvVars = class(EOSError);
+  {$IFDEF SUPPORTS_EOSERROR}
+  EPJEnvVars = class(EOSError);
   {$ELSE}
-    EPJEnvVars = class(EWin32Error);
+  EPJEnvVars = class(EWin32Error);
   {$ENDIF}
 
 
