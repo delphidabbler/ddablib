@@ -109,6 +109,11 @@ function GetAllEnvVars(const Vars: TStrings): Integer;
       in characters. Multiply by SizeOf(Char) to get size in bytes.
   }
 
+function EnvBlockSize: Integer;
+  {Calculates size of environment block in characters.
+    @return Size of environment block in characters. Multiply by SizeOf(Char) to
+      get size in bytes.
+  }
 
 type
 
@@ -403,6 +408,15 @@ begin
   else
     // No block => zero length
     Result := 0;
+end;
+
+function EnvBlockSize: Integer;
+  {Calculates size of environment block in characters.
+    @return Size of environment block in characters. Multiply by SizeOf(Char) to
+      get size in bytes.
+  }
+begin
+  Result := GetAllEnvVars(nil); // this function returns required block size
 end;
 
 resourcestring
