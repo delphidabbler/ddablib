@@ -847,18 +847,20 @@ HS
 0
 IDH_EV_UNIT
 
-1740
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fnil \fcharset2 WingDings;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+2123
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil \fcharset2 WingDings;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs22\cf3\b Environment Variable Handling Routines\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs18\cf2 
-\par The \plain\f0\fs18\cf1 \protect <HS 8>\plain\f0\fs18\cf2 PJEnvVars\plain\f0\fs18\cf1 \protect </HS 8>\plain\f0\fs18\cf2  unit defines various environment variable handling routines. They are:
+\par The \plain\f0\fs18\cf1 \protect <HS 8>\plain\f0\fs18\cf2 PJEnvVars\plain\f0\fs18\cf1 \protect </HS 8>\plain\f0\fs18\cf2  unit defines various environment variable handling routines. \plain\f1\fs18\cf2 Those routines documented here\plain\f0\fs18\cf2  are:
 \par \plain\f0\fs8\cf2 
-\par \pard \fi-400 \li400 \tx400 \plain\f1\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 GetEnvVarValue\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 
-\par \plain\f1\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf2 SetEnvVarValue\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf2 
-\par \plain\f1\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 DeleteEnvVar\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2 
-\par \plain\f1\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 GetAllEnvVars\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
-\par \plain\f1\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 ExpandEnvVars\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2 
-\par \plain\f1\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 CreateEnvBlock\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2 
+\par \pard \fi-400 \li400 \tx400 \plain\f2\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 GetEnvVarValue\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 
+\par \plain\f2\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf2 SetEnvVarValue\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf2 
+\par \plain\f2\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 DeleteEnvVar\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2 
+\par \plain\f2\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 GetAllEnvVars\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
+\par \plain\f2\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 6>\plain\f0\fs18\cf2 ExpandEnvVars\plain\f0\fs18\cf1 \protect </HS 6>\plain\f0\fs18\cf2 
+\par \plain\f2\fs18\cf2 \'A7\plain\f0\fs18\cf2 \tab \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 CreateEnvBlock\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2 
+\par 
+\par \pard \tx400 \plain\f1\fs18\cf2 In addition there were three routines added in release 2.0: EnvBlockSize and two overloaded versions of GetAllEnvVarNames. These routines are documented in the wiki at http://code.google.com/p/ddab-lib/wiki/PJEnvVarsRoutines\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]
