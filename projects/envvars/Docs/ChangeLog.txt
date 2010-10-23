@@ -4,13 +4,22 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v2.0 of 23 October 2010
++ Added an enumerator for the environment variables component that supports the Delphi for..in construct (issue #10: http://code.google.com/p/ddab-lib/issues/detail?id=10).
++ Added new EnvBlockSize and two overloaded GetAllEnvVarNames routines.
++ Renamed some conditional compilation symbols.
++ Abandoned Delphi 3 support.
++ Updated help file re changes. Added links to Wiki in place of detailed information.
++ Added demo code for new enumerator and routines to demo read-me file.
++ Updated read-me file.
+
 Release v1.3.2 of 22 October 2010
-+ Fixed bug in ExpandEnvVars routine (issue #11)
++ Fixed bug in ExpandEnvVars routine (issue #11: http://code.google.com/p/ddab-lib/issues/detail?id=11).
 + Made minor changes to read-me file.
 
 Release v1.3.1 of 20 February 2010
 + Fixed bug in GetAllEnvVars routine (issue #3: http://code.google.com/p/ddab-lib/issues/detail?id=3).
-+ Fixed bug in ExpandEnvironmentStrings  (issue #4: http://code.google.com/p/ddab-lib/issues/detail?id=4).
++ Fixed bug in ExpandEnvironmentStrings (issue #4: http://code.google.com/p/ddab-lib/issues/detail?id=4).
 + Updated help file and example code document for compatibility when unicode Delphis. Example code stripped from help file.
 + Updated documentation.
 
