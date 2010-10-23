@@ -39,9 +39,11 @@ unit PJEnvVars;
 
 // Determine compiler & switch off unsafe warnings if supported
 {$UNDEF DELPHI6ANDUP}
+{$UNDEF HAS_TYPES_UNIT}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 14.0} // >= Delphi 6
     {$DEFINE DELPHI6ANDUP}
+    {$DEFINE HAS_TYPES_UNIT}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // >= Delphi 7
     {$WARN UNSAFE_TYPE OFF}
@@ -55,8 +57,17 @@ interface
 
 uses
   // Delphi
-  SysUtils, Classes;
+  SysUtils, Classes  {$IFDEF HAS_TYPES_UNIT}, Types {$ENDIF};
 
+{$IFNDEF HAS_TYPES_UNIT}
+type
+  {
+  TStringDynArray:
+    Dynamic array of strings. Defined here if Types unit not available: Types
+    unit defines this type.
+  }
+  TStringDynArray = array of string;
+{$ENDIF}
 
 function GetEnvVarValue(const VarName: string): string;
   {Gets the value of an environment variable.
@@ -109,6 +120,19 @@ function GetAllEnvVars(const Vars: TStrings): Integer;
       in characters. Multiply by SizeOf(Char) to get size in bytes.
   }
 
+procedure GetAllEnvVarNames(const Names: TStrings); overload;
+  {Stores all environment variable names in a string list. Empty names are
+  ignored.
+    @param Names [in] String list to receive names. Any previous contents are
+      discarded.
+  }
+
+function GetAllEnvVarNames: TStringDynArray; overload;
+  {Creates a string array containing all environment variables. Empty names are
+  ignored.
+    @return Array of environment variable names.
+  }
+
 function EnvBlockSize: Integer;
   {Calculates size of environment block in characters.
     @return Size of environment block in characters. Multiply by SizeOf(Char) to
@@ -120,7 +144,7 @@ type
   {
   TPJEnvVarsEnum:
     Callback method type used in TPJEnvVars.EnumNames method: called for
-    each environment variable by name, passing used-supplied data.
+    each environment variable by name, passing user-supplied data.
       @param VarName [in] Name of an environment variable.
       @param Data [in] User-specified pointer as passed to TPJEnvVars.EnumNames.
   }
@@ -135,8 +159,8 @@ type
   }
   TPJEnvVarsEnumerator = class(TObject)
   private
-    fEnvVars: TStrings;   // List of env vars being enumerated
-    fIndex: Integer;      // Index of current env var in list
+    fEnvVarNames: TStrings; // List of names of env vars being enumerated
+    fIndex: Integer;        // Index of current env var in list
   public
     constructor Create;
       {Object constructor. Initialises enumeration.
@@ -410,6 +434,53 @@ begin
     Result := 0;
 end;
 
+procedure GetAllEnvVarNames(const Names: TStrings); overload;
+  {Stores all environment variable names in a string list. Empty names are
+  ignored.
+    @param Names [in] String list to receive names. Any previous contents are
+      discarded.
+  }
+var
+  AllEnvVars: TStrings; // list of all environment variables
+  Name: string;         // an environment variable name
+  Idx: Integer;         // loops thru indices of AllEnvVars
+begin
+  Assert(Assigned(Names));
+  Names.Clear;
+  AllEnvVars := TStringList.Create;
+  try
+    GetAllEnvVars(AllEnvVars);
+    for Idx := 0 to Pred(AllEnvVars.Count) do
+    begin
+      Name := Trim(AllEnvVars.Names[Idx]);
+      if Name <> '' then
+        Names.Add(Name);
+    end;
+  finally
+    AllEnvVars.Free;
+  end;
+end;
+
+function GetAllEnvVarNames: TStringDynArray; overload;
+  {Creates a string array containing all environment variables. Empty names are
+  ignored.
+    @return Array of environment variable names.
+  }
+var
+  Names: TStrings;  // string list of all environment variable names
+  Idx: Integer;     // loops through indices of Names
+begin
+  Names := TStringList.Create;
+  try
+    GetAllEnvVarNames(Names);
+    SetLength(Result, Names.Count);
+    for Idx := 0 to Pred(Names.Count) do
+      Result[Idx] := Names[Idx];
+  finally
+    Names.Free;
+  end;
+end;
+
 function EnvBlockSize: Integer;
   {Calculates size of environment block in characters.
     @return Size of environment block in characters. Multiply by SizeOf(Char) to
@@ -418,11 +489,6 @@ function EnvBlockSize: Integer;
 begin
   Result := GetAllEnvVars(nil); // this function returns required block size
 end;
-
-resourcestring
-  // Error messages
-  sSingleInstanceErr = 'Only one %s component is permitted on a form: ' +
-    '%0:s is already present on %1:s';
 
 procedure ErrorCheck(Code: Integer);
   {Checks a return value from one of TPJEnvVars methods that return Windows
@@ -444,6 +510,11 @@ begin
 end;
 
 { TPJEnvVars }
+
+resourcestring
+  // Error messages
+  sSingleInstanceErr = 'Only one %s component is permitted on a form: ' +
+    '%0:s is already present on %1:s';
 
 constructor TPJEnvVars.Create(AOwner: TComponent);
   {Object contructor. Ensures only one instance of the component is placed on a
@@ -549,24 +620,9 @@ end;
 constructor TPJEnvVarsEnumerator.Create;
   {Object constructor. Initialises enumeration.
   }
-var
-  Idx: Integer;         // loops thru all env vars
-  AllEnvVars: TStrings; // list of all env vars in system
 begin
-  fEnvVars := TStringList.Create;
-  AllEnvVars := TStringList.Create;
-  try
-    GetAllEnvVars(AllEnvVars);
-    // Strip out entries with no name
-    for Idx := 0 to Pred(AllEnvVars.Count) do
-    begin
-      if Trim(AllEnvVars.Names[Idx]) <> '' then
-        fEnvVars.Add(AllEnvVars[Idx]);
-    end;
-  finally
-    AllEnvVars.Free;
-  end;
-  // Initialise enumeration
+  fEnvVarNames := TStringList.Create;
+  GetAllEnvVarNames(fEnvVarNames);
   fIndex := -1;
 end;
 
@@ -574,7 +630,7 @@ destructor TPJEnvVarsEnumerator.Destroy;
   {Object destructor. Tidies up enumeration, freeing resources.
   }
 begin
-  fEnvVars.Free;
+  fEnvVarNames.Free;
   inherited;
 end;
 
@@ -583,7 +639,7 @@ function TPJEnvVarsEnumerator.GetCurrent: string;
     @return Required name.
   }
 begin
-  Result := fEnvVars.Names[fIndex];
+  Result := fEnvVarNames[fIndex];
 end;
 
 function TPJEnvVarsEnumerator.MoveNext: Boolean;
@@ -591,7 +647,7 @@ function TPJEnvVarsEnumerator.MoveNext: Boolean;
     @return True if there is a next item, False if beyond last item.
   }
 begin
-  Result := fIndex < Pred(fEnvVars.Count);
+  Result := fIndex < Pred(fEnvVarNames.Count);
   if Result then
     Inc(fIndex);
 end;
