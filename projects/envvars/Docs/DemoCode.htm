@@ -156,7 +156,7 @@
 </h1>
 
 <p>
-	This document contains four examples of how to use the code in the
+	This document contains several examples of how to use the code in the
 	Environment Variables Unit. They are:
 </p>
 
@@ -183,6 +183,10 @@
 		<a href="#eg4">Example 4</a>: using the <var>CreateEnvBlock</var>
 		function.
 	</li>
+	<li>
+		<a href="#eg5">Example 5</a>: using the <var>GetAllEnvVarNames</var> and
+		<var>EnvBlockSize</var> routines.
+	</li>
 </ol>
 
 <p>
@@ -191,6 +195,7 @@
 		href="http://www.delphidabbler.com/url/doodlings-repo"
 	>DelphiDabbler Doodlings Repository</a>.
 </p>
+
 
 <p class="gototop">
 	&raquo; <a href="#top">Go to top</a>
@@ -666,6 +671,97 @@ end;</pre>
 	again to spawn another instance of <code>SlaveApp</code>. This new instance
 	will have a copy of <code>MasterApp</code>'s environment variables along
 	with the new ones you entered in <code>MasterApp</code>'s memo control.
+</p>
+
+
+<p class="gototop">
+	&raquo; <a href="#top">Go to top</a>
+</p>
+
+<h2 id="eg5">
+	Example 5
+</h2>
+
+<p>
+	This example demonstrates the use of both overloaded versions of
+	<var>GetAllEnvVarNames</var> and <var>EnvBlockSize</var>.
+</p>
+
+<p>
+	Drop three labels, two edit controls, two list boxes, one button and a
+	<var>TPJEnvVars</var> component on a form. Set the following properties:
+</p>
+
+<ul>
+	<li>
+		<var>Label1.Caption</var> := <code>'Name'</code>.
+	</li>
+	<li>
+		<var>Label2.Caption</var> := <code>'Value'</code>.
+	</li>
+	<li>
+		<var>Button1.Caption</var> := <code>'Update'</code>.
+	</li>
+</ul>
+
+<p>
+	Create an <var>OnCreate</var> event handler for the form, an
+	<var>OnClick</var> event handler for the button and an <var>OnClick</var>
+	event handler that is attached to both list boxes. Also create a private
+	method of the form class named <var>UpdateListsEtc</var>. Code the methods
+	as follows:
+</p>
+
+<pre class="source">procedure TForm1.UpdateListsEtc;
+var
+  Idx: Integer;
+  Names: TStringDynArray;
+begin
+  GetAllEnvVarNames(ListBox1.Items);
+  Names := GetAllEnvVarNames;
+  ListBox2.Clear;
+  for Idx := 0 to High(Names) do
+    ListBox2.Items.Add(Names[Idx]);
+  Label3.Caption := Format('Environment block size: %d', [EnvBlockSize]);
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  UpdateListsEtc;
+end;
+
+procedure TForm1.ListBoxClick(Sender: TObject);
+begin
+  Edit1.Text := (Sender as TListBox).Items[(Sender as TListBox).ItemIndex];
+  Edit2.Text := PJEnvVars1.Values[Edit1.Text];
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  PJEnvVars1.Values[Trim(Edit1.Text)] := Trim(Edit2.Text);
+  UpdateListsEtc;
+end;</pre>
+
+<p>
+	If the <var>Types</var> unit is provided in your version of Delphi, add it
+	to the uses clause.
+</p>
+
+<p>
+	<var>UpdateListsEtc</var> populates the list boxes and displays the
+	environment block size in <var>Label3</var>. <var>ListBox1</var> is
+	populated with all environment variable names using the <var>TStrings</var>
+	overload of <var>GetAllEnvVarNames</var> while <var>ListBox2</var> is
+	populated by using <var>GetAllEnvVarNames</var>'s string array overload.
+	Both list boxes should contain exactly the same information.
+</p>
+
+<p>
+	Selecting a name in either list box copies the name into the first edit
+	control and the environment variable's value in the second edit control.
+	Entering a new name or value and clicking the <em>Update</em> button updates
+	the environment variable, repopulates the lists and updates the environment
+	block size.
 </p>
 
 
