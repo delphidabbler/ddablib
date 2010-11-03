@@ -22,7 +22,7 @@
 ; The Initial Developer of the Original Code is Peter Johnson
 ; (http://www.delphidabbler.com/).
 ; 
-; Portions created by the Initial Developer are Copyright (C) 1998-2009 Peter
+; Portions created by the Initial Developer are Copyright (C) 1998-2010 Peter
 ; Johnson. All Rights Reserved.
 ;
 ; Contributor(s):
@@ -36,7 +36,7 @@ HCW=0
 LCID=0x809 0x0 0x0 ;English (United Kingdom)
 REPORT=Yes
 TITLE=DelphiDabbler Components - TPJVersionInfo
-COPYRIGHT=PJVersionInfo Help - copyright © 1998-2009 P.D.Johnson (DelphiDabbler)
+COPYRIGHT=PJVersionInfo Help - copyright © 1998-2010 P.D.Johnson (DelphiDabbler)
 HLP=.\PJVersionInfo.hlp
 
 [FILES]

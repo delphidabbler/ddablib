@@ -1,5 +1,5 @@
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057
-{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fswiss MS Sans Serif;}{\f3\froman \fcharset2 Symbol;}{\f4\fswiss \fcharset1 Arial;}{\f5\fswiss \fprq2 System;}{\f6\fmodern Courier New;}{\f7\fnil \fcharset1 WingDings;}{\f8\fmodern \fcharset1 Courier New;}{\f9\fmodern \fcharset0 Courier New;}}
+{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fswiss MS Sans Serif;}{\f3\froman \fcharset2 Symbol;}{\f4\fswiss \fcharset1 Arial;}{\f5\fswiss \fprq2 System;}{\f6\fmodern Courier New;}{\f7\fnil \fcharset1 WingDings;}{\f8\fmodern \fcharset1 Courier New;}{\f9\fmodern \fcharset0 Courier New;}{\f10\fnil \fcharset2 WingDings;}{\f11\fnil \fcharset0 Arial;}}
 {\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue128;}
 ${\footnote {$}PJVersionInfo unit}
 #{\footnote {#}IDH_VI_UNIT}
@@ -881,12 +881,22 @@ A{\footnote {A}TPJVersionNumber}
 \par \plain\f0\fs18\cf0 TPJVersionNumber is a record that stores version numbers from version resources as four discrete values. The record is declared as follows:
 \par \plain\f0\fs8\cf0 
 \par \pard \keep \plain\f6\fs18\cf0 TPJVersionNumber = \plain\f6\fs18\cf0\b record\plain\f6\fs18\cf0 
-\par   V1, V2, V3, V4: WORD;
+\par   V1, V2, V3, V4: \plain\f9\fs18\cf0 Word\plain\f6\fs18\cf0 ;
 \par \plain\f6\fs18\cf0\b end\plain\f6\fs18\cf0 ;\plain\f0\fs18\cf0 
 \par \pard \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 V1 represents the most significant version number and V4 represents the least significant number.
 \par \plain\f0\fs8\cf0 
 \par \plain\f0\fs18\cf0 For example a version number written as 2.5.8.3 would be stored in a variable of type TVersionNumber with V1=2, V2=5, V3=8 and V4=3.
+\par \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 When compiled with Delphi 2006 and later TPJVersionNumber has some additional features:
+\par \plain\f1\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f10\fs18\cf0 \'A7\plain\f11\fs18\cf0 \tab Two TPJVersionNumber records can be compared for equality using the usual =, <>, <, <=, > and >= operators.
+\par \plain\f10\fs18\cf0 \'A7\plain\f11\fs18\cf0 \tab A TPJVersionNumber record can be directly assigned to a string. Doing this formats the version number as a dotted quad. For example, with the record's fields set as above assigning to a string variable will result in the string '2.5.8.3'.
+\par \pard \plain\f11\fs8\cf0 
+\par \plain\f11\fs18\cf0 Two helper functions are also provided, mainly for use with Delphi 2005 and earlier, that perform similar functions:
+\par \plain\f11\fs8\cf0 
+\par \pard \fi-400 \li400 \tx400 \plain\f10\fs18\cf0 \'A7\plain\f11\fs18\cf0 \tab CompareVerNums can be used to compare two version numbers. It returns 0 if the version numbers are the same, negative if the first version number is less than the second or positive if the first is greater than the second.
+\par \plain\f10\fs18\cf0 \'A7\plain\f11\fs18\cf0 \tab VerNumToStr can be used to format a version number record as a dotted quad string.\plain\f0\fs18\cf0 
 \par \page 
 ${\footnote {$}Example - Language and CharSets}
 #{\footnote {#}IDH_EG1}
