@@ -25,7 +25,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  * 
- * Portions created by the Initial Developer are Copyright (C) 1998-2009 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1998-2010 Peter
  * Johnson. All Rights Reserved.
  * 
  * Contributor(s):
@@ -37,17 +37,28 @@
 
 unit PJVersionInfo;
 
-// Determine if certain required features are supported
+// Determine if certain features are supported by compiler
+// * Supports_Assert          - Defined if assertions supported (all compilers
+//                              except Delphi 2).
+// * Supports_ResourceString  - Defined if resourcestring keyword supported (all
+//                              compilers except Delphi 2).
+// * Supports_AdvancedRecords - Defined if advanced records with record methods,
+//                              operator overloads etc. supported (Delphi 2006
+//                              and later).
 {$DEFINE Supports_Assert}
 {$DEFINE Supports_ResourceString}
-{$IFDEF VER90} // Delphi 2 doesn't support resourcestring or Assert
+{$UNDEF Supports_AdvancedRecords}
+{$IFDEF VER90} // Delphi 2
   {$UNDEF Supports_Assert}
   {$UNDEF Supports_ResourceString}
 {$ENDIF}
 // Switch off unsafe code warnings if switch supported
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0}  // >= Delphi 7
+  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
     {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
+  {$IF CompilerVersion >= 18.0}   // >= Delphi 2006
+    {$DEFINE Supports_AdvancedRecords}
   {$IFEND}
 {$ENDIF}
 
@@ -66,7 +77,18 @@ type
     Record holding version numbers.
   }
   TPJVersionNumber = record
-    V1, V2, V3, V4: WORD;
+    V1: Word;   // Major version number
+    V2: Word;   // Minor version number
+    V3: Word;   // Revision version number
+    V4: Word;   // Build number
+    {$IFDEF Supports_AdvancedRecords}
+    class operator Implicit(Ver: TPJVersionNumber): string;
+      {Operator overload that performs implicit conversion of TPJVersionNumber
+      to string as dotted quad.
+        @param Ver [in] Version number to be converted.
+        @return Version number as dotted quad.
+      }
+    {$ENDIF}
   end;
 
   {
@@ -221,6 +243,11 @@ type
       {Name of file to which version information relates}
   end;
 
+function VerNumToStr(const Ver: TPJVersionNumber): string;
+  {Converts a version number to its string representation as a dotted quad.
+    @param Ver [in] Version number to be converted.
+    @return Version number as dotted quad.
+  }
 
 procedure Register;
   {Register this component}
@@ -356,6 +383,15 @@ begin
       SizeOf(lpCPInfoEx.CodePageName)
     );
   end;
+end;
+
+function VerNumToStr(const Ver: TPJVersionNumber): string;
+  {Converts a version number to its string representation as a dotted quad.
+    @param Ver [in] Version number to be converted.
+    @return Version number as dotted quad.
+  }
+begin
+  Result := Format('%d.%d.%d.%d', [Ver.V1, Ver.V2, Ver.V3, Ver.V4]);
 end;
 
 { TPJVersionInfo }
@@ -684,6 +720,22 @@ begin
     ReadVersionInfo;
   end;
 end;
+
+{$IFDEF Supports_AdvancedRecords}
+
+{ TPJVersionNumber }
+
+class operator TPJVersionNumber.Implicit(Ver: TPJVersionNumber): string;
+  {Operator overload that performs implicit conversion of TPJVersionNumber to
+  string as dotted quad.
+    @param Ver [in] Version number to be converted.
+    @return Version number as dotted quad.
+  }
+begin
+  Result := VerNumToStr(Ver);
+end;
+
+{$ENDIF}
 
 initialization
 
