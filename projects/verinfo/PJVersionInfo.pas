@@ -9,13 +9,13 @@
  *
  *
  * ***** BEGIN LICENSE BLOCK *****
- * 
+ *
  * Version: MPL 1.1
- * 
+ *
  * The contents of this file are subject to the Mozilla Public License Version
  * 1.1 (the "License"); you may not use this file except in compliance with the
  * License. You may obtain a copy of the License at http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS" basis,
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
  * the specific language governing rights and limitations under the License.
@@ -87,6 +87,48 @@ type
       to string as dotted quad.
         @param Ver [in] Version number to be converted.
         @return Version number as dotted quad.
+      }
+    class operator LessThanOrEqual(Ver1, Ver2: TPJVersionNumber): Boolean;
+      {Operator overload that compares two version numbers to check if first is
+      less than or equal to the second.
+        @param Ver1 [in] First version number.
+        @param Ver2 [in] Second version number.
+        @return True if Ver1 <= Ver2, False otherwise.
+      }
+    class operator LessThan(Ver1, Ver2: TPJVersionNumber): Boolean;
+      {Operator overload that compares two version numbers to check if first is
+      less than second.
+        @param Ver1 [in] First version number.
+        @param Ver2 [in] Second version number.
+        @return True if Ver1 < Ver2, False otherwise.
+      }
+    class operator GreaterThan(Ver1, Ver2: TPJVersionNumber): Boolean;
+      {Operator overload that compares two version numbers to check if first is
+      greater than second.
+        @param Ver1 [in] First version number.
+        @param Ver2 [in] Second version number.
+        @return True if Ver1 > Ver2, False otherwise.
+      }
+    class operator GreaterThanOrEqual(Ver1, Ver2: TPJVersionNumber): Boolean;
+      {Operator overload that compares two version numbers to check if first is
+      greater than or equal to the second.
+        @param Ver1 [in] First version number.
+        @param Ver2 [in] Second version number.
+        @return True if Ver1 >= Ver2, False otherwise.
+      }
+    class operator Equal(Ver1, Ver2: TPJVersionNumber): Boolean;
+      {Operator overload that compares two version numbers to check for
+      equality.
+        @param Ver1 [in] First version number.
+        @param Ver2 [in] Second version number.
+        @return True if Ver1 = Ver2, False otherwise.
+      }
+    class operator NotEqual(Ver1, Ver2: TPJVersionNumber): Boolean;
+      {Operator overload that compares two version numbers to check for
+      inequality.
+        @param Ver1 [in] First version number.
+        @param Ver2 [in] Second version number.
+        @return True if Ver1 <> Ver2, False otherwise.
       }
     {$ENDIF}
   end;
@@ -249,6 +291,15 @@ function VerNumToStr(const Ver: TPJVersionNumber): string;
     @return Version number as dotted quad.
   }
 
+function CompareVerNums(const Ver1, Ver2: TPJVersionNumber): Integer;
+  {Compares two version numbers and returns a value indicating if one is less
+  than, equal to or greater than the other.
+    @param Ver1 [in] First version number to compare.
+    @param Ver2 [in] Second version number to compare.
+    @return 0 if Ver1 = Ver2, -ve value if Ver1 < Ver2, ir +ve value if
+      Ver1 > Ver2.
+  }
+
 procedure Register;
   {Register this component}
 
@@ -392,6 +443,27 @@ function VerNumToStr(const Ver: TPJVersionNumber): string;
   }
 begin
   Result := Format('%d.%d.%d.%d', [Ver.V1, Ver.V2, Ver.V3, Ver.V4]);
+end;
+
+function CompareVerNums(const Ver1, Ver2: TPJVersionNumber): Integer;
+  {Compares two version numbers and returns a value indicating if one is less
+  than, equal to or greater than the other.
+    @param Ver1 [in] First version number to compare.
+    @param Ver2 [in] Second version number to compare.
+    @return 0 if Ver1 = Ver2, -ve value if Ver1 < Ver2, ir +ve value if
+      Ver1 > Ver2.
+  }
+begin
+  Result := Ver1.V1 - Ver2.V1;
+  if Result <> 0 then
+    Exit;
+  Result := Ver1.V2 - Ver2.V2;
+  if Result <> 0 then
+    Exit;
+  Result := Ver1.V3 - Ver2.V3;
+  if Result <> 0 then
+    Exit;
+  Result := Ver1.V4 - Ver2.V4;
 end;
 
 { TPJVersionInfo }
@@ -725,6 +797,40 @@ end;
 
 { TPJVersionNumber }
 
+class operator TPJVersionNumber.Equal(Ver1, Ver2: TPJVersionNumber): Boolean;
+  {Operator overload that compares two version numbers to check for equality.
+    @param Ver1 [in] First version number.
+    @param Ver2 [in] Second version number.
+    @return True if Ver1 = Ver2, False otherwise.
+  }
+begin
+  Result := CompareVerNums(Ver1, Ver2) = 0;
+end;
+
+class operator TPJVersionNumber.GreaterThan(Ver1,
+  Ver2: TPJVersionNumber): Boolean;
+  {Operator overload that compares two version numbers to check if first is
+  greater than second.
+    @param Ver1 [in] First version number.
+    @param Ver2 [in] Second version number.
+    @return True if Ver1 > Ver2, False otherwise.
+  }
+begin
+  Result := CompareVerNums(Ver1, Ver2) > 0;
+end;
+
+class operator TPJVersionNumber.GreaterThanOrEqual(Ver1,
+  Ver2: TPJVersionNumber): Boolean;
+  {Operator overload that compares two version numbers to check if first is
+  greater than or equal to the second.
+    @param Ver1 [in] First version number.
+    @param Ver2 [in] Second version number.
+    @return True if Ver1 >= Ver2, False otherwise.
+  }
+begin
+  Result := CompareVerNums(Ver1, Ver2) >= 0;
+end;
+
 class operator TPJVersionNumber.Implicit(Ver: TPJVersionNumber): string;
   {Operator overload that performs implicit conversion of TPJVersionNumber to
   string as dotted quad.
@@ -735,7 +841,41 @@ begin
   Result := VerNumToStr(Ver);
 end;
 
+class operator TPJVersionNumber.LessThan(Ver1, Ver2: TPJVersionNumber): Boolean;
+  {Operator overload that compares two version numbers to check if first is less
+  than second.
+    @param Ver1 [in] First version number.
+    @param Ver2 [in] Second version number.
+    @return True if Ver1 < Ver2, False otherwise.
+  }
+begin
+  Result := CompareVerNums(Ver1, Ver2) < 0;
+end;
+
+class operator TPJVersionNumber.LessThanOrEqual(Ver1,
+  Ver2: TPJVersionNumber): Boolean;
+  {Operator overload that compares two version numbers to check if first is less
+  than or equal to the second.
+    @param Ver1 [in] First version number.
+    @param Ver2 [in] Second version number.
+    @return True if Ver1 <= Ver2, False otherwise.
+  }
+begin
+  Result := CompareVerNums(Ver1, Ver2) <= 0;
+end;
+
+class operator TPJVersionNumber.NotEqual(Ver1, Ver2: TPJVersionNumber): Boolean;
+  {Operator overload that compares two version numbers to check for inequality.
+    @param Ver1 [in] First version number.
+    @param Ver2 [in] Second version number.
+    @return True if Ver1 <> Ver2, False otherwise.
+  }
+begin
+  Result := CompareVerNums(Ver1, Ver2) <> 0;
+end;
+
 {$ENDIF}
+
 
 initialization
 
@@ -745,3 +885,4 @@ if not Assigned(GetCPInfoExFn) then
   GetCPInfoExFn := GetCPInfoAlt;
 
 end.
+
