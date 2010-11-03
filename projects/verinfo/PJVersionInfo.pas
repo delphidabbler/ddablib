@@ -74,7 +74,7 @@ type
 
   {
   TPJVersionNumber:
-    Record holding version numbers.
+    Record that encapsulates version numbers.
   }
   TPJVersionNumber = record
     V1: Word;   // Major version number
@@ -135,8 +135,9 @@ type
 
   {
   TPJVersionInfo:
-    Component that exposes the version information embedded in an executable
-    file and exposed the detail as properties.
+    Component that accesses the version information embedded in an executable
+    file and exposes the information as properties. Supports multi-lingual
+    version iformation resources.
   }
   TPJVersionInfo = class(TComponent)
   private // properties
@@ -174,7 +175,8 @@ type
       }
   protected
     procedure ClearProperties; virtual;
-      {Forces properties to return cleared values}
+      {Forces properties to return cleared values.
+      }
     procedure ReadVersionInfo; virtual;
       {Reads version info from file named by FileName property.
       }
