@@ -3,7 +3,7 @@
 @rem
 @rem Script used to create zip file containing release files.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2009
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2009-2010
 @rem
 @rem $Rev$
 @rem $Date$
