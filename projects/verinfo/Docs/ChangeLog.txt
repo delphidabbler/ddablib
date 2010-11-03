@@ -4,6 +4,16 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v3.3 of 03 November 2010
++ Added operator overloads to TPJVersionNumber record when compiled with Delphi 2006 and later to:
+  - Support equality tests using =, <>, <, <=, > and >= operators.
+  - Support implicit casting to a string which formats the version number as a dotted quad (issue #12: http://code.google.com/p/ddab-lib/issues/detail?id=12).
++ Added new helper functions primarily for use with Delphi 2005 and earlier:
+  - CompareVerNums - compares two version number records.
+  - VerNumToStr - formats a version number as a dotted quad.
++ Updated TPJVersionNumber topic in help file re changes.
++ Updated HTML documentation.
+
 Release v3.2 of 09 November 2009
 + Changed method used to get character set descriptions. These are now obtained from operating system where possible instead of from hard-wired values.
 + Added compiler directive to switch off unsafe code warnings on compilers that support the directive.
