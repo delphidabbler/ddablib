@@ -161,103 +161,111 @@ type
     fPInfoBuffer: PChar;      // Pointer to info buffer
     fPTransBuffer: Pointer;   // Pointer to translation buffer
     procedure GetInfoBuffer(Len: DWORD);
-      {Creates an info buffer of required size}
+      {Creates an info buffer of required size.
+        @param Len [in] Required buffer size in characters.
+      }
     procedure GetTransBuffer(Len: UINT);
-      {Creates a translation table buffer of required size}
+      {Creates a translation table buffer of required size.
+        @param Required buffer size in bytes.
+      }
     function GetTransStr: string;
-      {Translation info encoded in string: takes into account current
-      translation}
+      {Encodes information about the current translation in a string.
+        @return Required translation information.
+      }
   protected
     procedure ClearProperties; virtual;
       {Forces properties to return cleared values}
     procedure ReadVersionInfo; virtual;
-      {Reads version info from file}
+      {Reads version info from file named by FileName property.
+      }
   public
     constructor Create(AOwner: TComponent); override;
-      {Class constructor: sets default values}
+      {Object constructor. Sets default values.
+        @param AOwner [in] Component that owns this one. May be nil.
+      }
     destructor Destroy; override;
-      {Class destructor: frees allocated memory}
-    {Properties}
+      {Object destructor. Frees allocated memory.
+      }
     property HaveInfo: Boolean
       read fHaveInfo;
-      {Property true if file version info for the file per FileName property has
-      been successfully read}
+      {Property true if file version info for the file named by the FileName
+      property has been successfully read}
     property FixedFileInfo: TVSFixedFileInfo
       read fFixedFileInfo;
-      {Exposes the whole fixed file info record: following properties expose
+      {Exposes the whole fixed file info record. Following properties expose
       the various fields of it}
     property FileVersionNumber: TPJVersionNumber
       read GetFileVersionNumber;
-      {Version number of file, in numeric format, from fixed file info}
+      {Version number of file in numeric format. From fixed file info}
     property ProductVersionNumber: TPJVersionNumber
       read GetProductVersionNumber;
-      {Version number of product, in numeric format, from fixed file info}
+      {Version number of product in numeric format. From fixed file info}
     property FileOS: DWORD  index 0
       read GetFixedFileInfoItemByIdx;
-      {Code describing operating system to be used by file}
+      {Code describing operating system to be used by file, From fixed file
+      info}
     property FileType: DWORD index 1
       read GetFixedFileInfoItemByIdx;
-      {Code descibing type of file}
+      {Code descibing type of file. From fixed file info}
     property FileSubType: DWORD index 2
       read GetFixedFileInfoItemByIdx;
       {Code describing sub-type of file - only used for certain values of
-      FileType property}
+      FileType property. From fixed file info}
     property FileFlagsMask: DWORD index 3
       read GetFixedFileInfoItemByIdx;
-      {Code describing which FileFlags are valid}
+      {Code describing which FileFlags are valid. From fixed file info}
     property FileFlags: DWORD index 4
       read GetFixedFileInfoItemByIdx;
-      {Flags describing file state}
+      {Flags describing file state. From fixed file info}
     property Comments: string index 0
       read GetStringFileInfoByIdx;
-      {String file info property giving user defined comments for current
+      {String file info property giving user defined comments in current
       translation}
     property CompanyName: string index 1
       read GetStringFileInfoByIdx;
-      {String file info property giving name of company for current translation}
+      {String file info property giving name of company in current translation}
     property FileDescription: string index 2
       read GetStringFileInfoByIdx;
-      {String file info property giving description of file for current
+      {String file info property giving description of file in current
       translation}
     property FileVersion: string index 3
       read GetStringFileInfoByIdx;
       {String file info property giving version number of file in string format
-      for current translation}
+      in current translation}
     property InternalName: string index 4
       read GetStringFileInfoByIdx;
-      {String file info property giving internal name of file for current
+      {String file info property giving internal name of file in current
       translation}
     property LegalCopyright: string index 5
       read GetStringFileInfoByIdx;
-      {String file info property giving copyright message for current
+      {String file info property giving copyright message in current
       translation}
     property LegalTrademarks: string index 6
       read GetStringFileInfoByIdx;
-      {String file info property giving trademark info for current translation}
+      {String file info property giving trademark info in current translation}
     property OriginalFileName: string index 7
       read GetStringFileInfoByIdx;
-      {String file info property giving original name of file for current
+      {String file info property giving original name of file in current
       translation}
     property PrivateBuild: string index 8
       read GetStringFileInfoByIdx;
       {String file info property giving information about a private build of
-      file for current translation}
+      file in current translation}
     property ProductName: string index 9
       read GetStringFileInfoByIdx;
-      {String file info property giving name of product for current translation}
+      {String file info property giving name of product in current translation}
     property ProductVersion: string index 10
       read GetStringFileInfoByIdx;
       {String file info property giving version number of product in string
-      format for current translation}
+      format in current translation}
     property SpecialBuild: string index 11
       read GetStringFileInfoByIdx;
       {String file info property giving information about a special build of
-      file for current translation}
+      file in current translation}
     property StringFileInfo[const Name: string]: string
       read GetStringFileInfo;
-      {Returns the value for string file info with given name for current
-      translation. This property can return both standard and custom string
-      info}
+      {Value of named string file info item in current translation. This
+      property can access both standard and custom string info}
     property Language: string
       read GetLanguage;
       {Name of language in use in current translation}
@@ -269,7 +277,7 @@ type
       {Code of laguage in use in current translation}
     property CharSetCode: WORD
       read GetCharSetCode;
-      {Character set code in use in current translation}
+      {Code of character set in use in current translation}
     property NumTranslations: Integer
       read fNumTranslations;
       {The number of difference translations (ie languages and char sets) in
@@ -282,7 +290,8 @@ type
       return information for the current translation}
   published
     property FileName: string read fFileName write SetFileName;
-      {Name of file to which version information relates}
+      {Name of file containing version information. If set to '' (default) the
+      version information comes from the containing executable file}
   end;
 
 function VerNumToStr(const Ver: TPJVersionNumber): string;
@@ -292,16 +301,16 @@ function VerNumToStr(const Ver: TPJVersionNumber): string;
   }
 
 function CompareVerNums(const Ver1, Ver2: TPJVersionNumber): Integer;
-  {Compares two version numbers and returns a value indicating if one is less
-  than, equal to or greater than the other.
+  {Compares two version numbers and returns a value indicating if the first is
+  less than, equal to or greater than the second.
     @param Ver1 [in] First version number to compare.
     @param Ver2 [in] Second version number to compare.
-    @return 0 if Ver1 = Ver2, -ve value if Ver1 < Ver2, ir +ve value if
-      Ver1 > Ver2.
+    @return 0 if Ver1 = Ver2, -ve if Ver1 < Ver2, +ve if Ver1 > Ver2.
   }
 
 procedure Register;
-  {Register this component}
+  {Registers this component.
+  }
 
 
 implementation
@@ -313,7 +322,8 @@ uses
 
 
 procedure Register;
-  {Register this component}
+  {Registers this component.
+  }
 begin
   RegisterComponents('DelphiDabbler', [TPJVersionInfo]);
 end;
@@ -386,6 +396,11 @@ function GetCPInfoAlt(CodePage: UINT; dwFlags: DWORD;
   {Local implementation of GetCPInfoEx, for use on OSs that don't support
   GetCPInfoEx. Calls older GetCPInfo API function and calculates members of
   TCPInfoEx not provided by GetCPInfo.
+    @param CodePage [in] Code page for which information is required.
+    @param dwFlags [in] Reserved. Must be 0.
+    @param lpCPInfoEx [in/out] Structure that receives information about the
+      code page.
+    @return True on success, False on error.
   }
   // ---------------------------------------------------------------------------
   procedure CopyByteArray(const Src: array of Byte; var Dest: array of Byte);
@@ -446,12 +461,11 @@ begin
 end;
 
 function CompareVerNums(const Ver1, Ver2: TPJVersionNumber): Integer;
-  {Compares two version numbers and returns a value indicating if one is less
-  than, equal to or greater than the other.
+  {Compares two version numbers and returns a value indicating if the first is
+  less than, equal to or greater than the second.
     @param Ver1 [in] First version number to compare.
     @param Ver2 [in] Second version number to compare.
-    @return 0 if Ver1 = Ver2, -ve value if Ver1 < Ver2, ir +ve value if
-      Ver1 > Ver2.
+    @return 0 if Ver1 = Ver2, -ve if Ver1 < Ver2, +ve if Ver1 > Ver2.
   }
 begin
   Result := Ver1.V1 - Ver2.V1;
@@ -466,16 +480,15 @@ begin
   Result := Ver1.V4 - Ver2.V4;
 end;
 
-{ TPJVersionInfo }
-
 type
   {
   TTransRec:
     Record of language code and char set codes that are returned from version
     information.
   }
-  TTransRec = packed record      // record to hold translation information
-    Lang, CharSet: Word;
+  TTransRec = packed record
+    Lang: Word;       // language code
+    CharSet: Word;    // character set code
   end;
   {
   TTransRecs:
@@ -490,8 +503,11 @@ type
   PTransRecs = ^TTransRecs;
 
 
+{ TPJVersionInfo }
+
 procedure TPJVersionInfo.ClearProperties;
-  {Forces properties to return cleared values}
+  {Forces properties to return cleared values.
+  }
 begin
   // Record that we haven't read ver info: this effectively clears properties
   // since each property read access method checks this flag before returning
@@ -500,7 +516,9 @@ begin
 end;
 
 constructor TPJVersionInfo.Create(AOwner: TComponent);
-  {Class constructor: sets default values}
+  {Object constructor. Sets default values.
+    @param AOwner [in] Component that owns this one. May be nil.
+  }
 begin
   inherited Create(AOwner);
   // Default is no file name - refers to executable file for application
@@ -508,7 +526,8 @@ begin
 end;
 
 destructor TPJVersionInfo.Destroy;
-  {Class destructor: frees allocated memory}
+  {Object destructor. Frees allocated memory.
+  }
 begin
   // Ensure that info buffer is freed if allocated
   if fPInfoBuffer <> nil then
@@ -520,8 +539,10 @@ begin
 end;
 
 function TPJVersionInfo.GetCharSet: string;
-  {Read access method for CharSet property: return string describing character
-  set if we have some version info and empty string if we haven't}
+  {Read accessor for CharSet property:
+    @return String describing character set if version info is available or
+      empty string if not.
+  }
 var
   Info: TCPInfoEx;  // receives code page info
   CP: Word;         // code page
@@ -563,8 +584,10 @@ begin
 end;
 
 function TPJVersionInfo.GetCharSetCode: WORD;
-  {Read access for CharSetCode property: returns char set code for current
-  translation or 0 if there is no translation or we have no version info}
+  {Read accessor for CharSetCode property.
+    @return Char set code for current translation or 0 if there is no
+      translation or there is no version info.
+  }
 begin
   if fHaveInfo and (GetCurrentTranslation >= 0) then
     Result := PTransRecs(fPTransBuffer)^[GetCurrentTranslation].CharSet
@@ -573,8 +596,10 @@ begin
 end;
 
 function TPJVersionInfo.GetCurrentTranslation: Integer;
-  {Read access method for CurrentTranslation property: returns index to current
-  translation if we have version info or -1 if no version info}
+  {Read accessor for CurrentTranslation property.
+    @return Index to current translation if version info is available or -1 if
+      not.
+  }
 begin
   if fHaveInfo then
     Result := fCurrentTranslation
@@ -583,8 +608,10 @@ begin
 end;
 
 function TPJVersionInfo.GetFileVersionNumber: TPJVersionNumber;
-  {Read access method for FileVersionNumber property: fill version info
-  structure and return it - if there's no version info all values will be zero}
+  {Read accessor for FileVersionNumber property.
+    @return Record containing version information. If there is no version info
+      then all fields will be zero.
+  }
 begin
   Result.V1 := HiWord(fFixedFileInfo.dwFileVersionMS);
   Result.V2 := LoWord(fFixedFileInfo.dwFileVersionMS);
@@ -593,11 +620,14 @@ begin
 end;
 
 function TPJVersionInfo.GetFixedFileInfoItemByIdx(Index: Integer): DWORD;
-  {Read access method for various DWORD fields of the fixed file information
+  {Read accessor method for various DWORD fields of the fixed file information
   record accessed by index.
   NOTE: This is a fix for C++ Builder. Delphi is able to access the fields of
   the TVSFixedFileInfo record directly in the read clause of the property
-  declaration but this is not possible in C++ Builder}
+  declaration but this is not possible in C++ Builder.
+    @param Index [in] Index of required property.
+    @return Required DWORD value.
+  }
 begin
   case Index of
     0:  Result := fFixedFileInfo.dwFileOS;
@@ -610,7 +640,9 @@ begin
 end;
 
 procedure TPJVersionInfo.GetInfoBuffer(Len: DWORD);
-  {Creates an info buffer of required size}
+  {Creates an info buffer of required size.
+    @param Len [in] Required buffer size in characters.
+  }
 begin
   // Clear any existing buffer
   if fPInfoBuffer <> nil then
@@ -620,12 +652,14 @@ begin
 end;
 
 function TPJVersionInfo.GetLanguage: string;
-  {Read access method for Language property: return string describing language
-  if we have some version info and empty string if we haven't}
+  {Read accessor for Language property
+    @return String describing language or empty string if no version info
+      available.
+  }
 const
   cBufSize = 256;   // size of buffer
 var
-  Buf: array[0..Pred(cBufSize)] of Char;   // stores langauge string from API call
+  Buf: array[0..Pred(cBufSize)] of Char; // stores langauge string from API call
 begin
   // Assume failure
   Result := '';
@@ -636,8 +670,10 @@ begin
 end;
 
 function TPJVersionInfo.GetLanguageCode: WORD;
-  {Read access for LanguageCode property: returns language code for current
-  translation or 0 if there is no translation or we have no version info}
+  {Read accessor for LanguageCode property
+    @return Language code for current translation or 0 if there is no
+      translation or there is no version info.
+  }
 begin
   if fHaveInfo and (GetCurrentTranslation >= 0) then
     Result := PTransRecs(fPTransBuffer)^[GetCurrentTranslation].Lang
@@ -646,8 +682,10 @@ begin
 end;
 
 function TPJVersionInfo.GetProductVersionNumber: TPJVersionNumber;
-  {Read access method for ProductVersionNumber property: fill version info
-  structure and return it - if there's no version info all values will be zero}
+  {Read accessor for ProductVersionNumber property.
+    @return Record containing version information. If there is no version info
+      then all fields will be zero.
+  }
 begin
   Result.V1 := HiWord(fFixedFileInfo.dwProductVersionMS);
   Result.V2 := LoWord(fFixedFileInfo.dwProductVersionMS);
@@ -656,8 +694,10 @@ begin
 end;
 
 function TPJVersionInfo.GetStringFileInfo(const Name: string): string;
-  {Read access method for StringFileInfo array property: returns string
-  associated with given name or empty string if we have no version info}
+  {Read accessor for StringFileInfo array property.
+    @param Name [in] Name of required string information.
+    @return String associated Name or empty string if there is no version info.
+  }
 var
   CommandBuf: array[0..255] of char;  // buffer to build API call command str
   Ptr: Pointer;                       // pointer to result of API call
@@ -678,8 +718,11 @@ begin
 end;
 
 function TPJVersionInfo.GetStringFileInfoByIdx(Index: Integer): string;
-  {Read access method for all string file info properties: returns appropriate
-  string for the given property or empty string if we have no version info}
+  {Read accessor for all string file info properties.
+    @param Index [in] Index of required property.
+    @return Appropriate string value of the indexed property or empty string if
+      property has no value or there is no version info.
+  }
 const
   cNames: array[0..11] of string =
     ('Comments', 'CompanyName', 'FileDescription', 'FileVersion',
@@ -691,7 +734,9 @@ begin
 end;
 
 procedure TPJVersionInfo.GetTransBuffer(Len: UINT);
-  {Creates a translation table buffer of required size}
+  {Creates a translation table buffer of required size.
+    @param Required buffer size in bytes.
+  }
 begin
   // Clear any existing buffer
   if fPTransBuffer <> nil then
@@ -701,7 +746,9 @@ begin
 end;
 
 function TPJVersionInfo.GetTransStr: string;
-  {Translation info encoded in string: takes into account current translation}
+  {Encodes information about the current translation in a string.
+    @return Required translation information.
+  }
 var
   TransRec: TTransRec;  // translation record in array of translations
 begin
@@ -717,7 +764,8 @@ begin
 end;
 
 procedure TPJVersionInfo.ReadVersionInfo;
-  {Reads version info from file}
+  {Reads version info from file named by FileName property.
+  }
 var
   Len: UINT;        // length of structs returned from API calls
   Ptr: Pointer;     // points to version info structures
@@ -761,8 +809,10 @@ begin
 end;
 
 procedure TPJVersionInfo.SetCurrentTranslation(const Value: Integer);
-  {Write accees method for CurrentTranslation property: if value is out of
-  translation range then it is set to -1 to indicate no translation}
+  {Write acceesor method CurrentTranslation property
+    @param Index of required translation. If Value is out of range then the
+      property is set to -1 to indicate no translation.
+  }
 begin
   if (Value >= 0) and (Value < NumTranslations) then
     fCurrentTranslation := Value
@@ -771,10 +821,12 @@ begin
 end;
 
 procedure TPJVersionInfo.SetFileName(AName: string);
-  {Write access method for FileName property: action at design time is different
-  to run time. At design time we simply record value while at run time we store
-  value - using actual name of program for '' string - and read the version
-  information}
+  {Write accessor for FileName property. Action at design time and run time is
+  different. At design time we simply record the property value while at run
+  time we store the value and read any version information from the file.
+    @param AName [in] New value of FileName property. If '' then property is set
+      to the name of the program's executable file.
+  }
 begin
   if csDesigning in ComponentState then
     // We are designing, simply record the required name
