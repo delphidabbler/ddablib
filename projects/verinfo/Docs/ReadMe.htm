@@ -94,14 +94,6 @@
 	a:hover {
 		text-decoration: underline;
 	}
-	.gototop {
-		margin: 1em 0 0 0;
-		padding: 0.3em 0 0 0;
-		text-align: center;
-		position: relative;
-		float: right;
-		font-weight: bold;
-	}
 	.pullout {
 		border-left: 8px silver solid;
 		background-color: #eee;
@@ -159,9 +151,6 @@
 	<li><a href="#author">About the Author</a></li>
 </ul>
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="description">
 	Description
@@ -210,6 +199,14 @@
 	</li>
 </ul>
 
+<p>
+	Version numbers are encapsulated in <var>TPJVersionNumber</var> records
+	which, on Delphi 2006 or later, can be directly assigned to a string and can
+	be compared using the normal equality operators. Helper functions are also
+	provided for use with earlier Delphis that can format version numbers as
+	text and can compare them.
+</p>
+
 <h3>
 	Limitations
 </h3>
@@ -226,7 +223,7 @@
 
 <p>
 	<var>TPJVersionInfo</var> compiles on all Win32 versions and personalities
-	of Delphi. It has been tested with Delphi versions 2, 3, 4, 6, 7, 2006 
+	of Delphi. It has been tested with Delphi versions 2, 3, 4, 6, 7, 2006
 	and 2010. It is assumed to work on other versions.
 </p>
 
@@ -246,10 +243,6 @@
 	For detailed information about version information refer to the Windows SDK.
 </p>
 
-
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="installation">
 	Installation
@@ -332,10 +325,6 @@
 </p>
 
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
 <h2 id="demo">
 	Demo Projects
 </h2>
@@ -357,9 +346,6 @@
 	</li>
 </ol>
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
 
 <h2 id="update">
 	Update History
@@ -369,10 +355,7 @@
 	A complete change log is provided in a text file that is included in the
 	download.
 </p>
-  
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
+
 
 <h2 id="license">
 	License and Disclaimer
@@ -383,7 +366,7 @@
 	Mozilla Public License Version 1.1 (the &quot;License&quot;). You may not
 	use this Product except in compliance with the License. You may obtain a
 	copy of the License at <a
-		href="http://www.mozilla.org/MPL/MPL-1.1" 
+		href="http://www.mozilla.org/MPL/MPL-1.1"
 	>http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
@@ -411,10 +394,6 @@
 </p>
 
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
-</p>
-
 <h2 id="bugs">
 	Bugs and Feature Requests
 </h2>
@@ -427,13 +406,17 @@
 
 <p>
 	If no similar report or request has been recorded already, use the <em>New
-	Issue</em> link to add a new issue. Please select the most appropriate
-	template from the <em>Templates</em> drop down list.
+	Issue</em> link to add a new issue. Please select the <em>Defect Report from
+	User</em> template and be sure to specify the <code>Project-verinfo</code>
+	label.
 </p>
 
-<p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+<p>
+	Feature requests are also made using the Issue Tracker. This time please
+	select the <em>Feature Request</em> template and, again, specify the
+	<code>Project-verinfo</code> label.
 </p>
+
 
 <h2 id="author">
 	About the Author
@@ -449,7 +432,7 @@
 <p>
 	I can be <a href="http://www.delphidabbler.com/contact">contacted via the
 	website.</a>
-</p> 
+</p>
 
 
 <div class="endnotes">
