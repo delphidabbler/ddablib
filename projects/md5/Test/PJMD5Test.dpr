@@ -8,9 +8,10 @@
  * Console Application
  * ~~~~~~~~~~~~~~~~~~~
  *
- * The CONSOLE_TESTRUNNER symbol must be defined to create a console application.
- * From the IDE define the symbol in the conditional defines entry in project
- * options. To compile from the command line pass the -D switch to the compiler:
+ * The CONSOLE_TESTRUNNER symbol must be defined to create a console
+ * application. From the IDE define the symbol in the conditional defines entry
+ * in project options. To compile from the command line pass the -D switch to
+ * the compiler:
  *
  *   DCC32 -DCONSOLE_TESTRUNNER -B PJMD5Test
  *
@@ -43,7 +44,11 @@ program PJMD5Test;
 
 uses
   Forms,
+  {$IFDEF CONSOLE_TESTRUNNER}
+  TextTestRunner,
+  {$ELSE}
   GUITestRunner,
+  {$ENDIF}
   XPMan,
   TestFramework,
   TestPJMD5 in 'TestPJMD5.pas',
