@@ -224,10 +224,10 @@ type
     ///  </summary>
     procedure Transform(const Bytes: array of Byte; const StartIdx: Cardinal);
     ///  <summary>
-    ///  Updates digest by processing Count bytes from byte array X. Any
-    ///  unprocessed bytes are buffered.
+    ///  Updates digest by processing Count bytes from byte array X, starting at
+    ///  index StartIdx. Any unprocessed bytes are buffered.
     ///  </summary>
-    procedure Update(const X: array of Byte; const Count: Cardinal);
+    procedure Update(const X: array of Byte; const StartIdx, Count: Cardinal);
     ///  <summary>
     ///  Helper method to perform calculations of digests for most Calculate
     ///  methods. Calls anonymous method DoProcess to perform the actual
@@ -668,7 +668,7 @@ begin
   else
     // at or beyond 56th byte: need 128-8-cur_pos bytes
     PadLen := (128 - 8) - Index;
-  Update(PADDING, PadLen);
+  Update(PADDING, 0, PadLen);
 
   // Write the bit count and let it wrap round
   {$IFOPT R+}
@@ -682,7 +682,7 @@ begin
     {$R+}
   {$ENDIF}
   LongWordsToBytes(Int64Rec(BitCount).Cardinals, EncodedBitCount);
-  Update(EncodedBitCount, SizeOf(EncodedBitCount));
+  Update(EncodedBitCount, 0, SizeOf(EncodedBitCount));
 
   Assert(fBuffer.IsEmpty);
 
@@ -709,12 +709,12 @@ end;
 
 procedure TPJMD5.Process(const Buf; const Count: Cardinal);
 begin
-  Process(TBytes(@Buf), Count);
+  Update(TBytes(@Buf), 0, Count);
 end;
 
 procedure TPJMD5.Process(const S: RawByteString);
 begin
-  Process(Pointer(S)^, Length(S));
+  Process(Pointer(S)^, Length(S) * SizeOf(AnsiChar));
 end;
 
 procedure TPJMD5.Process(const Stream: TStream);
@@ -738,14 +738,14 @@ begin
     BytesRead := Stream.Read(
       fReadBuffer.Buffer^, Min(fReadBuffer.Size, BytesToRead)
     );
-    Process(fReadBuffer.Buffer^, BytesRead);
+    Update(TBytes(fReadBuffer.Buffer), 0, BytesRead);
     Dec(BytesToRead, BytesRead);
   end;
 end;
 
 procedure TPJMD5.Process(const X: TBytes);
 begin
-  Process(X, Length(X));
+  Update(X, 0, Length(X));
 end;
 
 procedure TPJMD5.Process(const X: TBytes; const Count: Cardinal);
@@ -754,7 +754,7 @@ begin
     Exit;
   if Count > Cardinal(Length(X)) then
     raise EPJMD5.CreateFmt(sTBytesTooShort, [Count, Length(X)]);
-  Update(X, Count);
+  Update(X, 0, Count);
 end;
 
 procedure TPJMD5.Process(const X: TBytes; const StartIdx, Count: Cardinal);
@@ -763,7 +763,7 @@ begin
     Exit;
   if StartIdx + Count > Cardinal(Length(X)) then
     raise EPJMD5.CreateFmt(sTBytesIndexTooShort, [Count, Length(X), StartIdx]);
-  Update(Copy(X, StartIdx, Count), Count);
+  Update(X, StartIdx, Count);
 end;
 
 procedure TPJMD5.ProcessFile(const FileName: TFileName);
@@ -895,7 +895,8 @@ begin
   FillChar(Block, SizeOf(Block), 0);
 end;
 
-procedure TPJMD5.Update(const X: array of Byte; const Count: Cardinal);
+procedure TPJMD5.Update(const X: array of Byte;
+  const StartIdx, Count: Cardinal);
 var
   BytesLeft: Cardinal;
   BytesToCopy: Cardinal;
@@ -910,7 +911,7 @@ begin
     // we add either sufficient data to fill buffer or all we've got if its less
     // than remaining space in buffer
     BytesToCopy := Min(fBuffer.SpaceRemaining, BytesLeft);
-    fBuffer.Copy(X, Count - BytesLeft, BytesToCopy);
+    fBuffer.Copy(X, StartIdx + Count - BytesLeft, BytesToCopy);
     Inc(fByteCount, BytesToCopy);
     Dec(BytesLeft, BytesToCopy);
     if fBuffer.IsFull then
@@ -924,7 +925,7 @@ begin
   // it until there's less than a buffer's worth left
   while BytesLeft >= ChunkSize do
   begin
-    Transform(X, Count - BytesLeft);
+    Transform(X, StartIdx + Count - BytesLeft);
     Inc(fByteCount, ChunkSize);
     Dec(BytesLeft, ChunkSize);
   end;
@@ -944,7 +945,7 @@ begin
     // we have bytes left over (which must be less than space remaining)
     // we copy all the remaining bytes to the buffer and, if it gets full we
     // Transform the digest from the buffer and empty it
-    fBuffer.Copy(X, Count - BytesLeft, BytesLeft);
+    fBuffer.Copy(X, StartIdx + Count - BytesLeft, BytesLeft);
     Inc(fByteCount, BytesLeft);
     if fBuffer.IsFull then
     begin
