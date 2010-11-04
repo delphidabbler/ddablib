@@ -244,11 +244,21 @@ type
     ///  </summary>
     destructor Destroy; override;
     ///  <summary>
+    ///  Calculates a digest of Count bytes read from byte array X, starting at
+    ///  index StartIdx. Raises a EPJMD5 exception if there are less than Count
+    ///  bytes from StartIdx to the end of the array.
+    ///  </summary>
+    ///  <remarks>
+    ///  If StartIdx is beyond the end of the array then no data is processed.
+    ///  </remarks>
+    class function Calculate(const X: TBytes; const StartIdx, Count: Cardinal):
+      TPJMD5Digest; overload;
+    ///  <summary>
     ///  Calculates a digest of Count bytes read from byte array X. Raises an
     ///  EPJMD5 exception if Count is greater than the number of elements in X.
     ///  </summary>
-    class function Calculate(const X: TBytes;
-      const Count: Cardinal): TPJMD5Digest; overload;
+    class function Calculate(const X: TBytes; const Count: Cardinal):
+      TPJMD5Digest; overload;
     ///  <summary>
     ///  Calculates a digest of all the bytes of byte array X.
     ///  </summary>
@@ -299,6 +309,17 @@ type
     ///  The file is read in chunks of size DefReadBufferSize.
     ///  </remarks>
     class function CalculateFile(const FileName: TFileName): TPJMD5Digest;
+    ///  <summary>
+    ///  Adds Count bytes from byte array X, starting at index StartIdx, to the
+    ///  digest. If there are less than Count bytes from StartIdx to the end of
+    ///  the array then an EPJMD5 exception is raised.
+    ///  </summary>
+    ///  <remarks>
+    ///  If StartIdx is beyond the end of the array or if Count is zero then
+    ///  there is nothing to do and the digest remains unchanged.
+    ///  </remarks>
+    procedure Process(const X: TBytes; const StartIdx, Count: Cardinal);
+      overload;
     ///  <summary>
     ///  Adds Count bytes from a byte array X to the digest. If Count is greater
     ///  than the size of the array an EPJMD5 exception is raised.
@@ -512,6 +533,8 @@ resourcestring
   sStreamTooShort = 'Can''t read %0:d bytes from stream. '
     + 'Only %1:d bytes remaining';
   sTBytesTooShort = 'Can''t read %0:d bytes from array of length %1:d';
+  sTBytesIndexTooShort = 'Can''t read %0:d bytes from array of length %1:d '
+    + 'starting at index %2:d';
 
 { TPJMD5 }
 
@@ -535,6 +558,13 @@ begin
   );
 end;
 
+class function TPJMD5.Calculate(const X: TBytes): TPJMD5Digest;
+begin
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.Process(X); end
+  );
+end;
+
 class function TPJMD5.Calculate(const X: TBytes;
   const Count: Cardinal): TPJMD5Digest;
 begin
@@ -543,10 +573,11 @@ begin
   );
 end;
 
-class function TPJMD5.Calculate(const X: TBytes): TPJMD5Digest;
+class function TPJMD5.Calculate(const X: TBytes; const StartIdx,
+  Count: Cardinal): TPJMD5Digest;
 begin
   Result := DoCalculate(
-    procedure(Instance: TPJMD5) begin Instance.Process(X); end
+    procedure(Instance: TPJMD5) begin Instance.Process(X, StartIdx, Count); end
   );
 end;
 
@@ -719,9 +750,20 @@ end;
 
 procedure TPJMD5.Process(const X: TBytes; const Count: Cardinal);
 begin
+  if Count = 0 then
+    Exit;
   if Count > Cardinal(Length(X)) then
     raise EPJMD5.CreateFmt(sTBytesTooShort, [Count, Length(X)]);
   Update(X, Count);
+end;
+
+procedure TPJMD5.Process(const X: TBytes; const StartIdx, Count: Cardinal);
+begin
+  if (StartIdx >= Cardinal(Length(X))) or (Count = 0) then
+    Exit;
+  if StartIdx + Count > Cardinal(Length(X)) then
+    raise EPJMD5.CreateFmt(sTBytesIndexTooShort, [Count, Length(X), StartIdx]);
+  Update(Copy(X, StartIdx, Count), Count);
 end;
 
 procedure TPJMD5.ProcessFile(const FileName: TFileName);
