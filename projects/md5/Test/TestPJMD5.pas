@@ -103,8 +103,14 @@ type
     procedure ErrorCalculateStreamCount;
     // Runs test for TestProcessArrayOfByteSize that should raise exception
     procedure ErrorProcessArrayOfByteSize;
+    // Runds test for TestProcessArrayOfByteSizeIndex that should raise
+    // exception
+    procedure ErrorProcessArrayOfByteSizeIndex;
     // Runs test for TestCalculateArrayOfByteSize that should raise exception
     procedure ErrorCalculateArrayOfByteSize;
+    // Runs test for TestCalculateArrayOfByteSizeIndex that should raise
+    // exception
+    procedure ErrorCalculateArrayOfByteSizeIndex;
   published
     // ** NOTE: Order of these tests is important **
 
@@ -131,6 +137,11 @@ type
     // This test runs all RFC tests
     procedure TestProcessArrayOfByte;
     procedure TestCalculateArrayOfByte;
+
+    // Tests Process(TBytes,Cardinal,Cardinal) and
+    // Calculate(TBytes,Cardinal,Cardinal) methods.
+    procedure TestCalculateArrayOfByteSizeIndex;
+    procedure TestProcessArrayOfByteSizeIndex;
 
     // Tests Process(Untyped, Cardinal) and Calculate(Untyped, Cardinal) methods
     // This test runs all RFC tests
@@ -320,6 +331,7 @@ const
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
   );
 
+
 function ByteArrayToBytes(const A: array of Byte): TBytes;
 var
   Idx: Integer;
@@ -327,6 +339,27 @@ begin
   SetLength(Result, Length(A));
   for Idx := Low(A) to High(A) do
     Result[Idx - Low(A)] := A[Idx];
+end;
+
+function ConcatByteArrays(const BAs: array of TBytes): TBytes;
+var
+  A: TBytes;
+  Len: Integer;
+  ResIdx, Idx: Integer;
+begin
+  Len := 0;
+  for A in BAs do
+    Inc(Len, Length(A));
+  SetLength(Result, Len);
+  ResIdx := 0;
+  for A in BAs do
+  begin
+    for Idx := Low(A) to High(A) do
+    begin
+      Result[ResIdx] := A[Idx];
+      Inc(ResIdx);
+    end;
+  end;
 end;
 
 procedure TestTPJMD5.BytesArraysToStream(const BAs: array of TBytes;
@@ -348,6 +381,18 @@ begin
   Bytes := RFCTests[DefaultRFCTest].DataAsByteArray;
   Count := Length(Bytes) + 1; // count is too large
   D := TPJMD5.Calculate(Bytes, Count); // should raise exception
+end;
+
+procedure TestTPJMD5.ErrorCalculateArrayOfByteSizeIndex;
+var
+  Bytes: TBytes;
+  D: TPJMD5Digest;
+const
+  StartIdx = 3;
+  Count = 4;
+begin
+  Bytes := TBytes.Create(1,2,3,4,5,6);
+  D := TPJMD5.Calculate(Bytes, StartIdx, Count);  // should raise exception
 end;
 
 procedure TestTPJMD5.ErrorCalculateStreamCount;
@@ -377,6 +422,23 @@ begin
   MD5 := TPJMD5.Create;
   try
     MD5.Process(Bytes, Count);  // should raise exception
+  finally
+    MD5.Free;
+  end;
+end;
+
+procedure TestTPJMD5.ErrorProcessArrayOfByteSizeIndex;
+var
+  Bytes: TBytes;
+  MD5: TPJMD5;
+const
+  StartIdx = 3;
+  Count = 4;
+begin
+  Bytes := TBytes.Create(1,2,3,4,5,6);
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(Bytes, StartIdx, Count);  // should raise exception
   finally
     MD5.Free;
   end;
@@ -501,14 +563,76 @@ end;
 
 procedure TestTPJMD5.TestCalculateArrayOfByteSize;
 var
-  Fn: TCalculateMethodCall;
+  Fn1, Fn2: TCalculateMethodCall;
+  A: TBytes;
+  Postfix: TBytes;
+  D: TPJMD5Digest;
 begin
-  Fn := function(const Test: TRFCTest): TPJMD5Digest
+  Fn1 := function(const Test: TRFCTest): TPJMD5Digest
   begin
     Result := TPJMD5.Calculate(Test.DataAsByteArray, Test.SizeOfData);
   end;
-  RunRFCCalcTests(Fn);
+  RunRFCCalcTests(Fn1);
+
+  Postfix := TBytes.Create(42, 69, 56, 42);
+  Fn2 := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    A := ConcatByteArrays([Test.DataAsByteArray, Postfix]);
+    Result := TPJMD5.Calculate(A, Test.SizeOfData);
+  end;
+  RunRFCCalcTests(Fn2);
+
+  A := TBytes.Create(10,20,30);
+  D := TPJMD5.Calculate(A, 0);
+  Check(D = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+
   CheckException(ErrorCalculateArrayOfByteSize, EPJMD5);
+end;
+
+procedure TestTPJMD5.TestCalculateArrayOfByteSizeIndex;
+var
+  Prefix, Postfix: TBytes;
+  Fn1, Fn2, Fn3, Fn4: TCalculateMethodCall;
+  A: TBytes;
+  D: TPJMD5Digest;
+begin
+  Prefix := TBytes.Create(1,2,3,4);
+  Postfix := TBytes.Create(5,6,7,8);
+
+  Fn1 := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    Result := TPJMD5.Calculate(Test.DataAsByteArray, 0, Test.SizeOfData);
+  end;
+  RunRFCCalcTests(Fn1);
+
+  Fn2 := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    A := ConcatByteArrays([Prefix, Test.DataAsByteArray, Postfix]);
+    Result := TPJMD5.Calculate(A, Length(Prefix), Test.SizeOfData);
+  end;
+  RunRFCCalcTests(Fn2);
+
+  Fn3 := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    A := ConcatByteArrays([Prefix, Test.DataAsByteArray]);
+    Result := TPJMD5.Calculate(A, Length(Prefix), Test.SizeOfData);
+  end;
+  RunRFCCalcTests(Fn3);
+
+  Fn4 := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    A := ConcatByteArrays([Test.DataAsByteArray, Postfix]);
+    Result := TPJMD5.Calculate(A, 0, Test.SizeOfData);
+  end;
+  RunRFCCalcTests(Fn4);
+
+  A := TBytes.Create(10,20,30);
+  D := TPJMD5.Calculate(A, 3, 1);
+  Check(D = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+  D := TPJMD5.Calculate(A, 0, 0);
+  Check(D = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+
+  CheckException(ErrorCalculateArrayOfByteSizeIndex, EPJMD5);
 end;
 
 procedure TestTPJMD5.TestCalculateBuf;
@@ -655,14 +779,87 @@ end;
 
 procedure TestTPJMD5.TestProcessArrayOfByteSize;
 var
-  Fn: TProcessMethodCall;
+  Fn1, Fn2: TProcessMethodCall;
+  Postfix: TBytes;
+  A: TBytes;
+  MD5: TPJMD5;
 begin
-  Fn := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  Fn1 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
   begin
     MD5.Process(Test.DataAsByteArray, Test.SizeOfData);
   end;
-  RunRFCTests(Fn);
+  RunRFCTests(Fn1);
+
+  Postfix := TBytes.Create(42, 56, 69, 42);
+  Fn2 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    A := ConcatByteArrays([Test.DataAsByteArray, Postfix]);
+    MD5.Process(A, Test.SizeOfData);
+  end;
+  RunRFCTests(Fn2);
+
+  A := TBytes.Create(10,20,30);
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(A, 0);
+    Check(MD5.Digest = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+  finally
+    MD5.Free;
+  end;
+
   CheckException(ErrorProcessArrayOfByteSize, EPJMD5);
+end;
+
+procedure TestTPJMD5.TestProcessArrayOfByteSizeIndex;
+var
+  Prefix, Postfix: TBytes;
+  Fn1, Fn2, Fn3, Fn4: TProcessMethodCall;
+  A: TBytes;
+  MD5: TPJMD5;
+begin
+  Prefix := TBytes.Create(1,2,3,4);
+  Postfix := TBytes.Create(5,6,7,8);
+
+  Fn1 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    MD5.Process(Test.DataAsByteArray, 0, Test.SizeOfData);
+  end;
+  RunRFCTests(Fn1);
+
+  Fn2 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    A := ConcatByteArrays([Prefix, Test.DataAsByteArray, Postfix]);
+    MD5.Process(A, Length(Prefix), Test.SizeOfData);
+  end;
+  RunRFCTests(Fn2);
+
+  Fn3 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    A := ConcatByteArrays([Prefix, Test.DataAsByteArray]);
+    MD5.Process(A, Length(Prefix), Test.SizeOfData);
+  end;
+  RunRFCTests(Fn3);
+
+  Fn4 := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    A := ConcatByteArrays([Test.DataAsByteArray, Postfix]);
+    MD5.Process(A, 0, Test.SizeOfData);
+  end;
+  RunRFCTests(Fn4);
+
+  A := TBytes.Create(10,20,30);
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(A, 3, 1);
+    Check(MD5.Digest = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+    MD5.Reset;
+    MD5.Process(A, 0, 0);
+    Check(MD5.Digest = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+  finally
+    MD5.Free;
+  end;
+
+  CheckException(ErrorProcessArrayOfByteSizeIndex, EPJMD5);
 end;
 
 procedure TestTPJMD5.TestProcessBuf;
