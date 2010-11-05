@@ -4,6 +4,15 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v0.3 beta of 05 November 2010
++ Added new Process and Calculate method overloads to TPJMD5 that process a specified number of bytes from a given start index in a byte array.
++ Modified internal Update method to support the new method overloads and made some minor changes to other methods.
++ Fixed error in DUnit test project that prevented it compiling as a console application.
++ Added new unit tests for new TPJMD5 methods and added additional tests to some other test cases.
++ Renamed some method parameters and constants.
++ Corrected and updated XMLDoc comments.
++ Updated documentation.
+
 Release v0.2 beta of 21 July 2010
 + Changed AnsiString overloads of TPJMD5.Calculate and TPJMD5.Process methods to take RawByteString parameter instead.
 + Updated DUnit tests re changes in TPJMD5.
