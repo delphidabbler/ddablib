@@ -4,6 +4,9 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v3.5.1 of 25 Mar 2011
++ Fixed bug (issue #13) where making some application wide changes to how forms are handled in later Delphis could cause the dialog box to always be positioned at the top left of the screen.
+
 Release v3.5 of 27 December 2009
 + Removed Delphi 1 support.
 + Changed default values of AutoDetectGlyphs and ButtonGlyphs properties.
