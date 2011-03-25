@@ -25,7 +25,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1998-2009 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1998-2011 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributors:
@@ -171,6 +171,11 @@ type
     procedure SetDefaultFont(Font: TFont);
       {Set a font to underlying OSs default font.
         @param Font [in] Font to be set to default font.
+      }
+    procedure ShowHandler(Sender: TObject);
+      {Handler for about box form's OnShow event. Positions dialog box on
+      screen.
+        @param Sender [in] Reference to dialog box form.
       }
   protected
     procedure Notification(AComponent: TComponent;
@@ -379,6 +384,7 @@ begin
   // Create dialog box instance
   Dlg := TPJAboutBoxForm.Create(Owner);
   try
+    Dlg.OnShow := ShowHandler;
 
     // decide if to use dialog's owner as parent
     if fUseOwnerAsParent then
@@ -459,43 +465,9 @@ begin
     // adjust dialog box height according to button height
     Dlg.ClientHeight := 166 + fButtonHeight;
 
-    // Position dialog on screen
-    if fCentreDlg then
-    begin
-      // Centre dialog per Position property: ignore DlgLeft & DlgTop
-      case fPosition of
-        abpScreen:
-          CentreInRect(Dlg, ScreenArea);
-        abpDesktop:
-          CentreInRect(Dlg, DesktopWorkArea);
-        abpOwner:
-        begin
-          if (Owner is TWinControl) then
-            CentreInRect(Dlg, (Owner as TWinControl).BoundsRect)
-          else
-            // no owner or owner not win control: centre on screen
-            CentreInRect(Dlg, ScreenArea);
-        end;
-      end;
-    end
-    else
-    begin
-      // position per DlgLeft and DlgTop and adjust to keep on screen
-      case fPosition of
-        abpScreen:
-          OffsetFromPoint(Dlg, ScreenArea.TopLeft);
-        abpDesktop:
-          OffsetFromPoint(Dlg, DesktopWorkArea.TopLeft);
-        abpOwner:
-        begin
-          if (Owner is TWinControl) then
-            OffsetFromPoint(Dlg, (Owner as TWinControl).BoundsRect.TopLeft)
-          else
-            // no owner or not win control: offset relative to screen
-            OffsetFromPoint(Dlg, ScreenArea.TopLeft);
-        end;
-      end;
-    end;
+    // Positioning of dialog on screen is done in OnShow handler to work round
+    // problem in later Delphis that place main form on taskbar: setting
+    // position here causes position info to be lost.
 
     // Set dialog's help context
     Dlg.HelpContext := fHelpContext;
@@ -592,6 +564,53 @@ begin
       GWL_HWNDPARENT,
       (Dlg.Owner as TWinControl).Handle
     );
+end;
+
+procedure TPJAboutBoxDlg.ShowHandler(Sender: TObject);
+  {Handler for about box form's OnShow event. Positions dialog box on screen.
+    @param Sender [in] Reference to dialog box form.
+  }
+var
+  Dlg: TPJAboutBoxForm; // reference to dialog box form
+begin
+  Dlg := Sender as TPJAboutBoxForm;
+  if fCentreDlg then
+  begin
+    // Centre dialog per Position property: ignore DlgLeft & DlgTop.
+    case fPosition of
+      abpScreen:
+        CentreInRect(Dlg, ScreenArea);
+      abpDesktop:
+        CentreInRect(Dlg, DesktopWorkArea);
+      abpOwner:
+      begin
+        if (Owner is TWinControl) then
+          CentreInRect(Dlg, (Owner as TWinControl).BoundsRect)
+        else
+          // no owner or owner not win control: centre on screen
+          CentreInRect(Dlg, ScreenArea);
+      end;
+    end;
+  end
+  else
+  begin
+    // position per DlgLeft and DlgTop relative to position defined by Position
+    // property and adjust to keep on screen.
+    case fPosition of
+      abpScreen:
+        OffsetFromPoint(Dlg, ScreenArea.TopLeft);
+      abpDesktop:
+        OffsetFromPoint(Dlg, DesktopWorkArea.TopLeft);
+      abpOwner:
+      begin
+        if (Owner is TWinControl) then
+          OffsetFromPoint(Dlg, (Owner as TWinControl).BoundsRect.TopLeft)
+        else
+          // no owner or not win control: offset relative to screen
+          OffsetFromPoint(Dlg, ScreenArea.TopLeft);
+      end;
+    end;
+  end;
 end;
 
 end.
