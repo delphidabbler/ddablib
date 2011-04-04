@@ -34,6 +34,17 @@
 
 unit PJPipe;
 
+{$UNDEF COMPILERSUPPORTED}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0}   // Delphi 7
+    {$DEFINE COMPILERSUPPORTED}
+  {$IFEND}
+{$ENDIF}
+
+{$IFNDEF COMPILERSUPPORTED}
+  {$MESSAGE FATAL 'Minimum compiler version is Delphi 7'}
+{$ENDIF}
+
 {$WARN UNSAFE_CODE OFF}
 
 interface

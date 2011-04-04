@@ -24,7 +24,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2007-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2007-2011 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s): 
@@ -35,6 +35,17 @@
 
 
 unit PJConsoleApp;
+
+{$UNDEF COMPILERSUPPORTED}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0}   // Delphi 7
+    {$DEFINE COMPILERSUPPORTED}
+  {$IFEND}
+{$ENDIF}
+
+{$IFNDEF COMPILERSUPPORTED}
+  {$MESSAGE FATAL 'Minimum compiler version is Delphi 7'}
+{$ENDIF}
 
 {$WARN UNSAFE_CODE OFF}
 
