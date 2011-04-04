@@ -23,7 +23,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2007-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2007-2011 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -41,8 +41,14 @@ interface
 
 uses
   // Delphi
-  Classes, Windows;
+  SysUtils, Classes, Windows;
 
+
+// Ensure TBytes is defined
+{$IF not Declared(TBytes)}
+type
+  TBytes = array of Byte;
+{$IFEND}
 
 type
 
@@ -119,6 +125,14 @@ type
         @return True if some data was read, false if not.
         @except EInOutError raised if there is an error peeking or reading pipe.
       }
+    function ReadBytes(const Count: LongWord = 0): TBytes;
+      {Reads data from pipe into a byte array.
+        @param Count [in] Number of bytes to read from pipe. If Count = 0 or is
+          greater than number of available bytes then all the data from the pipe
+          is read.
+        @return Byte array containing data.
+        @except EInOutError raised if there is an error peeking or reading pipe.
+      }
     procedure CopyToStream(const Stm: TStream; Count: LongWord = 0);
       {Copies data from pipe to a stream.
         @param Stm [in] Stream that receives data.
@@ -135,6 +149,11 @@ type
         @except EInOutError raised if pipe's write handle has been closed or if
           can't write to pipe.
         @except EReadError raised if fail to read from stream.
+      }
+    procedure WriteBytes(const Bytes: TBytes);
+      {Writes the whole content of a byte array to pipe.
+        @except EInOutError raised if pipe's write handle has been closed or if
+          can't write to pipe.
       }
     function WriteData(const Buf; const BufSize: LongWord): LongWord;
       {Writes data from buffer to pipe.
@@ -159,11 +178,6 @@ type
 
 
 implementation
-
-
-uses
-  // Delphi
-  SysUtils;
 
 
 resourcestring
@@ -351,6 +365,28 @@ begin
   inherited;
 end;
 
+function TPJPipe.ReadBytes(const Count: LongWord): TBytes;
+  {Reads data from pipe into a byte array.
+    @param Count [in] Number of bytes to read from pipe. If Count = 0 or is
+      greater than number of available bytes then all the data from the pipe is
+      read.
+    @return Byte array containing data.
+    @except EInOutError raised if there is an error peeking or reading pipe.
+  }
+var
+  AvailBytes: LongWord; // number of bytes in pipe
+  BytesRead: LongWord;  // number of bytes actually read from pipe
+begin
+  AvailBytes := AvailableDataSize;
+  if (Count = 0) or (Count > AvailBytes) then
+    SetLength(Result, AvailBytes)
+  else
+    SetLength(Result, Count);
+  ReadData(Pointer(Result)^, Length(Result), BytesRead);
+  if BytesRead <> LongWord(Length(Result)) then
+    raise EInOutError.Create(sPipeReadError);
+end;
+
 function TPJPipe.ReadData(out Buf; const BufSize: LongWord;
   out BytesRead: LongWord): Boolean;
   {Reads data from pipe into a buffer.
@@ -378,6 +414,15 @@ begin
     Result := False;
     BytesRead := 0;
   end;
+end;
+
+procedure TPJPipe.WriteBytes(const Bytes: TBytes);
+  {Writes the whole content of a byte array to pipe.
+    @except EInOutError raised if pipe's write handle has been closed or if
+      can't write to pipe.
+  }
+begin
+  WriteData(Pointer(Bytes)^, Length(Bytes));
 end;
 
 function TPJPipe.WriteData(const Buf; const BufSize: LongWord): LongWord;
