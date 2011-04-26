@@ -63,128 +63,138 @@ type
 
 type
 
-  {
-  TPJPipe:
-    Class that encapsulates an unamed pipe and can read and write the pipe.
-  }
+  ///  <summary>
+  ///  Class that encapsulates an unamed pipe and can read and write the pipe.
+  ///  </summary>
   TPJPipe = class(TObject)
   private
+    ///  Handle used to read the pipe.
     fReadHandle: THandle;
-      {Handle used to read the pipe}
+    ///  Handle used to write the pipe.
     fWriteHandle: THandle;
-      {Handle used to write the pipe}
+    ///  <summary>Checks that the pipe's write handle hasn't been closed.
+    ///  </summary>
+    ///  <remarks>Raises EInOurError if handle is 0.</remarks>
     procedure CheckWriteHandle;
-      {Check that pipe's write handle hasn't been closed.
-        @except EInOutError raised if handle is 0.
-      }
+    ///  <summary>Creates a pipe using Windows API and records pipe handles.
+    ///  </summary>
+    ///  <param name="Size">Longword [in] Size of pipe. If 0 the default pipe
+    ///  size is used.</param>
+    ///  <param name="Security">PSecurityAttributes [in] Pointer to security
+    ///  structure. May be nil.</param>
+    ///  <remarks>Raises EInOutError if pipe can't be created.</remarks>
     procedure CreatePipe(const Size: LongWord;
       const Security: PSecurityAttributes);
-      {Creates Windows pipe using Windows API and records pipe handles.
-        @param Size [in] Size of pipe. If Size is 0 default size pipe is
-          created.
-        @param Security [in] Pointer to security structure: may be nil.
-        @except Raises EInOutError if pipe can't be created.
-      }
   public
+    ///  <summary>Object constructor. Creates a pipe with specified size.
+    ///  </summary>
+    ///  <param name="Size">LongWord [in] Required size of pipe. If Size is 0
+    ///  then default pipe size used.</param>
+    ///  <param name="Inheritable">Boolean [in] Indicates whether pipe handles
+    ///  are to be inheritable.</param>
+    ///  <remarks>Raises EInOutError if pipe can't be created.</remarks>
     constructor Create(const Size: LongWord; const Inheritable: Boolean = True);
       overload;
-      {Class constructor. Creates pipe object with specified size.
-        @param Size [in] Required size of pipe. If Size is 0 then default pipe
-          size used.
-        @param Inheritable [in] Whether pipe handles are to be inheritable.
-        @except Raises EInOutError if pipe can't be created.
-      }
+    ///  <summary>Object constructor. Creates a pipe object with default size.
+    ///  </summary>
+    ///  <param name="Inheritable">Boolean [in] Indicates whether pipe handles
+    ///  are to be inheritable.</param>
+    ///  <remarks>Raises EInOutError if pipe can't be created.</remarks>
     constructor Create(const Inheritable: Boolean = True);
       overload;
-      {Class constructor. Creates pipe object with default size.
-        @param Inheritable [in] Whether pipe handles are to be inheritable.
-        @except Raises EInOutError if pipe can't be created.
-      }
+    ///  <summary>Object constructor. Creates a pipe object with specified size
+    ///  and security.</summary>
+    ///  <param name="Size">LongWord [in] Required size of pipe. If Size is 0
+    ///  then default pipe size used.</param>
+    ///  <param name="Security">TSecurityAttributes [in] Required security for
+    ///  pipe. If handles to be inheritable set the bInheritHandle field to
+    ///  true.</param>
+    ///  <remarks>Raises EInOutError if pipe can't be created.</remarks>
     constructor Create(const Size: LongWord;
       const Security: TSecurityAttributes);
       overload;
-      {Class constructor. Creates pipe object with specified size and security.
-        @param Size [in] Required size of pipe. If Size is 0 then default pipe
-          size used.
-        @param Security [in] Required security for pipe. If handles to be
-          inheritable set the bInheritHandle field to true.
-        @except Raises EInOutError if pipe can't be created.
-      }
+    ///  <summary>Object constructor. Creates a pipe object with default size
+    ///  pipe and specified security.</summary>
+    ///  <param name="Security">TSecurityAttributes [in] Required security for
+    ///  pipe. If handles to be inheritable set the bInheritHandle field to
+    ///  true.</param>
+    ///  <remarks>Raises EInOutError if pipe can't be created.</remarks>
     constructor Create(const Security: TSecurityAttributes);
       overload;
-      {Class constructor. Creates pipe object with default size pipe and
-      specified security.
-        @param Security [in] Required security for pipe. If handles to be
-          inheritable set the bInheritHandle field to true.
-        @except Raises EInOutError if pipe can't be created.
-      }
+    ///  <summary>Object destructor. Tears down object.</summary>
     destructor Destroy; override;
-      {Class destructor. Tears down object.
-      }
+    ///  <summary>Returns size of data, in bytes, available for reading from
+    ///  pipe.</summary>
+    ///  <remarks>EInOutError raised if there is an error peeking pipe.
+    ///  </remarks>
     function AvailableDataSize: LongWord;
-      {Gets size of data available for reading from pipe.
-        @return Number of bytes of available data.
-        @except EInOutError raised if there is an error peeking pipe.
-      }
+    ///  <summary>Reads data from pipe into a buffer.</summary>
+    ///  <param name="Buf">Untyped [out] Buffer that receives data. Must have
+    ///  capacity of at least BufSize bytes.</param>
+    ///  <param name="BufSize">LongWord [in] Size of buffer or number of bytes
+    ///  requested.</param>
+    ///  <param name="BytesRead">LongWord [out] Receives number of bytes
+    ///  actually read.</param>
+    ///  <returns>True if some data was read, false if not.</returns>
+    ///  <remarks>EInOutError raised if there is an error peeking or reading
+    ///  pipe.</remarks>
     function ReadData(out Buf; const BufSize: LongWord;
       out BytesRead: LongWord): Boolean;
-      {Reads data from pipe into a buffer.
-        @param Buf [out] Buffer receiving data. Must have capacity of at least
-          BufSize bytes.
-        @param BufSize [in] Size of buffer or number of bytes requested.
-        @param BytesRead [out] Set to number of bytes actually read.
-        @return True if some data was read, false if not.
-        @except EInOutError raised if there is an error peeking or reading pipe.
-      }
+    ///  <summary>Reads data from pipe into a byte array.</summary>
+    ///  <param name="Count">LongWord [in] Number of bytes to read from pipe. If
+    ///  Count = 0 or greater than number of available bytes then all the data
+    ///  from the pipe is read.</param>
+    ///  <returns>Byte array containing data.</returns>
+    ///  <remarks>EInOutError raised if there is an error peeking or reading
+    ///  pipe.</remarks>
     function ReadBytes(const Count: LongWord = 0): TBytes;
-      {Reads data from pipe into a byte array.
-        @param Count [in] Number of bytes to read from pipe. If Count = 0 or is
-          greater than number of available bytes then all the data from the pipe
-          is read.
-        @return Byte array containing data.
-        @except EInOutError raised if there is an error peeking or reading pipe.
-      }
+    ///  <summary>Copies data from pipe to a stream.</summary>
+    ///  <param name="Stm">TStream [in] Stream that receives data.</param>
+    ///  <param name="Count">LongWord [in] Number of bytes to copy. If 0 then
+    ///  all remaining data in pipe is copied to stream.</param>
+    ///  <remarks>
+    ///  <para>EInOutError raised if there is an error peeking or reading pipe.
+    ///  </para>
+    ///  <para>EWriteError raised if fail to write to stream.</para>
+    ///  </remarks>
     procedure CopyToStream(const Stm: TStream; Count: LongWord = 0);
-      {Copies data from pipe to a stream.
-        @param Stm [in] Stream that receives data.
-        @param Count [in] Number of bytes to copy. If 0 then all remaining data
-          in pipe is copied to stream.
-        @except EInOutError raised if there is an error peeking or reading pipe.
-        @except EWriteError raised if fail to write to stream.
-      }
+    ///  <summary>Copies data from a stream into the pipe.</summary>
+    ///  <param name="Stm">TStream [in] Stream from which to copy data.</param>
+    ///  <param name="Count">LongWord [in] Number of bytes to copy. If 0 then
+    ///  all remaining data in stream is copied.</param>
+    ///  <remarks>
+    ///  <para>EInOutError raised if pipe's write handle has been closed or if
+    ///  can't write to pipe.</para>
+    ///  <para>EReadError raised if fail to read from stream.</para>
+    ///  </remarks>
     procedure CopyFromStream(const Stm: TStream; Count: LongWord = 0);
-      {Copies data from a stream into the pipe.
-        @param Stm [in] Stream from which to copy data.
-        @param Count [in] Number of bytes to copy. If 0 then all remaining data
-          in stream is copied.
-        @except EInOutError raised if pipe's write handle has been closed or if
-          can't write to pipe.
-        @except EReadError raised if fail to read from stream.
-      }
+    ///  <summary>Writes the whole content of a byte array to pipe.</summary>
+    ///  <param name="Bytes">TBytes [in] Array of bytes to write to pipe.
+    ///  </param>
+    ///  <remarks>EInOutError raised if pipe's write handle has been closed or
+    ///  if can't write to pipe.</remarks>
     procedure WriteBytes(const Bytes: TBytes);
-      {Writes the whole content of a byte array to pipe.
-        @except EInOutError raised if pipe's write handle has been closed or if
-          can't write to pipe.
-      }
+    ///  <summary>Writes data from buffer to pipe.</summary>
+    ///  <param name="Buf">Untyped [in] Buffer containing data to be written.
+    ///  </param>
+    ///  <param name="BufSize">LongWord [in] Number of bytes to write from
+    ///  buffer. Buf must have capacity of at least BufSize bytes.</param>
+    ///  <returns>Number of bytes actually written.</returns>
+    ///  <remarks>EInOutError raised if pipe's write handle has been closed or
+    ///  if can't write to pipe.</remarks>
     function WriteData(const Buf; const BufSize: LongWord): LongWord;
-      {Writes data from buffer to pipe.
-        @param Buf [in] Buffer containing data to be written.
-        @param BufSize [in] Number of bytes to write from buffer. Buf must have
-          capacity of at least BufSize bytes.
-        @return Number of bytes actually written.
-        @except EInOutError raised if pipe's write handle has been closed or if
-          can't write to pipe.
-      }
+    ///  <summary>Closes the pipe's write handle if it is open.</summary>
+    ///  <remarks>Closing the write handle effectively signals EOF to any reader
+    ///  of the pipe. After calling this method no further data may be written
+    ///  to the pipe.</remarks>
     procedure CloseWriteHandle;
-      {Closes the pipe's write handle if it is open. This effectively signals
-      EOF to any reader of the pipe. After calling this method no further data
-      may be written to the pipe.
-      }
+    ///  <summary>Handle used to read data from the pipe. Should be non-zero.
+    ///  </summary>
     property ReadHandle: THandle read fReadHandle;
-      {Handle used to read data from the pipe. Should be non-zero}
+    ///  <summary>Handle used to write data to the pipe. Should not be used
+    ///  when 0.</summary>
+    ///  <remarks>CloseWriteHandle closes and zeros this handle.</remarks>
     property WriteHandle: THandle read fWriteHandle;
-      {Handle used to write data to the pipe. Should not be used when 0.
-      CloseWriteHandle closes and zeros this handle}
   end;
 
 
@@ -203,29 +213,18 @@ resourcestring
 { TPJPipe }
 
 function TPJPipe.AvailableDataSize: LongWord;
-  {Gets size of data available for reading from pipe.
-    @return Number of bytes of available data.
-    @except EInOutError raised if there is an error peeking pipe.
-  }
 begin
   if not PeekNamedPipe(fReadHandle, nil, 0, nil, @Result, nil) then
     raise EInOutError.Create(sCantPeekPipe);
 end;
 
 procedure TPJPipe.CheckWriteHandle;
-  {Check that pipe's write handle hasn't been closed.
-    @except EInOutError raised if handle is 0.
-  }
 begin
   if fWriteHandle = 0 then
     raise EInOutError.Create(sBadWriteHandle);
 end;
 
 procedure TPJPipe.CloseWriteHandle;
-  {Closes the pipe's write handle if it is open. This effectively signals EOF to
-  any reader of the pipe. After calling this method no further data may be
-  written to the pipe.
-  }
 begin
   if fWriteHandle <> 0 then
   begin
@@ -235,14 +234,6 @@ begin
 end;
 
 procedure TPJPipe.CopyFromStream(const Stm: TStream; Count: LongWord);
-  {Copies data from a stream into the pipe.
-    @param Stm [in] Stream from which to copy data.
-    @param Count [in] Number of bytes to copy. If 0 then all remaining data in
-      stream is copied.
-    @except EInOutError raised if pipe's write handle has been closed or if
-      can't write to pipe.
-    @except EReadError raised if fail to read from stream.
-  }
 var
   BytesToWrite: LongWord;       // adjusted number of bytes to write
   Buf: array[0..4095] of Byte;  // buffer used in copying from pipe to stream
@@ -264,13 +255,6 @@ begin
 end;
 
 procedure TPJPipe.CopyToStream(const Stm: TStream; Count: LongWord);
-  {Copies data from pipe to a stream.
-    @param Stm [in] Stream that receives data.
-    @param Count [in] Number of bytes to copy. If 0 then all remaining data in
-      pipe is copied to stream.
-    @except EInOutError raised if there is an error peeking or reading pipe.
-    @except EWriteError raised if fail to write to stream.
-  }
 var
   AvailBytes: LongWord;           // number of bytes in pipe
   BytesToRead: LongWord;          // decreasing count of remaining bytes
@@ -297,12 +281,6 @@ begin
 end;
 
 constructor TPJPipe.Create(const Size: LongWord; const Inheritable: Boolean);
-  {Class constructor. Creates pipe object with specified size.
-    @param Size [in] Required size of pipe. If Size is 0 then default pipe size
-      used.
-    @param Inheritable [in] Whether pipe handles are to be inheritable.
-    @except Raises EInOutError if pipe can't be created.
-  }
 var
   Security: TSecurityAttributes;  // file's security attributes
 begin
@@ -321,45 +299,23 @@ end;
 
 constructor TPJPipe.Create(const Size: LongWord;
   const Security: TSecurityAttributes);
-  {Class constructor. Creates pipe object with specified size and security.
-    @param Size [in] Required size of pipe. If Size is 0 then default pipe size
-      used.
-    @param Security [in] Required security for pipe. If handles to be
-      inheritable set the bInheritHandle field to true.
-    @except Raises EInOutError if pipe can't be created.
-  }
 begin
   inherited Create;
   CreatePipe(Size, @Security);
 end;
 
 constructor TPJPipe.Create(const Security: TSecurityAttributes);
-  {Class constructor. Creates pipe object with default size pipe and specified
-  security.
-    @param Security [in] Required security for pipe. If handles to be
-      inheritable set the bInheritHandle field to true.
-    @except Raises EInOutError if pipe can't be created.
-  }
 begin
   Create(0, Security);
 end;
 
 constructor TPJPipe.Create(const Inheritable: Boolean);
-  {Class constructor. Creates pipe object with default size.
-    @param Inheritable [in] Whether pipe handles are to be inheritable.
-    @except Raises EInOutError if pipe can't be created.
-  }
 begin
   Create(0, Inheritable);
 end;
 
 procedure TPJPipe.CreatePipe(const Size: LongWord;
   const Security: PSecurityAttributes);
-  {Creates Windows pipe using Windows API and records pipe handles.
-    @param Size [in] Size of pipe. If Size is 0 default size pipe is created.
-    @param Security [in] Pointer to security structure: may be nil.
-    @except Raises EInOutError if pipe can't be created.
-  }
 begin
   if not Windows.CreatePipe(fReadHandle, fWriteHandle, Security, Size) then
     raise EInOutError.CreateFmt(
@@ -368,8 +324,6 @@ begin
 end;
 
 destructor TPJPipe.Destroy;
-  {Class destructor. Tears down object.
-  }
 begin
   CloseHandle(fReadHandle);
   CloseWriteHandle;
@@ -377,13 +331,6 @@ begin
 end;
 
 function TPJPipe.ReadBytes(const Count: LongWord): TBytes;
-  {Reads data from pipe into a byte array.
-    @param Count [in] Number of bytes to read from pipe. If Count = 0 or is
-      greater than number of available bytes then all the data from the pipe is
-      read.
-    @return Byte array containing data.
-    @except EInOutError raised if there is an error peeking or reading pipe.
-  }
 var
   AvailBytes: LongWord; // number of bytes in pipe
   BytesRead: LongWord;  // number of bytes actually read from pipe
@@ -400,14 +347,6 @@ end;
 
 function TPJPipe.ReadData(out Buf; const BufSize: LongWord;
   out BytesRead: LongWord): Boolean;
-  {Reads data from pipe into a buffer.
-    @param Buf [out] Buffer receiving data. Must have capacity of at least
-      BufSize bytes.
-    @param BufSize [in] Size of buffer or number of bytes requested.
-    @param BytesRead [out] Set to number of bytes actually read.
-    @return True if some data was read, false if not.
-    @except EInOutError raised if there is an error peeking pipe.
-  }
 var
   BytesToRead: DWORD;   // number of bytes to actually read
 begin
@@ -428,23 +367,11 @@ begin
 end;
 
 procedure TPJPipe.WriteBytes(const Bytes: TBytes);
-  {Writes the whole content of a byte array to pipe.
-    @except EInOutError raised if pipe's write handle has been closed or if
-      can't write to pipe.
-  }
 begin
   WriteData(Pointer(Bytes)^, Length(Bytes));
 end;
 
 function TPJPipe.WriteData(const Buf; const BufSize: LongWord): LongWord;
-  {Writes data from buffer to pipe.
-    @param Buf [in] Buffer containing data to be written.
-    @param BufSize [in] Number of bytes to write from buffer. Buf must have
-      capacity of at least BufSize bytes.
-    @return Number of bytes actually written.
-    @except EInOutError raised if pipe's write handle has been closed or if
-      can't write to pipe.
-  }
 begin
   CheckWriteHandle;
   if not WriteFile(fWriteHandle, Buf, BufSize, Result, nil) then
