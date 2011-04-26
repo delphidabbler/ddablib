@@ -135,14 +135,15 @@ type
 
 type
   ///  <summary>
-  ///  Constructs valid Unicode strings from chucnk of data read from pipe.
+  ///  Constructs valid Unicode BMP strings from chunks of data read from pipe.
   ///  Chunk may or may not be split on valid Unicode character boundaries. An
   ///  event is triggered for each string read. Strings are also parsed into
   ///  lines that are split by a specified end of line marker.
   ///  </summary>
   ///  <remarks>
-  ///  The class only works for Unicode text from the basic multingual plane
-  ///  (see http://bit.ly/f3Ardu).
+  ///  <para>The class only works for Unicode text from the basic multingual
+  ///  plane (BMP).</para>
+  ///  <para>For info about the BMP see http://bit.ly/f3Ardu</para>
   ///  </remarks>
   TPJUnicodeBMPPipeFilter = class(TPJPipeFilter)
   {$IFDEF STRICT}strict{$ENDIF}
@@ -179,7 +180,7 @@ type
     ///  parsing text into lines.</summary>
     ///  <remarks>Defaults to CRLF (#13#10).</remarks>
     property EOLMarker: UnicodeString read fEOLMarker write fEOLMarker;
-    ///  <summary>Event triggered whenever valid text is read in AddData.
+    ///  <summary>Event triggered whenever valid text is read from pipe.
     ///  Contains text up to and including last valid Unicode character in given
     ///  data.</summary>
     property OnText: TPJUnicodeTextReadEvent read fOnText write fOnText;
@@ -187,6 +188,73 @@ type
     ///  triggered for any pending text when Flush is called, or object is
     ///  destroyed.</summary>
     property OnLineEnd: TPJUnicodeTextReadEvent
+      read fOnLineEnd write fOnLineEnd;
+  end;
+
+type
+  ///  <summary>Type of text read event triggered by classes that read Ansi
+  ///  strings from pipes.</summary>
+  ///  <param name="Sender">TObject [in] Object that triggers event.</param>
+  ///  <param name="Text">AnsiString [in] Text for which event was triggered.
+  ///  </param>
+  ///  <remarks>Type of OnText and OnLineEnd events.</remarks>
+  TPJAnsiTextReadEvent = procedure(Sender: TObject;
+    const Text: AnsiString) of object;
+
+type
+  ///  <summary>
+  ///  Constructs valid ANSI SBCS strings from chunks of data read from pipe. An
+  ///  event is triggered for each string read. Strings are also parsed into
+  ///  lines that are split by a specified end of line marker.
+  ///  </summary>
+  ///  <remarks>
+  ///  <para>The class only works for Single Byte Character Set (SBCS) strings,
+  ///  i.e. those that take exactly one byte per character. It is the caller's
+  ///  responsibility to interpret the string's code page correctly.</para>
+  ///  <para>For info about SBCS see http://bit.ly/epPKtW</para>
+  ///  </remarks>
+  TPJAnsiSBCSPipeFilter = class(TPJPipeFilter)
+  {$IFDEF STRICT}strict{$ENDIF}
+  private
+    ///  Text data buffered awaiting next end of line.
+    fPartialLine: AnsiString;
+    ///  Stores reference to OnText event handler.
+    fOnText: TPJAnsiTextReadEvent;
+    ///  Stores reference to OnLineEnd event handler.
+    fOnLineEnd: TPJAnsiTextReadEvent;
+    ///  Value of EOLMarker property.
+    fEOLMarker: AnsiString;
+    ///  <summary>Triggers OnText event for a given ANSI string.</summary>
+    procedure DoText(const Text: AnsiString);
+    ///  <summary>Triggers OnLineEnd event for a given ANSI string.</summary>
+    procedure DoLineEnd(const Text: AnsiString);
+  {$IFDEF STRICT}strict{$ENDIF}
+  protected
+    ///  <summary>Returns number of bytes at end of RawData that cannot be
+    ///  processed yet.</summary>
+    ///  <remarks>All bytes can always be processed in a SBCS string, so this
+    ///  method always returns 0.</remarks>
+    function LeftOverByteCount(const RawData: TBytes): Integer; override;
+    ///  <summary>Extracts ANSI text from given data and parses it into lines.
+    ///  </summary>
+    procedure DoFilter(const ValidData: TBytes); override;
+    ///  <summary>Flushes any un-reported line of text, triggering OnLineEnd
+    ///  event for it.</summary>
+    procedure DoFlush; override;
+  public
+    ///  <summary>Sets default property values.</summary>
+    procedure AfterConstruction; override;
+    ///  <summary>Character(s) to be used as end of line marker used when
+    ///  parsing text into lines.</summary>
+    ///  <remarks>Defaults to CRLF (#13#10).</remarks>
+    property EOLMarker: AnsiString read fEOLMarker write fEOLMarker;
+    ///  <summary>Event triggered whenever text is read from pipe. Contains text
+    ///  up to and including last ANSI character in given data.</summary>
+    property OnText: TPJAnsiTextReadEvent read fOnText write fOnText;
+    ///  <summary>Event triggered when each end of line is reached. Also
+    ///  triggered for any pending text when Flush is called, or object is
+    ///  destroyed.</summary>
+    property OnLineEnd: TPJAnsiTextReadEvent
       read fOnLineEnd write fOnLineEnd;
   end;
 
@@ -263,9 +331,12 @@ var
   Text: UnicodeString;  // Text read from ValidData
   EOLPos: Integer;      // Position(s) of end of line marker in text
 begin
+  // Create Unicode text from data
   {$IFDEF UNICODE}
   Text := TEncoding.Unicode.GetString(ValidData);
   {$ELSE}
+  // each character is exactly SizeOf(WideChar) bytes in basic multilingual
+  // plane
   SetLength(Text, Length(ValidData) div SizeOf(WideChar));
   Move(Pointer(ValidData)^, Pointer(Text)^, Length(ValidData));
   {$ENDIF}
@@ -309,6 +380,66 @@ function TPJUnicodeBMPPipeFilter.LeftOverByteCount(
   const RawData: TBytes): Integer;
 begin
   Result := Length(RawData) mod SizeOf(WideChar);
+end;
+
+{ TPJAnsiSBCSPipeFilter }
+
+procedure TPJAnsiSBCSPipeFilter.AfterConstruction;
+begin
+  inherited;
+  fEOLMarker := #13#10;
+end;
+
+procedure TPJAnsiSBCSPipeFilter.DoFilter(const ValidData: TBytes);
+var
+  Text: AnsiString;  // Text read from ValidData
+  EOLPos: Integer;   // Position(s) of end of line marker in text
+begin
+  // NOTE: code assumes SizeOf(AnsiChar) = 1
+  // Record ANSI SBCS text
+  SetLength(Text, Length(ValidData));
+  Move(Pointer(ValidData)^, Pointer(Text)^, Length(ValidData));
+  // Trigger OnText event for read text
+  DoText(Text);
+  fPartialLine := fPartialLine + Text;
+  // Break text into lines separated by EOLMarker, trigger OnLineEnd for each
+  EOLPos := Pos(fEOLMarker, fPartialLine);
+  while EOLPos > 0 do
+  begin
+    DoLineEnd(Copy(fPartialLine, 1, EOLPos - 1));
+    fPartialLine := Copy(
+      fPartialLine, EOLPos + Length(fEOLMarker), MaxInt
+    );
+    EOLPos := Pos(fEOLMarker, fPartialLine);
+  end;
+end;
+
+procedure TPJAnsiSBCSPipeFilter.DoFlush;
+begin
+  if fPartialLine <> '' then
+  begin
+    DoLineEnd(fPartialLine);
+    fPartialLine := '';
+  end;
+end;
+
+procedure TPJAnsiSBCSPipeFilter.DoLineEnd(const Text: AnsiString);
+begin
+  if Assigned(OnLineEnd) then
+    OnLineEnd(Self, Text);
+end;
+
+procedure TPJAnsiSBCSPipeFilter.DoText(const Text: AnsiString);
+begin
+  if Assigned(OnText) then
+    OnText(Self, Text);
+end;
+
+function TPJAnsiSBCSPipeFilter.LeftOverByteCount(
+  const RawData: TBytes): Integer;
+begin
+  // all bytes are valid because each character is exactly one byte in a SBCS
+  Result := 0;
 end;
 
 end.
