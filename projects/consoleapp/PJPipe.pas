@@ -60,11 +60,6 @@ uses
 type
   TBytes = array of Byte;
 {$IFEND}
-// Ensure UnicodeString is defined
-{$IFNDEF UNICODE}
-type
-  UnicodeString = WideString;
-{$ENDIF}
 
 type
 
@@ -190,86 +185,6 @@ type
     property WriteHandle: THandle read fWriteHandle;
       {Handle used to write data to the pipe. Should not be used when 0.
       CloseWriteHandle closes and zeros this handle}
-  end;
-
-
-type
-  ///  <summary>Type of text read event triggered by classes that read Unicode
-  ///  strings from text reader objects.</summary>
-  ///  <param name="Sender">TObject [in] Object that triggers event.</param>
-  ///  <param name="Text">UnicodeString [in] Text for which event was triggered.
-  ///  </param>
-  ///  <remarks>Type of OnText and OnLineEnd events.</remarks>
-  TPJUnicodeTextReadEvent = procedure(Sender: TObject;
-    const Text: UnicodeString) of object;
-
-type
-  ///  <summary>
-  ///  Constructs valid Unicode strings from chunks of data that may or may not
-  ///  be split on valid Unicode character boundaries. An event is triggered for
-  ///  each string read. Strings are also parsed into lines that are split by
-  ///  a specified end of line marker.
-  ///  </summary>
-  ///  <remarks>
-  ///  The class only works for Unicode text from the basic multingual plane
-  ///  (see http://bit.ly/f3Ardu).
-  ///  </remarks>
-  TPJUnicodeBMPTextReader = class(TObject)
-  private
-    ///  Records any bytes that were not processed in last call to AddData
-    ///  because they are not part of a valid Unicode character. The data is
-    ///  prepended to the next chunk of data read.
-    fUnprocessedBytes: TBytes;
-    ///  Text data buffered awaiting next end of line.
-    fPartialLine: UnicodeString;
-    ///  Stores reference to OnText event handler.
-    fOnText: TPJUnicodeTextReadEvent;
-    ///  Stores reference to OnLineEnd event handler.
-    fOnLineEnd: TPJUnicodeTextReadEvent;
-    ///  Value of EOLMarker property.
-    fEOLMarker: UnicodeString;
-    ///  <summary>Triggers OnText event for a given Unicode string.</summary>
-    procedure DoText(const Text: UnicodeString);
-    ///  <summary>Triggers OnLineEnd event for a given Unicode string.</summary>
-    procedure DoLineEnd(const Text: UnicodeString);
-  public
-    ///  <summary>Object constructor. Sets default properties.</summary>
-    constructor Create;
-    ///  <summary>Object destructor. Flushes any un-flushed text line.</summary>
-    destructor Destroy; override;
-    ///  <summary>Adds a chunk of bytes to the object, extracting the longest
-    ///  valid Unicode string that is represented by the data. Also parses the
-    ///  text into logical lines.</summary>
-    ///  <remarks>
-    ///  <para>An OnText event is triggered for the extracted text and an
-    ///  OnLineEnd event is triggered for each end of line marker
-    ///  encountered.</para>
-    ///  <para>Any data not used is buffered for use in the next call to this
-    ///  method.</para>
-    ///  </remarks>
-    procedure AddData(const Data: TBytes);
-    ///  <summary>Flushes any un-reported line of text, triggering OnLineEnd
-    ///  event for it.</summary>
-    procedure Flush;
-    ///  <summary>Checks if object currently contains any un processed data.
-    ///  </summary>
-    ///  <remarks>Call this after last call to AddData to test if there is any
-    ///  data left un-processed. If so the data stream is not valid Unicode.
-    ///  </remarks>
-    function HaveUnprocessedData: Boolean;
-    ///  <summary>Character(s) to be used as end of line marker used when
-    ///  parsing text into lines.</summary>
-    ///  <remarks>Defaults to CRLF.</remarks>
-    property EOLMarker: UnicodeString read fEOLMarker write fEOLMarker;
-    ///  <summary>Event triggered whenever valid text is read in AddData.
-    ///  Contains text up to and including last valid Unicode character in given
-    ///  data.</summary>
-    property OnText: TPJUnicodeTextReadEvent read fOnText write fOnText;
-    ///  <summary>Event triggered when each end of line is reached. Also
-    ///  triggered for any pending text when Flush is called, or object is
-    ///  destroyed.</summary>
-    property OnLineEnd: TPJUnicodeTextReadEvent
-      read fOnLineEnd write fOnLineEnd;
   end;
 
 
@@ -534,101 +449,6 @@ begin
   CheckWriteHandle;
   if not WriteFile(fWriteHandle, Buf, BufSize, Result, nil) then
     raise EInOutError.Create(sPipeWriteError);
-end;
-
-{ TPJUnicodeBMPTextReader }
-
-procedure TPJUnicodeBMPTextReader.AddData(const Data: TBytes);
-var
-  UnprocessedByteCount: Integer;  // number of byte un-processed (partial chars)
-  Text: UnicodeString;            // text read
-  EOLPos: Integer;                // position of EOL in Text
-  Buffer: TBytes;                 // bytes to be processed
-begin
-  if Length(Data) = 0 then
-    Exit;
-  // Set up data to be processed in buffer. Starts with any as yet unprocessed
-  // bytes followed by new data
-  SetLength(Buffer, Length(fUnprocessedBytes) + Length(Data));
-  if Length(fUnprocessedBytes) > 0 then
-    Move(
-      fUnprocessedBytes[0], Buffer[0], Length(fUnprocessedBytes)
-    );
-  Move(
-    Data[0], Buffer[Length(fUnprocessedBytes)], Length(Data)
-  );
-  // Decide if there are any bytes not to be processed this time. In basic
-  // multilingual plane all Unicode chars are 2 bytes, to we only need to store
-  // any odd trailing bytes for later processing.
-  UnprocessedByteCount := Length(Buffer) mod SizeOf(WideChar);
-  if UnprocessedByteCount <> 0 then
-    // we have bytes we won't process this time: record for use in next AddData
-    fUnprocessedBytes := Copy(
-      Buffer, Length(Buffer) - UnprocessedByteCount, UnprocessedByteCount
-    )
-  else
-    // no unprocessed bytes
-    SetLength(fUnprocessedBytes, 0);
-  // Record text from valid bytes
-  {$IFDEF UNICODE}
-  Text := TEncoding.Unicode.GetString(
-    Buffer, 0, Length(Buffer) - UnprocessedByteCount
-  );
-  {$ELSE}
-  SetLength(Text, Length(Buffer) div SizeOf(WideChar));
-  Move(Pointer(Buffer)^, Pointer(Text)^, Length(Buffer) - UnprocessedByteCount);
-  {$ENDIF}
-  // Trigger OnText event for read text
-  DoText(Text);
-  fPartialLine := fPartialLine + Text;
-  // Break text into lines separated by EOLMarker, trigger OnLineEnd for each
-  EOLPos := Pos(fEOLMarker, fPartialLine);
-  while EOLPos > 0 do
-  begin
-    DoLineEnd(Copy(fPartialLine, 1, EOLPos - 1));
-    fPartialLine := Copy(
-      fPartialLine, EOLPos + Length(fEOLMarker), MaxInt
-    );
-    EOLPos := Pos(fEOLMarker, fPartialLine);
-  end;
-end;
-
-constructor TPJUnicodeBMPTextReader.Create;
-begin
-  inherited Create;
-  fEOLMarker := #13#10; // Default EOL marker
-end;
-
-destructor TPJUnicodeBMPTextReader.Destroy;
-begin
-  Flush;
-  inherited;
-end;
-
-procedure TPJUnicodeBMPTextReader.DoLineEnd(const Text: UnicodeString);
-begin
-  if Assigned(OnLineEnd) then
-    OnLineEnd(Self, Text);
-end;
-
-procedure TPJUnicodeBMPTextReader.DoText(const Text: UnicodeString);
-begin
-  if Assigned(OnText) then
-    OnText(Self, Text);
-end;
-
-procedure TPJUnicodeBMPTextReader.Flush;
-begin
-  if fPartialLine <> '' then
-  begin
-    DoLineEnd(fPartialLine);
-    fPartialLine := '';
-  end;
-end;
-
-function TPJUnicodeBMPTextReader.HaveUnprocessedData: Boolean;
-begin
-  Result := Length(fUnprocessedBytes) <> 0;
 end;
 
 end.
