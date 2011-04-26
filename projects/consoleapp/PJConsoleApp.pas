@@ -48,6 +48,7 @@ unit PJConsoleApp;
 {$ENDIF}
 
 {$WARN UNSAFE_CODE OFF}
+{$WARN UNSAFE_CAST OFF}
 
 interface
 
