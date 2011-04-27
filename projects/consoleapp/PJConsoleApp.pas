@@ -92,6 +92,44 @@ type
     cpRealTime    // highest possible priority: preempts all threads inc OS
   );
 
+type
+  TPJConsoleColor = (
+    ccBlack = 0,
+    ccNavy = 1,
+    ccGreen = 2,
+    ccTeal = 3,
+    ccMaroon = 4,
+    ccPurple = 5,
+    ccOlive = 6,
+    ccSilver = 7,
+    ccGray = 8,
+    ccBlue = 9,
+    ccLime = 10,
+    ccAqua = 11,
+    ccRed = 12,
+    ccFuchsia = 13,
+    ccYellow = 14,
+    ccWhite = 15
+  );
+
+type
+  TPJConsoleColors = record
+    Foreground: TPJConsoleColor;
+    Background: TPJConsoleColor;
+  end;
+
+function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
+  TPJConsoleColors;
+
+type
+  TPJConsoleBufferSize = record
+    CX: LongWord;
+    CY: LongWord;
+  end;
+
+function MakeConsoleBufferSize(const ACX, ACY: LongWord): TPJConsoleBufferSize;
+
+type
   {
   TPJCustomConsoleApp:
     Base class that encapsulates and executes a command line application and
@@ -142,6 +180,11 @@ type
       {Whether application should be started in a new console window}
     fConsoleTitle: string;
       {Title to be displayed in a new console. '' => default title used}
+    fConsoleColors: TPJConsoleColors;
+      {Foreground and background colours of the console window}
+    fConsoleBufferSize: TPJConsoleBufferSize;
+      {Size of console's screen buffer in characters. Ignored if either field is
+      0}
     fEnvironment: Pointer;
       {Pointer to environment block to be passed to console application}
     fProcessInfo: TProcessInformation;
@@ -278,6 +321,13 @@ type
       {Title to be displayed in any new console window. If left as default ''
       default title is used. If console app shares a console this property is
       ignored}
+    property ConsoleColors: TPJConsoleColors
+      read fConsoleColors write fConsoleColors;
+      {Foreground and background colours of the console window}
+    property ConsoleBufferSize: TPJConsoleBufferSize
+      read fConsoleBufferSize write fConsoleBufferSize;
+      {Size of console's screen buffer in characters. Ignored if either field is
+      0. Has no effect if any dimension is less than default.}
     property Environment: Pointer
       read fEnvironment write fEnvironment;
       {Pointer to environment block used by console application. The caller is
@@ -369,6 +419,8 @@ type
     property ThreadAttrs;
     property UseNewConsole;
     property ConsoleTitle;
+    property ConsoleColors;
+    property ConsoleBufferSize;
     property Environment;
     property Priority;
     property TimeToLive;
@@ -395,6 +447,19 @@ resourcestring
   sErrTimeout = 'Application timed out';
   sTerminated = 'Application terminated';
 
+function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
+  TPJConsoleColors;
+begin
+  Result.Foreground := AForeground;
+  Result.Background := ABackground;
+end;
+
+function MakeConsoleBufferSize(const ACX, ACY: LongWord): TPJConsoleBufferSize;
+begin
+  Result.CX := ACX;
+  Result.CY := ACY;
+end;
+
 { TPJCustomConsoleApp }
 
 constructor TPJCustomConsoleApp.Create;
@@ -417,6 +482,7 @@ begin
   fConsoleTitle := '';
   fEnvironment := nil;
   fPriority := cpDefault;
+  fConsoleColors := MakeConsoleColors(ccWhite, ccBlack);
 end;
 
 destructor TPJCustomConsoleApp.Destroy;
@@ -664,15 +730,23 @@ begin
   // See http://bit.ly/adgQ8H
   SafeCmdLine := CmdLine;
   UniqueString(SafeCmdLine);
-  
+
   // Set up startup information structure
   FillChar(StartInfo, Sizeof(StartInfo),#0);
   with StartInfo do
   begin
     cb := SizeOf(StartInfo);
-    dwFlags := STARTF_USESHOWWINDOW;
+    dwFlags := STARTF_USESHOWWINDOW or STARTF_USEFILLATTRIBUTE;
     if (fStdIn <> 0) or (fStdOut <> 0) or (fStdErr <> 0) then
       dwFlags := dwFlags or STARTF_USESTDHANDLES;          // we are redirecting
+    if (fConsoleBufferSize.CX > 0) and (fConsoleBufferSize.CY > 0) then
+    begin
+      dwFlags := dwFlags or STARTF_USECOUNTCHARS;
+      dwXCountChars := fConsoleBufferSize.CX;
+      dwYCountChars := fConsoleBufferSize.CY;
+    end;
+    dwFillAttribute := Ord(fConsoleColors.Foreground)
+      or (Ord(fConsoleColors.Background) shl 4);
     if fConsoleTitle <> '' then
       lpTitle := PChar(fConsoleTitle);
     hStdInput := fStdIn;                   // std handles (non-zero => redirect)
