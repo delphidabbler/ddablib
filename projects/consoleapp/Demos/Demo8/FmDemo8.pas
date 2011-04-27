@@ -7,7 +7,7 @@
  * $Rev$
  * $Date$
  *
- * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2007-2010.
+ * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2007-2011.
  * It may be used without restriction. This code distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 }
@@ -20,18 +20,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls,
 
-  PJPipe, PJConsoleApp;
+  PJPipe, PJConsoleApp, PJPipeFilters;
 
 type
-  TTextToLines = class(TObject)
-  private
-    fRemainder: string;
-    fLines: TStrings;
-  public
-    procedure AddText(const Text: string);
-    procedure Flush;
-    constructor Create(const Lines: TStrings);
-  end;
 
   TForm1 = class(TForm)
     Label1: TLabel;
@@ -41,11 +32,10 @@ type
     Label2: TLabel;
     Label3: TLabel;
     procedure Button1Click(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
   private
-    fErrPipe, fOutPipe: TPJPipe;
-    fOutLines, fErrLines: TTextToLines;
+    fErrFilter, fOutFilter: TPJAnsiSBCSPipeFilter;
+    procedure ErrLineEndHandler(Sender: TObject; const Line: AnsiString);
+    procedure OutLineEndHandler(Sender: TObject; const Line: AnsiString);
     procedure WorkHandler(Sender: TObject);
     procedure CompletionHandler(Sender: TObject);
   end;
@@ -56,40 +46,6 @@ var
 implementation
 
 {$R *.dfm}
-
-{ TTextToLines }
-
-procedure TTextToLines.AddText(const Text: string);
-var
-  EOLPos: Integer;
-begin
-  if Text = '' then
-    Exit;
-  fRemainder := fRemainder + Text;
-  EOLPos := Pos(#13#10, fRemainder);
-  while EOLPos > 0 do
-  begin
-    fLines.Add(Copy(fRemainder, 1, EOLPos - 1));
-    fRemainder := Copy(fRemainder, EOLPos + 2, MaxInt);
-    EOLPos := Pos(#13#10, fRemainder);
-  end;
-end;
-
-constructor TTextToLines.Create(const Lines: TStrings);
-begin
-  inherited Create;
-  fLines := Lines;
-  fRemainder := '';
-end;
-
-procedure TTextToLines.Flush;
-begin
-  if fRemainder <> '' then
-  begin
-    fLines.Add(fRemainder);
-    fRemainder := '';
-  end;
-end;
 
 { TForm1 }
 
@@ -119,16 +75,18 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
   App: TPJConsoleApp;
 begin
-  fOutPipe := nil;
-  fErrPipe := nil;
+  fOutFilter := nil;
+  fErrFilter := nil;
   try
-    fOutPipe := TPJPipe.Create;
-    fErrPipe := TPJPipe.Create;
+    fOutFilter := TPJAnsiSBCSPipeFilter.Create(TPJPipe.Create, True);
+    fOutFilter.OnLineEnd := OutLineEndHandler;
+    fErrFilter := TPJAnsiSBCSPipeFilter.Create(TPJPipe.Create, True);
+    fErrFilter.OnLineEnd := ErrLineEndHandler;
     App := TPJConsoleApp.Create;
     try
-      App.StdIn := OpenInputFile('..\..\PJConsoleApp.pas');
-      App.StdOut := fOutPipe.WriteHandle;
-      App.StdErr := fErrPipe.WriteHandle;
+      App.StdIn := OpenInputFile('..\TestData\MobyDick-ANSI.txt');
+      App.StdOut := fOutFilter.Pipe.WriteHandle;
+      App.StdErr := fErrFilter.Pipe.WriteHandle;
       App.OnWork := WorkHandler;
       App.OnComplete := CompletionHandler;
       App.TimeSlice := 1;
@@ -141,50 +99,31 @@ begin
       App.Free;
     end;
   finally
-    FreeAndNil(fErrPipe);
-    FreeAndNil(fOutPipe);
+    FreeAndNil(fErrFilter);
+    FreeAndNil(fOutFilter);
   end;
 end;
 
 procedure TForm1.CompletionHandler(Sender: TObject);
 begin
-  fOutLines.Flush;
-  fErrLines.Flush;
+  fOutFilter.Flush;
+  fErrFilter.Flush;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TForm1.ErrLineEndHandler(Sender: TObject; const Line: AnsiString);
 begin
-  fOutLines := TTextToLines.Create(Memo1.Lines);
-  fErrLines := TTextToLines.Create(Memo2.Lines);
+  Memo2.Lines.Add(string(Line));
 end;
 
-procedure TForm1.FormDestroy(Sender: TObject);
+procedure TForm1.OutLineEndHandler(Sender: TObject; const Line: AnsiString);
 begin
-  FreeAndNil(fErrLines);
-  FreeAndNil(fOutLines);
+  Memo1.Lines.Add(string(Line));
 end;
 
 procedure TForm1.WorkHandler(Sender: TObject);
-
-  procedure ProcessPipe(const Pipe: TPJPipe; const LineHandler: TTextToLines);
-  var
-    Text: string;
-    BytesToRead: Cardinal;
-    BytesRead: Cardinal;
-  begin
-    BytesToRead := Pipe.AvailableDataSize;
-    SetLength(Text, BytesToRead);
-    Pipe.ReadData(PChar(Text)^, BytesToRead, BytesRead);
-    if BytesRead > 0 then
-    begin
-      SetLength(Text, BytesRead);
-      LineHandler.AddText(Text);
-    end;
-  end;
-
 begin
-  ProcessPipe(fErrPipe, fErrLines);  // Read from standard error
-  ProcessPipe(fOutPipe, fOutLines);  // Read from standard output
+  fOutFilter.ReadPipe;
+  fErrFilter.ReadPipe;
   Application.ProcessMessages;       // Let the memo controls update
 end;
 
