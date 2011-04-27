@@ -55,7 +55,7 @@ interface
 
 uses
   // Delphi
-  Classes, Windows;
+  Classes, Windows, Graphics;
 
 
 const
@@ -77,13 +77,10 @@ const
   cAppErrorTimeOut = 1 or cAppErrorMask;      // application timed out
   cAppErrorTerminated = 2 or cAppErrorMask;   // application was terminated
 
-
 type
-
-  {
-  TPJConsoleAppPriority:
-    Enumeration of possible priorties for console application.
-  }
+  ///  <summary>
+  ///  Enumeration of possible priorties for a console application.
+  ///  </summary>
   TPJConsoleAppPriority = (
     cpDefault,    // use default priority (see Win API docs for details)
     cpHigh,       // use for time-critical tasks: processor intensive
@@ -93,40 +90,87 @@ type
   );
 
 type
+  ///  <summary>
+  ///  Enumeration of possible colours to be used for a console's foreground and
+  ///  background.
+  ///  </summary>
+  ///  <remarks>
+  ///  <para>It is important that the assigned ordinal values are retained. They
+  ///  relate to various combinations of the FOREGROUND_* constants declared in
+  ///  the Windows unit.</para>
+  ///  <para>Foreground colours are obtained directly from these ordinal values
+  ///  while background colours are obtained by left shifting the values by 4.
+  ///  </para>
+  ///  <para>The value names are similar to the equivalent TColor constants, but
+  ///  they have different numeric values.</para>
+  ///  </remarks>
   TPJConsoleColor = (
-    ccBlack = 0,
-    ccNavy = 1,
-    ccGreen = 2,
-    ccTeal = 3,
-    ccMaroon = 4,
-    ccPurple = 5,
-    ccOlive = 6,
-    ccSilver = 7,
-    ccGray = 8,
-    ccBlue = 9,
-    ccLime = 10,
-    ccAqua = 11,
-    ccRed = 12,
+    ccBlack   =  0,
+    ccNavy    =  1,
+    ccGreen   =  2,
+    ccTeal    =  3,
+    ccMaroon  =  4,
+    ccPurple  =  5,
+    ccOlive   =  6,
+    ccSilver  =  7,
+    ccGray    =  8,
+    ccBlue    =  9,
+    ccLime    = 10,
+    ccAqua    = 11,
+    ccRed     = 12,
     ccFuchsia = 13,
-    ccYellow = 14,
-    ccWhite = 15
+    ccYellow  = 14,
+    ccWhite   = 15
   );
 
 type
+  ///  <summary>
+  ///  Type of the TPJConsoleApp.ConsoleColors property. Records the console's
+  ///  foreground and background colours.
+  ///  </summary>
   TPJConsoleColors = record
+    ///  <summary>Console's foreground colour.</summary>
     Foreground: TPJConsoleColor;
+    ///  <summary>Console's background colour.</summary>
     Background: TPJConsoleColor;
   end;
 
+///  <summary>"Constructor" function that creates a TPJConsoleColors record from
+///  given foreground and background TPJConsoleColor colours.</summary>
+///  <remarks>This function is provided because it is not possible to assign the
+///  fields of the TPJConsoleApp.ConsoleColors property individually. Instead
+///  assign the return value of this function to the property.</remarks>
 function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
-  TPJConsoleColors;
+  TPJConsoleColors; overload;
+
+///  <summary>"Constructor" function that creates a TPJConsoleColors record from
+///  given foreground and background TColor colours.</summary>
+///  <remarks>
+///  <para>This function is provided as a convenience to enable normal TColor
+///  values to be used to instantiate a TPJConsoleColours record without having
+///  to manually convert to TPJConsoleColour values.</para>
+///  <para>An exception is raised if either TColor value is not one of the 16
+///  standard colours.</para>
+///  </remarks>
+function MakeConsoleColors(const AForeground, ABackground: TColor):
+  TPJConsoleColors; overload;
 
 type
+  ///  <summary>
+  ///  Type of the TPJConsoleApp.ConsoleBufferSize property. Records the
+  ///  required screen buffer size in characters and lines.
+  ///  </summary>
   TPJConsoleBufferSize = record
+    ///  <summary>Horizontal screen buffer size in character columns.</summary>
     CX: LongWord;
+    ///  <summary>Vertical screen buffer size in character rows.</summary>
     CY: LongWord;
   end;
 
+///  <summary>"Constructor" function for TPJConsoleBufferSize.</summary>
+///  <remarks>This function is provided because if is not possible to assign the
+///  fields of the TPJConsoleApp.ConsoleBufferSize individually. Instead assign
+///  the return value of this function to the property.</remarks>
 function MakeConsoleBufferSize(const ACX, ACY: LongWord): TPJConsoleBufferSize;
 
 type
@@ -407,7 +451,7 @@ type
   }
   TPJConsoleApp = class(TPJCustomConsoleApp)
   public
-    // Published inherited properties
+    // Make all inherited protected properties public
     property StdIn;
     property StdOut;
     property StdErr;
@@ -452,6 +496,42 @@ function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
 begin
   Result.Foreground := AForeground;
   Result.Background := ABackground;
+end;
+
+function MakeConsoleColors(const AForeground, ABackground: TColor):
+  TPJConsoleColors;
+
+  ///  Converts a TColor into equivalent TPJConsoleColor. Raises exception if
+  ///  TColor value is not one of the 16 standard colours.
+  function ConvertColor(const Color: TColor): TPJConsoleColor;
+  resourcestring
+    sUnsupportedColour = 'Invalid console window colour';
+  begin
+    case Color of
+      clBlack:    Result := ccBlack;
+      clNavy:     Result := ccNavy;
+      clGreen:    Result := ccGreen;
+      clTeal:     Result := ccTeal;
+      clMaroon:   Result := ccMaroon;
+      clPurple:   Result := ccPurple;
+      clOlive:    Result := ccOlive;
+      clSilver:   Result := ccSilver;
+      clGray:     Result := ccGray;
+      clBlue:     Result := ccBlue;
+      clLime:     Result := ccLime;
+      clAqua:     Result := ccAqua;
+      clRed:      Result := ccRed;
+      clFuchsia:  Result := ccFuchsia;
+      clYellow:   Result := ccYellow;
+      clWhite:    Result := ccWhite;
+      else raise Exception.Create(sUnsupportedColour);
+    end;
+  end;
+
+begin
+  Result := MakeConsoleColors(
+    ConvertColor(AForeground), ConvertColor(ABackground)
+  );
 end;
 
 function MakeConsoleBufferSize(const ACX, ACY: LongWord): TPJConsoleBufferSize;
