@@ -121,6 +121,9 @@ type
     ///  data left un-processed. If so the data stream is not valid Unicode.
     ///  </remarks>
     function HaveUnprocessedData: Boolean;
+    ///  <summary>Read only property providing access to pipe that is being
+    ///  filtered.</summary>
+    property Pipe: TPJPipe read fPipe;
   end;
 
 type
