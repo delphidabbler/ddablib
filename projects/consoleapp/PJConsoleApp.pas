@@ -86,6 +86,11 @@ const
   ///  <summary>Application terminated error code.</summary>
   cAppErrorTerminated = 2 or cAppErrorMask;
 
+///  <summary>Checks if given error code is an application defined error.
+///  </summary>
+///  <remarks>Application defined errors have bit 29 set.</remarks>
+function IsApplicationError(const ErrCode: LongWord): Boolean;
+
 type
   ///  <summary>
   ///  Enumeration of possible priorties for a console application.
@@ -537,6 +542,10 @@ resourcestring
   sErrTimeout = 'Application timed out';
   sTerminated = 'Application terminated';
 
+function IsApplicationError(const ErrCode: LongWord): Boolean;
+begin
+  Result := (ErrCode and cAppErrorMask) <> 0;
+end;
 
 function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
   TPJConsoleColors;
@@ -720,7 +729,7 @@ end;
 procedure TPJCustomConsoleApp.RecordAppError(const Code: LongWord;
   const Msg: string);
 begin
-  Assert(Code and cAppErrorMask <> 0);
+  Assert(IsApplicationError(Code));
   fErrorCode := Code;
   fErrorMessage := Msg;
 end;
