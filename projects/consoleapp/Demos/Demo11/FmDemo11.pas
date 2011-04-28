@@ -55,29 +55,6 @@ implementation
 
 {$R *.dfm}
 
-function ConvertColor(const C: TColor): TPJConsoleColor;
-begin
-  case C of
-    clBlack: Result := ccBlack;
-    clNavy: Result := ccNavy;
-    clGreen: Result := ccGreen;
-    clTeal: Result := ccTeal;
-    clMaroon: Result := ccMaroon;
-    clPurple: Result := ccPurple;
-    clOlive: Result := ccOlive;
-    clSilver: Result := ccSilver;
-    clGray: Result := ccGray;
-    clBlue: Result := ccBlue;
-    clLime: Result := ccLime;
-    clAqua: Result := ccAqua;
-    clRed: Result := ccRed;
-    clFuchsia: Result := ccFuchsia;
-    clYellow: Result := ccYellow;
-    clWhite: Result := ccWhite;
-    else raise Exception.Create('Unsupported colour');
-  end;
-end;
-
 { TForm1 }
 
 procedure TForm1.btnDefaultColoursClick(Sender: TObject);
