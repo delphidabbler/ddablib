@@ -169,7 +169,7 @@ function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
 function MakeConsoleColors(const AForeground, ABackground: TColor):
   TPJConsoleColors; overload;
 
-///  <summary>"Constructor" function for TSize.</summary>
+///  <summary>"Constructor" function for TSize records.</summary>
 ///  <remarks>This function is provided because if is not possible to assign the
 ///  fields of properties of type TSize individually. Instead assign the return
 ///  value of this function to such properties.</remarks>
@@ -241,12 +241,12 @@ type
     fConsoleColors: TPJConsoleColors;
     ///  <summary>Size of console's screen buffer in character columns and rows.
     ///  </summary>
-    fConsoleBufferSize: TSize;
+    fScreenBufferSize: TSize;
     ///  <summary>Size of console's window in pixels.</summary>
-    fConsoleSize: TSize;
+    fWindowSize: TSize;
     ///  <summary>Position of console's window in pixel co-oridinates relative
     ///  to the screen.</summary>
-    fConsolePosition: TPoint;
+    fWindowPosition: TPoint;
     ///  <summary>Pointer to environment block to be passed to console app.
     ///  </summary>
     fEnvironment: Pointer;
@@ -396,21 +396,21 @@ type
     ///  buffer size is used.</summary>
     ///  <remarks>If a console app shares a console this property has no effect.
     ///  </remarks>
-    property ConsoleBufferSize: TSize
-      read fConsoleBufferSize write fConsoleBufferSize;
-    ///  <summary>Position of console window in pixel co-ordinates relative to
-    ///  the screen. If either co-ordinate is negative or zero the default
-    ///  window position is used.</summary>
+    property ScreenBufferSize: TSize
+      read fScreenBufferSize write fScreenBufferSize;
+    ///  <summary>Position of top left of console window in pixel co-ordinates
+    ///  relative to the screen. If either co-ordinate is negative or zero the
+    ///  default window position is used.</summary>
     ///  <remarks>If a console app shares a console this property has no effect.
     ///  </remarks>
-    property ConsolePosition: TPoint
-      read fConsolePosition write fConsolePosition;
+    property WindowPosition: TPoint
+      read fWindowPosition write fWindowPosition;
     ///  <summary>Size of console window in pixels. If either dimension is
     ///  negative and the default window size is used.</summary>
     ///  <remarks>If a console app shares a console this property has no effect.
     ///  </remarks>
-    property ConsoleSize: TSize
-      read fConsoleSize write fConsoleSize;
+    property WindowSize: TSize
+      read fWindowSize write fWindowSize;
     ///  <summary>Pointer to the environment block to be used by a console app.
     ///  </summary>
     ///  <remarks>The caller is responsible for allocating and freeing the
@@ -522,9 +522,9 @@ type
     property UseNewConsole;
     property ConsoleTitle;
     property ConsoleColors;
-    property ConsoleBufferSize;
-    property ConsolePosition;
-    property ConsoleSize;
+    property ScreenBufferSize;
+    property WindowPosition;
+    property WindowSize;
     property Environment;
     property Priority;
     property TimeToLive;
@@ -625,10 +625,10 @@ begin
   fEnvironment := nil;
   fPriority := cpDefault;
   fConsoleTitle := '';
-  fConsoleBufferSize := MakeSize(0, 0);
+  fScreenBufferSize := MakeSize(0, 0);
   fConsoleColors := MakeConsoleColors(ccWhite, ccBlack);
-  fConsolePosition := Point(-1, -1);
-  fConsoleSize := MakeSize(0, 0);
+  fWindowPosition := Point(-1, -1);
+  fWindowSize := MakeSize(0, 0);
 end;
 
 destructor TPJCustomConsoleApp.Destroy;
@@ -819,24 +819,24 @@ begin
     cb := SizeOf(StartInfo);
     dwFlags := STARTF_USESHOWWINDOW or STARTF_USEFILLATTRIBUTE;
     if (fStdIn <> 0) or (fStdOut <> 0) or (fStdErr <> 0) then
-      dwFlags := dwFlags or STARTF_USESTDHANDLES;          // we are redirecting
-    if (fConsoleBufferSize.cx > 0) and (fConsoleBufferSize.cy > 0) then
+      dwFlags := dwFlags or STARTF_USESTDHANDLES;                 // redirecting
+    if (fScreenBufferSize.cx > 0) and (fScreenBufferSize.cy > 0) then
     begin
       dwFlags := dwFlags or STARTF_USECOUNTCHARS;  // setting screen buffer size
-      dwXCountChars := fConsoleBufferSize.cx;
-      dwYCountChars := fConsoleBufferSize.cy;
+      dwXCountChars := fScreenBufferSize.cx;
+      dwYCountChars := fScreenBufferSize.cy;
     end;
-    if (fConsoleSize.cx > 0) and (fConsoleSize.cy > 0) then
+    if (fWindowSize.cx > 0) and (fWindowSize.cy > 0) then
     begin
-      dwFlags := dwFlags or STARTF_USESIZE;
-      dwXSize := fConsoleSize.cx;
-      dwYSize := fConsoleSize.cy;
+      dwFlags := dwFlags or STARTF_USESIZE;               // setting window size
+      dwXSize := fWindowSize.cx;
+      dwYSize := fWindowSize.cy;
     end;
-    if (fConsolePosition.X >= 0) and (fConsolePosition.Y >= 0) then
+    if (fWindowPosition.X >= 0) and (fWindowPosition.Y >= 0) then
     begin
-      dwFlags := dwFlags or STARTF_USEPOSITION;
-      dwX := fConsolePosition.X;
-      dwY := fConsolePosition.Y;
+      dwFlags := dwFlags or STARTF_USEPOSITION;       // setting window position
+      dwX := fWindowPosition.X;
+      dwY := fWindowPosition.Y;
     end;
     dwFillAttribute := Ord(fConsoleColors.Foreground)   // set fg and bg colours
       or (Ord(fConsoleColors.Background) shl 4);
