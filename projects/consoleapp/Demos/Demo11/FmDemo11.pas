@@ -98,7 +98,7 @@ begin
       App.Visible := True;
       App.ConsoleTitle := edTitle.Text;
       if not cbDefScrBufferSize.Checked then
-        App.ConsoleBufferSize := MakeConsoleBufferSize(
+        App.ScreenBufferSize := MakeSize(
           StrToInt(edScrBufX.Text), StrToInt(edScrBufY.Text)
         );
       App.ConsoleColors := MakeConsoleColors(
