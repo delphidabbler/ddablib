@@ -55,7 +55,7 @@ interface
 
 uses
   // Delphi
-  Classes, Windows, Graphics;
+  Classes, Windows, Graphics, Types;
 
 
 const
@@ -242,6 +242,11 @@ type
     ///  <summary>Size of console's screen buffer in character columns and rows.
     ///  </summary>
     fConsoleBufferSize: TSize;
+    ///  <summary>Size of console's window in pixels.</summary>
+    fConsoleSize: TSize;
+    ///  <summary>Position of console's window in pixel co-oridinates relative
+    ///  to the screen.</summary>
+    fConsolePosition: TPoint;
     ///  <summary>Pointer to environment block to be passed to console app.
     ///  </summary>
     fEnvironment: Pointer;
@@ -387,12 +392,25 @@ type
     property ConsoleColors: TPJConsoleColors
       read fConsoleColors write fConsoleColors;
     ///  <summary>Specifies the size of a console's screen buffer in character
-    ///  columns and rows. Ignored if either field is zero or negative.
-    ///  </summary>
+    ///  columns and rows. If either dimension is zero or negative the default
+    ///  buffer size is used.</summary>
     ///  <remarks>If a console app shares a console this property has no effect.
     ///  </remarks>
     property ConsoleBufferSize: TSize
       read fConsoleBufferSize write fConsoleBufferSize;
+    ///  <summary>Position of console window in pixel co-ordinates relative to
+    ///  the screen. If either co-ordinate is negative or zero the default
+    ///  window position is used.</summary>
+    ///  <remarks>If a console app shares a console this property has no effect.
+    ///  </remarks>
+    property ConsolePosition: TPoint
+      read fConsolePosition write fConsolePosition;
+    ///  <summary>Size of console window in pixels. If either dimension is
+    ///  negative and the default window size is used.</summary>
+    ///  <remarks>If a console app shares a console this property has no effect.
+    ///  </remarks>
+    property ConsoleSize: TSize
+      read fConsoleSize write fConsoleSize;
     ///  <summary>Pointer to the environment block to be used by a console app.
     ///  </summary>
     ///  <remarks>The caller is responsible for allocating and freeing the
@@ -505,6 +523,8 @@ type
     property ConsoleTitle;
     property ConsoleColors;
     property ConsoleBufferSize;
+    property ConsolePosition;
+    property ConsoleSize;
     property Environment;
     property Priority;
     property TimeToLive;
@@ -602,10 +622,13 @@ begin
   fProcessAttrs := nil;
   fThreadAttrs := nil;
   fUseNewConsole := False;
-  fConsoleTitle := '';
   fEnvironment := nil;
   fPriority := cpDefault;
+  fConsoleTitle := '';
+  fConsoleBufferSize := MakeSize(0, 0);
   fConsoleColors := MakeConsoleColors(ccWhite, ccBlack);
+  fConsolePosition := Point(-1, -1);
+  fConsoleSize := MakeSize(0, 0);
 end;
 
 destructor TPJCustomConsoleApp.Destroy;
@@ -802,6 +825,18 @@ begin
       dwFlags := dwFlags or STARTF_USECOUNTCHARS;  // setting screen buffer size
       dwXCountChars := fConsoleBufferSize.cx;
       dwYCountChars := fConsoleBufferSize.cy;
+    end;
+    if (fConsoleSize.cx > 0) and (fConsoleSize.cy > 0) then
+    begin
+      dwFlags := dwFlags or STARTF_USESIZE;
+      dwXSize := fConsoleSize.cx;
+      dwYSize := fConsoleSize.cy;
+    end;
+    if (fConsolePosition.X >= 0) and (fConsolePosition.Y >= 0) then
+    begin
+      dwFlags := dwFlags or STARTF_USEPOSITION;
+      dwX := fConsolePosition.X;
+      dwY := fConsolePosition.Y;
     end;
     dwFillAttribute := Ord(fConsoleColors.Foreground)   // set fg and bg colours
       or (Ord(fConsoleColors.Background) shl 4);
