@@ -60,22 +60,31 @@ uses
 
 const
   // Constants for working in milliseconds
-  cOneSecInMS = 1000;               // one second in milliseconds
-  cOneMinInMS = 60 * cOneSecInMS;   // one minute in milliseconds
+  ///  <summary>One second in milliseconds.</summary>
+  cOneSecInMS = 1000;
+  ///  <summary>One minute in milliseconds.</summary>
+  cOneMinInMS = 60 * cOneSecInMS;
 
   // Default values for some TPJConsoleApp properties
-  cDefTimeSlice = 50;               // default time slice allocated to app
-  cDefMaxExecTime = cOneMinInMS;    // maximum execution time of app
+  ///  <summary>Default time slice allocated to console app.</summary>
+  cDefTimeSlice = 50;
+  ///  <summary>Console app's maximum execution time.</summary>
+  cDefMaxExecTime = cOneMinInMS;
 
-  // Mask that is ORd with application error codes: according to Windows API
-  // docs, error codes with bit 29 set are reserved for application use.
-  // Test for an app error code by and-ing the error with this mask, e.g.
-  // IsAppError = (ErrorCode and cAppErrorMask) <> 0
+  ///  <summary>Mask that is ORd with application error codes.</summary>
+  ///  <remarks>
+  ///  <para>According to Windows API docs, error codes with bit 29 set are
+  ///  reserved for application use.</para>
+  ///  <para>Test for an app error code by and-ing the error code with this
+  ///  mask.</para>
+  ///  </remarks>
   cAppErrorMask = 1 shl 29;
 
   // Application errors
-  cAppErrorTimeOut = 1 or cAppErrorMask;      // application timed out
-  cAppErrorTerminated = 2 or cAppErrorMask;   // application was terminated
+  ///  <summary>Application time-out error code.</summary>
+  cAppErrorTimeOut = 1 or cAppErrorMask;
+  ///  <summary>Application terminated error code.</summary>
+  cAppErrorTerminated = 2 or cAppErrorMask;
 
 type
   ///  <summary>
@@ -174,281 +183,318 @@ type
 function MakeConsoleBufferSize(const ACX, ACY: LongWord): TPJConsoleBufferSize;
 
 type
-  {
-  TPJCustomConsoleApp:
-    Base class that encapsulates and executes a command line application and
-    optionally redirects the application's standard input, output and error. The
-    application is excuted in time slices and the class triggers an event
-    between time slices. All properties declared protected. Descendant classes
-    can make required properties public.
-  }
+  ///  <summary>
+  ///  Base class for classe that execute a command line (console) application.
+  ///  </summary>
+  ///  <remarks>
+  ///  <para>Many properties are available to customise how the console app is
+  ///  executed and how the console appears.</para>
+  ///  <para>All properties are declared protected. Descendant classes can make
+  ///  required properties public.</para>
+  ///  </remarks>
   TPJCustomConsoleApp = class(TObject)
   private
+    ///  <summary>Reference to OnWork event handler.</summary>
     fOnWork: TNotifyEvent;
-      {References OnWork event handler}
+    ///  <summary>Reference to OnComplete event handler.</summary>
     fOnComplete: TNotifyEvent;
-      {Reference to OnComplete event handler}
+    ///  <summary>Handle of console app's redirected standard input. 0 if not
+    ///  redirected.</summary>
     fStdIn: THandle;
-      {Handle of Console app's redirected standard input or 0 if not redirected}
+    ///  <summary>Handle of console app's redirected standard output. 0 if not
+    ///  redirected.</summary>
     fStdOut: THandle;
-      {Handle of Console app's redirected standard output or 0 if not
-      redirected}
+    ///  <summary>Handle of console app's redirected standard error. 0 if not
+    ///  redirected.</summary>
     fStdErr: THandle;
-      {Handle of Console app's redirected standard error or 0 if not redirected}
+    ///  <summary>Exit code returned by console app.</summary>
     fExitCode: LongWord;
-      {Exit code returned from console app}
+    ///  <summary>Maximum execution time of console app (in ms).</summary>
     fMaxExecTime: LongWord;
-      {Maximum execution time of console app}
+    ///  <summary>Description of any error that occured while trying to execute
+    ///  console app.</summary>
     fErrorMessage: string;
-      {Description of any error that occured while trying to execute
-      application}
+    ///  <summary>Code of any error that occured while trying to execute console
+    ///  app.</summary>
     fErrorCode: LongWord;
-      {Code of any error that occured while trying to execute application}
+    ///  <summary>Determines whether console app is to be visible or hidden.
+    ///  </summary>
     fVisible: Boolean;
-      {Whether application is to be visible or hidden}
+    ///  <summary>Time console app can run between OnWork events (in ms).
+    ///  </summary>
     fTimeSlice: LongWord;
-      {Time to let application run before generating each OnWork event}
+    ///  <summary>Determines whether a timed out process is killed.</summary>
     fKillTimedOutProcess: Boolean;
-      {Whether to terminate a timed out or force-terminated process}
+    ///  <summary>Time remaining before console app times out (in ms).</summary>
     fTimeToLive: LongWord;
-      {Time application has to execute in milliseconds}
+    ///  <summary>Time since console app started running (in ms).</summary>
     fElapsedTime: LongWord;
-      {Time elapased in milliseconds since program started executing}
+    ///  <summary>Flag set by Terminate method to request that a console app is
+    ///  terminated.</summary>
     fRequestTerminate: Boolean;
-      {Flag set true by Terminate to request that application is terminated}
+    ///  <summary>Pointer to process security and inheritance attributes.
+    ///  </summary>
     fProcessAttrs: PSecurityAttributes;
-      {Pointer to process security and inheritance attributes}
+    ///  <summary>Pointer to thread security and inheritance attributes.
+    ///  </summary>
     fThreadAttrs: PSecurityAttributes;
-      {Pointer to thread security and inheritance attributes}
+    ///  <summary>Indicates whether console app should be started in a new
+    ///  console window.</summary>
     fUseNewConsole: Boolean;
-      {Whether application should be started in a new console window}
+    ///  <summary>Title to be displayed in a new console window. If '' default
+    ///  window title is used.</summary>
     fConsoleTitle: string;
-      {Title to be displayed in a new console. '' => default title used}
+    ///  <summary>Colours to be used in a console window.</summary>
     fConsoleColors: TPJConsoleColors;
-      {Foreground and background colours of the console window}
+    ///  <summary>Size of console's screen buffer in character columns and rows.
+    ///  </summary>
     fConsoleBufferSize: TPJConsoleBufferSize;
-      {Size of console's screen buffer in characters. Ignored if either field is
-      0}
+    ///  <summary>Pointer to environment block to be passed to console app.
+    ///  </summary>
     fEnvironment: Pointer;
-      {Pointer to environment block to be passed to console application}
+    ///  <summary>Information about running console app process. All values are
+    ///  zero when no process is running.</summary>
     fProcessInfo: TProcessInformation;
-      {Stores information about running process. Zeroed when no process running}
+    ///  <summary>Priority with which console app is started.</summary>
     fPriority: TPJConsoleAppPriority;
-      {Priority with which console application is started}
+    ///  <summary>Monitors a running process, triggering events at the end of
+    ///  each timeslice and when the process completes.</summary>
     function MonitorProcess: Boolean;
-      {Monitors a running process, triggering event at end of each timeslice and
-      when completed.
-        @return True on successful completion or false if application times out
-          or is forced to terminate.
-      }
+    ///  <summary>Sets ExitCode property to value returned from console app on
+    ///  completion.</summary>
+    ///  <returns>Boolean. True if exit code retrieved OK and False if not.
+    ///  </returns>
+    ///  <remarks>Sets ErrorCode if exit code is not retrieved.</remarks>
     function SetExitCode: Boolean;
-      {Sets ExitCode property to value returned from application. Sets error
-      code if we fail to retrieve exit code.
-        @return True if exit code retrieved OK and False if we fail to retrieve
-          it.
-      }
+    ///  <summary>Setter for MaxExecTime property.</summary>
     procedure SetMaxExecTime(const Value: LongWord);
-      {Sets MaxExecTime property.
-        @param Value [in] Required time in milliseconds. If 0 then property's
-          default value is used.
-      }
+    ///  <summary>Setter for TimeSlice property.</summary>
     procedure SetTimeSlice(const Value: LongWord);
-      {Sets TimeSlice property.
-        @param Value [in] Required time in milliseconds. If 0 then property's
-          default value is used.
-      }
+    ///  <summary>Zeroes the process information structure.</summary>
     procedure ZeroProcessInfo;
-      {Zeros the process information structure.
-      }
+    ///  <summary>Gets process handle from process info structure.</summary>
+    ///  <returns>THandle. Required process handle or 0 if no process is
+    ///  running.</returns>
     function GetProcessHandle: THandle;
-      {Gets process handle from process info structure.
-        @return Required process handle.
-      }
+    ///  <summary>Updates or clears stored security attributes.</summary>
+    ///  <param name="OldValue">PSecurityAttributes [in/out] Passed a pointer
+    ///  to attributes to be updated. On return set to point to a copy of
+    ///  NewValue structure unless NewValue is nil when OldValue is set to nil.
+    ///  </param>
+    ///  <param name="NewValue">PSecurityAttributes [in] Pointer to new
+    ///  security attributes. May be nil if attributes storage is to be cleared.
+    ///  </param>
     procedure UpdateSecurityAttrs(var OldValue: PSecurityAttributes;
       const NewValue: PSecurityAttributes);
-      {Updates security attributes new new value.
-        @param OldValue [in/out] Pointer to value to be updated. On return set
-          to nil if NewValue is nil, otherwise set to point at copy of NewValue.
-        @param NewValue [in] Pointer to new security attributes. May be nil.
-      }
+    ///  <summary>Frees memory of a security attributes structure.</summary>
+    ///  <param name="Attrs">PSecurityAttributes [in/out] Points to security
+    ///  attributes to be freed. Set to nil on return.</param>
+    ///  <remarks>Attrs may be nil, in which case no actions is taken.</remarks>
     procedure FreeSecurityAttrs(var Attrs: PSecurityAttributes);
-      {Frees memory for and nils a security attributes structure.
-        @param Attrs [in/out] Pointer to the structure to be freed (may be nil).
-          Set to nil on return.
-      }
+    ///  <summary>Setter for ProcessAttrs property. Makes a copy of new value if
+    ///  non-nil.</summary>
     procedure SetProcessAttrs(const Value: PSecurityAttributes);
-      {Write access method for ProcessAttrs property. Makes a copy of new value
-      if non nil.
-        @param Values [in] New value. If nil ProcessAttrs is set nil otherwise
-          ProcessAttrs points to a copy of structure pointed to by Value.
-      }
+    ///  <summary>Setter for ThreadAttrs property. Makes a copy of new value if
+    ///  non-nil.</summary>
     procedure SetThreadAttrs(const Value: PSecurityAttributes);
-      {Write access method for ThreadAttrs property. Makes a copy of new value
-      if non nil.
-        @param Values [in] New value. If nil ThreadAttrs is set nil otherwise
-          ThreadAttrs points to a copy of structure pointed to by Value.
-      }
   protected
+    ///  <summary>Starts a process and gets information about it from OS.
+    ///  </summary>
+    ///  <param name="CmdLine">string [in] Command line to be executed.
+    ///  </param>
+    ///  <param name="CurrentDir">string [in] Application's current directory.
+    ///  Pass '' to use same current directory as parent application.</param>
+    ///  <param name="ProcessInfo">TProcessInformation [out] Passes process
+    ///  information back to caller.</param>
+    ///  <returns>Boolean. True if process was created OK, False if process
+    ///  couldn't be started.</returns>
     function StartProcess(const CmdLine, CurrentDir: string;
       out ProcessInfo: TProcessInformation): Boolean;
-      {Starts a process and gets information about it from OS.
-        @param CmdLine [in] Command line to be executed.
-        @param CurrentDir [in] Application's current directory. Pass '' to use
-          same current directory as parent application.
-        @param ProcessInfo [out] Passes OS's process info back to caller.
-        @return True if process created OK and false if process couldn't be
-          started.
-      }
+    ///  <summary>Triggers OnWork event.</summary>
     procedure DoWork; virtual;
-      {Method called between program timeslices and after completion but never
-      called if TimeSlice=INFINITE. Triggers the OnWork event.
-      }
+    ///  <summary>Triggers OnComplete event.</summary>
     procedure DoComplete; virtual;
-      {Method called after completion. Triggers the OnComplete event.
-      }
+    ///  <summary>Sets error code and message to a class-defined error.
+    ///  </summary>
+    ///  <param name="Code">LongWord [in] Error code. Must have bit 29 set to
+    ///  indicate an application error code.</param>
+    ///  <param name="Msg">string [in] Error message.</param>
     procedure RecordAppError(const Code: LongWord; const Msg: string);
-      {Set error code and message to class-defined error.
-        @param Code [in] Required error code. Must have bit 29 set.
-        @param Msg [in] Required error message.
-      }
+    ///  <summary>Sets error code and message to the last-reported Windows
+    ///  error.</summary>
     procedure RecordWin32Error;
-      {Set error code message to the last-reported Windows error.
-      }
+    ///  <summary>Resets error code and message to indicate no error.</summary>
     procedure ResetError;
-      {Resets error code and message to "no error" values of 0 and empty string.
-      }
+    ///  <summary>Inheritable handle of console app's redirected standard input
+    ///  Must be zero if standard input not redirected.</summary>
     property StdIn: THandle read fStdIn write fStdIn default 0;
-      {Handle of console app's redirected standard input. Leave as 0 if standard
-      input is not to be redirected. Ensure handle is inheritable}
+    ///  <summary>Inheritable handle of console app's redirected standard output
+    ///  Must be zero if standard output not redirected.</summary>
     property StdOut: THandle read fStdOut write fStdOut default 0;
-      {Handle of console app's redirected standard output. Leave as 0 if
-      standard output not to be redirected. Ensure handle is inheritable}
+    ///  <summary>Inheritable handle of console app's redirected standard error
+    ///  Must be zero if standard error not redirected.</summary>
     property StdErr: THandle read fStdErr write fStdErr default 0;
-      {Handle of console app's redirected standard error. Leave as 0 if standard
-      error is not to be redirected. Ensure handle is inheritable}
+    ///  <summary>Determines whether console app's console is to be displayed
+    ///  (True) or hidden (False).</summary>
     property Visible: Boolean read fVisible write fVisible default False;
-      {Determines whether console app is to be displayed of not}
+    ///  <summary>Maximum execution time of console app in ms. Set to INFINITE
+    ///  if no execution time limit is required.</summary>
     property MaxExecTime: LongWord read fMaxExecTime write SetMaxExecTime
       default cDefMaxExecTime;
-      {Maximum execution time of console app in milliseconds. Set to INFINITE if
-      no execution time limit is required (not recommended)}
+    ///  <summary>Time console app executes between OnWork events, in ms.
+    ///  </summary>
+    ///  <remarks>
+    ///  <para>The app is paused at the end of each time slice while OnWork
+    ///  executes.</para>
+    ///  <para>Setting TimeSlice to INFINITE means that the app never pauses and
+    ///  the OnWork event is never triggered.</para>
+    /// </remarks>
     property TimeSlice: LongWord read fTimeSlice write SetTimeSlice
       default cDefTimeSlice;
-      {Timeslice allocated to console app in milliseconds. The app is paused at
-      end of each time slice and OnWork event is triggered. If TimeSlice is set
-      to INFINITE (not recommended) then the app is never paused and OnWork is
-      never triggered}
+    ///  <summary>Determines whether timed out console apps are forcible
+    ///  terminated.</summary>
+    ///  <remarks>When False the Execute method returns when the console app
+    ///  times out but leaves the app to run to completion. When true the
+    ///  console app is killed when Execute returns.</remarks>
     property KillTimedOutProcess: Boolean
       read fKillTimedOutProcess write fKillTimedOutProcess
       default True;
-      {When true any console app that times out will be killed off. When false a
-      timeout causes the Execute method to return leaving the timed out console
-      to run to completion}
+    ///  <summary>Points to a record of security and inheritance attributes for
+    ///  a console app process.</summary>
+    ///  <remarks>
+    ///  <para>When nil the process handle can't be inherited.</para>
+    ///  <para>When set to a non nil pointer a copy of the referenced structure
+    ///  is made.</para>
+    ///  </remarks>
     property ProcessAttrs: PSecurityAttributes
       read fProcessAttrs write SetProcessAttrs default nil;
-      {Security and inheritance attributes for console process. Determines
-      whether the process handle can be inherited by child processes. Setting to
-      nil means the process handle can't be inherited. Setting to non-nil makes
-      a copy of the provided structure}
+    ///  <summary>Points to a record of security and inheritance attributes for
+    ///  the console app's primary thread.</summary>
+    ///  <remarks>
+    ///  <para>When nil the thread handle can't be inherited.</para>
+    ///  <para>When set to a non nil pointer a copy of the referenced structure
+    ///  is made.</para>
+    ///  </remarks>
     property ThreadAttrs: PSecurityAttributes
       read fThreadAttrs write SetThreadAttrs default nil;
-      {Security and inheritance attributes for console's primary thread.
-      Determines whether the thread handle can be inherited by child processes.
-      Setting to nil means the thread handle can't be inherited. Setting to
-      non-nil makes a copy of the provided structure}
+    ///  <summary>Determines if a console app opens a new console window (True)
+    ///  or uses any existing console (False).</summary>
     property UseNewConsole: Boolean
       read fUseNewConsole write fUseNewConsole default False;
-      {When true causes console application to open a new console window. If
-      false the console application uses any existing console}
+    ///  <summary>Title to be displayed in any new console window. If set to the
+    ///  empty string the window's default title is displayed.</summary>
+    ///  <remarks>If a console app shares a console this property has no effect.
+    ///  </remarks>
     property ConsoleTitle: string
       read fConsoleTitle write fConsoleTitle;
-      {Title to be displayed in any new console window. If left as default ''
-      default title is used. If console app shares a console this property is
-      ignored}
+    ///  <summary>Specifies the foreground and background colours of a new
+    ///  console window.</summary>
+    ///  <remarks>If a console app shares a console this property has no effect.
+    ///  </remarks>
     property ConsoleColors: TPJConsoleColors
       read fConsoleColors write fConsoleColors;
-      {Foreground and background colours of the console window}
+    ///  <summary>Specifies the size of a console's screen buffer in characters.
+    ///  Has no effect if either field is zero.</summary>
+    ///  <remarks>If a console app shares a console this property has no effect.
+    ///  </remarks>
     property ConsoleBufferSize: TPJConsoleBufferSize
       read fConsoleBufferSize write fConsoleBufferSize;
-      {Size of console's screen buffer in characters. Ignored if either field is
-      0. Has no effect if any dimension is less than default.}
+    ///  <summary>Pointer to the environment block to be used by a console app.
+    ///  </summary>
+    ///  <remarks>The caller is responsible for allocating and freeing the
+    ///  memory used for the environment block. This memory must remain
+    ///  allocated while the console app is running.</remarks>
     property Environment: Pointer
       read fEnvironment write fEnvironment;
-      {Pointer to environment block used by console application. The caller is
-      responsible for allocating and freeing this memory, which must remain
-      allocated while the console application is executing}
+    ///  <summary>Priority with which a console app is executed.</summary>
     property Priority: TPJConsoleAppPriority
       read fPriority write fPriority default cpDefault;
-      {Priority with which console application is started}
+    ///  <summary>Amount of time, in ms, a console app has remaining before
+    ///  it times out.</summary>
+    ///  <remarks>This value will be INFINITE if MaxExecTime is INFINITE.
+    ///  </remarks>
     property TimeToLive: LongWord
       read fTimeToLive;
-      {The amount of time in milliseconds a console app has left before timing
-      out. This value is INFINITE if MaxExecTime is INFINITE}
+    ///  <summary>Amount of time, in ms, since a console app started.</summary>
+    ///  <remarks>Not updated after the app completes or times out.</remarks>
     property ElapsedTime: LongWord
       read fElapsedTime;
-      {Time in milliseconds since a console app began execution. The clock stops
-      when the app completes or times out}
+    ///  <summary>Provides information about the executing process.</summary>
+    ///  <remarks>All fields are zero when no process is executing.</remarks>
     property ProcessInfo: TProcessInformation
       read fProcessInfo;
-      {Information about process including process and main thread handle. All
-      fields zero when process not executing}
+    ///  <summary>Records the console app's exit code.</summary>
+    ///  <remarks>
+    ///  <para>The meaning of exit codes is application dependant.</para>
+    ///  <para>ExitCode is not valid if ErrorCode is non-zero.</para>
+    ///  </remarks>
     property ExitCode: LongWord
       read fExitCode;
-      {Exit code set by console app. Not valid if ErrorCode is non zero. Refer
-      to console application documentation for meaning of these codes}
+    ///  <summary>Code indicating if a console app was executed successfully.
+    ///  Zero indicates success, non-zero indicates a problem.</summary>
+    ///  <remarks>Error codes are either Windows error codes or are set by the
+    ///  class (e.g. application timed out or was terminated). Class specific
+    ///  error codes have bit 29 set.</remarks>
     property ErrorCode: LongWord
       read fErrorCode;
-      {Zero if application executes successfully and non-zero if there was an
-      error executing the application (e.g. if it timed out). Error codes either
-      correspond to Windows error or are set by the class. Class generated error
-      codes have bit 29 set}
+    ///  <summary>Error message corresponding to the value of ErrorCode. Empty
+    ///  string if ErrorCode is zero.</summary>
     property ErrorMessage: string
       read fErrorMessage;
-      {Error message corresponding to ErrorCode. '' if ErrorCode = 0}
+    ///  <summary>Event triggered periodically while a console app is executing.
+    ///  </summary>
+    ///  <remarks>
+    ///  <para>The frequency this event is triggered depends on the value of the
+    ///  TimeSlice property. If TimeSlice is INFINITE then the event is never
+    ///  triggered.</para>
+    ///  <para>ProcessInfo has valid data during this event.</para>
+    ///  </remarks>
     property OnWork: TNotifyEvent
       read fOnWork write fOnWork;
-      {Event triggered each time console application signals the class.
-      Frequency of these events depends on TimeSlice. If TimeSlice is INFINITE
-      then OnWork is never triggered. Process handle is available}
+    ///  <summary>Event triggered when application completes or times out. Can
+    ///  be used to tidy up after a process has completed.</summary>
+    ///  <remarks>
+    ///  <para>This event is always triggered. It fires after the last OnWork
+    ///  event.</para>
+    ///  <para>ErrorCode will have been set and can be used to check how the
+    ///  process terminated.</para>
+    ///  <para>ProcessInfo has valid data during this event.</para>
+    ///  </remarks>
     property OnComplete: TNotifyEvent
       read fOnComplete write fOnComplete;
-      {Event triggered when application completes or times out. Always called.
-      Called after last OnWork event. Use to tidy up after process completed.
-      ProcessHandle is available. Use ErrorCode to check how application
-      terminated}
   public
+    ///  <summary>Object constructor. Instantiates object and sets default
+    ///  properties.</summary>
     constructor Create;
-      {Class constructor. Instantiates object and sets default properties.
-      }
+    ///  <summary>Object destructor. Tears down object.</summary>
     destructor Destroy; override;
-      {Class destructor. Tidies up object.
-      }
+    ///  <summary>Executes a console app.</summary>
+    ///  <param name="CmdLine">string [in] Command line to execute. Includes
+    ///  program name and any parameters. Paths containing spaces must be
+    ///  quoted.</param>
+    ///  <param name="CurrentDir">string [in] Application's current directory.
+    ///  Pass '' to use same current directory as parent application.</param>
+    ///  <returns>Boolean. True if console app runs successfully or Falso if
+    ///  it fails to run.</returns>
     function Execute(const CmdLine: string;
       const CurrentDir: string = ''): Boolean;
-      {Executes the console application.
-        @param CmdLine [in] Command line to execute. Includes program name and
-          any parameters. Paths containing spaces must be quoted.
-        @param CurrentDir [in] Application's current directory. Pass '' to use
-          same current directory as parent application.
-        @return True if command line application is run successfully or false if
-          it fails to run. Note that this has nothing to do with application's
-          exit code.
-      }
+    ///  <summary>Attempts to terminate the current console app.</summary>
+    ///  <remarks>Calling this method causes the Execute method to return after
+    ///  the next OnWork event. If KillTimedOutProcess is true the console
+    ///  application will be halted. The method has no effect when TimeSlice is
+    ///  INFINITE.</remarks>
     procedure Terminate;
-      {Attempts to terminate the process. Calling this method causes the Execute
-      method to return after the next OnWork event. If KillTimedOutProcess is
-      true the console application will be halted. The method has no effect when
-      TimeSlice=INFINITE.
-      }
   end;
 
-  {
-  TPJConsoleApp:
-    Class that encapsulates and executes a command line application and
-    optionally redirects the application's standard input, output and error. The
-    application is excuted in time slices and the class triggers an event
-    between time slices.
-  }
+  ///  <summary>
+  ///  Class that execute a command line (console) application.
+  ///  </summary>
+  ///  <remarks>
+  ///  <para>Many properties are available to customise how the console app is
+  ///  executed and how the console appears.</para>
+  ///  <para>This class simply makes public all the protected properties of
+  ///  TPJCustomConsoleApp.</para>
+  ///  </remarks>
   TPJConsoleApp = class(TPJCustomConsoleApp)
   public
     // Make all inherited protected properties public
@@ -487,9 +533,10 @@ uses
 
 
 resourcestring
-  // Error message
+  // Error messages
   sErrTimeout = 'Application timed out';
   sTerminated = 'Application terminated';
+
 
 function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
   TPJConsoleColors;
@@ -500,9 +547,9 @@ end;
 
 function MakeConsoleColors(const AForeground, ABackground: TColor):
   TPJConsoleColors;
-
-  ///  Converts a TColor into equivalent TPJConsoleColor. Raises exception if
-  ///  TColor value is not one of the 16 standard colours.
+  // ---------------------------------------------------------------------------
+  // Converts a TColor into equivalent TPJConsoleColor. Raises exception if
+  // TColor value is not one of the 16 standard colours.
   function ConvertColor(const Color: TColor): TPJConsoleColor;
   resourcestring
     sUnsupportedColour = 'Invalid console window colour';
@@ -527,7 +574,7 @@ function MakeConsoleColors(const AForeground, ABackground: TColor):
       else raise Exception.Create(sUnsupportedColour);
     end;
   end;
-
+  // ---------------------------------------------------------------------------
 begin
   Result := MakeConsoleColors(
     ConvertColor(AForeground), ConvertColor(ABackground)
@@ -543,8 +590,6 @@ end;
 { TPJCustomConsoleApp }
 
 constructor TPJCustomConsoleApp.Create;
-  {Class constructor. Instantiates object and sets default properties.
-  }
 begin
   inherited Create;
   // Set default property values
@@ -566,8 +611,6 @@ begin
 end;
 
 destructor TPJCustomConsoleApp.Destroy;
-  {Class destructor. Tidies up object.
-  }
 begin
   FreeSecurityAttrs(fProcessAttrs);
   FreeSecurityAttrs(fThreadAttrs);
@@ -575,32 +618,18 @@ begin
 end;
 
 procedure TPJCustomConsoleApp.DoComplete;
-  {Method called after completion. Triggers the OnComplete event.
-  }
 begin
   if Assigned(fOnComplete) then
     fOnComplete(Self);
 end;
 
 procedure TPJCustomConsoleApp.DoWork;
-  {Method called between program timeslices and after completion but never
-  called if TimeSlice=INFINITE. Triggers the OnWork event.
-  }
 begin
   if Assigned(fOnWork) then
     fOnWork(Self);
 end;
 
 function TPJCustomConsoleApp.Execute(const CmdLine, CurrentDir: string): Boolean;
-  {Executes the console application.
-    @param CmdLine [in] Command line to execute. Includes program name and any
-      parameters. Paths containing spaces must be quoted.
-    @param CurrentDir [in] Application's current directory. Pass '' to use same
-      current directory as parent application.
-    @return True if command line application is run successfully or false if it
-      fails to run. Note that this has nothing to do with application's exit
-      code.
-  }
 var
   ProcessInfo: TProcessInformation; // information about process
 begin
@@ -630,10 +659,6 @@ begin
 end;
 
 procedure TPJCustomConsoleApp.FreeSecurityAttrs(var Attrs: PSecurityAttributes);
-  {Frees memory for and nils a security attributes structure.
-    @param Attrs [in/out] Pointer to the structure to be freed (may be nil). Set
-      to nil on return.
-  }
 begin
   if Assigned(Attrs) then
   begin
@@ -643,19 +668,11 @@ begin
 end;
 
 function TPJCustomConsoleApp.GetProcessHandle: THandle;
-  {Gets process handle from process info structure.
-    @return Required process handle.
-  }
 begin
   Result := fProcessInfo.hProcess;
 end;
 
 function TPJCustomConsoleApp.MonitorProcess: Boolean;
-  {Monitors a running process, triggering event at end of each timeslice and
-  when completed.
-    @return True on successful completion or false if application times out or
-      is forced to terminate.
-  }
 var
   AppState: DWORD;        // State of app after last wait
   StartTime: TDateTime;   // Time application starts
@@ -691,7 +708,7 @@ begin
       RecordAppError(cAppErrorTerminated, sTerminated)
     else
       RecordAppError(cAppErrorTimeOut, sErrTimeout);
-    DoComplete;   // call do complete before possibly terminating process
+    DoComplete;   // trigger OnComplete before possibly terminating process
     Result := False;
     if KillTimedOutProcess then
       TerminateProcess(GetProcessHandle, fErrorCode);
@@ -702,10 +719,6 @@ end;
 
 procedure TPJCustomConsoleApp.RecordAppError(const Code: LongWord;
   const Msg: string);
-  {Set error code and message to class-defined error.
-    @param Code [in] Required error code. Must have bit 29 set.
-    @param Msg [in] Required error message.
-  }
 begin
   Assert(Code and cAppErrorMask <> 0);
   fErrorCode := Code;
@@ -713,26 +726,18 @@ begin
 end;
 
 procedure TPJCustomConsoleApp.RecordWin32Error;
-  {Set error code message to the last-reported Windows error.
-  }
 begin
   fErrorCode := GetLastError;
   fErrorMessage := SysErrorMessage(fErrorCode);
 end;
 
 procedure TPJCustomConsoleApp.ResetError;
-  {Resets error code and message to "no error" values of 0 and empty string.
-  }
 begin
   fErrorCode := 0;
   fErrorMessage := '';
 end;
 
 function TPJCustomConsoleApp.SetExitCode: Boolean;
-  {Sets ExitCode property to value returned from application. Sets error code
-  if we fail to retrieve exit code.
-    @return True if exit code retrieved OK and False if we fail to retrieve it.
-  }
 begin
   Result := GetExitCodeProcess(GetProcessHandle, fExitCode);
   if not Result then
@@ -740,10 +745,6 @@ begin
 end;
 
 procedure TPJCustomConsoleApp.SetMaxExecTime(const Value: LongWord);
-  {Sets MaxExecTime property.
-    @param Value [in] Required time in milliseconds. If 0 then property's
-      default value is used.
-  }
 begin
   if Value = 0 then
     fMaxExecTime := cDefMaxExecTime
@@ -752,30 +753,16 @@ begin
 end;
 
 procedure TPJCustomConsoleApp.SetProcessAttrs(const Value: PSecurityAttributes);
-  {Write access method for ProcessAttrs property. Makes a copy of new value if
-  non nil.
-    @param Values [in] New value. If nil ProcessAttrs is set nil otherwise
-      ProcessAttrs points to a copy of structure pointed to by Value.
-  }
 begin
   UpdateSecurityAttrs(fProcessAttrs, Value);
 end;
 
 procedure TPJCustomConsoleApp.SetThreadAttrs(const Value: PSecurityAttributes);
-  {Write access method for ThreadAttrs property. Makes a copy of new value if
-  non nil.
-    @param Values [in] New value. If nil ThreadAttrs is set nil otherwise
-      ThreadAttrs points to a copy of structure pointed to by Value.
-  }
 begin
   UpdateSecurityAttrs(fThreadAttrs, Value);
 end;
 
 procedure TPJCustomConsoleApp.SetTimeSlice(const Value: LongWord);
-  {Sets TimeSlice property.
-    @param Value [in] Required time in milliseconds. If 0 then property's
-      default value is used.
-  }
 begin
   if Value > 0 then
     fTimeSlice := Value
@@ -785,13 +772,6 @@ end;
 
 function TPJCustomConsoleApp.StartProcess(const CmdLine, CurrentDir: string;
   out ProcessInfo: TProcessInformation): Boolean;
-  {Starts a process and gets information about it from OS.
-    @param CmdLine [in] Command line to be executed.
-    @param CurrentDir [in] Application's current directory. Pass '' to use same
-      current directory as parent application.
-    @param ProcessInfo [out] Passes OS's process info back to caller.
-    @return True if process created OK and false if process couldn't be started.
-  }
 const
   // Maps Visible property to required wondows flags
   cShowFlags: array[Boolean] of Integer = (SW_HIDE, SW_SHOW);
@@ -821,18 +801,18 @@ begin
       dwFlags := dwFlags or STARTF_USESTDHANDLES;          // we are redirecting
     if (fConsoleBufferSize.CX > 0) and (fConsoleBufferSize.CY > 0) then
     begin
-      dwFlags := dwFlags or STARTF_USECOUNTCHARS;
+      dwFlags := dwFlags or STARTF_USECOUNTCHARS;  // setting screen buffer size
       dwXCountChars := fConsoleBufferSize.CX;
       dwYCountChars := fConsoleBufferSize.CY;
     end;
-    dwFillAttribute := Ord(fConsoleColors.Foreground)
+    dwFillAttribute := Ord(fConsoleColors.Foreground)   // set fg and bg colours
       or (Ord(fConsoleColors.Background) shl 4);
     if fConsoleTitle <> '' then
       lpTitle := PChar(fConsoleTitle);
-    hStdInput := fStdIn;                   // std handles (non-zero => redirect)
+    hStdInput := fStdIn;
     hStdOutput := fStdOut;
     hStdError := fStdErr;
-    wShowWindow := cShowFlags[fVisible];                  // show or hide window
+    wShowWindow := cShowFlags[fVisible];
   end;
 
   // Set up process info structure
@@ -864,22 +844,12 @@ begin
 end;
 
 procedure TPJCustomConsoleApp.Terminate;
-  {Attempts to terminate the process. Calling this method causes the Execute
-  method to return after the next OnWork event. If KillTimedOutProcess is true
-  the console application will be halted. The method has no effect when
-  TimeSlice=INFINITE.
-  }
 begin
   fRequestTerminate := True;
 end;
 
 procedure TPJCustomConsoleApp.UpdateSecurityAttrs(
   var OldValue: PSecurityAttributes; const NewValue: PSecurityAttributes);
-  {Updates security attributes new new value.
-    @param OldValue [in/out] Pointer to value to be updated. On return set to
-      nil if NewValue is nil, otherwise set to point at copy of NewValue.
-    @param NewValue [in] Pointer to new security attributes. May be nil.
-  }
 begin
   if Assigned(NewValue) then
   begin
@@ -892,8 +862,6 @@ begin
 end;
 
 procedure TPJCustomConsoleApp.ZeroProcessInfo;
-  {Zeros the process information structure.
-  }
 begin
   FillChar(fProcessInfo, SizeOf(fProcessInfo), 0);
 end;
