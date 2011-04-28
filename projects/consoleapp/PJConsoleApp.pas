@@ -169,23 +169,11 @@ function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
 function MakeConsoleColors(const AForeground, ABackground: TColor):
   TPJConsoleColors; overload;
 
-type
-  ///  <summary>
-  ///  Type of the TPJConsoleApp.ConsoleBufferSize property. Records the
-  ///  required screen buffer size in characters and lines.
-  ///  </summary>
-  TPJConsoleBufferSize = record
-    ///  <summary>Horizontal screen buffer size in character columns.</summary>
-    CX: LongWord;
-    ///  <summary>Vertical screen buffer size in character rows.</summary>
-    CY: LongWord;
-  end;
-
-///  <summary>"Constructor" function for TPJConsoleBufferSize.</summary>
+///  <summary>"Constructor" function for TSize.</summary>
 ///  <remarks>This function is provided because if is not possible to assign the
-///  fields of the TPJConsoleApp.ConsoleBufferSize individually. Instead assign
-///  the return value of this function to the property.</remarks>
-function MakeConsoleBufferSize(const ACX, ACY: LongWord): TPJConsoleBufferSize;
+///  fields of properties of type TSize individually. Instead assign the return
+///  value of this function to such properties.</remarks>
+function MakeSize(const ACX, ACY: LongInt): TSize;
 
 type
   ///  <summary>
@@ -253,7 +241,7 @@ type
     fConsoleColors: TPJConsoleColors;
     ///  <summary>Size of console's screen buffer in character columns and rows.
     ///  </summary>
-    fConsoleBufferSize: TPJConsoleBufferSize;
+    fConsoleBufferSize: TSize;
     ///  <summary>Pointer to environment block to be passed to console app.
     ///  </summary>
     fEnvironment: Pointer;
@@ -398,11 +386,12 @@ type
     ///  </remarks>
     property ConsoleColors: TPJConsoleColors
       read fConsoleColors write fConsoleColors;
-    ///  <summary>Specifies the size of a console's screen buffer in characters.
-    ///  Has no effect if either field is zero.</summary>
+    ///  <summary>Specifies the size of a console's screen buffer in character
+    ///  columns and rows. Ignored if either field is zero or negative.
+    ///  </summary>
     ///  <remarks>If a console app shares a console this property has no effect.
     ///  </remarks>
-    property ConsoleBufferSize: TPJConsoleBufferSize
+    property ConsoleBufferSize: TSize
       read fConsoleBufferSize write fConsoleBufferSize;
     ///  <summary>Pointer to the environment block to be used by a console app.
     ///  </summary>
@@ -590,10 +579,10 @@ begin
   );
 end;
 
-function MakeConsoleBufferSize(const ACX, ACY: LongWord): TPJConsoleBufferSize;
+function MakeSize(const ACX, ACY: LongInt): TSize;
 begin
-  Result.CX := ACX;
-  Result.CY := ACY;
+  Result.cx := ACX;
+  Result.cy := ACY;
 end;
 
 { TPJCustomConsoleApp }
@@ -808,11 +797,11 @@ begin
     dwFlags := STARTF_USESHOWWINDOW or STARTF_USEFILLATTRIBUTE;
     if (fStdIn <> 0) or (fStdOut <> 0) or (fStdErr <> 0) then
       dwFlags := dwFlags or STARTF_USESTDHANDLES;          // we are redirecting
-    if (fConsoleBufferSize.CX > 0) and (fConsoleBufferSize.CY > 0) then
+    if (fConsoleBufferSize.cx > 0) and (fConsoleBufferSize.cy > 0) then
     begin
       dwFlags := dwFlags or STARTF_USECOUNTCHARS;  // setting screen buffer size
-      dwXCountChars := fConsoleBufferSize.CX;
-      dwYCountChars := fConsoleBufferSize.CY;
+      dwXCountChars := fConsoleBufferSize.cx;
+      dwYCountChars := fConsoleBufferSize.cy;
     end;
     dwFillAttribute := Ord(fConsoleColors.Foreground)   // set fg and bg colours
       or (Ord(fConsoleColors.Background) shl 4);
