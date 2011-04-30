@@ -39,6 +39,9 @@
 			<Projects Include="Demo10\Demo10.dproj">
 				<Dependencies/>
 			</Projects>
+			<Projects Include="Demo11\Demo11.dproj">
+				<Dependencies/>
+			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
 			<Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -155,14 +158,23 @@
 		<Target Name="Demo10:Make">
 			<MSBuild Targets="Make" Projects="Demo10\Demo10.dproj"/>
 		</Target>
+		<Target Name="Demo11">
+			<MSBuild Projects="Demo11\Demo11.dproj"/>
+		</Target>
+		<Target Name="Demo11:Clean">
+			<MSBuild Targets="Clean" Projects="Demo11\Demo11.dproj"/>
+		</Target>
+		<Target Name="Demo11:Make">
+			<MSBuild Targets="Make" Projects="Demo11\Demo11.dproj"/>
+		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="Timed;Echoer;Demo1;Demo2;Demo3;Demo4;Demo5;Demo6;Demo7;Demo8;Demo9;Demo10"/>
+			<CallTarget Targets="Timed;Echoer;Demo1;Demo2;Demo3;Demo4;Demo5;Demo6;Demo7;Demo8;Demo9;Demo10;Demo11"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="Timed:Clean;Echoer:Clean;Demo1:Clean;Demo2:Clean;Demo3:Clean;Demo4:Clean;Demo5:Clean;Demo6:Clean;Demo7:Clean;Demo8:Clean;Demo9:Clean;Demo10:Clean"/>
+			<CallTarget Targets="Timed:Clean;Echoer:Clean;Demo1:Clean;Demo2:Clean;Demo3:Clean;Demo4:Clean;Demo5:Clean;Demo6:Clean;Demo7:Clean;Demo8:Clean;Demo9:Clean;Demo10:Clean;Demo11:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="Timed:Make;Echoer:Make;Demo1:Make;Demo2:Make;Demo3:Make;Demo4:Make;Demo5:Make;Demo6:Make;Demo7:Make;Demo8:Make;Demo9:Make;Demo10:Make"/>
+			<CallTarget Targets="Timed:Make;Echoer:Make;Demo1:Make;Demo2:Make;Demo3:Make;Demo4:Make;Demo5:Make;Demo6:Make;Demo7:Make;Demo8:Make;Demo9:Make;Demo10:Make;Demo11:Make"/>
 		</Target>
 		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 	</Project>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <PersonalityInfo>
+    <Option>
+      <Option Name="Personality">Default.Personality</Option>
+      <Option Name="ProjectType"></Option>
+      <Option Name="Version">1.0</Option>
+      <Option Name="GUID">{15E7F750-CE3D-4AE4-8031-49CF032A8A9A}</Option>
+    </Option>
+  </PersonalityInfo>
+  <Default.Personality>
+    
+    <Projects>
+      <Projects Name="Timed.exe">TestApps\Timed\Timed.bdsproj</Projects>
+      <Projects Name="Echoer.exe">TestApps\Echoer\Echoer.bdsproj</Projects>
+      <Projects Name="Demo1.exe">Demo1\Demo1.bdsproj</Projects>
+      <Projects Name="Demo2.exe">Demo2\Demo2.bdsproj</Projects>
+      <Projects Name="Demo3.exe">Demo3\Demo3.bdsproj</Projects>
+      <Projects Name="Demo4.exe">Demo4\Demo4.bdsproj</Projects>
+      <Projects Name="Demo5.exe">Demo5\Demo5.bdsproj</Projects>
+      <Projects Name="Demo6.exe">Demo6\Demo6.bdsproj</Projects>
+      <Projects Name="Demo7.exe">Demo7\Demo7.bdsproj</Projects>
+      <Projects Name="Demo8.exe">Demo8\Demo8.bdsproj</Projects>
+      <Projects Name="Demo9.exe">Demo9\Demo9.bdsproj</Projects>
+      <Projects Name="Demo10.exe">Demo10\Demo10.bdsproj</Projects>
+      <Projects Name="Demo11.exe">Demo11\Demo11.bdsproj</Projects>
+      <Projects Name="Targets">Timed.exe Echoer.exe Demo1.exe Demo2.exe Demo3.exe Demo4.exe Demo5.exe Demo6.exe Demo7.exe Demo8.exe Demo9.exe Demo10.exe Demo11.exe</Projects>
+    </Projects>
+    <Dependencies/>
+  </Default.Personality>
+</BorlandProject>
