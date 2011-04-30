@@ -28,7 +28,6 @@ program Demo10;
 
 uses
   SysUtils,
-  PJConsoleApp in '..\..\PJConsoleApp.pas',
   UMain in 'UMain.pas';
 
 begin

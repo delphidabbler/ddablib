@@ -17,8 +17,6 @@ program Demo9;
 uses
   Forms,
   FmDemo9 in 'FmDemo9.pas' {Form1},
-  PJPipe in '..\..\PJPipe.pas',
-  PJConsoleApp in '..\..\PJConsoleApp.pas',
   UConsoleAppEx in 'UConsoleAppEx.pas';
 
 {$R *.res}

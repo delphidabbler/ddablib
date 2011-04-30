@@ -16,8 +16,7 @@ program Demo1;
 
 uses
   Forms,
-  FmDemo1 in 'FmDemo1.pas' {Form1},
-  PJConsoleApp in '..\..\PJConsoleApp.pas';
+  FmDemo1 in 'FmDemo1.pas' {Form1};
 
 {$R *.res}
 

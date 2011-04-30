@@ -47,8 +47,6 @@
 			<DCCReference Include="FmDemo7.pas">
 				<Form>Form2</Form>
 			</DCCReference>
-			<DCCReference Include="..\..\PJPipe.pas"/>
-			<DCCReference Include="..\..\PJConsoleApp.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
