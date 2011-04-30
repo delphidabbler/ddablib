@@ -20,7 +20,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls,
 
-  PJPipe, PJConsoleApp, PJPipeFilters;
+  PJPipe, PJConsoleApp, PJPipeFilters, PJFileHandle;
 
 type
 
@@ -49,44 +49,39 @@ implementation
 
 { TForm1 }
 
-function OpenInputFile(const FileName: string): THandle;
-var
-  Security: TSecurityAttributes;  // file's security attributes
-begin
-  // Set up security structure so file handle is inheritable (NT)
-  Security.nLength := SizeOf(Security);
-  Security.lpSecurityDescriptor := nil;
-  Security.bInheritHandle := True;
-  // Open the file for reading
-  Result := CreateFile(
-    PChar(FileName),        // file name
-    GENERIC_READ,           // readable file
-    FILE_SHARE_READ,        // share read access
-    @Security,              // security attributes (NT only)
-    OPEN_EXISTING,          // file must exist
-    FILE_ATTRIBUTE_NORMAL,  // just the normal attributes
-    0                       // no template file (NT only)
-  );
-  if Result = INVALID_HANDLE_VALUE then
-    raise Exception.CreateFmt('Can''t open file "%s"', [FileName]);
-end;
-
 procedure TForm1.Button1Click(Sender: TObject);
 var
   App: TPJConsoleApp;
+  InFile: TPJFileHandle;
+  OutPipe, ErrPipe: TPJPipe;
+const
+  InFileName = '..\TestData\MobyDick-ANSI.txt';
 begin
   fOutFilter := nil;
   fErrFilter := nil;
+  OutPipe := nil;
+  ErrPipe := nil;
+  InFile := nil;
   try
-    fOutFilter := TPJAnsiSBCSPipeFilter.Create(TPJPipe.Create, True);
+    // Open input file
+    InFile := TPJFileHandle.Create(InFileName, fmOpenRead or fmShareDenyNone);
+
+    // Create output pipes: one each for stdout and stderr
+    OutPipe := TPJPipe.Create;
+    ErrPipe := TPJPipe.Create;
+
+    // Create filter objects used to format text from output pipe into lines
+    fOutFilter := TPJAnsiSBCSPipeFilter.Create(OutPipe);
     fOutFilter.OnLineEnd := OutLineEndHandler;
-    fErrFilter := TPJAnsiSBCSPipeFilter.Create(TPJPipe.Create, True);
+    fErrFilter := TPJAnsiSBCSPipeFilter.Create(ErrPipe);
     fErrFilter.OnLineEnd := ErrLineEndHandler;
+
     App := TPJConsoleApp.Create;
     try
-      App.StdIn := OpenInputFile('..\TestData\MobyDick-ANSI.txt');
-      App.StdOut := fOutFilter.Pipe.WriteHandle;
-      App.StdErr := fErrFilter.Pipe.WriteHandle;
+      // redirect stdin to file and stdout/stderr to pipes
+      App.StdIn := InFile.Handle;
+      App.StdOut := OutPipe.WriteHandle;
+      App.StdErr := ErrPipe.WriteHandle;
       App.OnWork := WorkHandler;
       App.OnComplete := CompletionHandler;
       App.TimeSlice := 1;
@@ -95,12 +90,14 @@ begin
           'Error %X: %s', [App.ErrorCode, App.ErrorMessage]
         );
     finally
-      FileClose(App.StdIn);
       App.Free;
     end;
   finally
     FreeAndNil(fErrFilter);
     FreeAndNil(fOutFilter);
+    ErrPipe.Free;
+    OutPipe.Free;
+    InFile.Free;
   end;
 end;
 
