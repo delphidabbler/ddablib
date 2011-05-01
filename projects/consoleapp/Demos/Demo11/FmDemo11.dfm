@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 116
   BorderStyle = bsSingle
   Caption = 'TPJConsoleApp Demo 11'
-  ClientHeight = 388
+  ClientHeight = 346
   ClientWidth = 348
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -25,7 +25,7 @@ object Form1: TForm1
   end
   object btnRun: TButton
     Left = 8
-    Top = 352
+    Top = 312
     Width = 329
     Height = 25
     Caption = '&Run Console App'
@@ -36,7 +36,7 @@ object Form1: TForm1
     Left = 8
     Top = 56
     Width = 329
-    Height = 113
+    Height = 73
     Caption = 'Console colours'
     TabOrder = 1
     object lblForeground: TLabel
@@ -74,15 +74,6 @@ object Form1: TForm1
       ItemHeight = 16
       TabOrder = 1
     end
-    object btnDefaultColours: TButton
-      Left = 8
-      Top = 72
-      Width = 129
-      Height = 25
-      Caption = 'Use Defaults'
-      TabOrder = 2
-      OnClick = btnDefaultColoursClick
-    end
   end
   object edTitle: TEdit
     Left = 8
@@ -93,7 +84,7 @@ object Form1: TForm1
   end
   object gbWindowSize: TGroupBox
     Left = 8
-    Top = 176
+    Top = 136
     Width = 329
     Height = 81
     Caption = 'Window Size'
@@ -152,7 +143,7 @@ object Form1: TForm1
   end
   object gbWindowPos: TGroupBox
     Left = 8
-    Top = 264
+    Top = 224
     Width = 329
     Height = 81
     Caption = 'Window Position'

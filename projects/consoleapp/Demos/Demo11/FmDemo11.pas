@@ -31,7 +31,6 @@ type
     lblBackground: TLabel;
     cbBackground: TColorBox;
     lblTitle: TLabel;
-    btnDefaultColours: TButton;
     edTitle: TEdit;
     gbWindowSize: TGroupBox;
     lblWindowWidth: TLabel;
@@ -46,7 +45,6 @@ type
     edWindowLeft: TEdit;
     edWindowTop: TEdit;
     procedure btnRunClick(Sender: TObject);
-    procedure btnDefaultColoursClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure EdNumberFilter(Sender: TObject; var Key: Char);
     procedure cbDefWindowSizeClick(Sender: TObject);
@@ -63,12 +61,6 @@ implementation
 {$R *.dfm}
 
 { TForm1 }
-
-procedure TForm1.btnDefaultColoursClick(Sender: TObject);
-begin
-  cbForeground.Selected := clWhite;
-  cbBackground.Selected := clBlack;
-end;
 
 procedure TForm1.btnRunClick(Sender: TObject);
 var
