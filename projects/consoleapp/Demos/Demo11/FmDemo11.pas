@@ -33,12 +33,6 @@ type
     lblTitle: TLabel;
     btnDefaultColours: TButton;
     edTitle: TEdit;
-    gbScrBufferSize: TGroupBox;
-    cbDefScrBufferSize: TCheckBox;
-    edScrBufX: TEdit;
-    lblScrBufX: TLabel;
-    lblScrBufY: TLabel;
-    edScrBufY: TEdit;
     gbWindowSize: TGroupBox;
     lblWindowWidth: TLabel;
     lblWindowHeight: TLabel;
@@ -54,7 +48,6 @@ type
     procedure btnRunClick(Sender: TObject);
     procedure btnDefaultColoursClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure cbDefScrBufferSizeClick(Sender: TObject);
     procedure EdNumberFilter(Sender: TObject; var Key: Char);
     procedure cbDefWindowSizeClick(Sender: TObject);
     procedure cbDefWindowPosClick(Sender: TObject);
@@ -96,10 +89,6 @@ begin
         App.WindowPosition := Point(
           StrToInt(edWindowLeft.Text), StrToInt(edWindowTop.Text)
         );
-      if not cbDefScrBufferSize.Checked then
-        App.ScreenBufferSize := MakeSize(
-          StrToInt(edScrBufX.Text), StrToInt(edScrBufY.Text)
-        );
       App.ConsoleColors := MakeConsoleColors(
         cbForeground.Selected, cbBackground.Selected
       );
@@ -114,14 +103,6 @@ begin
   finally
     btnRun.Enabled := True;
   end;
-end;
-
-procedure TForm1.cbDefScrBufferSizeClick(Sender: TObject);
-begin
-  lblScrBufX.Enabled := not cbDefScrBufferSize.Checked;
-  lblScrBufY.Enabled := not cbDefScrBufferSize.Checked;
-  edScrBufX.Enabled := not cbDefScrBufferSize.Checked;
-  edScrBufY.Enabled := not cbDefScrBufferSize.Checked;
 end;
 
 procedure TForm1.cbDefWindowPosClick(Sender: TObject);

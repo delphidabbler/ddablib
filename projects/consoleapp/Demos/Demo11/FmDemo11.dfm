@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 116
   BorderStyle = bsSingle
   Caption = 'TPJConsoleApp Demo 11'
-  ClientHeight = 476
+  ClientHeight = 388
   ClientWidth = 348
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -25,11 +25,11 @@ object Form1: TForm1
   end
   object btnRun: TButton
     Left = 8
-    Top = 440
+    Top = 352
     Width = 329
     Height = 25
     Caption = '&Run Console App'
-    TabOrder = 5
+    TabOrder = 4
     OnClick = btnRunClick
   end
   object gbConsoleColours: TGroupBox
@@ -90,65 +90,6 @@ object Form1: TForm1
     Width = 329
     Height = 21
     TabOrder = 0
-  end
-  object gbScrBufferSize: TGroupBox
-    Left = 8
-    Top = 352
-    Width = 329
-    Height = 81
-    Caption = 'Console Screen Buffer Size'
-    TabOrder = 4
-    object lblScrBufX: TLabel
-      Left = 8
-      Top = 48
-      Width = 10
-      Height = 13
-      Caption = '&X:'
-      Enabled = False
-      FocusControl = edScrBufX
-    end
-    object lblScrBufY: TLabel
-      Left = 104
-      Top = 48
-      Width = 10
-      Height = 13
-      Caption = '&Y:'
-      Enabled = False
-      FocusControl = edScrBufY
-    end
-    object cbDefScrBufferSize: TCheckBox
-      Left = 8
-      Top = 16
-      Width = 241
-      Height = 17
-      Caption = 'Use default'
-      Checked = True
-      State = cbChecked
-      TabOrder = 0
-      OnClick = cbDefScrBufferSizeClick
-    end
-    object edScrBufX: TEdit
-      Left = 48
-      Top = 44
-      Width = 49
-      Height = 21
-      Enabled = False
-      MaxLength = 3
-      TabOrder = 1
-      Text = '80'
-      OnKeyPress = EdNumberFilter
-    end
-    object edScrBufY: TEdit
-      Left = 144
-      Top = 44
-      Width = 49
-      Height = 21
-      Enabled = False
-      MaxLength = 3
-      TabOrder = 2
-      Text = '200'
-      OnKeyPress = EdNumberFilter
-    end
   end
   object gbWindowSize: TGroupBox
     Left = 8
