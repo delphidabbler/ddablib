@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 300
-  Top = 122
+  Left = 595
+  Top = 116
   BorderStyle = bsSingle
   Caption = 'TPJConsoleApp Demo 11'
-  ClientHeight = 301
-  ClientWidth = 350
+  ClientHeight = 476
+  ClientWidth = 348
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -25,11 +25,11 @@ object Form1: TForm1
   end
   object btnRun: TButton
     Left = 8
-    Top = 264
+    Top = 440
     Width = 329
     Height = 25
-    Caption = 'Run Console App'
-    TabOrder = 3
+    Caption = '&Run Console App'
+    TabOrder = 5
     OnClick = btnRunClick
   end
   object gbConsoleColours: TGroupBox
@@ -93,11 +93,11 @@ object Form1: TForm1
   end
   object gbScrBufferSize: TGroupBox
     Left = 8
-    Top = 176
+    Top = 352
     Width = 329
     Height = 81
     Caption = 'Console Screen Buffer Size'
-    TabOrder = 2
+    TabOrder = 4
     object lblScrBufX: TLabel
       Left = 8
       Top = 48
@@ -108,7 +108,7 @@ object Form1: TForm1
       FocusControl = edScrBufX
     end
     object lblScrBufY: TLabel
-      Left = 80
+      Left = 104
       Top = 48
       Width = 10
       Height = 13
@@ -128,7 +128,7 @@ object Form1: TForm1
       OnClick = cbDefScrBufferSizeClick
     end
     object edScrBufX: TEdit
-      Left = 24
+      Left = 48
       Top = 44
       Width = 49
       Height = 21
@@ -139,7 +139,7 @@ object Form1: TForm1
       OnKeyPress = EdNumberFilter
     end
     object edScrBufY: TEdit
-      Left = 96
+      Left = 144
       Top = 44
       Width = 49
       Height = 21
@@ -147,6 +147,124 @@ object Form1: TForm1
       MaxLength = 3
       TabOrder = 2
       Text = '200'
+      OnKeyPress = EdNumberFilter
+    end
+  end
+  object gbWindowSize: TGroupBox
+    Left = 8
+    Top = 176
+    Width = 329
+    Height = 81
+    Caption = 'Window Size'
+    TabOrder = 2
+    object lblWindowWidth: TLabel
+      Left = 8
+      Top = 48
+      Width = 31
+      Height = 13
+      Caption = '&Width:'
+      Enabled = False
+      FocusControl = edWindowWidth
+    end
+    object lblWindowHeight: TLabel
+      Left = 104
+      Top = 48
+      Width = 34
+      Height = 13
+      Caption = '&Height:'
+      Enabled = False
+      FocusControl = edWindowHeight
+    end
+    object cbDefWindowSize: TCheckBox
+      Left = 8
+      Top = 16
+      Width = 241
+      Height = 17
+      Caption = 'Use default'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+      OnClick = cbDefWindowSizeClick
+    end
+    object edWindowWidth: TEdit
+      Left = 48
+      Top = 44
+      Width = 49
+      Height = 21
+      Enabled = False
+      MaxLength = 3
+      TabOrder = 1
+      Text = '640'
+      OnKeyPress = EdNumberFilter
+    end
+    object edWindowHeight: TEdit
+      Left = 144
+      Top = 44
+      Width = 49
+      Height = 21
+      Enabled = False
+      MaxLength = 3
+      TabOrder = 2
+      Text = '480'
+      OnKeyPress = EdNumberFilter
+    end
+  end
+  object gbWindowPos: TGroupBox
+    Left = 8
+    Top = 264
+    Width = 329
+    Height = 81
+    Caption = 'Window Position'
+    TabOrder = 3
+    object lblWindowLeft: TLabel
+      Left = 8
+      Top = 48
+      Width = 21
+      Height = 13
+      Caption = '&Left:'
+      Enabled = False
+      FocusControl = edWindowLeft
+    end
+    object lblWindowTop: TLabel
+      Left = 104
+      Top = 48
+      Width = 22
+      Height = 13
+      Caption = 'T&op:'
+      Enabled = False
+      FocusControl = edWindowTop
+    end
+    object cbDefWindowPos: TCheckBox
+      Left = 8
+      Top = 16
+      Width = 241
+      Height = 17
+      Caption = 'Use default'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+      OnClick = cbDefWindowPosClick
+    end
+    object edWindowLeft: TEdit
+      Left = 48
+      Top = 44
+      Width = 49
+      Height = 21
+      Enabled = False
+      MaxLength = 3
+      TabOrder = 1
+      Text = '0'
+      OnKeyPress = EdNumberFilter
+    end
+    object edWindowTop: TEdit
+      Left = 144
+      Top = 44
+      Width = 49
+      Height = 21
+      Enabled = False
+      MaxLength = 3
+      TabOrder = 2
+      Text = '0'
       OnKeyPress = EdNumberFilter
     end
   end

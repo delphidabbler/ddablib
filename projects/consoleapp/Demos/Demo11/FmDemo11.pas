@@ -39,11 +39,25 @@ type
     lblScrBufX: TLabel;
     lblScrBufY: TLabel;
     edScrBufY: TEdit;
+    gbWindowSize: TGroupBox;
+    lblWindowWidth: TLabel;
+    lblWindowHeight: TLabel;
+    cbDefWindowSize: TCheckBox;
+    edWindowWidth: TEdit;
+    edWindowHeight: TEdit;
+    gbWindowPos: TGroupBox;
+    lblWindowLeft: TLabel;
+    lblWindowTop: TLabel;
+    cbDefWindowPos: TCheckBox;
+    edWindowLeft: TEdit;
+    edWindowTop: TEdit;
     procedure btnRunClick(Sender: TObject);
     procedure btnDefaultColoursClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cbDefScrBufferSizeClick(Sender: TObject);
     procedure EdNumberFilter(Sender: TObject; var Key: Char);
+    procedure cbDefWindowSizeClick(Sender: TObject);
+    procedure cbDefWindowPosClick(Sender: TObject);
   private
     procedure WorkHandler(Sender: TObject);
   end;
@@ -74,6 +88,14 @@ begin
       App.OnWork := WorkHandler;
       App.Visible := True;
       App.ConsoleTitle := edTitle.Text;
+      if not cbDefWindowSize.Checked then
+        App.WindowSize := MakeSize(
+          StrToInt(edWindowWidth.Text), StrToInt(edWindowHeight.Text)
+        );
+      if not cbDefWindowPos.Checked then
+        App.WindowPosition := Point(
+          StrToInt(edWindowLeft.Text), StrToInt(edWindowTop.Text)
+        );
       if not cbDefScrBufferSize.Checked then
         App.ScreenBufferSize := MakeSize(
           StrToInt(edScrBufX.Text), StrToInt(edScrBufY.Text)
@@ -81,7 +103,11 @@ begin
       App.ConsoleColors := MakeConsoleColors(
         cbForeground.Selected, cbBackground.Selected
       );
-      App.Execute('Timed 2');
+      if not App.Execute('Timed 2') then
+        raise Exception.CreateFmt(
+          'Can''t execute program: error %d - "%s"',
+          [App.ErrorCode, App.ErrorMessage]
+        );
     finally
       App.Free;
     end;
@@ -96,6 +122,22 @@ begin
   lblScrBufY.Enabled := not cbDefScrBufferSize.Checked;
   edScrBufX.Enabled := not cbDefScrBufferSize.Checked;
   edScrBufY.Enabled := not cbDefScrBufferSize.Checked;
+end;
+
+procedure TForm1.cbDefWindowPosClick(Sender: TObject);
+begin
+  lblWindowLeft.Enabled := not cbDefWindowPos.Checked;
+  lblWindowTop.Enabled := not cbDefWindowPos.Checked;
+  edWindowLeft.Enabled := not cbDefWindowPos.Checked;
+  edWindowTop.Enabled := not cbDefWindowPos.Checked;
+end;
+
+procedure TForm1.cbDefWindowSizeClick(Sender: TObject);
+begin
+  lblWindowWidth.Enabled := not cbDefWindowSize.Checked;
+  lblWindowHeight.Enabled := not cbDefWindowSize.Checked;
+  edWindowWidth.Enabled := not cbDefWindowSize.Checked;
+  edWindowHeight.Enabled := not cbDefWindowSize.Checked;
 end;
 
 procedure TForm1.EdNumberFilter(Sender: TObject; var Key: Char);
