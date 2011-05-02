@@ -191,6 +191,8 @@ type
     fOnWork: TNotifyEvent;
     ///  <summary>Reference to OnComplete event handler.</summary>
     fOnComplete: TNotifyEvent;
+    ///  <summary>Reference to OnStart event handler.</summary>
+    fOnStart: TNotifyEvent;
     ///  <summary>Handle of console app's redirected standard input. 0 if not
     ///  redirected.</summary>
     fStdIn: THandle;
@@ -200,6 +202,10 @@ type
     ///  <summary>Handle of console app's redirected standard error. 0 if not
     ///  redirected.</summary>
     fStdErr: THandle;
+    ///  <summary>Command line used to execute application.</summary>
+    fCommandLine: string;
+    ///  <summary>Specifies console application's current directory.</summary>
+    fCurrentDir: string;
     ///  <summary>Exit code returned by console app.</summary>
     fExitCode: LongWord;
     ///  <summary>Maximum execution time of console app (in ms).</summary>
@@ -308,6 +314,8 @@ type
     ///  couldn't be started.</returns>
     function StartProcess(const CmdLine, CurrentDir: string;
       out ProcessInfo: TProcessInformation): Boolean;
+    ///  <summary>Triggers OnStart event.</summary>
+    procedure DoStart; virtual;
     ///  <summary>Triggers OnWork event.</summary>
     procedure DoWork; virtual;
     ///  <summary>Triggers OnComplete event.</summary>
@@ -332,6 +340,12 @@ type
     ///  <summary>Inheritable handle of console app's redirected standard error
     ///  Must be zero if standard error not redirected.</summary>
     property StdErr: THandle read fStdErr write fStdErr default 0;
+    ///  <summary>Command line to execute. Includes program name and any
+    ///  parameters. Paths containing spaces must be quoted.</summary>
+    property CommandLine: string read fCommandLine write fCommandLine;
+    ///  <summary>Application's current directory. Set to '' to use same current
+    ///  directory as parent application.</summary>
+    property CurrentDir: string read fCurrentDir write fCurrentDir;
     ///  <summary>Determines whether console app's console is to be displayed
     ///  (True) or hidden (False).</summary>
     property Visible: Boolean read fVisible write fVisible default False;
@@ -453,6 +467,10 @@ type
     ///  string if ErrorCode is zero.</summary>
     property ErrorMessage: string
       read fErrorMessage;
+    ///  <summary>Event triggered just after console application process is
+    ///  created, just before it starts executing.</summary>
+    ///  <remarks>ProcessInfo has valid data during this event.</remarks>
+    property OnStart: TNotifyEvent read fOnStart write fOnStart;
     ///  <summary>Event triggered periodically while a console app is executing.
     ///  </summary>
     ///  <remarks>
@@ -486,10 +504,18 @@ type
     ///  quoted.</param>
     ///  <param name="CurrentDir">string [in] Application's current directory.
     ///  Pass '' to use same current directory as parent application.</param>
-    ///  <returns>Boolean. True if console app runs successfully or Falso if
+    ///  <returns>Boolean. True if console app runs successfully or False if
     ///  it fails to run.</returns>
-    function Execute(const CmdLine: string;
-      const CurrentDir: string = ''): Boolean;
+    ///  <remarks>The CommandLine and CurrentDir properties are set to the
+    ///  values of the CmdLine and CurrentDir parameters respectively.</remarks>
+    function Execute(const CmdLine: string; const CurrentDir: string = ''):
+      Boolean; overload;
+    ///  <summary>Executes a console app specified by the CommandLine property
+    ///  with the current directory specified by the CurrentDir property.
+    ///  </summary>
+    ///  <returns>Boolean. True if console app runs successfully or False if
+    ///  it fails to run.</returns>
+    function Execute: Boolean; overload;
     ///  <summary>Attempts to terminate the current console app.</summary>
     ///  <remarks>Calling this method causes the Execute method to return after
     ///  the next OnWork event. If KillTimedOutProcess is true the console
@@ -513,6 +539,8 @@ type
     property StdIn;
     property StdOut;
     property StdErr;
+    property CommandLine;
+    property CurrentDir;
     property Visible;
     property MaxExecTime;
     property TimeSlice;
@@ -533,6 +561,7 @@ type
     property ExitCode;
     property ErrorCode;
     property ErrorMessage;
+    property OnStart;
     property OnWork;
     property OnComplete;
   end;
@@ -644,25 +673,32 @@ begin
     fOnComplete(Self);
 end;
 
+procedure TPJCustomConsoleApp.DoStart;
+begin
+  if Assigned(fOnStart) then
+    fOnStart(Self);
+end;
+
 procedure TPJCustomConsoleApp.DoWork;
 begin
   if Assigned(fOnWork) then
     fOnWork(Self);
 end;
 
-function TPJCustomConsoleApp.Execute(const CmdLine, CurrentDir: string): Boolean;
+function TPJCustomConsoleApp.Execute: Boolean;
 var
   ProcessInfo: TProcessInformation; // information about process
 begin
   fExitCode := 0;
   ResetError;
   ZeroProcessInfo;
-  Result := StartProcess(CmdLine, CurrentDir, ProcessInfo);
+  Result := StartProcess(fCommandLine, fCurrentDir, ProcessInfo);
   if Result then
   begin
     // Process started: monitor its progress
     try
       fProcessInfo := ProcessInfo;
+      DoStart;
       Result := MonitorProcess and SetExitCode;
     finally
       // Process ended: tidy up
@@ -677,6 +713,14 @@ begin
     RecordWin32Error;
     ZeroProcessInfo;
   end;
+end;
+
+function TPJCustomConsoleApp.Execute(const CmdLine, CurrentDir: string):
+  Boolean;
+begin
+  fCommandLine := CmdLine;
+  fCurrentDir := CurrentDir;
+  Result := Execute;
 end;
 
 procedure TPJCustomConsoleApp.FreeSecurityAttrs(var Attrs: PSecurityAttributes);
@@ -771,6 +815,11 @@ begin
     fMaxExecTime := cDefMaxExecTime
   else
     fMaxExecTime := Value;
+end;
+
+procedure TPJCustomConsoleApp.SetOnStart(const Value: TNotifyEvent);
+begin
+  FOnStart := Value;
 end;
 
 procedure TPJCustomConsoleApp.SetProcessAttrs(const Value: PSecurityAttributes);
