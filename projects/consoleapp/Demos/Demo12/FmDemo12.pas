@@ -49,9 +49,12 @@ begin
     App.StdIn := InFile.Handle;
     App.StdOut := fOutFilter.Pipe.WriteHandle;
     App.TimeSlice := 5;
-    App.CommandLine := 'Echoer ">>> " -u';
     App.OnWork := WorkHandler;
-    App.Execute;
+    App.CommandLine := 'Echoer ">>> " -u';
+    if not App.Execute then
+      raise Exception.CreateFmt(
+        'Error %X: %s', [App.ErrorCode, App.ErrorMessage]
+      );
   finally
     App.Free;
     InFile.Free;
