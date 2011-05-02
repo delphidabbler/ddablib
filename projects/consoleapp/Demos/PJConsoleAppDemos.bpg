@@ -10,7 +10,8 @@ DCC = $(ROOT)\bin\dcc32.exe $**
 BRCC = $(ROOT)\bin\brcc32.exe $**
 #------------------------------------------------------------------------------
 PROJECTS = Timed.exe Echoer.exe Demo1.exe Demo2.exe Demo3.exe Demo4.exe \
-  Demo5.exe Demo6.exe Demo7.exe Demo8.exe Demo9.exe Demo10.exe Demo11.exe
+  Demo5.exe Demo6.exe Demo7.exe Demo8.exe Demo9.exe Demo10.exe Demo11.exe \
+  Demo12.exe
 #------------------------------------------------------------------------------
 default: $(PROJECTS)
 #------------------------------------------------------------------------------
@@ -52,6 +53,9 @@ Demo10.exe: Demo10\Demo10.dpr
   $(DCC)
 
 Demo11.exe: Demo11\Demo11.dpr
+  $(DCC)
+
+Demo12.exe: Demo12\Demo12.dpr
   $(DCC)
 
 
