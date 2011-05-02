@@ -817,11 +817,6 @@ begin
     fMaxExecTime := Value;
 end;
 
-procedure TPJCustomConsoleApp.SetOnStart(const Value: TNotifyEvent);
-begin
-  FOnStart := Value;
-end;
-
 procedure TPJCustomConsoleApp.SetProcessAttrs(const Value: PSecurityAttributes);
 begin
   UpdateSecurityAttrs(fProcessAttrs, Value);
