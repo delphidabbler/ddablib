@@ -146,76 +146,27 @@
 
 <p>
   These classes are designed to be used to control the execution of child
-  console application processes and to redirect input and output where
-  required.
+  console application processes.
 </p>
 
 <p>
   The main class &ndash; <var>TPJConsoleApp</var> &ndash; will run console
   applications. It enables the console application's standard input, standard
-  output and standard error to be redirected to and from files or pipes.
+  output and standard error to be redirected to and from files or pipes. The
+  class can also timeslice the running of the console application to enable the
+  calling application to continue processing and to enable redirected piped
+  output to be processed.
 </p>
 
 <p>
-  The class can also timeslice the running of the console application to
-  enable the calling application to continue processing and to enable
-  redirected piped output to be processed.
+  There are numerous subsidiary classes to help when working with pipes and
+  inheritable handles.
 </p>
 
 <p>
-  Various other properties of the console application can also be configured,
-  including:
-</p>
-
-<ul>
-  <li>
-    Whether the application's process and thread handles can be inherited.
-  </li>
-  <li>
-    Whether the application is visible or is displayed in a new console
-    window.
-  </li>
-  <li>
-    The console window's title.
-  </li>
-  <li>
-    The environment block passed to the application.
-  </li>
-  <li>
-    The application's maximum execution time. The process can be forcibly
-    terminated if it times-out.
-  </li>
-  <li>
-    The application's priority.
-  </li>
-</ul>
-
-<p>
-  If the class fails to execute the application it sets an <var>ExitCode</var>
-  and an <var>ErrorMessage</var> property. The exit code of the application is
-  returned via the <var>ExitCode</var> property. Errant applications can be
-  terminated.
-</p>
-
-<p>
-  <var>TPJConsoleApp</var> descends from <var>TPJCustomConsoleApp</var>, which
-  provides all the functionality of the derived class, except that all
-  properties are protected. <var>TPJCustomConsoleApp</var> should be used if
-  you need to create subclasses. Subclasses should make required properties
-  public.
-</p>
-
-<p>
-  <var>TPJPipe</var> is a helper class that assists in working with pipes used
-  for redirecting input / output. This class simplifies reading and writing to
-  pipes.
-</p>
-
-<p>
-  A comprehensive PDF user guide can be downloaded separately.
-  <a
-    href="http://www.delphidabbler.com/download?id=consoleapp&amp;type=docs"
-  >Download the user guide</a>.
+  For full details see the <a
+    href="http://www.delphidabbler.com/url/consoleapp-wiki"
+  >Documentation Wiki</a>.
 </p>
 
 
@@ -224,10 +175,7 @@
 </h3>
 
 <p>
-  The Console Application Runner Classes were originally developed and tested
-  with Delphi 7 and need this compiler as a minimum. Since v1.0.2 the classes
-  have been modified to work with later Unicode versions of Delphi, i.e.
-  Delphi 2009 and 2010.
+  The classes are compatible with Delphi 7 and later.
 </p>
 
 
@@ -237,8 +185,8 @@
 
 <p>
   The Console Application Runner Classes and associated documentation and demo
-  programs are supplied in a zip file. Before installing, or using, you need
-  to extract all the files from the zip file, preserving the directory
+  program source files are supplied in a zip file. Before installing, or using,
+  you need to extract all the files from the zip file, preserving the directory
   structure. The following files will be extracted:
 </p>
 
@@ -252,17 +200,24 @@
     supporting <var>TPJPipe</var> class.
   </li>
   <li>
+    <code><strong>PJPipeFilters.pas</strong></code> &ndash; Source code for the
+    supporting pipe filter classes.
+  </li>
+  <li>
+    <code><strong>PJFileHandle.pas</strong></code> &ndash; Source code for the
+    supporting <var>TPJFileHandle</var> class.
+  <li>
     <code>Docs\ChangeLog.txt</code> &ndash; The project's change log.
+  </li>
+  <li>
+    <code>Docs\DocumentationWiki.URL</code> &ndash; Shortcut to the online Wiki
+    that documents the project.
   </li>
   <li>
     <code>Docs\MPL.txt</code> &ndash; Mozilla Public License v1.1.
   </li>
   <li>
     <code>Docs\ReadMe.htm</code> &ndash; The project's read-me file.
-  </li>
-  <li>
-    <code>Docs\Wiki.URL</code> &ndash; Shortcut to the online Wiki that
-    documents the project.
   </li>
 </ul>
 
@@ -277,7 +232,8 @@
 
 <ol class="spaced">
   <li>
-    The simplest way is to add <code>PJConsoleApp.pas</code> and
+    The simplest way is to add <code>PJConsoleApp.pas</code>,
+    <code>PJPipeFilters.pas</code>, <code>PJFileHandle.pas</code> and
     <code>PJPipe.pas</code> to your projects as you need them.
   </li>
   <li>
@@ -300,24 +256,26 @@
 </h2>
 
 <p>
-  The source code for ten demo projects is included in the download, along
-  with two console applications that are required by the demos. All the demos
-  are stored in subfolders of the <code>Demos</code> directory.
+  The source code for twelve demo projects is included in the download, along
+  with two console applications and a sample text file that are required by the
+  demos. All the demos are stored in subfolders of the <code>Demos</code>
+  directory.
 </p>
 
 <p>
   Make sure you preserved the directory structure when unzipping the
-  downloaded archive. Open <code>PJConsoleAppDemos.bpg</code> in Delphi.
-  Compile each of the ten demo projects and the two programs in the
-  <code>TestApps</code> sub-directory. All the resulting <code>.exe</code>
-  files should have been written to the <code>Exe</code> directory.
+  downloaded archive. Open <code>PJConsoleAppDemos.bpg</code> or
+  <code>PJConsoleAppDemos.groupproj</code> in Delphi. Compile each of the demo
+  projects and the two programs in the <code>TestApps</code> sub-directory. All
+  the resulting <code>.exe</code> files should have been written to the
+  <code>Exe</code> directory.
 </p>
 
 <p>
   The demo programs are fully described in the <em>Examples</em> section of
   the <a
-    href="http://www.delphidabbler.com/download?id=consoleapp&amp;type=docs"
-  >PDF user guide</a>.
+    href="http://www.delphidabbler.com/url/consoleapp-wiki"
+  >Documentation Wiki</a>.
 </p>
 
 
@@ -354,7 +312,7 @@
 <p>
   The Initial Developer of <em>Console Application Runner Classes</em> is
   Peter D Johnson. Portions created by the Initial Developer are Copyright
-  &copy; 2007-2010 Peter D Johnson (www.delphidabbler.com). All Rights
+  &copy; 2007-2011 Peter D Johnson (www.delphidabbler.com). All Rights
   Reserved.
 </p>
 
@@ -376,7 +334,9 @@
 <p>
   If no similar report or request has been recorded already, use the <em>New
   Issue</em> link to add a new issue. Please select the most appropriate
-  template from the <em>Templates</em> drop down list.
+  template from the <em>Templates</em> drop down list and apply the
+  <code>Project-consoleapp</code> label. If there is already a similar issue
+  please add a comment to it if there's anything you can add.
 </p>
 
 
@@ -387,8 +347,9 @@
 <p>
   I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
   Wales,  UK, writing write mainly in Delphi. My programs are available for
-  download from:
-  <a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+  download from <a
+    href="http://www.delphidabbler.com/"
+  >http://www.delphidabbler.com/</a>.
 </p>
 
 <div class="endnotes">
@@ -396,11 +357,12 @@
     Please <a
       href="http://www.delphidabbler.com/contact"
     >let me know</a> if you have any comments about the classes, but please
-    use the Issue Tracker noted above to report bugs and request new
-    features.
+    use the <a
+      href="http://www.delphidabbler.com/url/ddlib-issues"
+    >Issue Tracker</a> discussed above to report bugs and request new features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2007-2010, P D Johnson, <a
+    This document is copyright &copy; 2007-2011, P D Johnson, <a
       href="http://www.delphidabbler.com/"
     >www.delphidabbler.com</a>
   </div>
