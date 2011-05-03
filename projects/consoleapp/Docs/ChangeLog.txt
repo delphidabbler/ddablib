@@ -4,6 +4,29 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release 2.0 of 03 May 2011
++ Significant updates to TPJCustomConsoleApp and TPJConsoleApp classes:
+  - Several new properties.
+  - New OnStart event.
+  - New overloaded version of Execute method.
++ Added new ReadBytes and WriteBytes methods to TPJPipe.
++ New PJPipeFilters unit containing classes for safely reading text from pipes and splitting the text into lines. Includes filters for ANSI and Unicode text.
++ New TPJFileHandle class for assisting in creating files with inheritable handles.
++ Various new helper routines to ease working with some properties and application error codes.
++ Added compiler directives that refuse to compile with compilers earlier than Delphi 7.
++ Some "unsafe" compiler warnings inhibited.
++ All units now have XMLDoc compatible comments.
++ Major update to demo projects:
+  - All demos now work correctly with Unicode Delphis.
+  - Many revisions to demos to demonstrate new filter and file handle classes.
+  - Two new demos.
+  - "Echoer" helper program now has option output Unicode text.
+  - Some changes to organisation and configuration of demo projects' config and project files.
+  - New test ANSI text file (extract from "Moby Dick").
++ User guide removed from project since documentation now in online wiki at http://www.delphidabbler.com/url/consoleapp-wiki
++ Internet shortcut to documentation wiki renamed.
++ Updated other documentation files.
+
 Release 1.0.2 of 20 July 2010
 + Fixed problem with programs failing to execute when compiled with Unicode versions of Delphi due to strange "feature" of Unicode version of Windows CreateProcess API function.
 + Fixed similar Unicode CreateProcess problem in demo #1.
