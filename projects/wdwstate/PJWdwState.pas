@@ -1,4 +1,4 @@
-{ 
+{
  * PJWdwState.pas
  *
  * DelphiDabbler Window state components.
@@ -24,7 +24,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1999-2009 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1999-2011 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -69,17 +69,15 @@ uses
 
 
 const
-  // Custom message used internally
+  // Custom messages used internally
   // instructs component to set window state (normal, minimized or maximized)
   PJM_SETWDWSTATE = WM_USER + 0;
   // instructs MDI child components they can restore their windows
   PJM_RESTOREMDICHILD = WM_USER + 1;
 
-
 type
 
   TPJCustomWdwState = class;
-
 
   {
   TPJWdwStateHook:
@@ -118,13 +116,11 @@ type
       }
   end;
 
-
   {
   EPJCustomWdwState:
     Type of exception raised by TPJCustomWdwState.
   }
   EPJCustomWdwState = class(Exception);
-
 
   {
   TPJWdwStateReadEvent:
@@ -152,7 +148,6 @@ type
   TPJWdwStateReadEvent = procedure(Sender: TObject; var Left, Top, Width,
     Height, State: Integer) of object;
 
-
   {
   TPJWdwStateOptions
     Set of values that are stored in the component's Options property.
@@ -165,7 +160,6 @@ type
                       // (work area is desktop or MDI client area for MDI child
                       // windows)
   );
-
 
   {
   TPJCustomWdwState:
@@ -180,6 +174,10 @@ type
       {Value of MinimizeDelay property}
     fOnReadWdwState: TPJWdwStateReadEvent;
       {Event handler for OnReadWdwState event}
+    fOnAfterWindowSized: TNotifyEvent;
+      // todo: comment this
+    fOnAfterWindowRestored: TNotifyEvent;
+      // todo: comment this
     fOptions: TPJWdwStateOptions;
       {Value of Options property}
     fHook: TPJWdwStateHook;
@@ -375,8 +373,13 @@ type
       or if certain stored values are ignored. See the TPJWdwStateOptions type
       definition for details. Including/excluding the woIgnoreState value is the
       same as setting IgnoreState to true or false respectively}
+    property OnAfterWindowSized: TNotifyEvent
+      read fOnAfterWindowSized write fOnAfterWindowSized;
+      // todo: comment this
+    property OnAfterWindowRestored: TNotifyEvent
+      read fOnAfterWindowRestored write fOnAfterWindowRestored;
+      // todo: comment this
   end;
-
 
   {
   TPJWdwStateData:
@@ -390,7 +393,6 @@ type
     State: Integer;   // state of window (ordinal value of TWindowState value)
   end;
 
-
   {
   TPJWdwStateReadData:
     Type of event triggered by TPJUserWdwState when window state data is
@@ -403,7 +405,6 @@ type
   TPJWdwStateReadData = procedure(Sender: TObject; var Data: TPJWdwStateData)
     of object;
 
-
   {
   TPJWdwStateSaveData:
     Type of event triggered by TPJUserWdwState when window state data is
@@ -413,7 +414,6 @@ type
   }
   TPJWdwStateSaveData = procedure(Sender: TObject; const Data: TPJWdwStateData)
     of object;
-
 
   {
   TPJUserWdwState:
@@ -469,7 +469,6 @@ type
       not handled window state is not saved}
   end;
 
-
   {
   TPJWdwStateGetIniData:
     Type of event that is triggered just before ini file is accessed. It allows
@@ -480,7 +479,6 @@ type
         change this value.
   }
   TPJWdwStateGetIniData = procedure(var IniFilename, Section: string) of object;
-
 
   {
   TPJWdwState:
@@ -569,7 +567,6 @@ type
       this event is handled then IniFileName and Section properties are ignored}
   end;
 
-
   {
   TPJWdwStateGetRegData:
     Type of event that is triggered just before registry is accessed. It allows
@@ -582,7 +579,6 @@ type
   TPJWdwStateGetRegData = procedure(var RootKey: HKEY;
     var SubKey: string) of object;
 
-
   {
   TPJWdwStateRegAccessEvent:
     Type of event that is triggered after registry is opened, ready for access.
@@ -593,7 +589,6 @@ type
         stored and can be used to read / write additional data.
   }
   TPJWdwStateRegAccessEvent = procedure(const Reg: TRegistry) of object;
-
 
   {
   TPJRegWdwState:
@@ -712,7 +707,6 @@ begin
   );
 end;
 
-
 { TPJWdwStateHook }
 
 procedure TPJWdwStateHook.CMShowingChanged(var Msg: TMessage);
@@ -764,7 +758,6 @@ begin
   inherited;
 end;
 
-
 { TPJCustomWdwState }
 
 resourcestring
@@ -777,7 +770,6 @@ resourcestring
   sErrSingleInstance = 'TPJCustomWdwState.Create():'#13#10
     + 'Only one window state component is permitted on a  form: %s is already '
     + 'present on %s.';
-
 
 function TPJCustomWdwState.CanRestoreMDIChild: Boolean;
   {Checks if an MDI child form can be restored.
@@ -1097,6 +1089,9 @@ begin
     // Notify any MDI child forms that this form has been restored
     DispatchMDIChildMessages;
   end;
+  // Trigger event to inform that window has been restored
+  if Assigned(fOnAfterWindowRestored) then
+    fOnAfterWindowRestored(Self);
 end;
 
 procedure TPJCustomWdwState.Restore;
@@ -1265,6 +1260,8 @@ begin
   {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE OFF}{$ENDIF}
   SetWindowPlacement(fWindow.Handle, @Pl);
   {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE ON}{$ENDIF}
+  if Assigned(fOnAfterWindowSized) then
+    fOnAfterWindowSized(Self);
 
   // Set window state
 
@@ -1350,7 +1347,6 @@ begin
     Save;
   inherited;
 end;
-
 
 { TPJWdwState }
 
@@ -1475,7 +1471,6 @@ begin
   else
     fSection := Value;
 end;
-
 
 { TPJRegWdwState }
 
@@ -1632,7 +1627,6 @@ begin
   else
     fSubKey := Value;
 end;
-
 
 { TPJUserWdwState }
 
