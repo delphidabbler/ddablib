@@ -1,6 +1,6 @@
 ; PJWdwState.hpj
 ;
-; Help project file of Windows State components.
+; Help project file for Window State Components.
 ;
 ; $Rev$
 ; $Date$
@@ -22,7 +22,7 @@
 ; The Initial Developer of the Original Code is Peter Johnson
 ; (http://www.delphidabbler.com/).
 ; 
-; Portions created by the Initial Developer are Copyright (C) 1999-2009 Peter
+; Portions created by the Initial Developer are Copyright (C) 1999-2011 Peter
 ; Johnson. All Rights Reserved.
 ; 
 ; ***** END LICENSE BLOCK;****
@@ -32,7 +32,7 @@
 LCID=0x809 0x0 0x0 ; English (United Kingdom)
 REPORT=Yes
 TITLE=DelphiDabbler Window State Components Help
-COPYRIGHT=DelphiDabbler Window State Components Copyright © P D Johnson 1999-2007
+COPYRIGHT=DelphiDabbler Window State Components Copyright © P D Johnson 1999-2011
 HLP=PJWdwState.hlp
 
 [FILES]
