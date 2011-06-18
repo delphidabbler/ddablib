@@ -175,9 +175,9 @@ type
     fOnReadWdwState: TPJWdwStateReadEvent;
       {Event handler for OnReadWdwState event}
     fOnAfterWindowSized: TNotifyEvent;
-      // todo: comment this
+      {Event handler for OnAfterWindowSized event}
     fOnAfterWindowRestored: TNotifyEvent;
-      // todo: comment this
+      {Event handler for OnAfterWindowRestored event}
     fOptions: TPJWdwStateOptions;
       {Value of Options property}
     fHook: TPJWdwStateHook;
@@ -343,7 +343,7 @@ type
       }
     procedure Restore;
       {Reads window placement and state from storage and set up the window's
-      size, positions and state as required.
+      size, position and state as required.
       }
     procedure Save;
       {Save window placement, size and state to storage.
@@ -375,10 +375,12 @@ type
       same as setting IgnoreState to true or false respectively}
     property OnAfterWindowSized: TNotifyEvent
       read fOnAfterWindowSized write fOnAfterWindowSized;
-      // todo: comment this
+      {Event triggered immediately after window has been sized, but before it
+      has been restored}
     property OnAfterWindowRestored: TNotifyEvent
       read fOnAfterWindowRestored write fOnAfterWindowRestored;
-      // todo: comment this
+      {Event triggered immediately after window has been restored to required
+      state}
   end;
 
   {
@@ -1096,7 +1098,7 @@ end;
 
 procedure TPJCustomWdwState.Restore;
   {Reads window placement and state from storage and set up the window's size,
-  positions and state as required.
+  position and state as required.
   }
 
   //----------------------------------------------------------------------------
@@ -1253,13 +1255,14 @@ begin
   Pl.Length := SizeOf(TWindowPlacement);
   Pl.rcNormalPosition.Left := Left;
   Pl.rcNormalPosition.Top := Top;
-  Pl.rcNormalPosition.Right := Left+Width;
-  Pl.rcNormalPosition.Bottom := Top+Height;
+  Pl.rcNormalPosition.Right := Left + Width;
+  Pl.rcNormalPosition.Bottom := Top + Height;
   Pl.showCmd := SW_SHOW;      // needed when restore called late in start-up
   // Finally, set the actual size. This call allows for task bar etc.
   {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE OFF}{$ENDIF}
   SetWindowPlacement(fWindow.Handle, @Pl);
   {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE ON}{$ENDIF}
+  // Trigger event to inform that window has been sized
   if Assigned(fOnAfterWindowSized) then
     fOnAfterWindowSized(Self);
 
