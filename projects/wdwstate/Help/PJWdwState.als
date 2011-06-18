@@ -10,6 +10,10 @@ inifilename
 inifilename_property
 minimizedelay
 minimizedelay_property
+onafterwindowrestored
+onafterwindowrestored_event
+onafterwindowsized
+onafterwindowsized_event
 ongetinidata
 ongetinidata_event
 ongetregdata
@@ -47,6 +51,8 @@ tpjcustomwdwstate_createstandalone
 tpjcustomwdwstate_ignorestate
 tpjcustomwdwstate_minimizedelay
 tpjcustomwdwstate_object
+tpjcustomwdwstate_onafterwindowrestored
+tpjcustomwdwstate_onafterwindowsized
 tpjcustomwdwstate_onreadwdwstate
 tpjcustomwdwstate_options
 tpjcustomwdwstate_readwdwstate

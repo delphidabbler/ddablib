@@ -346,6 +346,54 @@ ${\footnote {$}TPJCustomWdwState events}
 \par 
 \par \pard \tx200 \plain\f0\fs18\cf0\i Protected\plain\f1\fs18\cf0\i :\plain\f0\fs18\cf0 
 \par \plain\f1\fs18\cf0\i \tab \plain\f0\fs18\cf0 {\strike OnReadWdwState}{\v IDH_CWS_ONREADWDWSTATE}
+\par 
+\par \plain\f1\fs18\cf0\i Published:\plain\f1\fs18\cf0 
+\par \tab {\strike OnAfterWindowRestored}{\v IDH_CWS_ONAFTERWINDOWRESTORED}
+\par \tab {\strike OnAfterWindowSized}{\v IDH_CWS_ONAFTERWINDOWSIZED}\plain\f0\fs18\cf0 
+\par \page 
+#{\footnote {#}IDH_CWS_ONAFTERWINDOWRESTORED}
+${\footnote {$}TPJCustomWdwState.OnAfterWindowRestored}
+K{\footnote {K}TPJCustomWdwState,OnAfterWindowRestored;OnAfterWindowRestored,TPJCustomWdwState;OnAfterWindowRestored}
+A{\footnote {A}TPJCustomWdwState_OnAfterWindowRestored;OnAfterWindowRestored_event;OnAfterWindowRestored}
+@{\footnote {@}TPJCustomWdwState.OnAfterWindowRestored event topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.OnAfterWindowRestored
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}          {\strike See also}{\v !AL(TPJCustomWdwState_OnAfterWindowSized)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Protected e\plain\f0\fs18\cf0 vent that allows user to change the window data read from storage before the window is displayed.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  OnAfterWindowRestored: \plain\f3\fs18\cf0 TNotifyEvent\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This published event is triggered just after the window has been restored. This occurs either after program start-up if the {\strike AutoSaveRestore}{\v IDH_CWS_AUTOSAVERESTORE} property is True or after the {\strike Restore}{\v IDH_CWS_RESTORE} method has been called.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Use th\plain\f1\fs18\cf0 is event\plain\f0\fs18\cf0  if you need to determine the state of the restored window or its restored size. Use methods of the host form to find the required information.
+\par \page 
+#{\footnote {#}IDH_CWS_ONAFTERWINDOWSIZED}
+${\footnote {$}TPJCustomWdwState.OnAfterWindowSized}
+K{\footnote {K}TPJCustomWdwState,OnAfterWindowSized;OnAfterWindowSized,TPJCustomWdwState;OnAfterWindowSized}
+A{\footnote {A}TPJCustomWdwState_OnAfterWindowSized;OnAfterWindowSized_event;OnAfterWindowSized}
+@{\footnote {@}TPJCustomWdwState.OnAfterWindowSized event topic.}
+
+\pard \plain \pard \keepn \plain\f0\fs8\cf0 
+\par \plain\f0\fs22\cf2\b TPJCustomWdwState.OnAfterWindowSized
+\par \plain\f0\fs12\cf0 
+\par \plain\f0\fs18\cf0 {\strike TPJCustomWdwState}{\v IDH_TPJCUSTOMWDWSTATE}          {\strike See also}{\v !AL(TPJCustomWdwState_OnAfterWindowRestored)}
+\par \plain\f0\fs8\cf0  \plain\f0\fs18\cf0 
+\par \pard \plain\f0\fs8\cf0 
+\par \plain\f1\fs18\cf0 Protected e\plain\f0\fs18\cf0 vent that allows user to change the window data read from storage before the window is displayed.
+\par 
+\par \pard \keep \plain\f2\fs18\cf0\b property\plain\f2\fs18\cf0  OnAfterWindowSized: \plain\f3\fs18\cf0 TNotifyEvent\plain\f2\fs18\cf0 ;
+\par \pard \plain\f0\fs18\cf0 
+\par \plain\f0\fs18\cf0\b Description\plain\f0\fs18\cf0 
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 This published event is triggered just after the window's size has been set. This occurs before the window is actually restored on screen and before its state has been set.
+\par \plain\f0\fs8\cf0 
+\par \plain\f0\fs18\cf0 Use th\plain\f1\fs18\cf0 is\plain\f0\fs18\cf0  \plain\f1\fs18\cf0 event\plain\f0\fs18\cf0  if you need to determine the normal size and position of the window, regardless of its final state. Use methods of the host form to find the required size and position information.
 \par \page 
 #{\footnote {#}IDH_CWS_ONREADWDWSTATE}
 ${\footnote {$}TPJCustomWdwState.OnReadWdwState}
@@ -625,7 +673,9 @@ ${\footnote {$}TPJWdwState events}
 
 \pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
 \par 
-\par \pard \tx200 \tab {\strike OnGetIniData}{\v IDH_WS_ONGETINIDATA}
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab {\strike OnAfterWindowRestored}{\v IDH_CWS_ONAFTERWINDOWRESTORED}
+\par \tab {\strike OnAfterWindowSized}{\v IDH_CWS_ONAFTERWINDOWSIZED}\plain\f0\fs18\cf0 
+\par \tab {\strike OnGetIniData}{\v IDH_WS_ONGETINIDATA}
 \par \tab {\strike OnReadWdwState}{\v IDH_CWS_ONREADWDWSTATE}
 \par \page 
 #{\footnote {#}IDH_WS_ONGETINIDATA}
@@ -922,7 +972,9 @@ ${\footnote {$}TPJRegWdwState events}
 
 \pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
 \par 
-\par \pard \tx200 \tab {\strike OnGetRegData}{\v IDH_RWS_ONGETREGDATA}
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab {\strike OnAfterWindowRestored}{\v IDH_CWS_ONAFTERWINDOWRESTORED}
+\par \tab {\strike OnAfterWindowSized}{\v IDH_CWS_ONAFTERWINDOWSIZED}\plain\f0\fs18\cf0 
+\par \tab {\strike OnGetRegData}{\v IDH_RWS_ONGETREGDATA}
 \par \plain\f1\fs18\cf0 \tab {\strike OnGettingRegData}{\v IDH_RWS_ONGETTINGREGDATA}
 \par \tab {\strike OnPuttingRegData}{\v IDH_RWS_ONPUTTINGREGDATA}\plain\f0\fs18\cf0 
 \par \tab {\strike OnReadWdwState}{\v IDH_CWS_ONREADWDWSTATE}
@@ -1177,7 +1229,9 @@ ${\footnote {$}TPJUserWdwState events}
 
 \pard \plain \plain\f0\fs18\cf0\b Events\plain\f0\fs18\cf0 
 \par 
-\par \pard \tx200 \tab {\strike OnReadData}{\v IDH_UWS_ONREADDATA}
+\par \pard \tx200 \plain\f1\fs18\cf0 \tab {\strike OnAfterWindowRestored}{\v IDH_CWS_ONAFTERWINDOWRESTORED}
+\par \tab {\strike OnAfterWindowSized}{\v IDH_CWS_ONAFTERWINDOWSIZED}\plain\f0\fs18\cf0 
+\par \tab {\strike OnReadData}{\v IDH_UWS_ONREADDATA}
 \par \tab {\strike OnSaveData}{\v IDH_UWS_ONSAVEDATA}
 \par \page 
 #{\footnote {#}IDH_UWS_ONREADDATA}

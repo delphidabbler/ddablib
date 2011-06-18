@@ -1,6 +1,6 @@
 <*HelpAuthor HTA1.9*>
 AK
-57
+59
 [Footnotes]
 #=IDH_PJWDWSTATE
 $=PJWdwState unit
@@ -908,7 +908,7 @@ IDH_TPJCUSTOMWDWSTATE
 $=TPJCustomWdwState events
 @=Events for TPJCustomWdwState.
 [End]
-1
+3
 HS
 1
 0
@@ -916,11 +916,131 @@ HS
 0
 IDH_CWS_ONREADWDWSTATE
 
-501
+HS
+2
+0
+
+0
+IDH_CWS_ONAFTERWINDOWRESTORED
+
+HS
+3
+0
+
+0
+IDH_CWS_ONAFTERWINDOWSIZED
+
+842
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
 \par 
 \par \pard \tx200 \plain\f0\fs18\cf1\i Protected\plain\f1\fs18\cf1\i :\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1\i \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 OnReadWdwState\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par 
+\par \plain\f1\fs18\cf1\i Published:\plain\f1\fs18\cf1 
+\par \tab \plain\f1\fs18\cf2 \protect <HS 2>\plain\f1\fs18\cf1 OnAfterWindowRestored\plain\f1\fs18\cf2 \protect </HS 2>\plain\f1\fs18\cf1 
+\par \tab \plain\f1\fs18\cf2 \protect <HS 3>\plain\f1\fs18\cf1 OnAfterWindowSized\plain\f1\fs18\cf2 \protect </HS 3>\plain\f0\fs18\cf1 
+\par }
+
+[Footnotes]
+#=IDH_CWS_ONAFTERWINDOWRESTORED
+$=TPJCustomWdwState.OnAfterWindowRestored
+K=TPJCustomWdwState,OnAfterWindowRestored;OnAfterWindowRestored,TPJCustomWdwState;OnAfterWindowRestored
+A=TPJCustomWdwState_OnAfterWindowRestored;OnAfterWindowRestored_event;OnAfterWindowRestored
+@=TPJCustomWdwState.OnAfterWindowRestored event topic.
+[End]
+6
+KP
+1
+HS
+2
+0
+
+0
+IDH_CWS_AUTOSAVERESTORE
+
+HS
+3
+0
+
+0
+IDH_CWS_RESTORE
+
+HS
+4
+0
+
+0
+
+AL(TPJCustomWdwState_OnAfterWindowSized)
+NS
+17
+HS
+18
+0
+
+0
+IDH_TPJCUSTOMWDWSTATE
+
+1973
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 17>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJCustomWdwState.OnAfterWindowRestored
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 18>\plain\f0\fs18\cf2 TPJCustomWdwState\plain\f0\fs18\cf1 \protect </HS 18>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf2 See also\plain\f1\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 17>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2 Protected e\plain\f0\fs18\cf2 vent that allows user to change the window data read from storage before the window is displayed.
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf2\b property\plain\f2\fs18\cf2  OnAfterWindowRestored: \plain\f3\fs18\cf2 TNotifyEvent\plain\f2\fs18\cf2 ;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f2\fs18\cf2 
+\par \plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This published event is triggered just after the window has been restored. This occurs either after program start-up if the \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 AutoSaveRestore\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2  property is True or after the \plain\f0\fs18\cf1 \protect <HS 3>\plain\f0\fs18\cf2 Restore\plain\f0\fs18\cf1 \protect </HS 3>\plain\f0\fs18\cf2  method has been called.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Use th\plain\f1\fs18\cf2 is event\plain\f0\fs18\cf2  if you need to determine the state of the restored window or its restored size. Use methods of the host form to find the required information.
+\par }
+
+[Footnotes]
+#=IDH_CWS_ONAFTERWINDOWSIZED
+$=TPJCustomWdwState.OnAfterWindowSized
+K=TPJCustomWdwState,OnAfterWindowSized;OnAfterWindowSized,TPJCustomWdwState;OnAfterWindowSized
+A=TPJCustomWdwState_OnAfterWindowSized;OnAfterWindowSized_event;OnAfterWindowSized
+@=TPJCustomWdwState.OnAfterWindowSized event topic.
+[End]
+4
+KP
+1
+HS
+4
+0
+
+0
+
+AL(TPJCustomWdwState_OnAfterWindowRestored)
+NS
+17
+HS
+18
+0
+
+0
+IDH_TPJCUSTOMWDWSTATE
+
+1800
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 17>\plain\f0\fs8\cf2 
+\par \plain\f0\fs22\cf3\b TPJCustomWdwState.OnAfterWindowSized
+\par \plain\f0\fs12\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 18>\plain\f0\fs18\cf2 TPJCustomWdwState\plain\f0\fs18\cf1 \protect </HS 18>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf2 See also\plain\f1\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 17>\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f1\fs18\cf2 Protected e\plain\f0\fs18\cf2 vent that allows user to change the window data read from storage before the window is displayed.
+\par 
+\par \plain\f2\fs18\cf1\b \protect <KP 1>\plain\f2\fs18\cf2\b property\plain\f2\fs18\cf2  OnAfterWindowSized: \plain\f3\fs18\cf2 TNotifyEvent\plain\f2\fs18\cf2 ;\plain\f2\fs18\cf1 \protect </KP 1>\plain\f2\fs18\cf2 
+\par \plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 This published event is triggered just after the window's size has been set. This occurs before the window is actually restored on screen and before its state has been set.
+\par \plain\f0\fs8\cf2 
+\par \plain\f0\fs18\cf2 Use th\plain\f1\fs18\cf2 is\plain\f0\fs18\cf2  \plain\f1\fs18\cf2 event\plain\f0\fs18\cf2  if you need to determine the normal size and position of the window, regardless of its final state. Use methods of the host form to find the required size and position information.
 \par }
 
 [Footnotes]
@@ -1757,7 +1877,7 @@ IDH_TPJWDWSTATE
 $=TPJWdwState events
 @=Events for TPJWdwState.
 [End]
-2
+4
 HS
 1
 0
@@ -1772,10 +1892,26 @@ HS
 0
 IDH_CWS_ONREADWDWSTATE
 
-503
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
+HS
+3
+0
+
+0
+IDH_CWS_ONAFTERWINDOWRESTORED
+
+HS
+4
+0
+
+0
+IDH_CWS_ONAFTERWINDOWSIZED
+
+829
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
 \par 
-\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 OnGetIniData\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 3>\plain\f1\fs18\cf1 OnAfterWindowRestored\plain\f1\fs18\cf2 \protect </HS 3>\plain\f1\fs18\cf1 
+\par \tab \plain\f1\fs18\cf2 \protect <HS 4>\plain\f1\fs18\cf1 OnAfterWindowSized\plain\f1\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 OnGetIniData\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 OnReadWdwState\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
 \par }
 
@@ -2649,7 +2785,7 @@ IDH_TPJREGWDWSTATE
 $=TPJRegWdwState events
 @=Events for TPJRegWdwState.
 [End]
-4
+6
 HS
 1
 0
@@ -2678,10 +2814,26 @@ HS
 0
 IDH_RWS_ONPUTTINGREGDATA
 
-822
+HS
+5
+0
+
+0
+IDH_CWS_ONAFTERWINDOWRESTORED
+
+HS
+6
+0
+
+0
+IDH_CWS_ONAFTERWINDOWSIZED
+
+1118
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
 \par 
-\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 OnGetRegData\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 5>\plain\f1\fs18\cf1 OnAfterWindowRestored\plain\f1\fs18\cf2 \protect </HS 5>\plain\f1\fs18\cf1 
+\par \tab \plain\f1\fs18\cf2 \protect <HS 6>\plain\f1\fs18\cf1 OnAfterWindowSized\plain\f1\fs18\cf2 \protect </HS 6>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 OnGetRegData\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 3>\plain\f1\fs18\cf1 OnGettingRegData\plain\f1\fs18\cf2 \protect </HS 3>\plain\f1\fs18\cf1 
 \par \tab \plain\f1\fs18\cf2 \protect <HS 4>\plain\f1\fs18\cf1 OnPuttingRegData\plain\f1\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 OnReadWdwState\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
@@ -3445,7 +3597,7 @@ IDH_TPJUSERWDWSTATE
 $=TPJUserWdwState events
 @=Events for TPJUserWdwState.
 [End]
-2
+4
 HS
 1
 0
@@ -3460,10 +3612,26 @@ HS
 0
 IDH_UWS_ONSAVEDATA
 
-527
+HS
+3
+0
+
+0
+IDH_CWS_ONAFTERWINDOWRESTORED
+
+HS
+4
+0
+
+0
+IDH_CWS_ONAFTERWINDOWSIZED
+
+823
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Events\plain\f0\fs18\cf1 
 \par 
-\par \pard \tx200 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 OnReadData\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
+\par \pard \tx200 \plain\f1\fs18\cf1 \tab \plain\f1\fs18\cf2 \protect <HS 3>\plain\f1\fs18\cf1 OnAfterWindowRestored\plain\f1\fs18\cf2 \protect </HS 3>\plain\f1\fs18\cf1 
+\par \tab \plain\f1\fs18\cf2 \protect <HS 4>\plain\f1\fs18\cf1 OnAfterWindowSized\plain\f1\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
+\par \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 OnReadData\plain\f0\fs18\cf2 \protect </HS 1>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f1\fs18\cf1 OnSaveData\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
 \par }
 
