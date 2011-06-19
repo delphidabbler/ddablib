@@ -4,7 +4,9 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
-Release ***NEXT***
+Release v5.4 of 19 June 2011
++ Added new OnAfterWindowRestored and OnAfterWindowSized events to all components.
++ Added new topics to help file and updated copyright date.
 + Corrected header comments in various demo project files.
 
 Release v5.3.1 of 15 November 2009
