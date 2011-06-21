@@ -72,348 +72,343 @@ unit PJMD5;
 {$WARN UNSAFE_TYPE OFF}
 {$WARN UNSAFE_CAST OFF}
 
+
 interface
+
 
 uses
   SysUtils, Classes;
 
-type
 
-  ///  Class of exception raised by TPJMD5 and TPJMD5Digest.
+type
+  ///  <summary>Class of exception raised by TPJMD5 and TPJMD5Digest.</summary>
   EPJMD5 = class(Exception);
 
+type
   ///  <summary>
   ///  Record that encapsulates an MD5 digest.
   ///  </summary>
   ///  <remarks>
-  ///  Provides alternative ways of accessing the digest data: as a byte array,
-  ///  using the Bytes[] field, as a LongWord array, using the LongWords[] field
-  ///  or as four named LongWord fields: A, B, C and D. Overloaded operators
-  ///  permit equality testing with, and implicit casting to, strings and byte
-  ///  arrays.
+  ///  <para>Provides alternative ways of accessing the digest data: as a byte
+  ///  array, using the Bytes[] field, as a LongWord array, using the
+  ///  LongWords[] field or as four named LongWord fields: A, B, C and D.</para>
+  ///  <para>Overloaded operators permit equality testing with, and implicit
+  ///  casting to and from, strings and byte arrays.</para>
   ///  </remarks>
   TPJMD5Digest = record
   strict private
-    ///  Read accessor for Parts[] property.
+    ///  <summary>Read accessor for Parts[] property.</summary>
     function GetLongWord(Idx: Integer): LongWord;
   public
-    // ** NOTE XML Doc can't see doc comments for these operator overloads
-    // Tests all combinations of TPJMD5Digest, string and TBytes records for
-    // equality.
+    ///  <summary>Compares two TPJMD5Digest records for equality.</summary>
     class operator Equal(const D1, D2: TPJMD5Digest): Boolean;
+    ///  <summary>Compares a TPJMD5Digest record and a TBytes array for
+    ///  equality.</summary>
     class operator Equal(const D: TPJMD5Digest; const B: TBytes): Boolean;
+    ///  <summary>Compares a TBytes arrays and a TPJMD5Digest record for
+    ///  equality.</summary>
     class operator Equal(const B: TBytes; const D: TPJMD5Digest): Boolean;
+    ///  <summary>Compares a TPJMD5Digest record and a Unicode string for
+    ///  equality.</summary>
     class operator Equal(const D: TPJMD5Digest; const S: string): Boolean;
+    ///  <summary>Compares a Unicode string and a TPJMD5Digest record for
+    ///  equality.</summary>
     class operator Equal(const S: string; const D: TPJMD5Digest): Boolean;
-    // Tests all combinations of TPJMD5Digest, string and TBytes records for
-    // inequality.
+    ///  <summary>Compares two TPJMD5Digest records for inequality.</summary>
     class operator NotEqual(const D1, D2: TPJMD5Digest): Boolean;
+    ///  <summary>Compares a TPJMD5Digest record and a TBytes array for
+    ///  inequality.</summary>
     class operator NotEqual(const D: TPJMD5Digest; const B: TBytes): Boolean;
+    ///  <summary>Compares a TBytes arrays and a TPJMD5Digest record for
+    ///  inequality.</summary>
     class operator NotEqual(const B: TBytes; const D: TPJMD5Digest): Boolean;
+    ///  <summary>Compares a TPJMD5Digest record and a Unicode string for
+    ///  inequality.</summary>
     class operator NotEqual(const D: TPJMD5Digest; const S: string): Boolean;
+    ///  <summary>Compares a Unicode string and a TPJMD5Digest record for
+    ///  inequality.</summary>
     class operator NotEqual(const S: string; const D: TPJMD5Digest): Boolean;
-    // Converts a TPJMD5Digest record to a (hexadecimal) string.
+    ///  <summary>Creates a 32 character hexadecimal Unicode string
+    ///  representation of digest D.</summary>
     class operator Implicit(const D: TPJMD5Digest): string;
-    // Creates a TPJMD5Digest record by decoding a string, which must have 32
-    // characters and contain only hex digits.
+    ///  <summary>Creates a TPJMD5Digest record from Unicode string S by
+    ///  interpreting S as hexadecimal.</summary>
+    ///  <remarks>S must have exactly 32 characters and may contain only valid
+    ///  hexadecimal characters.</remarks>
     class operator Implicit(const S: string): TPJMD5Digest;
-    // Creates a byte array containing the digest data.
+    ///  <summary>Creates an array of bytes from the data contained in
+    ///  TPJMD5Digest record D.</summary>
+    ///  <remarks>The resulting byte array contains a copy of the record's
+    ///  Bytes field.</remarks>
     class operator Implicit(const D: TPJMD5Digest): TBytes;
-    // Creates a TPJMD5Digest record from Byte array B, which must have at
-    // least 16 elements. If B has more than 16 elements, elements from B[16]
-    // onwards are ignored.
+    ///  <summary>Creates a TPJMD5Digest record from the data contained in byte
+    ///  array B.</summary>
+    ///  <remarks>B must have at least 16 elements. If B has more than 16
+    ///  elements, elements from B[16] onwards are ignored.</remarks>
     class operator Implicit(const B: TBytes): TPJMD5Digest;
-    ///  <summary>
-    ///  Default array property that permits access to the longwords of digest
-    ///  by index.
-    ///  </summary>
-    ///  <remarks>
-    ///  Provided mainly to permit the record to be directly indexed: D[Idx],
-    ///  D.Parts[Idx] and D.LongWords[Idx] are all equivalent if D is a
-    ///  TPJMD5Digest.
-    ///  </remarks>
+    ///  <summary>Default array property that permits access to the long words
+    ///  of the digest by index.</summary>
+    ///  <remarks>Provided mainly to permit the record to be directly indexed:
+    ///  D[Idx], D.Parts[Idx] and D.LongWords[Idx] are all equivalent if D is a
+    ///  TPJMD5Digest.</remarks>
     property Parts[Idx: Integer]: LongWord read GetLongWord; default;
-    ///  <summary>
-    ///  Variant record that provides access to the digest as an array of bytes,
-    ///  an array of LongWords or as LongWord fields named A, B, C and D.
-    ///  </summary>
+    ///  <summary>Variant record that provides access to the digest as an array
+    ///  of bytes, an array of LongWords or as LongWord fields named A, B, C and
+    ///  D.</summary>
     case Integer of
-      0: (Bytes: packed array[0..15] of Byte);
-      1: (LongWords: packed array[0..3] of LongWord);
-      2: (A, B, C, D: LongWord);
+      0: (
+        ///  <summary>Digest's data represented as an array of bytes.</summary>
+        Bytes: packed array[0..15] of Byte
+      );
+      1: (
+        ///  <summary>Digest's data represented as an array of long words.
+        ///  </summary>
+        LongWords: packed array[0..3] of LongWord
+      );
+      2: (
+        ///  <summary>First long word of digest's data.</summary>
+        ///  <remarks>Equivalent to LongWords[0].</remarks>
+        A: LongWord;
+        ///  <summary>Second long word of digest's data.</summary>
+        ///  <remarks>Equivalent to LongWords[1].</remarks>
+        B: LongWord;
+        ///  <summary>Third long word of digest's data.</summary>
+        ///  <remarks>Equivalent to LongWords[2].</remarks>
+        C: LongWord;
+        ///  <summary>Fourth long word of digest's data.</summary>
+        ///  <remarks>Equivalent to LongWords[3].</remarks>
+        D: LongWord;
+      );
   end;
 
+type
   ///  <summary>
   ///  Class that implements the MD5 message digest algorithm.
   ///  </summary>
   ///  <remarks>
-  ///  Digests can be created with one call to one of the overloaded Calculate
-  ///  class methods. Multiple data sources can be added to a digest using the
-  ///  overloaded Process methods. Each method updates the current digest.
-  ///  Finalize ends processing and creates the digest which is accessed via the
-  ///  Digest property.
+  ///  <para>Digests of single data sources can be created with one call to one
+  ///  of the overloaded Calculate or the CalculateFile class methods.</para>
+  ///  <para>Multiple data sources can be added to a digest using the one of the
+  ///  overloaded Process or the ProcessFile methods. Each method updates the
+  ///  current digest. Finalize ends processing and creates the digest which is
+  ///  accessed via the Digest property.</para>
   ///  </remarks>
   TPJMD5 = class(TObject)
   strict private
     const
-      ///  Size, in LongWords, of a data block (chunk).
+      ///  <summary>Size, in LongWords, of a data block (chunk).</summary>
       BlockSize = 16;
-      ///  Size, in bytes, of a data chunk.
+      ///  <summary>Size, in bytes, of a data chunk.</summary>
       ChunkSize = SizeOf(LongWord) * BlockSize;
     type
-      ///  Data chunk. One chunk is processed at a time by Transform method.
+      ///  <summary>Data chunk.</summary>
+      ///  <remarks>One chunk is processed at a time by Transform method.
+      ///  </remarks>
       TMDChunk = array[0..Pred(ChunkSize)] of Byte;
-      ///  Buffer storing bytes to be processed.
+    type
+      ///  <summary>Buffer storing bytes to be processed.</summary>
       TMDBuffer = record
-        ///  Stores data being (or to be) processed
+        ///  <summary>Stores data being (or to be) processed.</summary>
         Data: TMDChunk;
-        ///  Current position in data storage
+        ///  <summary>Current position in data storage.</summary>
         Cursor: Byte;
-        ///  Informs if Data buffer is empty
+        ///  <summary>Informs if Data buffer is empty.</summary>
         function IsEmpty: Boolean;
-        ///  Informs if Data buffer is full of data
+        ///  <summary>Informs if Data buffer is full of data.</summary>
         function IsFull: Boolean;
-        ///  Returns amount of space remaining in Data buffer
+        ///  <summary>Returns amount of space remaining in Data buffer.
+        ///  </summary>
         function SpaceRemaining: Byte;
-        ///  Copies Count bytes starting at index StartIdx from Bytes array into
-        ///  Data buffer.
+        ///  <summary>Copies Count bytes starting at index StartIdx from Bytes
+        ///  array into Data buffer.</summary>
         procedure Copy(const Bytes: array of Byte; const StartIdx: Cardinal;
           const Count: Cardinal);
-        ///  Clears and zeroes the Data buffer
+        ///  <summary>Clears and zeroes the Data buffer.</summary>
         procedure Clear;
       end;
     type
-      ///  <summary>
-      ///  Buffer used to read data from streams and files.
-      ///  </summary>
+      ///  <summary>Buffer used to read data from streams and files.</summary>
       TMDReadBuffer = record
-        ///  Pointer to buffer
+        ///  <summary>Pointer to buffer.</summary>
         Buffer: Pointer;
-        ///  Size of buffer
+        ///  <summary>Size of buffer.</summary>
         Size: Cardinal;
-        ///  Allocates a buffer of given size. Frees any existing buffer.
+        ///  <summary>Allocates a buffer of given size, freeing any existing
+        ///  buffer first.</summary>
         procedure Alloc(const ASize: Cardinal);
-        ///  Releases (de-allocates) the buffer.
+        ///  <summary>Releases (de-allocates) the buffer.</summary>
         procedure Release;
       end;
     var
-      ///  Current state of digest
+      ///  <summary>Current state of digest.</summary>
       fState: TPJMD5Digest;
-      ///  Value of Digest property
+      ///  <summary>Value of Digest property.</summary>
       fDigest: TPJMD5Digest;
-      ///  Value of Finalized property
+      ///  <summary>Value of Finalized property.</summary>
       fFinalized: Boolean;
-      ///  Number of bytes processed
+      ///  <summary>Number of bytes processed.</summary>
       fByteCount: UINT64;
-      ///  Buffer that stores unprocessed data
+      ///  <summary>Buffer that stores unprocessed data.</summary>
       fBuffer: TMDBuffer;
-      ///  Buffer used to read data from streams etc
+      ///  <summary>Buffer used to read data from streams etc.</summary>
       fReadBuffer: TMDReadBuffer;
-      ///  Value of ReadBufferSize property
+      ///  <summary>Value of ReadBufferSize property.</summary>
       fReadBufferSize: Cardinal;
-    ///  <summary>
-    ///  Read accessor for Digest property. Finalizes digest and returns it.
+    ///  <summary>Getter for Digest property. Finalizes digest and returns it.
     ///  </summary>
     function GetDigest: TPJMD5Digest;
-    ///  <summary>
-    ///  Transforms byte array Bytes from starting position StartIdx, updating
-    ///  digest.
-    ///  </summary>
+    ///  <summary>Transforms byte array Bytes from starting position StartIdx,
+    ///  updating digest.</summary>
     procedure Transform(const Bytes: array of Byte; const StartIdx: Cardinal);
-    ///  <summary>
-    ///  Updates digest by processing Count bytes from byte array X, starting at
-    ///  index StartIdx. Any unprocessed bytes are buffered.
+    ///  <summary>Updates digest by processing Count bytes from byte array X,
+    ///  starting at index StartIdx. Any unprocessed bytes are buffered.
     ///  </summary>
     procedure Update(const X: array of Byte; const StartIdx, Count: Cardinal);
-    ///  <summary>
-    ///  Helper method to perform calculations of digests for most Calculate
-    ///  methods. Calls anonymous method DoProcess to perform the actual
-    ///  processing.
-    ///  </summary>
+    ///  <summary>Helper method to perform calculations of digests for most
+    ///  Calculate methods.</summary>
+    ///  <remarks>Calls anonymous method DoProcess to perform the actual
+    ///  processing.</remarks>
     class function DoCalculate(const DoProcess: TProc<TPJMD5>): TPJMD5Digest;
   public
     const
-      ///  Default size of buffer for block reads from streams and files.
+      ///  <summary>Default size of buffer for block reads from streams and
+      ///  files.</summary>
       DefReadBufferSize = 64 * 1024;  // 64Kb
-    ///  <summary>
-    ///  Object constructor. Sets up object and begins a new digest.
+  public
+    ///  <summary>Object constructor. Sets up object and begins a new digest.
     ///  </summary>
     constructor Create;
-    ///  <summary>
-    ///  Object destructor. Tears down object
-    ///  </summary>
+    ///  <summary>Object destructor. Tears down object.</summary>
     destructor Destroy; override;
-    ///  <summary>
-    ///  Calculates a digest of Count bytes read from byte array X, starting at
-    ///  index StartIdx. Raises a EPJMD5 exception if there are less than Count
-    ///  bytes from StartIdx to the end of the array.
-    ///  </summary>
+    ///  <summary>Calculates a digest of Count bytes read from byte array X,
+    ///  starting at index StartIdx.</summary>
     ///  <remarks>
-    ///  If StartIdx is beyond the end of the array then no data is processed.
+    ///  <para>Raises a EPJMD5 exception if there are less than Count bytes from
+    ///  StartIdx to the end of the array.</para>
+    ///  <para>If StartIdx is beyond the end of the array then no data is
+    ///  processed.</para>
     ///  </remarks>
     class function Calculate(const X: TBytes; const StartIdx, Count: Cardinal):
       TPJMD5Digest; overload;
-    ///  <summary>
-    ///  Calculates a digest of Count bytes read from byte array X. Raises an
-    ///  EPJMD5 exception if Count is greater than the number of elements in X.
+    ///  <summary>Calculates a digest of Count bytes read from byte array X.
     ///  </summary>
+    ///  <remarks>Raises an EPJMD5 exception if Count is greater than the number
+    ///  of elements in X.</remarks>
     class function Calculate(const X: TBytes; const Count: Cardinal):
       TPJMD5Digest; overload;
-    ///  <summary>
-    ///  Calculates a digest of all the bytes of byte array X.
+    ///  <summary>Calculates a digest of all the bytes of byte array X.
     ///  </summary>
     class function Calculate(const X: TBytes): TPJMD5Digest; overload;
-    ///  <summary>
-    ///  Calculates a digest of Count bytes read from untyped buffer Buf. Buf
-    ///  must contain at least Count bytes (this is not checked).
-    ///  </summary>
+    ///  <summary>Calculates a digest of Count bytes read from untyped buffer
+    ///  Buf.</summary>
+    ///  <remarks>Buf must contain at least Count bytes (this is not checked).
+    ///  </remarks>
     class function Calculate(const Buf; const Count: Cardinal): TPJMD5Digest;
       overload;
-    ///  <summary>
-    ///  Calculates a digest of the characters of RawByteString S.
+    ///  <summary>Calculates a digest of the characters of ANSI string S.
     ///  </summary>
     class function Calculate(const S: RawByteString): TPJMD5Digest; overload;
-    ///  <summary>
-    ///  Calculates a digest of the bytes of UnicodeString S according to the
-    ///  given encoding.
-    ///  </summary>
+    ///  <summary>Calculates a digest of the bytes of Unicode string S according
+    ///  to the given encoding.</summary>
     class function Calculate(const S: UnicodeString;
       const Encoding: TEncoding): TPJMD5Digest; overload;
-    ///  <summary>
-    ///  Calculates a digest of the bytes of UnicodeString S according to the
-    ///  default encoding.
-    ///  </summary>
+    ///  <summary>Calculates a digest of the bytes of Unicode string S according
+    ///  to the default encoding.</summary>
     class function Calculate(const S: UnicodeString): TPJMD5Digest; overload;
-    ///  <summary>
-    ///  Calculates a digest of the bytes from the current position to the end
-    ///  of the given Stream.
-    ///  </summary>
-    ///  <remarks>
-    ///  The stream is read in chunks of size DefReadBufferSize.
+    ///  <summary>Calculates a digest of the bytes from the current position to
+    ///  the end of the given Stream.</summary>
+    ///  <remarks>The stream is read in chunks of size DefReadBufferSize.
     ///  </remarks>
     class function Calculate(const Stream: TStream): TPJMD5Digest; overload;
-    ///  <summary>
-    ///  Calculates a digest of up to Count bytes from the current position in
-    ///  the given stream. If Count is greater than available bytes in stream,
-    ///  a EPJMD5 exception is raised.
-    ///  </summary>
+    ///  <summary>Calculates a digest of up to Count bytes from the current
+    ///  position in the given stream.</summary>
     ///  <remarks>
-    ///  The stream is read in chunks of size DefReadBufferSize.
+    ///  <para>If Count is greater than available bytes in stream, an EPJMD5
+    ///  exception is raised.</para>
+    ///  <para>The stream is read in chunks of size DefReadBufferSize.</para>
     ///  </remarks>
     class function Calculate(const Stream: TStream;
       const Count: Int64): TPJMD5Digest; overload;
-    ///  <summary>
-    ///  Calculates a digest of all the bytes of the named file.
+    ///  <summary>Calculates a digest of all the bytes of the named file.
     ///  </summary>
-    ///  <remarks>
-    ///  The file is read in chunks of size DefReadBufferSize.
+    ///  <remarks>The file is read in chunks of size DefReadBufferSize.
     ///  </remarks>
     class function CalculateFile(const FileName: TFileName): TPJMD5Digest;
-    ///  <summary>
-    ///  Adds Count bytes from byte array X, starting at index StartIdx, to the
-    ///  digest. If there are less than Count bytes from StartIdx to the end of
-    ///  the array then an EPJMD5 exception is raised.
-    ///  </summary>
+    ///  <summary>Adds Count bytes from byte array X, starting at index
+    ///  StartIdx, to the digest.</summary>
     ///  <remarks>
-    ///  If StartIdx is beyond the end of the array or if Count is zero then
-    ///  there is nothing to do and the digest remains unchanged.
+    ///  <para>If there are less than Count bytes from StartIdx to the end of
+    ///  the array then an EPJMD5 exception is raised.</para>
+    ///  <para>If StartIdx is beyond the end of the array or if Count is zero
+    ///  then there is nothing to do and the digest remains unchanged.</para>
     ///  </remarks>
     procedure Process(const X: TBytes; const StartIdx, Count: Cardinal);
       overload;
-    ///  <summary>
-    ///  Adds Count bytes from a byte array X to the digest. If Count is greater
-    ///  than the size of the array an EPJMD5 exception is raised.
-    ///  </summary>
+    ///  <summary>Adds Count bytes from a byte array X to the digest.</summary>
+    ///  <remarks>If Count is greater than the size of the array an EPJMD5
+    ///  exception is raised.</remarks>
     procedure Process(const X: TBytes; const Count: Cardinal); overload;
-    ///  <summary>
-    ///  Adds all the bytes from a byte array X to the digest.
+    ///  <summary>Adds all the bytes from a byte array X to the digest.
     ///  </summary>
     procedure Process(const X: TBytes); overload;
-    ///  <summary>
-    ///  Adds Count bytes from untyped buff Buf to the digest. Buf must contain
-    ///  sufficient data (this is not checked).
+    ///  <summary>Adds Count bytes from untyped buffer Buf to the digest.
     ///  </summary>
+    ///  <remarks>Buf must contain sufficient data (this is not checked).
+    ///  </remarks>
     procedure Process(const Buf; const Count: Cardinal); overload;
-    ///  <summary>
-    ///  Adds all the characters from RawByteString S as bytes to the digest.
-    ///  </summary>
+    ///  <summary>Adds all the characters from ANSI string S as bytes to the
+    ///  digest.</summary>
     procedure Process(const S: RawByteString); overload;
-    ///  <summary>
-    ///  Adds bytes from UnicodeString S according to the given Encoding to the
-    ///  digest.
-    ///  </summary>
+    ///  <summary>Adds bytes from Unicode string S, according to the given
+    ///  encoding, to the digest.</summary>
     procedure Process(const S: UnicodeString; const Encoding: TEncoding);
       overload;
-    ///  <summary>
-    ///  Adds bytes from UnicodeString S according to the Default encoding to
-    ///  the digest.
-    ///  </summary>
+    ///  <summary>Adds bytes from Unicode string S, according to the Default
+    ///  encoding, to the digest.</summary>
     procedure Process(const S: UnicodeString); overload;
-    ///  <summary>
-    ///  Adds bytes to the digest from a stream starting from the current
-    ///  position up to the end of the stream.
-    ///  </summary>
-    ///  <remarks>
-    ///  The stream is read in chunks of size ReadBufferSize.
-    ///  </remarks>
+    ///  <summary>Adds bytes to the digest from a stream starting from the
+    ///  current position up to the end of the stream.</summary>
+    ///  <remarks>The stream is read in chunks of size ReadBufferSize.</remarks>
     procedure Process(const Stream: TStream); overload;
-    ///  <summary>
-    ///  Adds up to Count bytes from to the digest from a stream starting from
-    ///  the current position. If Count is greater than available bytes in
-    ///  stream an EPJMD5 exception is raised. If Count is -ve it is treated as
-    ///  if it were 0.
-    ///  </summary>
+    ///  <summary>Adds up to Count bytes from to the digest from a stream,
+    ///  starting from the current position.</summary>
     ///  <remarks>
-    ///  The stream is read in chunks of size ReadBufferSize.
+    ///  <para>If Count is greater than available bytes in stream an EPJMD5
+    ///  exception is raised. If Count is -ve it is treated as if it were 0.
+    ///  </para>
+    ///  <para>The stream is read in chunks of size ReadBufferSize.</para>
     ///  </remarks>
     procedure Process(const Stream: TStream; const Count: Int64); overload;
-    ///  <summary>
-    ///  Adds all the bytes from the named file to the digest.
+    ///  <summary>Adds all the bytes from the named file to the digest.
     ///  </summary>
-    ///  <remarks>
-    ///  The file is read in chunks of size ReadBufferSize.
-    ///  </remarks>
+    ///  <remarks>The file is read in chunks of size ReadBufferSize.</remarks>
     procedure ProcessFile(const FileName: TFileName);
-    ///  <summary>
-    ///  Discards any current digest, whether finalized or not.
+    ///  <summary>Discards any current digest, whether finalized or not.
     ///  </summary>
-    ///  <remarks>
-    ///  Sets the Finalized property to False.
-    ///  </remarks>
+    ///  <remarks>Sets the Finalized property to False.</remarks>
     procedure Reset;
-    ///  <summary>
-    ///  Finalizes the current digest.
-    ///  </summary>
-    ///  <remarks>
-    ///  Sets the Finalized property to True. An exception will be raised if
-    ///  any Process method is called after finalization.
-    ///  </remarks>
+    ///  <summary>Finalizes the current digest.</summary>
+    ///  <remarks>Sets the Finalized property to True. An exception will be
+    ///  raised if any Process method is called after finalization.</remarks>
     procedure Finalize;
-    ///  <summary>
-    ///  Returns the MD5 digest.
-    ///  </summary>
-    ///  <remarks>
-    ///  Referencing this property finalizes the digest by calling Finalize. The
-    ///  Finalized property is set to True.
-    ///  </remarks>
+    ///  <summary>Returns the MD5 digest.</summary>
+    ///  <remarks>Referencing this property finalizes the digest by calling
+    ///  Finalize. The Finalized property is set to True. Once the property is
+    ///  read no further data can be added to the digest.</remarks>
     property Digest: TPJMD5Digest read GetDigest;
-    ///  <summary>
-    ///  Gets and sets the size of buffer used when reading from stream or
-    ///  files.
-    ///  </summary>
+    ///  <summary>Gets and sets the size of buffer used when reading from stream
+    ///  or files.</summary>
     property ReadBufferSize: Cardinal
       read fReadBufferSize write fReadBufferSize default DefReadBufferSize;
-    ///  <summary>
-    ///  Informs if the digest has been finalized.
-    ///  </summary>
-    ///  <remarks>
-    ///  It is an error to process any further data once the digest has been
-    ///  finalized.
-    ///  </remarks>
+    ///  <summary>Informs if the digest has been finalized.</summary>
+    ///  <remarks>It is an error to process any further data once the digest has
+    ///  been finalized.</remarks>
     property Finalized: Boolean read fFinalized;
   end;
 
+
 implementation
+
 
 uses
   Math;
