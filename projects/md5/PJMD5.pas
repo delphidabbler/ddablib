@@ -786,7 +786,7 @@ begin
   D := fState.D;
 
   // Copy bytes from given start index into Block, low order bytes 1st
-  Move(Bytes[StartIdx], Block[0], Length(Block) * SizeOf(LongWord));
+  Move(Bytes[StartIdx], Block[0], SizeOf(Block));
 
   // Round 1
   FF(A, B, C, D, Block[ 0], S11, $d76aa478); // 1
