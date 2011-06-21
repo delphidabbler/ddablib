@@ -16,9 +16,7 @@
 			<DCC_UnitSearchPath>$(BDS)\Source\DUnit\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
 			<DCC_ImageBase>00400000</DCC_ImageBase>
 			<DCC_CVT_WIDENING_STRING_LOST>true</DCC_CVT_WIDENING_STRING_LOST>
-			<DCC_EXPLICIT_STRING_CAST>true</DCC_EXPLICIT_STRING_CAST>
 			<DCC_CVT_ACHAR_TO_WCHAR>true</DCC_CVT_ACHAR_TO_WCHAR>
-			<DCC_EXPLICIT_STRING_CAST_LOSS>true</DCC_EXPLICIT_STRING_CAST_LOSS>
 			<DCC_Platform>x86</DCC_Platform>
 			<DCC_DcuOutput>.</DCC_DcuOutput>
 			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
