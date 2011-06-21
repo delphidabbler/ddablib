@@ -34,7 +34,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2010-2011 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s)
@@ -182,9 +182,6 @@ type
         ///  Clears and zeroes the Data buffer
         procedure Clear;
       end;
-    const
-      ///  Default size of buffer for block reads from streams and files.
-      DefReadBufferSize = 64 * 1024;  // 64Kb
     type
       ///  <summary>
       ///  Buffer used to read data from streams and files.
@@ -235,6 +232,9 @@ type
     ///  </summary>
     class function DoCalculate(const DoProcess: TProc<TPJMD5>): TPJMD5Digest;
   public
+    const
+      ///  Default size of buffer for block reads from streams and files.
+      DefReadBufferSize = 64 * 1024;  // 64Kb
     ///  <summary>
     ///  Object constructor. Sets up object and begins a new digest.
     ///  </summary>
