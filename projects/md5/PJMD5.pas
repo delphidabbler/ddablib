@@ -196,7 +196,7 @@ type
   TPJMD5 = class(TObject)
   strict private
     const
-      ///  <summary>Size, in LongWords, of a data block (chunk).</summary>
+      ///  <summary>Size, in long words, of a data block (chunk).</summary>
       BlockSize = 16;
       ///  <summary>Size, in bytes, of a data chunk.</summary>
       ChunkSize = SizeOf(LongWord) * BlockSize;
@@ -413,110 +413,75 @@ implementation
 uses
   Math;
 
-// Copies the bytes of LongWord array LWords into an array of bytes Bytes. Low
-// order bytes are copied first. The size of Bytes must be the same as the size
-// of LWords in bytes.
-procedure LongWordsToBytes(const LWords: array of LongWord;
-  out Bytes: array of Byte);
-var
-  I, J: Cardinal;
-begin
-  Assert(Length(Bytes) = SizeOf(LongWord) * Length(LWords));
-  J := 0;
-  for I := 0 to Length(LWords) - 1 do
-  begin
-    Bytes[J] := LWords[I] and $FF;
-    Bytes[J + 1] := (LWords[I] shr 8) and $FF;
-    Bytes[J + 2] := (LWords[I] shr 16) and $FF;
-    Bytes[J + 3] := (LWords[I] shr 24) and $FF;
-    Inc(J, 4);
-  end;
-end;
-
-// Copies an array of bytes Bytes, starting at index StartIdx, into an array
-// LWords of LongWord. Assumes that the number of bytes after StartIndex in
-// Bytes is >= the size of LWords. Bytes are copied from LongWord values low
-// order first.
-procedure BytesToLongWords(const Bytes: array of Byte; const StartIdx: Cardinal;
-  out LWords: array of LongWord);
-var
-  I, J: Cardinal;
-begin
-  J := StartIdx;
-  for I := 0 to Length(LWords) - 1 do
-  begin
-    LWords[I] := Bytes[J] or (Bytes[J + 1] shl 8)
-      or (Bytes[J + 2] shl 16) or (Bytes[J + 3] shl 24);
-    Inc(J, 4);
-  end;
-end;
-
-// F, G, H and I are basic MD5 functions.
-
-function F(const X, Y, Z: LongWord): LongWord; inline;
-begin
-  Result := (X and Y) or ((not X) and Z);
-end;
-
-function G(const X, Y, Z: LongWord): LongWord; inline;
-begin
-  Result := (X and Z) or (Y and not Z);
-end;
-
-function H(const X, Y, Z: LongWord): LongWord; inline;
-begin
-  Result := X xor Y xor Z;
-end;
-
-function I(const X, Y, Z: LongWord): LongWord; inline;
-begin
-  Result := Y xor (X or not Z);
-end;
-
 // Rotates LongWord X left by N bits
 function RotateLeft(const X: LongWord; const N: Byte): LongWord; inline;
 begin
   Result := (X shl N) or (X shr (32 - N));
 end;
 
-// FF, GG, HH, and II transformations for rounds 1, 2, 3, and 4.
+// Generalisation of MD5 transformations for rounds 1 to 4.
+procedure Transformer(var A: LongWord; const B, C, D, X: LongWord;
+  const S: Byte; const AC: LongWord;
+  const Fn: TFunc<LongWord, LongWord, LongWord, LongWord>);
+begin
+  A := RotateLeft(A + Fn(B, C, D) + X + AC, S) + B;
+end;
 
+// MD5 transformation for "round 1"
 procedure FF(var A: LongWord; const B, C, D, X: LongWord; const S: Byte;
   const AC: LongWord);
 begin
-  A := RotateLeft(A + F(B, C, D) + X + AC, S) + B;
+  Transformer(
+    A, B, C, D, X, S, AC,
+    function (X, Y, Z: LongWord): LongWord
+    begin
+      // this is the MD5 basic function "F" in reference implementation
+      Result := (X and Y) or ((not X) and Z);
+    end
+  );
 end;
 
+// MD5 transformation for "round 2"
 procedure GG(var A: LongWord; const B, C, D, X: LongWord; const S: Byte;
   const AC: LongWord);
 begin
-  A := RotateLeft(A + G(B, C, D) + X + AC, S) + B;
+  Transformer(
+    A, B, C, D, X, S, AC,
+    function (X, Y, Z: LongWord): LongWord
+    begin
+      // this is the MD5 basic function "G" in reference implementation
+      Result := (X and Z) or (Y and not Z);
+    end
+  );
 end;
 
+// MD5 transformation for "round 3"
 procedure HH(var A: LongWord; const B, C, D, X: LongWord; const S: Byte;
   const AC: LongWord);
 begin
-  A := RotateLeft(A + H(B, C, D) + X + AC, S) + B;
+  Transformer(
+    A, B, C, D, X, S, AC,
+    function (X, Y, Z: LongWord): LongWord
+    begin
+      // this is the MD5 basic function "H" in reference implementation
+      Result := X xor Y xor Z;
+    end
+  );
 end;
 
+// MD5 transformation for "round 4"
 procedure II(var A: LongWord; const B, C, D, X: LongWord; const S: Byte;
   const AC: LongWord);
 begin
-  A := RotateLeft(A + I(B, C, D) + X + AC, S) + B;
-end;
-
-const
-  // Padding applied to end of data stream is a subset of these bytes
-  PADDING: array[0..63] of Byte = (
-    $80, $00, $00, $00, $00, $00, $00, $00,
-    $00, $00, $00, $00, $00, $00, $00, $00,
-    $00, $00, $00, $00, $00, $00, $00, $00,
-    $00, $00, $00, $00, $00, $00, $00, $00,
-    $00, $00, $00, $00, $00, $00, $00, $00,
-    $00, $00, $00, $00, $00, $00, $00, $00,
-    $00, $00, $00, $00, $00, $00, $00, $00,
-    $00, $00, $00, $00, $00, $00, $00, $00
+  Transformer(
+    A, B, C, D, X, S, AC,
+    function (X, Y, Z: LongWord): LongWord
+    begin
+      // this is the MD5 basic function "I" in reference implementation
+      Result := Y xor (X or not Z);
+    end
   );
+end;
 
 resourcestring
   // Error messages
@@ -643,41 +608,55 @@ end;
 
 procedure TPJMD5.Finalize;
 var
-  Index: Cardinal;
+  Offset: Cardinal;
   PadLen: Cardinal;
-  ByteCount: UINT64;
   BitCount: UINT64;
-  EncodedBitCount: array[0..7] of Byte;
+const
+  // Padding applied to end of data stream is a subset of these bytes
+  Padding: array[0..63] of Byte = (
+    $80, $00, $00, $00, $00, $00, $00, $00,
+    $00, $00, $00, $00, $00, $00, $00, $00,
+    $00, $00, $00, $00, $00, $00, $00, $00,
+    $00, $00, $00, $00, $00, $00, $00, $00,
+    $00, $00, $00, $00, $00, $00, $00, $00,
+    $00, $00, $00, $00, $00, $00, $00, $00,
+    $00, $00, $00, $00, $00, $00, $00, $00,
+    $00, $00, $00, $00, $00, $00, $00, $00
+  );
 begin
+
   if fFinalized then
     Exit;
 
-  // Store byte count
-  ByteCount := fByteCount;
+  // Total bytes must be multiple of 64 and end with $80 followed by 0 or more
+  // $00 bytes and terminate in 8 byte bit count.
 
-  // Pad the data and write padding to digest
-  Index := fByteCount mod 64;
-  if Index < (64 - 8) then
-    // write bytes to take length to 56 mod 24
-    PadLen := (64 - 8) - Index
-  else
-    // at or beyond 56th byte: need 128-8-cur_pos bytes
-    PadLen := (128 - 8) - Index;
-  Update(PADDING, 0, PadLen);
-
-  // Write the bit count and let it wrap round
+  // Calculate bit count, letting it wrap round if necessary. This must be done
+  // before padding added to digest because this changes fByteCount. Wrapping
+  // round requires that range check are off.
   {$IFOPT R+}
     {$DEFINE RANGECHECKS}
     {$R-}
   {$ELSE}
     {$UNDEF RANGECHECKS}
   {$ENDIF}
-  BitCount := 8 * ByteCount;
+  BitCount := 8 * fByteCount;
   {$IFDEF RANGECHECKS}
     {$R+}
   {$ENDIF}
-  LongWordsToBytes(Int64Rec(BitCount).Cardinals, EncodedBitCount);
-  Update(EncodedBitCount, 0, SizeOf(EncodedBitCount));
+
+  // Update digest with required padding bytes
+  Offset := fByteCount mod 64;
+  if Offset < (64 - SizeOf(BitCount)) then
+    // below 56th byte
+    PadLen := (64 - SizeOf(BitCount)) - Offset
+  else
+    // at or beyond 56th byte
+    PadLen := (128 - SizeOf(BitCount)) - Offset;
+  Update(Padding, 0, PadLen);
+
+  // Update digest with bit count: these are last 8 bytes
+  Update(TBytes(@BitCount), 0, SizeOf(BitCount));
 
   Assert(fBuffer.IsEmpty);
 
@@ -806,7 +785,8 @@ begin
   C := fState.C;
   D := fState.D;
 
-  BytesToLongWords(Bytes, StartIdx, Block);
+  // Copy bytes from given start index into Block, low order bytes 1st
+  Move(Bytes[StartIdx], Block[0], Length(Block) * SizeOf(LongWord));
 
   // Round 1
   FF(A, B, C, D, Block[ 0], S11, $d76aa478); // 1
