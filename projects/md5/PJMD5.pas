@@ -57,7 +57,7 @@
 
 unit PJMD5;
 
-// Delphi 2009 or later is required to compile: requires Unicode support
+// Delphi 2009 or later is required to compile
 {$UNDEF CANCOMPILE}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 20.0}
@@ -67,6 +67,14 @@ unit PJMD5;
 {$IFNDEF CANCOMPILE}
   {$MESSAGE FATAL 'Delphi 2009 or later required'}
 {$ENDIF}
+
+// Check assumptions about size of data types
+{$IF SizeOf(LongWord) <> 4}
+  {$MESSAGE FATAL 'Size of LongWord assumed to be 4 bytes'}
+{$IFEND}
+{$IF SizeOf(UINT64) <> 8}
+  {$MESSAGE FATAL 'Size of UINT64 assumed to be 8 bytes'}
+{$IFEND}
 
 {$WARN UNSAFE_CODE OFF}
 {$WARN UNSAFE_TYPE OFF}
@@ -413,13 +421,13 @@ implementation
 uses
   Math;
 
-// Rotates LongWord X left by N bits
+///  <summary>Rotates LongWord X left by N bits.</summary>
 function RotateLeft(const X: LongWord; const N: Byte): LongWord; inline;
 begin
   Result := (X shl N) or (X shr (32 - N));
 end;
 
-// Generalisation of MD5 transformations for rounds 1 to 4.
+///  <summary>Generalisation of MD5 transformations for rounds 1 to 4.</summary>
 procedure Transformer(var A: LongWord; const B, C, D, X: LongWord;
   const S: Byte; const AC: LongWord;
   const Fn: TFunc<LongWord, LongWord, LongWord, LongWord>);
@@ -427,7 +435,7 @@ begin
   A := RotateLeft(A + Fn(B, C, D) + X + AC, S) + B;
 end;
 
-// MD5 transformation for "round 1"
+///  <summary>MD5 transformation for "round 1".</summary>
 procedure FF(var A: LongWord; const B, C, D, X: LongWord; const S: Byte;
   const AC: LongWord);
 begin
@@ -441,7 +449,7 @@ begin
   );
 end;
 
-// MD5 transformation for "round 2"
+///  <summary>MD5 transformation for "round 2".</summary>
 procedure GG(var A: LongWord; const B, C, D, X: LongWord; const S: Byte;
   const AC: LongWord);
 begin
@@ -455,7 +463,7 @@ begin
   );
 end;
 
-// MD5 transformation for "round 3"
+///  <summary>MD5 transformation for "round 3".</summary>
 procedure HH(var A: LongWord; const B, C, D, X: LongWord; const S: Byte;
   const AC: LongWord);
 begin
@@ -469,7 +477,7 @@ begin
   );
 end;
 
-// MD5 transformation for "round 4"
+///  <summary>MD5 transformation for "round 4".</summary>
 procedure II(var A: LongWord; const B, C, D, X: LongWord; const S: Byte;
   const AC: LongWord);
 begin
