@@ -950,23 +950,35 @@ begin
     MD5.Process(A, 3, 1);
     Check(MD5.Digest = RFCTests[1].ResultStr,
       'MD5 of 0 bytes expected (A, 3, 1)');
+  finally
+    MD5.Free;
+  end;
 
-    MD5.Reset;
+  A := TBytes.Create(10,20,30);
+  MD5 := TPJMD5.Create;
+  try
     MD5.Process(A, 0, 0);
     Check(MD5.Digest = RFCTests[1].ResultStr,
       'MD5 of 0 bytes expected (A, 0, 0)');
+  finally
+    MD5.Free;
+  end;
 
-    SetLength(A, 0);
-    MD5.Reset;
+  SetLength(A, 0);
+  MD5 := TPJMD5.Create;
+  try
     MD5.Process(A, 0, 0);
     Check(MD5.Digest = RFCTests[1].ResultStr,
       'MD5 of 0 bytes expected (A-length-0, 0, 0)');
+  finally
+    MD5.Free;
+  end;
 
-    MD5.Reset;
+  MD5 := TPJMD5.Create;
+  try
     MD5.Process(EmptyByteArray, 0, 0);
     Check(MD5.Digest = RFCTests[1].ResultStr,
       'MD5 of 0 bytes expected (EmptyByteArray, 0, 0)');
-
   finally
     MD5.Free;
   end;
@@ -1106,7 +1118,12 @@ begin
       SameStr(MD5.Digest, ASCIITestStringRes),
       'Unicode ASCII string test (ASCII encoding)'
     );
-    MD5.Reset;
+  finally
+    MD5.Free;
+  end;
+
+  MD5 := TPJMD5.Create;
+  try
     MD5.Process(UnicodeTestString, TEncoding.Unicode);
     Check(
       SameStr(MD5.Digest, UnicodeTestStringRes),
