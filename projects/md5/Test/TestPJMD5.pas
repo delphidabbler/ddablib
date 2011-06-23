@@ -49,6 +49,7 @@ type
     ResultBin: array[$0..$F] of Byte;
     function SizeOfData: Cardinal;
     function DataAsByteArray: TBytes;
+    function DataAsShortString: ShortString;
     function PointerToData: Pointer;
     function IsEqualResult(const S: string): Boolean; overload;
     function IsEqualResult(const Bytes: array of Byte): Boolean; overload;
@@ -154,6 +155,10 @@ type
     // This test runs all RFC tests
     procedure TestProcessRawByteString;
     procedure TestCalculateRawByteString;
+
+    // Tests Process(ShortString) and Calculate(ShortString) methods
+    procedure TestProcessShortString;
+    procedure TestCalculateShortString;
 
     // Tests Process(UnicodeString) and Calculate(UnicodeString) methods
     // RFC Tests cannot be used with these methods. A special unicode test
@@ -723,6 +728,17 @@ begin
   RunRFCCalcTests(Fn);
 end;
 
+procedure TestTPJMD5.TestCalculateShortString;
+var
+  Fn: TCalculateMethodCall;
+begin
+  Fn := function(const Test: TRFCTest): TPJMD5Digest
+  begin
+    Result := TPJMD5.Calculate(Test.DataAsShortString);
+  end;
+  RunRFCCalcTests(Fn);
+end;
+
 procedure TestTPJMD5.TestCalculateStream;
 var
   Fn: TCalculateMethodCall;
@@ -1022,6 +1038,17 @@ begin
   RunRFCTests(Fn);
 end;
 
+procedure TestTPJMD5.TestProcessShortString;
+var
+  Fn: TProcessMethodCall;
+begin
+  Fn := procedure(const MD5: TPJMD5; const Test: TRFCTest)
+  begin
+    MD5.Process(Test.DataAsShortString);
+  end;
+  RunRFCTests(Fn);
+end;
+
 procedure TestTPJMD5.TestProcessStream;
 var
   Fn: TProcessMethodCall;
@@ -1178,6 +1205,11 @@ begin
   SetLength(Result, Length(Data));
   for I := 1 to Length(Data) do
     Result[I - 1] := Byte(Data[I]);
+end;
+
+function TRFCTest.DataAsShortString: ShortString;
+begin
+  Result := Data;
 end;
 
 function TRFCTest.IsEqualResult(const D: TPJMD5Digest): Boolean;

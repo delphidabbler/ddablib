@@ -316,6 +316,9 @@ type
     ///  <summary>Calculates a digest of the characters of ANSI string S.
     ///  </summary>
     class function Calculate(const S: RawByteString): TPJMD5Digest; overload;
+    ///  <summary>Calculates a digest of the characters of short string S.
+    ///  </summary>
+    class function Calculate(const S: ShortString): TPJMD5Digest; overload;
     ///  <summary>Calculates a digest of the bytes of Unicode string S according
     ///  to the given encoding.</summary>
     class function Calculate(const S: UnicodeString;
@@ -367,6 +370,9 @@ type
     ///  <summary>Adds all the characters from ANSI string S as bytes to the
     ///  digest.</summary>
     procedure Process(const S: RawByteString); overload;
+    ///  <summary>Adds all the characters from short string S as bytes to the
+    ///  digest.</summary>
+    procedure Process(const S: ShortString); overload;
     ///  <summary>Adds bytes from Unicode string S, according to the given
     ///  encoding, to the digest.</summary>
     procedure Process(const S: UnicodeString; const Encoding: TEncoding);
@@ -564,6 +570,17 @@ begin
   );
 end;
 
+class function TPJMD5.Calculate(const S: ShortString): TPJMD5Digest;
+var
+  SS: ShortString;  // copy of parameter S
+begin
+  // this assignement required since close below can't capture parameter S
+  SS := S;
+  Result := DoCalculate(
+    procedure(Instance: TPJMD5) begin Instance.Process(SS); end
+  );
+end;
+
 class function TPJMD5.Calculate(const S: UnicodeString): TPJMD5Digest;
 begin
   Result := DoCalculate(
@@ -723,6 +740,11 @@ begin
     Update(TBytes(fReadBuffer.Buffer), 0, BytesRead);
     Dec(BytesToRead, BytesRead);
   end;
+end;
+
+procedure TPJMD5.Process(const S: ShortString);
+begin
+  Process(S[1], Length(S) * SizeOf(AnsiChar));
 end;
 
 procedure TPJMD5.Process(const X: TBytes);
