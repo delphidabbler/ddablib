@@ -101,13 +101,15 @@ type
     procedure ErrorProcessStreamCount;
     // Runs test for TestCalculateStreamCount that should raise exception
     procedure ErrorCalculateStreamCount;
-    // Runs test for TestProcessArrayOfByteSize that should raise exception
+    // Run tests for TestProcessArrayOfByteSize that should raise exception
     procedure ErrorProcessArrayOfByteSize;
+    procedure ErrorProcessEmptyArrayOfByteSize;
     // Runds test for TestProcessArrayOfByteSizeIndex that should raise
     // exception
     procedure ErrorProcessArrayOfByteSizeIndex;
-    // Runs test for TestCalculateArrayOfByteSize that should raise exception
+    // Run tests for TestCalculateArrayOfByteSize that should raise exception
     procedure ErrorCalculateArrayOfByteSize;
+    procedure ErrorCalculateEmptyArrayOfByteSize;
     // Runs test for TestCalculateArrayOfByteSizeIndex that should raise
     // exception
     procedure ErrorCalculateArrayOfByteSizeIndex;
@@ -116,8 +118,8 @@ type
 
     // Tests Process(TBytes, Cardinal) and Calculate(TBytes, Cardinal) methods
     // and Digest property.
-    // Process(TBytes, Cardinal) is called internally by all other
-    // Process... methods, so is tested first. The method is also called by some
+    // Process(TBytes, Cardinal) is called internally by other Process...
+    // methods, so must be tested first. The method is also called by some other
     // test methods.
     // This test runs all RFC tests
     procedure TestProcessArrayOfByteSize;
@@ -331,6 +333,9 @@ const
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
   );
 
+var
+  // global, unitialised byte array
+  EmptyByteArray: TBytes;
 
 function ByteArrayToBytes(const A: array of Byte): TBytes;
 var
@@ -395,6 +400,15 @@ begin
   D := TPJMD5.Calculate(Bytes, StartIdx, Count);  // should raise exception
 end;
 
+procedure TestTPJMD5.ErrorCalculateEmptyArrayOfByteSize;
+var
+  D: TPJMD5Digest;
+const
+  Count = 1;
+begin
+  D := TPJMD5.Calculate(EmptyByteArray, Count); // should raise exception
+end;
+
 procedure TestTPJMD5.ErrorCalculateStreamCount;
 var
   Stm: TBytesStream;
@@ -439,6 +453,20 @@ begin
   MD5 := TPJMD5.Create;
   try
     MD5.Process(Bytes, StartIdx, Count);  // should raise exception
+  finally
+    MD5.Free;
+  end;
+end;
+
+procedure TestTPJMD5.ErrorProcessEmptyArrayOfByteSize;
+var
+  MD5: TPJMD5;
+const
+  Count = 1;
+begin
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(EmptyByteArray, Count);  // should raise exception
   finally
     MD5.Free;
   end;
@@ -553,12 +581,22 @@ end;
 procedure TestTPJMD5.TestCalculateArrayOfByte;
 var
   Fn: TCalculateMethodCall;
+  D: TPJMD5Digest;
+  A: TBytes;
 begin
   Fn := function(const Test: TRFCTest): TPJMD5Digest
   begin
     Result := TPJMD5.Calculate(Test.DataAsByteArray);
   end;
   RunRFCCalcTests(Fn);
+
+  D := TPJMD5.Calculate(EmptyByteArray);
+  Check(D = RFCTests[1].ResultStr, 'MD5 of EmptyByteArray (0 bytes) expected');
+
+  SetLength(A, 0);
+  D := TPJMD5.Calculate(A);
+  Check(D = RFCTests[1].ResultStr,
+    'MD5 of zero length array (0 bytes) expected');
 end;
 
 procedure TestTPJMD5.TestCalculateArrayOfByteSize;
@@ -586,7 +624,15 @@ begin
   D := TPJMD5.Calculate(A, 0);
   Check(D = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
 
+  SetLength(A, 0);
+  D := TPJMD5.Calculate(A, 0);
+  Check(D = RFCTests[1].ResultStr, 'MD5 of A length 0 (0 bytes) expected');
+
+  D := TPJMD5.Calculate(EmptyByteArray, 0);
+  Check(D = RFCTests[1].ResultStr, 'MD5 of EmptyByteArray (0 bytes) expected');
+
   CheckException(ErrorCalculateArrayOfByteSize, EPJMD5);
+  CheckException(ErrorCalculateEmptyArrayOfByteSize, EPJMD5);
 end;
 
 procedure TestTPJMD5.TestCalculateArrayOfByteSizeIndex;
@@ -628,9 +674,19 @@ begin
 
   A := TBytes.Create(10,20,30);
   D := TPJMD5.Calculate(A, 3, 1);
-  Check(D = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+  Check(D = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected (A, 3, 1)');
+
+  A := TBytes.Create(10,20,30);
   D := TPJMD5.Calculate(A, 0, 0);
-  Check(D = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+  Check(D = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected (A, 0, 0)');
+
+  SetLength(A, 0);
+  D := TPJMD5.Calculate(A, 0, 0);
+  Check(D = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected (A-length-0, 0, 0');
+
+  D := TPJMD5.Calculate(EmptyByteArray, 0, 0);
+  Check(D = RFCTests[1].ResultStr,
+    'MD5 of 0 bytes expected (EmptyByteArray, 0, 0)');
 
   CheckException(ErrorCalculateArrayOfByteSizeIndex, EPJMD5);
 end;
@@ -769,12 +825,33 @@ end;
 procedure TestTPJMD5.TestProcessArrayOfByte;
 var
   Fn: TProcessMethodCall;
+  MD5: TPJMD5;
+  A: TBytes;
 begin
   Fn := procedure(const MD5: TPJMD5; const Test: TRFCTest)
   begin
     MD5.Process(Test.DataAsByteArray);
   end;
   RunRFCTests(Fn);
+
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(EmptyByteArray);
+    Check(MD5.Digest = RFCTests[1].ResultStr,
+      'MD5 of EmptyByteArray (0 bytes) expected');
+  finally
+    MD5.Free;
+  end;
+
+  MD5 := TPJMD5.Create;
+  try
+    SetLength(A, 0);
+    MD5.Process(A);
+    Check(MD5.Digest = RFCTests[1].ResultStr,
+      'MD5 of zero length array (0 bytes) expected');
+  finally
+    MD5.Free;
+  end;
 end;
 
 procedure TestTPJMD5.TestProcessArrayOfByteSize;
@@ -807,7 +884,27 @@ begin
     MD5.Free;
   end;
 
+  SetLength(A, 0);
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(A, 0);
+    Check(MD5.Digest = RFCTests[1].ResultStr,
+      'A (length 0) MD5 of 0 bytes expected');
+  finally
+    MD5.Free;
+  end;
+
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(EmptyByteArray, 0);
+    Check(MD5.Digest = RFCTests[1].ResultStr,
+      'EmptyByteArray MD5 of 0 bytes expected');
+  finally
+    MD5.Free;
+  end;
+
   CheckException(ErrorProcessArrayOfByteSize, EPJMD5);
+  CheckException(ErrorProcessEmptyArrayOfByteSize, EPJMD5);
 end;
 
 procedure TestTPJMD5.TestProcessArrayOfByteSizeIndex;
@@ -851,10 +948,25 @@ begin
   MD5 := TPJMD5.Create;
   try
     MD5.Process(A, 3, 1);
-    Check(MD5.Digest = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+    Check(MD5.Digest = RFCTests[1].ResultStr,
+      'MD5 of 0 bytes expected (A, 3, 1)');
+
     MD5.Reset;
     MD5.Process(A, 0, 0);
-    Check(MD5.Digest = RFCTests[1].ResultStr, 'MD5 of 0 bytes expected');
+    Check(MD5.Digest = RFCTests[1].ResultStr,
+      'MD5 of 0 bytes expected (A, 0, 0)');
+
+    SetLength(A, 0);
+    MD5.Reset;
+    MD5.Process(A, 0, 0);
+    Check(MD5.Digest = RFCTests[1].ResultStr,
+      'MD5 of 0 bytes expected (A-length-0, 0, 0)');
+
+    MD5.Reset;
+    MD5.Process(EmptyByteArray, 0, 0);
+    Check(MD5.Digest = RFCTests[1].ResultStr,
+      'MD5 of 0 bytes expected (EmptyByteArray, 0, 0)');
+
   finally
     MD5.Free;
   end;
