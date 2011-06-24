@@ -274,7 +274,6 @@ const
       $80, $ac, $de, $8b, $a9, $3f, $a4, $a8
     )
   );
-
   // test string for ASCII encoding
   ASCIITestString = 'QWERTYUIOPASDFGHJKLZXCVBNM0123456789';
   ASCIITestStringRes = '79d291b4afd040c2a18f69e9c832fa1b';
@@ -292,6 +291,13 @@ const
 
   // Digest when no data processed = RFCTests[0].ResultStr
   NoProcessingRes = 'd41d8cd98f00b204e9800998ecf8427e';
+  NoProcessingDigest: TPJMD5Digest = (
+    Bytes: (
+      $D4, $1D, $8C, $D9, $8F, $00, $B2, $04,
+      $E9, $80, $09, $98, $EC, $F8, $42, $7E
+    )
+  );
+
 
   // Default test
   DefaultRFCTest = 6;
@@ -804,6 +810,12 @@ begin
     SameDigests(ResultDigest, ExpectedDigest),
     'Calculate(UnicodeString): ASCII string'
   );
+
+  ResultDigest := TPJMD5.Calculate(EmptyStr);
+  Check(
+    SameDigests(ResultDigest, NoProcessingDigest),
+    'Calculate(UnicodeString): empty string'
+  );
 end;
 
 procedure TestTPJMD5.TestCalculateUnicodeStringWithEncoding;
@@ -817,13 +829,26 @@ begin
   ResultDigest :=  TPJMD5.Calculate(ASCIITestString, TEncoding.ASCII);
   Check(
     SameDigests(ResultDigest, ExpectedDigest),
-    'Calculate(UnicodeString, TEncoding): ASCII string'
+    'Calculate(UnicodeString, TEncoding.ASCII): ASCIITestString'
   );
+
+  ResultDigest := TPJMD5.Calculate(EmptyStr, TEncoding.ASCII);
+  Check(
+    SameDigests(ResultDigest, NoProcessingDigest),
+    'Calculate(UnicodeString, TEncoding.ASCII): empty string'
+  );
+
   ExpectedDigest := UnicodeTestResultDigest;
   ResultDigest :=  TPJMD5.Calculate(UnicodeTestString, TEncoding.Unicode);
   Check(
     SameDigests(ResultDigest, ExpectedDigest),
-    'Calculate(UnicodeString, TEncoding): Unicode string'
+    'Calculate(UnicodeString, TEncoding.Unicode): UnicodeTestString'
+  );
+
+  ResultDigest := TPJMD5.Calculate(EmptyStr, TEncoding.Unicode);
+  Check(
+    SameDigests(ResultDigest, NoProcessingDigest),
+    'Calculate(UnicodeString, TEncoding.Unicode): empty string'
   );
 end;
 
@@ -1130,6 +1155,18 @@ begin
   finally
     MD5.Free;
   end;
+
+  // empty string test
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(EmptyStr);
+    Check(
+      SameStr(MD5.Digest, NoProcessingRes),
+      'Unicode empty string test (default encoding)'
+    );
+  finally
+    MD5.Free;
+  end;
 end;
 
 procedure TestTPJMD5.TestProcessUnicodeStringWithEncoding;
@@ -1149,12 +1186,36 @@ begin
     MD5.Free;
   end;
 
+  // empty string test
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(EmptyStr, TEncoding.ASCII);
+    Check(
+      SameStr(MD5.Digest, NoProcessingRes),
+      'Unicode empty string test (ASCII encoding)'
+    );
+  finally
+    MD5.Free;
+  end;
+
   MD5 := TPJMD5.Create;
   try
     MD5.Process(UnicodeTestString, TEncoding.Unicode);
     Check(
       SameStr(MD5.Digest, UnicodeTestStringRes),
       'Unicode string test (Unicode encoding)'
+    );
+  finally
+    MD5.Free;
+  end;
+
+  // empty string test
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(EmptyStr, TEncoding.Unicode);
+    Check(
+      SameStr(MD5.Digest, NoProcessingRes),
+      'Unicode empty string test (Unicode encoding)'
     );
   finally
     MD5.Free;
