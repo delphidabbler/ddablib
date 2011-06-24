@@ -160,6 +160,10 @@ type
     procedure TestProcessShortString;
     procedure TestCalculateShortString;
 
+    // Test Process(WideString) and Calculate(WideString) methods
+    procedure TestProcessWideString;
+    procedure TestCalculateWideString;
+
     // Tests Process(UnicodeString) and Calculate(UnicodeString) methods
     // RFC Tests cannot be used with these methods. A special unicode test
     // string is used.
@@ -281,6 +285,17 @@ const
     Bytes: (
       $79, $d2, $91, $b4, $af, $d0, $40, $c2,
       $a1, $8f, $69, $e9, $c8, $32, $fa, $1b
+    )
+  );
+
+  // Tests for wide strings: can't use RFC tests
+  WideStringTestString: WideString =
+    'QWERTY - '#$0444#$1D42' - qwerty - '#$2030' - end.';
+  WideStringTestStringRes = 'a65a476239c6806880acde8ba93fa4a8';
+  WideStringTestResultDigest: TPJMD5Digest = (
+    Bytes: (
+      $a6, $5a, $47, $62, $39, $c6, $80, $68,
+      $80, $ac, $de, $8b, $a9, $3f, $a4, $a8
     )
   );
 
@@ -852,6 +867,23 @@ begin
   );
 end;
 
+procedure TestTPJMD5.TestCalculateWideString;
+var
+  ResultDigest: TPJMD5Digest;
+begin
+  ResultDigest := TPJMD5.Calculate(WideStringTestString);
+  Check(
+    SameDigests(ResultDigest, WideStringTestResultDigest),
+    'Calculate(WideString): WideStringTestString'
+  );
+
+  ResultDigest := TPJMD5.Calculate(EmptyWideStr);
+  Check(
+    SameDigests(ResultDigest, NoProcessingDigest),
+    'Calculate(WideString): empty string'
+  );
+end;
+
 function TestTPJMD5.TestFilePath: string;
 begin
   Result := ExtractFilePath(ParamStr(0));
@@ -1216,6 +1248,33 @@ begin
     Check(
       SameStr(MD5.Digest, NoProcessingRes),
       'Unicode empty string test (Unicode encoding)'
+    );
+  finally
+    MD5.Free;
+  end;
+end;
+
+procedure TestTPJMD5.TestProcessWideString;
+var
+  MD5: TPJMD5;
+begin
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(WideStringTestString);;
+    Check(
+      SameStr(MD5.Digest, WideStringTestStringRes),
+      'Process(WideString) WideStringTestString'
+    );
+  finally
+    MD5.Free;
+  end;
+
+  MD5 := TPJMD5.Create;
+  try
+    MD5.Process(EmptyWideStr);;
+    Check(
+      SameStr(MD5.Digest, NoProcessingRes),
+      'Process(WideString) empty string'
     );
   finally
     MD5.Free;
