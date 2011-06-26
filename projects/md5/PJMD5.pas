@@ -367,7 +367,9 @@ type
     procedure Process(const X: TBytes); overload;
     ///  <summary>Adds Count bytes from untyped buffer Buf to the digest.
     ///  </summary>
-    ///  <remarks>Buf must contain sufficient data (this is not checked).
+    ///  <remarks>
+    ///  <para>An EPJMD5 exception is raised if address of Buf is nil.</para>
+    ///  <para>Buf must contain sufficient data (this is not checked).</para>
     ///  </remarks>
     procedure Process(const Buf; const Count: Cardinal); overload;
     ///  <summary>Adds all the characters from ANSI string S as bytes to the
@@ -388,7 +390,10 @@ type
     procedure Process(const S: UnicodeString); overload;
     ///  <summary>Adds bytes to the digest from a stream starting from the
     ///  current position up to the end of the stream.</summary>
-    ///  <remarks>The stream is read in chunks of size ReadBufferSize.</remarks>
+    ///  <remarks>
+    ///  <para>An EPJMD5 exception is raised if Stream is nil</para>
+    ///  <para>The stream is read in chunks of size ReadBufferSize.</para>
+    ///  </remarks>
     procedure Process(const Stream: TStream); overload;
     ///  <summary>Adds up to Count bytes from to the digest from a stream,
     ///  starting from the current position.</summary>
@@ -396,6 +401,7 @@ type
     ///  <para>If Count is greater than available bytes in stream an EPJMD5
     ///  exception is raised. If Count is -ve it is treated as if it were 0.
     ///  </para>
+    ///  <para>An EPJMD5 exception is raised if Stream is nil</para>
     ///  <para>The stream is read in chunks of size ReadBufferSize.</para>
     ///  </remarks>
     procedure Process(const Stream: TStream; const Count: Int64); overload;
@@ -515,6 +521,8 @@ resourcestring
   sTBytesTooShort = 'Can''t read %0:d bytes from array of length %1:d';
   sTBytesIndexTooShort = 'Can''t read %0:d bytes from array of length %1:d '
     + 'starting at index %2:d';
+  sBufferIsNil = 'Can''t read from untyped buffer: buffer is nil';
+  sStreamIsNil = 'Can''t read from stream: stream is nil';
 
 { TPJMD5 }
 
@@ -721,6 +729,8 @@ end;
 
 procedure TPJMD5.Process(const Buf; const Count: Cardinal);
 begin
+  if @Buf = nil then
+    raise EPJMD5.Create(sBufferIsNil);
   Update(TBytes(@Buf), 0, Count);
 end;
 
@@ -739,6 +749,8 @@ var
   BytesRead: Cardinal;
   BytesToRead: Int64;
 begin
+  if not Assigned(Stream) then
+    raise EPJMD5.Create(sStreamIsNil);
   if Count > Stream.Size - Stream.Position then
     raise EPJMD5.CreateFmt(
       sStreamTooShort, [Count, Stream.Size - Stream.Position]
