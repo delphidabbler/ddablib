@@ -103,7 +103,7 @@ type
   ///  <para>Overloaded operators permit equality testing with, and implicit
   ///  casting to and from, strings and byte arrays.</para>
   ///  </remarks>
-  TPJMD5Digest = record
+  TPJMD5Digest = packed record
   strict private
     ///  <summary>Read accessor for Parts[] property.</summary>
     function GetLongWord(Idx: Integer): LongWord;
