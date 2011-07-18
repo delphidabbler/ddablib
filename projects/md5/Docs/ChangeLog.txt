@@ -4,6 +4,17 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v1.0 of 18 July 2011
++ Added new Calculate and Process overloads to TPJMD5 that take ShortString and WideString parameters.
++ Fixed potential bugs in passing nil parameters to some TPJMD5's Process and Calculate methods.
++ Made TPJMD5.DefReadBufferSize constant public.
++ Several refactorings and optimisations.
++ Compiler directives added to check certain data size assumptions.
++ Explicit string cast compiler warnings switched off.
++ Added new DUnit tests.
++ Revised and completed XMLDoc comments.
++ Updated documentation.
+
 Release v0.3 beta of 05 November 2010
 + Added new Process and Calculate method overloads to TPJMD5 that process a specified number of bytes from a given start index in a byte array.
 + Modified internal Update method to support the new method overloads and made some minor changes to other methods.
