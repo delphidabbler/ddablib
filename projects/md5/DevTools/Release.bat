@@ -3,7 +3,7 @@
 @rem
 @rem Script used to create zip file containing release files.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2010
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2010-2011
 @rem
 @rem $Rev$
 @rem $Date$
@@ -31,7 +31,7 @@ zip %OutFile% -j -9 %DocsDir%\LGPL-2.1.txt
 zip %OutFile% -j -9 %DocsDir%\MD5-Notice.txt
 zip %OutFile% -j -9 %DocsDir%\MPL-1.1.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
-zip %OutFile% -j -9 %DocsDir%\Wiki.URL
+zip %OutFile% -j -9 %DocsDir%\DocumentationWiki.URL
 
 zip %OutFile% -r -9 %TestDir%\*.* -x *.svn\*
 
