@@ -101,12 +101,18 @@ type
     btnOK: TButton;
     btnCancel: TButton;
     cbWordWrap: TCheckBox;
+    actHelp: TAction;
+    tbSeparator4: TToolButton;
+    tbHelp: TToolButton;
     ///  <summary>Copies all text in editor to clipboard.</summary>
     procedure actCopyAllExecute(Sender: TObject);
     ///  <summary>Disables Copy All action if no text in editor.</summary>
     procedure actCopyAllUpdate(Sender: TObject);
     ///  <summary>Clears all text from editor.</summary>
     procedure actClearExecute(Sender: TObject);
+    ///  <summary>Displays property editor's online documentation wiki.
+    ///  </summary>
+    procedure actHelpExecute(Sender: TObject);
     ///  <summary>Replaces text in editor with text on clipboard.</summary>
     procedure actPasteOverExecute(Sender: TObject);
     ///  <summary>Disables Paste Over action if there is no text on clipboard.
@@ -129,6 +135,9 @@ type
     ///  <summary>Toggles word wrapping in editor on and off depending on state
     ///  of check box.</summary>
     procedure cbWordWrapClick(Sender: TObject);
+    ///  <summary>Initialises form.</summary>
+    ///  <remarks>Sets default font.</remarks>
+    procedure FormCreate(Sender: TObject);
     ///  <summary>Saves persistent settings when form is destroyed.</summary>
     ///  <remarks>Word wrap setting and window location are persisted.</remarks>
     procedure FormDestroy(Sender: TObject);
@@ -187,7 +196,7 @@ implementation
 
 uses
   // Delphi
-  SysUtils, Windows, Registry, ClipBrd, Messages;
+  SysUtils, Windows, Registry, ClipBrd, Messages, ShellAPI;
 
 
 {$R *.DFM}
@@ -253,6 +262,18 @@ begin
   actCopyAll.Enabled := edText.Text <> '';
 end;
 
+procedure TPJStringPEDlg.actHelpExecute(Sender: TObject);
+begin
+  ShellExecute(
+    Handle,
+    'open',
+    'http://www.delphidabbler.com/url/stringpe-wiki',
+    nil,
+    nil,
+    SW_SHOWNORMAL
+  );
+end;
+
 procedure TPJStringPEDlg.actLoadExecute(Sender: TObject);
 begin
   if dlgOpen.Execute then
@@ -312,6 +333,20 @@ end;
 procedure TPJStringPEDlg.cbWordWrapClick(Sender: TObject);
 begin
   UpdateWordWrap(cbWordWrap.Checked);
+end;
+
+procedure TPJStringPEDlg.FormCreate(Sender: TObject);
+const
+  VistaFontName = 'Segoe UI';
+  XPFontName = 'Tahoma';
+begin
+  if Screen.Fonts.IndexOf(VistaFontName) >= 0 then
+  begin
+    Font.Name := VistaFontName;
+    Font.Size := 9;
+  end
+  else if Screen.Fonts.IndexOf(XPFontName) >= 0 then
+    Font.Name := XPFontName;
 end;
 
 procedure TPJStringPEDlg.FormDestroy(Sender: TObject);
