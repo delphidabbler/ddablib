@@ -4,6 +4,24 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v2.0 of 21 July 2011
++ Added several new commands to editor dialog box:
+  - "copy all" copies all text from editor to clipboard.
+  - "paste over" replaces text in editor with text on clipboard.
+  - "select all" selects all text in editor.
+  - "clear" deletes all text from editor.
+  - "undo" undoes last edit.
+  - "help" displays online documentation for property editor.
++ Revised user interface:
+  - Added toolbar at top of window with buttons for all commands.
+  - Added to keyboard shortcuts for toolbar buttons.
+  - Removed former Load and Save buttons from bottom of window.
+  - Repositioned "word wrap" check box.
+  - Constained minimum size of window so all controls remain accessible.
+  - Now uses Vista or XP default fonts if available.
++ Unit now commented for used with XMLDoc.
++ Updated documentation.
+
 Release v1.2 of 05 January 2010
 + Changed property editor form:
   - Removed bevel from around memo control.
