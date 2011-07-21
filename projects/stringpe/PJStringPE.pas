@@ -25,11 +25,12 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2004-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2004-2011 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
  *   Richard C Haven (Ctrl+Return and Esc key functionality)
+ *   Bino (some of copy, paste, select and clear functionality)
  *
  * ***** END LICENSE BLOCK *****
 }
@@ -55,7 +56,8 @@ interface
 
 uses
   // Delphi
-  StdCtrls, Controls, ExtCtrls, Classes, Dialogs, Forms,
+  StdCtrls, Controls, ExtCtrls, Classes, Dialogs, Forms, ImgList, ComCtrls,
+  ToolWin, ActnList,
   {$IFDEF DELPHI6ANDUP}
   DesignIntf, DesignEditors;
   {$ELSE}
@@ -75,17 +77,45 @@ type
     pnlButton: TPanel;
     btnOK: TButton;
     btnCancel: TButton;
-    btnLoad: TButton;
-    btnSave: TButton;
     dlgOpen: TOpenDialog;
     dlgSave: TSaveDialog;
+    toolBar: TToolBar;
+    tbSelectAll: TToolButton;
+    imageList: TImageList;
+    tbSave: TToolButton;
+    tbLoad: TToolButton;
+    tbClearText: TToolButton;
+    tbPasteOver: TToolButton;
+    tbCopyAll: TToolButton;
+    actionList: TActionList;
+    actLoad: TAction;
+    actSave: TAction;
+    actClear: TAction;
+    actSelectAll: TAction;
+    actPasteOver: TAction;
+    actCopyAll: TAction;
+    tbSeparator1: TToolButton;
+    tbSeparator2: TToolButton;
     cbWordWrap: TCheckBox;
-    procedure btnLoadClick(Sender: TObject);
-    procedure btnSaveClick(Sender: TObject);
+    tbUndo: TToolButton;
+    actUndo: TAction;
+    tbSeparator3: TToolButton;
     procedure cbWordWrapClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure actLoadExecute(Sender: TObject);
+    procedure actSaveExecute(Sender: TObject);
+    procedure actClearExecute(Sender: TObject);
+    procedure actSelectAllExecute(Sender: TObject);
+    procedure actCopyAllExecute(Sender: TObject);
+    procedure actPasteOverExecute(Sender: TObject);
+    procedure actPasteOverUpdate(Sender: TObject);
+    procedure actCopyAllUpdate(Sender: TObject);
+    procedure actSelectAllUpdate(Sender: TObject);
+    procedure actClearUpdate(Sender: TObject);
+    procedure actUndoUpdate(Sender: TObject);
+    procedure actUndoExecute(Sender: TObject);
   private
     function SaveSetting(const ID: string; var Value;
       const Size: Integer): Boolean;
@@ -141,7 +171,7 @@ implementation
 
 uses
   // Delphi
-  SysUtils, Windows, Registry;
+  SysUtils, Windows, Registry, ClipBrd, Messages;
 
 
 {$R *.DFM}    // links the property editor form
@@ -203,24 +233,81 @@ const
   cWindowPlacementSetting = 'WindowPlacement'; // size and location of window
 
 
-procedure TPJStringPEDlg.btnLoadClick(Sender: TObject);
-  {Event handler for "Load" button. Gets file from user and loads its contents
-  in editor.
-    @param Sender [in] Object generating event. Not used.
-  }
+procedure TPJStringPEDlg.actClearExecute(Sender: TObject);
 begin
-  if dlgOpen.Execute then
-    edText.Lines.LoadFromFile(dlgOpen.FileName);
+  edText.Clear;
+  edText.SetFocus;
 end;
 
-procedure TPJStringPEDlg.btnSaveClick(Sender: TObject);
-  {Event handler for "Save" button. Saves contents of editor to file specified
-  by user.
-    @param Sender [in] Object generating event. Not used.
-  }
+procedure TPJStringPEDlg.actClearUpdate(Sender: TObject);
+begin
+  actClear.Enabled := edText.Text <> '';
+end;
+
+procedure TPJStringPEDlg.actCopyAllExecute(Sender: TObject);
+begin
+  Clipboard.AsText := edText.Text;
+end;
+
+procedure TPJStringPEDlg.actCopyAllUpdate(Sender: TObject);
+begin
+  actCopyAll.Enabled := edText.Text <> '';
+end;
+
+procedure TPJStringPEDlg.actLoadExecute(Sender: TObject);
+begin
+  if dlgOpen.Execute then
+  begin
+    edText.Lines.LoadFromFile(dlgOpen.FileName);
+    edText.SetFocus;
+    edText.SelStart := 0;
+    edText.SelLength := 0;
+  end;
+end;
+
+procedure TPJStringPEDlg.actPasteOverExecute(Sender: TObject);
+begin
+  edText.Text := Clipboard.AsText;
+  edText.SetFocus;
+  edText.SelStart := 0;
+  edText.SelLength := 0;
+end;
+
+procedure TPJStringPEDlg.actPasteOverUpdate(Sender: TObject);
+begin
+  {$IFDEF UNICODE}
+  actPasteOver.Enabled := ClipBoard.HasFormat(CF_TEXT)
+    or Clipboard.HasFormat(CF_UNICODETEXT);
+  {$ELSE}
+  actPasteOver.Enabled := ClipBoard.HasFormat(CF_TEXT);
+  {$ENDIF}
+end;
+
+procedure TPJStringPEDlg.actSaveExecute(Sender: TObject);
 begin
   if dlgSave.Execute then
     edText.Lines.SaveToFile(dlgSave.FileName);
+end;
+
+procedure TPJStringPEDlg.actSelectAllExecute(Sender: TObject);
+begin
+  edText.SetFocus;
+  edText.SelectAll;
+end;
+
+procedure TPJStringPEDlg.actSelectAllUpdate(Sender: TObject);
+begin
+  actSelectAll.Enabled := edText.Text <> '';
+end;
+
+procedure TPJStringPEDlg.actUndoExecute(Sender: TObject);
+begin
+  edText.Perform(EM_UNDO, 0, 0);
+end;
+
+procedure TPJStringPEDlg.actUndoUpdate(Sender: TObject);
+begin
+  actUndo.Enabled := edText.Perform(EM_CANUNDO, 0, 0) <> 0;
 end;
 
 procedure TPJStringPEDlg.cbWordWrapClick(Sender: TObject);
