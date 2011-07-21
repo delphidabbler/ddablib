@@ -74,33 +74,33 @@ type
   ///  Instantiated by TPJStringPE.
   ///  </remarks>
   TPJStringPEDlg = class(TForm)
-    actClear: TAction;
-    actCopyAll: TAction;
-    actionList: TActionList;
-    actLoad: TAction;
-    actPasteOver: TAction;
-    actSave: TAction;
-    actSelectAll: TAction;
-    actUndo: TAction;
-    btnCancel: TButton;
-    btnOK: TButton;
-    cbWordWrap: TCheckBox;
+    toolBar: TToolBar;
+    tbSelectAll: TToolButton;
+    tbClearText: TToolButton;
+    tbSeparator1: TToolButton;
+    tbPasteOver: TToolButton;
+    tbCopyAll: TToolButton;
+    tbSeparator2: TToolButton;
+    tbUndo: TToolButton;
+    tbSeparator3: TToolButton;
+    tbLoad: TToolButton;
+    tbSave: TToolButton;
+    edText: TMemo;
     dlgOpen: TOpenDialog;
     dlgSave: TSaveDialog;
-    edText: TMemo;
+    actionList: TActionList;
+    actLoad: TAction;
+    actSave: TAction;
+    actClear: TAction;
+    actSelectAll: TAction;
+    actPasteOver: TAction;
+    actCopyAll: TAction;
+    actUndo: TAction;
     imageList: TImageList;
     pnlButton: TPanel;
-    tbClearText: TToolButton;
-    tbCopyAll: TToolButton;
-    tbLoad: TToolButton;
-    tbPasteOver: TToolButton;
-    tbSave: TToolButton;
-    tbSelectAll: TToolButton;
-    tbSeparator1: TToolButton;
-    tbSeparator2: TToolButton;
-    tbSeparator3: TToolButton;
-    tbUndo: TToolButton;
-    toolBar: TToolBar;
+    btnOK: TButton;
+    btnCancel: TButton;
+    cbWordWrap: TCheckBox;
     ///  <summary>Copies all text in editor to clipboard.</summary>
     procedure actCopyAllExecute(Sender: TObject);
     ///  <summary>Disables Copy All action if no text in editor.</summary>
