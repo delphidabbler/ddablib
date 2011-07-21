@@ -1,9 +1,9 @@
 {
  * PJStringPE.pas
  *
- * Extended String Property Editor source code. Property editor for the Delphi
- * IDE that enables multi-line strings to be edited and assigned to component
- * string properties at design time.
+ * Enhanced string property editor for the Delphi IDE that enables multi-line
+ * strings to be edited and assigned to any components' string & TCaption
+ * properties at design time.
  *
  * $Rev$
  * $Date$
@@ -29,8 +29,8 @@
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
- *   Richard C Haven (Ctrl+Return and Esc key functionality)
- *   Bino (some of copy, paste, select and clear functionality)
+ *   Richard C Haven
+ *   Bino
  *
  * ***** END LICENSE BLOCK *****
 }
@@ -42,7 +42,6 @@ unit PJStringPE;
 interface
 
 
-{ Find if we have a Delphi 6 or higher compiler }
 {$UNDEF DELPHI6ANDUP}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and higher
@@ -204,18 +203,10 @@ uses
 
 procedure Register;
 begin
-  RegisterPropertyEditor(
-    TypeInfo(string),             // use for any string component
-    nil,                          // use for any component
-    '',                           // use for any property
-    TPJStringPE                   // property editor class
-  );
-  RegisterPropertyEditor(
-    TypeInfo(TCaption),           // use for any TCaption component
-    nil,                          // use for any component
-    '',                           // use for any property
-    TPJStringPE                   // property editor class
-  );
+  // Register property editor for any string or TCaption property of any
+  // component.
+  RegisterPropertyEditor(TypeInfo(string), nil, '', TPJStringPE);
+  RegisterPropertyEditor(TypeInfo(TCaption), nil, '', TPJStringPE);
 end;
 
 { TPJStringPE }
@@ -457,7 +448,7 @@ end;
 
 procedure TPJStringPEDlg.UpdateWordWrap(Flag: Boolean);
 const
-  // map of flag to TMemo.Scrollbars property value
+  // map of word wrap flag to TMemo.Scrollbars property value
   cScrollBars: array[Boolean] of TScrollStyle = (ssBoth, ssVertical);
 begin
   // update check box
