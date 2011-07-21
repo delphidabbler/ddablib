@@ -67,103 +67,119 @@ uses
 
 type
 
-  {
-  TPJStringPEDlg:
-    Dialog box used to edit multi-line string properties. Instantiated by
-    TPJStringPE.
-  }
+  ///  <summary>
+  ///  Dialog box used to edit multi-line string properties.
+  ///  </summary>
+  ///  <remarks>
+  ///  Instantiated by TPJStringPE.
+  ///  </remarks>
   TPJStringPEDlg = class(TForm)
-    edText: TMemo;
-    pnlButton: TPanel;
-    btnOK: TButton;
-    btnCancel: TButton;
-    dlgOpen: TOpenDialog;
-    dlgSave: TSaveDialog;
-    toolBar: TToolBar;
-    tbSelectAll: TToolButton;
-    imageList: TImageList;
-    tbSave: TToolButton;
-    tbLoad: TToolButton;
-    tbClearText: TToolButton;
-    tbPasteOver: TToolButton;
-    tbCopyAll: TToolButton;
+    actClear: TAction;
+    actCopyAll: TAction;
     actionList: TActionList;
     actLoad: TAction;
-    actSave: TAction;
-    actClear: TAction;
-    actSelectAll: TAction;
     actPasteOver: TAction;
-    actCopyAll: TAction;
+    actSave: TAction;
+    actSelectAll: TAction;
+    actUndo: TAction;
+    btnCancel: TButton;
+    btnOK: TButton;
+    cbWordWrap: TCheckBox;
+    dlgOpen: TOpenDialog;
+    dlgSave: TSaveDialog;
+    edText: TMemo;
+    imageList: TImageList;
+    pnlButton: TPanel;
+    tbClearText: TToolButton;
+    tbCopyAll: TToolButton;
+    tbLoad: TToolButton;
+    tbPasteOver: TToolButton;
+    tbSave: TToolButton;
+    tbSelectAll: TToolButton;
     tbSeparator1: TToolButton;
     tbSeparator2: TToolButton;
-    cbWordWrap: TCheckBox;
-    tbUndo: TToolButton;
-    actUndo: TAction;
     tbSeparator3: TToolButton;
-    procedure cbWordWrapClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure actLoadExecute(Sender: TObject);
-    procedure actSaveExecute(Sender: TObject);
-    procedure actClearExecute(Sender: TObject);
-    procedure actSelectAllExecute(Sender: TObject);
+    tbUndo: TToolButton;
+    toolBar: TToolBar;
+    ///  <summary>Copies all text in editor to clipboard.</summary>
     procedure actCopyAllExecute(Sender: TObject);
-    procedure actPasteOverExecute(Sender: TObject);
-    procedure actPasteOverUpdate(Sender: TObject);
+    ///  <summary>Disables Copy All action if no text in editor.</summary>
     procedure actCopyAllUpdate(Sender: TObject);
+    ///  <summary>Clears all text from editor.</summary>
+    procedure actClearExecute(Sender: TObject);
+    ///  <summary>Replaces text in editor with text on clipboard.</summary>
+    procedure actPasteOverExecute(Sender: TObject);
+    ///  <summary>Disables Paste Over action if there is no text on clipboard.
+    ///  </summary>
+    procedure actPasteOverUpdate(Sender: TObject);
+    ///  <summary>Loads text from a file specified by user into editor.
+    ///  </summary>
+    procedure actLoadExecute(Sender: TObject);
+    ///  <summary>Saves text from editor to file specified by user.</summary>
+    procedure actSaveExecute(Sender: TObject);
+    ///  <summary>Selects all text in editor.</summary>
+    procedure actSelectAllExecute(Sender: TObject);
+    ///  <summary>Disables Select All action if there is no text in editor.
+    ///  </summary>
     procedure actSelectAllUpdate(Sender: TObject);
-    procedure actClearUpdate(Sender: TObject);
-    procedure actUndoUpdate(Sender: TObject);
+    ///  <summary>Undoes last change in editor.</summary>
     procedure actUndoExecute(Sender: TObject);
+    ///  <summary>Disables Undo action if editor can't undo last edit.</summary>
+    procedure actUndoUpdate(Sender: TObject);
+    ///  <summary>Toggles word wrapping in editor on and off depending on state
+    ///  of check box.</summary>
+    procedure cbWordWrapClick(Sender: TObject);
+    ///  <summary>Saves persistent settings when form is destroyed.</summary>
+    ///  <remarks>Word wrap setting and window location are persisted.</remarks>
+    procedure FormDestroy(Sender: TObject);
+    ///  <summary>Cause unmodified ESC key and Ctrl+RETURN key presses to have
+    ///  same effect as clicking Cancel and OK buttons respectively.</summary>
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    ///  <summary>Reads and acts on persistent settings from registry.</summary>
+    ///  <remarks>Updates word-wrap setting and locates window.</remarks>
+    procedure FormShow(Sender: TObject);
   private
+    ///  <summary>Saves a setting as binary data in registry.</summary>
+    ///  <param name="ID">string [in] Name of registry value.</param>
+    ///  <param name="Value">Untyped [in] Value to be stored.</param>
+    ///  <param name="Size">Integer [in] Size of Value in bytes.</param>
+    ///  <returns>Boolean. True if setting is written successfully or False on
+    ///  failure.</returns>
     function SaveSetting(const ID: string; var Value;
       const Size: Integer): Boolean;
-      {Saves given setting as binary data in registry.
-        @param ID [in] Name of the value's registry value.
-        @param Value [in/out] Untyped value to be written to registry.
-          Unmodified (var parameter type required by referenced TRegistry
-          method).
-        @param Size [in] Size of Value in bytes.
-        @return True on success or false on error.
-      }
+    ///  <summary>Reads binary data for a given setting.</summary>
+    ///  <param name="ID">string [in] Name of registry value.</param>
+    ///  <param name="Value">Untypes [in/out] Untyped value that receives
+    ///  setting data. Any existing value is overwritten.</param>
+    ///  <param name="Size">Integer [in] Size of Value in bytes.</param>
+    ///  <returns>Boolean. True if setting is read successfully or False on
+    ///  failure.</returns>
     function ReadSetting(const ID: string; var Value;
       const Size: Integer): Boolean;
-      {Reads data for a given setting.
-        @param ID [in] Name of the registry value storing setting data.
-        @param Value [in/out] Untyped value that recieves setting data. Any
-          existing input value is overwritten.
-        @param Size [in] Size of Value in bytes.
-        @return True if setting read successfully, false on error.
-      }
+    ///  <summary>Updates editor's word wrap setting and state of check box.
+    ///  </summary>
     procedure UpdateWordWrap(Flag: Boolean);
-      {Updates editor's word wrap settings and check box.
-        @param Flag [in] Indicates whether we require word wrapping.
-      }
   end;
 
 
-  {
-  TPJStringPE:
-    Extended string property editor.
-  }
+  ///  <summary>
+  ///  Extended string property editor.
+  ///  </summary>
   TPJStringPE = class(TStringProperty)
   public
+    ///  <summary>Called by IDE to get attributes of property editor.</summary>
+    ///  <remarks>Informs IDE that property editor displays a dialog box in
+    ///  addition to standard string property editor.</remarks>
     function GetAttributes: TPropertyAttributes; override;
-      {Tell object inspector that editor displays a dialog box in addition to
-      other attributes of a standard string property editor.
-        @return A set of values describing attributes of property editor.
-      }
+    ///  <summary>Called by IDE when property editor dialog box is to be
+    ///  displayed.</summary>
     procedure Edit; override;
-      {Display property editor dialog box to edit the property.
-      }
   end;
 
 
+///  <summary>Registers property editor for all string and TCaption properties
+///  of all components.</summary>
 procedure Register;
-  {Registers property editor for all string and TCaption properties of all
-  components.
-  }
 
 
 implementation
@@ -174,13 +190,10 @@ uses
   SysUtils, Windows, Registry, ClipBrd, Messages;
 
 
-{$R *.DFM}    // links the property editor form
+{$R *.DFM}
 
 
 procedure Register;
-  {Registers property editor for all string and TCaption properties of all
-  components.
-  }
 begin
   RegisterPropertyEditor(
     TypeInfo(string),             // use for any string component
@@ -196,12 +209,9 @@ begin
   );
 end;
 
-
 { TPJStringPE }
 
 procedure TPJStringPE.Edit;
-  {Display property editor dialog box to edit the property.
-  }
 begin
   with TPJStringPEDlg.Create(Application) do
     try
@@ -214,14 +224,9 @@ begin
 end;
 
 function TPJStringPE.GetAttributes: TPropertyAttributes;
-  {Tell object inspector that editor displays a dialog box in addition to other
-  attributes of a standard string property editor.
-    @return A set of values describing attributes of property editor.
-  }
 begin
   Result := inherited GetAttributes + [paDialog];
 end;
-
 
 { TPJStringPEDlg }
 
@@ -232,16 +237,10 @@ const
   cWordWrapSetting = 'WordWrap';               // whether word wrap is enabled
   cWindowPlacementSetting = 'WindowPlacement'; // size and location of window
 
-
 procedure TPJStringPEDlg.actClearExecute(Sender: TObject);
 begin
   edText.Clear;
   edText.SetFocus;
-end;
-
-procedure TPJStringPEDlg.actClearUpdate(Sender: TObject);
-begin
-  actClear.Enabled := edText.Text <> '';
 end;
 
 procedure TPJStringPEDlg.actCopyAllExecute(Sender: TObject);
@@ -311,17 +310,11 @@ begin
 end;
 
 procedure TPJStringPEDlg.cbWordWrapClick(Sender: TObject);
-  {Event handler for "Word Wrap" check box. Updates word wrapping in editor.
-    @param Sender [in] Object generating event. Not used.
-  }
 begin
   UpdateWordWrap(cbWordWrap.Checked);
 end;
 
 procedure TPJStringPEDlg.FormDestroy(Sender: TObject);
-  {Form destruction event handler. Saves persistent settings.
-    @param Sender [in] Object generating event. Not used.
-  }
 var
   WordWrap: Boolean;    // whether editor word wraps
   Pl: TWindowPlacement; // placement of editor window
@@ -340,12 +333,6 @@ end;
 
 procedure TPJStringPEDlg.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
-  {Form key down event handler. Handles unmodified ESC and CTRL+RETURN key
-  presses to simulate clicking of Cancel and OK buttons respectively.
-    @param Sender [in] Object generating event. Not used.
-    @param Key [in/out] Code of key pressed. Unchanged.
-    @param Shift [in] Combination of shift keys pressed.
-  }
 const
   cShiftKeys = [ssCtrl, ssAlt, ssShift];  // set of modifier keys
 begin
@@ -364,9 +351,6 @@ begin
 end;
 
 procedure TPJStringPEDlg.FormShow(Sender: TObject);
-  {Form show event handler. Reads persistent settings and applies them.
-    @param Sender [in] Object generating event. Not used.
-  }
 var
   WordWrap: Boolean;    // whether editor word wraps
   Pl: TWindowPlacement; // placement of editor window
@@ -404,13 +388,6 @@ end;
 
 function TPJStringPEDlg.ReadSetting(const ID: string; var Value;
   const Size: Integer): Boolean;
-  {Reads data for a given setting.
-    @param ID [in] Name of the registry value storing setting data.
-    @param Value [in/out] Untyped value that recieves setting data. Any existing
-      input value is overwritten.
-    @param Size [in] Size of Value in bytes.
-    @return True if setting read successfully, false on error.
-  }
 begin
   with TRegistry.Create do
     try
@@ -428,13 +405,6 @@ end;
 
 function TPJStringPEDlg.SaveSetting(const ID: string; var Value;
   const Size: Integer): Boolean;
-  {Saves given setting as binary data in registry.
-    @param ID [in] Name of the value's registry value.
-    @param Value [in/out] Untyped value to be written to registry. Unmodified
-      (var parameter type required by referenced TRegistry method).
-    @param Size [in] Size of Value in bytes.
-    @return True on success or false on error.
-  }
 begin
   with TRegistry.Create do
     try
@@ -451,9 +421,6 @@ begin
 end;
 
 procedure TPJStringPEDlg.UpdateWordWrap(Flag: Boolean);
-  {Updates editor's word wrap settings and check box.
-    @param Flag [in] Indicates whether we require word wrapping.
-  }
 const
   // map of flag to TMemo.Scrollbars property value
   cScrollBars: array[Boolean] of TScrollStyle = (ssBoth, ssVertical);
