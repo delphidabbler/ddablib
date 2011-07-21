@@ -149,8 +149,8 @@
 </h2>
 
 <p>
-  This property editor has been designed to get round two limitations of the
-  standard Delphi string property editor.
+  This enhanced property editor has been designed to get round two limitations
+  of the standard Delphi string property editor.
 </p>
 
 <ol class="spaced">
@@ -167,12 +167,12 @@
 </ol>
 
 <p>
-  The enhanced property editor works with every string or <var>TCaption</var>
-  property. It adds an ellipsis button to the right hand side of the data
-  entry area in the object inspector. Clicking this button displays a dialog
-  box in which the property's value can be entered. Pressing return in the
-  dialog box starts a new line. There is no practical limit to the length of
-  strings that can be entered.
+  The property editor works with every string or <var>TCaption</var> property.
+  It adds an ellipsis button to the right hand side of the data entry area in
+  the object inspector. Clicking this button displays a dialog box in which the
+  property's value can be entered. Pressing return in the dialog box starts a
+  new line. There is no practical limit to the length of strings that can be
+  entered.
 </p>
 
 <p>
@@ -184,11 +184,38 @@
 
 <p>
   The edit dialog is resizable. Word wrapping can be switched on or off. Both
-  the word-wrapping and dialog box size and position are persistent. Load and
-  Save buttons are provided in the dialog box to enable the property's value
-  to be loaded from, or saved to a file.
+  the word-wrapping and dialog box size and position are persistent. The dialog
+  box has a toolbar that provides buttons to:
 </p>
 
+<ul>
+  <li>
+    Select all the text in the editor.
+  </li>
+  <li>
+    Clear all the text from the editor.
+  </li>
+  <li>
+    Overwrite the editor's existing text with text from the clipboard.
+  </li>
+  <li>
+    Copy all the text from the editor to the clipboard.
+  </li>
+  <li>
+    Undo the last edit.
+  </li>
+  <li>
+    Load text into the editor from a file.
+  </li>
+  <li>
+    Save the contents of the editor to a file.
+  </li>
+</ul>
+
+<p>
+  In addition the normal cut, copy and paste operations are available via a
+  context menu and the usual keywboard shortcuts.
+</p>
 
 <h2 id="compatibility">
   Compatibility
@@ -196,7 +223,8 @@
 
 <p>
   The property editor compiles and works with all Win 32 version of Delphi
-  from 4 onwards. It has been tested with Delphi 4, 6, 7, 2006 and 2010.
+  from 4 onwards, although there may be some display problems when used with
+  Delphi 4. The editor has been tested with Delphi 4, 6, 7, 2006 and 2010.
 </p>
 
 
@@ -291,6 +319,7 @@
   All relevant trademarks are acknowledged.
 </p>
 
+
 <h2>
   Acknowledgements
 </h2>
@@ -314,6 +343,7 @@
     project.
   </li>
 </ul>
+
 
 <h2 id="bugs">
   Bugs and Feature Requests
@@ -358,7 +388,7 @@
     features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2005-2010, P D Johnson,
+    This document is copyright &copy; 2005-2011, P D Johnson,
     <a href="http://www.delphidabbler.com/">
     www.delphidabbler.com</a>
   </div>
