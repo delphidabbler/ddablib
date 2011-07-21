@@ -15,12 +15,13 @@ Release v2.0 of 21 July 2011
 + Revised user interface:
   - Added toolbar at top of window with buttons for all commands.
   - Added to keyboard shortcuts for toolbar buttons.
-  - Removed former Load and Save buttons from bottom of window.
+  - Removed former Load and Save buttons from bottom of window: now replaced by toolbar buttons.
   - Repositioned "word wrap" check box.
-  - Constained minimum size of window so all controls remain accessible.
+  - Constrained minimum size of window so all controls remain accessible.
   - Now uses Vista or XP default fonts if available.
-+ Unit now commented for used with XMLDoc.
++ Unit now commented for use with XMLDoc.
 + Updated documentation.
++ Provided shortcut file that links to online documentation wiki.
 
 Release v1.2 of 05 January 2010
 + Changed property editor form:
