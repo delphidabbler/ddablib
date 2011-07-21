@@ -157,7 +157,7 @@
   <li>
     The standard property editor does not allow multi-line strings with
     embedded CR/LF characters to be entered via the object inspector. Such
-    strings can only be assigned run-time.
+    strings can only be assigned at run-time.
   </li>
   <li>
     Although 32 bit Delphi strings have a 2Gb size limit, the standard
@@ -167,12 +167,12 @@
 </ol>
 
 <p>
-  The property editor works with every string or <var>TCaption</var> property.
-  It adds an ellipsis button to the right hand side of the data entry area in
-  the object inspector. Clicking this button displays a dialog box in which the
-  property's value can be entered. Pressing return in the dialog box starts a
-  new line. There is no practical limit to the length of strings that can be
-  entered.
+  The property editor works with all properties of type <strong>string</strong>
+  or <var>TCaption</var> of all components. It adds an ellipsis button to the
+  right hand side of the data entry area in the object inspector. Clicking this
+  button displays a dialog box in which the property's value can be entered.
+  Pressing return in the dialog box starts a new line. There is no practical
+  limit to the length of strings that can be entered.
 </p>
 
 <p>
@@ -210,12 +210,16 @@
   <li>
     Save the contents of the editor to a file.
   </li>
+  <li>
+    Display online help.
+  </li>
 </ul>
 
 <p>
   In addition the normal cut, copy and paste operations are available via a
   context menu and the usual keywboard shortcuts.
 </p>
+
 
 <h2 id="compatibility">
   Compatibility
@@ -249,10 +253,6 @@
     form file.
   </li>
   <li>
-    <code>DocumentationWiki.URL</code> &ndash; Internet shortcut to online
-    property editor documentation.
-  </li>
-  <li>
     <code>ReadMe.htm</code> &ndash; This read-me file.
   </li>
   <li>
@@ -260,6 +260,10 @@
   </li>
   <li>
     <code>MPL.txt</code> &ndash; Mozilla Public License.
+  </li>
+  <li>
+    <code>DocumentationWiki.URL</code> &ndash; Internet shortcut to online
+    property editor documentation.
   </li>
 </ul>
 
@@ -277,8 +281,7 @@
 </h2>
 
 <p>
-   A complete change log is provided in the file <code>ChangeLog.txt</code>
-   that is included in the download.
+   A complete change log is provided in the file <code>ChangeLog.txt</code>.
 </p>
 
 
@@ -300,7 +303,6 @@
   IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
   the License for the specific language governing rights and limitations under
   the License.
-
 </p>
 
 <p>
@@ -328,8 +330,7 @@
 </h2>
 
 <p>
-  The property editor uses icons from, or derived from the following
-  collections:
+  The property editor uses or adapts icons from the following collections:
 </p>
 
 <ul>
@@ -361,7 +362,8 @@
 <p>
   If no similar report or request has been recorded already, use the <em>New
   Issue</em> link to add a new issue. Please select the most appropriate
-  template from the <em>Templates</em> drop down list.
+  template from the <em>Templates</em> drop down list and change the
+  <code>Project-unspecified</code> label to <code>Project-stringpe</code>.
 </p>
 
 
