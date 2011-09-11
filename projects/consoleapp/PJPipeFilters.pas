@@ -61,7 +61,7 @@ uses
   // Delphi
   SysUtils, Classes,
   // Project
-  PJConsoleApp, PJPipe;
+  PJPipe;
 
 // Ensure TBytes is declared
 {$IF not Declared(TBytes)}
