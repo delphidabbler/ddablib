@@ -28,7 +28,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2000-2009 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2000-2011 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -43,14 +43,15 @@ unit PJStreamWrapper;
 interface
 
 uses
-
   // Delphi
   Classes;
 
 {$UNDEF SUPPORTS_STRICT}
+{$UNDEF SUPPORTS_TSTREAM64}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 18.0} // >= Delphi 2006
     {$DEFINE SUPPORTS_STRICT}
+    {$DEFINE SUPPORTS_TSTREAM64}
   {$IFEND}
 {$ENDIF}
 
@@ -78,6 +79,9 @@ type
     procedure SetSize(NewSize: Longint); override;
       {Sets the size of the stream to the given value if the operation is
       supported by the underlying stream}
+    {$IFDEF SUPPORTS_TSTREAM64}
+    procedure SetSize(const NewSize: Int64); override;
+    {$ENDIF}
     property BaseStream: TStream read fBaseStream;
       {Gives access to the underlying stream to descended classes}
   public
@@ -97,6 +101,9 @@ type
       {Moves the underlying stream's position to Offset bytes from the given
       origin - see TStream for values of Origin. This operation may cause an
       exception if the underlying stream does not support Seek}
+    {$IFDEF SUPPORTS_TSTREAM64}
+    function Seek(const Offset: Int64; Origin: TSeekOrigin): Int64; override;
+    {$ENDIF}
   end;
 
 
@@ -134,6 +141,14 @@ begin
   Result := fBaseStream.Read(Buffer, Count);
 end;
 
+{$IFDEF SUPPORTS_TSTREAM64}
+function TPJStreamWrapper.Seek(const Offset: Int64; Origin: TSeekOrigin): Int64;
+begin
+  // Simply call the equivalent method in the underlying stream
+  Result := fBaseStream.Seek(Offset, Origin);
+end;
+{$ENDIF}
+
 function TPJStreamWrapper.Seek(Offset: Integer; Origin: Word): Longint;
   {Moves the underlying stream's position to Offset bytes from the given origin
   - see TStream for values of Origin. This operation may cause an exception if
@@ -143,12 +158,25 @@ begin
   Result := fBaseStream.Seek(Offset, Origin);
 end;
 
+{$IFDEF SUPPORTS_TSTREAM64}
+procedure TPJStreamWrapper.SetSize(const NewSize: Int64);
+begin
+  fBaseStream.Size := NewSize;
+end;
+{$ENDIF}
+
 procedure TPJStreamWrapper.SetSize(NewSize: Integer);
   {Sets the size of the stream to the given value if the operation is supported
   by the underlying stream}
 begin
   // Set the size property of the underlying stream
+  {$IFDEF SUPPORTS_TSTREAM64}
+  // according to comments in TStream.SetSize if we implement 64 bit version of
+  // SetSize, our 32 bit implementation must call it
+  SetSize(Int64(NewSize));
+  {$ELSE}
   fBaseStream.Size := NewSize;
+  {$ENDIF}
 end;
 
 function TPJStreamWrapper.Write(const Buffer; Count: Integer): Longint;
