@@ -57,51 +57,115 @@ uses
 
 type
 
-  {
-  TPJStreamWrapper:
-    Base class for descendant classes that "wrap" a TStream class to provide
-    some form of filter or additional functionality. The wrapped TStream is used
-    to do physical i/o. This base class simply replicates the facilities in the
-    wrapped stream - it is for descendant classes to add functionality.
-    TPJStreamWrapper and its decendants can optionally free the wrapped class
-    when they themselves are freed.
-    Wrapping a TStream rather than adding functionality by extending the class
-    means that the functionality provided by the wrapper class can be applied to
-    any TStream descendant.
-  }
+  ///  <summary>
+  ///  Base class for descendant classes that "wrap" a TStream class to provide
+  ///  some form of filter or additional functionality. The wrapped TStream is
+  ///  used to do physical i/o. This base class simply replicates the facilities
+  ///  in the wrapped stream - it is for descendant classes to add
+  ///  functionality.
+  ///  </summary>
+  ///  <remarks>
+  ///  Wrapping a TStream rather than adding functionality by extending the
+  ///  class means that the functionality provided by the wrapper class can be
+  ///  applied to any TStream descendant.
+  ///  </remarks>
   TPJStreamWrapper = class(TStream)
   {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   private
-    fBaseStream: TStream;  // The wrapped stream
-    fCloseStream: Boolean; // Flags if wrapped stream is freed in destructor
+    ///  <summary>Reference to wrapped stream.</summary>
+    fBaseStream: TStream;
+    ///  <summary>Records whether wrapped stream is to be freed when this object
+    ///  is destroyed.</summary>
+    fCloseStream: Boolean;
   {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   protected
+    ///  <summary>Reference to the wrapped stream object.</summary>
+    ///  <remarks>Enables sub-classes to access the wrapped stream.</remarks>
+    property BaseStream: TStream read fBaseStream;
+
+    ///  <summary>Sets the size of the wrapped stream.</summary>
+    ///  <param name="NewSize">Longint [in] New size of stream.</param>
+    ///  <remarks>
+    ///  <para>If the wrapped stream does not support the SetSize operation then
+    ///  the stream's size is not changed.</para>
+    ///  <para>See also the overloaded version that takes a 64 bit size.</para>
+    ///  </remarks>
     procedure SetSize(NewSize: Longint); override;
-      {Sets the size of the stream to the given value if the operation is
-      supported by the underlying stream}
+
     {$IFDEF SUPPORTS_TSTREAM64}
+    ///  <summary>Sets the size of the wrapped stream.</summary>
+    ///  <param name="NewSize">Int64 [in] New size of stream.</param>
+    ///  <remarks>
+    ///  <para>If the wrapped stream does not support the SetSize operation then
+    ///  the stream's size is not changed.</para>
+    ///  <para>If the wrapped stream does not support 64 bit SetSize then
+    ///  NewSize is truncated to 32 bits.</para>
+    ///  <para>See also the overloaded version that takes a 32 bit size.</para>
+    ///  </remarks>
     procedure SetSize(const NewSize: Int64); override;
     {$ENDIF}
-    property BaseStream: TStream read fBaseStream;
-      {Gives access to the underlying stream to descended classes}
   public
+    ///  <summary>Object constructor. Creates a TStream descendant object that
+    ///  wraps another stream and optionally takes ownership of it.</summary>
+    ///  <param name="Stream">TStream [in] Stream to be wrapped.</param>
+    ///  <param name="CloseStream">Boolean [in] Flag that indicates whether
+    ///  Stream is to be freed when this object is be destroyed (True) or
+    ///  whether caller retains responsibility for freeing Stream (False).
+    ///  </param>
     constructor Create(const Stream: TStream;
       const CloseStream: Boolean = False); virtual;
-      {Creates a TPJStreamWrapper object that wraps the given stream. If
-      CloseStream is true the underlying stream is freed when this object is
-      freed}
+
+    ///  <summary>Tears down object. Frees wrapped stream iff CloseStream
+    ///  parameter of constructor was True.</summary>
     destructor Destroy; override;
-      {Frees underlying stream if user specified CloseStream as True when this
-      object was created}
+
+    ///  <summary>Reads data from wrapped stream into a buffer.</summary>
+    ///  <param name="Buffer">Untyped [in/out] Buffer that receives data read
+    ///  from stream. Must have size of at least Count bytes.</param>
+    ///  <param name="Count">Longint [in] Number of bytes to be read.</param>
+    ///  <returns>Number of bytes actually read.</returns>
+    ///  <remarks>If return value is less than Count then end of stream has been
+    ///  reached.</remarks>
     function Read(var Buffer; Count: Longint): Longint; override;
-      {Reads Count bytes from underlying stream into given buffer}
+
+    ///  <summary>Writes data from a buffer to wrapped stream.</summary>
+    ///  <param name="Buffer">Untyped [in] Buffer containg date to be written.
+    ///  Must contain at least Count bytes of data.</param>
+    ///  <param name="Count">Longiny [in] Number of bytes of data to be
+    ///  written.</param>
+    ///  <returns>Number of bytes actually written.</returns>
+    ///  <remarks>If the return value is less than Count then the stream is full
+    ///  and not all the data could be written.</remarks>
     function Write(const Buffer; Count: Longint): Longint; override;
-      {Writes Count bytes from Buffer to underlying stream}
+
+    ///  <summary>Sets the underlying stream's position.</summary>
+    ///  <param name="Offset">Longint [in] New stream position relative to
+    ///  position defined by Offset.</param>
+    ///  <param name="Origin">Word [in] Specifies origin that Offset relates to.
+    ///  For details of values see documentation of TStream.Seek.</param>
+    ///  <returns>New stream position (value of Position property).</returns>
+    ///  <remarks>
+    ///  <para>If the wrapped stream does not support changing the stream
+    ///  position an exception will be raised.</para>
+    ///  <para>See also the overloaded version that takes a 64 bit size.</para>
+    ///  </remarks>
     function Seek(Offset: Longint; Origin: Word): Longint; override;
-      {Moves the underlying stream's position to Offset bytes from the given
-      origin - see TStream for values of Origin. This operation may cause an
-      exception if the underlying stream does not support Seek}
+
     {$IFDEF SUPPORTS_TSTREAM64}
+    ///  <summary>Sets the underlying stream's position.</summary>
+    ///  <param name="Offset">Int64 [in] New stream position relative to
+    ///  position defined by Offset.</param>
+    ///  <param name="Origin">TSeekOrigin [in] Specifies origin that Offset
+    ///  relates to. For details of values see documentation of TSeekOrigin.
+    ///  </param>
+    ///  <returns>New stream position (value of Position property).</returns>
+    ///  <remarks>
+    ///  <para>If the wrapped stream does not support changing the stream
+    ///  position an exception will be raised.</para>
+    ///  <para>If the wrapped stream does not support 64 bit Seek then the 32
+    ///  bit version will be called instead and Offset may be truncated.</para>
+    ///  <para>See also the overloaded version that takes a 32 bit size.</para>
+    ///  </remarks>
     function Seek(const Offset: Int64; Origin: TSeekOrigin): Int64; override;
     {$ENDIF}
   end;
@@ -114,47 +178,33 @@ implementation
 
 constructor TPJStreamWrapper.Create(const Stream: TStream;
   const CloseStream: Boolean);
-  {Creates a TPJStreamWrapper object that wraps the given stream. If CloseStream
-  is true the underlying stream is freed when this object is freed}
 begin
   inherited Create;
-  // Record reference to underlying base stream - used for i/o operations
   fBaseStream := Stream;
-  // Record whether base stream is to be freed when this object is freed
   fCloseStream := CloseStream;
 end;
 
 destructor TPJStreamWrapper.Destroy;
-  {Frees underlying stream if user specified CloseStream as True when this
-  object was created}
 begin
-  // Close base stream if user specified this should be done
   if fCloseStream then
     fBaseStream.Free;
   inherited Destroy;
 end;
 
 function TPJStreamWrapper.Read(var Buffer; Count: Integer): Longint;
-  {Reads Count bytes from underlying stream into given buffer}
 begin
-  // Simply call the equivalent method in the underlying stream
   Result := fBaseStream.Read(Buffer, Count);
 end;
 
 {$IFDEF SUPPORTS_TSTREAM64}
 function TPJStreamWrapper.Seek(const Offset: Int64; Origin: TSeekOrigin): Int64;
 begin
-  // Simply call the equivalent method in the underlying stream
   Result := fBaseStream.Seek(Offset, Origin);
 end;
 {$ENDIF}
 
 function TPJStreamWrapper.Seek(Offset: Integer; Origin: Word): Longint;
-  {Moves the underlying stream's position to Offset bytes from the given origin
-  - see TStream for values of Origin. This operation may cause an exception if
-  the underlying stream does not support Seek}
 begin
-  // Simply call the equivalent method in the underlying stream
   Result := fBaseStream.Seek(Offset, Origin);
 end;
 
@@ -166,10 +216,7 @@ end;
 {$ENDIF}
 
 procedure TPJStreamWrapper.SetSize(NewSize: Integer);
-  {Sets the size of the stream to the given value if the operation is supported
-  by the underlying stream}
 begin
-  // Set the size property of the underlying stream
   {$IFDEF SUPPORTS_TSTREAM64}
   // according to comments in TStream.SetSize if we implement 64 bit version of
   // SetSize, our 32 bit implementation must call it
@@ -180,10 +227,9 @@ begin
 end;
 
 function TPJStreamWrapper.Write(const Buffer; Count: Integer): Longint;
-  {Writes Count bytes from Buffer to underlying stream}
 begin
-  // Simply call the equivalent method in the underlying stream
   Result := fBaseStream.Write(Buffer, Count);
 end;
 
 end.
+
