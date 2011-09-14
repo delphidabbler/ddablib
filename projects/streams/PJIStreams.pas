@@ -82,7 +82,14 @@ type
       the name returned, override GetStreamNameAsString instead}
     property BaseStream: TStream read fBaseStream;
       {Reference to wrapped TStream object}
-  protected // Do not make strict
+  public
+    constructor Create(const Stream: TStream;
+      const CloseStream: Boolean = False);
+      {Class constructor: the given stream is given an IStream interface and is
+      freed when this object is destroyed if CloseStream is true}
+    destructor Destroy; override;
+      {Class destructor: frees wrapped stream if CloseStream parameter to
+      constructor was true}
     { IStream methods }
     function Read(pv: Pointer; cb: Longint; pcbRead: PLongint): HResult;
       virtual; stdcall;
@@ -135,14 +142,6 @@ type
       {Not implemented. (Where implemented Clone creates a new stream object
       that references the same bytes as the original stream but provides a
       separate seek pointer to those bytes)}
-  public
-    constructor Create(const Stream: TStream;
-      const CloseStream: Boolean = False);
-      {Class constructor: the given stream is given an IStream interface and is
-      freed when this object is destroyed if CloseStream is true}
-    destructor Destroy; override;
-      {Class destructor: frees wrapped stream if CloseStream parameter to
-      constructor was true}
   end;
 
   {
@@ -153,7 +152,11 @@ type
     method.
   }
   TPJHandleIStreamWrapper = class(TPJIStreamWrapper, IStream)
-  protected // Do not make strict
+  public
+    constructor Create(const Stream: THandleStream;
+      const CloseStream: Boolean = False);
+      {Class constructor: the given handle stream is given an IStream interface
+      and is freed when this object is destroyed if CloseStream is true}
     function Stat(out statstg: TStatStg; grfStatFlag: Longint): HResult;
       override; stdcall;
       {Retrieves the STATSTG structure for this stream. grfStatFlag can be
@@ -161,11 +164,6 @@ type
       STATFLAG_NORMAL, which includes the stream name. In the latter case the
       name should be freed using the task allocator. This method returns the
       underlying file's modification, access and creation times if available}
-  public
-    constructor Create(const Stream: THandleStream;
-      const CloseStream: Boolean = False);
-      {Class constructor: the given handle stream is given an IStream interface
-      and is freed when this object is destroyed if CloseStream is true}
   end;
 
   {
