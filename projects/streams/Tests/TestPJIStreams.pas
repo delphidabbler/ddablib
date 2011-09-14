@@ -133,16 +133,16 @@ begin
   Stm2.Seek(6, STREAM_SEEK_SET, Largeint(nil^));  // start of "Dabbler"
   // do the copy
   Stm2.CopyTo(Stm1, 7, R, W);
-  Check(R = 7);   // bytes read
-  Check(W = 7);   // bytes written
-  Check(S1.DataString = 'Hello Dabbler');
+  CheckEquals(7, R, 'Test 1');   // bytes read
+  CheckEquals(7, W, 'Test 2');   // bytes written
+  CheckEquals('Hello Dabbler', S1.DataString, 'Test 3');
   // Now we try to copy all of S2 + a few extra bytes to same place in S1
   Stm2.Seek(0, STREAM_SEEK_SET, Largeint(nil^));  // wind to start of S2
   Stm1.Seek(6, STREAM_SEEK_SET, Largeint(nil^));  // start of "Dabbler"
   Stm2.CopyTo(Stm1, 64, R, W);
-  Check(R = Length('delphiDabbler!'));
-  Check(W = R);
-  Check(S1.DataString = 'Hello delphiDabbler!');
+  CheckEquals(Length('delphiDabbler!'), R, 'Test 4');
+  CheckEquals(True, W = R, 'Test 5');
+  CheckEquals('Hello delphiDabbler!', S1.DataString, 'Test 6');
 end;
 
 procedure TTestPJIStreamWrapper.TestCreateDestroy;
@@ -155,11 +155,11 @@ begin
   // Check freeing wrapper stream doesn't free owned stream when not required
   Stm := TPJIStreamWrapper.Create(S, False);
   Stm := nil;
-  Check(ObList.Count = 1);  // TTestStream object still exists
+  CheckEquals(1, ObList.Count, 'Test 1');
   // Check freeing wrapper stream does free owned stream when required
   Stm := TPJIStreamWrapper.Create(S, True);
   Stm := nil;
-  Check(ObList.Count = 0);  // TTestStream object has been freed
+  CheckEquals(0, ObList.Count, 'Test 2');
 end;
 
 procedure TTestPJIStreamWrapper.TestNonImpl;
@@ -169,10 +169,10 @@ var
 begin
   S := TStringStream.Create('Hello World');
   Stm := TPJIStreamWrapper.Create(S, True);
-  Check(Stm.Commit(0) = S_OK);
-  Check(Stm.Revert = STG_E_REVERTED);
-  Check(Stm.LockRegion(0, 0, 0) = STG_E_INVALIDFUNCTION);
-  Check(Stm.UnlockRegion(0, 0, 0) = STG_E_INVALIDFUNCTION);
+  CheckEquals(S_OK, Stm.Commit(0), 'Test 1');
+  CheckEquals(STG_E_REVERTED, Stm.Revert, 'Test 2');
+  CheckEquals(STG_E_INVALIDFUNCTION, Stm.LockRegion(0, 0, 0), 'Test 3');
+  CheckEquals(STG_E_INVALIDFUNCTION, Stm.UnlockRegion(0, 0, 0), 'Test 4');
 end;
 
 procedure TTestPJIStreamWrapper.TestReadAndSeek;
@@ -188,26 +188,27 @@ begin
   // Read 1st five chars('Hello');
   SetLength(InStr, 5);
   Stm.Read(PChar(InStr), 5, @R);
-  Check((InStr = 'Hello') and (R = 5));
+  CheckEquals('Hello', InStr, 'Test 1a');
+  CheckEquals(5, R, 'Test 1b');
   // Move to one char from end (pos should be 10)
   Stm.Seek(1, STREAM_SEEK_END, P);
-  Check(P = 10);
+  CheckEquals(10, P, 'Test 2');
   // Read one char: should be last one = 'd'
   SetLength(InStr, 1);
   Stm.Read(PChar(InStr), 1, nil);
-  Check(InStr = 'd');
+  CheckEquals('d', InStr, 'Test 3');
   // We should now be at end (P = 11)
   Stm.Seek(0, STREAM_SEEK_CUR, P);
-  Check(P = 11);
+  CheckEquals(11, P, 'Test 4');
   // Seek 6 chars in from start
   Stm.Seek(6, STREAM_SEEK_SET, P);
-  Check (P = 6);
+  CheckEquals(6, P, 'Test 5');
   // Try to read 64 chars from here: should read just last 5 = 'World'
   SetLength(InStr, 64);
   Stm.Read(PChar(InStr), 64, @R);
-  Check(R = 5);
+  CheckEquals(5, R, 'Test 6');
   SetLength(InStr, 5);
-  Check(InStr = 'World');
+  CheckEquals('World', InStr, 'Test 7');
 end;
 
 procedure TTestPJIStreamWrapper.TestSize;
@@ -220,18 +221,18 @@ begin
   Stm := TPJIStreamWrapper.Create(S, True);
   // Check size starts as 5 (test stream length and data string length)
   Stm.Seek(0, STREAM_SEEK_END, P);
-  Check(P = 5);
-  Check(Length(S.DataString) = 5);
+  CheckEquals(5, P, 'Test 1a');
+  CheckEquals(5, Length(S.DataString), 'Test 1b');
   // Check size starts as 3 (test stream length and data string length)
   Stm.SetSize(3);
   Stm.Seek(0, STREAM_SEEK_END, P);
-  Check(P = 3);
-  Check(Length(S.DataString) = 3);
+  CheckEquals(3, P, 'Test 2a');
+  CheckEquals(3, Length(S.DataString), 'Test 2b');
   // Check size starts as 64 (test stream length and data string length)
   Stm.SetSize(64);
   Stm.Seek(0, STREAM_SEEK_END, P);
-  Check(P = 64);
-  Check(Length(S.DataString) = 64);
+  CheckEquals(64, P, 'Test 3a');
+  CheckEquals(64, Length(S.DataString), 'Test 3b');
 end;
 
 procedure TTestPJIStreamWrapper.TestStat;
@@ -243,37 +244,38 @@ begin
   S := TStringStream.Create('Hello World');
   Stm := TPJIStreamWrapper.Create(S, True);
   // Check bad call with nil statstg param
-  Check(Stm.Stat(TStatStg(nil^), STATFLAG_DEFAULT) = STG_E_INVALIDPOINTER);
+  CheckEquals(STG_E_INVALIDPOINTER, Stm.Stat(TStatStg(nil^), STATFLAG_DEFAULT),
+    'Test 1');
   // Check bad call with unrecognised grStatFlag param
-  Check(Stm.Stat(Stg, $FFFF) = STG_E_INVALIDFLAG);
+  CheckEquals(STG_E_INVALIDFLAG, Stm.Stat(Stg, $FFFF), 'Test 2');
   // Check call with no name returned
-  Check(Stm.Stat(Stg, STATFLAG_NONAME) = S_OK);
-  Check(Stg.pwcsName = nil);        // no name returned
-  Check(Stg.dwType = STGTY_STREAM); // type is stream
-  Check(Stg.cbSize = S.Size);       // size of underlying stream
-  Check(FTIsZero(Stg.mtime));       // no modification time
-  Check(FTIsZero(Stg.ctime));       // no creation time
-  Check(FTIsZero(Stg.atime));       // no access time
-  Check(Stg.grfMode = 0);           // no access mode specified
-  Check(Stg.grfLocksSupported = 0); // locks not supported
-  Check(GUIDIsZero(Stg.clsid));     // clsid is zero: not used for stream
-  Check(Stg.grfStateBits = 0);      // not used for stream
-  Check(Stg.reserved = 0);          // reserved
+  CheckEquals(S_OK, Stm.Stat(Stg, STATFLAG_NONAME), 'Test 3');
+  Check(Stg.pwcsName = nil, 'Test 4');                       // no name returned
+  CheckEquals(STGTY_STREAM, Stg.dwType, 'Test 5');             // type is stream
+  CheckEquals(S.Size, Stg.cbSize, 'Test 6');        // size of underlying stream
+  CheckEquals(True, FTIsZero(Stg.mtime), 'Test 7');      // no modification time
+  CheckEquals(True, FTIsZero(Stg.ctime), 'Test 8');          // no creation time
+  CheckEquals(True, FTIsZero(Stg.atime), 'Test 9');            // no access time
+  CheckEquals(0, Stg.grfMode, 'Test 10');            // no access mode specified
+  CheckEquals(0, Stg.grfLocksSupported, 'Test 11');      // locks not supported
+  CheckEquals(True, GUIDIsZero(Stg.clsid), 'Test 12');          // clsid is zero
+  CheckEquals(0, Stg.grfStateBits, 'Test 13');            // not used for stream
+  CheckEquals(0, Stg.reserved, 'Test 14');                           // reserved
   // Check call with name returned
-  Check(Stm.Stat(Stg, STATFLAG_DEFAULT) = S_OK);
-  Check(string(Stg.pwcsName) = 'TPJIStreamWrapper(TStringStream)');
-                                    // required name
-  CoTaskMemFree(Stg.pwcsName);      //    free the name memory
-  Check(Stg.dwType = STGTY_STREAM); // type is stream
-  Check(Stg.cbSize = S.Size);       // size of underlying stream
-  Check(FTIsZero(Stg.mtime));       // no modification time
-  Check(FTIsZero(Stg.ctime));       // no creation time
-  Check(FTIsZero(Stg.atime));       // no access time
-  Check(Stg.grfMode = 0);           // no access mode specified
-  Check(Stg.grfLocksSupported = 0); // locks not supported
-  Check(GUIDIsZero(Stg.clsid));     // clsid is zero: not used for stream
-  Check(Stg.grfStateBits = 0);      // not used for stream
-  Check(Stg.reserved = 0);          // reserved
+  CheckEquals(S_OK, Stm.Stat(Stg, STATFLAG_DEFAULT), 'Test 15');
+  CheckEquals('TPJIStreamWrapper(TStringStream)', string(Stg.pwcsName),
+    'Test 16');
+  CoTaskMemFree(Stg.pwcsName);
+  CheckEquals(STGTY_STREAM, Stg.dwType, 'Test 17');            // type is stream
+  CheckEquals(S.Size, Stg.cbSize, 'Test 18');       // size of underlying stream
+  CheckEquals(True, FTIsZero(Stg.mtime), 'Test 19');     // no modification time
+  CheckEquals(True, FTIsZero(Stg.ctime), 'Test 20');         // no creation time
+  CheckEquals(True, FTIsZero(Stg.atime), 'Test 21');           // no access time
+  CheckEquals(0, Stg.grfMode, 'Test 22');            // no access mode specified
+  CheckEquals(0, Stg.grfLocksSupported, 'Test 23');       // locks not supported
+  CheckEquals(True, GUIDIsZero(Stg.clsid), 'Test 24');          // clsid is zero
+  CheckEquals(0, Stg.grfStateBits, 'Test 25');            // not used for stream
+  CheckEquals(0, Stg.reserved, 'Test 26');                           // reserved
 end;
 
 procedure TTestPJIStreamWrapper.TestWriteAndSeek;
@@ -288,18 +290,18 @@ begin
   // Write 'Hello' to empty string stream
   OutStr := 'Hello';
   Stm.Write(PChar(OutStr), 5, @W);
-  Check(W = 5);
-  Check(S.DataString = 'Hello');
+  CheckEquals(5, W, 'Test 1a');
+  CheckEquals('Hello', S.DataString, 'Test 1b');
   // Write ' there' to current stream
   OutStr := ' there';
   Stm.Write(PChar(OutStr), 6, @W);
-  Check(W = 6);
-  Check(S.DataString = 'Hello there');
+  CheckEquals(6, W, 'Test 2a');
+  CheckEquals('Hello there', S.DataString, 'Test 2b');
   // Now overwrite 'there' with 'World'
   Stm.Seek(6, STREAM_SEEK_SET, Largeint(nil^));
   OutStr := 'World';
   Stm.Write(PChar(OutStr), 5, nil);
-  Check(S.DataString = 'Hello World');
+  CheckEquals('Hello World', S.DataString, 'Test 3');
 end;
 
 { TTestPJHandleIStreamWrapper }
@@ -318,38 +320,39 @@ begin
     S := THandleStream.Create(H);
     Stm := TPJHandleIStreamWrapper.Create(S, True);
     // Check bad call with nil statstg param
-    Check(Stm.Stat(TStatStg(nil^), STATFLAG_DEFAULT) = STG_E_INVALIDPOINTER);
+    CheckEquals(STG_E_INVALIDPOINTER,
+      Stm.Stat(TStatStg(nil^), STATFLAG_DEFAULT), 'Test 1');
     // Check bad call with unrecognised grStatFlag param
-    Check(Stm.Stat(Stg, $FFFF) = STG_E_INVALIDFLAG);
+    CheckEquals(STG_E_INVALIDFLAG, Stm.Stat(Stg, $FFFF), 'Test 2');
     // Check call with no name returned
-    Check(Stm.Stat(Stg, STATFLAG_NONAME) = S_OK);
-    Check(Stg.pwcsName = nil);        // no name returned
-    Check(Stg.dwType = STGTY_STREAM); // type is stream
-    Check(Stg.cbSize = S.Size);       // size of underlying stream
-    Check(not FTIsZero(Stg.mtime));   // non-zero modification time
-    Check(not FTIsZero(Stg.ctime));   // non-zero creation time
-    Check(not FTIsZero(Stg.atime));   // non-zero access time
-    Check(Stg.grfMode = 0);           // no access mode specified
-    Check(Stg.grfLocksSupported = 0); // locks not supported
-    Check(GUIDIsZero(Stg.clsid));     // clsid is zero: not used for stream
-    Check(Stg.grfStateBits = 0);      // not used for stream
-    Check(Stg.reserved = 0);          // reserved
+    CheckEquals(S_OK, Stm.Stat(Stg, STATFLAG_NONAME), 'Test 3');
+    Check(Stg.pwcsName = nil, 'Test 4');                     // no name returned
+    CheckEquals(STGTY_STREAM, Stg.dwType, 'Test 5');           // type is stream
+    CheckEquals(S.Size, Stg.cbSize, 'Test 6');      // size of underlying stream
+    CheckEquals(False, FTIsZero(Stg.mtime), 'Test 7');      // modification time
+    CheckEquals(False, FTIsZero(Stg.ctime), 'Test 8');          // creation time
+    CheckEquals(False, FTIsZero(Stg.atime), 'Test 9');   // non-zero access time
+    CheckEquals(0, Stg.grfMode, 'Test 10');          // no access mode specified
+    CheckEquals(0, Stg.grfLocksSupported, 'Test 11');     // locks not supported
+    CheckEquals(True, GUIDIsZero(Stg.clsid), 'Test 12');        // clsid is zero
+    CheckEquals(0, Stg.grfStateBits, 'Test 13');          // not used for stream
+    CheckEquals(0, Stg.reserved, 'Test 14');                         // reserved
 
     // Check call with name returned
-    Check(Stm.Stat(Stg, STATFLAG_DEFAULT) = S_OK);
-    Check(string(Stg.pwcsName) = 'TPJHandleIStreamWrapper(THandleStream)');
-                                      // required name
-    CoTaskMemFree(Stg.pwcsName);      //    free the name memory
-    Check(Stg.dwType = STGTY_STREAM); // type is stream
-    Check(Stg.cbSize = S.Size);       // size of underlying stream
-    Check(not FTIsZero(Stg.mtime));   // non-zero modification time
-    Check(not FTIsZero(Stg.ctime));   // non-zero creation time
-    Check(not FTIsZero(Stg.atime));   // non-zero access time
-    Check(Stg.grfMode = 0);           // no access mode specified
-    Check(Stg.grfLocksSupported = 0); // locks not supported
-    Check(GUIDIsZero(Stg.clsid));     // clsid is zero: not used for stream
-    Check(Stg.grfStateBits = 0);      // not used for stream
-    Check(Stg.reserved = 0);          // reserved
+    CheckEquals(S_OK, Stm.Stat(Stg, STATFLAG_DEFAULT), 'Test 15');
+    CheckEquals('TPJHandleIStreamWrapper(THandleStream)', string(Stg.pwcsName),
+      'Test 16');
+    CoTaskMemFree(Stg.pwcsName);
+    CheckEquals(STGTY_STREAM, Stg.dwType, 'Test 17');          // type is stream
+    CheckEquals(S.Size, Stg.cbSize, 'Test 18');     // size of underlying stream
+    CheckEquals(False, FTIsZero(Stg.mtime), 'Test 19');     // modification time
+    CheckEquals(False, FTIsZero(Stg.ctime), 'Test 20');         // creation time
+    CheckEquals(False, FTIsZero(Stg.atime), 'Test 21');  // non-zero access time
+    CheckEquals(0, Stg.grfMode, 'Test 22');          // no access mode specified
+    CheckEquals(0, Stg.grfLocksSupported, 'Test 23');     // locks not supported
+    CheckEquals(True, GUIDIsZero(Stg.clsid), 'Test 24');        // clsid is zero
+    CheckEquals(0, Stg.grfStateBits, 'Test 25');          // not used for stream
+    CheckEquals(0, Stg.reserved, 'Test 26');                         // reserved
   finally
     FileClose(H);
   end;
@@ -359,11 +362,9 @@ end;
 
 procedure TTestPJFileIStream.TestStat;
 var
-//  S: THandleStream;
   FS: TFileStream;
   Stm: IStream;
   Stg: TStatStg;
-//  H: Integer;
 begin
   // Create file IStream
   Stm := TPJFileIStream.Create(GetTestFileName, fmOpenRead + fmShareDenyNone);
@@ -371,38 +372,38 @@ begin
   FS := TFileStream.Create(GetTestFileName, fmOpenRead + fmShareDenyNone);
   try
     // Check bad call with nil statstg param
-    Check(Stm.Stat(TStatStg(nil^), STATFLAG_DEFAULT) = STG_E_INVALIDPOINTER);
-    // Check bad call with unrecognised grStatFlag param
-    Check(Stm.Stat(Stg, $FFFF) = STG_E_INVALIDFLAG);
-    // Check call with no name returned
-    Check(Stm.Stat(Stg, STATFLAG_NONAME) = S_OK);
-    Check(Stg.pwcsName = nil);        // no name returned
-    Check(Stg.dwType = STGTY_STREAM); // type is stream
-    Check(Stg.cbSize = FS.Size);      // size of file
-    Check(not FTIsZero(Stg.mtime));   // non-zero modification time
-    Check(not FTIsZero(Stg.ctime));   // non-zero creation time
-    Check(not FTIsZero(Stg.atime));   // non-zero access time
-    Check(Stg.grfMode = 0);           // no access mode specified
-    Check(Stg.grfLocksSupported = 0); // locks not supported
-    Check(GUIDIsZero(Stg.clsid));     // clsid is zero: not used for stream
-    Check(Stg.grfStateBits = 0);      // not used for stream
-    Check(Stg.reserved = 0);          // reserved
+    CheckEquals(STG_E_INVALIDPOINTER,
+      Stm.Stat(TStatStg(nil^), STATFLAG_DEFAULT), 'Test 1');
+    // CheckEquals bad call with unrecognised grStatFlag param
+    CheckEquals(STG_E_INVALIDFLAG, Stm.Stat(Stg, $FFFF), 'Test 2');
+    // CheckEquals call with no name returned
+    CheckEquals(S_OK, Stm.Stat(Stg, STATFLAG_NONAME), 'Test 3');
+    Check(Stg.pwcsName = nil, 'Test 4');                     // no name returned
+    CheckEquals(STGTY_STREAM, Stg.dwType, 'Test 5');           // type is stream
+    CheckEquals(FS.Size, Stg.cbSize, 'Test 6');                  // size of file
+    CheckEquals(False, FTIsZero(Stg.mtime), 'Test 7');      // modification time
+    CheckEquals(False, FTIsZero(Stg.ctime), 'Test 8');          // creation time
+    CheckEquals(False, FTIsZero(Stg.atime), 'Test 9');            // access time
+    CheckEquals(0, Stg.grfMode, 'Test 10');          // no access mode specified
+    CheckEquals(0, Stg.grfLocksSupported, 'Test 11');     // locks not supported
+    CheckEquals(True, GUIDIsZero(Stg.clsid), 'Test 12');        // clsid is zero
+    CheckEquals(0, Stg.grfStateBits, 'Test 13');          // not used for stream
+    CheckEquals(0, Stg.reserved, 'Test 14');                         // reserved
 
-    // Check call with name returned
-    Check(Stm.Stat(Stg, STATFLAG_DEFAULT) = S_OK);
-    Check(string(Stg.pwcsName) = GetTestFileName);
-                                      // required name
-    CoTaskMemFree(Stg.pwcsName);      //    free the name memory
-    Check(Stg.dwType = STGTY_STREAM); // type is stream
-    Check(Stg.cbSize = FS.Size);      // size of file
-    Check(not FTIsZero(Stg.mtime));   // non-zero modification time
-    Check(not FTIsZero(Stg.ctime));   // non-zero creation time
-    Check(not FTIsZero(Stg.atime));   // non-zero access time
-    Check(Stg.grfMode = 0);           // no access mode specified
-    Check(Stg.grfLocksSupported = 0); // locks not supported
-    Check(GUIDIsZero(Stg.clsid));     // clsid is zero: not used for stream
-    Check(Stg.grfStateBits = 0);      // not used for stream
-    Check(Stg.reserved = 0);          // reserved
+    // CheckEquals call with name returned
+    CheckEquals(S_OK, Stm.Stat(Stg, STATFLAG_DEFAULT), 'Test 15');
+    CheckEquals(GetTestFileName, string(Stg.pwcsName), 'Test 16');
+    CoTaskMemFree(Stg.pwcsName);
+    CheckEquals(STGTY_STREAM, Stg.dwType, 'Test 17');          // type is stream
+    CheckEquals(FS.Size, Stg.cbSize, 'Test 18');                 // size of file
+    CheckEquals(False, FTIsZero(Stg.mtime), 'Test 19');     // modification time
+    CheckEquals(False, FTIsZero(Stg.ctime), 'Test 20');         // creation time
+    CheckEquals(False, FTIsZero(Stg.atime), 'Test 21');           // access time
+    CheckEquals(0, Stg.grfMode, 'Test 22');          // no access mode specified
+    CheckEquals(0, Stg.grfLocksSupported, 'Test 23');     // locks not supported
+    CheckEquals(True, GUIDIsZero(Stg.clsid), 'Test 24');        // clsid is zero
+    CheckEquals(0, Stg.grfStateBits, 'Test 25');          // not used for stream
+    CheckEquals(0, Stg.reserved, 'Test 26');                         // reserved
   finally
     FS.Free;
   end;
@@ -423,3 +424,4 @@ ClearObList;
 ObList.Free;
 
 end.
+

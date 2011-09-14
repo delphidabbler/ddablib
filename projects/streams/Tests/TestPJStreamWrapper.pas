@@ -62,11 +62,11 @@ begin
   // Check freeing wrapper stream doesn't free wrapper stream when not owned
   W := TPJStreamWrapper.Create(S, False);
   W.Free;
-  Check(ObList.Count = 1);  // TTestStream object still exists
+  CheckEquals(1, ObList.Count, 'Test 1');
   // Check freeing wrapper stream does free an owned wrapped stream
   W := TPJStreamWrapper.Create(S, True);
   W.Free;
-  Check(ObList.Count = 0);  // TTestStream object has now been freed
+  CheckEquals(0, ObList.Count, 'Test 2');
 end;
 
 procedure TTestPJStreamWrapper.TestReadAndSeek;
@@ -81,24 +81,24 @@ begin
   try
     // Read 1st five chars('Hello');
     SetLength(InStr, 5);
-    Check(W.Read(PChar(InStr)^, 5) = 5);
-    Check(InStr = 'Hello');
+    CheckEquals(5, W.Read(PChar(InStr)^, 5), 'Test 1');
+    CheckEquals('Hello', InStr, 'Test 2');
     // Move to one char from end (pos should be 10)
-    Check(W.Seek(1, soFromEnd) = 10);
+    CheckEquals(10, W.Seek(1, soFromEnd), 'Test 3');
     // Read one char: should be last one = 'd'
     SetLength(InStr, 1);
     W.Read(PChar(InStr)^, 1);
-    Check(InStr = 'd');
+    CheckEquals('d', InStr, 'Test 4');
     // We should now be at end (P = 11)
-    Check(W.Position = 11);
+    CheckEquals(11, W.Position, 'Test 5');
     // Seek 6 chars in from start
-    Check(W.Seek(6, soFromBeginning) = 6);
+    CheckEquals(6, W.Seek(6, soFromBeginning), 'Test 6');
     // Try to read 64 chars from here: should read just last 5 = 'World'
     SetLength(InStr, 64);
-    Check(W.Read(PChar(InStr)^, 64) = 5);
+    CheckEquals(5, W.Read(PChar(InStr)^, 64), 'Test 7');
     SetLength(InStr, 5);
     status(instr);
-    Check(InStr = 'World');
+    CheckEquals('World', InStr, 'Test 8');
   finally
     W.Free;
   end;
@@ -113,16 +113,16 @@ begin
   W := TPJStreamWrapper.Create(S, True);
   try
     // Check size starts as 5 (test stream length and data string length)
-    Check(W.Seek(0, soFromEnd) = 5);
-    Check(Length(S.DataString) = 5);
+    CheckEquals(5, W.Seek(0, soFromEnd), 'Test 1a');
+    CheckEquals(5, Length(S.DataString), 'Test 1b');
     // Check size starts as 3 (test stream length and data string length)
     W.Size := 3;
-    Check(W.Size = 3);
-    Check(Length(S.DataString) = 3);
+    CheckEquals(3, W.Size, 'Test 2a');
+    CheckEquals(3, Length(S.DataString), 'Test 2b');
     // Check size starts as 64 (test stream length and data string length)
     W.Size := 64;
-    Check(W.Size = 64);
-    Check(Length(S.DataString) = 64);
+    CheckEquals(64, W.Size, 'Test 3a');
+    CheckEquals(64, Length(S.DataString), 'Test 3b');
   finally
     W.Free;
   end;
@@ -139,18 +139,18 @@ begin
   try
     // Write 'Hello' to empty string stream
     OutStr := 'Hello';
-    Check(W.Write(PChar(OutStr)^, 5) = 5);
-    Check(S.DataString = 'Hello');
+    CheckEquals(5, W.Write(PChar(OutStr)^, 5), 'Test 1a');
+    CheckEquals('Hello', S.DataString, 'Test 1b');
     // Write ' there' to current stream
     OutStr := ' there';
-    Check(W.Write(PChar(OutStr)^, 6) = 6);
-    Check(S.DataString = 'Hello there');
+    CheckEquals(6, W.Write(PChar(OutStr)^, 6), 'Test 2a');
+    CheckEquals('Hello there', S.DataString, 'Test 2b');
     // Now overwrite 'there' with 'World': use Position instead of Seek
     W.Position := 6;
     OutStr := 'World';
     W.Write(PChar(OutStr)^, 5);
-    Check(W.Position = S.Position);
-    Check(S.DataString = 'Hello World');
+    CheckEquals(S.Position, W.Position, 'Test 3a');
+    CheckEquals('Hello World', S.DataString, 'Test 3b');
   finally
     W.Free;
   end;
@@ -182,3 +182,4 @@ ClearObList;
 ObList.Free;
 
 end.
+
