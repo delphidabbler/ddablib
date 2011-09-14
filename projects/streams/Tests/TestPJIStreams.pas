@@ -25,9 +25,6 @@ type
     procedure TestCreateDestroy;
       {Test that wrapped owned streams are freed on destruction and non-owned
       streams are not}
-    procedure TestBaseStreamAndName;
-      {Test protected GetStreamName method and BaseStream property by using hack
-      of creating derived wrapper class to access method and property}
     procedure TestReadAndSeek;
       {Tests Read and Seek methods of IStream}
     procedure TestWriteAndSeek;
@@ -55,7 +52,6 @@ type
     // for the protected GetStreamName which is overridden. Because of this we
     // just provide tests to test base stream name and for Stat
   published
-    procedure TestStreamName;
     procedure TestStat;
   end;
 
@@ -78,11 +74,6 @@ begin
     TTestStream(ObList[ObIdx]).Free;
 end;
 
-type
-  TPJIStreamWrapperHack = class(TPJIStreamWrapper);
-    // used to get at protected methods / properties of TPJIStreamWrapper
-  TPJFileIStreamHack = class(TPJFileIStream);
-    // used to get at protected methods / properties of TPJFileIStream
 
 // Some helper functions
 
@@ -126,31 +117,6 @@ end;
 
 
 { TTestPJIStreamWrapper }
-
-procedure TTestPJIStreamWrapper.TestBaseStreamAndName;
-var
-  S: TTestStream;
-  Stm: TPJIStreamWrapperHack;
-  Malloc: IMalloc;
-  N: POleStr;
-begin
-  ClearObList;
-  S := TTestStream.Create('test');
-  Stm := TPJIStreamWrapperHack.Create(S, True);
-  try
-    // Check stream name is made from wrapper class and wrapped class names
-    // (we need to free given name using system allocator
-    CoGetMalloc(1, Malloc);
-    N := Stm.GetStreamName;
-    Check(N = 'TPJIStreamWrapperHack(TTestStream)');
-    Malloc.Free(N);
-    // Check base stream of stream wrapper is S
-    Check(Stm.BaseStream = S);
-  finally
-    Stm.Free;
-    Check(ObList.Count = 0);  // just make sure we've freed S
-  end;
-end;
 
 procedure TTestPJIStreamWrapper.TestCopyTo;
 var
@@ -442,27 +408,7 @@ begin
   end;
 end;
 
-procedure TTestPJFileIStream.TestStreamName;
-var
-  Stm: TPJFileIStreamHack;
-  Malloc: IMalloc;
-  N: POleStr;
-begin
-  Stm := TPJFileIStreamHack.Create(GetTestFileName, fmOpenRead);
-  try
-    // Check stream name is made from wrapper class and wrapped class names
-    // (we need to free given name using system allocator
-    CoGetMalloc(1, Malloc);
-    N := Stm.GetStreamName;
-    Check(N = GetTestFileName);
-    Malloc.Free(N);
-  finally
-    Stm.Free;
-  end;
-end;
-
 initialization
-
 
 ObList := TList.Create;
 
