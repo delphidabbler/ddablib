@@ -307,26 +307,16 @@ end;
 
 procedure TTestPJIStreamWrapper.TestSize;
 var
-  S: TStringStream;
-  Stm: IStream;
-  P: Largeint;
+  WS: IStream;
 begin
-  S := TStringStream.Create(AnsiString('Hello'));
-  Stm := TPJIStreamWrapper.Create(S, True);
-  // Check size starts as 5 (test stream length and data string length)
-  Stm.Seek(0, STREAM_SEEK_END, P);
-  CheckEquals(5, P, 'Test 1a');
-  CheckEquals(5, Length(S.DataString), 'Test 1b');
-  // Check size starts as 3 (test stream length and data string length)
-  Stm.SetSize(3);
-  Stm.Seek(0, STREAM_SEEK_END, P);
-  CheckEquals(3, P, 'Test 2a');
-  CheckEquals(3, Length(S.DataString), 'Test 2b');
-  // Check size starts as 64 (test stream length and data string length)
-  Stm.SetSize(64);
-  Stm.Seek(0, STREAM_SEEK_END, P);
-  CheckEquals(64, P, 'Test 3a');
-  CheckEquals(64, Length(S.DataString), 'Test 3b');
+  Assert(MS.Size = 1024);
+  WS := TPJIStreamWrapper.Create(MS, False);
+  WS.SetSize(42);
+  CheckEquals(42, MS.Size, 'Test 1');
+  WS.SetSize(56);
+  CheckEquals(56, MS.Size, 'Test 2');
+  WS.SetSize(0);
+  CheckEquals(0, MS.Size, 'Test 3');
 end;
 
 procedure TTestPJIStreamWrapper.TestStat;
