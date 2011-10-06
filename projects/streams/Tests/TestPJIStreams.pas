@@ -35,12 +35,12 @@ type
       {Test Seek method}
     procedure TestRead;
       {Test Read method}
-    procedure TestWriteAndSeek;
-      {Test Write and Seek methods of IStream}
+    procedure TestWrite;
+      {Test Write method}
     procedure TestSize;
-      {Test SetSize method of IStream}
+      {Test SetSize method}
     procedure TestCopyTo;
-      {Text CopyTo methof of IStream}
+      {Text CopyTo method}
     procedure TestNonImpl;
       {Test the return values of the non-implemented IStream methods are as
       expected}
@@ -339,30 +339,32 @@ begin
   CheckEquals(0, Stg.reserved, 'Test 26');                           // reserved
 end;
 
-procedure TTestPJIStreamWrapper.TestWriteAndSeek;
+procedure TTestPJIStreamWrapper.TestWrite;
 var
-  S: TStringStream;
-  Stm: IStream;
+  SS: TStringStream;
+  WS: IStream;
   OutStr: AnsiString;
-  W: LongInt;
+  Count: LongInt;
 begin
-  S := TStringStream.Create(AnsiString(''));
-  Stm := TPJIStreamWrapper.Create(S, True);
+  SS := TStringStream.Create(AnsiString(''));
+  WS := TPJIStreamWrapper.Create(SS, True);
   // Write 'Hello' to empty string stream
   OutStr := 'Hello';
-  Stm.Write(PAnsiChar(OutStr), 5, @W);
-  CheckEquals(5, W, 'Test 1a');
-  CheckEquals('Hello', S.DataString, 'Test 1b');
+  WS.Write(PAnsiChar(OutStr), 5, @Count);
+  CheckEquals(5, Count, 'Test 1a');
+  CheckEquals('Hello', SS.DataString, 'Test 1b');
   // Write ' there' to current stream
   OutStr := ' there';
-  Stm.Write(PAnsiChar(OutStr), 6, @W);
-  CheckEquals(6, W, 'Test 2a');
-  CheckEquals('Hello there', S.DataString, 'Test 2b');
-  // Now overwrite 'there' with 'World'
-  Stm.Seek(6, STREAM_SEEK_SET, Largeint(nil^));
+  WS.Write(PAnsiChar(OutStr), 6, @Count);
+  CheckEquals(6, Count, 'Test 2a');
+  CheckEquals('Hello there', SS.DataString, 'Test 2b');
+  // Now overwrite 'there' with 'World': use Position on underlying stream to
+  // reposition stream pointer: we don't use WS.Seek or WS.Position because
+  // that must also be tested
+  SS.Position := 6;
   OutStr := 'World';
-  Stm.Write(PAnsiChar(OutStr), 5, nil);
-  CheckEquals('Hello World', S.DataString, 'Test 3');
+  WS.Write(PAnsiChar(OutStr), 5, nil);
+  CheckEquals('Hello World', SS.DataString, 'Test 3');
 end;
 
 { TTestPJHandleIStreamWrapper }
