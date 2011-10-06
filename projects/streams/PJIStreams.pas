@@ -45,7 +45,11 @@ uses
   Classes, Windows, ActiveX;
 
 {$UNDEF SUPPORTS_STRICT}
+{$UNDEF SUPPORTS_TSTREAM64}
 {$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 14.0} // >= Delphi 6
+    {$DEFINE SUPPORTS_TSTREAM64}
+  {$IFEND}
   {$IF CompilerVersion >= 15.0} // >= Delphi 7
     {$WARN UNSAFE_CODE OFF}
     {$WARN UNSAFE_CAST OFF}
@@ -189,7 +193,9 @@ implementation
 
 uses
   // Delphi
-  Math, SysUtils;
+  Math, SysUtils,
+  // Library
+  PJStreamWrapper;
 
 
 { TPJIStreamWrapper }
@@ -361,34 +367,59 @@ function TPJIStreamWrapper.Seek(dlibMove: Largeint; dwOrigin: Integer;
   stream, the end of the stream, or the current seek pointer. Returns the new
   seek pointer position in libNewPosition}
 var
-  Origin: Word;           // seek origin in terms of TStream
-  NewPosition: Largeint;  // new file pointer position after seek
+  {$IFDEF SUPPORTS_TSTREAM64}
+  Origin: TSeekOrigin;
+  {$ELSE}
+  Origin: Word;               // seek origin in terms of TStream
+  {$ENDIF}
+  NewPosition: Largeint;      // new file pointer position after seek
+  Wrapper: TPJStreamWrapper;  // stream wrapper to perform actual seek
 begin
   // Translate origin from IStream constant to TStream constant
   case dwOrigin of
-    STREAM_SEEK_SET: Origin := soFromBeginning;
-    STREAM_SEEK_CUR: Origin := soFromCurrent;
-    STREAM_SEEK_END: Origin := soFromEnd;
-    else Origin := MaxWord; // unrecognised origin
+    STREAM_SEEK_SET:
+      {$IFDEF SUPPORTS_TSTREAM64}
+      Origin := soBeginning;
+      {$ELSE}
+      Origin := soFromBeginning;
+      {$ENDIF}
+    STREAM_SEEK_CUR:
+      {$IFDEF SUPPORTS_TSTREAM64}
+      Origin := soCurrent;
+      {$ELSE}
+      Origin := soFromCurrent;
+      {$ENDIF}
+    STREAM_SEEK_END:
+      {$IFDEF SUPPORTS_TSTREAM64}
+      Origin := soEnd;
+      {$ELSE}
+      Origin := soFromEnd;
+      {$ENDIF}
+    else
+    begin
+      Result := STG_E_INVALIDFUNCTION;
+      Exit;
+    end
   end;
-  // Check if origin is valid
-  if Origin <> MaxWord then
-  begin
+  try
+    // We use a TPJStreamWrapper to perform seek so that it can fix any problems
+    // with seek on a TStringStream using STREAM_SEEK_END origin (see comments
+    // in PJStreamWrapper unit for details).
+    Wrapper := TPJStreamWrapper.Create(fBaseStream);
     try
       // Valid origin: do seek and record new position if it's assigned
-      NewPosition := fBaseStream.Seek(dlibMove, Origin);
+      NewPosition := Wrapper.Seek(dlibMove, Origin);
       if Assigned(@libNewPosition) then
         libNewPosition := NewPosition;
       // seek succeeded
       Result := S_OK;
-    except
-      // seek failed
-      Result := STG_E_INVALIDPOINTER;
+    finally
+      Wrapper.Free;
     end;
-  end
-  else
-    // Bad origin
-    Result := STG_E_INVALIDFUNCTION;
+  except
+    // seek failed
+    Result := STG_E_INVALIDPOINTER;
+  end;
 end;
 
 function TPJIStreamWrapper.SetSize(libNewSize: Largeint): HResult;
