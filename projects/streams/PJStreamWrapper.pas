@@ -57,6 +57,19 @@ uses
   {$IFEND}
 {$ENDIF}
 
+// There is an error in TStringStream's Seek implementation in non-Unicode
+// versions of the Classes unit. Seeks using the soFromEnd origin incorrectly
+// handle offsets in that positive offsets move back from the end of the stream
+// when negative offsets should be required. All other stream classes behave
+// in the opposite manner, including Unicode implementations of TStringStream.
+//
+// The following define causes this class to fix this behaviour by implementing
+// soFromEnd correctly on all wrapped streams. This behaviour can break earlier
+// code, so if you need the old behaviour where the Seek behaviour of the
+// underlying stream is always used, regardless of bugs, you must comment out
+// the following define.
+{$DEFINE FIX_TSTRINGSTREAM_SEEK_ERROR}
+
 type
 
   ///  <summary>
@@ -201,13 +214,33 @@ end;
 {$IFDEF SUPPORTS_TSTREAM64}
 function TPJStreamWrapper.Seek(const Offset: Int64; Origin: TSeekOrigin): Int64;
 begin
+  {$IFDEF FIX_TSTRINGSTREAM_SEEK_ERROR}
+  if Origin = soEnd then
+  begin
+    fBaseStream.Seek(0, soEnd);
+    Result := fBaseStream.Seek(Offset, soCurrent);
+  end
+  else
+    Result := fBaseStream.Seek(Offset, Origin);
+  {$ELSE}
   Result := fBaseStream.Seek(Offset, Origin);
+  {$ENDIF}
 end;
 {$ENDIF}
 
 function TPJStreamWrapper.Seek(Offset: Integer; Origin: Word): Longint;
 begin
+  {$IFDEF FIX_TSTRINGSTREAM_SEEK_ERROR}
+  if Origin = soFromEnd then
+  begin
+    fBaseStream.Seek(0, soFromEnd);
+    Result := fBaseStream.Seek(Offset, soFromCurrent);
+  end
+  else
+    Result := fBaseStream.Seek(Offset, Origin);
+  {$ELSE}
   Result := fBaseStream.Seek(Offset, Origin);
+  {$ENDIF}
 end;
 
 {$IFDEF SUPPORTS_TSTREAM64}
