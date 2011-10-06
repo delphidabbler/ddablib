@@ -157,9 +157,13 @@ end;
 
 procedure TTestPJIStreamWrapper.TestCopyTo;
 var
-  S1, S2: TStringStream;
+  LargeSS1, LargeSS2, S1, S2: TStringStream;
   Stm1, Stm2: IStream;
+  LargeStm1, LargeStm2: IStream;
   R, W: LargeInt;
+  S: AnsiString;
+const
+  LargeStreamSize = 1024 * 1024 * 3 + 40 * 1024; // 3Mb + 40Kb
 begin
   // We copy 'Dabbler' from S2 and overwrite 'World' in S1
   S1 := TStringStream.Create(AnsiString('Hello World'));
@@ -180,6 +184,17 @@ begin
   CheckEquals(Length('delphiDabbler!'), R, 'Test 4');
   CheckEquals(True, W = R, 'Test 5');
   CheckEquals('Hello delphiDabbler!', S1.DataString, 'Test 6');
+
+  // Test stream copy when size greater than 1Mb (internal copy buffer size)
+  S := StringOfChar(AnsiChar('@'), LargeStreamSize);
+  LargeSS1 := TStringStream.Create(S);
+  LargeStm1 := TPJIStreamWrapper.Create(LargeSS1, True);
+  LargeSS2 := TStringStream.Create(AnsiString(''));
+  LargeStm2 := TPJIStreamWrapper.Create(LargeSS2, True);
+  LargeStm1.CopyTo(LargeStm2, LargeStreamSize, R, W);
+  CheckEquals(LargeStreamSize, R, 'Test 7a');
+  CheckEquals(LargeStreamSize, W, 'Test 7b');
+  CheckEquals(LargeSS1.DataString, LargeSS2.DataString, 'Test 7c');
 end;
 
 procedure TTestPJIStreamWrapper.TestCreateDestroy;
