@@ -125,8 +125,8 @@ var
   R, W: LargeInt;
 begin
   // We copy 'Dabbler' from S2 and overwrite 'World' in S1
-  S1 := TStringStream.Create('Hello World');
-  S2 := TStringStream.Create('delphiDabbler!');
+  S1 := TStringStream.Create(AnsiString('Hello World'));
+  S2 := TStringStream.Create(AnsiString('delphiDabbler!'));
   Stm1 := TPJIStreamWrapper.Create(S1, True);
   Stm2 := TPJIStreamWrapper.Create(S2, True);
   Stm1.Seek(6, STREAM_SEEK_SET, Largeint(nil^));  // start of "World"
@@ -167,7 +167,7 @@ var
   S: TStringStream;
   Stm: IStream;
 begin
-  S := TStringStream.Create('Hello World');
+  S := TStringStream.Create(AnsiString('Hello World'));
   Stm := TPJIStreamWrapper.Create(S, True);
   CheckEquals(S_OK, Stm.Commit(0), 'Test 1');
   CheckEquals(STG_E_REVERTED, Stm.Revert, 'Test 2');
@@ -179,24 +179,24 @@ procedure TTestPJIStreamWrapper.TestReadAndSeek;
 var
   S: TStringStream;
   Stm: IStream;
-  InStr: string;
+  InStr: AnsiString;
   R: LongInt;
   P: Largeint;
 begin
-  S := TStringStream.Create('Hello World');
+  S := TStringStream.Create(AnsiString('Hello World'));
   Stm := TPJIStreamWrapper.Create(S, True);
   // Read 1st five chars('Hello');
   SetLength(InStr, 5);
-  Stm.Read(PChar(InStr), 5, @R);
-  CheckEquals('Hello', InStr, 'Test 1a');
+  Stm.Read(PAnsiChar(InStr), 5, @R);
+  CheckEquals(AnsiString('Hello'), InStr, 'Test 1a');
   CheckEquals(5, R, 'Test 1b');
   // Move to one char from end (pos should be 10)
   Stm.Seek(1, STREAM_SEEK_END, P);
   CheckEquals(10, P, 'Test 2');
   // Read one char: should be last one = 'd'
   SetLength(InStr, 1);
-  Stm.Read(PChar(InStr), 1, nil);
-  CheckEquals('d', InStr, 'Test 3');
+  Stm.Read(PAnsiChar(InStr), 1, nil);
+  CheckEquals(AnsiString('d'), InStr, 'Test 3');
   // We should now be at end (P = 11)
   Stm.Seek(0, STREAM_SEEK_CUR, P);
   CheckEquals(11, P, 'Test 4');
@@ -205,10 +205,10 @@ begin
   CheckEquals(6, P, 'Test 5');
   // Try to read 64 chars from here: should read just last 5 = 'World'
   SetLength(InStr, 64);
-  Stm.Read(PChar(InStr), 64, @R);
+  Stm.Read(PAnsiChar(InStr), 64, @R);
   CheckEquals(5, R, 'Test 6');
   SetLength(InStr, 5);
-  CheckEquals('World', InStr, 'Test 7');
+  CheckEquals(AnsiString('World'), InStr, 'Test 7');
 end;
 
 procedure TTestPJIStreamWrapper.TestSize;
@@ -217,7 +217,7 @@ var
   Stm: IStream;
   P: Largeint;
 begin
-  S := TStringStream.Create('Hello');
+  S := TStringStream.Create(AnsiString('Hello'));
   Stm := TPJIStreamWrapper.Create(S, True);
   // Check size starts as 5 (test stream length and data string length)
   Stm.Seek(0, STREAM_SEEK_END, P);
@@ -241,7 +241,7 @@ var
   Stm: IStream;
   Stg: TStatStg;
 begin
-  S := TStringStream.Create('Hello World');
+  S := TStringStream.Create(AnsiString('Hello World'));
   Stm := TPJIStreamWrapper.Create(S, True);
   // Check bad call with nil statstg param
   CheckEquals(STG_E_INVALIDPOINTER, Stm.Stat(TStatStg(nil^), STATFLAG_DEFAULT),
@@ -282,25 +282,25 @@ procedure TTestPJIStreamWrapper.TestWriteAndSeek;
 var
   S: TStringStream;
   Stm: IStream;
-  OutStr: string;
+  OutStr: AnsiString;
   W: LongInt;
 begin
-  S := TStringStream.Create('');
+  S := TStringStream.Create(AnsiString(''));
   Stm := TPJIStreamWrapper.Create(S, True);
   // Write 'Hello' to empty string stream
   OutStr := 'Hello';
-  Stm.Write(PChar(OutStr), 5, @W);
+  Stm.Write(PAnsiChar(OutStr), 5, @W);
   CheckEquals(5, W, 'Test 1a');
   CheckEquals('Hello', S.DataString, 'Test 1b');
   // Write ' there' to current stream
   OutStr := ' there';
-  Stm.Write(PChar(OutStr), 6, @W);
+  Stm.Write(PAnsiChar(OutStr), 6, @W);
   CheckEquals(6, W, 'Test 2a');
   CheckEquals('Hello there', S.DataString, 'Test 2b');
   // Now overwrite 'there' with 'World'
   Stm.Seek(6, STREAM_SEEK_SET, Largeint(nil^));
   OutStr := 'World';
-  Stm.Write(PChar(OutStr), 5, nil);
+  Stm.Write(PAnsiChar(OutStr), 5, nil);
   CheckEquals('Hello World', S.DataString, 'Test 3');
 end;
 

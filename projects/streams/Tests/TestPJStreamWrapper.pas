@@ -58,7 +58,7 @@ var
   W: TPJStreamWrapper;
 begin
   ClearObList;
-  S := TTestStream.Create('test');
+  S := TTestStream.Create(AnsiString('test'));
   // Check freeing wrapper stream doesn't free wrapper stream when not owned
   W := TPJStreamWrapper.Create(S, False);
   W.Free;
@@ -73,32 +73,32 @@ procedure TTestPJStreamWrapper.TestReadAndSeek;
 var
   S: TStringStream;
   W: TPJStreamWrapper;
-  InStr: string;
+  InStr: AnsiString;
 begin
   ClearObList;
-  S := TTestStream.Create('Hello World');
+  S := TTestStream.Create(AnsiString('Hello World'));
   W := TPJStreamWrapper.Create(S, True);
   try
     // Read 1st five chars('Hello');
     SetLength(InStr, 5);
-    CheckEquals(5, W.Read(PChar(InStr)^, 5), 'Test 1');
-    CheckEquals('Hello', InStr, 'Test 2');
+    CheckEquals(5, W.Read(PAnsiChar(InStr)^, 5), 'Test 1');
+    CheckEquals(AnsiString('Hello'), InStr, 'Test 2');
     // Move to one char from end (pos should be 10)
     CheckEquals(10, W.Seek(1, soFromEnd), 'Test 3');
     // Read one char: should be last one = 'd'
     SetLength(InStr, 1);
-    W.Read(PChar(InStr)^, 1);
-    CheckEquals('d', InStr, 'Test 4');
+    W.Read(PAnsiChar(InStr)^, 1);
+    CheckEquals(AnsiString('d'), InStr, 'Test 4');
     // We should now be at end (P = 11)
     CheckEquals(11, W.Position, 'Test 5');
     // Seek 6 chars in from start
     CheckEquals(6, W.Seek(6, soFromBeginning), 'Test 6');
     // Try to read 64 chars from here: should read just last 5 = 'World'
     SetLength(InStr, 64);
-    CheckEquals(5, W.Read(PChar(InStr)^, 64), 'Test 7');
+    CheckEquals(5, W.Read(PAnsiChar(InStr)^, 64), 'Test 7');
     SetLength(InStr, 5);
-    status(instr);
-    CheckEquals('World', InStr, 'Test 8');
+    status(string(instr));
+    CheckEquals(AnsiString('World'), InStr, 'Test 8');
   finally
     W.Free;
   end;
@@ -109,7 +109,7 @@ var
   S: TStringStream;
   W: TPJStreamWrapper;
 begin
-  S := TStringStream.Create('Hello');
+  S := TStringStream.Create(AnsiString('Hello'));
   W := TPJStreamWrapper.Create(S, True);
   try
     // Check size starts as 5 (test stream length and data string length)
@@ -132,23 +132,23 @@ procedure TTestPJStreamWrapper.TestWriteAndSeek;
 var
   S: TStringStream;
   W: TPJStreamWrapper;
-  OutStr: string;
+  OutStr: AnsiString;
 begin
-  S := TStringStream.Create('');
+  S := TStringStream.Create(AnsiString(''));
   W := TPJStreamWrapper.Create(S, True);
   try
     // Write 'Hello' to empty string stream
     OutStr := 'Hello';
-    CheckEquals(5, W.Write(PChar(OutStr)^, 5), 'Test 1a');
+    CheckEquals(5, W.Write(PAnsiChar(OutStr)^, 5), 'Test 1a');
     CheckEquals('Hello', S.DataString, 'Test 1b');
     // Write ' there' to current stream
     OutStr := ' there';
-    CheckEquals(6, W.Write(PChar(OutStr)^, 6), 'Test 2a');
+    CheckEquals(6, W.Write(PAnsiChar(OutStr)^, 6), 'Test 2a');
     CheckEquals('Hello there', S.DataString, 'Test 2b');
     // Now overwrite 'there' with 'World': use Position instead of Seek
     W.Position := 6;
     OutStr := 'World';
-    W.Write(PChar(OutStr)^, 5);
+    W.Write(PAnsiChar(OutStr)^, 5);
     CheckEquals(S.Position, W.Position, 'Test 3a');
     CheckEquals('Hello World', S.DataString, 'Test 3b');
   finally
