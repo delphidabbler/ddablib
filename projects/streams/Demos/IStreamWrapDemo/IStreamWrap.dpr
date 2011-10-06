@@ -14,7 +14,9 @@ program IStreamWrap;
 uses
   Forms,
   FmIStreamWrap in 'FmIStreamWrap.pas' {IStreamWrapForm},
-  FmIStreamWrapHelp in 'FmIStreamWrapHelp.pas' {IStreamWrapHelpForm};
+  FmIStreamWrapHelp in 'FmIStreamWrapHelp.pas' {IStreamWrapHelpForm},
+  PJIStreams in '..\..\PJIStreams.pas',
+  PJStreamWrapper in '..\..\PJStreamWrapper.pas';
 
 {$R *.RES}
 

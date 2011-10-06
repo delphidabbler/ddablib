@@ -13,7 +13,8 @@ program StreamWrap;
 
 uses
   Forms,
-  FmStreamWrap in 'FmStreamWrap.pas' {StreamWrapForm};
+  FmStreamWrap in 'FmStreamWrap.pas' {StreamWrapForm},
+  PJStreamWrapper in '..\..\PJStreamWrapper.pas';
 
 {$R *.RES}
 
