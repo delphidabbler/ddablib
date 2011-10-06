@@ -24,6 +24,8 @@ type
   private
     MS: TMemoryStream;
     SS: TStringStream;
+    FS: TFileStream;
+    function OneKbFileName: string;
   public
     procedure SetUp; override;
     procedure TearDown; override;
@@ -43,6 +45,9 @@ type
 
 implementation
 
+uses
+  SysUtils, Windows {for inlining};
+
 var
   ObList: TList;
 
@@ -57,11 +62,17 @@ end;
 
 { TTestPJStreamWrapper }
 
+function TTestPJStreamWrapper.OneKbFileName: string;
+begin
+  Result := ExtractFilePath(ParamStr(0)) + '1KbTestFile';
+end;
+
 procedure TTestPJStreamWrapper.SetUp;
 var
   S: AnsiString;
   Buf: array of Byte;
   I: Integer;
+  NFS: TFileStream;
 const
   CS: AnsiString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 begin
@@ -78,12 +89,22 @@ begin
   MS := TMemoryStream.Create;
   MS.WriteBuffer(Pointer(Buf)^, Length(Buf));
   Assert(MS.Size = 1024);
+
+  NFS := TFileStream.Create(OneKbFileName, fmCreate);
+  try
+    NFS.WriteBuffer(Pointer(Buf)^, Length(Buf));
+  finally
+    NFS.Free;
+  end;
+  FS := TFileStream.Create(OneKbFileName, fmOpenRead or fmShareDenyWrite);
 end;
 
 procedure TTestPJStreamWrapper.TearDown;
 begin
+  FS.Free;
   MS.Free;
   SS.Free;
+  SysUtils.DeleteFile(OneKbFileName);
 end;
 
 procedure TTestPJStreamWrapper.TestCreateDestroy;
@@ -168,6 +189,7 @@ procedure TTestPJStreamWrapper.TestSeek;
   end;
 begin
   DoTest(MS);
+  DoTest(FS);
   DoTest(SS);
 end;
 
