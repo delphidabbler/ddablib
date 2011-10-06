@@ -21,12 +21,20 @@ type
   end;
 
   TTestPJIStreamWrapper = class(TTestCase)
+  private
+    MS: TMemoryStream;
+    SS: TStringStream;
+  public
+    procedure SetUp; override;
+    procedure TearDown; override;
   published
     procedure TestCreateDestroy;
       {Test that wrapped owned streams are freed on destruction and non-owned
       streams are not}
-    procedure TestReadAndSeek;
-      {Tests Read and Seek methods of IStream}
+    procedure TestSeek;
+      {Test Seek method}
+    procedure TestRead;
+      {Test Read method}
     procedure TestWriteAndSeek;
       {Test Write and Seek methods of IStream}
     procedure TestSize;
@@ -118,6 +126,35 @@ end;
 
 { TTestPJIStreamWrapper }
 
+procedure TTestPJIStreamWrapper.SetUp;
+var
+  S: AnsiString;
+  Buf: array of Byte;
+  I: Integer;
+const
+  CS: AnsiString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+begin
+  S := '';
+  while Length(S) < 1024 do
+    S := S + CS;
+  SetLength(S, 1024);
+  SS := TStringStream.Create(S);
+  Assert(SS.Size = 1024);
+
+  SetLength(Buf, 1024);
+  for I := Low(Buf) to High(Buf) do
+    Buf[I] := I mod 256;
+  MS := TMemoryStream.Create;
+  MS.WriteBuffer(Pointer(Buf)^, Length(Buf));
+  Assert(MS.Size = 1024);
+end;
+
+procedure TTestPJIStreamWrapper.TearDown;
+begin
+  MS.Free;
+  SS.Free;
+end;
+
 procedure TTestPJIStreamWrapper.TestCopyTo;
 var
   S1, S2: TStringStream;
@@ -175,40 +212,64 @@ begin
   CheckEquals(STG_E_INVALIDFUNCTION, Stm.UnlockRegion(0, 0, 0), 'Test 4');
 end;
 
-procedure TTestPJIStreamWrapper.TestReadAndSeek;
+procedure TTestPJIStreamWrapper.TestRead;
 var
-  S: TStringStream;
-  Stm: IStream;
+  WS: IStream;
   InStr: AnsiString;
-  R: LongInt;
-  P: Largeint;
+  Count: Longint;
 begin
-  S := TStringStream.Create(AnsiString('Hello World'));
-  Stm := TPJIStreamWrapper.Create(S, True);
-  // Read 1st five chars('Hello');
+  Assert(SS.Size = 1024);
+  SS.Position := 0;
+  WS := TPJIStreamWrapper.Create(SS, False);
+
   SetLength(InStr, 5);
-  Stm.Read(PAnsiChar(InStr), 5, @R);
-  CheckEquals(AnsiString('Hello'), InStr, 'Test 1a');
-  CheckEquals(5, R, 'Test 1b');
-  // Move to one char from end (pos should be 10)
-  Stm.Seek(1, STREAM_SEEK_END, P);
-  CheckEquals(10, P, 'Test 2');
-  // Read one char: should be last one = 'd'
+  WS.Read(Pointer(InStr), 5, @Count);
+  CheckEquals(AnsiString('ABCDE'), InStr, 'Test 1a');
+  CheckEquals(5, Count, 'Test 1b');
+
   SetLength(InStr, 1);
-  Stm.Read(PAnsiChar(InStr), 1, nil);
-  CheckEquals(AnsiString('d'), InStr, 'Test 3');
-  // We should now be at end (P = 11)
-  Stm.Seek(0, STREAM_SEEK_CUR, P);
-  CheckEquals(11, P, 'Test 4');
-  // Seek 6 chars in from start
-  Stm.Seek(6, STREAM_SEEK_SET, P);
-  CheckEquals(6, P, 'Test 5');
-  // Try to read 64 chars from here: should read just last 5 = 'World'
-  SetLength(InStr, 64);
-  Stm.Read(PAnsiChar(InStr), 64, @R);
-  CheckEquals(5, R, 'Test 6');
-  SetLength(InStr, 5);
-  CheckEquals(AnsiString('World'), InStr, 'Test 7');
+  WS.Read(Pointer(InStr), 1, @Count);
+  CheckEquals(AnsiString('F'), InStr, 'Test 2a');
+  CheckEquals(1, Count, 'Test 2b');
+
+  SetLength(InStr, 1024);
+  WS.Read(Pointer(InStr), 1024, @Count);
+  CheckEquals(Count, 1018, 'Test 3');
+
+  SS.Position := 9;
+  SetLength(InStr, 4);
+  WS.Read(Pointer(InStr), 4, @Count);
+  CheckEquals(AnsiString('JKLM'), InStr, 'Test 4a');
+  CheckEquals(4, Count, 'Test 4b');
+end;
+
+procedure TTestPJIStreamWrapper.TestSeek;
+  procedure DoTest(const Stm: TStream);
+  var
+    WS: IStream;
+    Pos: Int64;
+  begin
+    WS := TPJIStreamWrapper.Create(Stm, False);
+    WS.Seek(0, STREAM_SEEK_SET, Pos);
+    CheckEquals(0, Pos, Stm.ClassName + ': Test 1');
+    WS.Seek(100, STREAM_SEEK_SET, Pos);
+    CheckEquals(100, Pos, Stm.ClassName + ': Test 2');
+    WS.Seek(100, STREAM_SEEK_CUR, Pos);
+    CheckEquals(200, Pos, Stm.ClassName + ': Test 3');
+    WS.Seek(-50, STREAM_SEEK_CUR, Pos);
+    CheckEquals(150, Pos, Stm.ClassName + ': Test 4');
+    WS.Seek(1024, STREAM_SEEK_SET, Pos);
+    CheckEquals(1024, Pos, Stm.ClassName + ': Test 5');
+    WS.Seek(0, STREAM_SEEK_END, Pos);
+    CheckEquals(1024, Pos, Stm.ClassName + ': Test 6');
+    WS.Seek(-24, STREAM_SEEK_END, Pos);
+    CheckEquals(1000, Pos, Stm.ClassName + ': Test 7');
+    WS.Seek(-1024, STREAM_SEEK_END, Pos);
+    CheckEquals(0, Pos, Stm.ClassName + ': Test 8');
+  end;
+begin
+  DoTest(MS);
+  DoTest(SS);
 end;
 
 procedure TTestPJIStreamWrapper.TestSize;
