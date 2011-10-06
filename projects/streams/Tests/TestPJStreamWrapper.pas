@@ -21,12 +21,20 @@ type
   end;
 
   TTestPJStreamWrapper = class(TTestCase)
+  private
+    MS: TMemoryStream;
+    SS: TStringStream;
+  public
+    procedure SetUp; override;
+    procedure TearDown; override;
   published
     procedure TestCreateDestroy;
       {Test that wrapped owned streams are freed on destruction and non-owned
       streams are not}
-    procedure TestReadAndSeek;
-      {Test Read and Seek methods}
+    procedure TestSeek;
+      {Test Seek method}
+    procedure TestRead;
+      {Test Read method}
     procedure TestWriteAndSeek;
       {Test Write and Seek methods}
     procedure TestSize;
@@ -52,6 +60,35 @@ end;
 
 { TTestPJStreamWrapper }
 
+procedure TTestPJStreamWrapper.SetUp;
+var
+  S: AnsiString;
+  Buf: array of Byte;
+  I: Integer;
+const
+  CS: AnsiString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+begin
+  S := '';
+  while Length(S) < 1024 do
+    S := S + CS;
+  SetLength(S, 1024);
+  SS := TStringStream.Create(S);
+  Assert(SS.Size = 1024);
+
+  SetLength(Buf, 1024);
+  for I := Low(Buf) to High(Buf) do
+    Buf[I] := I mod 256;
+  MS := TMemoryStream.Create;
+  MS.WriteBuffer(Pointer(Buf)^, Length(Buf));
+  Assert(MS.Size = 1024);
+end;
+
+procedure TTestPJStreamWrapper.TearDown;
+begin
+  MS.Free;
+  SS.Free;
+end;
+
 procedure TTestPJStreamWrapper.TestCreateDestroy;
 var
   S: TTestStream;
@@ -69,39 +106,72 @@ begin
   CheckEquals(0, ObList.Count, 'Test 2');
 end;
 
-procedure TTestPJStreamWrapper.TestReadAndSeek;
+procedure TTestPJStreamWrapper.TestRead;
 var
-  S: TStringStream;
-  W: TPJStreamWrapper;
+  WS: TPJStreamWrapper;
   InStr: AnsiString;
+  Count: Longint;
 begin
-  ClearObList;
-  S := TTestStream.Create(AnsiString('Hello World'));
-  W := TPJStreamWrapper.Create(S, True);
+  Assert(SS.Size = 1024);
+  SS.Position := 0;
+  WS := TPJStreamWrapper.Create(SS, False);
   try
-    // Read 1st five chars('Hello');
     SetLength(InStr, 5);
-    CheckEquals(5, W.Read(PAnsiChar(InStr)^, 5), 'Test 1');
-    CheckEquals(AnsiString('Hello'), InStr, 'Test 2');
-    // Move to one char from end (pos should be 10)
-    CheckEquals(10, W.Seek(1, soFromEnd), 'Test 3');
-    // Read one char: should be last one = 'd'
+    Count := WS.Read(Pointer(InStr)^, 5);
+    CheckEquals(AnsiString('ABCDE'), InStr, 'Test 1a');
+    CheckEquals(5, Count, 'Test 1b');
+
     SetLength(InStr, 1);
-    W.Read(PAnsiChar(InStr)^, 1);
-    CheckEquals(AnsiString('d'), InStr, 'Test 4');
-    // We should now be at end (P = 11)
-    CheckEquals(11, W.Position, 'Test 5');
-    // Seek 6 chars in from start
-    CheckEquals(6, W.Seek(6, soFromBeginning), 'Test 6');
-    // Try to read 64 chars from here: should read just last 5 = 'World'
-    SetLength(InStr, 64);
-    CheckEquals(5, W.Read(PAnsiChar(InStr)^, 64), 'Test 7');
-    SetLength(InStr, 5);
-    status(string(instr));
-    CheckEquals(AnsiString('World'), InStr, 'Test 8');
+    Count := WS.Read(Pointer(InStr)^, 1);
+    CheckEquals(AnsiString('F'), InStr, 'Test 2a');
+    CheckEquals(1, Count, 'Test 2b');
+
+    SetLength(InStr, 1024);
+    Count := WS.Read(Pointer(InStr)^, 1024);
+    CheckEquals(Count, 1018, 'Test 3');
+
+    SS.Position := 9;
+    SetLength(InStr, 4);
+    Count := WS.Read(Pointer(InStr)^, 4);
+    CheckEquals(AnsiString('JKLM'), InStr, 'Test 4a');
+    CheckEquals(4, Count, 'Test 4b');
   finally
-    W.Free;
+    WS.Free;
   end;
+end;
+
+procedure TTestPJStreamWrapper.TestSeek;
+
+  procedure DoTest(const Stm: TStream);
+  var
+    WS: TPJStreamWrapper;
+    Pos: Int64;
+  begin
+    WS := TPJStreamWrapper.Create(Stm, False);
+    try
+      Pos := WS.Seek(0, soFromBeginning);
+      CheckEquals(0, Pos, Stm.ClassName + ': Test 1');
+      Pos := WS.Seek(100, soFromBeginning);
+      CheckEquals(100, Pos, Stm.ClassName + ': Test 2');
+      Pos := WS.Seek(100, soFromCurrent);
+      CheckEquals(200, Pos, Stm.ClassName + ': Test 3');
+      Pos := WS.Seek(-50, soFromCurrent);
+      CheckEquals(150, Pos, Stm.ClassName + ': Test 4');
+      Pos := WS.Seek(1024, soFromBeginning);
+      CheckEquals(1024, Pos, Stm.ClassName + ': Test 5');
+      Pos := WS.Seek(0, soFromEnd);
+      CheckEquals(1024, Pos, Stm.ClassName + ': Test 6');
+      Pos := WS.Seek(-24, soFromEnd);
+      CheckEquals(1000, Pos, Stm.ClassName + ': Test 7');
+      Pos := WS.Seek(-1024, soFromEnd);
+      CheckEquals(0, Pos, Stm.ClassName + ': Test 8');
+    finally
+      WS.Free;
+    end;
+  end;
+begin
+  DoTest(MS);
+  DoTest(SS);
 end;
 
 procedure TTestPJStreamWrapper.TestSize;
