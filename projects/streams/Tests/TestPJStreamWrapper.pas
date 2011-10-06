@@ -35,8 +35,8 @@ type
       {Test Seek method}
     procedure TestRead;
       {Test Read method}
-    procedure TestWriteAndSeek;
-      {Test Write and Seek methods}
+    procedure TestWrite;
+      {Test Write method}
     procedure TestSize;
       {Test Size property}
   end;
@@ -54,9 +54,6 @@ begin
   for ObIdx := Pred(ObList.Count) downto 0 do
     TTestStream(ObList[ObIdx]).Free;
 end;
-
-
-
 
 { TTestPJStreamWrapper }
 
@@ -198,31 +195,33 @@ begin
   end;
 end;
 
-procedure TTestPJStreamWrapper.TestWriteAndSeek;
+procedure TTestPJStreamWrapper.TestWrite;
 var
-  S: TStringStream;
-  W: TPJStreamWrapper;
+  SS: TStringStream;
+  WS: TPJStreamWrapper;
   OutStr: AnsiString;
 begin
-  S := TStringStream.Create(AnsiString(''));
-  W := TPJStreamWrapper.Create(S, True);
+  SS := TStringStream.Create(AnsiString(''));
+  WS := TPJStreamWrapper.Create(SS, True);
   try
     // Write 'Hello' to empty string stream
     OutStr := 'Hello';
-    CheckEquals(5, W.Write(PAnsiChar(OutStr)^, 5), 'Test 1a');
-    CheckEquals('Hello', S.DataString, 'Test 1b');
+    CheckEquals(5, WS.Write(Pointer(OutStr)^, 5), 'Test 1a');
+    CheckEquals('Hello', SS.DataString, 'Test 1b');
     // Write ' there' to current stream
     OutStr := ' there';
-    CheckEquals(6, W.Write(PAnsiChar(OutStr)^, 6), 'Test 2a');
-    CheckEquals('Hello there', S.DataString, 'Test 2b');
-    // Now overwrite 'there' with 'World': use Position instead of Seek
-    W.Position := 6;
+    CheckEquals(6, WS.Write(Pointer(OutStr)^, 6), 'Test 2a');
+    CheckEquals('Hello there', SS.DataString, 'Test 2b');
+    // Now overwrite 'there' with 'World': use Position on underlying stream to
+    // reposition stream pointer: we don't use WS.Seek or WS.Position because
+    // that must also be tested
+    SS.Position := 6;
     OutStr := 'World';
-    W.Write(PAnsiChar(OutStr)^, 5);
-    CheckEquals(S.Position, W.Position, 'Test 3a');
-    CheckEquals('Hello World', S.DataString, 'Test 3b');
+    WS.Write(Pointer(OutStr)^, 5);
+    CheckEquals(SS.Position, WS.Position, 'Test 3a');
+    CheckEquals('Hello World', SS.DataString, 'Test 3b');
   finally
-    W.Free;
+    WS.Free;
   end;
 end;
 
