@@ -1,5 +1,12 @@
 unit TestPJStreamWrapper;
 
+{$UNDEF SUPPORTS_TSTREAM64}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 14.0} // >= Delphi 6
+    {$DEFINE SUPPORTS_TSTREAM64}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
@@ -183,6 +190,24 @@ procedure TTestPJStreamWrapper.TestSeek;
       CheckEquals(1000, Pos, Stm.ClassName + ': Test 7');
       Pos := WS.Seek(-1024, soFromEnd);
       CheckEquals(0, Pos, Stm.ClassName + ': Test 8');
+      {$IFDEF SUPPORTS_TSTREAM64}
+      Pos := WS.Seek(0, soBeginning);
+      CheckEquals(0, Pos, Stm.ClassName + ': Test A1');
+      Pos := WS.Seek(100, soBeginning);
+      CheckEquals(100, Pos, Stm.ClassName + ': Test A2');
+      Pos := WS.Seek(100, soCurrent);
+      CheckEquals(200, Pos, Stm.ClassName + ': Test A3');
+      Pos := WS.Seek(-50, soCurrent);
+      CheckEquals(150, Pos, Stm.ClassName + ': Test A4');
+      Pos := WS.Seek(1024, soBeginning);
+      CheckEquals(1024, Pos, Stm.ClassName + ': Test A5');
+      Pos := WS.Seek(0, soEnd);
+      CheckEquals(1024, Pos, Stm.ClassName + ': Test A6');
+      Pos := WS.Seek(-24, soEnd);
+      CheckEquals(1000, Pos, Stm.ClassName + ': Test A7');
+      Pos := WS.Seek(-1024, soEnd);
+      CheckEquals(0, Pos, Stm.ClassName + ': Test A8');
+      {$ENDIF}
     finally
       WS.Free;
     end;
