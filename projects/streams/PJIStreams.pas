@@ -24,7 +24,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2001-2009 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2001-2011 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -219,10 +219,12 @@ function TPJIStreamWrapper.CopyTo(stm: IStream; cb: Largeint; out cbRead,
   stream has less than the required number of bytes available then all remaining
   bytes are written}
 var
-  CopyBuf: Pointer;       // pointer to buffer used to hold copied bytes
-  Count: Integer;         // numnber of bytes to read (= LoDWord(c))
-  BytesRead: LongInt;     // number of bytes read from this stream
-  BytesWritten: LongInt;  // number of bytes written to stm
+  BytesRead: Integer;     // number of bytes read in a chunk
+  BytesWritten: Integer;  // number of bytes written in a chunk
+  BufSize: Integer;       // size of buffer used for copying data
+  Buffer: PByte;          // buffer used for copying data
+const
+  MaxBufSize = 1024 * 1024; // maximum size of copy buffer
 begin
   // Assume no bytes anre read / written
   if Assigned(@cbRead) then
@@ -230,51 +232,42 @@ begin
   if Assigned(@cbWritten) then
     cbWritten := 0;
   // Check parameters for validity
-  if Assigned(stm) then
+  if not Assigned(stm) then
   begin
-    if Int64Rec(cb).Hi = 0 then
-    begin
-      // All params OK: do copy
-      // get no of bytes to copy: lesser of requested and available on source
-      try
-        Count := Min(LongInt(cb), fBaseStream.Size - fBaseStream.Position);
-      except
-        Count := LongInt(cb); // can't find size or position: use cb
-      end;
-      // check if there's anything to do
-      if Count > 0 then
-      begin
-        try
-          // try to allocate a buffer of required size
-          GetMem(CopyBuf, Count);
-          try
-            // read bytes into buffer
-            BytesRead := fBaseStream.Read(CopyBuf^, Count);
-            if Assigned(@cbRead) then
-              cbRead := BytesRead;
-            // write bytes from buffer
-            Result := stm.Write(CopyBuf, BytesRead, @BytesWritten);
-            if (Result = S_OK) and Assigned(@cbWritten) then
-              cbWritten := BytesWritten;
-          finally
-            FreeMem(CopyBuf, Count);
-          end;
-        except
-          // exception during copy
-          Result := E_UNEXPECTED;
-        end;
-      end
-      else
-        // nothing to copy: do nothing except return OK
-        Result := S_OK;
-    end
-    else
-      // Count of bytes > 2^32
-      Result := E_FAIL;
-  end
-  else
-    // Nil stream interface pointer
     Result := STG_E_INVALIDPOINTER;
+    Exit;
+  end;
+  // Do copy
+  Result := S_OK;
+  try
+    BufSize := Min(MaxBufSize, cb);
+    GetMem(Buffer, BufSize);
+    try
+      while cb > 0 do
+      begin
+        BytesRead := BaseStream.Read(Buffer^, Min(BufSize, cb));
+        if BytesRead = 0 then
+          // end of stream reached
+          Exit;
+        if Assigned(@cbRead) then
+          Inc(cbRead, BytesRead);
+        Result := stm.Write(Buffer, BytesRead, @BytesWritten);
+        if Assigned(@cbWritten) then
+          Inc(cbWritten, BytesWritten);
+        if Succeeded(Result) and (BytesRead <> BytesWritten) then
+          // couldn't write all data: probably medium or stream full
+          Result := STG_E_MEDIUMFULL;
+        if Failed(Result) then
+          Exit; // write error
+        Dec(cb, BytesRead);
+      end;
+    finally
+      FreeMem(Buffer, BufSize);
+    end;
+  except
+    // exception during copy
+    Result := E_UNEXPECTED;
+  end;
 end;
 
 constructor TPJIStreamWrapper.Create(const Stream: TStream;
@@ -368,8 +361,8 @@ function TPJIStreamWrapper.Seek(dlibMove: Largeint; dwOrigin: Integer;
   stream, the end of the stream, or the current seek pointer. Returns the new
   seek pointer position in libNewPosition}
 var
-  Origin: Word;         // seek origin in terms of TStream
-  NewPosition: LongInt; // new file pointer position after seek
+  Origin: Word;           // seek origin in terms of TStream
+  NewPosition: Largeint;  // new file pointer position after seek
 begin
   // Translate origin from IStream constant to TStream constant
   case dwOrigin of
@@ -401,23 +394,16 @@ end;
 function TPJIStreamWrapper.SetSize(libNewSize: Largeint): HResult;
   {Changes the size of the stream object}
 begin
-  // Check params
-  if Int64Rec(libNewSize).Hi = 0 then
-  begin
-    try
-      // Set the stream size and compare actual new size to requested
-      fBaseStream.Size := libNewSize;
-      if libNewSize = fBaseStream.Size then
-        Result := S_OK
-      else
-        Result := E_FAIL;
-    except
-      Result := E_UNEXPECTED;
-    end;
-  end
-  else
-    // We only support stream sizes up to 2^32
-    Result := STG_E_INVALIDFUNCTION;
+  try
+    // Set the stream size and compare actual new size to requested
+    fBaseStream.Size := libNewSize;
+    if libNewSize = fBaseStream.Size then
+      Result := S_OK
+    else
+      Result := E_FAIL;
+  except
+    Result := E_UNEXPECTED;
+  end;
 end;
 
 function TPJIStreamWrapper.Stat(out statstg: TStatStg;
@@ -541,3 +527,4 @@ begin
 end;
 
 end.
+
