@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <PersonalityInfo>
+    <Option>
+      <Option Name="Personality">Default.Personality</Option>
+      <Option Name="ProjectType"></Option>
+      <Option Name="Version">1.0</Option>
+      <Option Name="GUID">{20068036-A9F2-4450-9C03-495D31E9351A}</Option>
+    </Option>
+  </PersonalityInfo>
+  <Default.Personality>
+    
+    <Projects>
+      <Projects Name="StreamWrap.exe">StreamWrapDemo\StreamWrap.bdsproj</Projects>
+      <Projects Name="IStreamWrap.exe">IStreamWrapDemo\IStreamWrap.bdsproj</Projects>
+      <Projects Name="Targets">StreamWrap.exe IStreamWrap.exe</Projects>
+    </Projects>
+    <Dependencies/>
+  </Default.Personality>
+</BorlandProject>
