@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{2AE52A63-33BD-4B9D-A380-2D9C29767BE1}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="StreamWrapDemo\StreamWrap.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="IStreamWrapDemo\IStreamWrap.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="StreamWrap">
+			<MSBuild Projects="StreamWrapDemo\StreamWrap.dproj"/>
+		</Target>
+		<Target Name="StreamWrap:Clean">
+			<MSBuild Targets="Clean" Projects="StreamWrapDemo\StreamWrap.dproj"/>
+		</Target>
+		<Target Name="StreamWrap:Make">
+			<MSBuild Targets="Make" Projects="StreamWrapDemo\StreamWrap.dproj"/>
+		</Target>
+		<Target Name="IStreamWrap">
+			<MSBuild Projects="IStreamWrapDemo\IStreamWrap.dproj"/>
+		</Target>
+		<Target Name="IStreamWrap:Clean">
+			<MSBuild Targets="Clean" Projects="IStreamWrapDemo\IStreamWrap.dproj"/>
+		</Target>
+		<Target Name="IStreamWrap:Make">
+			<MSBuild Targets="Make" Projects="IStreamWrapDemo\IStreamWrap.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="StreamWrap;IStreamWrap"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="StreamWrap:Clean;IStreamWrap:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="StreamWrap:Make;IStreamWrap:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
