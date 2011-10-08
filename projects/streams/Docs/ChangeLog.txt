@@ -4,6 +4,17 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v3.1 of 08 October 2011
++ Added overloads for 64 bit integer parameters to TStream descendant SetSize and Seek methods.
++ Implemented proper support to IStream implementations for large (64 bit) integer data sizes, seeks and copies.
++ Changed visibility of all IStream implementation methods from protected to public.
++ Implemented work around for error in seeking from end of wrapped TStringStream objects. This is caused by a bug in non-Unicode TStringStream's implementation of Seek.
++ Reinstated DUnit tests. They were revised, extended and corrected and made compatible with Unicode Delphis.
++ Demo projects now explicitly import project units so that they will work when the required units are not installed.
++ New project and project group files for later versions of Delphi added to demo and unit test projects.
++ Documentated units using XMLDoc comments.
++ Updated documentation.
+
 Release v3.0 of 07 October 2009
 + Removed deprecated PJResWriterStreams unit from project.
 + Removed demo programs for classes in PJResWriterStreams unit.
