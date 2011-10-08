@@ -29,7 +29,7 @@ zip %OutFile% -j -9 %DocsDir%\MPL.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
 zip %OutFile% -j -9 %DocsDir%\DocumentationWiki.URL
 
-zip %OutFile% -r -9 .\Demos\*.* -x *.svn\*
+zip %OutFile% -r -9 .\Demos\*.* -x *.svn\* *Test.*
 zip %OutFile% -r -9 .\Tests\*.* -x *Bin\* *.svn\*
 
 endlocal
