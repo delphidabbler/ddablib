@@ -3,7 +3,7 @@
 @rem
 @rem Script used to create zip file containing release files.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2009
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2009-2011
 @rem
 @rem $Rev$
 @rem $Date$
@@ -27,8 +27,9 @@ zip %OutFile% -j -9 PJStreamWrapper.pas
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
 zip %OutFile% -j -9 %DocsDir%\MPL.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
-zip %OutFile% -j -9 %DocsDir%\Wiki.URL
+zip %OutFile% -j -9 %DocsDir%\DocumentationWiki.URL
 
 zip %OutFile% -r -9 .\Demos\*.* -x *.svn\*
+zip %OutFile% -r -9 .\Tests\*.* -x *Bin\* *.svn\*
 
 endlocal
