@@ -146,25 +146,22 @@
 
 <p>
   These classes are designed to be used to control the execution of child
-  console application processes.
+  console application processes. There are two classes: a class named
+  <var>TPJCustomConsoleApp</var> that is provided a base class for user-defined
+  sub-classes, and <var>TPJConsoleApp</var> that is used to provide a general
+  way to run and manipulate console applications.
 </p>
 
 <p>
-  The main class &ndash; <var>TPJConsoleApp</var> &ndash; will run console
-  applications. It enables the console application's standard input, standard
-  output and standard error to be redirected to and from files or pipes. The
-  class can also timeslice the running of the console application to enable the
+  The classes enable the console application's standard input, standard output
+  and standard error to be redirected to and from files or pipes. The classes
+  can also timeslice the running of the console application to enable the
   calling application to continue processing and to enable redirected piped
   output to be processed.
 </p>
 
 <p>
-  There are numerous subsidiary classes to help when working with pipes and
-  inheritable handles.
-</p>
-
-<p>
-  For full details see the <a
+  For full details please see the <a
     href="http://www.delphidabbler.com/url/consoleapp-wiki"
   >Documentation Wiki</a>.
 </p>
@@ -175,7 +172,7 @@
 </h3>
 
 <p>
-  The classes are compatible with Delphi 7 and later.
+  The classes require Delphi 7 and later.
 </p>
 
 
@@ -195,17 +192,6 @@
     <code><strong>PJConsoleApp.pas</strong></code> &ndash; The source code
     of the console application runner classes.
   </li>
-  <li>
-    <code><strong>PJPipe.pas</strong></code> &ndash; Source code for the
-    supporting <var>TPJPipe</var> class.
-  </li>
-  <li>
-    <code><strong>PJPipeFilters.pas</strong></code> &ndash; Source code for the
-    supporting pipe filter classes.
-  </li>
-  <li>
-    <code><strong>PJFileHandle.pas</strong></code> &ndash; Source code for the
-    supporting <var>TPJFileHandle</var> class.
   <li>
     <code>Docs\ChangeLog.txt</code> &ndash; The project's change log.
   </li>
@@ -232,18 +218,17 @@
 
 <ol class="spaced">
   <li>
-    The simplest way is to add <code>PJConsoleApp.pas</code>,
-    <code>PJPipeFilters.pas</code>, <code>PJFileHandle.pas</code> and
-    <code>PJPipe.pas</code> to your projects as you need them.
+    The simplest way is to add <code>PJConsoleApp.pas</code> to your projects as 
+    you need them.
   </li>
   <li>
-    To make the units easier to re-use you can either copy them to a folder
-    on your Delphi search path, or add the folder where you extracted the
-    units to the Delphi Search path. You then simply use the units as
-    required without needing to add them to your project.
+    To make the unit easier to re-use you can either copy it to a folder on your 
+    Delphi search path, or add the folder where you extracted the units to the 
+    search path. You then simply use the units as required without needing to 
+    add them to your project.
   </li>
   <li>
-    For maximum portability you can add the units to a Delphi design time
+    For maximum portability you can add the unit to a Delphi design time
     package. If you need help doing this <a
       href="http://www.delphidabbler.com/url/install-comp"
     >see here</a>.
@@ -260,6 +245,14 @@
   with two console applications and a sample text file that are required by the
   demos. All the demos are stored in subfolders of the <code>Demos</code>
   directory.
+</p>
+
+<p class="pullout">
+  Please note that several of the demos use units and classes from the 
+  DelphiDabbler <a
+    href="http://www.delphidabbler.com/software/ioutils"
+  >IO Utility Classes</a> project. Before attempting to compile the affected
+  demo project you need to download and install this project.
 </p>
 
 <p>
