@@ -134,7 +134,7 @@ var
   F1, F2, F3, F4, F5, F6, F7, F8: TFraction;
 begin
   F1 := TFraction.Create(3, 4);
-  F2 := TFraction.Create(F1);
+  F2 := F1;
   F3 := TFraction.Create(-2, 4);
   F4 := TFraction.Create(7, 9);
   F5 := TFraction.Create(12, 16);
@@ -156,7 +156,7 @@ var
   F1, F2, F3, F4, F5, F6, F7, F8: TFraction;
 begin
   F1 := TFraction.Create(3, 4);
-  F2 := TFraction.Create(F1);
+  F2 := F1;
   F3 := TFraction.Create(-2, 4);
   F4 := TFraction.Create(7, 9);
   F5 := TFraction.Create(12, 16);
@@ -326,19 +326,19 @@ begin
 
   // test TFraction.Create(const Fraction: TFraction) 
   Temp := TFraction.Create(7, 4);
-  F := TFraction.Create(Temp);
+  F := Temp;
   CheckEquals(7, F.Numerator, 'Test 3a: Numerator');
   CheckEquals(4, F.Denominator, 'Test 3a: Denominator');
   Temp := TFraction.Create(-7, 4);
-  F := TFraction.Create(Temp);
+  F := Temp;
   CheckEquals(-7, F.Numerator, 'Test 3b: Numerator');
   CheckEquals(4, F.Denominator, 'Test 3b: Denominator');
   Temp := TFraction.Create(7, -4);
-  F := TFraction.Create(Temp);
+  F := Temp;
   CheckEquals(-7, F.Numerator, 'Test 3c: Numerator');
   CheckEquals(4, F.Denominator, 'Test 3c: Denominator');
   Temp := TFraction.Create(-7, -4);
-  F := TFraction.Create(Temp);
+  F := Temp;
   CheckEquals(7, F.Numerator, 'Test 3d: Numerator');
   CheckEquals(4, F.Denominator, 'Test 3d: Denominator');
 end;

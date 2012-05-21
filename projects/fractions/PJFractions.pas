@@ -24,7 +24,7 @@ uses
 type
   ///  <summary>Encapsulates a vulgar fraction and its the various mathematical
   ///  operations.</summary>
-  ///  <remarks>The information on fraction in the Mathematics Help Facility at
+  ///  <remarks>The information on fractions in the Mathematics Help Facility at
   ///  http://www.themathleague.com/ was useful in writing this code.</remarks>
   TFraction = record
   strict private
@@ -59,9 +59,6 @@ type
     ///  <remarks>Numerator is set to WholeNumber and denominator to 1.
     ///  </remarks>
     constructor Create(const WholeNumber: Integer); overload;
-
-    ///  <summary>Creates a cloned copy of the given fraction.</summary>
-    constructor Create(const Fraction: TFraction); overload;
 
     ///  <summary>This fraction's numerator.</summary>
     ///  <remarks>Can be positive, negative or zero.</remarks>
@@ -200,7 +197,7 @@ type
 
     ///  <summary>Enables unary plus operator to be used with a fraction.
     ///  </summary>
-    ///  <remarks>This is a no-op: it does nothing.</remarks>
+    ///  <remarks>This is a no-op: result is same as parameter.</remarks>
     class operator Positive(const F: TFraction): TFraction;
 
     ///  <summary>Overload of Trunc() operator that truncate a fraction to a
@@ -351,23 +348,6 @@ begin
   Result := TFraction.Create(Numerator1 + Numerator2, CommonDenom).Simplify;
 end;
 
-constructor TFraction.Create(const Numerator, Denominator: Int64);
-begin
-  Assert(Denominator <> 0, 'TFraction.Create: Denominator is 0');
-  fNumerator := Numerator;
-  fDenominator := Denominator;
-  if fDenominator < 0 then
-  begin
-    fNumerator := -fNumerator;
-    fDenominator := -fDenominator;
-  end;
-end;
-
-constructor TFraction.Create(const WholeNumber: Integer);
-begin
-  Create(WholeNumber, 1);
-end;
-
 class function TFraction.Compare(const F1, F2: TFraction): TValueRelationship;
 var
   X1, X2: Int64;          // 1st & 2nd cross products of F1 & F2
@@ -405,9 +385,21 @@ begin
   Result := TFraction.Create(Multiplier * Numerator, Multiplier * Denominator);
 end;
 
-constructor TFraction.Create(const Fraction: TFraction);
+constructor TFraction.Create(const WholeNumber: Integer);
 begin
-  Create(Fraction.fNumerator, Fraction.fDenominator);
+  Create(WholeNumber, 1);
+end;
+
+constructor TFraction.Create(const Numerator, Denominator: Int64);
+begin
+  Assert(Denominator <> 0, 'TFraction.Create: Denominator is 0');
+  fNumerator := Numerator;
+  fDenominator := Denominator;
+  if fDenominator < 0 then
+  begin
+    fNumerator := -fNumerator;
+    fDenominator := -fDenominator;
+  end;
 end;
 
 class function TFraction.DecimalConversionAccuracy(
@@ -581,7 +573,7 @@ end;
 
 class operator TFraction.Positive(const F: TFraction): TFraction;
 begin
-  Result := TFraction.Create(F);
+  Result := F;
 end;
 
 function TFraction.Reciprocal: TFraction;
