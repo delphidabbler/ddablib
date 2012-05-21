@@ -22,16 +22,16 @@ uses
   Types, Math;
 
 type
-  ///  <summary>Encapsulates a vulgar fraction and its the various mathematical
+  ///  <summary>Encapsulates a vulgar fraction its various mathematical
   ///  operations.</summary>
   ///  <remarks>The information on fractions in the Mathematics Help Facility at
   ///  http://www.themathleague.com/ was useful in writing this code.</remarks>
   TFraction = record
   strict private
     var
-      ///  <summary>Value of numerator property.</summary>
+      ///  <summary>Value of Numerator property.</summary>
       fNumerator: Int64;
-      ///  <summary>Value of denominator property.</summary>
+      ///  <summary>Value of Denominator property.</summary>
       fDenominator: Int64;
     ///  <summary>Returns the 1st cross product of two fractions.</summary>
     class function FirstCrossProduct(const F1, F2: TFraction): Int64; static;
@@ -40,12 +40,12 @@ type
     class function SecondCrossProduct(const F1, F2: TFraction): Int64; static;
       inline;
     ///  <summary>Returns a floating point value that is used to calculate
-    ///  the given number of decimal places of accuracy when converting floating
-    ///  point values to fractions.</summary>
+    ///  the given number of decimal places of accuracy to use when converting
+    ///  floating point values to fractions.</summary>
     class function DecimalConversionAccuracy(const Places: Byte): Extended;
       static; inline;
   public
-    ///  <summary>Constructs fraction with given numerator and denominator.
+    ///  <summary>Constructs a fraction with given numerator and denominator.
     ///  </summary>
     ///  <remarks>
     ///  <para>Denominator must not be zero.</para>
@@ -54,7 +54,7 @@ type
     ///  </remarks>
     constructor Create(const Numerator, Denominator: Int64); overload;
 
-    ///  <summary>Constructs a fractional representation of given whole number.
+    ///  <summary>Constructs a fractional representation of a whole number.
     ///  </summary>
     ///  <remarks>Numerator is set to WholeNumber and denominator to 1.
     ///  </remarks>
@@ -69,7 +69,7 @@ type
     property Denominator: Int64 read fDenominator;
 
     ///  <summary>Checks if this fraction is a proper fraction.</summary>
-    ///  <remarks>A proper fraction is one where the absolute values of the
+    ///  <remarks>A proper fraction is one where the absolute value of the
     ///  numerator is less than the denominator.</remarks>
     function IsProper: Boolean;
 
@@ -90,17 +90,18 @@ type
     function CompareTo(const F: TFraction): TValueRelationship;
 
     ///  <summary>Converts this fraction to an equivalent fraction whose
-    ///  numerator and denominator are multiples of this one's.</summary>
+    ///  numerator and denominator are multiples of those of this fraction.
+    ///  </summary>
     ///  <param name="Multiplier">Int64 [in] Factor by which to multiply
     ///  numerator and denominator.</param>
     ///  <returns>TFraction. Converted fraction.</returns>
     function Convert(const Multiplier: Int64): TFraction;
 
-    ///  <summary>Checks if a given value is common factor of this fraction.
-    ///  Value must be positive.</summary>
+    ///  <summary>Checks if a given non-zero value is a common factor of this
+    ///  fraction.</summary>
     function IsCommonFactor(const Factor: Int64): Boolean;
 
-    ///  <summary>Reduces fraction to its lowest terms.</summary>
+    ///  <summary>Reduces this fraction to its lowest terms.</summary>
     function Simplify: TFraction; overload;
 
     ///  <summary>Reduces this fraction by a given common factor.</summary>
@@ -108,15 +109,17 @@ type
     ///  and must not be zero.</remarks>
     function Simplify(const CommonFactor: Int64): TFraction; overload;
 
-    ///  <summary>Returns reciprocal of fraction.</summary>
+    ///  <summary>Returns reciprocal of this fraction.</summary>
     function Reciprocal: TFraction;
 
-    ///  <summary>Truncates fraction to a whole number multiple of fraction F.
-    ///  Result has same denominator as F.</summary>
+    ///  <summary>Truncates this fraction to a whole number multiple of given
+    ///  fraction F.</summary>
+    ///  <remarks>Result has same denominator as F.</remarks>
     function TruncateToMultiple(const F: TFraction): TFraction;
 
-    ///  <summary>Rounds fraction to nearest whole number multiple of fractio F.
-    ///  Result has same denominator as F.</summary>
+    ///  <summary>Rounds fraction to nearest whole number multiple of given
+    ///  fraction F.</summary>
+    ///  <remarks>Result has same denominator as F.</remarks>
     function RoundToMulitiple(const F: TFraction): TFraction;
 
     ///  <summary>Returns the least common denominator of two fractions.
@@ -130,26 +133,26 @@ type
     ///  is less than F2.</remarks>
     class function Compare(const F1, F2: TFraction): TValueRelationship; static;
 
-    ///  <summary>Returns the greatest of two fractions, F1 and F2.</summary>
+    ///  <summary>Returns the greatest of two given fractions.</summary>
     class function Max(const F1, F2: TFraction): TFraction; overload; static;
 
-    ///  <summary>Returns the greatest fraction from an array of fractions.
+    ///  <summary>Returns the greatest fraction from a given array of fractions.
     ///  </summary>
     ///  <remarks>FA must contain at least one fraction.</remarks>
     class function Max(const FA: array of TFraction): TFraction; overload;
       static;
 
-    ///  <summary>Returns the smallest of two fractions, F1 and F2.</summary>
+    ///  <summary>Returns the smallest of two given fractions.</summary>
     class function Min(const F1, F2: TFraction): TFraction; overload; static;
 
-    ///  <summary>Returns the smallest fraction from an array of fractions.
+    ///  <summary>Returns the smallest fraction from a given array of fractions.
     ///  </summary>
     ///  <remarks>FA must contain at least one fraction.</remarks>
     class function Min(const FA: array of TFraction): TFraction; overload;
       static;
 
     ///  <summary>Enables assignment of an integer to a fraction.</summary>
-    ///  <remarks>Result fraction will have numerator=I and denominator=1.
+    ///  <remarks>Resulting fraction will have numerator=I and denominator=1.
     ///  </remarks>
     class operator Implicit(const I: Integer): TFraction;
 
@@ -176,51 +179,51 @@ type
     ///  not-equals operator.</summary>
     class operator NotEqual(const F1, F2: TFraction): Boolean;
 
-    ///  <summary>Enables less-than operator to be used to compare two
+    ///  <summary>Enables the less-than operator to be used to compare two
     ///  fractions.</summary>
     class operator LessThan(const F1, F2: TFraction): Boolean;
 
-    ///  <summary>Enables less-than-or-equals operator to be used to compare two
-    ///  fractions.</summary>
+    ///  <summary>Enables the less-than-or-equals operator to be used to compare
+    ///  two fractions.</summary>
     class operator LessThanOrEqual(const F1, F2: TFraction): Boolean;
 
-    ///  <summary>Enables greater-than operator to be used to compare two
+    ///  <summary>Enables the greater-than operator to be used to compare two
     ///  fractions.</summary>
     class operator GreaterThan(const F1, F2: TFraction): Boolean;
 
-    ///  <summary>Enables greater-than-or-equals operator to be used to compare
-    ///  two fractions.</summary>
+    ///  <summary>Enables the greater-than-or-equals operator to be used to
+    ///  compare two fractions.</summary>
     class operator GreaterThanOrEqual(const F1, F2: TFraction): Boolean;
 
-    ///  <summary>Enables unary minus operator to negate a fraction.</summary>
+    ///  <summary>Enables the unary minus operator to negate a
+    ///  fraction.</summary>
     class operator Negative(const F: TFraction): TFraction;
 
     ///  <summary>Enables unary plus operator to be used with a fraction.
     ///  </summary>
-    ///  <remarks>This is a no-op: result is same as parameter.</remarks>
+    ///  <remarks>This is a no-op.</remarks>
     class operator Positive(const F: TFraction): TFraction;
 
-    ///  <summary>Overload of Trunc() operator that truncate a fraction to a
-    ///  the largest whole number less or equal to than the fraction.</summary>
+    ///  <summary>Overload of Trunc() operator that truncate a fraction to the
+    ///  largest whole number less than or equal to the fraction.</summary>
     class operator Trunc(const F: TFraction): Int64;
 
     ///  <summary>Overload of Round() operator that rounds a fraction to the
     ///  nearest whole number value.</summary>
     class operator Round(const F: TFraction): Int64;
 
-    ///  <summary>Overload of addition operator that the operands.</summary>
+    ///  <summary>Enables addition operator to be used with fractions.</summary>
     class operator Add(const F1, F2: TFraction): TFraction;
 
-    ///  <summary>Overload of subtraction operator that subtract right operand
-    ///  from left operand.</summary>
+    ///  <summary>Enables subtraction operator to be used with
+    ///  fractions.</summary>
     class operator Subtract(const F1, F2: TFraction): TFraction;
 
-    ///  <summary>Overload of multiplication operator that multiplies the
-    ///  operands.</summary>
+    ///  <summary>Enables multiplication operator to be used with
+    ///  fractions.</summary>
     class operator Multiply(const F1, F2: TFraction): TFraction;
 
-    ///  <summary>Overload of division operator that divides left hand operand
-    ///  by right hand operand.</summary>
+    ///  <summary>Enables division operator to be used with fractions.</summary>
     class operator Divide(const F1, F2: TFraction): TFraction;
 
     ///  <summary>Overload of div operator that divides left hand operand by
@@ -259,7 +262,7 @@ begin
   Result := A;
 end;
 
-///  <summary>Determines the least common multiple of two integers.
+///  <summary>Calculates the least common multiple of two integers.
 ///  </summary>
 ///  <remarks>Renamed from a function in UseNet post by Hans van Kruijssen: see
 ///  http://www.efg2.com/Lab/Library/UseNet/2000/0315b.txt</remarks>
@@ -269,14 +272,14 @@ begin
 end;
 
 ///  <summary>Converts a decimal to a fraction.</summary>
-///  <param name="Decimal">Extended [in] Decimal to convert</param>
+///  <param name="Decimal">Extended [in] Decimal to convert.</param>
 ///  <param name="FractionNumerator">Extended [out] Set to numerator of
 ///  required fraction.</param>
 ///  <param name="FractionDenominator">Extended [out] Set to denominator of
 ///  required fraction.</param>
 ///  <param name="AccuracyFactor">Extended [in] Determines how accurate
 ///  conversion is to be. E.g. 0.0005 requires accuracy of 3 decimal places and
-///  0.000005 required accuracy of 5 decimal places.</param>
+///  0.000005 requires accuracy of 5 decimal places.</param>
 ///  <remarks>Adapted from the Turbo Pascal code presented in 'Algorithm To
 ///  Convert A Decimal To A Fraction' by John Kennedy, Mathematics Department,
 ///  Santa Monica College. See http://homepage.smc.edu/kennedy_john/DEC2FRAC.PDF
