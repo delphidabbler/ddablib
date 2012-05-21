@@ -5,6 +5,7 @@
 ; ------------------------------------------------------------------------------
 
 Release 1.0 of XX XXX 2012
-+ Moved Pascal source files PJFileHandle.pas, PJPipe.pas and PJPipeFilters.pas from from Console Application Runner Classes project as at Release 2.0 of that project (see r967 in the ddab-lib Subversion repository). See Console Application Runner Classes change log for details of earlier changes relating to these files.
+See Console Application Runner Classes change log up to release 2.0 for details of earlier changes relating to these files.
++ Moved Pascal source files PJFileHandle.pas, PJPipe.pas and PJPipeFilters.pas from from Console Application Runner Classes project as at Release 2.0 of that project (revision 967).
 + Relicensed source code using MPL 1.1/GPL 2.0/LPGPL 2.1 tri-license.
 + New documentation including Internet shortcut to documentation wiki.
