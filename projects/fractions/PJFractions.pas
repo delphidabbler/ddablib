@@ -237,7 +237,7 @@ type
 implementation
 
 uses
-  SysUtils, WINDOWS;
+  SysUtils;
 
 ///  <summary>Calculates the greatest common divisor of two given integers.
 ///  </summary>
