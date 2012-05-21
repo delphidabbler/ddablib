@@ -9,6 +9,16 @@
  * $Date$
  *
  * Defines types that encapsulate fractions and operations on them.
+ *
+ * Acknowledgements:
+ *   o The information on fractions in the Mathematics Help Facility at
+ *     http://www.themathleague.com/ was useful in writing this code.
+ *   o The GCD and LCM routines were taken from a UseNet post by Hans van
+ *     Kruijssen: see http://www.efg2.com/Lab/Library/UseNet/2000/0315b.txt.
+ *   o The DecimalToFraction was adapted from the Turbo Pascal code presented in
+ *     "Algorithm To Convert A Decimal To A Fraction" by John Kennedy,
+ *     Mathematics Department, Santa Monica College. See
+ *     http://homepage.smc.edu/kennedy_john/DEC2FRAC.PDF
 }
 
 
@@ -24,8 +34,6 @@ uses
 type
   ///  <summary>Encapsulates a vulgar fraction its various mathematical
   ///  operations.</summary>
-  ///  <remarks>The information on fractions in the Mathematics Help Facility at
-  ///  http://www.themathleague.com/ was useful in writing this code.</remarks>
   TFraction = record
   strict private
     var
@@ -241,8 +249,6 @@ uses
 
 ///  <summary>Calculates the greatest common divisor of two given integers.
 ///  </summary>
-///  <remarks>From UseNet post by Hans van Kruijssen: see
-///  http://www.efg2.com/Lab/Library/UseNet/2000/0315b.txt</remarks>
 function GCD(A, B: Int64): Int64;
 var
   Temp: Int64;
@@ -256,10 +262,7 @@ begin
   Result := A;
 end;
 
-///  <summary>Calculates the least common multiple of two integers.
-///  </summary>
-///  <remarks>Renamed from a function in UseNet post by Hans van Kruijssen: see
-///  http://www.efg2.com/Lab/Library/UseNet/2000/0315b.txt</remarks>
+///  <summary>Calculates the least common multiple of two integers.</summary>
 function LCM(A, B: Int64): Int64;
 begin
   Result := (A * B) div GCD(A, B);
@@ -274,10 +277,6 @@ end;
 ///  <param name="AccuracyFactor">Extended [in] Determines how accurate
 ///  conversion is to be. E.g. 0.0005 requires accuracy of 3 decimal places and
 ///  0.000005 requires accuracy of 5 decimal places.</param>
-///  <remarks>Adapted from the Turbo Pascal code presented in 'Algorithm To
-///  Convert A Decimal To A Fraction' by John Kennedy, Mathematics Department,
-///  Santa Monica College. See http://homepage.smc.edu/kennedy_john/DEC2FRAC.PDF
-///  </remarks>
 procedure DecimalToFraction (Decimal: Extended;
   out FractionNumerator: Extended;
   out FractionDenominator: Extended;
@@ -347,7 +346,7 @@ end;
 
 class function TFraction.Compare(const F1, F2: TFraction): TValueRelationship;
 var
-  X1, X2: Int64;          // 1st & 2nd cross products of F1 & F2
+  X1, X2: Int64;  // 1st & 2nd cross products of F1 & F2
 begin
   if F1.fDenominator = F2.fDenominator then
   begin
