@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+ * Read-me file for I/O Utility Classes
+ *
+ * $Rev$
+ * $Date$
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+  <title>
+    DelphiDabbler.com I/O Utility Classes ReadMe
+  </title>
+
+  <style type="text/css">
+    body {
+      margin: 1em;
+      padding: 0;
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 9pt;
+      line-height: 150%;
+    }
+    h1 {
+      margin: 0 0 1em 0;
+      padding: 0.5em;
+      border: 1px silver solid;
+      background-color: #eee;
+      font-size: 13pt;
+      font-weight: bold;
+      text-align: center;
+    }
+    h1 .subtitle {
+      font-style: italic;
+      color: #336;
+    }
+    h2 {
+      margin: 1em 0 0 0;
+      padding: 0;
+      padding-bottom: 6px;
+      border-bottom: 1px silver solid;
+      font-size: 11pt;
+      font-weight: bold;
+    }
+    h3 {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+      font-size: 9pt;
+      font-weight: bold;
+    }
+    p {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+    }
+    ul, ol {
+      margin: 0.5em 0 0 3em;
+      padding: 0;
+    }
+    ul {
+      list-style-type: square;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.unspaced li,
+    ol.unspaced li {
+      margin-top: 0;
+    }
+    ul.unspaced li.first,
+    ol.unspaced li.first {
+      margin-top: 0.5em;
+    }
+    code {
+      font-family: "Courier New", Courier, monospace;
+    }
+    a:link {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #669;
+      text-decoration: underline;
+    }
+    a:active {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .pullout {
+      border-left: 8px silver solid;
+      xborder-bottom: 2px silver solid;
+      xborder-top: 2px silver solid;
+      background-color: #eee;
+      margin: 0.5em 0 0 0;
+      padding: 0.25em 0.5em;
+      font-style: italic;
+    }
+    .indent {
+      margin-left: 3em;
+    }
+    .highlight {
+      color: #336;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .endnotes {
+      margin: 1.5em 0 0 0;
+      padding: 1em 0 0 0;
+      border-top: 1px silver solid;
+    }
+    .comments {
+      font-style: italic;
+    }
+    .copyright,
+    .copyright a:link,
+    .copyright a:visited,
+    .copyright a:active {
+      margin: 1em 0 0 0;
+      color: gray;
+      font-size: 8pt;
+      text-align: right;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<h1>
+  I/O Utility Classes<br />
+  <span class="subtitle">ReadMe</span>
+</h1>
+
+
+<h2 id="desc">
+  Description
+</h2>
+
+<p>
+  These classes are designed to assist in various I/O related tasks. Classes are
+  provided to:
+</p>
+
+<ul>
+  <li>
+    Simplify the opening of files in various different modes with specified
+    security attributes and to provide access to the file handle.
+  </li>
+  <li>
+    Simplify working with un-named pipes.
+  </li>
+  <li>
+    Handle the formatting of data read from pipes, for example reading Unicode
+    strings.
+  </li>
+</ul>
+
+<p>
+  For full details please see the <a
+    href="http://www.delphidabbler.com/url/ioutils-wiki"
+  >Documentation Wiki</a>.
+</p>
+
+<p class="pullout">
+  These classes used to be included in the <em>Console Application Runner
+  Classes</em> project to help handle standard I/O redirection but were pulled
+  out into their own project because they have wider uses.
+</p>
+
+
+<h3 id="compatibility">
+   Compatibility
+</h3>
+
+<p>
+  The classes require Delphi 7 and later.
+</p>
+
+
+<h2 id="installation">
+  Installation
+</h2>
+
+<p>
+  The I/O Utility Classes and associated documentation
+  <!-- and demo program source files -->
+  are supplied in a zip file. Before installing, or using,
+  you need to extract all the files from the zip file, preserving the directory
+  structure. The following files will be extracted:
+</p>
+
+<ul>
+  <li>
+    <code><strong>PJFileHandle.pas</strong></code> &ndash; Source code of the
+    class used to open files in various sharing and security modes.
+  </li>
+  <li>
+    <code><strong>PJPipe.pas</strong></code> &ndash; Source code of class used
+    to encapsulate un-named pipes.
+  </li>
+  <li>
+    <code><strong>PJPipeFilters.pas</strong></code> &ndash; Source code of
+    classes that can be used to filter output from pipes.
+  </li>
+  <li>
+    <code>Docs\ChangeLog.txt</code> &ndash; The project's change log.
+  </li>
+  <li>
+    <code>Docs\DocumentationWiki.URL</code> &ndash; Shortcut to the online Wiki
+    that documents the project.
+  </li>
+  <li>
+    <code>Docs\MPL-1.1.txt</code> &ndash; Mozilla Public License v1.1.
+  </li>
+  <li>
+    <code>Docs\GPL-2.0.txt</code> &ndash; GNU General Public License v2.
+  </li>
+  <li>
+    <code>Docs\LGPL-2.1.txt</code> &ndash; GNU Lesser General Public License
+    v2.1.
+  </li>
+  <li>
+    <code>Docs\ReadMe.htm</code> &ndash; The project's read-me file (this file).
+  </li>
+</ul>
+
+<!--
+<p>
+  In addition to the above files you will find numerous demo projects in the
+  <code>Demos</code> sub-directory.
+</p>
+-->
+
+<p>
+  There are three possible ways to use the units.
+</p>
+
+<ol class="spaced">
+  <li>
+    The simplest way is to add <code>PJFileHandle.pas</code>,
+    <code>PJPipe.pas</code> and <code>PJPipeFilters.pas</code>to your projects
+    as you need them.
+  </li>
+  <li>
+    To make the units easier to re-use you can either copy them to a folder on
+    your Delphi search path, or add the folder where you extracted the units to
+    the search path. You then simply use the units as required without needing
+    to add them to your project.
+  </li>
+  <li>
+    For maximum portability you can add the units to a Delphi design time
+    package. If you need help doing this <a
+      href="http://www.delphidabbler.com/url/install-comp"
+    >see here</a>.
+  </li>
+</ol>
+
+
+<!--
+<h2 id="demo">
+  Demo Programs
+</h2>
+
+<p>
+  The source code for XXXX demo projects is included in the download. All the
+  demos are stored in subfolders of the <code>Demos</code> directory.
+</p>
+
+<p>
+  Make sure you preserved the directory structure when unzipping the
+  downloaded archive. Open <code>XXXX.bpg</code> or
+  <code>XXXX.groupproj</code> in Delphi. Compile each demo project. All the
+  resulting <code>.exe</code> files should have been written to the
+  <code>Exe</code> directory.
+</p>
+
+<p>
+  The demo programs are fully described in the <em>Examples</em> section of
+  the <a
+    href="http://www.delphidabbler.com/url/ioutils-wiki"
+  >Documentation Wiki</a>.
+</p>
+-->
+
+<h2 id="changelog">
+  Update History
+</h2>
+
+<p>
+  A complete change log is provided in a text file that is included in the
+  download.
+</p>
+
+
+<h2 id="license">
+  License and Disclaimer
+</h2>
+
+<p>
+  This product, <em>I/O Utility Classes</em>, is subject to the Mozilla Public
+  License Version 1.1 (the &quot;License&quot;). You may not use this Product
+  except in compliance with the License. You may obtain a copy of the License at
+  <a
+    href="http://www.mozilla.org/MPL/MPL-1.1"
+  >http://www.mozilla.org/MPL/MPL-1.1</a>.
+</p>
+
+<p>
+  Software distributed under the License is distributed on an &quot;AS
+  IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+  the License for the specific language governing rights and limitations under
+  the License.
+</p>
+
+<p>
+  The Initial Developer of <em>I/O Utility Classes</em> is Peter D Johnson.
+  Portions created by the Initial Developer are Copyright &copy; 2007-2012 Peter
+  D Johnson (www.delphidabbler.com). All Rights Reserved.
+</p>
+
+<p>
+  Alternatively, the contents of this file may be used under the terms of
+  either the GNU General Public License Version 2 or later (the
+  &quot;GPL&quot;), or the GNU Lesser General Public License Version 2.1 or
+  later (the &quot;LGPL&quot;), in which case the provisions of the GPL or the
+  LGPL are applicable instead of those above. If you wish to allow use of your
+  version of this file only under the terms of either the GPL or the LGPL, and
+  not to allow others to use your version of this file under the terms of the
+  MPL, indicate your decision by deleting the provisions above and replacing
+  them with the notice and other provisions required by the GPL or the LGPL.
+  If you do not delete the provisions above, a recipient may use your version
+  of this file under the terms of any one of the MPL, the GPL or the LGPL.
+<p>
+
+
+<p>
+  All relevant trademarks are acknowledged.
+</p>
+
+
+<h2 id="bugs">
+  Bugs and Feature Requests
+</h2>
+
+<p>
+  Bugs can be reported or new features requested via the <a
+    href="http://www.delphidabbler.com/url/ddlib-issues"
+  >Issue Tracker</a>.
+</p>
+
+<p>
+  If no similar report or request has been recorded already, use the <em>New
+  Issue</em> link to add a new issue. Please select the most appropriate
+  template from the <em>Templates</em> drop down list and apply the
+  <code>Project-ioutils</code> label. If there is already a similar issue
+  please add a comment to it if there's anything you can add.
+</p>
+
+
+<h2 id="author">
+  About the Author
+</h2>
+
+<p>
+  I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
+  Wales,  UK, writing write mainly in Delphi. My programs are available for
+  download from <a
+    href="http://www.delphidabbler.com/"
+  >http://www.delphidabbler.com/</a>.
+</p>
+
+<div class="endnotes">
+  <div class="comments">
+    Please <a
+      href="http://www.delphidabbler.com/contact"
+    >let me know</a> if you have any comments about the classes, but please
+    use the <a
+      href="http://www.delphidabbler.com/url/ddlib-issues"
+    >Issue Tracker</a> discussed above to report bugs and request new features.
+  </div>
+  <div class="copyright">
+    This document is copyright &copy; 2012, P D Johnson, <a
+      href="http://www.delphidabbler.com/"
+    >www.delphidabbler.com</a>
+  </div>
+</div>
+
+</body>
+
+</html>
