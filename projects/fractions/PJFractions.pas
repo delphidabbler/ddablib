@@ -52,13 +52,7 @@ type
     ///  <para>If denominator is negative then it is made positive and sign of
     ///  numerator is changed.</para>
     ///  </remarks>
-    constructor Create(const Numerator, Denominator: Int64); overload;
-
-    ///  <summary>Constructs a fractional representation of a whole number.
-    ///  </summary>
-    ///  <remarks>Numerator is set to WholeNumber and denominator to 1.
-    ///  </remarks>
-    constructor Create(const WholeNumber: Integer); overload;
+    constructor Create(const Numerator, Denominator: Int64);
 
     ///  <summary>This fraction's numerator.</summary>
     ///  <remarks>Can be positive, negative or zero.</remarks>
@@ -388,11 +382,6 @@ begin
   Result := TFraction.Create(Multiplier * Numerator, Multiplier * Denominator);
 end;
 
-constructor TFraction.Create(const WholeNumber: Integer);
-begin
-  Create(WholeNumber, 1);
-end;
-
 constructor TFraction.Create(const Numerator, Denominator: Int64);
 begin
   Assert(Denominator <> 0, 'TFraction.Create: Denominator is 0');
@@ -441,7 +430,7 @@ end;
 
 class operator TFraction.Implicit(const I: Integer): TFraction;
 begin
-  Result := TFraction.Create(I);
+  Result := TFraction.Create(I, 1);
 end;
 
 class operator TFraction.Implicit(const F: TFraction): Extended;
