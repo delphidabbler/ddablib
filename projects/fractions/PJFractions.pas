@@ -294,6 +294,143 @@ type
     ///  is positive and Negative value if negative.</remarks>
     function Sign: TValueSign;
 
+    ///  <summary>Compares this mixed fraction to given fraction M and returns a
+    ///  value representing their relationship.</summary>
+    ///  <remarks>Returns EqualsValue if the two fractions are equivalent,
+    ///  GreaterThanValue if this fraction is greater that M or LessThanValue if
+    ///  this fraction is less than M.</remarks>
+    function CompareTo(const M: TMixedFraction): TValueRelationship;
+
+//    ///  <summary>Converts this fraction to an equivalent fraction whose
+//    ///  numerator and denominator are multiples of those of this fraction.
+//    ///  </summary>
+//    ///  <param name="Multiplier">Int64 [in] Factor by which to multiply
+//    ///  numerator and denominator.</param>
+//    ///  <returns>TFraction. Converted fraction.</returns>
+//    function Convert(const Multiplier: Int64): TFraction;
+//
+//    ///  <summary>Checks if a given non-zero value is a common factor of this
+//    ///  fraction.</summary>
+//    function IsCommonFactor(const Factor: Int64): Boolean;
+//
+//    ///  <summary>Reduces this fraction to its lowest terms.</summary>
+//    function Simplify: TFraction; overload;
+//
+//    ///  <summary>Reduces this fraction by a given common factor.</summary>
+//    ///  <remarks>CommonFactor must be a valid common factor of this fraction
+//    ///  and must not be zero.</remarks>
+//    function Simplify(const CommonFactor: Int64): TFraction; overload;
+//
+//    ///  <summary>Returns reciprocal of this fraction.</summary>
+//    function Reciprocal: TFraction;
+//
+//    ///  <summary>Truncates this fraction to a whole number multiple of given
+//    ///  fraction F.</summary>
+//    ///  <remarks>Result has same denominator as F.</remarks>
+//    function TruncateToMultiple(const F: TFraction): TFraction;
+//
+//    ///  <summary>Rounds fraction to nearest whole number multiple of given
+//    ///  fraction F.</summary>
+//    ///  <remarks>Result has same denominator as F.</remarks>
+//    function RoundToMulitiple(const F: TFraction): TFraction;
+//
+//    ///  <summary>Returns the least common denominator of two fractions.
+//    ///  </summary>
+//    class function LCD(const F1, F2: TFraction): Int64; static;
+//
+    ///  <summary>Compares two fractions and returns a value indicating their
+    ///  relationship.</summary>
+    ///  <remarks>Possible return values are: EqualsValue when M1 equals M2,
+    ///  GreaterThanValue when M1 is greater than M2 and LessThanValue when M1
+    ///  is less than M2.</remarks>
+    class function Compare(const M1, M2: TMixedFraction): TValueRelationship;
+      static;
+
+//    ///  <summary>Returns the greatest of two given fractions.</summary>
+//    class function Max(const F1, F2: TFraction): TFraction; overload; static;
+//
+//    ///  <summary>Returns the greatest fraction from a given array of fractions.
+//    ///  </summary>
+//    ///  <remarks>FA must contain at least one fraction.</remarks>
+//    class function Max(const FA: array of TFraction): TFraction; overload;
+//      static;
+//
+//    ///  <summary>Returns the smallest of two given fractions.</summary>
+//    class function Min(const F1, F2: TFraction): TFraction; overload; static;
+//
+//    ///  <summary>Returns the smallest fraction from a given array of fractions.
+//    ///  </summary>
+//    ///  <remarks>FA must contain at least one fraction.</remarks>
+//    class function Min(const FA: array of TFraction): TFraction; overload;
+//      static;
+//
+    ///  <summary>Enables two mixed fractions to be tested for equality using
+    ///  the equals operator.</summary>
+    ///  <remarks>Two fractions are equal if they are the same when reduced to
+    ///  common terms.</remarks>
+    class operator Equal(const M1, M2: TMixedFraction): Boolean;
+
+    ///  <summary>Enables two mixed fractions to be tested for inequality using
+    ///  the not-equals operator.</summary>
+    class operator NotEqual(const M1, M2: TMixedFraction): Boolean;
+
+    ///  <summary>Enables the less-than operator to be used to compare two mixed
+    ///  fractions.</summary>
+    class operator LessThan(const M1, M2: TMixedFraction): Boolean;
+
+    ///  <summary>Enables the less-than-or-equals operator to be used to compare
+    ///  two mixed fractions.</summary>
+    class operator LessThanOrEqual(const M1, M2: TMixedFraction): Boolean;
+
+    ///  <summary>Enables the greater-than operator to be used to compare two
+    ///  mixed fractions.</summary>
+    class operator GreaterThan(const M1, M2: TMixedFraction): Boolean;
+
+    ///  <summary>Enables the greater-than-or-equals operator to be used to
+    ///  compare two mixed fractions.</summary>
+    class operator GreaterThanOrEqual(const M1, M2: TMixedFraction): Boolean;
+
+//    ///  <summary>Enables the unary minus operator to negate a
+//    ///  fraction.</summary>
+//    class operator Negative(const F: TFraction): TFraction;
+//
+//    ///  <summary>Enables unary plus operator to be used with a fraction.
+//    ///  </summary>
+//    ///  <remarks>This is a no-op.</remarks>
+//    class operator Positive(const F: TFraction): TFraction;
+//
+//    ///  <summary>Overload of Trunc() operator that truncate a fraction to the
+//    ///  largest whole number less than or equal to the fraction.</summary>
+//    class operator Trunc(const F: TFraction): Int64;
+//
+//    ///  <summary>Overload of Round() operator that rounds a fraction to the
+//    ///  nearest whole number value.</summary>
+//    class operator Round(const F: TFraction): Int64;
+//
+//    ///  <summary>Enables addition operator to be used with fractions.</summary>
+//    class operator Add(const F1, F2: TFraction): TFraction;
+//
+//    ///  <summary>Enables subtraction operator to be used with
+//    ///  fractions.</summary>
+//    class operator Subtract(const F1, F2: TFraction): TFraction;
+//
+//    ///  <summary>Enables multiplication operator to be used with
+//    ///  fractions.</summary>
+//    class operator Multiply(const F1, F2: TFraction): TFraction;
+//
+//    ///  <summary>Enables division operator to be used with fractions.</summary>
+//    class operator Divide(const F1, F2: TFraction): TFraction;
+//
+//    ///  <summary>Overload of div operator that divides left hand operand by
+//    ///  right hand operand and returns the largest whole number less than or
+//    ///  equal to the result of the division.</summary>
+//    class operator IntDivide(const F1, F2: TFraction): Int64;
+//
+//    ///  <summary>Overload of Mod operator that returns the fractional remainder
+//    ///  after dividing the left hand operand by the right hand operand.
+//    ///  </summary>
+//    class operator Modulus(const F1, F2: TFraction): TFraction;
+
     ///  <summary>Enables conversion and assignment of a TFraction to a mixed
     ///  fraction.</summary>
     class operator Implicit(const Fraction: TFraction): TMixedFraction;
@@ -737,10 +874,26 @@ begin
   );
 end;
 
+class function TMixedFraction.Compare(const M1, M2: TMixedFraction):
+  TValueRelationship;
+begin
+  Result := TFraction.Compare(M1.fFraction, M2.fFraction);
+end;
+
+function TMixedFraction.CompareTo(const M: TMixedFraction): TValueRelationship;
+begin
+  Result := Compare(Self, M);
+end;
+
 constructor TMixedFraction.Create(const WholeNumber, Numerator,
   Denominator: Int64);
 begin
   Create(WholeNumber, TFraction.Create(Numerator, Denominator));
+end;
+
+class operator TMixedFraction.Equal(const M1, M2: TMixedFraction): Boolean;
+begin
+  Result := M1.fFraction = M2.fFraction;
 end;
 
 function TMixedFraction.GetFractionalPart: TFraction;
@@ -755,6 +908,18 @@ begin
   Result := Trunc(fFraction);
 end;
 
+class operator TMixedFraction.GreaterThan(const M1, M2: TMixedFraction):
+  Boolean;
+begin
+  Result := M1.fFraction > M2.fFraction;
+end;
+
+class operator TMixedFraction.GreaterThanOrEqual(const M1, M2: TMixedFraction):
+  Boolean;
+begin
+  Result := M1.fFraction >= M2.fFraction;
+end;
+
 class operator TMixedFraction.Implicit(const I: Integer): TMixedFraction;
 begin
   Result.fFraction := I;      // uses implicit cast of Integer to TFraction
@@ -763,6 +928,17 @@ end;
 class operator TMixedFraction.Implicit(const E: Extended): TMixedFraction;
 begin
   Result.fFraction := E;      // uses implicit cast of Extended to TFraction
+end;
+
+class operator TMixedFraction.Implicit(const Fraction: TFraction):
+  TMixedFraction;
+begin
+  Result.fFraction := Fraction;
+end;
+
+class operator TMixedFraction.Implicit(const Mixed: TMixedFraction): TFraction;
+begin
+  Result := Mixed.fFraction;
 end;
 
 class operator TMixedFraction.Implicit(const Mixed: TMixedFraction): Extended;
@@ -775,20 +951,25 @@ begin
   Result := fFraction.IsWholeNumber;
 end;
 
+class operator TMixedFraction.LessThan(const M1, M2: TMixedFraction): Boolean;
+begin
+  Result := M1.fFraction < M2.fFraction;
+end;
+
+class operator TMixedFraction.LessThanOrEqual(const M1, M2: TMixedFraction):
+  Boolean;
+begin
+  Result := M1.fFraction <= M2.fFraction;
+end;
+
+class operator TMixedFraction.NotEqual(const M1, M2: TMixedFraction): Boolean;
+begin
+  Result := M1.fFraction <> M2.fFraction;
+end;
+
 function TMixedFraction.Sign: TValueSign;
 begin
   Result := fFraction.Sign;
-end;
-
-class operator TMixedFraction.Implicit(const Fraction: TFraction):
-  TMixedFraction;
-begin
-  Result.fFraction := Fraction;
-end;
-
-class operator TMixedFraction.Implicit(const Mixed: TMixedFraction): TFraction;
-begin
-  Result := Mixed.fFraction;
 end;
 
 end.

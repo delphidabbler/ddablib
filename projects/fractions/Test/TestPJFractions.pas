@@ -59,6 +59,9 @@ type
     procedure TestImplicit;
     procedure TestIsWholeNumber;
     procedure TestSign;
+    procedure TestCompare;
+    procedure TestCompareTo;
+    procedure TestComparisonOps;
   end;
 
 implementation
@@ -1058,6 +1061,111 @@ begin
 end;
 
 { TestTMixedFraction }
+
+procedure TestTMixedFraction.TestCompare;
+var
+  M1, M2, M3, M4, M5, M6, M7, M8: TMixedFraction;
+  F: TFraction;
+begin
+  M1 := TMixedFraction.Create(1, 3, 4);
+  M2 := M1;
+  M3 := TMixedFraction.Create(-5, -2, 4);
+  M4 := TMixedFraction.Create(1, 7, 9);
+  M5 := TMixedFraction.Create(1, 12, 16);
+  M6 := TMixedFraction.Create(2, 1, 12);
+  M7 := 4;
+  M8 := 0;
+  F := TFraction.Create(16, 9);
+  CheckEquals(EqualsValue, TMixedFraction.Compare(M1, M2), 'Test 1');
+  CheckEquals(LessThanValue, TMixedFraction.Compare(M1, M4), 'Test 2');
+  CheckEquals(GreaterThanValue, TMixedFraction.Compare(M1, M3), 'Test 3');
+  CheckEquals(EqualsValue, TMixedFraction.Compare(M1, M5), 'Test 4');
+  CheckEquals(LessThanValue, TMixedFraction.Compare(M5, M6), 'Test 5');
+  CheckEquals(GreaterThanValue, TMixedFraction.Compare(M7, M8), 'Test 6');
+  CheckEquals(LessThanValue, TMixedFraction.Compare(M3, M8), 'Test 7');
+  CheckEquals(GreaterThanValue, TMixedFraction.Compare(M8, M3), 'Test 8');
+  CheckEquals(EqualsValue, TMixedFraction.Compare(M4, F), 'Test 9');
+  CheckEquals(GreaterThanValue, TMixedFraction.Compare(F, M1), 'Test 10');
+  CheckEquals(LessThanValue, TFraction.Compare(M3, F), 'Test 11');
+  CheckEquals(EqualsValue, TMixedFraction.Compare(M7, 4), 'Test 12');
+  CheckEquals(EqualsValue, TMixedFraction.Compare(4, M7), 'Test 13');
+  CheckEquals(LessThanValue, TMixedFraction.Compare(M3, 1.75), 'Test 14');
+  CheckEquals(GreaterThanValue, TMixedFraction.Compare(1.75, M3), 'Test 15');
+end;
+
+procedure TestTMixedFraction.TestCompareTo;
+var
+  M1, M2, M3, M4, M5, M6, M7, M8: TMixedFraction;
+  F: TFraction;
+begin
+  M1 := TMixedFraction.Create(1, 3, 4);
+  M2 := M1;
+  M3 := TMixedFraction.Create(-5, -2, 4);
+  M4 := TMixedFraction.Create(1, 7, 9);
+  M5 := TMixedFraction.Create(1, 12, 16);
+  M6 := TMixedFraction.Create(2, 1, 12);
+  M7 := 4;
+  M8 := 0;
+  F := TFraction.Create(16, 9);
+  CheckEquals(EqualsValue, M1.CompareTo(M2), 'Test 1');
+  CheckEquals(LessThanValue, M1.CompareTo(M4), 'Test 2');
+  CheckEquals(GreaterThanValue, M1.CompareTo(M3), 'Test 3');
+  CheckEquals(EqualsValue, M1.CompareTo(M5), 'Test 4');
+  CheckEquals(LessThanValue, M5.CompareTo(M6), 'Test 5');
+  CheckEquals(GreaterThanValue, M7.CompareTo(M8), 'Test 6');
+  CheckEquals(LessThanValue, M3.CompareTo(M8), 'Test 7');
+  CheckEquals(GreaterThanValue, M8.CompareTo(M3), 'Test 8');
+  CheckEquals(EqualsValue, M4.CompareTo(F), 'Test 9');
+  CheckEquals(GreaterThanValue, F.CompareTo(M1), 'Test 10');
+  CheckEquals(LessThanValue, M3.CompareTo(F), 'Test 11');
+  CheckEquals(EqualsValue, M7.CompareTo(4), 'Test 12');
+  CheckEquals(LessThanValue, M3.CompareTo(1.75), 'Test 13');
+end;
+
+procedure TestTMixedFraction.TestComparisonOps;
+var
+  M1, M2: TMixedFraction;
+begin
+  // M1 = M2
+  M1 := TMixedFraction.Create(1, 2, 3);
+  M2 := TMixedFraction.Create(1, 2, 3);
+  CheckTrue(M1 = M2, 'Test 1a (=)');
+  CheckFalse(M1 <> M2, 'Test 1a (<>)');
+  CheckFalse(M1 < M2, 'Test 1a (<)');
+  CheckTrue(M1 <= M2, 'Test 1a (<=)');
+  CheckFalse(M1 > M2, 'Test 1a (>)');
+  CheckTrue(M1 >= M2, 'Test 1a (>=)');
+
+  // M1 = M2
+  M1 := TMixedFraction.Create(2, 6, 5);
+  M2 := TMixedFraction.Create(2, -30, -25);
+  CheckTrue(M1 = M2, 'Test 1d (=)');
+  CheckFalse(M1 <> M2, 'Test 1d (<>)');
+  CheckFalse(M1 < M2, 'Test 1d (<)');
+  CheckTrue(M1 <= M2, 'Test 1d (<=)');
+  CheckFalse(M1 > M2, 'Test 1d (>)');
+  CheckTrue(M1 >= M2, 'Test 1d (>=)');
+
+  // M1 > M2
+  M1 := TMixedFraction.Create(1, 4, 5);
+  M2 := TMixedFraction.Create(-2, 3, 5);
+  CheckFalse(M1 = M2, 'Test 2a (=)');
+  CheckTrue(M1 <> M2, 'Test 2a (<>)');
+  CheckFalse(M1 < M2, 'Test 2a (<)');
+  CheckFalse(M1 <= M2, 'Test 2a (<=)');
+  CheckTrue(M1 > M2, 'Test 2a (>)');
+  CheckTrue(M1 >= M2, 'Test 2a (>=)');
+
+  // M1 < M2
+  M1 := TMixedFraction.Create(-3, -1, 5);
+  M2 := TMixedFraction.Create(-2, -1, 9);
+  CheckFalse(M1 = M2, 'Test 3a (=)');
+  CheckTrue(M1 <> M2, 'Test 3a (<>)');
+  CheckTrue(M1 < M2, 'Test 3a (<)');
+  CheckTrue(M1 <= M2, 'Test 3a (<=)');
+  CheckFalse(M1 > M2, 'Test 3a (>)');
+  CheckFalse(M1 >= M2, 'Test 3a (>=)');
+end;
 
 procedure TestTMixedFraction.TestConstructors;
 var
