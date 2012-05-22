@@ -239,8 +239,78 @@ type
     class operator Modulus(const F1, F2: TFraction): TFraction;
   end;
 
-//  TMixedFraction = record
-//  end;
+type
+  TMixedFraction = record
+  strict private
+    var
+      ///  <summary>Records mixed fraction as a vulgar fractions.</summary>
+      fFraction: TFraction;
+    ///  <summary>Read accessor FractionalPart property.</summary>
+    function GetFractionalPart: TFraction; inline;
+    ///  <summary>Read accessor for WholePart property.</summary>
+    function GetWholePart: Int64; inline;
+  public
+    ///  <summary>Constructs a mixed fraction with given whole number and
+    ///  fractional part.</summary>
+    ///  <remarks>
+    ///  <para>Fractional part is added to whole number part which has the
+    ///  following implications:</para>
+    ///  <para>To create negative mixed fractions, both whole number part and
+    ///  fractional part should be negative otherwise the result may not be as
+    ///  expected.</para>
+    ///  <para>Fractional part may be a vulgar fraction in which case whole
+    ///  number part is adjusted.</para>
+    ///  </remarks>
+    constructor Create(const WholeNumber: Int64; const Fraction: TFraction);
+      overload;
+
+    ///  <summary>Constructs a mixed fraction with given whole number and a
+    ///  fractional part composed from given numerator and denominator.
+    ///  </summary>
+    ///  <remarks>
+    ///  <para>Denominator must not be negative.</para>
+    ///  <para>To create a negative mixed fractions, both whole number part and
+    ///  either numerator or denominator should be negative otherwise the result
+    ///  may not be as expected.</para>
+    ///  <para>If numerator is greater than denominator the whole number part is
+    ///  adjusted so that fractional part is a proper fraction.</para>
+    ///  </remarks>
+    constructor Create(const WholeNumber, Numerator, Denominator: Int64);
+      overload;
+
+    ///  <summary>This fraction's whole number part.</summary>
+    property WholePart: Int64 read GetWholePart;
+
+    ///  <summary>This fraction's fractional part.</summary>
+    ///  <remarks>This is always a proper fraction.</remarks>
+    property FractionalPart: TFraction read GetFractionalPart;
+
+    ///  <summary>Checks if this fraction represents a whole number.</summary>
+    function IsWholeNumber: Boolean;
+
+    ///  <summary>Enables conversion and assignment of a TFraction to a mixed
+    ///  fraction.</summary>
+    class operator Implicit(const Fraction: TFraction): TMixedFraction;
+    ///  <summary>Enables conversion and assignment of a mixed fraction to a
+    ///  TFraction.</summary>
+    class operator Implicit(const Mixed: TMixedFraction): TFraction;
+    ///  <summary>Enables conversion and assignment of an integer to a mixed
+    ///  fraction.</summary>
+    ///  <remarks>Resulting fraction will have whole number part equal to I,
+    ///  denominator of 1 and numerator of 0.</remarks>
+    class operator Implicit(const I: Integer): TMixedFraction;
+    ///  <summary>Enables conversion and assignment of floating point types to a
+    ///  mixed fraction.</summary>
+    ///  <remarks>
+    ///  <para>Absolute value of floating point number must be in range
+    ///  1.0E-19 to 1.0E+19, or be 0.</para>
+    ///  <para>Conversions are accurate to within five decimal places.</para>
+    ///  </remarks>
+    class operator Implicit(const E: Extended): TMixedFraction;
+    ///  <summary>Enables conversion and assignment of a mixed fraction to a
+    ///  floating point value.</summary>
+    class operator Implicit(const Mixed: TMixedFraction): Extended;
+  end;
 
 implementation
 
@@ -478,8 +548,7 @@ end;
 
 function TFraction.IsWholeNumber: Boolean;
 begin
-  Result := (Abs(fDenominator) = 1) or (Abs(fNumerator) = Abs(fDenominator)) or
-    (fNumerator = 0);
+  Result := fNumerator mod fDenominator = 0;
 end;
 
 class function TFraction.LCD(const F1, F2: TFraction): Int64;
@@ -645,6 +714,70 @@ begin
   Result := SimplifiedResult.Convert(
     F.Denominator div SimplifiedResult.Denominator
   );
+end;
+
+{ TMixedFraction }
+
+constructor TMixedFraction.Create(const WholeNumber: Int64;
+  const Fraction: TFraction);
+begin
+  // Don't use + operator to add WholeNumber to Fraction because that simplifies
+  // result and we want to preserve denominator as given. If simplified fraction
+  // is required, call Simplify method on Fraction in constructor call:
+  // TMixedFraction.Create(42, TFraction.Create(12, 16).Simplify);
+  fFraction := TFraction.Create(
+    WholeNumber * Fraction.Denominator + Fraction.Numerator,
+    Fraction.Denominator
+  );
+end;
+
+constructor TMixedFraction.Create(const WholeNumber, Numerator,
+  Denominator: Int64);
+begin
+  Create(WholeNumber, TFraction.Create(Numerator, Denominator));
+end;
+
+function TMixedFraction.GetFractionalPart: TFraction;
+begin
+  Result := TFraction.Create(
+    fFraction.Numerator mod fFraction.Denominator, fFraction.Denominator
+  );
+end;
+
+function TMixedFraction.GetWholePart: Int64;
+begin
+  Result := Trunc(fFraction);
+end;
+
+class operator TMixedFraction.Implicit(const I: Integer): TMixedFraction;
+begin
+  Result.fFraction := I;      // uses implicit cast of Integer to TFraction
+end;
+
+class operator TMixedFraction.Implicit(const E: Extended): TMixedFraction;
+begin
+  Result.fFraction := E;      // uses implicit cast of Extended to TFraction
+end;
+
+class operator TMixedFraction.Implicit(const Mixed: TMixedFraction): Extended;
+begin
+  Result := Mixed.fFraction;  // uses implicit cast of TFraction to Extended
+end;
+
+function TMixedFraction.IsWholeNumber: Boolean;
+begin
+  Result := fFraction.IsWholeNumber;
+end;
+
+class operator TMixedFraction.Implicit(const Fraction: TFraction):
+  TMixedFraction;
+begin
+  Result.fFraction := Fraction;
+end;
+
+class operator TMixedFraction.Implicit(const Mixed: TMixedFraction): TFraction;
+begin
+  Result := Mixed.fFraction;
 end;
 
 end.

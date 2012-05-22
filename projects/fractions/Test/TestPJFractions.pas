@@ -52,6 +52,14 @@ type
     procedure TestTruncateToMultiple;
   end;
 
+  // Test case for TMixedFraction
+  TestTMixedFraction = class(TTestCase)
+  published
+    procedure TestConstructors;
+    procedure TestImplicit;
+    procedure TestIsWholeNumber;
+  end;
+
 implementation
 
 uses
@@ -187,7 +195,7 @@ begin
   CheckFalse(F1 > F2, 'Test 1a (>)');
   CheckTrue(F1 >= F2, 'Test 1a (>=)');
 
-  // F1 = F2 
+  // F1 = F2
   F1 := TFraction.Create(6, 5);
   F2 := TFraction.Create(30, 25);
   CheckTrue(F1 = F2, 'Test 1b (=)');
@@ -302,7 +310,6 @@ procedure TestTFraction.TestConstructors;
 var
   F: TFraction;
 begin
-  // test TFraction.Create(const Numerator, Denominator: Int64)
   F := TFraction.Create(3, 5);
   CheckEquals(3, F.Numerator, 'Test 1a: Numerator');
   CheckEquals(5, F.Denominator, 'Test 1a: Denominator');
@@ -396,7 +403,7 @@ var
   E1, E2: Extended;
   D1, D2: Double;
 begin
-  // implicit cast of integer to fraction
+  // Integer => TFraction
   F := 12;
   CheckEquals(12, F.Numerator, 'Test 1 Numerator');
   CheckEquals(1, F.Denominator, 'Test 1 Denominator');
@@ -406,7 +413,8 @@ begin
   F := 0;
   CheckEquals(0, F.Numerator, 'Test 3 Numerator');
   CheckEquals(1, F.Denominator, 'Test 3 Denominator');
-  // implicit cast fraction to extended
+
+  // TFraction => Extended
   F := TFraction.Create(5, 27);
   E1 := 5 / 27;
   E2 := F;
@@ -414,7 +422,8 @@ begin
   D2 := F;
   CheckEquals(EqualsValue, CompareValue(D1, D2), 'Test 4 (Double)');
   CheckEquals(EqualsValue, CompareValue(E1, E2), 'Test 4 (Extended)');
-  // implicit case extended to fraction
+
+  // Extended => TFraction
   F := 1 / 3;
   CheckEquals(1, F.Numerator, 'Test 5 Numerator');
   CheckEquals(3, F.Denominator, 'Test 5 Denominator');
@@ -502,7 +511,7 @@ var
 begin
   F := 12;
   CheckTrue(F.IsWholeNumber, 'Test 1');
-  F := TFraction.Create(12, 13);
+  F := TFraction.Create(36, 13);
   CheckFalse(F.IsWholeNumber, 'Test 2');
   F := TFraction.Create(-5, 1);
   CheckTrue(F.IsWholeNumber, 'Test 3');
@@ -522,6 +531,8 @@ begin
   CheckTrue(F.IsWholeNumber, 'Test 10');
   F := TFraction.Create(4, -1);
   CheckTrue(F.IsWholeNumber, 'Test 12');
+  F := TFraction.Create(75, 5);
+  CheckTrue(F.IsWholeNumber, 'Test 13');
 end;
 
 procedure TestTFraction.TestLCD;
@@ -1045,10 +1056,206 @@ begin
   CheckEquals(1, G.Denominator, 'Test 4: Denominator');
 end;
 
+{ TestTMixedFraction }
+
+procedure TestTMixedFraction.TestConstructors;
+var
+  M: TMixedFraction;
+begin
+  // Test Create(const WholeNumber: Int64; const Fraction: TFraction);
+  M := TMixedFraction.Create(7, TFraction.Create(50, 15));
+  CheckEquals(10, M.WholePart, 'Test A1: Whole part');
+  CheckEquals(5, M.FractionalPart.Numerator, 'Test A1: Numerator');
+  CheckEquals(15, M.FractionalPart.Denominator, 'Test A1: Denominator');
+  M := TMixedFraction.Create(7, TFraction.Create(37, -15));
+  CheckEquals(4, M.WholePart, 'Test A2: Whole part');
+  CheckEquals(8, M.FractionalPart.Numerator, 'Test A2: Numerator');
+  CheckEquals(15, M.FractionalPart.Denominator, 'Test A2: Denominator');
+  M := TMixedFraction.Create(-7, TFraction.Create(17, 15));
+  CheckEquals(-5, M.WholePart, 'Test A3: Whole part');
+  CheckEquals(-13, M.FractionalPart.Numerator, 'Test A3: Numerator');
+  CheckEquals(15, M.FractionalPart.Denominator, 'Test A3: Denominator');
+  M := TMixedFraction.Create(-7, TFraction.Create(37, -15));
+  CheckEquals(-9, M.WholePart, 'Test A4: Whole part');
+  CheckEquals(-7, M.FractionalPart.Numerator, 'Test A4: Numerator');
+  CheckEquals(15, M.FractionalPart.Denominator, 'Test A4: Denominator');
+  M := TMixedFraction.Create(0, TFraction.Create(14, 2));
+  CheckEquals(7, M.WholePart, 'Test A5: Whole part');
+  CheckEquals(0, M.FractionalPart.Numerator, 'Test A5: Numerator');
+  CheckEquals(2, M.FractionalPart.Denominator, 'Test A5: Denominator');
+  M := TMixedFraction.Create(42, TFraction.Create(12, 16).Simplify);
+  CheckEquals(42, M.WholePart, 'Test A6: Whole part');
+  CheckEquals(3, M.FractionalPart.Numerator, 'Test A6: Numerator');
+  CheckEquals(4, M.FractionalPart.Denominator, 'Test A6: Denominator');
+  M := TMixedFraction.Create(0, TFraction.Create(0, 2));
+  CheckEquals(0, M.WholePart, 'Test A7: Whole part');
+  CheckEquals(0, M.FractionalPart.Numerator, 'Test A7: Numerator');
+  CheckEquals(2, M.FractionalPart.Denominator, 'Test A7: Denominator');
+  M := TMixedFraction.Create(12, TFraction.Create(24, 6));
+  CheckEquals(16, M.WholePart, 'Test A8: Whole part');
+  CheckEquals(0, M.FractionalPart.Numerator, 'Test A8: Numerator');
+  CheckEquals(6, M.FractionalPart.Denominator, 'Test A8: Denominator');
+  M := TMixedFraction.Create(0, TFraction.Create(17, -5));
+  CheckEquals(-3, M.WholePart, 'Test A9: Whole part');
+  CheckEquals(-2, M.FractionalPart.Numerator, 'Test A9: Numerator');
+  CheckEquals(5, M.FractionalPart.Denominator, 'Test A9: Denominator');
+
+  // Test Create(const WholeNumber, Numerator, Denominator: Int64);
+  // this calls above overload, so only minimal tests
+  M := TMixedFraction.Create(7, 37, 15);
+  CheckEquals(9, M.WholePart, 'Test B1: Whole part');
+  CheckEquals(7, M.FractionalPart.Numerator, 'Test B1: Numerator');
+  CheckEquals(15, M.FractionalPart.Denominator, 'Test B1: Denominator');
+  M := TMixedFraction.Create(7, 37, -15);
+  CheckEquals(4, M.WholePart, 'Test B2: Whole part');
+  CheckEquals(8, M.FractionalPart.Numerator, 'Test B2: Numerator');
+  CheckEquals(15, M.FractionalPart.Denominator, 'Test B2: Denominator');
+end;
+
+procedure TestTMixedFraction.TestImplicit;
+var
+  F: TFraction;
+  M: TMixedFraction;
+  S, Sf: Single;
+  D, Df: Double;
+  E, Ef: Extended;
+begin
+  // Test TFraction => TMixedFraction
+  F := TFraction.Create(49, 15);
+  M := F;
+  CheckEquals(3, M.WholePart, 'Test A1: Whole');
+  CheckEquals(4, M.FractionalPart.Numerator, 'Test A1: Numerator');
+  CheckEquals(15, M.FractionalPart.Denominator, 'Test A1: Denominator');
+  F := TFraction.Create(-25, 15);
+  M := F;
+  CheckEquals(-1, M.WholePart, 'Test A2: Whole');
+  CheckEquals(-10, M.FractionalPart.Numerator, 'Test A2: Numerator');
+  CheckEquals(15, M.FractionalPart.Denominator, 'Test A2: Denominator');
+  F := TFraction.Create(1, 3);
+  M := F;
+  CheckEquals(0, M.WholePart, 'Test A3: Whole');
+  CheckEquals(1, M.FractionalPart.Numerator, 'Test A3: Numerator');
+  CheckEquals(3, M.FractionalPart.Denominator, 'Test A3: Denominator');
+  F := TFraction.Create(0, -4);
+  M := F;
+  CheckEquals(0, M.WholePart, 'Test A4: Whole');
+  CheckEquals(0, M.FractionalPart.Numerator, 'Test A4: Numerator');
+  CheckEquals(4, M.FractionalPart.Denominator, 'Test A4: Denominator');
+
+  // Test TMixedFraction => TFraction
+  M := TMixedFraction.Create(1, 5, 8);
+  F := M;
+  CheckEquals(13, F.Numerator, 'Test B1: Numerator');
+  CheckEquals(8, F.Denominator, 'Test B1: Denominator');
+  M := TMixedFraction.Create(3, -5, 8);
+  F := M;
+  CheckEquals(19, F.Numerator, 'Test B2: Numerator');
+  CheckEquals(8, F.Denominator, 'Test B2: Denominator');
+  M := TMixedFraction.Create(0, -5, 20);
+  F := M;
+  CheckEquals(-5, F.Numerator, 'Test B3: Numerator');
+  CheckEquals(20, F.Denominator, 'Test B3: Denominator');
+  M := TMixedFraction.Create(0, 50, 20);
+  F := M;
+  CheckEquals(50, F.Numerator, 'Test B4: Numerator');
+  CheckEquals(20, F.Denominator, 'Test B4: Denominator');
+  M := TMixedFraction.Create(0, 4, 4);
+  F := M;
+  CheckEquals(4, F.Numerator, 'Test B5: Numerator');
+  CheckEquals(4, F.Denominator, 'Test B5: Denominator');
+  M := TMixedFraction.Create(12, 0, 2);
+  F := M;
+  CheckEquals(24, F.Numerator, 'Test B6: Numerator');
+  CheckEquals(2, F.Denominator, 'Test B6: Denominator');
+
+  // Test Integer => TMixedFraction
+  M := 42;
+  CheckEquals(42, M.WholePart, 'Test C1: Whole');
+  CheckEquals(0, M.FractionalPart.Numerator, 'Test C1: Numerator');
+  CheckEquals(1, M.FractionalPart.Denominator, 'Test C1: Denominator');
+  M := -56;
+  CheckEquals(-56, M.WholePart, 'Test C2: Whole');
+  CheckEquals(0, M.FractionalPart.Numerator, 'Test C2: Numerator');
+  CheckEquals(1, M.FractionalPart.Denominator, 'Test C2: Denominator');
+  M := 0;
+  CheckEquals(0, M.WholePart, 'Test C3: Whole');
+  CheckEquals(0, M.FractionalPart.Numerator, 'Test C3: Numerator');
+  CheckEquals(1, M.FractionalPart.Denominator, 'Test C3: Denominator');
+
+  // Test Float => TMixedFraction
+  S := 1/3;
+  M := S;
+  CheckEquals(0, M.WholePart, 'Test D1: Whole');
+  CheckEquals(1, M.FractionalPart.Numerator, 'Test D1: Numerator');
+  CheckEquals(3, M.FractionalPart.Denominator, 'Test D1: Denominator');
+  D := -34/6;
+  M := D;
+  CheckEquals(-5, M.WholePart, 'Test D2: Whole');
+  CheckEquals(-2, M.FractionalPart.Numerator, 'Test D2: Numerator');
+  CheckEquals(3, M.FractionalPart.Denominator, 'Test D2: Denominator');
+  E := 1.07407407;
+  M := E;
+  CheckEquals(1, M.WholePart, 'Test D3: Whole');
+  CheckEquals(2, M.FractionalPart.Numerator, 'Test D3: Numerator');
+  CheckEquals(27, M.FractionalPart.Denominator, 'Test D3: Denominator');
+  E := -2000000/350;
+  M := E;
+  CheckEquals(-5714, M.WholePart, 'Test D4: Whole');
+  CheckEquals(-2, M.FractionalPart.Numerator, 'Test D4: Numerator');
+  CheckEquals(7, M.FractionalPart.Denominator, 'Test D4: Denominator');
+
+  // Test TMixedFraction => Float
+  M := TMixedFraction.Create(5000, 14, 27);
+  E := 5000.0 + 14 / 27;
+  Ef := M;
+  CheckEquals(EqualsValue, CompareValue(E, Ef), 'Test E1 (Extended)');
+
+  M := TMixedFraction.Create(0, -14, 27);
+  D := -14 / 27;
+  Df := M;
+  CheckEquals(EqualsValue, CompareValue(D, Df), 'Test E2 (Double)');
+
+  M := TMixedFraction.Create(-200, 4, 6);
+  S := -200 + 2 / 3;
+  Sf := M;
+  CheckEquals(EqualsValue, CompareValue(S, Sf), 'Test E2 (Single)');
+end;
+
+procedure TestTMixedFraction.TestIsWholeNumber;
+var
+  M: TMixedFraction;
+begin
+  M := 12;
+  CheckTrue(M.IsWholeNumber, 'Test 1');
+  M := TMixedFraction.Create(0, 12, 13);
+  CheckFalse(M.IsWholeNumber, 'Test 2');
+  M := TMixedFraction.Create(-3, -5, 1);
+  CheckTrue(M.IsWholeNumber, 'Test 3');
+  M := TMixedFraction.Create(2, 1, -5);
+  CheckFalse(M.IsWholeNumber, 'Test 4');
+  M := 0;
+  CheckTrue(M.IsWholeNumber, 'Test 5');
+  M := TMixedFraction.Create(15, 0, 5);
+  CheckTrue(M.IsWholeNumber, 'Test 6');
+  M := TMixedFraction.Create(4, 4, 4);
+  CheckTrue(M.IsWholeNumber, 'Test 7');
+  M := TMixedFraction.Create(0, -4, 4);
+  CheckTrue(M.IsWholeNumber, 'Test 8');
+  M := TMixedFraction.Create(5, 4, -4);
+  CheckTrue(M.IsWholeNumber, 'Test 9');
+  M := TMixedFraction.Create(-12, -4, -4);
+  CheckTrue(M.IsWholeNumber, 'Test 10');
+  M := TMixedFraction.Create(0, 4, -1);
+  CheckTrue(M.IsWholeNumber, 'Test 12');
+  M := TMixedFraction.Create(12, 75, 5);
+  CheckTrue(M.IsWholeNumber, 'Test 13');
+end;
+
 initialization
 
 // Register any test cases with the test runner
 RegisterTest(TestTFraction.Suite);
+RegisterTest(TestTMixedFraction.Suite);
 
 end.
 
