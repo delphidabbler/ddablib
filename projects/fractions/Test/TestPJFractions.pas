@@ -64,6 +64,7 @@ type
     procedure TestComparisonOps;
     procedure TestUnaryPlusOp;
     procedure TestUnaryMinusOp;
+    procedure TestReciprocal;
   end;
 
 implementation
@@ -1360,6 +1361,37 @@ begin
   CheckTrue(M.IsWholeNumber, 'Test 12');
   M := TMixedFraction.Create(12, 75, 5);
   CheckTrue(M.IsWholeNumber, 'Test 13');
+end;
+
+procedure TestTMixedFraction.TestReciprocal;
+var
+  M, MR: TMixedFraction;
+begin
+  M := TMixedFraction.Create(0, 2, 3);
+  MR := M.Reciprocal;
+  CheckEquals(1, MR.WholePart, 'Test 1: Whole number');
+  CheckEquals(1, MR.FractionalPart.Numerator, 'Test 1 Numerator');
+  CheckEquals(2, MR.FractionalPart.Denominator, 'Test 1 Denominator');
+  M := TMixedFraction.Create(-2, -6, 9);
+  MR := M.Reciprocal;
+  CheckEquals(0, MR.WholePart, 'Test 2: Whole number');
+  CheckEquals(-9, MR.FractionalPart.Numerator, 'Test 2 Numerator');
+  CheckEquals(24, MR.FractionalPart.Denominator, 'Test 2 Denominator');
+  M := 42;
+  MR := M.Reciprocal;
+  CheckEquals(0, MR.WholePart, 'Test 3: Whole number');
+  CheckEquals(1, MR.FractionalPart.Numerator, 'Test 3 Numerator');
+  CheckEquals(42, MR.FractionalPart.Denominator, 'Test 3 Denominator');
+  M := TMixedFraction.Create(0, 3, 24);
+  MR := M.Reciprocal;
+  CheckEquals(8, MR.WholePart, 'Test 4: Whole number');
+  CheckEquals(0, MR.FractionalPart.Numerator, 'Test 4 Numerator');
+  CheckEquals(3, MR.FractionalPart.Denominator, 'Test 4 Denominator');
+  M := TMixedFraction.Create(2, 3, 12);
+  MR := M.Reciprocal;
+  CheckEquals(0, MR.WholePart, 'Test 5: Whole number');
+  CheckEquals(12, MR.FractionalPart.Numerator, 'Test 5 Numerator');
+  CheckEquals(27, MR.FractionalPart.Denominator, 'Test 5 Denominator');
 end;
 
 procedure TestTMixedFraction.TestSign;

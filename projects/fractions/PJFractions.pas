@@ -15,9 +15,9 @@
  *     http://www.themathleague.com/ was useful in writing this code.
  *   o The GCD and LCM routines were taken from a UseNet post by Hans van
  *     Kruijssen: see http://www.efg2.com/Lab/Library/UseNet/2000/0315b.txt.
- *   o The DecimalToFraction was adapted from the Turbo Pascal code presented in
- *     "Algorithm To Convert A Decimal To A Fraction" by John Kennedy,
- *     Mathematics Department, Santa Monica College. See
+ *   o The DecimalToFraction routine was adapted from the Turbo Pascal code
+ *     presented in "Algorithm To Convert A Decimal To A Fraction" by John
+ *     Kennedy, Mathematics Department, Santa Monica College. See
  *     http://homepage.smc.edu/kennedy_john/DEC2FRAC.PDF
 }
 
@@ -321,9 +321,9 @@ type
 //    ///  and must not be zero.</remarks>
 //    function Simplify(const CommonFactor: Int64): TFraction; overload;
 //
-//    ///  <summary>Returns reciprocal of this fraction.</summary>
-//    function Reciprocal: TFraction;
-//
+    ///  <summary>Returns reciprocal of this fraction.</summary>
+    function Reciprocal: TMixedFraction;
+
 //    ///  <summary>Truncates this fraction to a whole number multiple of given
 //    ///  fraction F.</summary>
 //    ///  <remarks>Result has same denominator as F.</remarks>
@@ -854,19 +854,6 @@ end;
 
 { TMixedFraction }
 
-constructor TMixedFraction.Create(const WholeNumber: Int64;
-  const Fraction: TFraction);
-begin
-  // Don't use + operator to add WholeNumber to Fraction because that simplifies
-  // result and we want to preserve denominator as given. If simplified fraction
-  // is required, call Simplify method on Fraction in constructor call:
-  // TMixedFraction.Create(42, TFraction.Create(12, 16).Simplify);
-  fFraction := TFraction.Create(
-    WholeNumber * Fraction.Denominator + Fraction.Numerator,
-    Fraction.Denominator
-  );
-end;
-
 class function TMixedFraction.Compare(const M1, M2: TMixedFraction):
   TValueRelationship;
 begin
@@ -882,6 +869,19 @@ constructor TMixedFraction.Create(const WholeNumber, Numerator,
   Denominator: Int64);
 begin
   Create(WholeNumber, TFraction.Create(Numerator, Denominator));
+end;
+
+constructor TMixedFraction.Create(const WholeNumber: Int64;
+  const Fraction: TFraction);
+begin
+  // Don't use + operator to add WholeNumber to Fraction because that simplifies
+  // result and we want to preserve denominator as given. If simplified fraction
+  // is required, call Simplify method on Fraction in constructor call:
+  // TMixedFraction.Create(42, TFraction.Create(12, 16)).Simplify;
+  fFraction := TFraction.Create(
+    WholeNumber * Fraction.Denominator + Fraction.Numerator,
+    Fraction.Denominator
+  );
 end;
 
 class operator TMixedFraction.Equal(const M1, M2: TMixedFraction): Boolean;
@@ -968,6 +968,12 @@ end;
 class operator TMixedFraction.Positive(const M: TMixedFraction): TMixedFraction;
 begin
   Result := M;
+end;
+
+function TMixedFraction.Reciprocal: TMixedFraction;
+begin
+  Assert(Self <> 0, 'TMixedFraction.Reciprocal: Fraction is 0');
+  Result.fFraction := fFraction.Reciprocal;
 end;
 
 function TMixedFraction.Sign: TValueSign;
