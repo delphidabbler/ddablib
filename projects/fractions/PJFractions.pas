@@ -197,11 +197,11 @@ type
     ///  compare two fractions.</summary>
     class operator GreaterThanOrEqual(const F1, F2: TFraction): Boolean;
 
-    ///  <summary>Enables the unary minus operator to negate a
-    ///  fraction.</summary>
+    ///  <summary>Enables the unary minus operator to negate a fraction.
+    ///  </summary>
     class operator Negative(const F: TFraction): TFraction;
 
-    ///  <summary>Enables unary plus operator to be used with a fraction.
+    ///  <summary>Enables the unary plus operator to be used with a fraction.
     ///  </summary>
     ///  <remarks>This is a no-op.</remarks>
     class operator Positive(const F: TFraction): TFraction;
@@ -390,15 +390,15 @@ type
     ///  compare two mixed fractions.</summary>
     class operator GreaterThanOrEqual(const M1, M2: TMixedFraction): Boolean;
 
-//    ///  <summary>Enables the unary minus operator to negate a
-//    ///  fraction.</summary>
-//    class operator Negative(const F: TFraction): TFraction;
-//
-//    ///  <summary>Enables unary plus operator to be used with a fraction.
-//    ///  </summary>
-//    ///  <remarks>This is a no-op.</remarks>
-//    class operator Positive(const F: TFraction): TFraction;
-//
+    ///  <summary>Enables the unary minus operator to negate a mixed fraction.
+    ///  </summary>
+    class operator Negative(const M: TMixedFraction): TMixedFraction;
+
+    ///  <summary>Enables the unary plus operator to be used with a mixed
+    ///  fraction.</summary>
+    ///  <remarks>This is a no-op.</remarks>
+    class operator Positive(const M: TMixedFraction): TMixedFraction;
+
 //    ///  <summary>Overload of Trunc() operator that truncate a fraction to the
 //    ///  largest whole number less than or equal to the fraction.</summary>
 //    class operator Trunc(const F: TFraction): Int64;
@@ -955,9 +955,19 @@ begin
   Result := M1.fFraction <= M2.fFraction;
 end;
 
+class operator TMixedFraction.Negative(const M: TMixedFraction): TMixedFraction;
+begin
+  Result.fFraction := -M.fFraction;
+end;
+
 class operator TMixedFraction.NotEqual(const M1, M2: TMixedFraction): Boolean;
 begin
   Result := M1.fFraction <> M2.fFraction;
+end;
+
+class operator TMixedFraction.Positive(const M: TMixedFraction): TMixedFraction;
+begin
+  Result := M;
 end;
 
 function TMixedFraction.Sign: TValueSign;

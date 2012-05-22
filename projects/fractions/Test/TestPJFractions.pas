@@ -62,6 +62,8 @@ type
     procedure TestCompare;
     procedure TestCompareTo;
     procedure TestComparisonOps;
+    procedure TestUnaryPlusOp;
+    procedure TestUnaryMinusOp;
   end;
 
 implementation
@@ -1378,6 +1380,58 @@ begin
   CheckEquals(PositiveValue, M.Sign, 'Test 6');
   M := TMixedFraction.Create(1, 7, -5);
   CheckEquals(NegativeValue, M.Sign, 'Test 7');
+end;
+
+procedure TestTMixedFraction.TestUnaryMinusOp;
+var
+  F, G: TMixedFraction;
+begin
+  F := TMixedFraction.Create(7, 4, 5);
+  G := -F;
+  CheckEquals(-7, G.WholePart, 'Test 1: Whole number');
+  CheckEquals(-4, G.FractionalPart.Numerator, 'Test 1: Numerator');
+  CheckEquals(5, G.FractionalPart.Denominator, 'Test 1: Denominator');
+  F := TMixedFraction.Create(-2, -3, 5);
+  G := -F;
+  CheckEquals(2, G.WholePart, 'Test 2: Whole number');
+  CheckEquals(3, G.FractionalPart.Numerator, 'Test 2: Numerator');
+  CheckEquals(5, G.FractionalPart.Denominator, 'Test 2: Denominator');
+  F := 42;
+  G := -F;
+  CheckEquals(-42, G.WholePart, 'Test 3: Whole number');
+  CheckEquals(0, G.FractionalPart.Numerator, 'Test 3: Numerator');
+  CheckEquals(1, G.FractionalPart.Denominator, 'Test 3: Denominator');
+  F := -56;
+  G := -F;
+  CheckEquals(56, G.WholePart, 'Test 4: Whole number');
+  CheckEquals(0, G.FractionalPart.Numerator, 'Test 4: Numerator');
+  CheckEquals(1, G.FractionalPart.Denominator, 'Test 4: Denominator');
+end;
+
+procedure TestTMixedFraction.TestUnaryPlusOp;
+var
+  F, G: TMixedFraction;
+begin
+  F := TMixedFraction.Create(7, 4, 5);
+  G := +F;
+  CheckEquals(7, G.WholePart, 'Test 1: Whole number');
+  CheckEquals(4, G.FractionalPart.Numerator, 'Test 1: Numerator');
+  CheckEquals(5, G.FractionalPart.Denominator, 'Test 1: Denominator');
+  F := TMixedFraction.Create(-2, -3, 5);
+  G := +F;
+  CheckEquals(-2, G.WholePart, 'Test 2: Whole number');
+  CheckEquals(-3, G.FractionalPart.Numerator, 'Test 2: Numerator');
+  CheckEquals(5, G.FractionalPart.Denominator, 'Test 2: Denominator');
+  F := 42;
+  G := +F;
+  CheckEquals(42, G.WholePart, 'Test 3: Whole number');
+  CheckEquals(0, G.FractionalPart.Numerator, 'Test 3: Numerator');
+  CheckEquals(1, G.FractionalPart.Denominator, 'Test 3: Denominator');
+  F := -56;
+  G := +F;
+  CheckEquals(-56, G.WholePart, 'Test 4: Whole number');
+  CheckEquals(0, G.FractionalPart.Numerator, 'Test 4: Numerator');
+  CheckEquals(1, G.FractionalPart.Denominator, 'Test 4: Denominator');
 end;
 
 initialization
