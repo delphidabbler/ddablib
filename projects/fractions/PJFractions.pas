@@ -366,8 +366,8 @@ type
 //
     ///  <summary>Enables two mixed fractions to be tested for equality using
     ///  the equals operator.</summary>
-    ///  <remarks>Two fractions are equal if they are the same when reduced to
-    ///  common terms.</remarks>
+    ///  <remarks>Two mixed fractions are equal if they are the same when
+    ///  converted to a vulgar fraction and reduced to common terms.</remarks>
     class operator Equal(const M1, M2: TMixedFraction): Boolean;
 
     ///  <summary>Enables two mixed fractions to be tested for inequality using
