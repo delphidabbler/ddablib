@@ -58,6 +58,7 @@ type
     procedure TestConstructors;
     procedure TestImplicit;
     procedure TestIsWholeNumber;
+    procedure TestSign;
   end;
 
 implementation
@@ -1249,6 +1250,26 @@ begin
   CheckTrue(M.IsWholeNumber, 'Test 12');
   M := TMixedFraction.Create(12, 75, 5);
   CheckTrue(M.IsWholeNumber, 'Test 13');
+end;
+
+procedure TestTMixedFraction.TestSign;
+var
+  M: TMixedFraction;
+begin
+  M := TMixedFraction.Create(3, 4, 5);
+  CheckEquals(PositiveValue, M.Sign, 'Test 1');
+  M := TMixedFraction.Create(-2, -4, 5);
+  CheckEquals(NegativeValue, M.Sign, 'Test 2');
+  M := 0;
+  CheckEquals(ZeroValue, M.Sign, 'Test 3');
+  M := TMixedFraction.Create(0, 1, 5);
+  CheckEquals(PositiveValue, M.Sign, 'Test 4');
+  M := TMixedFraction.Create(0, -1, 5);
+  CheckEquals(NegativeValue, M.Sign, 'Test 5');
+  M := TMixedFraction.Create(-1, 7, 5);
+  CheckEquals(PositiveValue, M.Sign, 'Test 6');
+  M := TMixedFraction.Create(1, 7, -5);
+  CheckEquals(NegativeValue, M.Sign, 'Test 7');
 end;
 
 initialization

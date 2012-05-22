@@ -288,6 +288,12 @@ type
     ///  <summary>Checks if this fraction represents a whole number.</summary>
     function IsWholeNumber: Boolean;
 
+    ///  <summary>Returns a value representing the sign of this fraction.
+    ///  </summary>
+    ///  <remarks>Returns ZeroValue if the fraction is zero, PositiveValue if it
+    ///  is positive and Negative value if negative.</remarks>
+    function Sign: TValueSign;
+
     ///  <summary>Enables conversion and assignment of a TFraction to a mixed
     ///  fraction.</summary>
     class operator Implicit(const Fraction: TFraction): TMixedFraction;
@@ -767,6 +773,11 @@ end;
 function TMixedFraction.IsWholeNumber: Boolean;
 begin
   Result := fFraction.IsWholeNumber;
+end;
+
+function TMixedFraction.Sign: TValueSign;
+begin
+  Result := fFraction.Sign;
 end;
 
 class operator TMixedFraction.Implicit(const Fraction: TFraction):
