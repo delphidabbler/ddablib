@@ -548,7 +548,7 @@ var
   F1S, F2S: TFraction;
   Numerator1, Numerator2: Integer;
 begin
-  // simply addends to reduce size of multiplication results if possible
+  // simplify addends to reduce size of multiplication results if possible
   F1S := F1.Simplify;
   F2S := F2.Simplify;
   CommonDenom := LCM(F1S.Denominator, F2S.Denominator);
@@ -633,11 +633,8 @@ begin
 end;
 
 class operator TFraction.GreaterThanOrEqual(const F1, F2: TFraction): Boolean;
-var
-  CompareResult: TValueRelationship;
 begin
-  CompareResult := Compare(F1, F2);
-  Result := CompareResult <> LessThanValue;
+  Result := Compare(F1, F2) <> LessThanValue;
 end;
 
 class operator TFraction.Implicit(const I: Integer): TFraction;
@@ -705,11 +702,8 @@ begin
 end;
 
 class operator TFraction.LessThanOrEqual(const F1, F2: TFraction): Boolean;
-var
-  CompareResult: TValueRelationship;
 begin
-  CompareResult := Compare(F1, F2);
-  Result := CompareResult <> GreaterThanValue;
+  Result := Compare(F1, F2) <> GreaterThanValue;
 end;
 
 class function TFraction.Max(const F1, F2: TFraction): TFraction;
@@ -765,7 +759,6 @@ end;
 
 class operator TFraction.Negative(const F: TFraction): TFraction;
 begin
-  Assert(F.Denominator <> 0, 'TFraction.Negative: F.Denominator is 0');
   Result := TFraction.Create(-F.fNumerator, F.Denominator);
 end;
 
