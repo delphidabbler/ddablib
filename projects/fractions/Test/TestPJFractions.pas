@@ -75,6 +75,7 @@ type
     procedure TestRoundOp;
     procedure TestMax;
     procedure TestMin;
+    procedure TestIsCommonFactor;
   end;
 
 implementation
@@ -505,6 +506,7 @@ begin
   CheckTrue(F.IsCommonFactor(16), 'Test 2');
   CheckTrue(F.IsCommonFactor(-2), 'Test 3');
   CheckFalse(F.IsCommonFactor(5), 'Test 4');
+  CheckFalse(F.IsCommonFactor(0), 'Test 5');
 end;
 
 procedure TestTFraction.TestIsProper;
@@ -1467,6 +1469,18 @@ begin
   // 3 2/3 div 1 = 11/3 div 1 = Trunc(11/3 * 1/1) = Trunc(11/3) = 3
   M1 := TMixedFraction.Create(3, 2, 3);
   CheckEquals(3, M1 div 1, 'Test 8');
+end;
+
+procedure TestTMixedFraction.TestIsCommonFactor;
+var
+  M: TMixedFraction;
+begin
+  M := TMixedFraction.Create(2, 32, 48);
+  CheckTrue(M.IsCommonFactor(8), 'Test 1');
+  CheckTrue(M.IsCommonFactor(16), 'Test 2');
+  CheckTrue(M.IsCommonFactor(-2), 'Test 3');
+  CheckFalse(M.IsCommonFactor(5), 'Test 4');
+  CheckFalse(M.IsCommonFactor(0), 'Test 5');
 end;
 
 procedure TestTMixedFraction.TestIsWholeNumber;

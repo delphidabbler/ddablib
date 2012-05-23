@@ -311,10 +311,10 @@ type
 //    ///  <returns>TFraction. Converted fraction.</returns>
 //    function Convert(const Multiplier: Int64): TFraction;
 //
-//    ///  <summary>Checks if a given non-zero value is a common factor of this
-//    ///  fraction.</summary>
-//    function IsCommonFactor(const Factor: Int64): Boolean;
-//
+    ///  <summary>Checks if a given non-zero value is a common factor of this
+    ///  mixed fraction.</summary>
+    function IsCommonFactor(const Factor: Int64): Boolean;
+
 //    ///  <summary>Reduces this fraction to its lowest terms.</summary>
 //    function Simplify: TFraction; overload;
 //
@@ -687,7 +687,8 @@ end;
 
 function TFraction.IsCommonFactor(const Factor: Int64): Boolean;
 begin
-  Assert(Factor <> 0, 'TFraction.IsCommonFactor: Factor can''t be 0');
+  if Factor = 0 then
+    Exit(False);
   Result := (Numerator mod Factor = 0) and (Denominator mod Factor = 0);
 end;
 
@@ -963,6 +964,11 @@ end;
 class operator TMixedFraction.IntDivide(const M1, M2: TMixedFraction): Int64;
 begin
   Result := M1.fFraction div M2.fFraction;
+end;
+
+function TMixedFraction.IsCommonFactor(const Factor: Int64): Boolean;
+begin
+  Result := fFraction.IsCommonFactor(Factor);
 end;
 
 function TMixedFraction.IsWholeNumber: Boolean;
