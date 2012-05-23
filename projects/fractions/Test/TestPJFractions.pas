@@ -76,6 +76,7 @@ type
     procedure TestMax;
     procedure TestMin;
     procedure TestIsCommonFactor;
+    procedure TestConvert;
   end;
 
 implementation
@@ -1267,6 +1268,32 @@ begin
   CheckEquals(4, M.WholePart, 'Test B2: Whole part');
   CheckEquals(8, M.FractionalPart.Numerator, 'Test B2: Numerator');
   CheckEquals(15, M.FractionalPart.Denominator, 'Test B2: Denominator');
+end;
+
+procedure TestTMixedFraction.TestConvert;
+var
+  M, MC: TMixedFraction;
+begin
+  M := TMixedFraction.Create(0, 1, 2);
+  MC := M.Convert(6);
+  CheckEquals(0, MC.WholePart, 'Test 1 Whole number');
+  CheckEquals(6, MC.FractionalPart.Numerator, 'Test 1 Numerator');
+  CheckEquals(12, MC.FractionalPart.Denominator, 'Test 1 Denominator');
+  M := TMixedFraction.Create(-7, -5, 13);
+  MC := M.Convert(3);
+  CheckEquals(-7, MC.WholePart, 'Test 2 Whole number');
+  CheckEquals(-15, MC.FractionalPart.Numerator, 'Test 2 Numerator');
+  CheckEquals(39, MC.FractionalPart.Denominator, 'Test 2 Denominator');
+  M := 0;
+  MC := M.Convert(7);
+  CheckEquals(0, MC.WholePart, 'Test 3 Whole number');
+  CheckEquals(0, MC.FractionalPart.Numerator, 'Test 3 Numerator');
+  CheckEquals(7, MC.FractionalPart.Denominator, 'Test 3 Denominator');
+  M := 3;
+  MC := M.Convert(3);
+  CheckEquals(3, MC.WholePart, 'Test 4 Whole number');
+  CheckEquals(0, MC.FractionalPart.Numerator, 'Test 4 Numerator');
+  CheckEquals(3, MC.FractionalPart.Denominator, 'Test 4 Denominator');
 end;
 
 procedure TestTMixedFraction.TestDivideOp;

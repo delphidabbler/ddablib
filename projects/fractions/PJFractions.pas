@@ -303,14 +303,14 @@ type
     ///  this fraction is less than M.</remarks>
     function CompareTo(const M: TMixedFraction): TValueRelationship;
 
-//    ///  <summary>Converts this fraction to an equivalent fraction whose
-//    ///  numerator and denominator are multiples of those of this fraction.
-//    ///  </summary>
-//    ///  <param name="Multiplier">Int64 [in] Factor by which to multiply
-//    ///  numerator and denominator.</param>
-//    ///  <returns>TFraction. Converted fraction.</returns>
-//    function Convert(const Multiplier: Int64): TFraction;
-//
+    ///  <summary>Converts this mixed fraction to an equivalent fraction whose
+    ///  numerator and denominator are multiples of those of this fraction.
+    ///  </summary>
+    ///  <param name="Multiplier">Int64 [in] Factor by which to multiply
+    ///  numerator and denominator.</param>
+    ///  <returns>TFraction. Converted fraction.</returns>
+    function Convert(const Multiplier: Int64): TMixedFraction;
+
     ///  <summary>Checks if a given non-zero value is a common factor of this
     ///  mixed fraction.</summary>
     function IsCommonFactor(const Factor: Int64): Boolean;
@@ -879,6 +879,11 @@ end;
 function TMixedFraction.CompareTo(const M: TMixedFraction): TValueRelationship;
 begin
   Result := Compare(Self, M);
+end;
+
+function TMixedFraction.Convert(const Multiplier: Int64): TMixedFraction;
+begin
+  Result.fFraction := fFraction.Convert(Multiplier);
 end;
 
 constructor TMixedFraction.Create(const WholeNumber, Numerator,
