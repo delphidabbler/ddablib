@@ -207,7 +207,7 @@ type
     class operator Positive(const F: TFraction): TFraction;
 
     ///  <summary>Overload of Trunc() operator that truncate a fraction to the
-    ///  largest whole number less than or equal to the fraction.</summary>
+    ///  nearest whole number in the direction of zero.</summary>
     class operator Trunc(const F: TFraction): Int64;
 
     ///  <summary>Overload of Round() operator that rounds a fraction to the
@@ -399,14 +399,14 @@ type
     ///  <remarks>This is a no-op.</remarks>
     class operator Positive(const M: TMixedFraction): TMixedFraction;
 
-//    ///  <summary>Overload of Trunc() operator that truncates a mixed fraction
-//    ///  to a whole number.</summary>
-//    class operator Trunc(const F: TFraction): Int64;
-//
-//    ///  <summary>Overload of Round() operator that rounds a fraction to the
-//    ///  nearest whole number value.</summary>
-//    class operator Round(const F: TFraction): Int64;
-//
+    ///  <summary>Overload of Trunc() operator that truncates a mixed fraction
+    ///  to the nearest whole number value towards zero.</summary>
+    class operator Trunc(const F: TMixedFraction): Int64;
+
+    ///  <summary>Overload of Round() operator that rounds a mixed fraction to
+    ///  the nearest whole number value.</summary>
+    class operator Round(const F: TMixedFraction): Int64;
+
     ///  <summary>Enables addition operator to be used with mixed fractions.
     ///  </summary>
     class operator Add(const M1, M2: TMixedFraction): TMixedFraction;
@@ -1006,6 +1006,11 @@ begin
   Result.fFraction := fFraction.Reciprocal;
 end;
 
+class operator TMixedFraction.Round(const F: TMixedFraction): Int64;
+begin
+  Result := Round(F.fFraction);
+end;
+
 function TMixedFraction.Sign: TValueSign;
 begin
   Result := fFraction.Sign;
@@ -1015,6 +1020,11 @@ class operator TMixedFraction.Subtract(const M1, M2: TMixedFraction):
   TMixedFraction;
 begin
   Result.fFraction := M1.fFraction - M2.fFraction;
+end;
+
+class operator TMixedFraction.Trunc(const F: TMixedFraction): Int64;
+begin
+  Result := Trunc(F.fFraction);
 end;
 
 end.

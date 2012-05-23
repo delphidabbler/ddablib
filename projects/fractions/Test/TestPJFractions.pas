@@ -71,6 +71,8 @@ type
     procedure TestDivideOp;
     procedure TestIntDivideOp;
     procedure TestModulusOp;
+    procedure TestTruncOp;
+    procedure TestRoundOp;
   end;
 
 implementation
@@ -722,48 +724,30 @@ begin
   F := -3;
   CheckEquals(-3, Round(F), 'Test 3');
 
-  F := TFraction.Create(4, -4);
-  CheckEquals(-1, Round(F), 'Test 4');
-  F := TFraction.Create(-4, 4);
-  CheckEquals(-1, Round(F), 'Test 5');
-  F := TFraction.Create(4, 4);
-  CheckEquals(1, Round(F), 'Test 6');
-  F := TFraction.Create(-4, -4);
-  CheckEquals(1, Round(F), 'Test 7');
+  F := TFraction.Create(1, 3);
+  CheckEquals(0, Round(F), 'Test 4');
+  F := TFraction.Create(-1, 3);
+  CheckEquals(0, Round(F), 'Test 5');
 
   F := TFraction.Create(2, 3);
-  CheckEquals(1, Round(F), 'Test 8');
+  CheckEquals(1, Round(F), 'Test 6');
   F := TFraction.Create(-2, 3);
-  CheckEquals(-1, Round(F), 'Test 9');
-  F := TFraction.Create(2, -3);
-  CheckEquals(-1, Round(F), 'Test 10');
-  F := TFraction.Create(-2, -3);
-  CheckEquals(1, Round(F), 'Test 11');
+  CheckEquals(-1, Round(F), 'Test 7');
 
-  F := TFraction.Create(21, 6);
-  CheckEquals(4, Round(F), 'Test 12');
-  F := TFraction.Create(-21, 6);
-  CheckEquals(-4, Round(F), 'Test 13');
-  F := TFraction.Create(21, -6);
-  CheckEquals(-4, Round(F), 'Test 14');
-  F := TFraction.Create(-21, -6);
-  CheckEquals(4, Round(F), 'Test 15');
+  F := TFraction.Create(7, 2);
+  CheckEquals(4, Round(F), 'Test 8');
+  F := TFraction.Create(-7, 2);
+  CheckEquals(-4, Round(F), 'Test 9');
 
-  F := TFraction.Create(1, 3);
-  CheckEquals(0, Round(F), 'Test 16');
-  F := TFraction.Create(3, 2);
-  CheckEquals(2, Round(F), 'Test 17');
-  F := TFraction.Create(-3, 2);
-  CheckEquals(-2, Round(F), 'Test 18');
-  F := TFraction.Create(4, 3);
-  CheckEquals(1, Round(F), 'Test 19');
-  F := TFraction.Create(-4, 3);
-  CheckEquals(-1, Round(F), 'Test 20');
-  F := TFraction.Create(5, 3);
-  CheckEquals(2, Round(F), 'Test 21');
-  F := TFraction.Create(5, -3);
-  CheckEquals(-2, Round(F), 'Test 22');
+  F := TFraction.Create(17, 3);
+  CheckEquals(6, Round(F), 'Test 10');
+  F := TFraction.Create(-17, 3);
+  CheckEquals(-6, Round(F), 'Test 11');
 
+  F := TFraction.Create(58, 7);
+  CheckEquals(8, Round(F), 'Test 12');
+  F := TFraction.Create(-58, 7);
+  CheckEquals(-8, Round(F), 'Test 13');
 end;
 
 procedure TestTFraction.TestRoundToMulitiple;
@@ -996,32 +980,30 @@ begin
   F := -3;
   CheckEquals(-3, Trunc(F), 'Test 3');
 
-  F := TFraction.Create(4, -4);
-  CheckEquals(-1, Trunc(F), 'Test 4');
-  F := TFraction.Create(-4, 4);
-  CheckEquals(-1, Trunc(F), 'Test 5');
-  F := TFraction.Create(4, 4);
-  CheckEquals(1, Trunc(F), 'Test 6');
-  F := TFraction.Create(-4, -4);
-  CheckEquals(1, Trunc(F), 'Test 7');
+  F := TFraction.Create(1, 3);
+  CheckEquals(0, Trunc(F), 'Test 4');
+  F := TFraction.Create(-1, 3);
+  CheckEquals(0, Trunc(F), 'Test 5');
 
   F := TFraction.Create(2, 3);
-  CheckEquals(0, Trunc(F), 'Test 8');
+  CheckEquals(0, Trunc(F), 'Test 6');
   F := TFraction.Create(-2, 3);
-  CheckEquals(0, Trunc(F), 'Test 9');
-  F := TFraction.Create(2, -3);
-  CheckEquals(0, Trunc(F), 'Test 10');
-  F := TFraction.Create(-2, -3);
-  CheckEquals(0, Trunc(F), 'Test 11');
+  CheckEquals(0, Trunc(F), 'Test 7');
 
-  F := TFraction.Create(21, 6);
-  CheckEquals(3, Trunc(F), 'Test 12');
-  F := TFraction.Create(-21, 6);
-  CheckEquals(-3, Trunc(F), 'Test 13');
-  F := TFraction.Create(21, -6);
-  CheckEquals(-3, Trunc(F), 'Test 14');
-  F := TFraction.Create(-21, -6);
-  CheckEquals(3, Trunc(F), 'Test 15');
+  F := TFraction.Create(7, 2);
+  CheckEquals(3, Trunc(F), 'Test 8');
+  F := TFraction.Create(-7, 2);
+  CheckEquals(-3, Trunc(F), 'Test 9');
+
+  F := TFraction.Create(17, 3);
+  CheckEquals(5, Trunc(F), 'Test 10');
+  F := TFraction.Create(-17, 3);
+  CheckEquals(-5, Trunc(F), 'Test 11');
+
+  F := TFraction.Create(58, 7);
+  CheckEquals(8, Trunc(F), 'Test 12');
+  F := TFraction.Create(-58, 7);
+  CheckEquals(-8, Trunc(F), 'Test 13');
 end;
 
 procedure TestTFraction.TestUnaryMinusOp;
@@ -1649,6 +1631,43 @@ begin
   CheckEquals(27, MR.FractionalPart.Denominator, 'Test 5 Denominator');
 end;
 
+procedure TestTMixedFraction.TestRoundOp;
+var
+  M: TMixedFraction;
+begin
+  M := 0;
+  CheckEquals(0, Round(M), 'Test 1');
+  M := 3;
+  CheckEquals(3, Round(M), 'Test 2');
+  M := -3;
+  CheckEquals(-3, Round(M), 'Test 3');
+
+  M := TMixedFraction.Create(0, 1, 3);
+  CheckEquals(0, Round(M), 'Test 4');
+  M := TMixedFraction.Create(0, -1, 3);
+  CheckEquals(0, Round(M), 'Test 5');
+
+  M := TMixedFraction.Create(0, 2, 3);
+  CheckEquals(1, Round(M), 'Test 6');
+  M := TMixedFraction.Create(0, -2, 3);
+  CheckEquals(-1, Round(M), 'Test 7');
+
+  M := TMixedFraction.Create(3, 1, 2);
+  CheckEquals(4, Round(M), 'Test 8');
+  M := TMixedFraction.Create(-3, -1, 2);
+  CheckEquals(-4, Round(M), 'Test 9');
+
+  M := TMixedFraction.Create(5, 2, 3);
+  CheckEquals(6, Round(M), 'Test 10');
+  M := TMixedFraction.Create(-5, -2, 3);
+  CheckEquals(-6, Round(M), 'Test 11');
+
+  M := TMixedFraction.Create(8, 2, 7);
+  CheckEquals(8, Round(M), 'Test 12');
+  M := TMixedFraction.Create(-8, -2, 7);
+  CheckEquals(-8, Round(M), 'Test 13');
+end;
+
 procedure TestTMixedFraction.TestSign;
 var
   M: TMixedFraction;
@@ -1740,6 +1759,43 @@ begin
   CheckEquals(3, MRes.WholePart, 'Test 10: Whole number');
   CheckEquals(5, MRes.FractionalPart.Numerator, 'Test 10 Numerator');
   CheckEquals(13, MRes.FractionalPart.Denominator, 'Test 10 Denominator');
+end;
+
+procedure TestTMixedFraction.TestTruncOp;
+var
+  M: TMixedFraction;
+begin
+  M := 0;
+  CheckEquals(0, Trunc(M), 'Test 1');
+  M := 3;
+  CheckEquals(3, Trunc(M), 'Test 2');
+  M := -3;
+  CheckEquals(-3, Trunc(M), 'Test 3');
+
+  M := TMixedFraction.Create(0, 1, 3);
+  CheckEquals(0, Trunc(M), 'Test 4');
+  M := TMixedFraction.Create(0, -1, 3);
+  CheckEquals(0, Trunc(M), 'Test 5');
+
+  M := TMixedFraction.Create(0, 2, 3);
+  CheckEquals(0, Trunc(M), 'Test 6');
+  M := TMixedFraction.Create(0, -2, 3);
+  CheckEquals(0, Trunc(M), 'Test 7');
+
+  M := TMixedFraction.Create(3, 1, 2);
+  CheckEquals(3, Trunc(M), 'Test 8');
+  M := TMixedFraction.Create(-3, -1, 2);
+  CheckEquals(-3, Trunc(M), 'Test 9');
+
+  M := TMixedFraction.Create(5, 2, 3);
+  CheckEquals(5, Trunc(M), 'Test 10');
+  M := TMixedFraction.Create(-5, -2, 3);
+  CheckEquals(-5, Trunc(M), 'Test 11');
+
+  M := TMixedFraction.Create(8, 2, 7);
+  CheckEquals(8, Trunc(M), 'Test 12');
+  M := TMixedFraction.Create(-8, -2, 7);
+  CheckEquals(-8, Trunc(M), 'Test 13');
 end;
 
 procedure TestTMixedFraction.TestUnaryMinusOp;
