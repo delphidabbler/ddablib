@@ -65,6 +65,12 @@ type
     procedure TestUnaryPlusOp;
     procedure TestUnaryMinusOp;
     procedure TestReciprocal;
+    procedure TestAddOp;
+    procedure TestSubtractOp;
+    procedure TestMultiplyOp;
+    procedure TestDivideOp;
+    procedure TestIntDivideOp;
+    procedure TestModulusOp;
   end;
 
 implementation
@@ -401,7 +407,6 @@ begin
   FRes := F1 / 1;
   CheckEquals(3, FRes.Numerator, 'Test 8 Numerator');
   CheckEquals(4, FRes.Denominator, 'Test 8 Denominator');
-
 end;
 
 procedure TestTFraction.TestImplicit;
@@ -603,14 +608,12 @@ procedure TestTFraction.TestModulusOp;
 var
   F1, F2, FRes: TFraction;
 begin
-  // 7/8 div 1/3 = Trunc(7/8 * 3/1) = Trunc(21/8) = 2
   // 7/8 mod 1/3 = 7/8 - 2 * 1/3 = 7/8 - 2/3 = 21/24-16/24 = 5/24
   F1 := TFraction.Create(7, 8);
   F2 := TFraction.Create(1, 3);
   FRes := F1 mod F2;
   CheckEquals(5, FRes.Numerator, 'Test 1 Numerator');
   CheckEquals(24, FRes.Denominator, 'Test 1 Denominator');
-  // 11/3 div -2/3 = Trunc(11/3 * -3/2) = Trunc(-33/6) = -5
   // 11/3 mod -2/3 = 11/3 - -5 * -2/3 = 11/3 - 10/3 = 1/3
   F1 := TFraction.Create(11, 3);
   F2 := TFraction.Create(-2, 3);
@@ -623,26 +626,22 @@ begin
   FRes := F1 mod F2;
   CheckEquals(0, FRes.Numerator, 'Test 3 Numerator');
   CheckEquals(1, FRes.Denominator, 'Test 3 Denominator');
-  // 2/3 div 3/4 = Trunc(2/3 * 4/3) = Trunc(6/9) = 0
   // 2/3 mod 3/4 = 2/3 - 0 * 3/4 = 2/3
   F1 := TFraction.Create(2, 3);
   F2 := TFraction.Create(3, 4);
   FRes := F1 mod F2;
   CheckEquals(2, FRes.Numerator, 'Test 4 Numerator');
   CheckEquals(3, FRes.Denominator, 'Test 4 Denominator');
-  // 32/5 div 3 = Trunc(32/5 * 1/3) = Trunc(32/15) = 2
   // 32/5 mod 3 = 32/5 - 2 * 3 = 32/5 - 6/1 = 32/5 - 30/5 = 2/5
   F1 := TFraction.Create(32, 5);
   FRes := F1 mod 3;
   CheckEquals(2, FRes.Numerator, 'Test 5 Numerator');
   CheckEquals(5, FRes.Denominator, 'Test 5 Denominator');
-  // 5 div 2/3 = Trunc(5/1 * 3/2) = Trunc(15/2) = 7
   // 5 mod 2/3 = 5 - 7 * 2/3 = 5/1 - 14/3 = 15/3 - 14/3 = 1/3
   F2 := TFraction.Create(2, 3);
   FRes := 5 mod F2;
   CheckEquals(1, FRes.Numerator, 'Test 6 Numerator');
   CheckEquals(3, FRes.Denominator, 'Test 6 Denominator');
-  // 4/3 div 2/3 = Trunc(4/3 * 3/2) = Trunc(12/6) = 2
   // 4/3 mod 2/3 = 4/3 - 2 * 2/3 = 4/3 - 4/3 = 0
   F1 := TFraction.Create(4, 3);
   F2 := TFraction.Create(2, 3);
@@ -654,6 +653,12 @@ begin
   FRes := F1 mod 1;
   CheckEquals(1, FRes.Numerator, 'Test 8 Numerator');
   CheckEquals(3, FRes.Denominator, 'Test 8 Denominator');
+  // 10 7/8 mod 3 3/4 = 87/8 mod 15/4 = 87/8 mod 30/8 = 87/8 - 60/8 = 27/8
+  F1 := TFraction.Create(87, 8);
+  F2 := TFraction.Create(15, 4);
+  FRes := F1 mod F2;
+  CheckEquals(27, FRes.Numerator, 'Test 9 Numerator');
+  CheckEquals(8, FRes.Denominator, 'Test 9 Denominator');
 end;
 
 procedure TestTFraction.TestMultiplyOp;
@@ -1065,6 +1070,60 @@ end;
 
 { TestTMixedFraction }
 
+procedure TestTMixedFraction.TestAddOp;
+var
+  M1, M2, MRes: TMixedFraction;
+begin
+  // 1/3 + 1/3 = 2/3
+  M1 := TMixedFraction.Create(0, 1, 3);
+  M2 := TMixedFraction.Create(0, 1, 3);
+  MRes := M1 + M2;
+  CheckEquals(0, MRes.WholePart, 'Test 1 Whole number');
+  CheckEquals(2, MRes.FractionalPart.Numerator, 'Test 1 Numerator');
+  CheckEquals(3, MRes.FractionalPart.Denominator, 'Test 1 Denominator');
+  // 1 2/3 + 1 5/6 = 10/6 + 11/6 = 21/6 = 7/2 = 3 1/2
+  M1 := TMixedFraction.Create(1, 2, 3);
+  M2 := TMixedFraction.Create(1, 5, 6);
+  MRes := M1 + M2;
+  CheckEquals(3, MRes.WholePart, 'Test 2 Whole number');
+  CheckEquals(1, MRes.FractionalPart.Numerator, 'Test 2 Numerator');
+  CheckEquals(2, MRes.FractionalPart.Denominator, 'Test 2 Denominator');
+  // 2/9 + 14/15 = 10/45 + 42/45 = 52/45 = 1 7/45
+  M1 := TMixedFraction.Create(0, 2, 9);
+  M2 := TMixedFraction.Create(0, 14, 15);
+  MRes := M1 + M2;
+  CheckEquals(1, MRes.WholePart, 'Test 3 Whole number');
+  CheckEquals(7, MRes.FractionalPart.Numerator, 'Test 3 Numerator');
+  CheckEquals(45, MRes.FractionalPart.Denominator, 'Test 3 Denominator');
+  // -1 -1/3 + 1 1/3 = 0
+  M1 := TMixedFraction.Create(-1, -1, 3);
+  M2 := TMixedFraction.Create(1, 1, 3);
+  MRes := M1 + M2;
+  CheckEquals(0, MRes.WholePart, 'Test 4 Whole number');
+  CheckEquals(0, MRes.FractionalPart.Numerator, 'Test 4 Numerator');
+  CheckEquals(1, MRes.FractionalPart.Denominator, 'Test 4 Denominator');
+  // -1 -1/3 + 5 2/3 = 4 1/3
+  M1 := TMixedFraction.Create(-1, -1, 3);
+  M2 := TMixedFraction.Create(5, 2, 3);
+  MRes := M1 + M2;
+  CheckEquals(4, MRes.WholePart, 'Test 5 Whole number');
+  CheckEquals(1, MRes.FractionalPart.Numerator, 'Test 5 Numerator');
+  CheckEquals(3, MRes.FractionalPart.Denominator, 'Test 5 Denominator');
+  // -5/6 + -5/8 = -20/24 + -15/24 = -35/24 = -1 -11/24
+  M1 := TMixedFraction.Create(0, -5, 6);
+  M2 := TMixedFraction.Create(0, -5, 8);
+  MRes := M1 + M2;
+  CheckEquals(-1, MRes.WholePart, 'Test 6 Whole number');
+  CheckEquals(-11, MRes.FractionalPart.Numerator, 'Test 6 Numerator');
+  CheckEquals(24, MRes.FractionalPart.Denominator, 'Test 6 Denominator');
+  // 2 5/13 + -3 = 31/13 + -39/13 = -8/13
+  M1 := TMixedFraction.Create(2, 5, 13);
+  MRes := M1 + -3;
+  CheckEquals(0, MRes.WholePart, 'Test 7 Whole number');
+  CheckEquals(-8, MRes.FractionalPart.Numerator, 'Test 7 Numerator');
+  CheckEquals(13, MRes.FractionalPart.Denominator, 'Test 7 Denominator');
+end;
+
 procedure TestTMixedFraction.TestCompare;
 var
   M1, M2, M3, M4, M5, M6, M7, M8: TMixedFraction;
@@ -1224,6 +1283,64 @@ begin
   CheckEquals(15, M.FractionalPart.Denominator, 'Test B2: Denominator');
 end;
 
+procedure TestTMixedFraction.TestDivideOp;
+var
+  M1, M2, MRes: TMixedFraction;
+begin
+  // 2 2/3 / 5/6 = 8/3 * 6/5 = 48/15 = 16/5 = 3 1/5
+  M1 := TMixedFraction.Create(2, 2, 3);
+  M2 := TMixedFraction.Create(0, 5, 6);
+  MRes := M1 / M2;
+  CheckEquals(3, MRes.WholePart, 'Test 1 Whole number');
+  CheckEquals(1, MRes.FractionalPart.Numerator, 'Test 1 Numerator');
+  CheckEquals(5, MRes.FractionalPart.Denominator, 'Test 1 Denominator');
+  // 5/6 / -2/3 = 5/6 * -3/2 = -15/12 = -5/4 = -1 -1/4
+  M1 := TMixedFraction.Create(0, 5, 6);
+  M2 := TMixedFraction.Create(0, -2, 3);
+  MRes := M1 / M2;
+  CheckEquals(-1, MRes.WholePart, 'Test 2 Whole number');
+  CheckEquals(-1, MRes.FractionalPart.Numerator, 'Test 2 Numerator');
+  CheckEquals(4, MRes.FractionalPart.Denominator, 'Test 2 Denominator');
+  // -3/7 / -3/5 = -3/7 * -5/3 = 15/21 = 5/7
+  M1 := TMixedFraction.Create(0, -3, 7);
+  M2 := TMixedFraction.Create(0, -3, 5);
+  MRes := M1 / M2;
+  CheckEquals(0, MRes.WholePart, 'Test 3 Whole number');
+  CheckEquals(5, MRes.FractionalPart.Numerator, 'Test 3 Numerator');
+  CheckEquals(7, MRes.FractionalPart.Denominator, 'Test 3 Denominator');
+  // 3 1/2 / 3 1/2 = 1
+  M1 := TMixedFraction.Create(3, 1, 2);
+  M2 := TMixedFraction.Create(3, 1, 2);
+  MRes := M1 / M2;
+  CheckEquals(1, MRes.WholePart, 'Test 4 Whole number');
+  CheckEquals(0, MRes.FractionalPart.Numerator, 'Test 4 Numerator');
+  CheckEquals(1, MRes.FractionalPart.Denominator, 'Test 4 Denominator');
+  // 10 5/8 / 4 = 85/8 * 1/4 = 85/32 = 2 21/32
+  M1 := TMixedFraction.Create(10, 5, 8);
+  MRes := M1 / 4;
+  CheckEquals(2, MRes.WholePart, 'Test 5 Whole number');
+  CheckEquals(21, MRes.FractionalPart.Numerator, 'Test 5 Numerator');
+  CheckEquals(32, MRes.FractionalPart.Denominator, 'Test 5 Denominator');
+  // 5 / 2 2/5 = 5 * 5/12 = 25/12 = 2 1/12
+  M2 := TMixedFraction.Create(2, 2, 5);
+  MRes := 5 / M2;
+  CheckEquals(2, MRes.WholePart, 'Test 6 Whole number');
+  CheckEquals(1, MRes.FractionalPart.Numerator, 'Test 6 Numerator');
+  CheckEquals(12, MRes.FractionalPart.Denominator, 'Test 6 Denominator');
+  // 1 / -1 -1/3 = 1 * -3/4 = -3/4
+  M2 := TMixedFraction.Create(-1, -1, 3);
+  MRes := 1 / M2;
+  CheckEquals(0, MRes.WholePart, 'Test 7 Whole number');
+  CheckEquals(-3, MRes.FractionalPart.Numerator, 'Test 7 Numerator');
+  CheckEquals(4, MRes.FractionalPart.Denominator, 'Test 7 Denominator');
+  // 12 14/20 / 1 = 12 7/10
+  M1 := TMixedFraction.Create(12, 14, 20);
+  MRes := M1 / 1;
+  CheckEquals(12, MRes.WholePart, 'Test 8 Whole number');
+  CheckEquals(7, MRes.FractionalPart.Numerator, 'Test 8 Numerator');
+  CheckEquals(10, MRes.FractionalPart.Denominator, 'Test 8 Denominator');
+end;
+
 procedure TestTMixedFraction.TestImplicit;
 var
   F: TFraction;
@@ -1333,6 +1450,41 @@ begin
   CheckEquals(EqualsValue, CompareValue(S, Sf), 'Test E2 (Single)');
 end;
 
+procedure TestTMixedFraction.TestIntDivideOp;
+var
+  M1, M2: TMixedFraction;
+begin
+  // 7/8 div 1/3 = Trunc(7/8 * 3/1) = Trunc(21/8) = 2
+  M1 := TMixedFraction.Create(0, 7, 8);
+  M2 := TMixedFraction.Create(0, 1, 3);
+  CheckEquals(2, M1 div M2, 'Test 1');
+  // 3 2/3 div -2/3 = 11/3 div -2/3 = Trunc(11/3 * -3/2) = Trunc(-33/6) = -5
+  M1 := TMixedFraction.Create(3, 2, 3);
+  M2 := TMixedFraction.Create(0, -2, 3);
+  CheckEquals(-5, M1 div M2, 'Test 2');
+  // 5 2/3 div 5 2/3 = Trunc(17/3 * 3/17) = Trunc(51/51) = 1
+  M1 := TMixedFraction.Create(5, 2, 3);
+  M2 := TMixedFraction.Create(5, 2, 3);
+  CheckEquals(1, M1 div M2, 'Test 3');
+  // 2 2/3 div 2 3/4 = 8/3 div 11/4 = Trunc(8/3 * 4/11) = Trunc(32/11) = 0
+  M1 := TMixedFraction.Create(2, 2, 3);
+  M2 := TMixedFraction.Create(2, 3, 4);
+  CheckEquals(0, M1 div M2, 'Test 4');
+  // 6 2/5 div 3 = 32/5 div 3 = Trunc(32/5 * 1/3) = Trunc(32/15) = 2
+  M1 := TMixedFraction.Create(6, 2, 5);
+  CheckEquals(2, M1 div 3, 'Test 5');
+  // 10 div 1 1/3 = 10 div 4/3 = Trunc(10/1 * 3/4) = Trunc(30/4) = 7
+  M2 := TMixedFraction.Create(1, 1, 3);
+  CheckEquals(7, 10 div M2, 'Test 6');
+  // -1 -1/3 div 2/3 = -4/3 div 2/3 = Trunc(-4/3 * 3/2) = Trunc(-12/6) = -2
+  M1 := TMixedFraction.Create(-1, -1, 3);
+  M2 := TMixedFraction.Create(0, 2, 3);
+  CheckEquals(-2, M1 div M2, 'Test 7');
+  // 3 2/3 div 1 = 11/3 div 1 = Trunc(11/3 * 1/1) = Trunc(11/3) = 3
+  M1 := TMixedFraction.Create(3, 2, 3);
+  CheckEquals(3, M1 div 1, 'Test 8');
+end;
+
 procedure TestTMixedFraction.TestIsWholeNumber;
 var
   M: TMixedFraction;
@@ -1361,6 +1513,109 @@ begin
   CheckTrue(M.IsWholeNumber, 'Test 12');
   M := TMixedFraction.Create(12, 75, 5);
   CheckTrue(M.IsWholeNumber, 'Test 13');
+end;
+
+procedure TestTMixedFraction.TestModulusOp;
+var
+  M1, M2, MRes: TMixedFraction;
+begin
+  // 7/8 mod 1/3 = 7/8 - 2 * 1/3 = 7/8 - 2/3 = 21/24-16/24 = 5/24
+  M1 := TMixedFraction.Create(0, 7, 8);
+  M2 := TMixedFraction.Create(0, 1, 3);
+  MRes := M1 mod M2;
+  CheckEquals(0, MRes.WholePart, 'Test 1 Whole number');
+  CheckEquals(5, MRes.FractionalPart.Numerator, 'Test 1 Numerator');
+  CheckEquals(24, MRes.FractionalPart.Denominator, 'Test 1 Denominator');
+  // 3 2/3 mod -2/3 = 11/3 mod -2/3 = 11/3 - -5 * -2/3 = 11/3 - 10/3 = 1/3
+  M1 := TMixedFraction.Create(3, 2, 3);
+  M2 := TMixedFraction.Create(0, -2, 3);
+  MRes := M1 mod M2;
+  CheckEquals(0, MRes.WholePart, 'Test 2 Whole number');
+  CheckEquals(1, MRes.FractionalPart.Numerator, 'Test 2 Numerator');
+  CheckEquals(3, MRes.FractionalPart.Denominator, 'Test 2 Denominator');
+  // 5 3/5 mod 5 3/5 = 0
+  M1 := TMixedFraction.Create(5, 3, 5);
+  M2 := TMixedFraction.Create(5, 3, 5);
+  MRes := M1 mod M2;
+  CheckEquals(0, MRes.WholePart, 'Test 3 Whole number');
+  CheckEquals(0, MRes.FractionalPart.Numerator, 'Test 3 Numerator');
+  CheckEquals(1, MRes.FractionalPart.Denominator, 'Test 3 Denominator');
+  // 5 3/5 mod 5 2/5 = 1/5
+  M1 := TMixedFraction.Create(5, 3, 5);
+  M2 := TMixedFraction.Create(5, 2, 5);
+  MRes := M1 mod M2;
+  CheckEquals(0, MRes.WholePart, 'Test 4 Whole number');
+  CheckEquals(1, MRes.FractionalPart.Numerator, 'Test 4 Numerator');
+  CheckEquals(5, MRes.FractionalPart.Denominator, 'Test 4 Denominator');
+  // 6 2/5 mod 3 = 32/5 mod 3 = 32/5 - 2 * 3 = 32/5 - 6/1 = 32/5 - 30/5 = 2/5
+  M1 := TMixedFraction.Create(6, 2, 5);
+  MRes := M1 mod 3;
+  CheckEquals(0, MRes.WholePart, 'Test 5 Whole number');
+  CheckEquals(2, MRes.FractionalPart.Numerator, 'Test 5 Numerator');
+  CheckEquals(5, MRes.FractionalPart.Denominator, 'Test 5 Denominator');
+  // 5 mod 1 1/3 = 5 mod 4/3 = 5 - 3 * 4/3 = 5/1 - 12/3 = 15/3 - 12/3 = 3/3 = 1
+  M2 := TMixedFraction.Create(1, 1, 3);
+  MRes := 5 mod M2;
+  CheckEquals(1, MRes.WholePart, 'Test 6 Whole number');
+  CheckEquals(0, MRes.FractionalPart.Numerator, 'Test 6 Numerator');
+  CheckEquals(1, MRes.FractionalPart.Denominator, 'Test 6 Denominator');
+  // 5 1/3 mod 2 2/3 = 16/3 mod 8/3 = 16/3 - 2 * 8/3 = 16/3 - 16/3 = 0
+  M1 := TMixedFraction.Create(5, 1, 3);
+  M2 := TMixedFraction.Create(2, 2, 3);
+  MRes := M1 mod M2;
+  CheckEquals(0, MRes.WholePart, 'Test 7 Whole number');
+  CheckEquals(0, MRes.FractionalPart.Numerator, 'Test 7 Numerator');
+  CheckEquals(1, MRes.FractionalPart.Denominator, 'Test 7 Denominator');
+  // -3 -2/5 mod 1 = -2/5
+  M1 := TMixedFraction.Create(-3, -2, 5);
+  MRes := M1 mod 1;
+  CheckEquals(0, MRes.WholePart, 'Test 8 Whole number');
+  CheckEquals(-2, MRes.FractionalPart.Numerator, 'Test 8 Numerator');
+  CheckEquals(5, MRes.FractionalPart.Denominator, 'Test 8 Denominator');
+  // 10 7/8 mod 3 3/4 = 87/8 mod 15/4 = 87/8 mod 30/8 = 87/8 - 60/8 = 27/8
+  M1 := TMixedFraction.Create(10, 7, 8);
+  M2 := TMixedFraction.Create(3, 3, 4);
+  MRes := M1 mod M2;
+  CheckEquals(3, MRes.WholePart, 'Test 9 Whole number');
+  CheckEquals(3, MRes.FractionalPart.Numerator, 'Test 9 Numerator');
+  CheckEquals(8, MRes.FractionalPart.Denominator, 'Test 9 Denominator');
+end;
+
+procedure TestTMixedFraction.TestMultiplyOp;
+var
+  M1, M2, MRes: TMixedFraction;
+begin
+  // 4 3/4 * 2 2/3 = 19/4 * 8/3 = 152/12 = 38/3 = 12 2/3
+  M1 := TMixedFraction.Create(4, 3, 4);
+  M2 := TMixedFraction.Create(2, 2, 3);
+  MRes := M1 * M2;
+  CheckEquals(12, MRes.WholePart, 'Test 1a: Whole number');
+  CheckEquals(2, MRes.FractionalPart.Numerator, 'Test 1a Numerator');
+  CheckEquals(3, MRes.FractionalPart.Denominator, 'Test 1a Denominator');
+  // check for commutativity
+  MRes := M2 * M1;
+  CheckEquals(12, MRes.WholePart, 'Test 1b: Whole number');
+  CheckEquals(2, MRes.FractionalPart.Numerator, 'Test 1b Numerator');
+  CheckEquals(3, MRes.FractionalPart.Denominator, 'Test 1b Denominator');
+  // -1 -1/7 * 9/10 = -72/70 = -36/35 = -1 -1/35
+  M1 := TMixedFraction.Create(-1, -1, 7);
+  M2 := TMixedFraction.Create(0, 9, 10);
+  MRes := M1 * M2;
+  CheckEquals(-1, MRes.WholePart, 'Test 2: Whole number');
+  CheckEquals(-1, MRes.FractionalPart.Numerator, 'Test 2 Numerator');
+  CheckEquals(35, MRes.FractionalPart.Denominator, 'Test 2 Denominator');
+  // 8 * 1 5/6 = 8/1 * 11/6 = 88/6 = 44/3 = 14 2/3
+  M2 := TMixedFraction.Create(1, 5, 6);
+  MRes := 8 * M2;
+  CheckEquals(14, MRes.WholePart, 'Test 3: Whole number');
+  CheckEquals(2, MRes.FractionalPart.Numerator, 'Test 3 Numerator');
+  CheckEquals(3, MRes.FractionalPart.Denominator, 'Test 3 Denominator');
+  // 7/9 * -3 = 7/9 * -3/1 = -21/9 = -7/3 = -2 -1/3
+  M1 := TMixedFraction.Create(0, 7, 9);
+  MRes := M1 * -3;
+  CheckEquals(-2, MRes.WholePart, 'Test 4: Whole number');
+  CheckEquals(-1, MRes.FractionalPart.Numerator, 'Test 4 Numerator');
+  CheckEquals(3, MRes.FractionalPart.Denominator, 'Test 4 Denominator');
 end;
 
 procedure TestTMixedFraction.TestReciprocal;
@@ -1412,6 +1667,79 @@ begin
   CheckEquals(PositiveValue, M.Sign, 'Test 6');
   M := TMixedFraction.Create(1, 7, -5);
   CheckEquals(NegativeValue, M.Sign, 'Test 7');
+end;
+
+procedure TestTMixedFraction.TestSubtractOp;
+var
+  MRes, M1, M2: TMixedFraction;
+begin
+  // 1 1/3 - 1/3 = 1
+  M1 := TMixedFraction.Create(1, 1, 3);
+  M2 := TMixedFraction.Create(0, 1, 3);
+  MRes := M1 - M2;
+  CheckEquals(1, MRes.WholePart, 'Test 1: Whole number');
+  CheckEquals(0, MRes.FractionalPart.Numerator, 'Test 1 Numerator');
+  CheckEquals(1, MRes.FractionalPart.Denominator, 'Test 1 Denominator');
+  // 1 2/3 - 2 1/6 = 5/3 - 13/6 = 10/6 - 13/6 = -3/6 = -1/2
+  M1 := TMixedFraction.Create(1, 2, 3);
+  M2 := TMixedFraction.Create(2, 1, 6);
+  MRes := M1 - M2;
+  CheckEquals(0, MRes.WholePart, 'Test 2: Whole number');
+  CheckEquals(-1, MRes.FractionalPart.Numerator, 'Test 2 Numerator');
+  CheckEquals(2, MRes.FractionalPart.Denominator, 'Test 2 Denominator');
+  // 2 7/15 - 1 2/9 = 37/15 - 11/9 = 111/45 - 55/45 = 56/45 = 1 11/45
+  M1 := TMixedFraction.Create(2, 7, 15);
+  M2 := TMixedFraction.Create(1, 2, 9);
+  MRes := M1 - M2;
+  CheckEquals(1, MRes.WholePart, 'Test 3: Whole number');
+  CheckEquals(11, MRes.FractionalPart.Numerator, 'Test 3 Numerator');
+  CheckEquals(45, MRes.FractionalPart.Denominator, 'Test 3 Denominator');
+  // 2/5 - 2 6/7 = 14/35 - 100/35 = --86/35 = -2 -16/35
+  M1 := TMixedFraction.Create(0, 2, 5);
+  M2 := TMixedFraction.Create(2, 6, 7);
+  MRes := M1 - M2;
+  CheckEquals(-2, MRes.WholePart, 'Test 4: Whole number');
+  CheckEquals(-16, MRes.FractionalPart.Numerator, 'Test 4 Numerator');
+  CheckEquals(35, MRes.FractionalPart.Denominator, 'Test 4 Denominator');
+  // -2/3 - 4/6 = -4/6 - 4/6 = -8/6 = -4/3 = -1 -1/3
+  M1 := TMixedFraction.Create(0, -2, 3);
+  M2 := TMixedFraction.Create(0, 4, 6);
+  MRes := M1 - M2;
+  CheckEquals(-1, MRes.WholePart, 'Test 5: Whole number');
+  CheckEquals(-1, MRes.FractionalPart.Numerator, 'Test 5 Numerator');
+  CheckEquals(3, MRes.FractionalPart.Denominator, 'Test 5 Denominator');
+  // 3 2/3 - 3 2/3 = 0
+  M1 := TMixedFraction.Create(3, 2, 3);
+  M2 := TMixedFraction.Create(3, 2, 3);
+  MRes := M1 - M2;
+  CheckEquals(0, MRes.WholePart, 'Test 6: Whole number');
+  CheckEquals(0, MRes.FractionalPart.Numerator, 'Test 6 Numerator');
+  CheckEquals(1, MRes.FractionalPart.Denominator, 'Test 6 Denominator');
+  // -5/6 - -3 -5/8 = -5/6 - -29/8 = -20/24 - -87/24 = 67/24 = 2 19/24
+  M1 := TMixedFraction.Create(0, -5, 6);
+  M2 := TMixedFraction.Create(-3, -5, 8);
+  MRes := M1 - M2;
+  CheckEquals(2, MRes.WholePart, 'Test 7: Whole number');
+  CheckEquals(19, MRes.FractionalPart.Numerator, 'Test 7 Numerator');
+  CheckEquals(24, MRes.FractionalPart.Denominator, 'Test 7 Denominator');
+  // 1 - -5/6 = 6/6 - -5/6 = 11/6 = 1 5/6
+  M2 := TMixedFraction.Create(0, -5, 6);
+  MRes := 1 - M2;
+  CheckEquals(1, MRes.WholePart, 'Test 8: Whole number');
+  CheckEquals(5, MRes.FractionalPart.Numerator, 'Test 8 Numerator');
+  CheckEquals(6, MRes.FractionalPart.Denominator, 'Test 8 Denominator');
+  // 2 - 5/6 = 12/6 - 5/6 = 7/6 = 1 1/6
+  M2 := TMixedFraction.Create(0, 5, 6);
+  MRes := 2 - M2;
+  CheckEquals(1, MRes.WholePart, 'Test 9: Whole number');
+  CheckEquals(1, MRes.FractionalPart.Numerator, 'Test 9 Numerator');
+  CheckEquals(6, MRes.FractionalPart.Denominator, 'Test 9 Denominator');
+  // 5/13 - -3 = 5/13 - -39/13 = 44/13 = 3 5/13
+  M1 := TMixedFraction.Create(0, 5, 13);
+  MRes := M1 - -3;
+  CheckEquals(3, MRes.WholePart, 'Test 10: Whole number');
+  CheckEquals(5, MRes.FractionalPart.Numerator, 'Test 10 Numerator');
+  CheckEquals(13, MRes.FractionalPart.Denominator, 'Test 10 Denominator');
 end;
 
 procedure TestTMixedFraction.TestUnaryMinusOp;
