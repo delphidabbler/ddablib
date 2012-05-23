@@ -32,8 +32,8 @@ uses
   Types, Math;
 
 type
-  ///  <summary>Encapsulates a vulgar fraction its various mathematical
-  ///  operations.</summary>
+  ///  <summary>Encapsulates a vulgar fraction mathematical operations on it.
+  ///  </summary>
   TFraction = record
   strict private
     var
@@ -240,6 +240,8 @@ type
   end;
 
 type
+  ///  <summary>Encapsulates a mixed fraction and mathematical operations on it.
+  ///  </summary>
   TMixedFraction = record
   strict private
     var
@@ -346,24 +348,26 @@ type
     class function Compare(const M1, M2: TMixedFraction): TValueRelationship;
       static;
 
-//    ///  <summary>Returns the greatest of two given fractions.</summary>
-//    class function Max(const F1, F2: TFraction): TFraction; overload; static;
-//
-//    ///  <summary>Returns the greatest fraction from a given array of fractions.
-//    ///  </summary>
-//    ///  <remarks>FA must contain at least one fraction.</remarks>
-//    class function Max(const FA: array of TFraction): TFraction; overload;
-//      static;
-//
-//    ///  <summary>Returns the smallest of two given fractions.</summary>
-//    class function Min(const F1, F2: TFraction): TFraction; overload; static;
-//
-//    ///  <summary>Returns the smallest fraction from a given array of fractions.
-//    ///  </summary>
-//    ///  <remarks>FA must contain at least one fraction.</remarks>
-//    class function Min(const FA: array of TFraction): TFraction; overload;
-//      static;
-//
+    ///  <summary>Returns the greatest of two given mixed fractions.</summary>
+    class function Max(const M1, M2: TMixedFraction): TMixedFraction; overload;
+      static;
+
+    ///  <summary>Returns the greatest fraction from a given array of mixed
+    ///  fractions.</summary>
+    ///  <remarks>FA must contain at least one fraction.</remarks>
+    class function Max(const MA: array of TMixedFraction): TMixedFraction;
+      overload; static;
+
+    ///  <summary>Returns the smallest of two given mixed fractions.</summary>
+    class function Min(const M1, M2: TMixedFraction): TMixedFraction; overload;
+      static;
+
+    ///  <summary>Returns the smallest fraction from a given array of mixed
+    ///  fractions.</summary>
+    ///  <remarks>FA must contain at least one fraction.</remarks>
+    class function Min(const MA: array of TMixedFraction): TMixedFraction;
+      overload; static;
+
     ///  <summary>Enables two mixed fractions to be tested for equality using
     ///  the equals operator.</summary>
     ///  <remarks>Two mixed fractions are equal if they are the same when
@@ -436,14 +440,17 @@ type
     ///  <summary>Enables conversion and assignment of a TFraction to a mixed
     ///  fraction.</summary>
     class operator Implicit(const Fraction: TFraction): TMixedFraction;
+
     ///  <summary>Enables conversion and assignment of a mixed fraction to a
     ///  TFraction.</summary>
     class operator Implicit(const Mixed: TMixedFraction): TFraction;
+
     ///  <summary>Enables conversion and assignment of an integer to a mixed
     ///  fraction.</summary>
     ///  <remarks>Resulting fraction will have whole number part equal to I,
     ///  denominator of 1 and numerator of 0.</remarks>
     class operator Implicit(const I: Integer): TMixedFraction;
+
     ///  <summary>Enables conversion and assignment of floating point types to a
     ///  mixed fraction.</summary>
     ///  <remarks>
@@ -452,6 +459,7 @@ type
     ///  <para>Conversions are accurate to within five decimal places.</para>
     ///  </remarks>
     class operator Implicit(const E: Extended): TMixedFraction;
+
     ///  <summary>Enables conversion and assignment of a mixed fraction to a
     ///  floating point value.</summary>
     class operator Implicit(const Mixed: TMixedFraction): Extended;
@@ -971,6 +979,38 @@ class operator TMixedFraction.LessThanOrEqual(const M1, M2: TMixedFraction):
   Boolean;
 begin
   Result := M1.fFraction <= M2.fFraction;
+end;
+
+class function TMixedFraction.Max(const M1, M2: TMixedFraction): TMixedFraction;
+begin
+  Result.fFraction := TFraction.Max(M1.fFraction, M2.fFraction);
+end;
+
+class function TMixedFraction.Max(const MA: array of TMixedFraction):
+  TMixedFraction;
+var
+  Idx: Integer;
+begin
+  Assert(Length(MA) > 0, 'TMixedFraction.Max: MA is empty array');
+  Result := MA[0];
+  for Idx := 1 to Pred(Length(MA)) do
+    Result := Max(Result, MA[Idx]);
+end;
+
+class function TMixedFraction.Min(const M1, M2: TMixedFraction): TMixedFraction;
+begin
+  Result.fFraction := TFraction.Min(M1.fFraction, M2.fFraction);
+end;
+
+class function TMixedFraction.Min(const MA: array of TMixedFraction):
+  TMixedFraction;
+var
+  Idx: Integer;
+begin
+  Assert(Length(MA) > 0, 'TMixedFraction.Min: MA is empty array');
+  Result := MA[0];
+  for Idx := 1 to Pred(Length(MA)) do
+    Result := Min(Result, MA[Idx]);
 end;
 
 class operator TMixedFraction.Modulus(const M1, M2: TMixedFraction):

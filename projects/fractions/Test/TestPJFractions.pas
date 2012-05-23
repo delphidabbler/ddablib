@@ -73,6 +73,8 @@ type
     procedure TestModulusOp;
     procedure TestTruncOp;
     procedure TestRoundOp;
+    procedure TestMax;
+    procedure TestMin;
   end;
 
 implementation
@@ -599,10 +601,10 @@ begin
     1,
     TFraction.Create(23, 5)
   );
-  CheckEquals(A[1], Min(A[0], A[1]), 'Test 1');
-  CheckEquals(A[2], Min(A[2], A[1]), 'Test 2');
-  CheckEquals(A[3], Min(A[3], A[4]), 'Test 3');
-  CheckEquals(A[1], Min(A[3], A[1]), 'Test 4');
+  CheckEquals(A[1], TFraction.Min(A[0], A[1]), 'Test 1');
+  CheckEquals(A[2], TFraction.Min(A[2], A[1]), 'Test 2');
+  CheckEquals(A[3], TFraction.Min(A[3], A[4]), 'Test 3');
+  CheckEquals(A[1], TFraction.Min(A[3], A[1]), 'Test 4');
   CheckEquals(A[2], TFraction.Min(A), 'Test 5');
 end;
 
@@ -1495,6 +1497,42 @@ begin
   CheckTrue(M.IsWholeNumber, 'Test 12');
   M := TMixedFraction.Create(12, 75, 5);
   CheckTrue(M.IsWholeNumber, 'Test 13');
+end;
+
+procedure TestTMixedFraction.TestMax;
+var
+  A: TArray<TMixedFraction>;
+begin
+  A := TArray<TMixedFraction>.Create(
+    TMixedFraction.Create(1, 3, 4),
+    TMixedFraction.Create(0, 5, 12),
+    TMixedFraction.Create(-2, 7, 9),
+    2,
+    TMixedFraction.Create(4, 3, 5)
+  );
+  CheckEquals(A[0], TMixedFraction.Max(A[0], A[1]), 'Test 1');
+  CheckEquals(A[1], TMixedFraction.Max(A[2], A[1]), 'Test 2');
+  CheckEquals(A[4], TMixedFraction.Max(A[3], A[4]), 'Test 3');
+  CheckEquals(A[3], TMixedFraction.Max(A[3], A[1]), 'Test 4');
+  CheckEquals(A[4], TMixedFraction.Max(A), 'Test 5');
+end;
+
+procedure TestTMixedFraction.TestMin;
+var
+  A: TArray<TMixedFraction>;
+begin
+  A := TArray<TMixedFraction>.Create(
+    TMixedFraction.Create(1, 3, 4),
+    TMixedFraction.Create(0, 5, 12),
+    TMixedFraction.Create(-2, 7, 9),
+    2,
+    TMixedFraction.Create(4, 3, 5)
+  );
+  CheckEquals(A[1], TMixedFraction.Min(A[0], A[1]), 'Test 1');
+  CheckEquals(A[2], TMixedFraction.Min(A[2], A[1]), 'Test 2');
+  CheckEquals(A[3], TMixedFraction.Min(A[3], A[4]), 'Test 3');
+  CheckEquals(A[1], TMixedFraction.Min(A[3], A[1]), 'Test 4');
+  CheckEquals(A[2], TMixedFraction.Min(A), 'Test 5');
 end;
 
 procedure TestTMixedFraction.TestModulusOp;
