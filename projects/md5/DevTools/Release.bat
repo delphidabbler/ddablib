@@ -3,7 +3,7 @@
 @rem
 @rem Script used to create zip file containing release files.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2010-2011
+@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2010-2012
 @rem
 @rem $Rev$
 @rem $Date$
@@ -26,6 +26,7 @@ mkdir %ReleaseDir%
 zip %OutFile% -j -9 PJMD5.pas
 
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
+zip %OutFile% -j -9 %DocsDir%\License.txt
 zip %OutFile% -j -9 %DocsDir%\GPL-2.0.txt
 zip %OutFile% -j -9 %DocsDir%\LGPL-2.1.txt
 zip %OutFile% -j -9 %DocsDir%\MD5-Notice.txt
