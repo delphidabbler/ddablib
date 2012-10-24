@@ -24,6 +24,7 @@ type
     // Order of tests is important since some later tests assume some of methods
     // tested earlier work correctly.
     procedure TestConstructors;
+    procedure TestCalculatedProperties;
     procedure TestImplicit;
     procedure TestIsProper;
     procedure TestIsWholeNumber;
@@ -154,6 +155,18 @@ begin
   FRes := F1 + -3;
   CheckEquals(-34, FRes.Numerator, 'Test 11 Numerator');
   CheckEquals(13, FRes.Denominator, 'Test 11 Denominator');
+end;
+
+procedure TestTFraction.TestCalculatedProperties;
+var
+  F: TFraction;
+begin
+  F := TFraction.Create(21, 4);
+  CheckEquals(5, F.WholeNumberPart, 'Test 1: WholeNumberPart');
+  CheckEquals(1, F.FractionalPart.Numerator,
+    'Test 1: FractionalPart Numerator');
+  CheckEquals(4, F.FractionalPart.Denominator,
+    'Test 1: FractionalPart Denominator');
 end;
 
 procedure TestTFraction.TestCompare;

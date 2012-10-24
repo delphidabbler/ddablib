@@ -52,6 +52,10 @@ type
     ///  floating point values to fractions.</summary>
     class function DecimalConversionAccuracy(const Places: Byte): Extended;
       static; inline;
+    ///  <summary>Read accessor for WholeNumberPart property.</summary>
+    function GetWholeNumberPart: Int64;
+    ///  <summary>Read accessor for FractionalPart property.</summary>
+    function GetFractionalPart: TFraction;
   public
     ///  <summary>Constructs a fraction with given numerator and denominator.
     ///  </summary>
@@ -69,6 +73,15 @@ type
     ///  <summary>This fraction's denominator.</summary>
     ///  <remarks>Always positive.</remarks>
     property Denominator: Int64 read fDenominator;
+
+    ///  <summary>The whole number part of this fraction when viewed as a mixed
+    ///  fraction.</summary>
+    property WholeNumberPart: Int64 read GetWholeNumberPart;
+
+    ///  <summary>The fractional part of this fraction when viewed as a mixed
+    ///  fraction.</summary>
+    ///  <remarks>This fraction is always proper.</remarks>
+    property FractionalPart: TFraction read GetFractionalPart;
 
     ///  <summary>Checks if this fraction is a proper fraction.</summary>
     ///  <remarks>A proper fraction is one where the absolute value of the
@@ -637,6 +650,16 @@ begin
   Result := F1.Numerator * F2.Denominator;
 end;
 
+function TFraction.GetFractionalPart: TFraction;
+begin
+  Result := TFraction.Create(fNumerator mod fDenominator, fDenominator);
+end;
+
+function TFraction.GetWholeNumberPart: Int64;
+begin
+  Result := fNumerator div fDenominator;
+end;
+
 class operator TFraction.GreaterThan(const F1, F2: TFraction): Boolean;
 begin
   Result := Compare(F1, F2) = GreaterThanValue;
@@ -850,7 +873,7 @@ end;
 
 class operator TFraction.Trunc(const F: TFraction): Int64;
 begin
-  Result := F.Numerator div F.Denominator;
+  Result := F.WholeNumberPart;
 end;
 
 function TFraction.TruncateToMultiple(const F: TFraction): TFraction;
