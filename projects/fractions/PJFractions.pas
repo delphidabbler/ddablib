@@ -33,8 +33,8 @@ uses
   Types, Math;
 
 type
-  ///  <summary>Encapsulates a vulgar fraction mathematical operations on it.
-  ///  </summary>
+  ///  <summary>Encapsulates a vulgar fraction and mathematical operations on
+  ///  it.</summary>
   TFraction = record
   strict private
     var
@@ -43,10 +43,10 @@ type
       ///  <summary>Value of Denominator property.</summary>
       fDenominator: Int64;
     ///  <summary>Returns the 1st cross product of two fractions.</summary>
-    class function FirstCrossProduct(const F1, F2: TFraction): Int64; static;
+    class function FirstCrossProduct(const A, B: TFraction): Int64; static;
       inline;
     ///  <summary>Returns the 2nd cross product of two fractions.</summary>
-    class function SecondCrossProduct(const F1, F2: TFraction): Int64; static;
+    class function SecondCrossProduct(const A, B: TFraction): Int64; static;
       inline;
     ///  <summary>Read accessor for WholeNumberPart property.</summary>
     function GetWholeNumberPart: Int64;
@@ -135,17 +135,17 @@ type
 
     ///  <summary>Returns the least common denominator of two fractions.
     ///  </summary>
-    class function LCD(const F1, F2: TFraction): Int64; static;
+    class function LCD(const A, B: TFraction): Int64; static;
 
     ///  <summary>Compares two fractions and returns a value indicating their
     ///  relationship.</summary>
-    ///  <remarks>Possible return values are: EqualsValue when F1 equals F2,
-    ///  GreaterThanValue when F1 is greater than F2 and LessThanValue when F1
-    ///  is less than F2.</remarks>
-    class function Compare(const F1, F2: TFraction): TValueRelationship; static;
+    ///  <remarks>Possible return values are: EqualsValue when A equals B,
+    ///  GreaterThanValue when A is greater than B and LessThanValue when A
+    ///  is less than B.</remarks>
+    class function Compare(const A, B: TFraction): TValueRelationship; static;
 
     ///  <summary>Returns the greatest of two given fractions.</summary>
-    class function Max(const F1, F2: TFraction): TFraction; overload; static;
+    class function Max(const A, B: TFraction): TFraction; overload; static;
 
     ///  <summary>Returns the greatest fraction from a given array of fractions.
     ///  </summary>
@@ -154,7 +154,7 @@ type
       static;
 
     ///  <summary>Returns the smallest of two given fractions.</summary>
-    class function Min(const F1, F2: TFraction): TFraction; overload; static;
+    class function Min(const A, B: TFraction): TFraction; overload; static;
 
     ///  <summary>Returns the smallest fraction from a given array of fractions.
     ///  </summary>
@@ -189,27 +189,27 @@ type
     ///  equals operator.</summary>
     ///  <remarks>Two fractions are equal if they are the same when reduced to
     ///  common terms.</remarks>
-    class operator Equal(const F1, F2: TFraction): Boolean;
+    class operator Equal(const A, B: TFraction): Boolean;
 
     ///  <summary>Enables two fractions to be tested for inequality using the
     ///  not-equals operator.</summary>
-    class operator NotEqual(const F1, F2: TFraction): Boolean;
+    class operator NotEqual(const A, B: TFraction): Boolean;
 
     ///  <summary>Enables the less-than operator to be used to compare two
     ///  fractions.</summary>
-    class operator LessThan(const F1, F2: TFraction): Boolean;
+    class operator LessThan(const A, B: TFraction): Boolean;
 
     ///  <summary>Enables the less-than-or-equals operator to be used to compare
     ///  two fractions.</summary>
-    class operator LessThanOrEqual(const F1, F2: TFraction): Boolean;
+    class operator LessThanOrEqual(const A, B: TFraction): Boolean;
 
     ///  <summary>Enables the greater-than operator to be used to compare two
     ///  fractions.</summary>
-    class operator GreaterThan(const F1, F2: TFraction): Boolean;
+    class operator GreaterThan(const A, B: TFraction): Boolean;
 
     ///  <summary>Enables the greater-than-or-equals operator to be used to
     ///  compare two fractions.</summary>
-    class operator GreaterThanOrEqual(const F1, F2: TFraction): Boolean;
+    class operator GreaterThanOrEqual(const A, B: TFraction): Boolean;
 
     ///  <summary>Enables the unary minus operator to negate a fraction.
     ///  </summary>
@@ -229,28 +229,28 @@ type
     class operator Round(const F: TFraction): Int64;
 
     ///  <summary>Enables addition operator to be used with fractions.</summary>
-    class operator Add(const F1, F2: TFraction): TFraction;
+    class operator Add(const A, B: TFraction): TFraction;
 
     ///  <summary>Enables subtraction operator to be used with fractions.
     ///  </summary>
-    class operator Subtract(const F1, F2: TFraction): TFraction;
+    class operator Subtract(const A, B: TFraction): TFraction;
 
     ///  <summary>Enables multiplication operator to be used with fractions.
     ///  </summary>
-    class operator Multiply(const F1, F2: TFraction): TFraction;
+    class operator Multiply(const A, B: TFraction): TFraction;
 
     ///  <summary>Enables division operator to be used with fractions.</summary>
-    class operator Divide(const F1, F2: TFraction): TFraction;
+    class operator Divide(const A, B: TFraction): TFraction;
 
     ///  <summary>Overload of div operator that divides left hand operand by
     ///  right hand operand and returns the largest whole number less than or
     ///  equal to the result of the division.</summary>
-    class operator IntDivide(const F1, F2: TFraction): Int64;
+    class operator IntDivide(const A, B: TFraction): Int64;
 
     ///  <summary>Overload of Mod operator that returns the fractional remainder
     ///  after dividing the left hand operand by the right hand operand.
     ///  </summary>
-    class operator Modulus(const F1, F2: TFraction): TFraction;
+    class operator Modulus(const A, B: TFraction): TFraction;
   end;
 
 implementation
@@ -351,38 +351,38 @@ end;
 
 { TFraction }
 
-class operator TFraction.Add(const F1, F2: TFraction): TFraction;
+class operator TFraction.Add(const A, B: TFraction): TFraction;
 var
   CommonDenom: Int64;
-  F1S, F2S: TFraction;
+  AR, BR: TFraction;
   Numerator1, Numerator2: Integer;
 begin
   // simplify addends to reduce size of multiplication results if possible
-  F1S := F1.Simplify;
-  F2S := F2.Simplify;
-  CommonDenom := LCM(F1S.Denominator, F2S.Denominator);
-  Numerator1 := F1S.Numerator * (CommonDenom div F1S.Denominator);
-  Numerator2 := F2S.Numerator * (CommonDenom div F2S.Denominator);
+  AR := A.Simplify;
+  BR := B.Simplify;
+  CommonDenom := LCM(AR.Denominator, BR.Denominator);
+  Numerator1 := AR.Numerator * (CommonDenom div AR.Denominator);
+  Numerator2 := BR.Numerator * (CommonDenom div BR.Denominator);
   Result := TFraction.Create(Numerator1 + Numerator2, CommonDenom).Simplify;
 end;
 
-class function TFraction.Compare(const F1, F2: TFraction): TValueRelationship;
+class function TFraction.Compare(const A, B: TFraction): TValueRelationship;
 var
-  X1, X2: Int64;  // 1st & 2nd cross products of F1 & F2
+  X1, X2: Int64;  // 1st & 2nd cross products of A & B
 begin
-  if F1.fDenominator = F2.fDenominator then
+  if A.fDenominator = B.fDenominator then
   begin
-    if F1.Numerator > F2.Numerator then
+    if A.Numerator > B.Numerator then
       Result := GreaterThanValue
-    else if F1.Numerator < F2.Numerator then
+    else if A.Numerator < B.Numerator then
       Result := LessThanValue
     else
       Result := EqualsValue;
   end
   else
   begin
-    X1 := FirstCrossProduct(F1, F2);
-    X2 := SecondCrossProduct(F1, F2);
+    X1 := FirstCrossProduct(A, B);
+    X2 := SecondCrossProduct(A, B);
     if X1 > X2 then
       Result := GreaterThanValue
     else if X1 < X2 then
@@ -415,19 +415,19 @@ begin
   end;
 end;
 
-class operator TFraction.Divide(const F1, F2: TFraction): TFraction;
+class operator TFraction.Divide(const A, B: TFraction): TFraction;
 begin
-  Result := F1 * F2.Reciprocal;
+  Result := A * B.Reciprocal;
 end;
 
-class operator TFraction.Equal(const F1, F2: TFraction): Boolean;
+class operator TFraction.Equal(const A, B: TFraction): Boolean;
 begin
-  Result := Compare(F1, F2) = EqualsValue;
+  Result := Compare(A, B) = EqualsValue;
 end;
 
-class function TFraction.FirstCrossProduct(const F1, F2: TFraction): Int64;
+class function TFraction.FirstCrossProduct(const A, B: TFraction): Int64;
 begin
-  Result := F1.Numerator * F2.Denominator;
+  Result := A.Numerator * B.Denominator;
 end;
 
 function TFraction.GetFractionalPart: TFraction;
@@ -440,14 +440,14 @@ begin
   Result := fNumerator div fDenominator;
 end;
 
-class operator TFraction.GreaterThan(const F1, F2: TFraction): Boolean;
+class operator TFraction.GreaterThan(const A, B: TFraction): Boolean;
 begin
-  Result := Compare(F1, F2) = GreaterThanValue;
+  Result := Compare(A, B) = GreaterThanValue;
 end;
 
-class operator TFraction.GreaterThanOrEqual(const F1, F2: TFraction): Boolean;
+class operator TFraction.GreaterThanOrEqual(const A, B: TFraction): Boolean;
 begin
-  Result := Compare(F1, F2) <> LessThanValue;
+  Result := Compare(A, B) <> LessThanValue;
 end;
 
 class operator TFraction.Implicit(const I: Integer): TFraction;
@@ -478,11 +478,11 @@ begin
   Result := TFraction.Create(Round(FNumerator), Round(FDenominator)).Simplify;
 end;
 
-class operator TFraction.IntDivide(const F1, F2: TFraction): Int64;
+class operator TFraction.IntDivide(const A, B: TFraction): Int64;
 var
   F: TFraction;
 begin
-  F := F1 / F2;
+  F := A / B;
   Result := Trunc(F);
 end;
 
@@ -503,27 +503,27 @@ begin
   Result := fNumerator mod fDenominator = 0;
 end;
 
-class function TFraction.LCD(const F1, F2: TFraction): Int64;
+class function TFraction.LCD(const A, B: TFraction): Int64;
 begin
-  Result := LCM(F1.Denominator, F2.Denominator);
+  Result := LCM(A.Denominator, B.Denominator);
 end;
 
-class operator TFraction.LessThan(const F1, F2: TFraction): Boolean;
+class operator TFraction.LessThan(const A, B: TFraction): Boolean;
 begin
-  Result := Compare(F1, F2) = LessThanValue;
+  Result := Compare(A, B) = LessThanValue;
 end;
 
-class operator TFraction.LessThanOrEqual(const F1, F2: TFraction): Boolean;
+class operator TFraction.LessThanOrEqual(const A, B: TFraction): Boolean;
 begin
-  Result := Compare(F1, F2) <> GreaterThanValue;
+  Result := Compare(A, B) <> GreaterThanValue;
 end;
 
-class function TFraction.Max(const F1, F2: TFraction): TFraction;
+class function TFraction.Max(const A, B: TFraction): TFraction;
 begin
-  if TFraction.Compare(F1, F2) = GreaterThanValue then
-    Result := F1
+  if TFraction.Compare(A, B) = GreaterThanValue then
+    Result := A
   else
-    Result := F2;
+    Result := B;
 end;
 
 class function TFraction.Max(const FA: array of TFraction): TFraction;
@@ -536,12 +536,12 @@ begin
     Result := Max(Result, FA[Idx]);
 end;
 
-class function TFraction.Min(const F1, F2: TFraction): TFraction;
+class function TFraction.Min(const A, B: TFraction): TFraction;
 begin
-  if TFraction.Compare(F1, F2) = LessThanValue then
-    Result := F1
+  if TFraction.Compare(A, B) = LessThanValue then
+    Result := A
   else
-    Result := F2;
+    Result := B;
 end;
 
 class function TFraction.Min(const FA: array of TFraction): TFraction;
@@ -554,18 +554,18 @@ begin
     Result := Min(Result, FA[Idx]);
 end;
 
-class operator TFraction.Modulus(const F1, F2: TFraction): TFraction;
+class operator TFraction.Modulus(const A, B: TFraction): TFraction;
 var
   D: Int64;
 begin
-  D := F1 div F2;
-  Result := F1 - D * F2;  // this is simplified by - operator
+  D := A div B;
+  Result := A - D * B;  // this is simplified by - operator
 end;
 
-class operator TFraction.Multiply(const F1, F2: TFraction): TFraction;
+class operator TFraction.Multiply(const A, B: TFraction): TFraction;
 begin
   Result := TFraction.Create(
-    F1.Numerator * F2.Numerator, F1.Denominator * F2.Denominator
+    A.Numerator * B.Numerator, A.Denominator * B.Denominator
   ).Simplify;
 end;
 
@@ -574,9 +574,9 @@ begin
   Result := TFraction.Create(-F.fNumerator, F.Denominator);
 end;
 
-class operator TFraction.NotEqual(const F1, F2: TFraction): Boolean;
+class operator TFraction.NotEqual(const A, B: TFraction): Boolean;
 begin
-  Result := Compare(F1, F2) <> EqualsValue;
+  Result := Compare(A, B) <> EqualsValue;
 end;
 
 class operator TFraction.Positive(const F: TFraction): TFraction;
@@ -633,9 +633,9 @@ begin
     Result := FHi.Convert(F.Denominator div FHi.Denominator);
 end;
 
-class function TFraction.SecondCrossProduct(const F1, F2: TFraction): Int64;
+class function TFraction.SecondCrossProduct(const A, B: TFraction): Int64;
 begin
-  Result := F2.Numerator * F1.Denominator;
+  Result := B.Numerator * A.Denominator;
 end;
 
 function TFraction.Sign: TValueSign;
@@ -664,9 +664,9 @@ begin
   Result := Simplify(GCD(Numerator, Denominator));
 end;
 
-class operator TFraction.Subtract(const F1, F2: TFraction): TFraction;
+class operator TFraction.Subtract(const A, B: TFraction): TFraction;
 begin
-  Result := F1 + -F2;
+  Result := A + -B;
 end;
 
 class operator TFraction.Trunc(const F: TFraction): Int64;
