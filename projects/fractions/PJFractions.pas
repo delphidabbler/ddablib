@@ -48,11 +48,6 @@ type
     ///  <summary>Returns the 2nd cross product of two fractions.</summary>
     class function SecondCrossProduct(const F1, F2: TFraction): Int64; static;
       inline;
-    ///  <summary>Returns a floating point value that is used to calculate
-    ///  the given number of decimal places of accuracy to use when converting
-    ///  floating point values to fractions.</summary>
-    class function DecimalConversionAccuracy(const Places: Byte): Extended;
-      static; inline;
     ///  <summary>Read accessor for WholeNumberPart property.</summary>
     function GetWholeNumberPart: Int64;
     ///  <summary>Read accessor for FractionalPart property.</summary>
@@ -286,18 +281,18 @@ end;
 ///  required fraction.</param>
 ///  <param name="FractionDenominator">Extended [out] Set to denominator of
 ///  required fraction.</param>
-///  <param name="AccuracyFactor">Extended [in] Determines how accurate
-///  conversion is to be. E.g. 0.0005 requires accuracy of 3 decimal places and
-///  0.000005 requires accuracy of 5 decimal places.</param>
+///  <param name="PlacesOfAccuracy">Byte [in] Specifies number of decimal places
+///  conversion is to be accurate to.</param>
 procedure DecimalToFraction (Decimal: Extended;
   out FractionNumerator: Extended;
   out FractionDenominator: Extended;
-  const AccuracyFactor: Extended);
+  const PlacesOfAccuracy: Byte);
 var
   DecimalSign: Extended;
   Z: Extended;
   PreviousDenominator: Extended;
   ScratchValue: Extended;
+  AccuracyFactor: Extended;
 resourcestring
   sTooSmall = 'Decimal too small to convert to fraction';
   sTooLarge = 'Decimal too large to convert to fraction';
@@ -323,6 +318,7 @@ begin
   Z := Decimal;
   PreviousDenominator := 0.0;
   FractionDenominator := 1.0;
+  AccuracyFactor := 0.5 * IntPower(10, -PlacesOfAccuracy);
   repeat
     Z := 1.0 / (Z - Int(Z));
     ScratchValue := FractionDenominator;
@@ -405,12 +401,6 @@ begin
   end;
 end;
 
-class function TFraction.DecimalConversionAccuracy(
-  const Places: Byte): Extended;
-begin
-  Result := 0.5 * IntPower(10, -Places);
-end;
-
 class operator TFraction.Divide(const F1, F2: TFraction): TFraction;
 begin
   Result := F1 * F2.Reciprocal;
@@ -467,9 +457,7 @@ var
   FNumerator: Extended;     // numerator as decimal
   FDenominator: Extended;   // numerator as decimal
 begin
-  DecimalToFraction(
-    E, FNumerator, FDenominator, DecimalConversionAccuracy(DecimalPlaces)
-  );
+  DecimalToFraction(E, FNumerator, FDenominator, DecimalPlaces);
   if (Abs(FNumerator) >= LargestNumerator)
     or (Abs(FDenominator) >= LargestDenominator) then
     raise EConvertError.Create(sCantConvert);
