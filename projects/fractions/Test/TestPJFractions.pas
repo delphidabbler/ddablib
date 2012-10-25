@@ -129,6 +129,11 @@ begin
   FRes := F1 + -3;
   CheckEquals(-34, FRes.Numerator, 'Test 11 Numerator');
   CheckEquals(13, FRes.Denominator, 'Test 11 Denominator');
+  // 4/6 + 1.5 = 4/6 + 3/2 = 4/6 + 9/6 = 13/6
+  F1 := TFraction.Create(4, 6);
+  FRes := F1 + 1.5;
+  CheckEquals(13, FRes.Numerator, 'Test 12 Numerator');
+  CheckEquals(6, FRes.Denominator, 'Test 12 Denominator');
 end;
 
 procedure TestTFraction.TestCalculatedProperties;
