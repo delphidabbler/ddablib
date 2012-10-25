@@ -162,6 +162,11 @@ type
     class function Min(const FA: array of TFraction): TFraction; overload;
       static;
 
+    ///  <summary>Returns the given fraction raised to the given power.
+    ///  </summary>
+    class function Power(const F: TFraction; Exponent: ShortInt): TFraction;
+      static;
+
     ///  <summary>Enables assignment of an integer to a fraction.</summary>
     ///  <remarks>Resulting fraction will have numerator=I and denominator=1.
     ///  </remarks>
@@ -283,10 +288,8 @@ end;
 ///  required fraction.</param>
 ///  <param name="PlacesOfAccuracy">Byte [in] Specifies number of decimal places
 ///  conversion is to be accurate to.</param>
-procedure DecimalToFraction (Decimal: Extended;
-  out FractionNumerator: Extended;
-  out FractionDenominator: Extended;
-  const PlacesOfAccuracy: Byte);
+procedure DecimalToFraction(Decimal: Extended; out FractionNumerator: Extended;
+  out FractionDenominator: Extended; const PlacesOfAccuracy: Byte);
 var
   DecimalSign: Extended;
   Z: Extended;
@@ -333,6 +336,17 @@ begin
     )
     or (Z = Int(Z));
   FractionNumerator := DecimalSign * FractionNumerator;
+end;
+
+///  <summary>Raises integer Base to non-negative integer power Exponent.
+///  </summary>
+function Pow(const Base: Int64; const Exponent: Byte): Int64;
+var
+  I: Byte;
+begin
+  Result := 1;
+  for I := 1 to Exponent do
+    Result := Result * Base;
 end;
 
 { TFraction }
@@ -452,7 +466,7 @@ resourcestring
 const
   LargestNumerator: Extended = High(Int64) - 1.0;
   LargestDenominator: Extended = High(Int64) - 1.0;
-  DecimalPlaces: Byte = 5; // 5 deicmal places of accuracy in conversion
+  DecimalPlaces: Byte = 5; // 5 decimal places of accuracy in conversion
 var
   FNumerator: Extended;     // numerator as decimal
   FDenominator: Extended;   // numerator as decimal
@@ -570,10 +584,30 @@ begin
   Result := F;
 end;
 
+class function TFraction.Power(const F: TFraction; Exponent: ShortInt):
+  TFraction;
+var
+  X: TFraction;
+begin
+  Assert((Exponent >= 0) or (F.Numerator <> 0),
+    'TFraction.Power: Numerator = 0 and Exponent < 0');
+  // simplify before we start to work with smallest possible numbers
+  X := F.Simplify;
+  // F ^ Power where Power < 0 is equivalent to 1/F ^ -Power
+  if Exponent < 0 then
+  begin
+    Exponent := -Exponent;
+    X := X.Reciprocal;
+  end;
+  Result := TFraction.Create(
+    Pow(X.Numerator, Exponent), Pow(X.Denominator, Exponent)
+  );
+end;
+
 function TFraction.Reciprocal: TFraction;
 begin
   Assert(Numerator <> 0, 'TFraction.Reciprocal: Fraction is 0');
-  // swap denomitator and numerator
+  // swap denominator and numerator
   Result := TFraction.Create(Denominator, Numerator);
 end;
 

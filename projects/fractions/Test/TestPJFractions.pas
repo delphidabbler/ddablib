@@ -51,6 +51,7 @@ type
     procedure TestConvert;
     procedure TestRoundToMulitiple;
     procedure TestTruncateToMultiple;
+    procedure TestPower;
   end;
 
 implementation
@@ -684,6 +685,61 @@ begin
   FRes := F1 * -3;
   CheckEquals(-7, FRes.Numerator, 'Test 4 Numerator');
   CheckEquals(3, FRes.Denominator, 'Test 4 Denominator');
+end;
+
+procedure TestTFraction.TestPower;
+var
+  F, FR, FRec: TFraction;
+begin
+  F := 0;
+  FR := TFraction.Power(F, 4);
+  CheckEquals(0, FR.Numerator, 'Test1 Numerator');
+  CheckEquals(1, FR.Denominator, 'Test1 Denominator');
+  F := TFraction.Create(3, 4);
+  FR := TFraction.Power(F, 3);
+  CheckEquals(27, FR.Numerator, 'Test 2 Numerator');
+  CheckEquals(64, FR.Denominator, 'Test 2 Denominator');
+  F := TFraction.Create(6, 15);
+  FR := TFraction.Power(F, -2);
+  CheckEquals(25, FR.Numerator, 'Test 3 Numerator');
+  CheckEquals(4, FR.Denominator, 'Test 3 Denominator');
+  F := TFraction.Create(15, 6);
+  FR := TFraction.Power(F, 2);
+  CheckEquals(25, FR.Numerator, 'Test 4 Numerator');
+  CheckEquals(4, FR.Denominator, 'Test 4 Denominator');
+  F := TFraction.Create(6, 15);
+  FR := TFraction.Power(F, 0);
+  CheckEquals(1, FR.Numerator, 'Test 5 Numerator');
+  CheckEquals(1, FR.Denominator, 'Test 5 Denominator');
+  F := TFraction.Create(-3, 4);
+  FR := TFraction.Power(F, 2);
+  CheckEquals(9, FR.Numerator, 'Test 6 Numerator');
+  CheckEquals(16, FR.Denominator, 'Test 6 Denominator');
+  F := TFraction.Create(-3, 4);
+  FR := TFraction.Power(F, 3);
+  CheckEquals(-27, FR.Numerator, 'Test 7 Numerator');
+  CheckEquals(64, FR.Denominator, 'Test 7 Denominator');
+  F := TFraction.Create(7, 5);
+  FR := TFraction.Power(F, 2);
+  CheckEquals(49, FR.Numerator, 'Test 8 Numerator');
+  CheckEquals(25, FR.Denominator, 'Test 8 Denominator');
+  F := TFraction.Create(7, 3);
+  FR := TFraction.Power(F, 1);
+  CheckEquals(7, FR.Numerator, 'Test 9 Numerator');
+  CheckEquals(3, FR.Denominator, 'Test 9 Denominator');
+  F := TFraction.Create(9, 3);
+  FR := TFraction.Power(F, 2);
+  CheckEquals(9, FR.Numerator, 'Test 10 Numerator');
+  CheckEquals(1, FR.Denominator, 'Test 10 Denominator');
+  F := TFraction.Create(7, 5);
+  FR := TFraction.Power(F, -1);
+  CheckEquals(5, FR.Numerator, 'Test 11 Numerator');
+  CheckEquals(7, FR.Denominator, 'Test 11 Denominator');
+  F := TFraction.Create(7, 5);
+  FR := TFraction.Power(F, -1);
+  FRec := F.Reciprocal;
+  CheckEquals(FRec.Numerator, FR.Numerator, 'Test 12 Numerator');
+  CheckEquals(FRec.Denominator, FR.Denominator, 'Test 12 Denominator');
 end;
 
 procedure TestTFraction.TestReciprocal;
