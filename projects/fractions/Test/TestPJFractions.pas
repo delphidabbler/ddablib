@@ -482,16 +482,16 @@ begin
   CheckEquals(0, F.Numerator, 'Test 3 Numerator');
   CheckEquals(1, F.Denominator, 'Test 3 Denominator');
 
-  // TFraction => Extended
+  // TFraction => Extended & Double
   F := TFraction.Create(5, 27);
   E1 := 5 / 27;
   E2 := F;
   D1 := 5 / 27;
-  D2 := F;
+  D2 := Double(F); // explicit cast
   CheckEquals(EqualsValue, CompareValue(D1, D2), 'Test 4 (Double)');
   CheckEquals(EqualsValue, CompareValue(E1, E2), 'Test 4 (Extended)');
 
-  // Extended => TFraction
+  // Extended & Double => TFraction
   F := 1 / 3;
   CheckEquals(1, F.Numerator, 'Test 5 Numerator');
   CheckEquals(3, F.Denominator, 'Test 5 Denominator');
@@ -507,10 +507,18 @@ begin
   F := 1.07407407;
   CheckEquals(29, F.Numerator, 'Test 6 Numerator');
   CheckEquals(27, F.Denominator, 'Test 6 Denominator');
+  D1 := -200/350;
+  F := TFraction(D1); // explicit
+  D2 := F;
+  CheckEquals(-4, F.Numerator, 'Test 8 Numerator');
+  CheckEquals(7, F.Denominator, 'Test 8 Denominator');
+  CheckEquals(D1, D2, 'Test 8 decimal');
+  CheckTrue(SameValue(D2, F), 'Test 8 parameter cast');
+
   // Check that explicit works by implication
   F := TFraction(6);
-  CheckEquals(6, F.Numerator, 'Test External 1 Numerator');
-  CheckEquals(1, F.Denominator, 'Test External 1 Denominator');
+  CheckEquals(6, F.Numerator, 'Test Explicit 1 Numerator');
+  CheckEquals(1, F.Denominator, 'Test Explicit 1 Denominator');
 end;
 
 procedure TestTFraction.TestIntDivideOp;
