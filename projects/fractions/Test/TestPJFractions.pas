@@ -194,9 +194,11 @@ end;
 
 procedure TestTFraction.TestComparisonOps;
 var
-  F1, F2: TFraction;
+  F1, F2, F3: TFraction;
+  D: Double;
+  I: Integer;
 begin
-  // F1 = F2 
+  // F1 = F2
   F1 := TFraction.Create(1, 2);
   F2 := TFraction.Create(1, 2);
   CheckTrue(F1 = F2, 'Test 1a (=)');
@@ -216,7 +218,7 @@ begin
   CheckFalse(F1 > F2, 'Test 1b (>)');
   CheckTrue(F1 >= F2, 'Test 1b (>=)');
 
-  // F1 = F2 
+  // F1 = F2
   F1 := TFraction.Create(-6, 5);
   F2 := TFraction.Create(30, -25);
   CheckTrue(F1 = F2, 'Test 1c (=)');
@@ -226,7 +228,7 @@ begin
   CheckFalse(F1 > F2, 'Test 1c (>)');
   CheckTrue(F1 >= F2, 'Test 1c (>=)');
 
-  // F1 = F2 
+  // F1 = F2
   F1 := TFraction.Create(6, 5);
   F2 := TFraction.Create(-30, -25);
   CheckTrue(F1 = F2, 'Test 1d (=)');
@@ -236,7 +238,7 @@ begin
   CheckFalse(F1 > F2, 'Test 1d (>)');
   CheckTrue(F1 >= F2, 'Test 1d (>=)');
 
-  // F1 > F2 
+  // F1 > F2
   F1 := TFraction.Create(4, 5);
   F2 := TFraction.Create(3, 5);
   CheckFalse(F1 = F2, 'Test 2a (=)');
@@ -246,7 +248,7 @@ begin
   CheckTrue(F1 > F2, 'Test 2a (>)');
   CheckTrue(F1 >= F2, 'Test 2a (>=)');
 
-  // F1 > F2 
+  // F1 > F2
   F1 := TFraction.Create(1, 2);
   F2 := TFraction.Create(3, 8);
   CheckFalse(F1 = F2, 'Test 2b (=)');
@@ -256,7 +258,7 @@ begin
   CheckTrue(F1 > F2, 'Test 2b (>)');
   CheckTrue(F1 >= F2, 'Test 2b (>=)');
 
-  // F1 > F2 
+  // F1 > F2
   F1 := TFraction.Create(-3, 8);
   F2 := TFraction.Create(-1, 2);
   CheckFalse(F1 = F2, 'Test 2c (=)');
@@ -266,7 +268,7 @@ begin
   CheckTrue(F1 > F2, 'Test 2c (>)');
   CheckTrue(F1 >= F2, 'Test 2c (>=)');
 
-  // F1 > F2 
+  // F1 > F2
   F1 := TFraction.Create(-1, -2);
   F2 := TFraction.Create(3, 8);
   CheckFalse(F1 = F2, 'Test 2d (=)');
@@ -276,7 +278,7 @@ begin
   CheckTrue(F1 > F2, 'Test 2d (>)');
   CheckTrue(F1 >= F2, 'Test 2d (>=)');
 
-  // F1 < F2 
+  // F1 < F2
   F1 := TFraction.Create(-1, 5);
   F2 := TFraction.Create(-1, 9);
   CheckFalse(F1 = F2, 'Test 3a (=)');
@@ -286,7 +288,7 @@ begin
   CheckFalse(F1 > F2, 'Test 3a (>)');
   CheckFalse(F1 >= F2, 'Test 3a (>=)');
 
-  // F1 < F2 
+  // F1 < F2
   F1 := TFraction.Create(3, 5);
   F2 := TFraction.Create(8, 11);
   CheckFalse(F1 = F2, 'Test 3b (=)');
@@ -296,7 +298,7 @@ begin
   CheckFalse(F1 > F2, 'Test 3b (>)');
   CheckFalse(F1 >= F2, 'Test 3b (>=)');
 
-  // F1 < F2 
+  // F1 < F2
   F1 := TFraction.Create(-11, 9);
   F2 := TFraction.Create(3, -8);
   CheckFalse(F1 = F2, 'Test 3c (=)');
@@ -306,15 +308,71 @@ begin
   CheckFalse(F1 > F2, 'Test 3c (>)');
   CheckFalse(F1 >= F2, 'Test 3c (>=)');
 
-  // F1 < F2 
+  // F1 < F2
   F1 := TFraction.Create(3, 4);
   F2 := TFraction.Create(-7, -8);
-  CheckFalse(F1 = F2, 'Test 3c (=)');
-  CheckTrue(F1 <> F2, 'Test 3c (<>)');
-  CheckTrue(F1 < F2, 'Test 3c (<)');
-  CheckTrue(F1 <= F2, 'Test 3c (<=)');
-  CheckFalse(F1 > F2, 'Test 3c (>)');
-  CheckFalse(F1 >= F2, 'Test 3c (>=)');
+  CheckFalse(F1 = F2, 'Test 3d (=)');
+  CheckTrue(F1 <> F2, 'Test 3d (<>)');
+  CheckTrue(F1 < F2, 'Test 3d (<)');
+  CheckTrue(F1 <= F2, 'Test 3d (<=)');
+  CheckFalse(F1 > F2, 'Test 3d (>)');
+  CheckFalse(F1 >= F2, 'Test 3d (>=)');
+
+  // Compare with float
+  F1 := TFraction.Create(3, 4);
+  F2 := TFraction.Create(1, 3);
+  F3 := TFraction.Create(-7, 8);
+  D := 1.0 / 3.0;
+  CheckFalse(F1 = D, 'Test 4a1');
+  CheckTrue(F2 = D, 'Test 4a2a');
+  CheckTrue(D = F2, 'Test 4a2b');
+  CheckFalse(F3 = D, 'Test 4a3');
+  CheckTrue(F1 > D, 'Test 4b1');
+  CheckFalse(F2 > D, 'Test 4b2');
+  CheckFalse(F3 > D, 'Test 4b3');
+  CheckTrue(F1 >= D, 'Test 4c1a');
+  CheckTrue(F2 >= D, 'Test 4c2a');
+  CheckFalse(F3 >= D, 'Test 4c3a');
+  CheckTrue(D <= F1, 'Test 4c1b');
+  CheckTrue(D <= F2, 'Test 4c2b');
+  CheckFalse(D <= F3, 'Test 4c3b');
+  CheckFalse(F1 < D, 'Test 4d1');
+  CheckFalse(F2 < D, 'Test 4d2');
+  CheckTrue(F3 < D, 'Test 4d3');
+  CheckFalse(F1 <= D, 'Test 4e1');
+  CheckTrue(F2 <= D, 'Test 4e2');
+  CheckTrue(F3 <= D, 'Test 4e3');
+  CheckTrue(F1 <> D, 'Test 4f1');
+  CheckFalse(F2 <> D, 'Test 4f2');
+  CheckTrue(F3 <> D, 'Test 4f3');
+
+  // Compare with integer
+  F1 := TFraction.Create(5, 2);
+  F2 := TFraction.Create(2, 1);
+  F3 := TFraction.Create(-1, 2);
+  I := 2;
+  CheckFalse(F1 = I, 'Test 5a1');
+  CheckTrue(F2 = I, 'Test 5a2a');
+  CheckTrue(I = F2, 'Test 5a2b');
+  CheckFalse(F3 = I, 'Test 5a3');
+  CheckTrue(F1 > I, 'Test 5b1');
+  CheckFalse(F2 > I, 'Test 5b2');
+  CheckFalse(F3 > I, 'Test 5b3');
+  CheckTrue(F1 >= I, 'Test 5c1a');
+  CheckTrue(I <= F1, 'Test 5c1b');
+  CheckTrue(F2 >= I, 'Test 5c2a');
+  CheckTrue(I <= F2, 'Test 5c2b');
+  CheckFalse(F3 >= I, 'Test 5c3a');
+  CheckFalse(I <= F3, 'Test 5c3b');
+  CheckFalse(F1 < I, 'Test 5d1');
+  CheckFalse(F2 < I, 'Test 5d2');
+  CheckTrue(F3 < I, 'Test 5d3');
+  CheckFalse(F1 <= I, 'Test 5e1');
+  CheckTrue(F2 <= I, 'Test 5e2');
+  CheckTrue(F3 <= I, 'Test 5e3');
+  CheckTrue(I <> F1, 'Test 5f1');
+  CheckFalse(I <> F2, 'Test 5f2');
+  CheckTrue(I <> F3, 'Test 5f3');
 end;
 
 procedure TestTFraction.TestConstructors;
