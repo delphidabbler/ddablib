@@ -630,17 +630,60 @@ var
   A: TArray<TFraction>;
 begin
   A := TArray<TFraction>.Create(
-    TFraction.Create(3,4),
-    TFraction.Create(5,12),
-    TFraction.Create(-4,3),
+    TFraction.Create(3, 4),
+    TFraction.Create(5, 12),
+    TFraction.Create(-4, 3),
     1,
+    1.2,
     TFraction.Create(23, 5)
   );
-  CheckEquals(A[0], TFraction.Max(A[0], A[1]), 'Test 1');
-  CheckEquals(A[1], TFraction.Max(A[2], A[1]), 'Test 2');
-  CheckEquals(A[4], TFraction.Max(A[3], A[4]), 'Test 3');
-  CheckEquals(A[3], TFraction.Max(A[3], A[1]), 'Test 4');
-  CheckEquals(A[4], TFraction.Max(A), 'Test 5');
+  CheckEquals(A[0].Numerator, TFraction.Max(A[0], A[1]).Numerator,
+    'Test 1 Numerator');
+  CheckEquals(A[0].Denominator, TFraction.Max(A[0], A[1]).Denominator,
+    'Test 1 Denominator');
+  CheckEquals(A[1].Numerator, TFraction.Max(A[2], A[1]).Numerator,
+    'Test 2 Numerator');
+  CheckEquals(A[1].Denominator, TFraction.Max(A[2], A[1]).Denominator,
+    'Test 2 Denominator');
+  CheckEquals(A[4].Numerator, TFraction.Max(A[3], A[4]).Numerator,
+    'Test 3 Numerator');
+  CheckEquals(A[4].Denominator, TFraction.Max(A[3], A[4]).Denominator,
+    'Test 3 Denominator');
+  CheckEquals(A[3].Numerator, TFraction.Max(A[3], A[1]).Numerator,
+    'Test 4 Numerator');
+  CheckEquals(A[3].Denominator, TFraction.Max(A[3], A[1]).Denominator,
+    'Test 4 Denominator');
+  CheckEquals(A[5].Numerator, TFraction.Max(A).Numerator,
+    'Test 5 Numerator');
+  CheckEquals(A[5].Denominator, TFraction.Max(A).Denominator,
+    'Test 5 Denominator');
+  // dynamic array
+  CheckEquals(
+    89,
+    TFraction.Max([
+      TFraction.Create(1, 2),
+      TFraction.Create(89, 12),
+      TFraction.Create(-4, 3),
+      2,
+      2.7,
+      TFraction(3.33),
+      TFraction(-1)
+    ]).Numerator,
+    'Test 6 Denominator'
+  );
+  CheckEquals(
+    12,
+    TFraction.Max([
+      TFraction.Create(1, 2),
+      TFraction.Create(89, 12),
+      TFraction.Create(-4, 3),
+      2,
+      2.7,
+      TFraction(3.33),
+      TFraction(-1)
+    ]).Denominator,
+    'Test 6 Denominator'
+  );
 end;
 
 procedure TestTFraction.TestMin;
@@ -648,17 +691,50 @@ var
   A: TArray<TFraction>;
 begin
   A := TArray<TFraction>.Create(
-    TFraction.Create(3,4),
-    TFraction.Create(5,12),
-    TFraction.Create(-4,3),
+    TFraction.Create(3, 4),
+    TFraction.Create(5, 12),
+    TFraction.Create(-4, 3),
     1,
+    1.2,
     TFraction.Create(23, 5)
   );
-  CheckEquals(A[1], TFraction.Min(A[0], A[1]), 'Test 1');
-  CheckEquals(A[2], TFraction.Min(A[2], A[1]), 'Test 2');
-  CheckEquals(A[3], TFraction.Min(A[3], A[4]), 'Test 3');
-  CheckEquals(A[1], TFraction.Min(A[3], A[1]), 'Test 4');
-  CheckEquals(A[2], TFraction.Min(A), 'Test 5');
+  CheckEquals(A[1].Numerator, TFraction.Min(A[0], A[1]).Numerator,
+    'Test 1 Numerator');
+  CheckEquals(A[1].Denominator, TFraction.Min(A[0], A[1]).Denominator,
+    'Test 1 Denominator');
+  CheckEquals(A[2].Numerator, TFraction.Min(A[2], A[1]).Numerator,
+    'Test 2 Numerator');
+  CheckEquals(A[2].Denominator, TFraction.Min(A[2], A[1]).Denominator,
+    'Test 2 Denominator');
+  CheckEquals(A[3].Numerator, TFraction.Min(A[3], A[4]).Numerator,
+    'Test 3 Numerator');
+  CheckEquals(A[3].Denominator, TFraction.Min(A[3], A[4]).Denominator,
+    'Test 3 Denominator');
+  CheckEquals(A[1].Numerator, TFraction.Min(A[3], A[1]).Numerator,
+    'Test 4 Numerator');
+  CheckEquals(A[1].Denominator, TFraction.Min(A[3], A[1]).Denominator,
+    'Test 4 Denominator');
+  CheckEquals(A[2].Numerator, TFraction.Min(A).Numerator,
+    'Test 5 Numerator');
+  CheckEquals(A[2].Denominator, TFraction.Min(A).Denominator,
+    'Test 5 Denominator');
+  // dynamic array
+  CheckEquals(
+    A[2].Numerator,
+    TFraction.Min([
+      TFraction.Create(1, 2), TFraction.Create(89, 12), TFraction.Create(-4, 3),
+      2, 2.7, TFraction(3.33), TFraction(-1)
+    ]).Numerator,
+    'Test 6 Numerator'
+  );
+  CheckEquals(
+    A[2].Denominator,
+    TFraction.Min([
+      TFraction.Create(1, 2), TFraction.Create(89, 12), TFraction.Create(-4, 3),
+      2, 2.7, TFraction(3.33), TFraction(-1)
+    ]).Denominator,
+    'Test 6 Denominator'
+  );
 end;
 
 procedure TestTFraction.TestModulusOp;
