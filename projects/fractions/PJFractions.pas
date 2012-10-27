@@ -110,7 +110,7 @@ type
 
     ///  <summary>Checks if a given non-zero value is a common factor of this
     ///  fraction.</summary>
-    function IsCommonFactor(const Factor: Int64): Boolean;
+    function HasCommonFactor(const Factor: Int64): Boolean;
 
     ///  <summary>Reduces this fraction to its lowest terms.</summary>
     function Simplify: TFraction; overload;
@@ -450,6 +450,13 @@ begin
   Result := Compare(A, B) <> LessThanValue;
 end;
 
+function TFraction.HasCommonFactor(const Factor: Int64): Boolean;
+begin
+  if Factor = 0 then
+    Exit(False);
+  Result := (Numerator mod Factor = 0) and (Denominator mod Factor = 0);
+end;
+
 class operator TFraction.Implicit(const I: Integer): TFraction;
 begin
   Result := TFraction.Create(I, 1);
@@ -484,13 +491,6 @@ var
 begin
   F := A / B;
   Result := Trunc(F);
-end;
-
-function TFraction.IsCommonFactor(const Factor: Int64): Boolean;
-begin
-  if Factor = 0 then
-    Exit(False);
-  Result := (Numerator mod Factor = 0) and (Denominator mod Factor = 0);
 end;
 
 function TFraction.IsProper: Boolean;
@@ -652,7 +652,7 @@ end;
 function TFraction.Simplify(const CommonFactor: Int64): TFraction;
 begin
   Assert(CommonFactor <> 0, 'TFraction.Simplify: CommonFactor = 0');
-  Assert(IsCommonFactor(CommonFactor),
+  Assert(HasCommonFactor(CommonFactor),
     'TFraction.Simplify: CommonFactor is not a common factor of this fraction');
   Result := TFraction.Create(
     Numerator div Abs(CommonFactor), Denominator div Abs(CommonFactor)

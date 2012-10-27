@@ -34,7 +34,7 @@ type
     procedure TestSimplify;
     procedure TestReciprocal;
     procedure TestSign;
-    procedure TestIsCommonFactor;
+    procedure TestHasCommonFactor;
     procedure TestComparisonOps;
     procedure TestTruncOp;
     procedure TestRoundOp;
@@ -489,6 +489,18 @@ begin
   CheckEquals(4, FRes.Denominator, 'Test 8 Denominator');
 end;
 
+procedure TestTFraction.TestHasCommonFactor;
+var
+  F: TFraction;
+begin
+  F := TFraction.Create(32, 48);
+  CheckTrue(F.HasCommonFactor(8), 'Test 1');
+  CheckTrue(F.HasCommonFactor(16), 'Test 2');
+  CheckTrue(F.HasCommonFactor(-2), 'Test 3');
+  CheckFalse(F.HasCommonFactor(5), 'Test 4');
+  CheckFalse(F.HasCommonFactor(0), 'Test 5');
+end;
+
 procedure TestTFraction.TestImplicit;
 var
   F: TFraction;
@@ -578,18 +590,6 @@ begin
   // 10/3 div 1 = Trunc(10/3 * 1/1) = Trunc(10/3) = 3
   F1 := TFraction.Create(10, 3);
   CheckEquals(3, F1 div 1, 'Test 8');
-end;
-
-procedure TestTFraction.TestIsCommonFactor;
-var
-  F: TFraction;
-begin
-  F := TFraction.Create(32, 48);
-  CheckTrue(F.IsCommonFactor(8), 'Test 1');
-  CheckTrue(F.IsCommonFactor(16), 'Test 2');
-  CheckTrue(F.IsCommonFactor(-2), 'Test 3');
-  CheckFalse(F.IsCommonFactor(5), 'Test 4');
-  CheckFalse(F.IsCommonFactor(0), 'Test 5');
 end;
 
 procedure TestTFraction.TestIsProper;
