@@ -146,6 +146,30 @@ begin
     'Test 1: FractionalPart Numerator');
   CheckEquals(4, F.FractionalPart.Denominator,
     'Test 1: FractionalPart Denominator');
+  F := TFraction.Create(-21, 4);
+  CheckEquals(-5, F.WholeNumberPart, 'Test 2: WholeNumberPart');
+  CheckEquals(-1, F.FractionalPart.Numerator,
+    'Test 2: FractionalPart Numerator');
+  CheckEquals(4, F.FractionalPart.Denominator,
+    'Test 2: FractionalPart Denominator');
+  F := TFraction.Create(5, 11);
+  CheckEquals(0, F.WholeNumberPart, 'Test 3: WholeNumberPart');
+  CheckEquals(5, F.FractionalPart.Numerator,
+    'Test 3: FractionalPart Numerator');
+  CheckEquals(11, F.FractionalPart.Denominator,
+    'Test 3: FractionalPart Denominator');
+  F := TFraction.Create(60, 6);
+  CheckEquals(10, F.WholeNumberPart, 'Test 4: WholeNumberPart');
+  CheckEquals(0, F.FractionalPart.Numerator,
+    'Test 4: FractionalPart Numerator');
+  CheckEquals(6, F.FractionalPart.Denominator,
+    'Test 4: FractionalPart Denominator');
+  F := -7;
+  CheckEquals(-7, F.WholeNumberPart, 'Test 5: WholeNumberPart');
+  CheckEquals(0, F.FractionalPart.Numerator,
+    'Test 5: FractionalPart Numerator');
+  CheckEquals(1, F.FractionalPart.Denominator,
+    'Test 5: FractionalPart Denominator');
 end;
 
 procedure TestTFraction.TestCompare;
