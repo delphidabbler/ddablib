@@ -131,7 +131,7 @@ type
     ///  <summary>Rounds fraction to nearest whole number multiple of given
     ///  fraction F.</summary>
     ///  <remarks>Result has same denominator as F.</remarks>
-    function RoundToMulitiple(const F: TFraction): TFraction;
+    function RoundToMultiple(const F: TFraction): TFraction;
 
     ///  <summary>Returns the least common denominator of two fractions.
     ///  </summary>
@@ -616,7 +616,7 @@ begin
   Result := Round(F.Numerator / F.Denominator);
 end;
 
-function TFraction.RoundToMulitiple(const F: TFraction): TFraction;
+function TFraction.RoundToMultiple(const F: TFraction): TFraction;
 var
   FLo, FHi: TFraction;
   MultLo: Int64;
