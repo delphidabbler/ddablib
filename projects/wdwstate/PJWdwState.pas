@@ -58,6 +58,16 @@ unit PJWdwState;
 {$IFDEF VER140} // Delphi 6
   {$UNDEF WARNDIRS}
 {$ENDIF}
+{$UNDEF RTLNAMESPACES}
+{$UNDEF TSCROLLSTYLEMOVED}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE RTLNAMESPACES}
+  {$IFEND}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3
+    {$DEFINE TSCROLLSTYLEMOVED}
+  {$IFEND}
+{$ENDIF}
 
 
 interface
@@ -65,7 +75,12 @@ interface
 
 uses
   // Delphi
+  {$IFDEF RTLNAMESPACES}
+  System.Classes, Vcl.Controls, Winapi.Messages, Winapi.Windows, Vcl.Forms,
+  System.SysUtils, System.Win.Registry;
+  {$ELSE}
   Classes, Controls, Messages, Windows, Forms, SysUtils, Registry;
+  {$ENDIF}
 
 
 const
@@ -694,7 +709,15 @@ implementation
 
 uses
   // Delphi
+  {$IFDEF RTLNAMESPACES}
+  System.IniFiles, Winapi.MultiMon, Vcl.StdCtrls
+  {$IFDEF TSCROLLSTYLEMOVED}
+  , System.UITypes
+  {$ENDIF}
+  ;
+  {$ELSE}
   IniFiles, MultiMon, StdCtrls;
+  {$ENDIF}
 
 
 { Component registration routine }
@@ -1202,9 +1225,9 @@ begin
         Scrollbars := WindowScrollbars(MDIParent.ClientHandle);
         GetClientRect(MDIParent.ClientHandle, WorkArea);
         if Scrollbars in [ssHorizontal, ssBoth] then
-          Inc(WorkArea.Bottom, GetSystemMetrics(Windows.SM_CXHSCROLL));
+          Inc(WorkArea.Bottom, GetSystemMetrics(SM_CXHSCROLL));
         if Scrollbars in [ssVertical, ssBoth] then
-          Inc(WorkArea.Right, GetSystemMetrics(Windows.SM_CYHSCROLL));
+          Inc(WorkArea.Right, GetSystemMetrics(SM_CYHSCROLL));
       end
       else
         // Can't read parent form (possibly because it has no TPJCustomWdwState
@@ -1228,7 +1251,7 @@ begin
     end;
 
     // Adjust window if we have got a work area
-    if not Windows.IsRectEmpty(WorkArea) then
+    if not IsRectEmpty(WorkArea) then
     begin
       // Resize window if too wide or high if resizing permitted
       if Width > WorkArea.Right - WorkArea.Left then
