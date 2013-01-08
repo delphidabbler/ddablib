@@ -31,7 +31,7 @@ zip %OutFile% -9 PJWdwState.dcr
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
 zip %OutFile% -j -9 %DocsDir%\MPL-2.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
-zip %OutFile% -j -9 %DocsDir%\Wiki.URL
+zip %OutFile% -j -9 %DocsDir%\DocumentationWiki.URL
 
 zip %OutFile% -j -9 %HelpDir%\PJWdwState.hlp
 zip %OutFile% -j -9 %HelpDir%\PJWdwState.als
