@@ -135,7 +135,7 @@ object PJStringPEDlg: TPJStringPEDlg
       489
       40)
     object btnOK: TButton
-      Left = 406
+      Left = 323
       Top = 7
       Width = 75
       Height = 25
@@ -146,10 +146,10 @@ object PJStringPEDlg: TPJStringPEDlg
       TabOrder = 1
     end
     object btnCancel: TButton
-      Left = 502
-      Top = 2
-      Width = 92
-      Height = 31
+      Left = 406
+      Top = 7
+      Width = 75
+      Height = 25
       Anchors = [akRight, akBottom]
       Cancel = True
       Caption = 'Cancel'
