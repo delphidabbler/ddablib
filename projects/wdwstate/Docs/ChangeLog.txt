@@ -11,6 +11,17 @@
 ; Change Log for Window State Components
 ; ------------------------------------------------------------------------------
 
+Release v5.4.1 of 08 January 2013
++ Changed to compile without warnings on Delphi XE2 & XE3 for both 32 and 64 bit targets.
++ Changes to demo projects:
+  - Font and appearance of some controls changed.
+  - All form files now in text format.
+  - All demos now need Delphi 7 as a minimum.
++ Component source license changed to Mozilla Public License v2.0. (Demos now placed in public domain).
++ MPL text file and documentation wiki shortcut have had names changed.
++ WinHelp help file regenerated with updated copyright date.
++ Documentation revised.
+
 Release v5.4 of 19 June 2011
 + Added new OnAfterWindowRestored and OnAfterWindowSized events to all components.
 + Added new topics to help file and updated copyright date.
