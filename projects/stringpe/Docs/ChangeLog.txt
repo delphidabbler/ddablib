@@ -11,6 +11,19 @@
 ; Change Log for Extended String Property Editor
 ; ------------------------------------------------------------------------------
 
+Release v2.0.1 of 08 January 2013
++ Property editor source modified to compile without warnings on Delphi XE3.
++ Unit names are now qualified with namespace on Delphi XE2 and later.
++ Revised property editor user interface:
+  - Font and appearance of some controls changed.
+  - All form files now in text format.
+  - Form is no longer scaled.
+  - Controls rearranged.
++ Support for old style design units removed: now requires Delphi 6 as a minimum.
++ Component source license changed to Mozilla Public License v2.0.
++ MPL text file updated to MPL v2.0 and renamed.
++ Updated documentation.
+
 Release v2.0 of 21 July 2011
 + Added several new commands to editor dialog box:
   - "copy all" copies all text from editor to clipboard.
