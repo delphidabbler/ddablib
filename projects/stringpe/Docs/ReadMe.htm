@@ -166,7 +166,7 @@
     strings can only be assigned at run-time.
   </li>
   <li>
-    Although 32 bit Delphi strings have a 2Gb size limit, the standard
+    Although long Delphi strings have a 2Gb size limit, the standard
     property editor only accepts strings up to 255 characters long. Once
     again, longer strings must be assigned at run-time.
   </li>
@@ -233,8 +233,8 @@
 
 <p>
   The property editor compiles and works with all Win 32 version of Delphi
-  from 4 onwards, although there may be some display problems when used with
-  Delphi 4. The editor has been tested with Delphi 4, 6, 7, 2006 and 2010.
+  from Delphi 7 onwards. It may work with Delphi 6, possibly with some
+  adjustments to the form file.
 </p>
 
 
@@ -265,7 +265,7 @@
     <code>ChangeLog.txt</code> &ndash; Change log.
   </li>
   <li>
-    <code>MPL.txt</code> &ndash; Mozilla Public License.
+    <code>MPL-2.txt</code> &ndash; Mozilla Public License v2.0.
   </li>
   <li>
     <code>DocumentationWiki.URL</code> &ndash; Internet shortcut to online
@@ -281,6 +281,12 @@
   >see here</a>.
 </p>
 
+<p>
+  <strong>Note:</strong> you must ensure the package containing the property
+  editor includes the <em>DesignIDE</em> package in its
+  <strong>requires</strong> clause.
+</p>
+
 
 <h2 id="update">
   Update History
@@ -292,33 +298,17 @@
 
 
 <h2 id="license">
-  License and Disclaimer
+  License and Credits
 </h2>
 
 <p>
-  This product, <em>Extended String Property Editor</em>, is subject to the
-  Mozilla Public License Version 1.1 (the &quot;License&quot;). You may not
-  use this Product except in compliance with the License. You may obtain a
-  copy of the License at <a
-    href="http://www.mozilla.org/MPL/MPL-1.1"
-  >http://www.mozilla.org/MPL/MPL-1.1</a>.
+  These components are released under the terms of the <a
+    href="http://www.mozilla.org/MPL/2.0/"
+  >Mozilla Public License v2.0</a>.
 </p>
 
 <p>
-  Software distributed under the License is distributed on an &quot;AS
-  IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
-  the License for the specific language governing rights and limitations under
-  the License.
-</p>
-
-<p>
-  The Initial Developer of <em>Extended String Property Editor</em> is Peter D
-  Johnson. Portions created by the Initial Developer are Copyright &copy;
-  2004-2011 Peter D Johnson (www.delphidabbler.com). All Rights Reserved.
-</p>
-
-<p>
-  Contributor(s) to this project:
+  Thanks to the following who have contributed to this project:
 </p>
 
 <p class="indent">
@@ -399,7 +389,7 @@
     features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2005-2011, P D Johnson,
+    This document is copyright &copy; 2005-2013, P D Johnson,
     <a href="http://www.delphidabbler.com/">
     www.delphidabbler.com</a>
   </div>
