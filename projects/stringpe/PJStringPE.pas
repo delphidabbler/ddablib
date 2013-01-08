@@ -50,13 +50,24 @@ interface
   {$IF CompilerVersion >= 15.0} // Delphi 7 and higher
     {$WARN UNSAFE_CODE OFF}
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE RTLNAMESPACES}
+  {$IFEND}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3
+    {$DEFINE TSCROLLSTYLEMOVED}
+  {$IFEND}
 {$ENDIF}
 
 
 uses
   // Delphi
+  {$IFDEF RTLNAMESPACES}
+  Vcl.StdCtrls, Vcl.Controls, Vcl.ExtCtrls, System.Classes, Vcl.Dialogs,
+  Vcl.Forms, Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Vcl.ActnList,
+  {$ELSE}
   StdCtrls, Controls, ExtCtrls, Classes, Dialogs, Forms, ImgList, ComCtrls,
   ToolWin, ActnList,
+  {$ENDIF}
   {$IFDEF DELPHI6ANDUP}
   DesignIntf, DesignEditors;
   {$ELSE}
@@ -195,7 +206,16 @@ implementation
 
 uses
   // Delphi
-  SysUtils, Windows, Registry, ClipBrd, Messages, ShellAPI;
+  {$IFDEF RTLNAMESPACES}
+  System.SysUtils, Winapi.Windows, System.Win.Registry, Vcl.ClipBrd,
+  Winapi.Messages, Winapi.ShellAPI
+  {$ELSE}
+  SysUtils, Windows, Registry, ClipBrd, Messages, ShellAPI
+  {$ENDIF}
+  {$IFDEF TSCROLLSTYLEMOVED}
+  , System.UITypes
+  {$ENDIF}
+  ;
 
 
 {$R *.DFM}
