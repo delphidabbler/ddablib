@@ -42,21 +42,17 @@ unit PJStringPE;
 interface
 
 
-{$UNDEF DELPHI6ANDUP}
-{$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 14.0} // Delphi 6 and higher
-    {$DEFINE DELPHI6ANDUP}
-  {$IFEND}
-  {$IF CompilerVersion >= 15.0} // Delphi 7 and higher
-    {$WARN UNSAFE_CODE OFF}
-  {$IFEND}
-  {$IF CompilerVersion >= 23.0} // Delphi XE2
-    {$DEFINE RTLNAMESPACES}
-  {$IFEND}
-  {$IF CompilerVersion >= 24.0} // Delphi XE3
-    {$DEFINE TSCROLLSTYLEMOVED}
-  {$IFEND}
-{$ENDIF}
+// Requires Delphi 6 or later
+
+{$IF CompilerVersion >= 15.0} // Delphi 7 and higher
+  {$WARN UNSAFE_CODE OFF}
+{$IFEND}
+{$IF CompilerVersion >= 23.0} // Delphi XE2
+  {$DEFINE RTLNAMESPACES}
+{$IFEND}
+{$IF CompilerVersion >= 24.0} // Delphi XE3
+  {$DEFINE TSCROLLSTYLEMOVED}
+{$IFEND}
 
 
 uses
@@ -68,11 +64,7 @@ uses
   StdCtrls, Controls, ExtCtrls, Classes, Dialogs, Forms, ImgList, ComCtrls,
   ToolWin, ActnList,
   {$ENDIF}
-  {$IFDEF DELPHI6ANDUP}
   DesignIntf, DesignEditors;
-  {$ELSE}
-  DsgnIntf;
-  {$ENDIF}
 
 
 type
