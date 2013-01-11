@@ -610,30 +610,13 @@ begin
 end;
 
 function IsEqualResID(const R1, R2: PChar): Boolean;
-
-  function IsEqualStrResID(const R1, R2: PChar): Boolean;
-    {Compares two string resources ids
-      @param R1 [in] 1st resource id to compare.
-      @param R2 [in] 2nd resource id to compare.
-      @return True if resource ids are equal.
-    }
-  begin
-    Assert(not IsIntResource(R1) and not IsIntResource(R2));
-    {$IFDEF UseAnsiStrIComp}
-    Result := AnsiStrIComp(R1, R2) = 0;
-    {$ELSE}
-    // There's a problem with AnsiStrICmp on some early Delphis
-    Result := StrIComp(R1, R2) = 0;
-    {$ENDIF}
-  end;
-
 begin
   if IsIntResource(R1) then
-    // R1 is ordinal: R2 must also be ordinal with same value
+    // R1 is ordinal: R2 must also be ordinal with same value in lo word
     Result := IsIntResource(R2) and (LoWord(DWORD(R1)) = LoWord(DWORD(R2)))
   else
-    // R1 is string: R2 must also be string with same text (ignoring case)
-    Result := not IsIntResource(R2) and IsEqualStrResID(R1, R2)
+    // R1 is string pointer: R2 must be same string (ignoring case)
+    Result := not IsIntResource(R2) and (StrIComp(R1, R2) = 0);
 end;
 
 
