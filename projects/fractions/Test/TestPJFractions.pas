@@ -694,10 +694,12 @@ begin
 end;
 
 procedure TestTFraction.TestMax;
+type
+  TFractionArray = array of TFraction;
 var
-  A: TArray<TFraction>;
+  A: TFractionArray;
 begin
-  A := TArray<TFraction>.Create(
+  A := TFractionArray.Create(
     TFraction.Create(3, 4),
     TFraction.Create(5, 12),
     TFraction.Create(-4, 3),
@@ -755,10 +757,12 @@ begin
 end;
 
 procedure TestTFraction.TestMin;
+type
+  TFractionArray = array of TFraction;
 var
-  A: TArray<TFraction>;
+  A: TFractionArray;
 begin
-  A := TArray<TFraction>.Create(
+  A := TFractionArray.Create(
     TFraction.Create(3, 4),
     TFraction.Create(5, 12),
     TFraction.Create(-4, 3),
