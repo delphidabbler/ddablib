@@ -40,7 +40,7 @@
  * -----------------------------------------------------------------------------
 }
 
-program PJFractionTest;
+program FractionTest;
 
 {$IFDEF CONSOLE_TESTRUNNER}
 {$APPTYPE CONSOLE}

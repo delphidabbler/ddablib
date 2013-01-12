@@ -4,14 +4,14 @@
 			<ProjectVersion>12.0</ProjectVersion>
 			<Config Condition="'$(Config)'==''">Base</Config>
 			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-			<MainSource>PJFractionTest.dpr</MainSource>
+			<MainSource>FractionTest.dpr</MainSource>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<DCC_UnitSearchPath>$(BDS)\Source\DUnit\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-			<DCC_DependencyCheckOutputName>PJFractionTest.exe</DCC_DependencyCheckOutputName>
+			<DCC_DependencyCheckOutputName>FractionTest.exe</DCC_DependencyCheckOutputName>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
 			<DCC_Define>_CONSOLE_TESTRUNNER;$(DCC_Define)</DCC_Define>
 			<DCC_ExeOutput>.</DCC_ExeOutput>
@@ -24,7 +24,7 @@
 			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
 		</PropertyGroup>
 		<ItemGroup>
-			<DelphiCompile Include="PJFractionTest.dpr">
+			<DelphiCompile Include="FractionTest.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="TestPJFractions.pas"/>
@@ -81,7 +81,7 @@
 						<Excluded_Packages Name="$(BDS)\bin\dclofficexp140.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
 					</Excluded_Packages>
 					<Source>
-						<Source Name="MainSource">PJFractionTest.dpr</Source>
+						<Source Name="MainSource">FractionTest.dpr</Source>
 					</Source>
 				</Delphi.Personality>
 				<UnitTesting>
