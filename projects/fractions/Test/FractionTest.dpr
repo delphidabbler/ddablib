@@ -58,7 +58,6 @@ uses
   {$ELSE}
   GUITestRunner,
   {$ENDIF}
-  XPMan,
   TestFramework,
   TestFractions in 'TestFractions.pas',
   DelphiDabbler.Lib.Fractions in '..\DelphiDabbler.Lib.Fractions.pas';
