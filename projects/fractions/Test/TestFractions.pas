@@ -5,6 +5,9 @@
  * These test cases were created with Delphi 2010 and haven't been checked with
  * any other compiler.
  *
+ * Any copyright in this file is dedicated to the Public Domain.
+ * http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * $Rev$
  * $Date$
  * -----------------------------------------------------------------------------
