@@ -8,7 +8,8 @@
  * $Rev$
  * $Date$
  *
- * Defines types that encapsulate fractions and operations on them.
+ * Defines an advanced record type that encapsulates fraction and related
+ * operations.
  *
  * Acknowledgements:
  *   o The information on fractions in the Mathematics Help Facility at
