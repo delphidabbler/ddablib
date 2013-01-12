@@ -30,10 +30,15 @@ unit DelphiDabbler.Lib.Fractions;
 
 
 // Delphi 2009 or later is required to compile
+// For Delphi XE2 and later we qualify used unit names with namespaces
 {$UNDEF CANCOMPILE}
+{$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 20.0}
     {$DEFINE CANCOMPILE}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}
+    {$DEFINE RTLNAMESPACES}
   {$IFEND}
 {$ENDIF}
 {$IFNDEF CANCOMPILE}
@@ -46,7 +51,11 @@ interface
 
 uses
   // RTL / VCL units
+  {$IFDEF RTLNAMESPACES}
+  System.Types, System.Math;
+  {$ELSE}
   Types, Math;
+  {$ENDIF}
 
 
 type
@@ -279,7 +288,11 @@ implementation
 
 uses
   // RTL / VCL units
+  {$IFDEF RTLNAMESPACES}
+  System.SysUtils;
+  {$ELSE}
   SysUtils;
+  {$ENDIF}
 
 
 ///  <summary>Calculates the greatest common divisor of two given integers.
