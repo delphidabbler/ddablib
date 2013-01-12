@@ -52,6 +52,7 @@ type
     procedure TestRoundToMultiple;
     procedure TestTruncateToMultiple;
     procedure TestPower;
+    procedure TestAbs;
   end;
 
 implementation
@@ -60,6 +61,41 @@ uses
   Types, Math;
 
 { TestTFraction }
+
+procedure TestTFraction.TestAbs;
+var
+  F, FRes: TFraction;
+begin
+  F := TFraction.Create(2, 3);
+  FRes := TFraction.Abs(F);
+  CheckEquals(2, FRes.Numerator, 'Test 1 Numerator');
+  CheckEquals(3, FRes.Denominator, 'Test 1 Denominator');
+
+  F := TFraction.Create(-4, 3);
+  FRes := TFraction.Abs(F);
+  CheckEquals(4, FRes.Numerator, 'Test 2 Numerator');
+  CheckEquals(3, FRes.Denominator, 'Test 2 Denominator');
+
+  F := 4;
+  FRes := TFraction.Abs(F);
+  CheckEquals(4, FRes.Numerator, 'Test 3 Numerator');
+  CheckEquals(1, FRes.Denominator, 'Test 3 Denominator');
+
+  F := -42;
+  FRes := TFraction.Abs(F);
+  CheckEquals(42, FRes.Numerator, 'Test 4 Numerator');
+  CheckEquals(1, FRes.Denominator, 'Test 4 Denominator');
+
+  F := 0;
+  FRes := TFraction.Abs(F);
+  CheckEquals(0, FRes.Numerator, 'Test 4 Numerator');
+  CheckEquals(1, FRes.Denominator, 'Test 4 Denominator');
+
+  F := TFraction.Create(-6, 4);
+  FRes := TFraction.Abs(F);
+  CheckEquals(6, FRes.Numerator, 'Test 4 Numerator');
+  CheckEquals(4, FRes.Denominator, 'Test 4 Denominator');
+end;
 
 procedure TestTFraction.TestAddOp;
 var

@@ -26,11 +26,14 @@
 
 unit PJFractions;
 
+
 interface
+
 
 uses
   // RTL / VCL units
   Types, Math;
+
 
 type
   ///  <summary>Encapsulates a vulgar fraction and mathematical operations on
@@ -167,6 +170,9 @@ type
     class function Power(const F: TFraction; Exponent: ShortInt): TFraction;
       static;
 
+    ///  <summary>Returns the absoulte value of the given fraction.</summary>
+    class function Abs(const F: TFraction): TFraction; static;
+
     ///  <summary>Enables assignment of an integer to a fraction.</summary>
     ///  <remarks>Resulting fraction will have numerator=I and denominator=1.
     ///  </remarks>
@@ -253,11 +259,14 @@ type
     class operator Modulus(const A, B: TFraction): TFraction;
   end;
 
+
 implementation
+
 
 uses
   // RTL / VCL units
   SysUtils;
+
 
 ///  <summary>Calculates the greatest common divisor of two given integers.
 ///  </summary>
@@ -350,6 +359,11 @@ begin
 end;
 
 { TFraction }
+
+class function TFraction.Abs(const F: TFraction): TFraction;
+begin
+  Result := TFraction.Create(System.Abs(F.Numerator), F.Denominator);
+end;
 
 class operator TFraction.Add(const A, B: TFraction): TFraction;
 var
@@ -479,8 +493,8 @@ var
   FDenominator: Extended;   // numerator as decimal
 begin
   DecimalToFraction(E, FNumerator, FDenominator, DecimalPlaces);
-  if (Abs(FNumerator) >= LargestNumerator)
-    or (Abs(FDenominator) >= LargestDenominator) then
+  if (System.Abs(FNumerator) >= LargestNumerator)
+    or (System.Abs(FDenominator) >= LargestDenominator) then
     raise EConvertError.Create(sCantConvert);
   Result := TFraction.Create(Round(FNumerator), Round(FDenominator)).Simplify;
 end;
@@ -655,7 +669,8 @@ begin
   Assert(HasCommonFactor(CommonFactor),
     'TFraction.Simplify: CommonFactor is not a common factor of this fraction');
   Result := TFraction.Create(
-    Numerator div Abs(CommonFactor), Denominator div Abs(CommonFactor)
+    Numerator div System.Abs(CommonFactor),
+    Denominator div System.Abs(CommonFactor)
   );
 end;
 
