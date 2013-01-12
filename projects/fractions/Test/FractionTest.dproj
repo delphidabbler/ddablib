@@ -27,7 +27,7 @@
 			<DelphiCompile Include="FractionTest.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="TestPJFractions.pas"/>
+			<DCCReference Include="TestFractions.pas"/>
 			<DCCReference Include="..\DelphiDabbler.Lib.Fractions.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>

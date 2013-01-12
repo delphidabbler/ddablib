@@ -55,7 +55,7 @@ uses
   {$ENDIF}
   XPMan,
   TestFramework,
-  TestPJFractions in 'TestPJFractions.pas',
+  TestFractions in 'TestFractions.pas',
   DelphiDabbler.Lib.Fractions in '..\DelphiDabbler.Lib.Fractions.pas';
 
 {$R *.RES}

@@ -10,7 +10,7 @@
  * -----------------------------------------------------------------------------
 }
 
-unit TestPJFractions;
+unit TestFractions;
 
 interface
 
