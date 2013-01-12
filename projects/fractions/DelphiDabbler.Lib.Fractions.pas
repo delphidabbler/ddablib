@@ -28,6 +28,18 @@
 unit DelphiDabbler.Lib.Fractions;
 
 
+// Delphi 2009 or later is required to compile
+{$UNDEF CANCOMPILE}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 20.0}
+    {$DEFINE CANCOMPILE}
+  {$IFEND}
+{$ENDIF}
+{$IFNDEF CANCOMPILE}
+  {$MESSAGE FATAL 'Delphi 2009 or later required'}
+{$ENDIF}
+
+
 interface
 
 
