@@ -24,7 +24,8 @@
 
 {$RANGECHECKS ON}
 
-unit PJFractions;
+
+unit DelphiDabbler.Lib.Fractions;
 
 
 interface

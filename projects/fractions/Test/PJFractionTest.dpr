@@ -56,7 +56,7 @@ uses
   XPMan,
   TestFramework,
   TestPJFractions in 'TestPJFractions.pas',
-  PJFractions in '..\PJFractions.pas';
+  DelphiDabbler.Lib.Fractions in '..\DelphiDabbler.Lib.Fractions.pas';
 
 {$R *.RES}
 

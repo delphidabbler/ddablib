@@ -15,7 +15,7 @@ unit TestPJFractions;
 interface
 
 uses
-  TestFramework, PJFractions;
+  TestFramework, DelphiDabbler.Lib.Fractions;
 
 type
   // Test case for TFraction
