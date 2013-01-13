@@ -27,7 +27,7 @@ FILETYPE VFT_APP
   BLOCK "080904E4"
   {
    VALUE "Comments", "This is the English English realisation.\000"
-   VALUE "CompanyName", "PJSoft\000"
+   VALUE "CompanyName", "DelphiDabbler.com\000"
    VALUE "FileDescription", "A demo application showing multi-lingual version info resources.\000"
    VALUE "FileVersion", "1.0\000"
    VALUE "InternalName", "MultiLingDemo\000"
@@ -40,7 +40,7 @@ FILETYPE VFT_APP
   BLOCK "040904B0"
   {
    VALUE "Comments", "This is the American English realization.\000"
-   VALUE "CompanyName", "PJSoft\000"
+   VALUE "CompanyName", "DelphiDabbler.com\000"
    VALUE "FileDescription", "A demo application showing multi-lingual version info resources.\000"
    VALUE "FileVersion", "1.0\000"
    VALUE "InternalName", "MultiLingDemo\000"
