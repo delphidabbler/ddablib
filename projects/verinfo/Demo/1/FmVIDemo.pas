@@ -13,12 +13,27 @@
 
 unit FmVIDemo;
 
+{$UNDEF Supports_RTLNameSpaces}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}   // Delphi XE2
+    {$DEFINE Supports_RTLNameSpaces}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
   // Delphi
+  {$IFDEF Supports_RTLNameSpaces}
+  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Buttons, Vcl.Dialogs, Vcl.Controls,
+  System.Classes, Vcl.Forms, Winapi.Windows, Winapi.Messages, Vcl.ExtCtrls,
+  {$ELSE}
   ComCtrls, StdCtrls, Buttons, Dialogs, Controls, Classes, Forms, Windows,
   Messages, ExtCtrls,
+  {$ENDIF}
   // DelphiDabbler component
   PJVersionInfo;
 
@@ -72,7 +87,11 @@ implementation
 
 uses
   // Delphi
+  {$IFDEF Supports_RTLNameSpaces}
+  System.SysUtils, System.Math, WinApi.ShellAPI;
+  {$ELSE}
   SysUtils, Math, ShellAPI;
+  {$ENDIF}
 
 {$R *.DFM}
 
