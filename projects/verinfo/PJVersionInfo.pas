@@ -45,6 +45,8 @@ unit PJVersionInfo;
 // * Supports_AdvancedRecords - Defined if advanced records with record methods,
 //                              operator overloads etc. supported (Delphi 2006
 //                              and later).
+// * Supports_RTLNameSpaces   - Defined if Delphi RTL / VCL unit references
+//                              should be qualified with namespaces. 
 {$DEFINE Supports_Assert}
 {$DEFINE Supports_ResourceString}
 {$UNDEF Supports_AdvancedRecords}
