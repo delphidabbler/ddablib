@@ -48,6 +48,7 @@ unit PJVersionInfo;
 {$DEFINE Supports_Assert}
 {$DEFINE Supports_ResourceString}
 {$UNDEF Supports_AdvancedRecords}
+{$UNDEF Supports_RTLNameSpaces}
 {$IFDEF VER90} // Delphi 2
   {$UNDEF Supports_Assert}
   {$UNDEF Supports_ResourceString}
@@ -60,6 +61,9 @@ unit PJVersionInfo;
   {$IF CompilerVersion >= 18.0}   // >= Delphi 2006
     {$DEFINE Supports_AdvancedRecords}
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE Supports_RTLNameSpaces}
+  {$IFEND}
 {$ENDIF}
 
 interface
@@ -67,7 +71,11 @@ interface
 
 uses
   // Delphi
+  {$IFDEF Supports_RTLNameSpaces}
+  Winapi.Windows, System.Classes;
+  {$ELSE}
   Windows, Classes;
+  {$ENDIF}
 
 
 type
@@ -319,8 +327,12 @@ implementation
 
 
 uses
+  {$IFDEF Supports_RTLNameSpaces}
+  System.SysUtils;
+  {$ELSE}
   // Delphi
   SysUtils;
+  {$ENDIF}
 
 
 procedure Register;
