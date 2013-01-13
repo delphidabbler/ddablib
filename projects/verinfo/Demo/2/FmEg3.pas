@@ -39,7 +39,7 @@ implementation
 
 uses
   // Delphi
-  SysUtils, Windows;
+  SysUtils, Windows, ShellAPI;
 
 {$R *.DFM}
 
@@ -174,9 +174,9 @@ procedure TEgForm3.Button3Click(Sender: TObject);
   // Displays example in help
   // this event handler is not included in help example
 const
-  cMacro = 'AL("TPJVersionInfo_Example3",1)';
+  cURL = 'http://delphidabbler.com/url/verinfo-eg3';
 begin
-  WinHelp(Handle, 'PJVersionInfo.hlp', HELP_COMMAND, LParam(PChar(cMacro)));
+  ShellExecute(Handle, 'open', cURL, nil, nil, SW_SHOWNORMAL);
 end;
 
 end.

@@ -50,7 +50,7 @@ object EgForm2: TEgForm2
     Width = 139
     Height = 31
     Hint = 'Help file must be installed'
-    Caption = 'View Help Topic'
+    Caption = 'View Example'
     TabOrder = 2
     OnClick = Button3Click
   end
