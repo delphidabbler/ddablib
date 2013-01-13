@@ -1,5 +1,8 @@
-The HelpEgs demo program implements the examples containing the the Version
-Information Component's help file.
+The HelpEgs demo program implements the examples from both the Version
+Information Component's help file and online documentation.
 
-The main window displays a button for each example. Click a button to display
-the output of the example in a dialog box.
+The main window displays a button for each example. Click the required button to
+run an example and display the results.
+
+Each example display its own dialogue box that includes a link to the related
+online example.
