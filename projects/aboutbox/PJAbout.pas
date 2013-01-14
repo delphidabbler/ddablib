@@ -44,6 +44,7 @@ interface
 // Set conditionally defined symbols and switch of code warnings
 {$DEFINE RESOURCESTRING}  // defined if resourcestring keyword supported
 {$UNDEF SCREENWORKAREA}   // defined if Screen.WorkAreaRect property supported
+{$UNDEF RTLNAMESPACES}    // defined if RTL units are qualified by namespace
 {$IFDEF VER90}  // Delphi 2
   {$UNDEF RESOURCESTRING}
 {$ENDIF}
@@ -54,12 +55,20 @@ interface
   {$IF CompilerVersion >= 15.0} // Delphi 7
     {$WARN UNSAFE_CODE OFF}
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE RTLNAMESPACES}
+  {$IFEND}
 {$ENDIF}
 
 
 uses
   // Delphi
+  {$IFNDEF RTLNAMESPACES}
   Forms, ExtCtrls, StdCtrls, Buttons, Classes, Controls, Windows, Graphics,
+  {$ELSE}
+  Vcl.Forms, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons, System.Classes,
+  Vcl.Controls, Winapi.Windows, Vcl.Graphics,
+  {$ENDIF}
   // DelphiDabbler component
   PJVersionInfo;
 
