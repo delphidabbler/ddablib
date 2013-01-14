@@ -7,3 +7,6 @@ Click refresh to display the version information.
 If the program contains version information string file information in more than
 one language (translation) the "Translation" drop down list will display each
 one. Select a translation to display its string file information.
+
+*** NOTE: To compile with Delphi 2007 first delete the .dproj file then load the
+          project from the .bdsproj file.

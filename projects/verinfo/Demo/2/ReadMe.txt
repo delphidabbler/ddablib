@@ -6,3 +6,6 @@ run an example and display the results.
 
 Each example display its own dialogue box that includes a link to the related
 online example.
+
+*** NOTE: To compile with Delphi 2007 first delete the .dproj file then load the
+          project from the .bdsproj file.
