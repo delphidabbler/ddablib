@@ -1,7 +1,8 @@
 @rem ---------------------------------------------------------------------------
 @rem Script used to create help file for About Box Component.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2008-2009
+@rem Any copyright in this file is dedicated to the Public Domain.
+@rem http://creativecommons.org/publicdomain/zero/1.0/
 @rem
 @rem Requires evironment variable HC set to full file path to MS WinHelp
 @rem compiler (HCRTF.exe).
