@@ -12,8 +12,22 @@
 
 program HelpEgs;
 
+{$UNDEF Supports_RTLNameSpaces}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}   // Delphi XE2
+    {$DEFINE Supports_RTLNameSpaces}
+  {$IFEND}
+{$ENDIF}
+
 uses
+  {$IFDEF Supports_RTLNameSpaces}
+  Vcl.Forms,
+  {$ELSE}
   Forms,
+  {$ENDIF}
   FmMain in 'FmMain.pas' {MainForm},
   FmEg1 in 'FmEg1.pas' {EgForm1},
   FmEg2 in 'FmEg2.pas' {EgForm2},

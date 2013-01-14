@@ -13,11 +13,25 @@
 
 unit FmEg2;
 
+{$UNDEF Supports_RTLNameSpaces}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}   // Delphi XE2
+    {$DEFINE Supports_RTLNameSpaces}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
   // Delphi
-  Forms, StdCtrls, Classes, Controls,
+  {$IFDEF Supports_RTLNameSpaces}
+  Vcl.Forms, System.Classes, Vcl.Controls, Vcl.StdCtrls,
+  {$ELSE}
+  Forms, Classes, Controls, StdCtrls,
+  {$ENDIF}
   // DelphiDabbler
   PJVersionInfo;
 
@@ -41,7 +55,11 @@ implementation
 
 uses
   // Delphi
+  {$IFDEF Supports_RTLNameSpaces}
+  Vcl.Dialogs, System.SysUtils, Winapi.Windows, Winapi.ShellAPI;
+  {$ELSE}
   Dialogs, SysUtils, Windows, ShellAPI;
+  {$ENDIF}
 
 {$R *.DFM}
 

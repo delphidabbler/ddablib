@@ -12,11 +12,25 @@
 
 unit FmMain;
 
+{$UNDEF Supports_RTLNameSpaces}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
+    {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}   // Delphi XE2
+    {$DEFINE Supports_RTLNameSpaces}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
   // Delphi
+  {$IFDEF Supports_RTLNameSpaces}
+  Vcl.Forms, System.Classes, Vcl.Controls, Vcl.StdCtrls;
+  {$ELSE}
   Forms, Classes, Controls, StdCtrls;
+  {$ENDIF}
 
 type
   TMainForm = class(TForm)
@@ -40,7 +54,11 @@ implementation
 
 uses
   // Delphi
+  {$IFDEF Supports_RTLNameSpaces}
+  Winapi.Windows,
+  {$ELSE}
   Windows,
+  {$ENDIF}
   // Project
   FmEg1, FmEg2, FmEg3, FmEg4;
 
