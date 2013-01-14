@@ -15,9 +15,22 @@ unit FmDemo;
 
 interface
 
+{$UNDEF RTLNAMESPACES}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE RTLNAMESPACES}
+  {$IFEND}
+{$ENDIF}
+
 uses
+  {$IFNDEF RTLNAMESPACES}
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Spin, PJAbout, PJVersionInfo;
+  Dialogs, StdCtrls, Spin, 
+  {$ELSE}
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Spin, 
+  {$ENDIF}
+  PJAbout, PJVersionInfo;
 
 type
   TForm1 = class(TForm)

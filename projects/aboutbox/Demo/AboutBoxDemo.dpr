@@ -11,14 +11,25 @@
 
 program AboutBoxDemo;
 
+{$UNDEF RTLNAMESPACES}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE RTLNAMESPACES}
+  {$IFEND}
+{$ENDIF}
+
 uses
+  {$IFNDEF RTLNAMESPACES}
   Forms,
+  {$ELSE}
+  Vcl.Forms,
+  {$ENDIF}
   FmDemo in 'FmDemo.pas' {Form1};
-      
+
 {$R *.res}
 {$R VerInfo.res}
 
-begin                       
+begin
   Application.Initialize;
   Application.Title := 'About Box Demo';
   Application.CreateForm(TForm1, Form1);
