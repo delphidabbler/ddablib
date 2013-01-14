@@ -152,7 +152,7 @@
   <li><a href="#installation">Installation</a></li>
   <li><a href="#demo">Demo Projects</a></li>
   <li><a href="#update">Update History</a></li>
-  <li><a href="#license">License and Disclaimer</a></li>
+  <li><a href="#license">License</a></li>
   <li><a href="#bugs">Bugs and Feature Requests</a></li>
   <li><a href="#author">About the Author</a></li>
 </ul>
@@ -170,11 +170,11 @@
 <p>
   The component reads information from a designated file's
   <var>VERSIONINFO</var> resource. The required file is specified in the
-  component's <var>FileName</var> property. Setting <var>FileName</var> to
-  the empty string fetches version information for the executable file
-  containing the component. The boolean <var>HaveInfo</var> property indicates
-  whether the file contains version information. This component can access
-  variable file information for each language provided in the resource.
+  component's <var>FileName</var> property. Setting <var>FileName</var> to the
+  empty string fetches version information for the executable file containing
+  the component. The boolean <var>HaveInfo</var> property indicates whether the
+  file contains version information. This component can access variable file
+  information for each language provided in the resource.
 </p>
 
 <p>
@@ -194,22 +194,22 @@
     other properties.
   </li>
   <li>
-    Access to the language and code page of the current translation - by
+    Access to the language and code page of the current translation &ndash; by
     code and by name.
   </li>
   <li>
-    Access to the string file information for the current translation -
-    named properties access the Microsoft-defined string information, while
-    an array property gives access to any string item by name.
+    Access to the string file information for the current translation &ndash;
+    named properties access the Microsoft-defined string information, while an
+    array property gives access to any string item by name.
   </li>
 </ul>
 
 <p>
-  Version numbers are encapsulated in <var>TPJVersionNumber</var> records
-  which, on Delphi 2006 or later, can be directly assigned to a string and can
-  be compared using the normal equality operators. Helper functions are also
-  provided for use with earlier Delphis that can format version numbers as
-  text and can compare them.
+  Version numbers are encapsulated in <var>TPJVersionNumber</var> records which,
+  on Delphi 2006 or later, can be directly assigned to a string and can be
+  compared using the normal equality operators. Helper functions are also
+  provided for use with earlier Delphis that can format version numbers as text
+  and can compare them.
 </p>
 
 <h3>
@@ -218,8 +218,8 @@
 
 <p>
   The component makes calls to the Windows API. Therefore the version
-  information being read must follow the Microsoft guidelines - be warned that
-  not all software complies!
+  information being read must follow the Microsoft guidelines &ndash; be warned
+  that not all software complies!
 </p>
 
 <h3>
@@ -227,14 +227,14 @@
 </h3>
 
 <p>
-  <var>TPJVersionInfo</var> compiles on all Win32 versions and personalities
-  of Delphi. Releases up v3.3 have  tested with Delphi versions 2, 3, 4, 6, 7,
-  2006 and 2010 while later releases have been tested on Delphi 7 and 2006 to
-  XE3 and are assumed to work on later versions.
+  <var>TPJVersionInfo</var> compiles on all Win32 versions and personalities of
+  Delphi. Releases up v3.3 have  tested with Delphi versions 2, 3, 4, 6, 7, 2006
+  and 2010 while later releases have been tested on Delphi 7 and 2006 to XE3 and
+  are assumed to work on later versions.
 </p>
 
 <p>
-  The unit name changed to <code>PJVersionInfo</code> at release 3 - this
+  The unit name changed to <code>PJVersionInfo</code> at release 3 &ndash; this
   means that programs using earlier versions will need to be modified (or to
   have an alias set in Delphi's Project Options) before being recompiled using
   the new version. Functionally, the component is backward compatible with
@@ -258,28 +258,28 @@
   of this component and have installed the <em>DelphiDabbler</em> About Box
   Component (<var>TPJAboutBoxDlg</var>) you may need to uninstall it before
   updating this component, and re-install the about box component once the
-  update has been installed. If the About Box Component is earlier that v3.2
-  it will need to be updated to the most recent version.
+  update has been installed. If the About Box Component is earlier that v3.2 it
+  will need to be updated to the most recent version.
 </div>
 
 <p>
   The <em>Version Information Component</em> is supplied in a zip file. Before
-  installing you need to extract all the files from the zip file. The
-  following files will be extracted:
+  installing you need to extract all the files from the zip file. The following
+  files will be extracted:
 </p>
 
 <ul>
   <li>
-    <strong><code>PJVersionInfo.pas</code></strong> &ndash; Component
-    source code.
+    <strong><code>PJVersionInfo.pas</code></strong> &ndash; Component source
+    code.
   </li>
   <li>
-    <strong><code>PJVersionInfo.dcr</code></strong> &ndash; Component
-    palette glyph.
+    <strong><code>PJVersionInfo.dcr</code></strong> &ndash; Component palette
+    glyph.
   </li>
   <li>
-    <code>PJVersionInfo.hlp</code> &ndash; Help file that integrates into
-    the Delphi 3-7 IDE.
+    <code>PJVersionInfo.hlp</code> &ndash; Help file that integrates into the
+    Delphi 3-7 IDE.
   </li>
   <li>
     <code>PJVersionInfo.als</code> &ndash; Keyword file required when
@@ -313,8 +313,8 @@
 
 <p>
   For Delphi 3 onwards you must include <code>PJVersionInfo.pas</code> and
-  <code>PJVersionInfo.dcr</code> in a design time package that is installed
-  into the Delphi IDE. If you need help doing this <a
+  <code>PJVersionInfo.dcr</code> in a design time package that is installed into
+  the Delphi IDE. If you need help doing this <a
     href="http://www.delphidabbler.com/url/install-comp"
   >see here</a>.
 </p>
@@ -341,9 +341,9 @@
 <ol class="spaced">
   <li>
     <code>VIDemo.dpr</code> is an application that can extract and display
-    version information from any program (provided that the program has
-    valid version information). <strong>Note:</strong> This demo requires
-    Delphi 7 or later.
+    version information from any program (provided that the program has valid
+    version information). <strong>Note:</strong> This demo requires Delphi 7 or
+    later.
   </li>
   <li>
     <code>HelpEgs.dpr</code> implements all the <a
@@ -401,28 +401,30 @@
 <p>
   I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
   Wales,  UK, writing write mainly in Delphi. My programs and code are
-  available from:
-  <a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+  available from: <a
+    href="http://www.delphidabbler.com/"
+  >http://www.delphidabbler.com/</a>.
 </p>
 
 <p>
-  I can be <a href="http://www.delphidabbler.com/contact">contacted via the
-  website.</a>
+  I can be <a
+    href="http://www.delphidabbler.com/contact"
+  >contacted via the website</a>.
 </p>
 
 <div class="endnotes">
 
   <div class="comments">
-    Please
-    <a href="http://www.delphidabbler.com/contact">
-    let me know</a> if you have any comments about the component, but please
+    Please <a
+      href="http://www.delphidabbler.com/contact"
+    >let me know</a> if you have any comments about the component, but please
     use the Issue Tracker noted above to report bugs and request new features.
   </div>
 
   <div class="copyright">
-    This document is copyright &copy; 2005-2013, P D Johnson,
-    <a href="http://www.delphidabbler.com/">
-    www.delphidabbler.com</a>
+    This document is copyright &copy; 2005-2013, P D Johnson, <a
+      href="http://www.delphidabbler.com/"
+    >www.delphidabbler.com</a>.
   </div>
 
 </div>
