@@ -1,441 +1,441 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
 
-	<title>
-		DelphiDabbler About Box Component ReadMe
-	</title>
+  <title>
+    DelphiDabbler About Box Component ReadMe
+  </title>
 
-	<style type="text/css">
-		body {
-			margin: 1em;
-			padding: 0;
-			font-family: Verdana, Arial, sans-serif;
-			font-size: 9pt;
-			line-height: 150%;
-		}
-		h1 {
-			margin: 0 0 1em 0;
-			padding: 0.5em;
-			border: 1px silver solid;
-			background-color: #eee;
-			font-size: 13pt;
-			font-weight: bold;
-			text-align: center;
-		}
-		h1 .subtitle {
-			font-style: italic;
-			color: #336;
-		}
-		h2 {
-			margin: 1em 0 0 0;
-			padding: 0;
-			padding-bottom: 6px;
-			border-bottom: 1px silver solid;
-			font-size: 11pt;
-			font-weight: bold;
-		}
-		h3 {
-			margin: 0.5em 0 0 0;
-			padding: 0;
-			font-size: 9pt;
-			font-weight: bold;
-		}
-		p {
-			margin: 0.5em 0 0 0;
-			padding: 0;
-		}
-		ul, ol {
-			margin: 0.5em 0 0 3em;
-			padding: 0;
-		}
-		ul {
-			list-style-type: square;
-		}
-		ul.spaced li,
-		ol.spaced li {
-			margin-top: 0.5em;
-		}
-		ul.spaced li,
-		ol.spaced li {
-			margin-top: 0.5em;
-		}
-		ul.unspaced li,
-		ol.unspaced li {
-			margin-top: 0;
-		}
-		ul.unspaced li.first,
-		ol.unspaced li.first {
-			margin-top: 0.5em;
-		}
-		code {
-			font-family: "Courier New", Courier, monospace;
-		}
-		a:link {
-			color: #336;
-			text-decoration: underline;
-		}
-		a:visited {
-			color: #669;
-			text-decoration: underline;
-		}
-		a:active {
-			color: #336;
-			text-decoration: underline;
-		}
-		a:hover {
-			text-decoration: underline;
-		}
-		.gototop {
-			margin: 1em 0 0 0;
-			padding: 0.3em 0 0 0;
-			text-align: center;
-			position: relative;
-			float: right;
-			font-weight: bold;
-		}
-		.pullout {
-			border-left: 8px silver solid;
-			xborder-bottom: 2px silver solid;
-			xborder-top: 2px silver solid;
-			background-color: #eee;
-			margin: 0.5em 0 0 0;
-			padding: 0.25em 0.5em;
-			font-style: italic;
-		}
-		.indent {
-			margin-left: 3em;
-		}
-		.highlight {
-			color: #336;
-			font-style: italic;
-			font-weight: bold;
-		}
-		.endnotes {
-			margin: 1.5em 0 0 0;
-			padding: 1em 0 0 0;
-			border-top: 1px silver solid;
-		}
-		.comments {
-			font-style: italic;
-		}
-		.copyright,
-		.copyright a:link,
-		.copyright a:visited,
-		.copyright a:active {
-			margin: 1em 0 0 0;
-			color: gray;
-			font-size: 8pt;
-			text-align: right;
-		}
-	</style>
+  <style type="text/css">
+    body {
+      margin: 1em;
+      padding: 0;
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 9pt;
+      line-height: 150%;
+    }
+    h1 {
+      margin: 0 0 1em 0;
+      padding: 0.5em;
+      border: 1px silver solid;
+      background-color: #eee;
+      font-size: 13pt;
+      font-weight: bold;
+      text-align: center;
+    }
+    h1 .subtitle {
+      font-style: italic;
+      color: #336;
+    }
+    h2 {
+      margin: 1em 0 0 0;
+      padding: 0;
+      padding-bottom: 6px;
+      border-bottom: 1px silver solid;
+      font-size: 11pt;
+      font-weight: bold;
+    }
+    h3 {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+      font-size: 9pt;
+      font-weight: bold;
+    }
+    p {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+    }
+    ul, ol {
+      margin: 0.5em 0 0 3em;
+      padding: 0;
+    }
+    ul {
+      list-style-type: square;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.unspaced li,
+    ol.unspaced li {
+      margin-top: 0;
+    }
+    ul.unspaced li.first,
+    ol.unspaced li.first {
+      margin-top: 0.5em;
+    }
+    code {
+      font-family: "Courier New", Courier, monospace;
+    }
+    a:link {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #669;
+      text-decoration: underline;
+    }
+    a:active {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .gototop {
+      margin: 1em 0 0 0;
+      padding: 0.3em 0 0 0;
+      text-align: center;
+      position: relative;
+      float: right;
+      font-weight: bold;
+    }
+    .pullout {
+      border-left: 8px silver solid;
+      xborder-bottom: 2px silver solid;
+      xborder-top: 2px silver solid;
+      background-color: #eee;
+      margin: 0.5em 0 0 0;
+      padding: 0.25em 0.5em;
+      font-style: italic;
+    }
+    .indent {
+      margin-left: 3em;
+    }
+    .highlight {
+      color: #336;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .endnotes {
+      margin: 1.5em 0 0 0;
+      padding: 1em 0 0 0;
+      border-top: 1px silver solid;
+    }
+    .comments {
+      font-style: italic;
+    }
+    .copyright,
+    .copyright a:link,
+    .copyright a:visited,
+    .copyright a:active {
+      margin: 1em 0 0 0;
+      color: gray;
+      font-size: 8pt;
+      text-align: right;
+    }
+  </style>
 
 </head>
 
 <body>
 
 <h1>
-	About Box Component<br />
-	<span class="subtitle">ReadMe</span>
+  About Box Component<br />
+  <span class="subtitle">ReadMe</span>
 </h1>
 
 <h2 id="contents">Contents</h2>
 
 <ul>
-	<li><a href="#description">Description</a></li>
-	<li><a href="#installation">Installation</a></li>
-	<li><a href="#demo">Demo Project</a></li>
-	<li><a href="#update">Update History</a></li>
-	<li><a href="#license">License and Disclaimer</a></li>
-	<li><a href="#bugs">Bugs and Feature Requests</a></li>
-	<li><a href="#author">About the Author</a></li>
+  <li><a href="#description">Description</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#demo">Demo Project</a></li>
+  <li><a href="#update">Update History</a></li>
+  <li><a href="#license">License and Disclaimer</a></li>
+  <li><a href="#bugs">Bugs and Feature Requests</a></li>
+  <li><a href="#author">About the Author</a></li>
 </ul>
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="description">
-	Description
+  Description
 </h2>
 
 <p>
-	This  non-visual component encapsulates an About Box.
+  This  non-visual component encapsulates an About Box.
 </p>
 
 <p>
-	The component has string properties to display five different pieces of
-	information in  the about box. These properties are:
+  The component has string properties to display five different pieces of
+  information in  the about box. These properties are:
 </p>
 
 <ul>
-	<li>
-		<var>Title</var> &ndash; Contents appear in the window title. The
-		default value is 'About'. 
-	</li>
-	<li>
-		<var>ProgramName</var> &ndash; The name of the program. This is the
-		title  of the application. The default value is the same as
-		<var>TApplications</var>'s <var>Title</var> property. 
-	</li>
-	<li>
-		<var>Version</var> &ndash; This version number of the program. Optional
-		property &ndash; default is nothing.
-	</li>
-	<li>
-		<var>Copyright</var> &ndash; A copyright message. Optional property
-		&ndash; default is nothing. 
-	</li>
-	<li>
-		<var>Notes</var> &ndash; Up to three lines of notes. Optional property
-		&ndash; default is nothing.
-	</li>
+  <li>
+    <var>Title</var> &ndash; Contents appear in the window title. The
+    default value is 'About'. 
+  </li>
+  <li>
+    <var>ProgramName</var> &ndash; The name of the program. This is the
+    title  of the application. The default value is the same as
+    <var>TApplications</var>'s <var>Title</var> property. 
+  </li>
+  <li>
+    <var>Version</var> &ndash; This version number of the program. Optional
+    property &ndash; default is nothing.
+  </li>
+  <li>
+    <var>Copyright</var> &ndash; A copyright message. Optional property
+    &ndash; default is nothing. 
+  </li>
+  <li>
+    <var>Notes</var> &ndash; Up to three lines of notes. Optional property
+    &ndash; default is nothing.
+  </li>
 </ul>
 
 <p>
-	Alternatively, the about box can display information from a VERSIONINFO
-	resource included in the program. This is accessed via a linked
-	<var>TPJVersionInfo</var> component. The values of the
-	<var>ProgramName</var>, <var>Version</var>, <var>Copyright</var> and
-	<var>Notes</var> properties are ignored and relevant strings from the
-	program's version information is used in their stead.
+  Alternatively, the about box can display information from a VERSIONINFO
+  resource included in the program. This is accessed via a linked
+  <var>TPJVersionInfo</var> component. The values of the
+  <var>ProgramName</var>, <var>Version</var>, <var>Copyright</var> and
+  <var>Notes</var> properties are ignored and relevant strings from the
+  program's version information is used in their stead.
 </p>
 
 <p>
-	The dialog's position can be specified relative to the screen, desktop or
-	parent application. The dialog has a single close button whose appearance
-	and position is customised. The About box also displays the program's icon.
-</p>
-
-<h3>
-	Required component
-</h3>
-
-<p>
-	<var>TPJAboutBoxDlg</var> requires that a DelphiDabbler <a
-		href="http://www.delphidabbler.com/software/verinfo"
-	>Version Information Component</a> is installed in order to compile.
+  The dialog's position can be specified relative to the screen, desktop or
+  parent application. The dialog has a single close button whose appearance
+  and position is customised. The About box also displays the program's icon.
 </p>
 
 <h3>
-	Compatibility
+  Required component
 </h3>
 
 <p>
-	<var>TPJAboutBoxDlg</var> compiles on all Win32 versions and personalities
-	of Delphi. It has been tested with Delphi versions 2, 3, 4, 6, 7, 2006 
-	and 2010. It is assumed to work on other versions. <strong>Note:</strong>
-	Delphi 1 support was dropped at v3.5.
+  <var>TPJAboutBoxDlg</var> requires that a DelphiDabbler <a
+    href="http://www.delphidabbler.com/software/verinfo"
+  >Version Information Component</a> is installed in order to compile.
+</p>
+
+<h3>
+  Compatibility
+</h3>
+
+<p>
+  <var>TPJAboutBoxDlg</var> compiles on all Win32 versions and personalities
+  of Delphi. It has been tested with Delphi versions 2, 3, 4, 6, 7, 2006 
+  and 2010. It is assumed to work on other versions. <strong>Note:</strong>
+  Delphi 1 support was dropped at v3.5.
 </p>
 
 <p>
-	The unit name changed to <code>PJAbout</code> at release 3. Programs using
-	earlier releases will need to be modified (or to have an alias set in
-	Delphi's Project Options) before being recompiled using the new version.
+  The unit name changed to <code>PJAbout</code> at release 3. Programs using
+  earlier releases will need to be modified (or to have an alias set in
+  Delphi's Project Options) before being recompiled using the new version.
 </p>
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="installation">
-	Installation
+  Installation
 </h2>
 
 <div class="pullout">
-	<strong>Important Note:</strong> Please ensure that you have installed the
-	<var><a
-		href="http://www.delphidabbler.com/software?id=verinfo"
-	>TPJVersionInfo</a></var> component v3.0 or later <strong>before</strong>
-	installing the about box component.
+  <strong>Important Note:</strong> Please ensure that you have installed the
+  <var><a
+    href="http://www.delphidabbler.com/software?id=verinfo"
+  >TPJVersionInfo</a></var> component v3.0 or later <strong>before</strong>
+  installing the about box component.
 </div>
 
 <p>
-	<var>TPJAboutBoxDlg</var>, its help files and demo program are supplied in a
-	zip file. Before installing you need to extract all the files from the zip
-	file, preserving the directory structure. The following files will be
-	extracted:
+  <var>TPJAboutBoxDlg</var>, its help files and demo program are supplied in a
+  zip file. Before installing you need to extract all the files from the zip
+  file, preserving the directory structure. The following files will be
+  extracted:
 </p>
 
 <ul>
-	<li class="first">
-		<strong><code>PJAbout.pas</code></strong> &ndash; Component source code.
-	</li>
-	<li>
-		<strong><code>PJAbout.dfm</code></strong> &ndash; Form file containing
-		about box.
-	</li>
-	<li>
-		<strong><code>PJAbout.dcr</code></strong> &ndash; Component palette
-		glyph.
-	</li>
-	<li>
-		<code>PJAbout.hlp</code> &ndash; Help file that integrates with the
-		Delphi 3-7 IDE.
-	</li>
-	<li>
-		<code>PJAbout.als</code> &ndash; Keyword file required when integrating
-		the help file with Delphi 6 and 7. 
-	</li>
-	<li>
-		<code>ReadMe.htm</code> &ndash; This read-me file.
-	</li>
-	<li>
-		<code>ChangeLog.txt</code> &ndash; Change log.
-	</li>
-	<li>
-		<code>MPL.txt</code> &ndash; Mozilla Public License.
-	</li>
-	<li>
-		<code>Wiki.URL</code> &ndash; Shortcut to online component Wiki.
-	</li>
+  <li class="first">
+    <strong><code>PJAbout.pas</code></strong> &ndash; Component source code.
+  </li>
+  <li>
+    <strong><code>PJAbout.dfm</code></strong> &ndash; Form file containing
+    about box.
+  </li>
+  <li>
+    <strong><code>PJAbout.dcr</code></strong> &ndash; Component palette
+    glyph.
+  </li>
+  <li>
+    <code>PJAbout.hlp</code> &ndash; Help file that integrates with the
+    Delphi 3-7 IDE.
+  </li>
+  <li>
+    <code>PJAbout.als</code> &ndash; Keyword file required when integrating
+    the help file with Delphi 6 and 7. 
+  </li>
+  <li>
+    <code>ReadMe.htm</code> &ndash; This read-me file.
+  </li>
+  <li>
+    <code>ChangeLog.txt</code> &ndash; Change log.
+  </li>
+  <li>
+    <code>MPL.txt</code> &ndash; Mozilla Public License.
+  </li>
+  <li>
+    <code>Wiki.URL</code> &ndash; Shortcut to online component Wiki.
+  </li>
 </ul>
 
 <p>
-	In addition to the above files you will find the the source code of a <a
-		href="#demo"
-	>demo project</a> in the <code>Demo</code> sub-directory.
+  In addition to the above files you will find the the source code of a <a
+    href="#demo"
+  >demo project</a> in the <code>Demo</code> sub-directory.
 </p>
 
 <p>
-	You can now install the component into the Delphi IDE. The files
-	<code>PJAbout.pas</code>, <code>PJAbout.dfm</code> and
-	<code>PJAbout.dcr</code> are required to do this. For Delphi 3 onwards you
-	must include these files in a design time package that is installed into the
-	Delphi IDE. If you need help doing this
-	<a
-		href="http://www.delphidabbler.com/url/install-comp"
-	>see here</a>.
+  You can now install the component into the Delphi IDE. The files
+  <code>PJAbout.pas</code>, <code>PJAbout.dfm</code> and
+  <code>PJAbout.dcr</code> are required to do this. For Delphi 3 onwards you
+  must include these files in a design time package that is installed into the
+  Delphi IDE. If you need help doing this
+  <a
+    href="http://www.delphidabbler.com/url/install-comp"
+  >see here</a>.
 </p>
 
 <p>
-	Note that the help file included in the download can only integrate with the
-	IDE in Delphi 3-7. For information on how to do this, see <a
-		href="http://www.delphidabbler.com/articles?article=15"
-	>this article</a>. Users of other versions of Delphi can either use the help
-	file as a stand-alone file (in which case some links won't work) or you can
-	use the <a
-		href="http://www.delphidabbler.com/url/aboutbox-wiki"
-	>About Box Component Wiki</a>.
+  Note that the help file included in the download can only integrate with the
+  IDE in Delphi 3-7. For information on how to do this, see <a
+    href="http://www.delphidabbler.com/articles?article=15"
+  >this article</a>. Users of other versions of Delphi can either use the help
+  file as a stand-alone file (in which case some links won't work) or you can
+  use the <a
+    href="http://www.delphidabbler.com/url/aboutbox-wiki"
+  >About Box Component Wiki</a>.
 </p>
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="demo">
-	Demo Project
+  Demo Project
 </h2>
 
 <p>
-	A demo program is included in the download that can be used to exercise the
-	component. This program can be compiled with any supported version of
-	Delphi.
+  A demo program is included in the download that can be used to exercise the
+  component. This program can be compiled with any supported version of
+  Delphi.
 </p>
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="update">
-	Update History
+  Update History
 </h2>
 
 <p>
-	 A complete change log is provided in a text file that is included in the
-	 download.
+   A complete change log is provided in a text file that is included in the
+   download.
 </p>
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="license">
-	License and Disclaimer
+  License and Disclaimer
 </h2>
 
 <p>
-	This product, <em>About Box Component</em>, is subject to the Mozilla Public
-	License Version 1.1 (the &quot;License&quot;). You may not use this Product
-	except in compliance with the License. You may obtain a copy of the License
-	at <a
-		href="http://www.mozilla.org/MPL/MPL-1.1"
-	>http://www.mozilla.org/MPL/MPL-1.1</a>.
+  This product, <em>About Box Component</em>, is subject to the Mozilla Public
+  License Version 1.1 (the &quot;License&quot;). You may not use this Product
+  except in compliance with the License. You may obtain a copy of the License
+  at <a
+    href="http://www.mozilla.org/MPL/MPL-1.1"
+  >http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
-	Software distributed under the License is distributed on an &quot;AS
-	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
-	the License for the specific language governing rights and limitations under
-	the License.
+  Software distributed under the License is distributed on an &quot;AS
+  IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+  the License for the specific language governing rights and limitations under
+  the License.
 </p>
 
 <p>
-	The Initial Developer of About Box Component is Peter D Johnson. Portions
-	created by the Initial Developer are Copyright &copy; 1998-2009 Peter D
-	Johnson (www.delphidabbler.com). All Rights Reserved.
+  The Initial Developer of About Box Component is Peter D Johnson. Portions
+  created by the Initial Developer are Copyright &copy; 1998-2009 Peter D
+  Johnson (www.delphidabbler.com). All Rights Reserved.
 </p>
 
 <p>
-	All relevant trademarks are acknowledged.
+  All relevant trademarks are acknowledged.
 </p>
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="bugs">
-	Bugs and Feature Requests
+  Bugs and Feature Requests
 </h2>
 
 <p>
-	Bugs can be reported or new features requested via the <a
-		href="http://www.delphidabbler.com/url/ddlib-issues"
-	>Issue Tracker</a>.
+  Bugs can be reported or new features requested via the <a
+    href="http://www.delphidabbler.com/url/ddlib-issues"
+  >Issue Tracker</a>.
 </p>
 
 <p>
-	If no similar report or request has been recorded already, use the <em>New
-	Issue</em> link to add a new issue. Please select the most appropriate
-	template from the <em>Templates</em> drop down list.
+  If no similar report or request has been recorded already, use the <em>New
+  Issue</em> link to add a new issue. Please select the most appropriate
+  template from the <em>Templates</em> drop down list.
 </p>
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="author">
-	About the Author
+  About the Author
 </h2>
 
 <p>
-	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-	Wales, UK, writing write mainly in Delphi. My programs and code are available
-	from:
-	<a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+  I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
+  Wales, UK, writing write mainly in Delphi. My programs and code are available
+  from:
+  <a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
 </p>
 
 <p>
-	I can be <a href="http://www.delphidabbler.com/contact">contacted via the
-	website.</a>
+  I can be <a href="http://www.delphidabbler.com/contact">contacted via the
+  website.</a>
 </p> 
 
 <div class="endnotes">
-	<div class="comments">
-		Please
-		<a href="http://www.delphidabbler.com/contact">
-		let me know</a> if you have any comments about the component, but please
-		use the Issue Tracker noted above to report bugs and request new
-		features.
-	</div>
-	<div class="copyright">
-		This document is copyright &copy; 2005-2009, P D Johnson,
-		<a href="http://www.delphidabbler.com/">
-		www.delphidabbler.com</a>
-	</div>
+  <div class="comments">
+    Please
+    <a href="http://www.delphidabbler.com/contact">
+    let me know</a> if you have any comments about the component, but please
+    use the Issue Tracker noted above to report bugs and request new
+    features.
+  </div>
+  <div class="copyright">
+    This document is copyright &copy; 2005-2009, P D Johnson,
+    <a href="http://www.delphidabbler.com/">
+    www.delphidabbler.com</a>
+  </div>
 </div>
 
 </body>
