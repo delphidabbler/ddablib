@@ -15,13 +15,13 @@ Release v3.3.1 of 14 January 2013
 + Unit names are now qualified with namespace name on Delphi XE2 and later.
 + Changes to demo projects:
   - Font and appearance of some controls changed.
+  - Controls are now themed.
   - All form files now in text format.
   - Forms are no longer scaled.
   - 1st demo program's main window now resizes.
-  - 2nd demo dialogue's "help" button now displays online examples instead of help file topics.
+  - 2nd demo dialogues' "help" buttona now display online examples instead of help file topics.
   - Demos now need Delphi 7 as a minimum.
-  - Demos now have themed controls.
-  - New project configurations files.s
+  - New project configurations files.
 + Component source license changed to Mozilla Public License v2.0. (Demos now placed in public domain).
 + MPL text file and documentation wiki shortcut have had names changed.
 + WinHelp help file regenerated with updated copyright date.
