@@ -26,10 +26,10 @@ interface
 
 uses
   // Delphi
-  {$IFDEF Supports_RTLNameSpaces}
-  Vcl.Forms, System.Classes, Vcl.Controls, Vcl.StdCtrls;
-  {$ELSE}
+  {$IFNDEF Supports_RTLNameSpaces}
   Forms, Classes, Controls, StdCtrls;
+  {$ELSE}
+  Vcl.Forms, System.Classes, Vcl.Controls, Vcl.StdCtrls;
   {$ENDIF}
 
 type
