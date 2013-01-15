@@ -35,6 +35,7 @@ uses
 type
   TForm1 = class(TForm)
     btnExecute: TButton;
+    btnFont: TButton;
     cbButtonGlyph: TComboBox;
     cbButtonKind: TComboBox;
     cbButtonPlacing: TComboBox;
@@ -62,9 +63,14 @@ type
     chkUseOwnerAsParent: TCheckBox;
     chkUseOSStdFonts: TCheckBox;
     procedure btnExecuteClick(Sender: TObject);
+    procedure btnFontClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure cbDlgTextChange(Sender: TObject);
     procedure chkCentreDlgClick(Sender: TObject);
+    procedure chkUseOSStdFontsClick(Sender: TObject);
+  private
+    fFont: TFont;
   end;
 
 var
@@ -95,9 +101,26 @@ begin
   else
     dlgAbout.VersionInfo := viAbout;
   dlgAbout.UseOSStdFonts := chkUseOSStdFonts.Checked;
+  dlgAbout.Font := fFont;
   dlgAbout.UseOwnerAsParent := chkUseOwnerAsParent.Checked;
   // Display dialog
   dlgAbout.Execute;
+end;
+
+procedure TForm1.btnFontClick(Sender: TObject);
+var
+  FontDlg: TFontDialog;
+begin
+  FontDlg := TFontDialog.Create(Self);
+  try
+    FontDlg.Font := fFont;
+    if FontDlg.Execute then
+    begin
+      fFont.Assign(FontDlg.Font);
+    end;
+  finally
+    FontDlg.Free;
+  end;
 end;
 
 procedure TForm1.cbDlgTextChange(Sender: TObject);
@@ -112,6 +135,11 @@ begin
   sedDlgTop.Enabled := not chkCentreDlg.Checked;
   lblDlgLeft.Enabled := not chkCentreDlg.Checked;
   lblDlgTop.Enabled := not chkCentreDlg.Checked;
+end;
+
+procedure TForm1.chkUseOSStdFontsClick(Sender: TObject);
+begin
+  btnFont.Enabled := not chkUseOSStdFonts.Checked;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -176,6 +204,14 @@ begin
   sedButtonWidth.Value := dlgAbout.ButtonWidth;
 
   sedButtonHeight.Value := dlgAbout.ButtonHeight;
+
+  fFont := TFont.Create;
+  fFont.Assign(dlgAbout.Font);
+end;
+
+procedure TForm1.FormDestroy(Sender: TObject);
+begin
+  fFont.Free;
 end;
 
 end.
