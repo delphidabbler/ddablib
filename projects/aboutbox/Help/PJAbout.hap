@@ -308,7 +308,7 @@ HS
 0
 
 0
-IDH_AB_AUTODETECTGLYPHS
+IDH_AB_FONT
 
 HS
 2
@@ -450,77 +450,20 @@ HS
 0
 
 AL(TComponent_Tag,1)
-3177
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;\red255\green0\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties\plain\f0\fs18\cf1 
+3099
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green0\blue0;\red0\green128\blue0;}\pard \plain \plain\f0\fs18\cf1\b Properties\plain\f0\fs18\cf1 
 \par 
-\par \pard \tx400 \tx2400 \tx2800 \tab \plain\f0\fs18\cf2 \protect <HS 1>\plain\f0\fs18\cf1 AutoDetectGlyphs\plain\f0\fs18\cf2 \protect </HS 1>\plain\f1\fs18\cf3\b *\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 ButtonGlyph\plain\f0\fs18\cf2 \protect </HS 2>\plain\f0\fs18\cf1 
-\par \tab \plain\f0\fs18\cf2 \protect <HS 3>\plain\f0\fs18\cf1 ButtonHeight\plain\f0\fs18\cf2 \protect </HS 3>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 4>\plain\f0\fs18\cf1 ButtonKind\plain\f0\fs18\cf2 \protect </HS 4>\plain\f0\fs18\cf1 
-\par \tab \plain\f0\fs18\cf2 \protect <HS 5>\plain\f0\fs18\cf1 ButtonPlacing\plain\f0\fs18\cf2 \protect </HS 5>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 6>\plain\f0\fs18\cf1 ButtonWidth\plain\f0\fs18\cf2 \protect </HS 6>\plain\f0\fs18\cf1 
-\par \tab \plain\f0\fs18\cf2 \protect <HS 7>\plain\f0\fs18\cf1 CentreDlg\plain\f0\fs18\cf2 \protect </HS 7>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 8>\plain\f0\fs18\cf1 Copyright\plain\f0\fs18\cf2 \protect </HS 8>\plain\f0\fs18\cf1 
-\par \tab \plain\f0\fs18\cf2 \protect <HS 9>\plain\f0\fs18\cf1 DlgLeft\plain\f0\fs18\cf2 \protect </HS 9>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 10>\plain\f0\fs18\cf1 DlgTop\plain\f0\fs18\cf2 \protect </HS 10>\plain\f0\fs18\cf1 
+\par \pard \tx400 \tx2400 \tx2800 \tab \plain\f0\fs18\cf2 \protect <HS 2>\plain\f0\fs18\cf1 ButtonGlyph\plain\f0\fs18\cf2 \protect </HS 2>\plain\f1\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 3>\plain\f0\fs18\cf1 ButtonHeight\plain\f0\fs18\cf2 \protect </HS 3>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 4>\plain\f0\fs18\cf1 ButtonKind\plain\f0\fs18\cf2 \protect </HS 4>\plain\f1\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 5>\plain\f0\fs18\cf1 ButtonPlacing\plain\f0\fs18\cf2 \protect </HS 5>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 6>\plain\f0\fs18\cf1 ButtonWidth\plain\f0\fs18\cf2 \protect </HS 6>\plain\f1\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 7>\plain\f0\fs18\cf1 CentreDlg\plain\f0\fs18\cf2 \protect </HS 7>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 8>\plain\f0\fs18\cf1 Copyright\plain\f0\fs18\cf2 \protect </HS 8>\plain\f1\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 9>\plain\f0\fs18\cf1 DlgLeft\plain\f0\fs18\cf2 \protect </HS 9>\plain\f0\fs18\cf1 
+\par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 10>\plain\f0\fs18\cf1 DlgTop\plain\f0\fs18\cf2 \protect </HS 10>\plain\f1\fs18\cf1 \tab \tab \plain\f1\fs18\cf2 \protect <HS 1>\plain\f1\fs18\cf1 Font\plain\f1\fs18\cf2 \protect </HS 1>\plain\f1\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 11>\plain\f0\fs18\cf1 HelpContext\plain\f0\fs18\cf2 \protect </HS 11>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 30>\plain\f0\fs18\cf1 Name\plain\f0\fs18\cf2 \protect </HS 30>\plain\f0\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 12>\plain\f0\fs18\cf1 Notes\plain\f0\fs18\cf2 \protect </HS 12>\plain\f0\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 17>\plain\f1\fs18\cf1 Position\plain\f1\fs18\cf2 \protect </HS 17>\plain\f1\fs18\cf1 
 \par \tab \plain\f0\fs18\cf2 \protect <HS 13>\plain\f0\fs18\cf1 ProgramName\plain\f0\fs18\cf2 \protect </HS 13>\plain\f1\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 31>\plain\f0\fs18\cf1 Tag\plain\f0\fs18\cf2 \protect </HS 31>\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 14>\plain\f0\fs18\cf1 Title\plain\f0\fs18\cf2 \protect </HS 14>\plain\f1\fs18\cf1 \tab \tab \plain\f1\fs18\cf2 \protect <HS 18>\plain\f1\fs18\cf1 UseOSStdFonts\plain\f1\fs18\cf2 \protect </HS 18>\plain\f1\fs18\cf1 
 \par \tab \plain\f1\fs18\cf2 \protect <HS 19>\plain\f1\fs18\cf1 UseOwnerAsParent\plain\f1\fs18\cf2 \protect </HS 19>\plain\f1\fs18\cf1 \tab \tab \plain\f0\fs18\cf2 \protect <HS 15>\plain\f0\fs18\cf1 Version\plain\f0\fs18\cf2 \protect </HS 15>\plain\f0\fs18\cf1 
 \par \plain\f1\fs18\cf1 \tab \plain\f0\fs18\cf2 \protect <HS 16>\plain\f0\fs18\cf1 VersionInfo\plain\f0\fs18\cf2 \protect </HS 16>\plain\f0\fs18\cf1 
-\par 
-\par \plain\f1\fs18\cf3\b *\plain\f1\fs18\cf1  AutoDetectGlyphs is deprecated.\plain\f0\fs18\cf1 
-\par }
-
-[Footnotes]
-$=TPJAboutBoxDlg.AutoDetectGlyphs
-#=IDH_AB_AUTODETECTGLYPHS
-@=AutoDetectGlyphs property topic.
-K=AutoDetectGlyphs,TPJAboutBoxDlg;TPJAboutBoxDlg,AutoDetectGlyphs;AutoDetectGlyphs
-A=TPJAboutBoxDlg_AutoDetectGlyphs;AutoDetectGlyphs_property;AutoDetectGlyphs
-[End]
-5
-NS
-1
-HS
-2
-0
-
-0
-IDH_TPJABOUTBOXDLG
-
-KP
-3
-HS
-4
-0
-
-0
-IDH_AB_BUTTONGLYPH
-
-HS
-5
-0
-
-0
-
-AL(TPJAboutBoxDlg_ButtonGlyph)
-2575
-{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;\red255\green0\blue0;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
-\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.AutoDetectGlyphs
-\par \plain\f0\fs12\cf2 
-\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2           \plain\f0\fs18\cf1 \protect <HS 5>\plain\f0\fs18\cf2 See also\plain\f0\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
-\par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
-\par 
-\par \plain\f0\fs18\cf2 Determines whether \plain\f1\fs18\cf2 the \plain\f0\fs18\cf2 ButtonGlyph property \plain\f1\fs18\cf2 is ignored\plain\f0\fs18\cf2 .\plain\f1\fs18\cf2  \plain\f1\fs18\cf4\b Deprecated\plain\f1\fs18\cf2 .\plain\f0\fs18\cf2 
-\par 
-\par \plain\f2\fs18\cf1 \protect <KP 3>\plain\f2\fs18\cf2\b property\plain\f2\fs18\cf2  AutoDetectGlyphs: Boolean;\plain\f2\fs18\cf1 \protect </KP 3>\plain\f0\fs18\cf2 
-\par 
-\par \plain\f0\fs18\cf2\b Description\plain\f0\fs18\cf2 
-\par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 The About box contains one button which is used to close the dialog box. This button can display a glyph, which is determined by the \plain\f0\fs18\cf1 \protect <HS 4>\plain\f0\fs18\cf2 ButtonGlyph\plain\f0\fs18\cf1 \protect </HS 4>\plain\f0\fs18\cf2  property. AutoDetectGlyphs determines whether or not the glyph is displayed.
-\par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 When AutoDetectGlyphs is False glyphs are displayed according to the ButtonGlyph property\plain\f1\fs18\cf2  but when the\plain\f0\fs18\cf2 .\plain\f1\fs18\cf2 property is false ButtonGlyph is ignored and no glyph is displayed on the button.
-\par \plain\f0\fs8\cf2 
-\par \plain\f1\fs18\cf2\b AutoDetectGlyphs is deprecated\plain\f1\fs18\cf2 . It was only of real use when the component was used with Delphi 1, when a different default behaviour to that expected on Delphi 2 and later was expected. To inhibit display of glyphs you should set AutoDetectGlyphs to False and set the ButtonGlyph property to \plain\f1\fs18\cf2\i abgNone\plain\f1\fs18\cf2  (the default).
-\par \plain\f0\fs8\cf2 
-\par \plain\f1\fs18\cf2 The \plain\f0\fs18\cf2 default value is \plain\f1\fs18\cf2\i False\plain\f1\fs18\cf2 . (Was \plain\f1\fs18\cf2\i True\plain\f1\fs18\cf2  in versions prior to v3.5).\plain\f0\fs18\cf2 
 \par 
 \par }
 
@@ -531,7 +474,7 @@ $=TPJAboutBoxDlg.ButtonGlyph
 K=ButtonGlyph,TPJAboutBoxDlg;TPJAboutBoxDlg,ButtonGlyph;ButtonGlyph
 A=TPJAboutBoxDlg_ButtonGlyph;ButtonGlyph_property;ButtonGlyph
 [End]
-6
+5
 NS
 1
 HS
@@ -556,15 +499,8 @@ HS
 
 0
 
-AL(TPJAboutBoxDlg_AutoDetectGlyphs;TPJAboutBoxDlg_ButtonKind;TPJAboutBoxDlg_ButtonPlacing)
-HS
-7
-0
-
-0
-IDH_AB_AUTODETECTGLYPHS
-
-2713
+AL(TPJAboutBoxDlg_ButtonKind;TPJAboutBoxDlg_ButtonPlacing)
+2183
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fmodern Courier New;}{\f2\fswiss \fcharset0 Arial;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.ButtonGlyph
 \par \plain\f0\fs12\cf2 
@@ -587,8 +523,6 @@ IDH_AB_AUTODETECTGLYPHS
 \par abgNone\tab No glyph is displayed on the button.
 \par \pard \plain\f0\fs8\cf2 
 \par \plain\f0\fs18\cf2 ButtonGlyph defaults to \plain\f0\fs18\cf2\i abg\plain\f2\fs18\cf2\i None\plain\f0\fs18\cf2 .\plain\f2\fs18\cf2  (Was \plain\f2\fs18\cf2\i abgOK\plain\f2\fs18\cf2  in versions prior to v3.5).\plain\f0\fs18\cf2 
-\par \plain\f0\fs8\cf2 
-\par \plain\f0\fs18\cf2 NB: If the \plain\f2\fs18\cf2\b deprecated\plain\f2\fs18\cf2  \plain\f0\fs18\cf1 \protect <HS 7>\plain\f0\fs18\cf2 AutoDetectGlyphs\plain\f0\fs18\cf1 \protect </HS 7>\plain\f0\fs18\cf2  property is \plain\f2\fs18\cf2 T\plain\f0\fs18\cf2 rue then th\plain\f2\fs18\cf2 e\plain\f0\fs18\cf2  value of the ButtonGlyph property \plain\f2\fs18\cf2 will\plain\f0\fs18\cf2  be ignored.\plain\f2\fs18\cf2  You are advised to ensure that AutoDetectGlyphs is set to False.\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]
@@ -1078,6 +1012,61 @@ KP
 \par }
 
 [Footnotes]
+$=TPJAboutBoxDlg.Font
+#=IDH_AB_FONT
+@=Font property topic.
+K=Font,TPJAboutBoxDlg;TPJAboutBoxDlg,Font;Font
+A=TPJAboutBoxDlg_Font;Font_property;Font
+[End]
+5
+NS
+1
+HS
+2
+0
+
+0
+IDH_TPJABOUTBOXDLG
+
+KP
+3
+HS
+4
+0
+
+0
+IDH_AB_USEOSSTDFONTS
+
+HS
+5
+0
+
+0
+
+AL(TPJAboutBoxDlg_UseOSStdFonts)
+1751
+{\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fnil Arial;}{\f3\fnil \fcharset0 Arial;}{\f4\fmodern Courier New;}{\f5\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
+\par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.\plain\f1\fs24\cf3\b Font\plain\f0\fs12\cf2 
+\par 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf2           \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf2 See Also\plain\f1\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
+\par \plain\f2\fs18\cf1 \protect </NS 1>\plain\f2\fs18\cf2 
+\par \plain\f3\fs8\cf2 
+\par \plain\f3\fs18\cf2 Determines the font displayed in the About box.
+\par 
+\par \plain\f4\fs18\cf1\b \protect <KP 3>\plain\f4\fs18\cf2\b property\plain\f4\fs18\cf2  \plain\f5\fs18\cf2 Font\plain\f4\fs18\cf2 : \plain\f5\fs18\cf2 TFont\plain\f4\fs18\cf2 ;\plain\f4\fs18\cf1 \protect </KP 3>\plain\f3\fs18\cf2 
+\par 
+\par \plain\f3\fs18\cf2\b Description\plain\f3\fs18\cf2 
+\par \plain\f3\fs8\cf2 
+\par \plain\f3\fs18\cf2 Use the Font property to specify the font displayed in the about box. This font is used for all the content, including the close button.
+\par \plain\f3\fs8\cf2 
+\par \plain\f3\fs18\cf2 The default font is Tahoma 8pt.
+\par \plain\f3\fs8\cf2 
+\par \plain\f3\fs18\cf2\b Note:\plain\f3\fs18\cf2  If the \plain\f3\fs18\cf1 \protect <HS 4>\plain\f3\fs18\cf2 UseOSStdFonts\plain\f3\fs18\cf1 \protect </HS 4>\plain\f3\fs18\cf2  property is True, the Font property is ignored.
+\par 
+\par \plain\f2\fs18\cf2 
+\par }
+
+[Footnotes]
 $=TPJAboutBoxDlg.Notes
 #=IDH_AB_NOTES
 @=Notes property topic.
@@ -1320,7 +1309,7 @@ $=TPJAboutBoxDlg.UseOSStdFonts
 K=UseOSStdFonts,TPJAboutBoxDlg;TPJAboutBoxDlg,UseOSStdFonts;UseOSStdFonts
 A=TPJAboutBoxDlg_UseOSStdFonts;UseOSStdFonts_property;UseOSStdFonts
 [End]
-3
+5
 NS
 1
 HS
@@ -1332,11 +1321,25 @@ IDH_TPJABOUTBOXDLG
 
 KP
 3
-1806
+HS
+4
+0
+
+0
+IDH_AB_FONT
+
+HS
+5
+0
+
+0
+
+AL(TPJAboutBoxDlg_Font)
+2161
 {\rtf1\ansi\ansicpg1252\deff0\deftab720\deflang2057{\fonttbl{\f0\fswiss Arial;}{\f1\fswiss \fcharset0 Arial;}{\f2\fmodern Courier New;}{\f3\fmodern \fcharset0 Courier New;}}{\colortbl\red0\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;\red0\green0\blue255;}\pard \plain \plain\f0\fs18\cf1 \protect <NS 1>\plain\f0\fs8\cf2 
 \par \plain\f0\fs24\cf3\b TPJAboutBoxDlg.UseOSStdFonts
 \par \plain\f0\fs12\cf2 
-\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f0\fs18\cf2 
+\par \plain\f0\fs18\cf1 \protect <HS 2>\plain\f0\fs18\cf2 TPJAboutBoxDlg\plain\f0\fs18\cf1 \protect </HS 2>\plain\f1\fs18\cf2           \plain\f1\fs18\cf1 \protect <HS 5>\plain\f1\fs18\cf2 See Also\plain\f1\fs18\cf1 \protect </HS 5>\plain\f0\fs18\cf2 
 \par \plain\f0\fs8\cf2  \plain\f0\fs18\cf1 \protect </NS 1>\plain\f0\fs8\cf2 
 \par 
 \par \plain\f1\fs18\cf2 Specifies whether dialog box should use the system's default font\plain\f0\fs18\cf2 .
@@ -1349,9 +1352,11 @@ KP
 \par \plain\f1\fs8\cf2 
 \par \plain\f1\fs18\cf2 The property is designed to enable the specific default fonts used on Windows XP and later to be used.
 \par \plain\f1\fs8\cf2 
-\par \plain\f1\fs18\cf2\b Warning:\plain\f1\fs18\cf2  On some operating systems the font is larger than others and careful note should be made to ensure text is not truncated in the dialog box.
+\par \plain\f1\fs18\cf2 On some operating systems the font is larger than others and careful note should be made to ensure text is not truncated in the dialog box.
 \par \plain\f1\fs8\cf2 
-\par \plain\f1\fs18\cf2 The default value is \plain\f1\fs18\cf2\i False\plain\f1\fs18\cf2 .\plain\f0\fs18\cf2 
+\par \plain\f1\fs18\cf2 The default value is \plain\f1\fs18\cf2\i False\plain\f1\fs18\cf2 .
+\par \plain\f1\fs8\cf2 
+\par \plain\f1\fs18\cf2\b Note:\plain\f1\fs18\cf2  Setting this property to True means that the \plain\f1\fs18\cf1 \protect <HS 4>\plain\f1\fs18\cf2 Font\plain\f1\fs18\cf1 \protect </HS 4>\plain\f1\fs18\cf2  property will be ignored.\plain\f0\fs18\cf2 
 \par }
 
 [Footnotes]

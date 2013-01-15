@@ -1,5 +1,3 @@
-autodetectglyphs
-autodetectglyphs_property
 buttonglyph
 buttonglyph_property
 buttonheight
@@ -20,6 +18,8 @@ dlgtop
 dlgtop_property
 execute
 execute_method
+font
+font_property
 helpcontext
 helpcontext_property
 notes
@@ -32,7 +32,6 @@ programname_property
 title
 title_property
 tpjaboutboxdlg
-tpjaboutboxdlg_autodetectglyphs
 tpjaboutboxdlg_buttonglyph
 tpjaboutboxdlg_buttonheight
 tpjaboutboxdlg_buttonkind
@@ -43,6 +42,7 @@ tpjaboutboxdlg_copyright
 tpjaboutboxdlg_dlgleft
 tpjaboutboxdlg_dlgtop
 tpjaboutboxdlg_execute
+tpjaboutboxdlg_font
 tpjaboutboxdlg_helpcontext
 tpjaboutboxdlg_notes
 tpjaboutboxdlg_object
