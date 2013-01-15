@@ -11,7 +11,7 @@
 ; Change Log for About Box Components
 ; ------------------------------------------------------------------------------
 
-Release v3.6 of 16 January 2013
+Release v3.6 of 15 January 2013
 + Changes to TPJAboutBoxDlg component
   - Added new Font property for setting font used in dialogue box window.
   - Default font changed to Tahoma.
