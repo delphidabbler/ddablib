@@ -10,5 +10,10 @@ Delphi 2007 users will need to delete the .dproj file and load the .dpr file.
 
 Delphi 2009 and later users load the .dproj file.
 
-Note: TSpinEdit from "Samples" palette is required to build the demo. If this
+Note 1:
+TSpinEdit from "Samples" palette is required to build the demo. If this
 component is not present the demo will not compile.
+
+Note 2:
+You may need to add the path to the package containing the About Box Component
+binaries to the project options.
