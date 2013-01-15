@@ -128,6 +128,7 @@ type
     fPosition: TPJAboutPosition;        // value of Position property
     fUseOwnerAsParent: Boolean;         // value of UseOwnerAsParent property
     fUseOSStdFonts: Boolean;            // value of UseOSStdFonts property
+    fFont: TFont;                       // value of Font property
     procedure CentreInRect(Dlg: TPJAboutBoxForm; Rect: TRect);
       {Centres dialog box within a rectangle.
         @param Dlg [in] Reference to dialog box form.
@@ -160,6 +161,10 @@ type
       {Set a font to underlying OSs default font.
         @param Font [in] Font to be set to default font.
       }
+    procedure SetFont(const Value: TFont);
+      {Sets Font property value.
+        @param Value [in] Required font.
+      }
     procedure ShowHandler(Sender: TObject);
       {Handler for about box form's OnShow event. Positions dialog box on
       screen.
@@ -178,6 +183,9 @@ type
     constructor Create(AOwner: TComponent); override;
       {Component constructor. Sets up dialog box.
         @param AOwner [in] Component that owns this component.
+      }
+    destructor Destroy; override;
+      {Component destructor. Tears down component.
       }
     procedure Execute;
       {Displays the dialog box.
@@ -278,8 +286,12 @@ type
       read fUseOSStdFonts write fUseOSStdFonts
       default False;
       {When true causes dialog to use OSs standard fonts. This property is
-      mainly of use to cause XP and Vista to use their differing default fonts
+      mainly of use to cause different OSs to use their differing default fonts
       in the dialog box}
+    property Font: TFont
+      read fFont write SetFont;
+      {Font used for by dialogue box. Default is Tahoma 8pt. Ignored if
+      UseOSStdFonts is True}
   end;
 
 
@@ -336,6 +348,11 @@ begin
   fCentreDlg := True;
   fPosition := abpDesktop;
   fAutoDetectGlyphs := False;
+  fFont := TFont.Create;
+  fFont.Name := 'Tahoma';
+  fFont.Size := 8;
+  fFont.Color := clWindowText;
+  fFont.Style := [];
 end;
 
 function TPJAboutBoxDlg.DesktopWorkArea: TRect;
@@ -351,6 +368,14 @@ begin
   // Delphi 2-5: get desktop area directly from Windows
   SystemParametersInfo(SPI_GETWORKAREA, 0, @Result, 0);
   {$ENDIF}
+end;
+
+destructor TPJAboutBoxDlg.Destroy;
+  {Component destructor. Tears down component.
+  }
+begin
+  fFont.Free;
+  inherited;
 end;
 
 procedure TPJAboutBoxDlg.Execute;
@@ -382,7 +407,7 @@ begin
     if fUseOSStdFonts then
       SetDefaultFont(Dlg.Font)
     else
-      Dlg.Font.Size := 8;
+      Dlg.Font := fFont;
 
     // Set window caption
     Dlg.Caption := fTitle;
@@ -538,6 +563,14 @@ begin
   else
     FontHandle := GetStockObject(DEFAULT_GUI_FONT);
   Font.Handle := FontHandle;
+end;
+
+procedure TPJAboutBoxDlg.SetFont(const Value: TFont);
+  {Sets Font property value.
+    @param Value [in] Required font.
+  }
+begin
+  fFont.Assign(Value);
 end;
 
 procedure TPJAboutBoxDlg.SetParentToOwner(Dlg: TWinControl);
