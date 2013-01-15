@@ -11,6 +11,25 @@
 ; Change Log for About Box Components
 ; ------------------------------------------------------------------------------
 
+Release v3.6 of 16 January 2013
++ Changes to TPJAboutBoxDlg component
+  - Added new Font property for setting font used in dialogue box window.
+  - Default font changed to Tahoma.
+  - Removed depreacted AutoDetectGlyphs property.
+  - Dialogue box form is no longer scaled.
+  - Referenced unit names are now qualified with namespace on Delphi XE2 and later.
++ Changes to demo project:
+  - Added facility to test new dialogue box Font property.
+  - Font and appearance of controls changed.
+  - Demo form no is longer scaled.
++ Component source license changed to Mozilla Public License v2.0. (Demo and development tools now placed in public domain).
++ MPL text file and documentation wiki shortcut have had names changed.
++ WinHelp help file updated:
+  - Removed AutoDetectGlyphs property topic.
+  - Added topic for Font property.
+  - Updated copyright date.
++ Documentation revised.
+
 Release v3.5.1 of 25 Mar 2011
 + Fixed bug (issue #13) where making some application wide changes to how forms are handled in later Delphis could cause the dialog box to always be positioned at the top left of the screen.
 
