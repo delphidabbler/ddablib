@@ -117,7 +117,6 @@ type
     fButtonPlacing: TPJAboutBtnPlacing; // value of ButtonPlacing property
     fButtonKind: TPJAboutBtnKinds;      // value of ButtonKind property
     fButtonGlyph: TPJAboutBtnGlyphs;    // value of ButtonGlyph property
-    fAutoDetectGlyphs: Boolean;         // value of AutoDetectGlyphs property
     fButtonHeight: Integer;             // value of ButtonHeight property
     fButtonWidth: Integer;              // value of ButtonWidth property
     fCentreDlg: Boolean;                // value of CentreDlg property
@@ -222,17 +221,7 @@ type
     property ButtonGlyph: TPJAboutBtnGlyphs
       read fButtonGlyph write fButtonGlyph
       default abgNone;
-      {Determines which glyph, if any, to display on dialog's OK button.
-      WARNING: If the deprecated AutoDetectGlyphs property is True then
-      ButtonGlyph is ignored}
-    property AutoDetectGlyphs: Boolean
-      read fAutoDetectGlyphs write fAutoDetectGlyphs
-      default False;
-      {Determines whether any image assigned to the ButtonGlyph property is
-      displayed. If AutoDetectGlyphs is true then ButtonGlyph is ignored.
-      WARNING: This property is DEPRECATED and should always be set to False.
-      Set ButtonGlyph to abgNone (default) to prevent display of gylphs on
-      buttons}
+      {Determines which glyph, if any, to display on dialog's OK button}
     property ButtonHeight: Integer
       read fButtonHeight write fButtonHeight
       default 25;
@@ -347,7 +336,6 @@ begin
   fTitle := sDefaultTitle;
   fCentreDlg := True;
   fPosition := abpDesktop;
-  fAutoDetectGlyphs := False;
   fFont := TFont.Create;
   fFont.Name := 'Tahoma';
   fFont.Size := 8;
@@ -437,6 +425,7 @@ begin
     Dlg.IconImg.Picture.Graphic := Application.Icon;
 
     // Configure "done" button
+    // size and position
     Dlg.DoneBtn.Height := fButtonHeight;
     Dlg.DoneBtn.Width := fButtonWidth;
     case ButtonPlacing of
@@ -448,26 +437,19 @@ begin
       abpCentre:
         Dlg.DoneBtn.Left := (Dlg.ClientWidth - Dlg.DoneBtn.Width) div 2;
     end;
-    // decide whether to use button glyph property, depending on value of
-    // AutoDetectGlyphs property
-    if not fAutoDetectGlyphs then
-      // use ButtonGlyph property: load one bitmap resources present in all
-      // Delphi apps
-      case ButtonGlyph of
-        abgOK:
-          Dlg.DoneBtn.Glyph.Handle := LoadBitmap(HInstance, 'BBOK');
-        abgCancel:
-          Dlg.DoneBtn.Glyph.Handle := LoadBitmap(HInstance, 'BBCANCEL');
-        abgIgnore:
-          Dlg.DoneBtn.Glyph.Handle := LoadBitmap(HInstance, 'BBIGNORE');
-        abgClose:
-          Dlg.DoneBtn.Glyph.Handle := LoadBitmap(HInstance, 'BBCLOSE');
-        abgNone:
-          Dlg.DoneBtn.Glyph := nil;
-      end
-    else
-      // ignore ButtonGlyphs property: don't use glyphs
-      Dlg.DoneBtn.Glyph := nil;
+    // load button glyph per ButtonGlyph property
+    case ButtonGlyph of
+      abgOK:
+        Dlg.DoneBtn.Glyph.Handle := LoadBitmap(HInstance, 'BBOK');
+      abgCancel:
+        Dlg.DoneBtn.Glyph.Handle := LoadBitmap(HInstance, 'BBCANCEL');
+      abgIgnore:
+        Dlg.DoneBtn.Glyph.Handle := LoadBitmap(HInstance, 'BBIGNORE');
+      abgClose:
+        Dlg.DoneBtn.Glyph.Handle := LoadBitmap(HInstance, 'BBCLOSE');
+      abgNone:
+        Dlg.DoneBtn.Glyph := nil;
+    end;
     // set button text per button kind property
     case ButtonKind of
       abkOK: Dlg.DoneBtn.Caption := sOKBtnCaption;
