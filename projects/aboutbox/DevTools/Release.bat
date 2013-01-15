@@ -34,15 +34,10 @@ zip -j -9 %OutFile% %HelpDir%\PJAbout.hlp
 zip -j -9 %OutFile% %HelpDir%\PJAbout.als
 
 zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
-zip -j -9 %OutFile% %DocsDir%\MPL.txt
+zip -j -9 %OutFile% %DocsDir%\MPL-2.txt
 zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
-zip -j -9 %OutFile% %DocsDir%\Wiki.URL
+zip -j -9 %OutFile% %DocsDir%\Documentation.URL
 
-zip -9 %OutFile% %DemoDir%\AboutBoxDemo.dpr
-zip -9 %OutFile% %DemoDir%\AboutBoxDemo.res
-zip -9 %OutFile% %DemoDir%\FmDemo.pas
-zip -9 %OutFile% %DemoDir%\FmDemo.dfm
-zip -9 %OutFile% %DemoDir%\VerInfo.rc
-zip -9 %OutFile% %DemoDir%\VerInfo.res
+zip %OutFile% -r -9 %DemoDir%\*.* -x *.svn\*
 
 endlocal
