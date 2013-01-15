@@ -9,3 +9,6 @@ Delphi 2006 users (and Delphi 2005?), open the .bdsproj file.
 Delphi 2007 users will need to delete the .dproj file and load the .dpr file.
 
 Delphi 2009 and later users load the .dproj file.
+
+Note: TSpinEdit from "Samples" palette is required to build the demo. If this
+component is not present the demo will not compile.
