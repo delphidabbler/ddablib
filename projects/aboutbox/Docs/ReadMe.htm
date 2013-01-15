@@ -160,7 +160,7 @@
   <li><a href="#installation">Installation</a></li>
   <li><a href="#demo">Demo Project</a></li>
   <li><a href="#update">Update History</a></li>
-  <li><a href="#license">License and Disclaimer</a></li>
+  <li><a href="#license">License</a></li>
   <li><a href="#bugs">Bugs and Feature Requests</a></li>
   <li><a href="#author">About the Author</a></li>
 </ul>
@@ -219,6 +219,7 @@
   The dialog's position can be specified relative to the screen, desktop or
   parent application. The dialog has a single close button whose appearance
   and position is customised. The About box also displays the program's icon.
+  The font used to display dialog box text can be customised.
 </p>
 
 <h3>
@@ -236,10 +237,17 @@
 </h3>
 
 <p>
-  <var>TPJAboutBoxDlg</var> compiles on all Win32 versions and personalities
-  of Delphi. It has been tested with Delphi versions 2, 3, 4, 6, 7, 2006
-  and 2010. It is assumed to work on other versions. <strong>Note:</strong>
-  Delphi 1 support was dropped at v3.5.
+  <var>TPJAboutBoxDlg</var> is believed to compile on all Win32 versions of
+  Delphi. Earlier versions were tested with Delphi 2, 3, 4, 6 and 7 but,
+  although every effort has been made to retain backward compatibility, this has
+  not been tested for v3.6. The latest version has been tested with Delphi 7,
+  2007, 2009, 2010, XE, XE2 and XE3. <strong>Note:</strong> Delphi 1 support was
+  dropped at v3.5.
+</p>
+
+<p>
+  This component is Windows 64 bit compatible and can be compiled into a 64 bit
+  VCL package.
 </p>
 
 <p>
@@ -260,7 +268,8 @@
   <strong>Important Note:</strong> Please ensure that you have installed the
   <var><a
     href="http://www.delphidabbler.com/software?id=verinfo"
-  >TPJVersionInfo</a></var> component v3.0 or later <strong>before</strong>
+  >TPJVersionInfo</a></var> component v3.0 or later (v3.3.1 or later preferred)
+  <strong>before</strong>
   installing the about box component.
 </div>
 
@@ -298,10 +307,11 @@
     <code>ChangeLog.txt</code> &ndash; Change log.
   </li>
   <li>
-    <code>MPL.txt</code> &ndash; Mozilla Public License.
+    <code>MPL-2.txt</code> &ndash; Mozilla Public License v2.0.
   </li>
   <li>
-    <code>Wiki.URL</code> &ndash; Shortcut to online component Wiki.
+    <code>Documentation.URL</code> &ndash; Shortcut to the component's online
+    documentation
   </li>
 </ul>
 
@@ -314,7 +324,8 @@
 <p>
   You can now install the component into the Delphi IDE. The files
   <code>PJAbout.pas</code>, <code>PJAbout.dfm</code> and
-  <code>PJAbout.dcr</code> are required to do this. For Delphi 3 onwards you
+  <code>PJAbout.dcr</code> are required to do this (<code>PJAbout.dcr</code> is
+  not required for 64 bit packages). For Delphi 3 onwards you
   must include these files in a design time package that is installed into the
   Delphi IDE. If you need help doing this
   <a
@@ -329,8 +340,8 @@
   >this article</a>. Users of other versions of Delphi can either use the help
   file as a stand-alone file (in which case some links won't work) or you can
   use the <a
-    href="http://www.delphidabbler.com/url/aboutbox-wiki"
-  >About Box Component Wiki</a>.
+    href="http://www.delphidabbler.com/url/aboutbox-docs"
+  >online documentation</a>.
 </p>
 
 <p class="gototop">
@@ -343,8 +354,14 @@
 
 <p>
   A demo program is included in the download that can be used to exercise the
-  component. This program can be compiled with any supported version of
-  Delphi.
+  component. This program should be able to be compiled with any version of
+  Delphi supported by the component, but this has only been tested in Delphi 7
+  or later.
+</p>
+
+<p>
+  See the read-me file included in the <code>Demo</code> directory for further
+  details.
 </p>
 
 <p class="gototop">
@@ -365,29 +382,14 @@
 </p>
 
 <h2 id="license">
-  License and Disclaimer
+  License
 </h2>
 
 <p>
-  This product, <em>About Box Component</em>, is subject to the Mozilla Public
-  License Version 1.1 (the &quot;License&quot;). You may not use this Product
-  except in compliance with the License. You may obtain a copy of the License
-  at <a
-    href="http://www.mozilla.org/MPL/MPL-1.1"
-  >http://www.mozilla.org/MPL/MPL-1.1</a>.
-</p>
-
-<p>
-  Software distributed under the License is distributed on an &quot;AS
-  IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
-  the License for the specific language governing rights and limitations under
-  the License.
-</p>
-
-<p>
-  The Initial Developer of About Box Component is Peter D Johnson. Portions
-  created by the Initial Developer are Copyright &copy; 1998-2009 Peter D
-  Johnson (www.delphidabbler.com). All Rights Reserved.
+  The <em>About Box Component</em> (<code>PJAbout.pas</code>) is released under
+  the terms of the <a
+    href="http://www.mozilla.org/MPL/2.0/"
+  >Mozilla Public License v2.0</a>.
 </p>
 
 <p>
@@ -411,7 +413,8 @@
 <p>
   If no similar report or request has been recorded already, use the <em>New
   Issue</em> link to add a new issue. Please select the most appropriate
-  template from the <em>Templates</em> drop down list.
+  template from the <em>Templates</em> drop down list and add the
+  <code>Project-aboutbox</code> label.
 </p>
 
 <p class="gototop">
@@ -443,7 +446,7 @@
     features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2005-2009, P D Johnson,
+    This document is copyright &copy; 2005-2013, P D Johnson,
     <a href="http://www.delphidabbler.com/">
     www.delphidabbler.com</a>
   </div>
