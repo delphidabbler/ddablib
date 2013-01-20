@@ -27,10 +27,15 @@ unit PJMD5;
 
 
 // Delphi 2009 or later is required to compile
+// Delphi XE2 or later need RTL unit names to be qualified with namespace
 {$UNDEF CANCOMPILE}
+{$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 20.0}
+  {$IF CompilerVersion >= 20.0}   // Delphi 2009
     {$DEFINE CANCOMPILE}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}   // Delphi XE2
+    {$DEFINE RTLNAMESPACES}
   {$IFEND}
 {$ENDIF}
 {$IFNDEF CANCOMPILE}
@@ -54,7 +59,11 @@ interface
 
 
 uses
+  {$IFNDEF RTLNAMESPACES}
   SysUtils, Classes;
+  {$ELSE}
+  System.SysUtils, System.Classes;
+  {$ENDIF}
 
 
 type
@@ -394,7 +403,11 @@ implementation
 
 
 uses
+  {$IFNDEF RTLNAMESPACES}
   Math;
+  {$ELSE}
+  System.Math;
+  {$ENDIF}
 
 ///  <summary>Rotates LongWord X left by N bits.</summary>
 function RotateLeft(const X: LongWord; const N: Byte): LongWord; inline;
