@@ -333,9 +333,7 @@ type
     procedure Process(const X: TBytes); overload;
     ///  <summary>Adds Count bytes from untyped buffer Buf to the digest.
     ///  </summary>
-    ///  <remarks>
-    ///  <para>An EPJMD5 exception is raised if address of Buf is nil.</para>
-    ///  <para>Buf must contain sufficient data (this is not checked).</para>
+    ///  <remarks>Buf must contain sufficient data (this is not checked).
     ///  </remarks>
     procedure Process(const Buf; const Count: Cardinal); overload;
     ///  <summary>Adds all the characters from ANSI string S as bytes to the
