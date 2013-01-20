@@ -63,7 +63,6 @@ uses
   {$ELSE}
   GUITestRunner,
   {$ENDIF}
-  XPMan,
   TestFramework,
   TestPJMD5 in 'TestPJMD5.pas',
   PJMD5 in '..\PJMD5.pas';
