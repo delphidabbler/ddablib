@@ -724,11 +724,8 @@ begin
 end;
 
 procedure TPJMD5.Process(const S: RawByteString);
-var
-  Bytes: TBytes;
 begin
-  Bytes := BufferToBytes(Pointer(S)^, Length(S) * SizeOf(AnsiChar));
-  Process(Bytes);
+  Process(BufferToBytes(Pointer(S)^, Length(S) * SizeOf(AnsiChar)));
 end;
 
 procedure TPJMD5.Process(const Stream: TStream);
@@ -761,19 +758,13 @@ begin
 end;
 
 procedure TPJMD5.Process(const S: WideString);
-var
-  Bytes: TBytes;
 begin
-  Bytes := BufferToBytes(Pointer(S)^, Length(S) * SizeOf(WideChar));
-  Process(Bytes);
+  Process(BufferToBytes(Pointer(S)^, Length(S) * SizeOf(WideChar)));
 end;
 
 procedure TPJMD5.Process(const S: ShortString);
-var
-  Bytes: TBytes;
 begin
-  Bytes := BufferToBytes(S[1], Length(S) * SizeOf(AnsiChar));
-  Process(Bytes);
+  Process(BufferToBytes(S[1], Length(S) * SizeOf(AnsiChar)));
 end;
 
 procedure TPJMD5.Process(const X: TBytes);
