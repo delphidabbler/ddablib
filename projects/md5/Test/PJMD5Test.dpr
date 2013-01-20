@@ -7,6 +7,9 @@
  * When compiled with Delphi XE3 or later, either the 32 bit or 64 bit Windows
  * compiler can be used - just selected the required target platform.
  *
+ * Any copyright in this file is dedicated to the Public Domain.
+ * http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * -----------------------------------------------------------------------------
  * $Rev$
  * $Date$

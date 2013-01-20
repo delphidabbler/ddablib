@@ -13,6 +13,9 @@
  * Delphi 2009 or later is required to compile: Unicode support and anonymous
  * methods are required.
  *
+ * Any copyright in this file is dedicated to the Public Domain.
+ * http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * -----------------------------------------------------------------------------
  * $Rev$
  * $Date$
