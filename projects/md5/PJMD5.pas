@@ -257,6 +257,9 @@ type
     ///  starting at index StartIdx. Any unprocessed bytes are buffered.
     ///  </summary>
     procedure Update(const X: array of Byte; const StartIdx, Count: Cardinal);
+    ///  <summary>Creates a TBytes array containing a copy of a given number of
+    ///  bytes from a given untyped buffer.</summary>
+    class function BufferToBytes(const Buf; const ByteCount: Cardinal): TBytes;
     ///  <summary>Helper method to perform calculations of digests for most
     ///  Calculate methods.</summary>
     ///  <remarks>Calls anonymous method DoProcess to perform the actual
@@ -510,6 +513,14 @@ resourcestring
 
 { TPJMD5 }
 
+class function TPJMD5.BufferToBytes(const Buf; const ByteCount: Cardinal):
+  TBytes;
+begin
+  SetLength(Result, ByteCount);
+  if ByteCount > 0 then
+    Move(Buf, Pointer(Result)^, ByteCount);
+end;
+
 class function TPJMD5.Calculate(const Buf; const Count: Cardinal): TPJMD5Digest;
 begin
   // Can't call DoCalculate with callback anonymous method because Buf is not
@@ -685,8 +696,7 @@ begin
   Update(Padding, 0, PadLen);
 
   // Update digest with bit count: these are last 8 bytes
-  SetLength(BitCountBytes, SizeOf(BitCount));
-  Move(BitCount, Pointer(BitCountBytes)^, SizeOf(BitCount));
+  BitCountBytes := BufferToBytes(BitCount, SizeOf(BitCount));
   Update(BitCountBytes, 0, Length(BitCountBytes));
 
   Assert(fBuffer.IsEmpty);
@@ -724,17 +734,19 @@ begin
   while BytesToRead > 0 do
   begin
     BufSize := Min(fReadBufferSize, BytesToRead);
-    SetLength(Bytes, BufSize);
-    Move(BufPtr^, Pointer(Bytes)^, BufSize);
-    Update(Bytes, 0, BufSize);
+    Bytes := BufferToBytes(BufPtr^, BufSize);
+    Process(Bytes);
     Dec(BytesToRead, BufSize);
     Inc(BufPtr, BufSize);
   end;
 end;
 
 procedure TPJMD5.Process(const S: RawByteString);
+var
+  Bytes: TBytes;
 begin
-  Process(Pointer(S)^, Length(S) * SizeOf(AnsiChar));
+  Bytes := BufferToBytes(Pointer(S)^, Length(S) * SizeOf(AnsiChar));
+  Process(Bytes);
 end;
 
 procedure TPJMD5.Process(const Stream: TStream);
@@ -761,19 +773,25 @@ begin
     BytesRead := Stream.Read(
       Pointer(Bytes)^, Min(fReadBufferSize, BytesToRead)
     );
-    Update(Bytes, 0, BytesRead);
+    Process(Bytes, BytesRead);
     Dec(BytesToRead, BytesRead);
   end;
 end;
 
 procedure TPJMD5.Process(const S: WideString);
+var
+  Bytes: TBytes;
 begin
-  Process(Pointer(S)^, Length(S) * SizeOf(WideChar));
+  Bytes := BufferToBytes(Pointer(S)^, Length(S) * SizeOf(WideChar));
+  Process(Bytes);
 end;
 
 procedure TPJMD5.Process(const S: ShortString);
+var
+  Bytes: TBytes;
 begin
-  Process(S[1], Length(S) * SizeOf(AnsiChar));
+  Bytes := BufferToBytes(S[1], Length(S) * SizeOf(AnsiChar));
+  Process(Bytes);
 end;
 
 procedure TPJMD5.Process(const X: TBytes);
@@ -937,6 +955,8 @@ var
 begin
   if fFinalized then
     raise EPJMD5.Create(sAlreadyFinalized);
+  if (Length(X) = 0) or (Count = 0) then
+    Exit;
   BytesLeft := Count;
   if not fBuffer.IsEmpty then
   begin
