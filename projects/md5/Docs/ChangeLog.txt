@@ -1,7 +1,14 @@
 ; ------------------------------------------------------------------------------
-; Change Log for MD5 Message Digest Unit
+; This Source Code Form is subject to the terms of the Mozilla Public License,
+; v. 2.0. If a copy of the MPL was not distributed with this file, You can
+; obtain one at http://mozilla.org/MPL/2.0/
+;
+; Copyright (C) 2013, Peter Johnson (www.delphidabbler.com).
+;
 ; $Rev$
 ; $Date$
+;
+; Change Log for MD5 Message Digest Unit
 ; ------------------------------------------------------------------------------
 
 Release v1.0 of 18 July 2011
@@ -29,4 +36,4 @@ Release v0.2 beta of 21 July 2010
 + Updated DUnit tests re changes in TPJMD5.
 
 Release v0.1 beta of 17 March 2010
-+ Initial beta release. 
++ Initial beta release.
