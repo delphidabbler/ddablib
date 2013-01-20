@@ -32,7 +32,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <DCC_ExeOutput>.\Bin</DCC_ExeOutput>
         <DCC_DependencyCheckOutputName>PJMD5Test.exe</DCC_DependencyCheckOutputName>
-        <DCC_Define>DEBUG;_CONSOLE_TESTRUNNER;$(DCC_Define)</DCC_Define>
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
         <DCC_UnitSearchPath>$(BDS)\Source\DUnit\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_ImageBase>00400000</DCC_ImageBase>
         <DCC_CVT_WIDENING_STRING_LOST>true</DCC_CVT_WIDENING_STRING_LOST>
