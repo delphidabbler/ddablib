@@ -521,7 +521,6 @@ resourcestring
   sTBytesTooShort = 'Can''t read %0:d bytes from array of length %1:d';
   sTBytesIndexTooShort = 'Can''t read %0:d bytes from array of length %1:d '
     + 'starting at index %2:d';
-  sBufferIsNil = 'Can''t read from untyped buffer: buffer is nil';
   sStreamIsNil = 'Can''t read from stream: stream is nil';
 
 { TPJMD5 }
@@ -730,7 +729,7 @@ end;
 procedure TPJMD5.Process(const Buf; const Count: Cardinal);
 begin
   if @Buf = nil then
-    raise EPJMD5.Create(sBufferIsNil);
+    Exit;
   Update(TBytes(@Buf), 0, Count);
 end;
 
