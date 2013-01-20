@@ -234,19 +234,6 @@ type
         ///  <summary>Clears and zeroes the Data buffer.</summary>
         procedure Clear;
       end;
-    type
-      ///  <summary>Buffer used to read data from streams and files.</summary>
-      TMDReadBuffer = record
-        ///  <summary>Pointer to buffer.</summary>
-        Buffer: Pointer;
-        ///  <summary>Size of buffer.</summary>
-        Size: Cardinal;
-        ///  <summary>Allocates a buffer of given size, freeing any existing
-        ///  buffer first.</summary>
-        procedure Alloc(const ASize: Cardinal);
-        ///  <summary>Releases (de-allocates) the buffer.</summary>
-        procedure Release;
-      end;
     var
       ///  <summary>Current state of digest.</summary>
       fState: TPJMD5Digest;
@@ -258,8 +245,6 @@ type
       fByteCount: UINT64;
       ///  <summary>Buffer that stores unprocessed data.</summary>
       fBuffer: TMDBuffer;
-      ///  <summary>Buffer used to read data from streams etc.</summary>
-      fReadBuffer: TMDReadBuffer;
       ///  <summary>Value of ReadBufferSize property.</summary>
       fReadBufferSize: Cardinal;
     ///  <summary>Getter for Digest property. Finalizes digest and returns it.
@@ -627,14 +612,12 @@ constructor TPJMD5.Create;
 begin
   inherited Create;
   Reset;
-  fReadBuffer.Release;
   fReadBufferSize := DefReadBufferSize;
 end;
 
 destructor TPJMD5.Destroy;
 begin
   fBuffer.Clear;
-  fReadBuffer.Release;
   inherited;
 end;
 
@@ -656,6 +639,7 @@ var
   Offset: Cardinal;
   PadLen: Cardinal;
   BitCount: UINT64;
+  BitCountBytes: TBytes;
 const
   // Padding applied to end of data stream is a subset of these bytes
   Padding: array[0..63] of Byte = (
@@ -701,7 +685,9 @@ begin
   Update(Padding, 0, PadLen);
 
   // Update digest with bit count: these are last 8 bytes
-  Update(TBytes(@BitCount), 0, SizeOf(BitCount));
+  SetLength(BitCountBytes, SizeOf(BitCount));
+  Move(BitCount, Pointer(BitCountBytes)^, SizeOf(BitCount));
+  Update(BitCountBytes, 0, Length(BitCountBytes));
 
   Assert(fBuffer.IsEmpty);
 
@@ -727,10 +713,23 @@ begin
 end;
 
 procedure TPJMD5.Process(const Buf; const Count: Cardinal);
+var
+  Bytes: TBytes;
+  BytesToRead: Cardinal;
+  BufSize: Cardinal;
+  BufPtr: PByte;
 begin
-  if @Buf = nil then
-    Exit;
-  Update(TBytes(@Buf), 0, Count);
+  BufPtr := @Buf;
+  BytesToRead := Count;
+  while BytesToRead > 0 do
+  begin
+    BufSize := Min(fReadBufferSize, BytesToRead);
+    SetLength(Bytes, BufSize);
+    Move(BufPtr^, Pointer(Bytes)^, BufSize);
+    Update(Bytes, 0, BufSize);
+    Dec(BytesToRead, BufSize);
+    Inc(BufPtr, BufSize);
+  end;
 end;
 
 procedure TPJMD5.Process(const S: RawByteString);
@@ -747,6 +746,7 @@ procedure TPJMD5.Process(const Stream: TStream; const Count: Int64);
 var
   BytesRead: Cardinal;
   BytesToRead: Int64;
+  Bytes: TBytes;
 begin
   if not Assigned(Stream) then
     raise EPJMD5.Create(sStreamIsNil);
@@ -755,13 +755,13 @@ begin
       sStreamTooShort, [Count, Stream.Size - Stream.Position]
     );
   BytesToRead := Max(Count, 0); // prevent Count < 0: use 0 in this case
-  fReadBuffer.Alloc(fReadBufferSize);
+  SetLength(Bytes, fReadBufferSize);
   while BytesToRead > 0 do
   begin
     BytesRead := Stream.Read(
-      fReadBuffer.Buffer^, Min(fReadBuffer.Size, BytesToRead)
+      Pointer(Bytes)^, Min(fReadBufferSize, BytesToRead)
     );
-    Update(TBytes(fReadBuffer.Buffer), 0, BytesRead);
+    Update(Bytes, 0, BytesRead);
     Dec(BytesToRead, BytesRead);
   end;
 end;
@@ -1026,30 +1026,6 @@ end;
 function TPJMD5.TMDBuffer.SpaceRemaining: Byte;
 begin
   Result := SizeOf(Data) - Cursor;
-end;
-
-{ TPJMD5.TMDReadBuffer }
-
-procedure TPJMD5.TMDReadBuffer.Alloc(const ASize: Cardinal);
-begin
-  if (ASize <> Size) then
-  begin
-    Release;
-    if ASize > 0 then
-    begin
-      GetMem(Buffer, ASize);
-      Size := ASize;
-    end;
-  end;
-end;
-
-procedure TPJMD5.TMDReadBuffer.Release;
-begin
-  if Assigned(Buffer) then
-  begin
-    FreeMem(Buffer);
-    Size := 0;
-  end;
 end;
 
 { TPJMD5Digest }
