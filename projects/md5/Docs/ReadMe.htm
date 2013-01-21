@@ -128,7 +128,7 @@
   .copyright,
   .copyright a:link,
   .copyright a:visited,
-  .copyright a:ac  tive {
+  .copyright a:active {
     margin: 1em 0 0 0;
     color: gray;
     font-size: 8pt;
@@ -178,9 +178,13 @@
 </h2>
 
 <p>
-  The unit is documented in the <a
-    href="http://www.delphidabbler.com/url/md5-wiki"
-  >MD5 Message Digest Unit Wiki</a>. There is no help file.
+  The unit is documented <a
+    href="http://www.delphidabbler.com/url/md5-docs"
+  >online</a>.
+</p>
+
+<p>
+  There is no help file.
 </p>
 
 <h2 id="compatibility">
@@ -188,8 +192,16 @@
 </h2>
 
 <p>
-  The unit is targetted at Delphi 2010 and later. It <strong>may</strong>
-  compile with Delphi 2009, but this has not been tested.
+  The unit requires Delphi 2009 and later. It has been tested with Delphi 2009,
+  2010, XE, XE2 and XE3.
+</p>
+
+<p>
+  Both the Delphi 32 bit and 64 bit compilers are supported.
+</p>
+
+<p>
+  The code is compatible with VCL and FireMonkey 2 applications.
 </p>
 
 <h2 id="installation">
@@ -198,40 +210,32 @@
 
 <p>
   The MD5 Message Digest Unit, documentation and test suite are supplied in a
-  zip file. Before installing you need to extract all the files from the zip
-  file, preserving the directory structure. The following files will be
+  zip file. Before installing you need to extract all the files, preserving the
+  directory structure. The following files will be
   extracted:
 </p>
 
 <ul>
   <li>
-    <code><strong>PJMD5.pas</strong></code> &ndash; Main source code.
+    <code><strong>PJMD5.pas</strong></code> &ndash; The source code.
   </li>
   <li>
     <code>ReadMe.htm</code> &ndash; The unit's read-me file.
   </li>
   <li>
-    <code>License.txt</code> &ndash; The project's license.
-  </li>
-  <li>
     <code>ChangeLog.txt</code> &ndash; The unit's change log.
   </li>
   <li>
-    <code>DocumentationWiki.URL</code> &ndash; Shortcut to the online Wiki that
-    documents the unit.
+    <code>Documentation.URL</code> &ndash; Shortcut to the online documentation.
   </li>
   <li>
-    <code>GPL-2.0.txt</code> &ndash; GNU General Public License v2.0.
+    <code>License.txt</code> &ndash; The project's license.
   </li>
   <li>
-    <code>LGPL-2.1.txt</code> &ndash; GNU Lesser General Public License
-    v2.1.
+    <code>MPL-2.txt</code> &ndash; Mozilla Public License v2.0.
   </li>
   <li>
     <code>MD5-Notice.txt</code> &ndash; MD5 algorithm licensing notice.
-  </li>
-  <li>
-    <code>MPL-1.1.txt</code> &ndash; Mozilla Public Licence v1.1.
   </li>
 </ul>
 
@@ -256,8 +260,8 @@
     required without needing to add it to your project.
   </li>
   <li>
-    For maximum portability you can add the unit to a Delphi design time
-    package. If you need help doing this <a
+    For maximum portability you can add the unit to a Delphi 32 bit or 64 bit
+    Windows package. If you need help doing this <a
       href="http://www.delphidabbler.com/url/install-comp"
     >see here</a>.
   </li>
@@ -273,7 +277,7 @@
 </p>
 
 <h2 id="license">
-  License and Disclaimer
+  License and Acknowledgements
 </h2>
 
 <p>
@@ -325,9 +329,9 @@
     use the Issue Tracker above to report bugs and request new features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2010-2011, P D Johnson,
+    This document is copyright &copy; 2010-2013, P D Johnson,
     <a href="http://www.delphidabbler.com/">
-    www.delphidabbler.com</a>
+    www.delphidabbler.com</a>.
   </div>
 </div>
 
