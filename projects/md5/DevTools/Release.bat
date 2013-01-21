@@ -28,12 +28,10 @@ zip %OutFile% -j -9 PJMD5.pas
 
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
 zip %OutFile% -j -9 %DocsDir%\License.txt
-zip %OutFile% -j -9 %DocsDir%\GPL-2.0.txt
-zip %OutFile% -j -9 %DocsDir%\LGPL-2.1.txt
 zip %OutFile% -j -9 %DocsDir%\MD5-Notice.txt
-zip %OutFile% -j -9 %DocsDir%\MPL-1.1.txt
+zip %OutFile% -j -9 %DocsDir%\MPL-2.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
-zip %OutFile% -j -9 %DocsDir%\DocumentationWiki.URL
+zip %OutFile% -j -9 %DocsDir%\Documentation.URL
 
 zip %OutFile% -r -9 %TestDir%\*.* -x *.svn\*
 
