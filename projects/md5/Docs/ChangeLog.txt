@@ -11,7 +11,7 @@
 ; Change Log for MD5 Message Digest Unit
 ; ------------------------------------------------------------------------------
 
-Release v1.1 of 23 January 2013
+Release v1.1 of 22 January 2013
 + Made unit compatible with Delphi Windows 64 bit compiler by fixing bug that was causing an assertion failure on 64 bit compiler when adding data from an untyped constant to MD5 hash.
 + Fixed bug in code that raised exception when getting hash of empty Ansi strings, Wide strings (not Unicode) and zero length untyped buffers.
 + Data from untyped buffers is now processed in chunks rather than all at once. Chunk size is determined by DefReadBufferSize constant or ReadBufferSize property.
