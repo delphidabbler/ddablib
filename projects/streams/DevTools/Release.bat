@@ -25,9 +25,9 @@ zip %OutFile% -j -9 PJIStreams.pas
 zip %OutFile% -j -9 PJStreamWrapper.pas
 
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
-zip %OutFile% -j -9 %DocsDir%\MPL.txt
+zip %OutFile% -j -9 %DocsDir%\MPL-2.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
-zip %OutFile% -j -9 %DocsDir%\DocumentationWiki.URL
+zip %OutFile% -j -9 %DocsDir%\Documentation.URL
 
 zip %OutFile% -r -9 .\Demos\*.* -x *.svn\* *Test.*
 zip %OutFile% -r -9 .\Tests\*.* -x *Bin\* *.svn\*
