@@ -4,6 +4,18 @@
 ; $Date$
 ; ------------------------------------------------------------------------------
 
+Release v3.1.1 of 28 January 2013
++ Unit names references in project source files are now qualified with namespace name on Delphi XE2 and later.
++ Changes to demo projects:
+  - Default form font changed to Arial.
+  - Forms are no longer scaled.
+  - Fixed error in IStreamWrap demo where Unicode text was not been read correctly from memory streams.
+  - Project group files removed.
+  - New FireMonkey 2 demo project that demonstrates PJIStreams unit.
++ Project source license changed to Mozilla Public License v2.0. (Demos and test project now placed in public domain).
++ MPL text file and documentation wiki shortcut have had names changed.
++ Updated documentation.
+
 Release v3.1 of 08 October 2011
 + Added overloads for 64 bit integer parameters to TStream descendant SetSize and Seek methods.
 + Implemented proper support to IStream implementations for large (64 bit) integer data sizes, seeks and copies.
