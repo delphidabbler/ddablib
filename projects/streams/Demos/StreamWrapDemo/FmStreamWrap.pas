@@ -67,7 +67,6 @@ uses
 {$R *.DFM}
 
 procedure TStreamWrapForm.btnWriteClick(Sender: TObject);
-  {Write the strings in the left hand memo to the stream}
 var
   SS: TStrStream;   // the string i/o enabled stream wrapper
   I: Integer;       // loops thru all strings in memo
@@ -75,7 +74,8 @@ begin
   // Create string writing stream wrapper round stream to new file
   SS := TStrStream.Create(
     TFileStream.Create('test.dat', fmCreate),     // create file & stream on fly
-    True);                       // causes file stream to be freed automatically
+    True                         // causes file stream to be freed automatically
+  );
   try
     // Write out each string in left hand memo to file
     for I := 0 to memoOutStr.Lines.Count - 1 do
@@ -98,7 +98,8 @@ begin
     // Create a string reading stream wrapping file stream to input file
     SS := TStrStream.Create(
       TFileStream.Create('test.dat', fmOpenRead),  // file stream created on fly
-      True);                                  // file stream freed automatically
+      True                                    // file stream freed automatically
+    );
     try
       // Read all strings from file, adding to memo in angle brackets
       while SS.Position < SS.Size do
@@ -111,12 +112,15 @@ begin
     end;
   end
   else
-    MessageDlg('There is no file to read - try writing some strings!',
-      mtError, [mbOK], 0);
+    MessageDlg(
+      'There is no file to read - try writing some strings!',
+      mtError,
+      [mbOK],
+      0
+    );
 end;
 
 procedure TStreamWrapForm.btnCloseClick(Sender: TObject);
-  {Closes the application}
 begin
   Close;
 end;
@@ -124,7 +128,6 @@ end;
 { TStrStream }
 
 function TStrStream.ReadString: string;
-  {Reads a string from the underlying stream}
 var
   Len: Integer; // length of string
 begin
@@ -147,3 +150,4 @@ begin
 end;
 
 end.
+
