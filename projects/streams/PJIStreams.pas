@@ -37,15 +37,9 @@
 unit PJIStreams;
 
 
-interface
-
-
-uses
-  // Delphi
-  Classes, Windows, ActiveX;
-
 {$UNDEF SUPPORTS_STRICT}
 {$UNDEF SUPPORTS_TSTREAM64}
+{$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 14.0} // >= Delphi 6
     {$DEFINE SUPPORTS_TSTREAM64}
@@ -57,13 +51,28 @@ uses
   {$IF CompilerVersion >= 18.0} // >= Delphi 2006
     {$DEFINE SUPPORTS_STRICT}
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // >= Delphi XE2
+    {$DEFINE RTLNAMESPACES}
+  {$IFEND}
 {$ENDIF}
+
+
+interface
+
+
+uses
+  // Delphi
+  {$IFNDEF RTLNAMESPACES}
+  Classes, Windows, ActiveX;
+  {$ELSE}
+  System.Classes, Winapi.Windows, Winapi.ActiveX;
+  {$ENDIF}
 
 type
 
-  ///  <summay>
+  ///  <summary>
   ///  Class that implements the IStream interface for a wrapped TStream object.
-  ///  </summay>
+  ///  </summary>
   TPJIStreamWrapper = class(TInterfacedObject, IStream)
   {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   private
@@ -339,7 +348,11 @@ implementation
 
 uses
   // Delphi
+  {$IFNDEF RTLNAMESPACES}
   Math, SysUtils,
+  {$ELSE}
+  System.Math, System.SysUtils,
+  {$ENDIF}
   // Library
   PJStreamWrapper;
 

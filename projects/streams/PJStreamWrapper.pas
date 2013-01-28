@@ -40,14 +40,9 @@
 
 unit PJStreamWrapper;
 
-interface
-
-uses
-  // Delphi
-  Classes;
-
 {$UNDEF SUPPORTS_STRICT}
 {$UNDEF SUPPORTS_TSTREAM64}
+{$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 14.0} // >= Delphi 6
     {$DEFINE SUPPORTS_TSTREAM64}
@@ -55,7 +50,20 @@ uses
   {$IF CompilerVersion >= 18.0} // >= Delphi 2006
     {$DEFINE SUPPORTS_STRICT}
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // >= Delphi XE2
+    {$DEFINE RTLNAMESPACES}
+  {$IFEND}
 {$ENDIF}
+
+interface
+
+uses
+  // Delphi
+  {$IFNDEF RTLNAMESPACES}
+  Classes;
+  {$ELSE}
+  System.Classes;
+  {$ENDIF}
 
 // There is an error in TStringStream's Seek implementation in non-Unicode
 // versions of the Classes unit. Seeks using the soFromEnd origin incorrectly
