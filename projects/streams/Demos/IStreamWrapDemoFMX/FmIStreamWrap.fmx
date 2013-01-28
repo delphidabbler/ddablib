@@ -1,0 +1,185 @@
+object IStreamWrapForm: TIStreamWrapForm
+  Left = 194
+  Top = 107
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'IStream Wrapper Demo'
+  ClientHeight = 345
+  ClientWidth = 474
+  Position = poScreenCenter
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  OnCreate = FormCreate
+  Left = 194
+  Top = 107
+  object lblOutStr: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 6.000000000000000000
+    Text = 'Enter some strings'
+    Width = 94.000000000000000000
+    WordWrap = False
+  end
+  object lblInStr: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 240.000000000000000000
+    Position.Y = 6.000000000000000000
+    Text = 'Strings read from file'
+    Width = 106.000000000000000000
+    WordWrap = False
+  end
+  object memoOutStr: TMemo
+    Touch.InteractiveGestures = [igPan]
+    Height = 161.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 24.000000000000000000
+    TabOrder = 0
+    Width = 225.000000000000000000
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    Lines.Strings = (
+      'This is a demo showing how'
+      'to use my IStream interface'
+      'implementation classes.'
+      'I Hope it'#39's useful.')
+    Font.Family = 'Tahoma'
+  end
+  object btnMSAppend: TButton
+    DisableFocusEffect = False
+    Height = 25.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 192.000000000000000000
+    TabOrder = 1
+    Text = 'Append Strings to Memory Stream'
+    Width = 225.000000000000000000
+    OnClick = btnMSAppendClick
+  end
+  object btnMSRead: TButton
+    DisableFocusEffect = False
+    Height = 25.000000000000000000
+    Position.X = 240.000000000000000000
+    Position.Y = 192.000000000000000000
+    TabOrder = 2
+    Text = 'Read Strings from Memory Stream'
+    Width = 225.000000000000000000
+    OnClick = btnMSReadClick
+  end
+  object memoInStr: TMemo
+    Touch.InteractiveGestures = [igPan]
+    Height = 161.000000000000000000
+    Position.X = 240.000000000000000000
+    Position.Y = 24.000000000000000000
+    TabOrder = 3
+    Width = 225.000000000000000000
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    ReadOnly = True
+    Font.Family = 'Tahoma'
+  end
+  object btnClose: TButton
+    DisableFocusEffect = False
+    Height = 25.000000000000000000
+    Position.X = 390.000000000000000000
+    Position.Y = 288.000000000000000000
+    TabOrder = 4
+    Text = 'Close'
+    Width = 75.000000000000000000
+    OnClick = btnCloseClick
+  end
+  object btnMSClear: TButton
+    DisableFocusEffect = False
+    Height = 25.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 224.000000000000000000
+    TabOrder = 5
+    Text = 'Clear Memory Stream'
+    Width = 225.000000000000000000
+    OnClick = btnMSClearClick
+  end
+  object btnMSToFile: TButton
+    DisableFocusEffect = False
+    Height = 25.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 256.000000000000000000
+    TabOrder = 6
+    Text = 'Copy Memory Stream to File'
+    Width = 225.000000000000000000
+    OnClick = btnMSToFileClick
+  end
+  object btnMSStats: TButton
+    DisableFocusEffect = False
+    Height = 25.000000000000000000
+    Position.X = 240.000000000000000000
+    Position.Y = 224.000000000000000000
+    TabOrder = 7
+    Text = 'Show Memory Stream Stats'
+    Width = 225.000000000000000000
+    OnClick = btnMSStatsClick
+  end
+  object btnFSStats: TButton
+    DisableFocusEffect = False
+    Height = 25.000000000000000000
+    Position.X = 240.000000000000000000
+    Position.Y = 256.000000000000000000
+    TabOrder = 8
+    Text = 'Show File Stream Stats'
+    Width = 225.000000000000000000
+    WordWrap = True
+    OnClick = btnFSStatsClick
+  end
+  object sbStatus: TStatusBar
+    Height = 19.000000000000000000
+    Position.Y = 326.000000000000000000
+    ShowSizeGrip = True
+    Width = 474.000000000000000000
+    object lblStatusBarSection0: TLabel
+      AutoSize = True
+      Height = 19.000000000000000000
+      Position.X = 4.000000000000000000
+      Position.Y = 2.000000000000000000
+      Width = 103.000000000000000000
+      WordWrap = False
+    end
+    object lblStatusBarSection1: TLabel
+      AutoSize = True
+      Height = 19.000000000000000000
+      Position.X = 223.000000000000000000
+      Position.Y = 2.000000000000000000
+      Width = 103.000000000000000000
+      WordWrap = False
+    end
+  end
+  object mnuFSStats: TPopupMenu
+    Left = 408
+    Top = 32
+    object miTPJIStreamWrapper: TMenuItem
+      Height = 50.000000000000000000
+      Text = 'Open with TPJIStreamWrapper'
+      Width = 50.000000000000000000
+      OnClick = miFSStatsClick
+    end
+    object miTPJHandleIStreamWrapper1: TMenuItem
+      Tag = 1
+      Height = 50.000000000000000000
+      Text = 'Open with TPJHandleIStreamWrapper (on a THandleStream)'
+      Width = 50.000000000000000000
+      OnClick = miFSStatsClick
+    end
+    object miTPJHandleIStreamWrapper2: TMenuItem
+      Tag = 2
+      Height = 50.000000000000000000
+      Text = 'Open with TPJHandleIStreamWrapper (on a TFileStream)'
+      Width = 50.000000000000000000
+      OnClick = miFSStatsClick
+    end
+    object miTPJFileIStream: TMenuItem
+      Tag = 3
+      Height = 50.000000000000000000
+      Text = 'Open with TPJFileIStream'
+      Width = 50.000000000000000000
+      OnClick = miFSStatsClick
+    end
+  end
+end
