@@ -177,21 +177,31 @@
 </h2>
 
 <p>
-  Two demo projects are provided in the download:
+  Three demo projects are provided in the download:
 </p>
 
-<ul class="spaced">
+<ol class="spaced">
   <li>
-    <em>IStreamWrap</em> demonstrates how to use the classes from the
-    <var>PJIStreams</var> unit that implement <var>IStream</var> interfaces for
-    wrapped streams.
+    <code>IStreamWrap.dpr</code> in the <code>IStreamWrapDemo</code>
+    sub-directory. This is a VCL project that demonstrates the IStream wrapper
+    classes in the <var>PJIStreams</var> unit.
   </li>
   <li>
-    The <em>StreamWrap</em> program demonstrates how to derive a class from the
-    <var>TPJSteamWrapper</var> class. The demo implements a class that can read
-    and write strings from and to a stream.
+    <code>IStreamWrapFMX.dpr</code> in the <code>IStreamWrapDemoFMX</code>
+    sub-directory. This is a FireMonkey 2 project that demonstrates the IStream
+    wrapper classes in the <var>PJIStreams</var> unit. It is similar, but not
+    identical, to <code>IStreamWrap.dpr</code>.
   </li>
-</ul>
+  <li>
+    <code>StreamWrap.dpr</code> in the <code>StreamWrapDemo</code>
+    sub-directory. This is a VCL project that demonstrates the
+    <var>PJStreamWrapper</var> unit.
+  </li>
+</ol>
+
+<p>
+  All the test projects are stored in the <code>Demos</code> directory.
+</p>
 
 <h2 id="tests">
   Unit Tests
@@ -211,14 +221,23 @@
 </h2>
 
 <p>
-  The classes depend on method overloading and are therefore only compatible
-  with Delphi 4 and later.
+  The classes are compatible with the following:
 </p>
 
-<p>
-  The classes, demos and tests are Unicode compatible and are suitable for
-  compilation with both the Delphi 32 bit and 64 bit Windows compilers.
-</p>
+<ul class="spaced">
+  <li>
+    The Delphi 4 and later Win 32 compilers.
+  </li>
+  <li>
+    The Delphi XE2 and later Win 64 compilers.
+  </li>
+  <li>
+    Both ANSI and Unicode strings.
+  </li>
+  <li>
+    The VCL and FireMonkey platforms (for Windows only).
+  </li>
+</ul>
 
 <h2 id="installation">
   Installation
@@ -247,8 +266,8 @@
 </ul>
 
 <p>
-  The demo files are stored in the <code>Demos</code> sub-folder - open the
-  <code>.bpg</code> file in Delphi to compile and examine the demos.
+  The demo files are stored in the <code>Demos</code> sub-folder and the DUnit
+  tests are in the <code>Tests</code> sub-folder.
 </p>
 
 <h2 id="documentation">
