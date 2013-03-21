@@ -10,6 +10,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UnitSearchPath>..\..;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
 			<DCC_DependencyCheckOutputName>..\Exe\Demo11.exe</DCC_DependencyCheckOutputName>
 			<DCC_ExeOutput>..\Exe</DCC_ExeOutput>
 			<DCC_ImageBase>00400000</DCC_ImageBase>
@@ -46,7 +47,7 @@
 						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
 					</Parameters>
 					<Language>
-						<Language Name="RootDir">D:\Prg\Rel\Lib\WC.trunk\projects\consoleapp\Demos\Demo11\</Language>
+						<Language Name="RootDir">..\..\..\..\..\..\..\Public\CodeLibrary\WC.trunk\projects\consoleapp\Demos\Demo11\</Language>
 					</Language>
 					<VersionInfo>
 						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
