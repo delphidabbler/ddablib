@@ -25,9 +25,7 @@ zip %OutFile% -9 PJPipeFilters.pas
 zip %OutFile% -9 PJFileHandle.pas
 
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
-zip %OutFile% -j -9 %DocsDir%\MPL-1.1.txt
-zip %OutFile% -j -9 %DocsDir%\LGPL-2.1.txt
-zip %OutFile% -j -9 %DocsDir%\GPL-2.0.txt
+zip %OutFile% -j -9 %DocsDir%\MPL-2.0.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
 zip %OutFile% -j -9 %DocsDir%\Documentation.URL
 
