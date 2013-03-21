@@ -14,10 +14,14 @@
 unit PJPipe;
 
 {$UNDEF COMPILERSUPPORTED}
+{$UNDEF STRICT}
 {$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 15.0}   // >= Delphi 7
     {$DEFINE COMPILERSUPPORTED}
+  {$IFEND}
+  {$IF CompilerVersion >= 17.0}   // >= Delphi 2005
+    {$DEFINE STRICT}
   {$IFEND}
   {$IF CompilerVersion >= 23.0}   // >= Delphi XE2
     {$DEFINE RTLNAMESPACES}
@@ -59,6 +63,7 @@ type
   ///  Class that encapsulates an unamed pipe and can read and write the pipe.
   ///  </summary>
   TPJPipe = class(TObject)
+  {$IFDEF STRICT}strict{$ENDIF}
   private
     ///  Handle used to read the pipe.
     fReadHandle: THandle;

@@ -16,10 +16,14 @@
 unit PJFileHandle;
 
 {$UNDEF COMPILERSUPPORTED}
+{$UNDEF STRICT}
 {$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 15.0}   // >= Delphi 7
     {$DEFINE COMPILERSUPPORTED}
+  {$IFEND}
+  {$IF CompilerVersion >= 17.0}   // >= Delphi 2005
+    {$DEFINE STRICT}
   {$IFEND}
   {$IF CompilerVersion >= 23.0}   // >= Delphi XE2
     {$DEFINE RTLNAMESPACES}
@@ -58,6 +62,7 @@ type
   ///  THandleStream object for the file's handle.</para>
   ///  </remarks>
   TPJFileHandle = class(TObject)
+  {$IFDEF STRICT}strict{$ENDIF}
   private
     ///  <summary>File handle.</summary>
     fHandle: THandle;
