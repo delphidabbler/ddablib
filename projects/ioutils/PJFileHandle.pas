@@ -16,9 +16,13 @@
 unit PJFileHandle;
 
 {$UNDEF COMPILERSUPPORTED}
+{$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0}   // Delphi 7
+  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
     {$DEFINE COMPILERSUPPORTED}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}   // >= Delphi XE2
+    {$DEFINE RTLNAMESPACES}
   {$IFEND}
 {$ENDIF}
 
@@ -32,7 +36,11 @@ interface
 
 uses
   // Delphi
+  {$IFNDEF RTLNAMESPACES}
   Windows;
+  {$ELSE}
+  Winapi.Windows;
+  {$ENDIF}
 
 type
 
@@ -100,7 +108,11 @@ implementation
 
 uses
   // Delphi
+  {$IFNDEF RTLNAMESPACES}
   SysUtils, Classes, RTLConsts;
+  {$ELSE}
+  System.SysUtils, System.Classes, System.RTLConsts;
+  {$ENDIF}
 
 
 resourcestring

@@ -16,15 +16,19 @@ unit PJPipeFilters;
 {$UNDEF COMPILERSUPPORTED}
 {$UNDEF ABSTRACTCLASSES}
 {$UNDEF STRICT}
+{$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0}   // Delphi 7
+  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
     {$DEFINE COMPILERSUPPORTED}
   {$IFEND}
-  {$IF CompilerVersion >= 17.0}   // Delphi 2005
+  {$IF CompilerVersion >= 17.0}   // >= Delphi 2005
     {$DEFINE STRICT}
   {$IFEND}
-  {$IF CompilerVersion >= 18.0}   // Delphi 2006
+  {$IF CompilerVersion >= 18.0}   // >= Delphi 2006
     {$DEFINE ABSTRACTCLASSES}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}   // >= Delphi XE2
+    {$DEFINE RTLNAMESPACES}
   {$IFEND}
 {$ENDIF}
 
@@ -37,8 +41,12 @@ unit PJPipeFilters;
 interface
 
 uses
+  {$IFNDEF RTLNAMESPACES}
   // Delphi
   SysUtils, Classes,
+  {$ELSE}
+  System.SysUtils, System.Classes,
+  {$ENDIF}
   // Project
   PJPipe;
 

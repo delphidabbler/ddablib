@@ -14,15 +14,24 @@
 unit PJPipe;
 
 {$UNDEF COMPILERSUPPORTED}
+{$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0}   // Delphi 7
+  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
     {$DEFINE COMPILERSUPPORTED}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}   // >= Delphi XE2
+    {$DEFINE RTLNAMESPACES}
   {$IFEND}
 {$ENDIF}
 
 {$IFNDEF COMPILERSUPPORTED}
   {$MESSAGE FATAL 'Minimum compiler version is Delphi 7'}
 {$ENDIF}
+
+{$UNDEF RTLNAMESPACES}
+{$IF CompilerVersion >= 23.0} // >= Delphi XE2
+  {$DEFINE RTLNAMESPACES}
+{$IFEND}
 
 {$WARN UNSAFE_CODE OFF}
 
@@ -31,7 +40,11 @@ interface
 
 uses
   // Delphi
+  {$IFNDEF RTLNAMESPACES}
   SysUtils, Classes, Windows;
+  {$ELSE}
+  System.SysUtils, System.Classes, Winapi.Windows;
+  {$ENDIF}
 
 
 // Ensure TBytes is defined
@@ -296,7 +309,13 @@ end;
 procedure TPJPipe.CreatePipe(const Size: LongWord;
   const Security: PSecurityAttributes);
 begin
+  {$IFNDEF RTLNAMESPACES}
   if not Windows.CreatePipe(fReadHandle, fWriteHandle, Security, Size) then
+  {$ELSE}
+  if not Winapi.Windows.CreatePipe(
+    fReadHandle, fWriteHandle, Security, Size
+  ) then
+  {$ENDIF}
     raise EInOutError.CreateFmt(
       sCantCreatePipe, [SysErrorMessage(GetLastError)]
     );
