@@ -93,7 +93,7 @@ OutputDir=..\Exe
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
-SearchPath=
+SearchPath=..\..
 Conditionals=
 DebugSourceDirs=
 UsePackages=0
@@ -103,9 +103,6 @@ HostApplication=
 Launcher=
 UseLauncher=0
 DebugCWD=
-[Language]
-ActiveLang=
-ProjectLang=
 [Version Info]
 IncludeVerInfo=0
 AutoIncBuild=0
