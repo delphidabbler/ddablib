@@ -24,9 +24,6 @@ if not exist Release mkdir Release
 if exist %OutFile% del %OutFile%
 
 zip %OutFile% -9 PJConsoleApp.pas
-zip %OutFile% -9 PJPipe.pas
-zip %OutFile% -9 PJPipeFilters.pas
-zip %OutFile% -9 PJFileHandle.pas
 
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
 zip %OutFile% -j -9 %DocsDir%\MPL.txt
