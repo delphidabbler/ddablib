@@ -24,6 +24,10 @@ Demos\TestApps\Echoer and Demos\TestApps\Timed.
 The Demos directory itself contains .bpg format that includes all the demo
 projects and the example console applications in a single project group.
 
+Finally there's an Demos\IOUtils sub-directory (explained in Dependencies below)
+and a Demos\TestData directory which stores any data files required by the demo
+programs.
+
 --------------------------------------------------------------------------------
 Information about the Demos
 --------------------------------------------------------------------------------
