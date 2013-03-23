@@ -1,3 +1,16 @@
+{
+ * Demo11.dpr
+ *
+ * Project file for DelphiDabbler Console Application Runner Classes demo
+ * program #12: Handling Unicode output from console applications.
+ *
+ * $Rev$
+ * $Date$
+ *
+ * Any copyright in this file is dedicated to the Public Domain.
+ * http://creativecommons.org/publicdomain/zero/1.0/
+}
+
 program Demo12;
 
 uses

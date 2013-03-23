@@ -2,14 +2,13 @@
  * Demo1.dpr
  *
  * Project file for DelphiDabbler Console Application Runner Classes demo
- * program #1: Example of ExecAndWait.
+ * program #1: ExecAndWait.
  *
  * $Rev$
  * $Date$
  *
- * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2007-2010.
- * It may be used without restriction. This code distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * Any copyright in this file is dedicated to the Public Domain.
+ * http://creativecommons.org/publicdomain/zero/1.0/
 }
 
 program Demo1;
