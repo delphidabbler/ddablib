@@ -3,23 +3,24 @@ object Form1: TForm1
   Top = 114
   BorderStyle = bsSingle
   Caption = 'TPJConsoleApp Demo 1'
-  ClientHeight = 118
-  ClientWidth = 314
+  ClientHeight = 145
+  ClientWidth = 386
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Height = -12
+  Font.Name = 'Arial'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  Scaled = False
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label1: TLabel
-    Left = 8
-    Top = 8
-    Width = 297
-    Height = 71
+    Left = 10
+    Top = 10
+    Width = 365
+    Height = 82
     AutoSize = False
     Caption = 
       'First click ExecAndWait to run Timed.exe using the original stan' +
@@ -30,19 +31,19 @@ object Form1: TForm1
     WordWrap = True
   end
   object Button1: TButton
-    Left = 8
-    Top = 88
-    Width = 97
-    Height = 25
+    Left = 10
+    Top = 108
+    Width = 119
+    Height = 31
     Caption = 'ExecAndWait'
     TabOrder = 0
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 208
-    Top = 88
-    Width = 97
-    Height = 25
+    Left = 256
+    Top = 108
+    Width = 119
+    Height = 31
     Caption = 'ExecAndWait2'
     TabOrder = 1
     OnClick = Button2Click

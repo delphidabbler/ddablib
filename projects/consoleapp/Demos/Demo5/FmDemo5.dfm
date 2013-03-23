@@ -3,23 +3,24 @@ object Form1: TForm1
   Top = 114
   BorderStyle = bsSingle
   Caption = 'TPJConsoleApp Demo 5'
-  ClientHeight = 156
-  ClientWidth = 313
+  ClientHeight = 192
+  ClientWidth = 385
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Height = -12
+  Font.Name = 'Arial'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  Scaled = False
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label1: TLabel
-    Left = 8
-    Top = 8
-    Width = 297
-    Height = 81
+    Left = 10
+    Top = 10
+    Width = 365
+    Height = 100
     AutoSize = False
     Caption = 
       'Check the "Kill terminated app" check box if you want terminated' +
@@ -29,27 +30,27 @@ object Form1: TForm1
     WordWrap = True
   end
   object CheckBox1: TCheckBox
-    Left = 8
-    Top = 96
-    Width = 121
-    Height = 17
+    Left = 10
+    Top = 118
+    Width = 149
+    Height = 21
     Caption = 'Kill terminated app'
     TabOrder = 0
   end
   object Button1: TButton
-    Left = 8
-    Top = 120
-    Width = 105
-    Height = 25
+    Left = 10
+    Top = 148
+    Width = 129
+    Height = 30
     Caption = 'Execute Timed.exe'
     TabOrder = 1
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 200
-    Top = 120
-    Width = 105
-    Height = 25
+    Left = 246
+    Top = 148
+    Width = 129
+    Height = 30
     Caption = 'Terminate'
     Enabled = False
     TabOrder = 2

@@ -3,23 +3,24 @@ object Form1: TForm1
   Top = 159
   BorderStyle = bsSingle
   Caption = 'TPJConsoleApp Demo 7'
-  ClientHeight = 290
-  ClientWidth = 473
+  ClientHeight = 357
+  ClientWidth = 582
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Height = -12
+  Font.Name = 'Arial'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  Scaled = False
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label1: TLabel
-    Left = 8
-    Top = 8
-    Width = 457
-    Height = 97
+    Left = 10
+    Top = 10
+    Width = 562
+    Height = 119
     AutoSize = False
     Caption = 
       'Enter some text in the left hand memo then click the "Execute Ec' +
@@ -31,19 +32,19 @@ object Form1: TForm1
     WordWrap = True
   end
   object Button1: TButton
-    Left = 180
-    Top = 112
-    Width = 113
-    Height = 25
+    Left = 222
+    Top = 138
+    Width = 139
+    Height = 31
     Caption = 'Execute Echoer.exe'
     TabOrder = 0
     OnClick = Button1Click
   end
   object Memo1: TMemo
-    Left = 8
-    Top = 144
-    Width = 225
-    Height = 137
+    Left = 10
+    Top = 177
+    Width = 277
+    Height = 169
     Lines.Strings = (
       
         'Enter some text in the left hand memo then click the "Execute Ec' +
@@ -60,10 +61,10 @@ object Form1: TForm1
     WordWrap = False
   end
   object Memo2: TMemo
-    Left = 240
-    Top = 144
-    Width = 225
-    Height = 137
+    Left = 295
+    Top = 177
+    Width = 277
+    Height = 169
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 2

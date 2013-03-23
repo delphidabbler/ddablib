@@ -3,62 +3,63 @@ object Form1: TForm1
   Top = 116
   BorderStyle = bsSingle
   Caption = 'TPJConsoleApp Demo 11'
-  ClientHeight = 346
-  ClientWidth = 348
+  ClientHeight = 426
+  ClientWidth = 428
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Height = -12
+  Font.Name = 'Arial'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  Scaled = False
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object lblTitle: TLabel
-    Left = 8
-    Top = 8
-    Width = 111
-    Height = 13
+    Left = 10
+    Top = 10
+    Width = 130
+    Height = 15
     Caption = 'Console Windows &Title:'
   end
   object btnRun: TButton
-    Left = 8
-    Top = 312
-    Width = 329
-    Height = 25
+    Left = 10
+    Top = 384
+    Width = 405
+    Height = 31
     Caption = '&Run Console App'
     TabOrder = 4
     OnClick = btnRunClick
   end
   object gbConsoleColours: TGroupBox
-    Left = 8
-    Top = 56
-    Width = 329
-    Height = 73
+    Left = 10
+    Top = 69
+    Width = 405
+    Height = 90
     Caption = 'Console colours'
     TabOrder = 1
     object lblForeground: TLabel
-      Left = 8
-      Top = 20
-      Width = 57
-      Height = 13
+      Left = 10
+      Top = 25
+      Width = 67
+      Height = 15
       Caption = '&Foreground:'
       FocusControl = cbForeground
     end
     object lblBackground: TLabel
-      Left = 176
-      Top = 20
-      Width = 61
-      Height = 13
+      Left = 217
+      Top = 25
+      Width = 69
+      Height = 15
       Caption = '&Background:'
       FocusControl = cbBackground
     end
     object cbForeground: TColorBox
-      Left = 8
-      Top = 35
-      Width = 145
+      Left = 10
+      Top = 43
+      Width = 178
       Height = 22
       Selected = clWhite
       Style = [cbStandardColors, cbPrettyNames]
@@ -66,9 +67,9 @@ object Form1: TForm1
       TabOrder = 0
     end
     object cbBackground: TColorBox
-      Left = 176
-      Top = 35
-      Width = 145
+      Left = 217
+      Top = 43
+      Width = 178
       Height = 22
       Style = [cbStandardColors, cbPrettyNames]
       ItemHeight = 16
@@ -76,42 +77,42 @@ object Form1: TForm1
     end
   end
   object edTitle: TEdit
-    Left = 8
-    Top = 24
-    Width = 329
-    Height = 21
+    Left = 10
+    Top = 30
+    Width = 405
+    Height = 23
     TabOrder = 0
   end
   object gbWindowSize: TGroupBox
-    Left = 8
-    Top = 136
-    Width = 329
-    Height = 81
+    Left = 10
+    Top = 167
+    Width = 405
+    Height = 100
     Caption = 'Window Size'
     TabOrder = 2
     object lblWindowWidth: TLabel
-      Left = 8
-      Top = 48
-      Width = 31
-      Height = 13
+      Left = 10
+      Top = 59
+      Width = 34
+      Height = 15
       Caption = '&Width:'
       Enabled = False
       FocusControl = edWindowWidth
     end
     object lblWindowHeight: TLabel
-      Left = 104
-      Top = 48
-      Width = 34
-      Height = 13
+      Left = 128
+      Top = 59
+      Width = 39
+      Height = 15
       Caption = '&Height:'
       Enabled = False
       FocusControl = edWindowHeight
     end
     object cbDefWindowSize: TCheckBox
-      Left = 8
-      Top = 16
-      Width = 241
-      Height = 17
+      Left = 10
+      Top = 20
+      Width = 296
+      Height = 21
       Caption = 'Use default'
       Checked = True
       State = cbChecked
@@ -119,10 +120,10 @@ object Form1: TForm1
       OnClick = cbDefWindowSizeClick
     end
     object edWindowWidth: TEdit
-      Left = 48
-      Top = 44
-      Width = 49
-      Height = 21
+      Left = 59
+      Top = 54
+      Width = 60
+      Height = 23
       Enabled = False
       MaxLength = 3
       TabOrder = 1
@@ -130,10 +131,10 @@ object Form1: TForm1
       OnKeyPress = EdNumberFilter
     end
     object edWindowHeight: TEdit
-      Left = 144
-      Top = 44
-      Width = 49
-      Height = 21
+      Left = 177
+      Top = 54
+      Width = 61
+      Height = 23
       Enabled = False
       MaxLength = 3
       TabOrder = 2
@@ -142,35 +143,35 @@ object Form1: TForm1
     end
   end
   object gbWindowPos: TGroupBox
-    Left = 8
-    Top = 224
-    Width = 329
-    Height = 81
+    Left = 10
+    Top = 276
+    Width = 405
+    Height = 99
     Caption = 'Window Position'
     TabOrder = 3
     object lblWindowLeft: TLabel
-      Left = 8
-      Top = 48
-      Width = 21
-      Height = 13
+      Left = 10
+      Top = 59
+      Width = 23
+      Height = 15
       Caption = '&Left:'
       Enabled = False
       FocusControl = edWindowLeft
     end
     object lblWindowTop: TLabel
-      Left = 104
-      Top = 48
-      Width = 22
-      Height = 13
+      Left = 128
+      Top = 59
+      Width = 23
+      Height = 15
       Caption = 'T&op:'
       Enabled = False
       FocusControl = edWindowTop
     end
     object cbDefWindowPos: TCheckBox
-      Left = 8
-      Top = 16
-      Width = 241
-      Height = 17
+      Left = 10
+      Top = 20
+      Width = 296
+      Height = 21
       Caption = 'Use default'
       Checked = True
       State = cbChecked
@@ -178,10 +179,10 @@ object Form1: TForm1
       OnClick = cbDefWindowPosClick
     end
     object edWindowLeft: TEdit
-      Left = 48
-      Top = 44
-      Width = 49
-      Height = 21
+      Left = 59
+      Top = 54
+      Width = 60
+      Height = 23
       Enabled = False
       MaxLength = 3
       TabOrder = 1
@@ -189,10 +190,10 @@ object Form1: TForm1
       OnKeyPress = EdNumberFilter
     end
     object edWindowTop: TEdit
-      Left = 144
-      Top = 44
-      Width = 49
-      Height = 21
+      Left = 177
+      Top = 54
+      Width = 61
+      Height = 23
       Enabled = False
       MaxLength = 3
       TabOrder = 2

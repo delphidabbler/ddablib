@@ -3,23 +3,24 @@ object Form1: TForm1
   Top = 114
   BorderStyle = bsSingle
   Caption = 'TPJConsoleApp Demo 4'
-  ClientHeight = 353
-  ClientWidth = 385
+  ClientHeight = 434
+  ClientWidth = 474
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Height = -12
+  Font.Name = 'Arial'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  Scaled = False
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label1: TLabel
-    Left = 8
-    Top = 8
-    Width = 369
-    Height = 105
+    Left = 10
+    Top = 10
+    Width = 454
+    Height = 129
     AutoSize = False
     Caption = 
       'Enter a maximum execution time (in milliseconds) in the edit box' +
@@ -33,43 +34,43 @@ object Form1: TForm1
     WordWrap = True
   end
   object Label2: TLabel
-    Left = 8
-    Top = 128
-    Width = 154
-    Height = 13
+    Left = 10
+    Top = 158
+    Width = 182
+    Height = 15
     Caption = 'Enter max execution time (in ms):'
   end
   object Button1: TButton
-    Left = 137
-    Top = 152
-    Width = 113
-    Height = 25
+    Left = 169
+    Top = 187
+    Width = 139
+    Height = 31
     Caption = 'Execute Timed.exe'
     TabOrder = 2
     OnClick = Button1Click
   end
   object Memo1: TMemo
-    Left = 8
-    Top = 184
-    Width = 369
-    Height = 153
+    Left = 10
+    Top = 226
+    Width = 454
+    Height = 189
     TabStop = False
     ScrollBars = ssVertical
     TabOrder = 3
   end
   object Edit1: TEdit
-    Left = 168
-    Top = 128
-    Width = 57
-    Height = 21
+    Left = 207
+    Top = 158
+    Width = 70
+    Height = 23
     TabOrder = 0
     Text = '3000'
   end
   object CheckBox1: TCheckBox
-    Left = 248
-    Top = 128
-    Width = 129
-    Height = 17
+    Left = 305
+    Top = 158
+    Width = 159
+    Height = 20
     Caption = 'Kill timed out app'
     TabOrder = 1
   end
