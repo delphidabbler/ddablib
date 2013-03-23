@@ -37,9 +37,13 @@
 unit PJConsoleApp;
 
 {$UNDEF COMPILERSUPPORTED}
+{$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0}   // Delphi 7
+  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
     {$DEFINE COMPILERSUPPORTED}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0}   // >= Delphi XE2
+    {$DEFINE RTLNAMESPACES}
   {$IFEND}
 {$ENDIF}
 
@@ -55,7 +59,11 @@ interface
 
 uses
   // Delphi
+  {$IFNDEF RTLNAMESPACES}
   Classes, Windows, Graphics, Types;
+  {$ELSE}
+  System.Classes, Winapi.Windows, Vcl.Graphics, System.Types;
+  {$ENDIF}
 
 
 const
@@ -572,7 +580,11 @@ implementation
 
 uses
   // Delphi
+  {$IFNDEF RTLNAMESPACES}
   SysUtils, DateUtils, Messages;
+  {$ELSE}
+  System.SysUtils, System.DateUtils, Winapi.Messages;
+  {$ENDIF}
 
 
 resourcestring
@@ -750,7 +762,7 @@ begin
   repeat
     // Pause and wait for app - length determined by TimeSlice property
     AppState := WaitForSingleObject(GetProcessHandle, fTimeSlice);
-    fElapsedTime := Int64Rec(DateUtils.MilliSecondsBetween(StartTime, Now)).Lo;
+    fElapsedTime := Int64Rec(MilliSecondsBetween(StartTime, Now)).Lo;
     if fMaxExecTime <> INFINITE then
       if fElapsedTime >= fMaxExecTime then
         fTimeToLive := 0
