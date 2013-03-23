@@ -26,9 +26,9 @@ if exist %OutFile% del %OutFile%
 zip %OutFile% -9 PJConsoleApp.pas
 
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
-zip %OutFile% -j -9 %DocsDir%\MPL.txt
+zip %OutFile% -j -9 %DocsDir%\MPL-2.0.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
-zip %OutFile% -j -9 %DocsDir%\DocumentationWiki.URL
+zip %OutFile% -j -9 %DocsDir%\Documentation.URL
 
 zip %OutFile% -r -9 %DemosDir%\*.* -x *.svn\*
 
