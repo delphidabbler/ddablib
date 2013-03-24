@@ -560,9 +560,9 @@ implementation
 uses
   // Delphi
   {$IFNDEF RTLNAMESPACES}
-  SysUtils, DateUtils, Messages;
+  SysUtils, DateUtils;
   {$ELSE}
-  System.SysUtils, System.DateUtils, Winapi.Messages;
+  System.SysUtils, System.DateUtils;
   {$ENDIF}
 
 
