@@ -136,6 +136,11 @@ Delphi may update the project or project group files. If this happens you may
 need to restore the original files from before re-compiling with a different
 version of Delphi.
 
+Each demo project is configured to compile as a 32 bit Windows application. They
+will all compile successfully as 64 bit Windows applications with Delphi XE2 and
+later, but you will need to manually add 64 bit targets to each project
+individually.
+
 Note: some versions of Delphi may generate hints, or possibly warning, depending
 on your setup. These should not cause a problem.
 
