@@ -27,7 +27,7 @@
  * Portions created by the Initial Developer are Copyright (C) 2007-2011 Peter
  * Johnson. All Rights Reserved.
  *
- * Contributor(s): 
+ * Contributor(s):
  *   NONE
  *
  * ***** END LICENSE BLOCK *****
@@ -62,7 +62,7 @@ uses
   {$IFNDEF RTLNAMESPACES}
   Classes, Windows, Graphics, Types;
   {$ELSE}
-  System.Classes, Winapi.Windows, Vcl.Graphics, System.Types;
+  System.Classes, Winapi.Windows, System.UITypes, System.Types;
   {$ENDIF}
 
 
@@ -614,22 +614,41 @@ function MakeConsoleColors(const AForeground, ABackground: TColor):
     sUnsupportedColour = 'Invalid console window colour';
   begin
     case Color of
-      clBlack:    Result := ccBlack;
-      clNavy:     Result := ccNavy;
-      clGreen:    Result := ccGreen;
-      clTeal:     Result := ccTeal;
-      clMaroon:   Result := ccMaroon;
-      clPurple:   Result := ccPurple;
-      clOlive:    Result := ccOlive;
-      clSilver:   Result := ccSilver;
-      clGray:     Result := ccGray;
-      clBlue:     Result := ccBlue;
-      clLime:     Result := ccLime;
-      clAqua:     Result := ccAqua;
-      clRed:      Result := ccRed;
-      clFuchsia:  Result := ccFuchsia;
-      clYellow:   Result := ccYellow;
-      clWhite:    Result := ccWhite;
+      {$IFDEF RTLNAMESPACES}
+      TColors.Black:    Result := ccBlack;
+      TColors.Navy:     Result := ccNavy;
+      TColors.Green:    Result := ccGreen;
+      TColors.Teal:     Result := ccTeal;
+      TColors.Maroon:   Result := ccMaroon;
+      TColors.Purple:   Result := ccPurple;
+      TColors.Olive:    Result := ccOlive;
+      TColors.Silver:   Result := ccSilver;
+      TColors.Gray:     Result := ccGray;
+      TColors.Blue:     Result := ccBlue;
+      TColors.Lime:     Result := ccLime;
+      TColors.Aqua:     Result := ccAqua;
+      TColors.Red:      Result := ccRed;
+      TColors.Fuchsia:  Result := ccFuchsia;
+      TColors.Yellow:   Result := ccYellow;
+      TColors.White:    Result := ccWhite;
+      {$ELSE}
+      clBlack:          Result := ccBlack;
+      clNavy:           Result := ccNavy;
+      clGreen:          Result := ccGreen;
+      clTeal:           Result := ccTeal;
+      clMaroon:         Result := ccMaroon;
+      clPurple:         Result := ccPurple;
+      clOlive:          Result := ccOlive;
+      clSilver:         Result := ccSilver;
+      clGray:           Result := ccGray;
+      clBlue:           Result := ccBlue;
+      clLime:           Result := ccLime;
+      clAqua:           Result := ccAqua;
+      clRed:            Result := ccRed;
+      clFuchsia:        Result := ccFuchsia;
+      clYellow:         Result := ccYellow;
+      clWhite:          Result := ccWhite;
+      {$ENDIF}
       else raise Exception.Create(sUnsupportedColour);
     end;
   end;
