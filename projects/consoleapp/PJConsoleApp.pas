@@ -17,12 +17,14 @@ unit PJConsoleApp;
 
 {$UNDEF COMPILERSUPPORTED}
 {$UNDEF RTLNAMESPACES}
+{$UNDEF SUPPORTSTALPHACOLOR}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 15.0}   // >= Delphi 7
     {$DEFINE COMPILERSUPPORTED}
   {$IFEND}
   {$IF CompilerVersion >= 23.0}   // >= Delphi XE2
     {$DEFINE RTLNAMESPACES}
+    {$DEFINE SUPPORTSTALPHACOLOR}
   {$IFEND}
 {$ENDIF}
 
@@ -155,6 +157,20 @@ function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
 ///  </remarks>
 function MakeConsoleColors(const AForeground, ABackground: TColor):
   TPJConsoleColors; overload;
+
+{$IFDEF SUPPORTSTALPHACOLOR}
+///  <summary>"Constructor" function that creates a TPJConsoleColors record from
+///  given foreground and background TAlphaColor colours.</summary>
+///  <remarks>
+///  <para>This function is provided as a convenience to enable normal
+///  TAlphaColor values to be used to instantiate a TPJConsoleColours record
+///  without having to manually convert to TPJConsoleColour values.</para>
+///  <para>An exception is raised if either TAlphaColor value is not one of the
+///  16 standard colours.</para>
+///  </remarks>
+function MakeConsoleColors(const AForeground, ABackground: TAlphaColor):
+  TPJConsoleColors; overload;
+{$ENDIF}
 
 ///  <summary>"Constructor" function for TSize records.</summary>
 ///  <remarks>This function is provided because if is not possible to assign the
@@ -588,12 +604,15 @@ function MakeConsoleColors(const AForeground, ABackground: TColor):
   // ---------------------------------------------------------------------------
   // Converts a TColor into equivalent TPJConsoleColor. Raises exception if
   // TColor value is not one of the 16 standard colours.
-  function ConvertColor(const Color: TColor): TPJConsoleColor;
+  function ConvertColor(Color: TColor): TPJConsoleColor;
   resourcestring
     sUnsupportedColour = 'Invalid console window colour';
   begin
     case Color of
       {$IFDEF RTLNAMESPACES}
+      // Using RTL Namespaces => using System.UITypes instead of Vcl.Graphics,
+      // so we don't have clXXX colour constant and must use equivalent TColors
+      // constants instead.
       TColors.Black:    Result := ccBlack;
       TColors.Navy:     Result := ccNavy;
       TColors.Green:    Result := ccGreen;
@@ -611,6 +630,8 @@ function MakeConsoleColors(const AForeground, ABackground: TColor):
       TColors.Yellow:   Result := ccYellow;
       TColors.White:    Result := ccWhite;
       {$ELSE}
+      // Not using RTL Namespaces means we are using Graphics unit and can use
+      // normal clXXX TColor constants
       clBlack:          Result := ccBlack;
       clNavy:           Result := ccNavy;
       clGreen:          Result := ccGreen;
@@ -637,6 +658,30 @@ begin
     ConvertColor(AForeground), ConvertColor(ABackground)
   );
 end;
+
+{$IFDEF SUPPORTSTALPHACOLOR}
+function MakeConsoleColors(const AForeground, ABackground: TAlphaColor):
+  TPJConsoleColors;
+var
+  FG, BG: TColor;
+begin
+  FG := TColor(
+    RGB(
+      TAlphaColorRec(AForeground).R,
+      TAlphaColorRec(AForeground).G,
+      TAlphaColorRec(AForeground).B
+    )
+  );
+  BG := TColor(
+    RGB(
+      TAlphaColorRec(ABackground).R,
+      TAlphaColorRec(ABackground).G,
+      TAlphaColorRec(ABackground).B
+    )
+  );
+  Result := MakeConsoleColors(FG, BG);
+end;
+{$ENDIF}
 
 function MakeSize(const ACX, ACY: LongInt): TSize;
 begin
