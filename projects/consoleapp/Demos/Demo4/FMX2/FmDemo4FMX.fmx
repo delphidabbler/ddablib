@@ -1,0 +1,75 @@
+object Demo4FMXForm: TDemo4FMXForm
+  Left = 211
+  Top = 114
+  Caption = 'TPJConsoleApp Demo 4'
+  ClientHeight = 434
+  ClientWidth = 474
+  Position = poDesktopCenter
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  Left = 211
+  Top = 114
+  object Label1: TLabel
+    Height = 129.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 10.000000000000000000
+    Text = 
+      'Enter a maximum execution time (in milliseconds) in the edit box' +
+      '.'#13#10'Check the "Kill timed out app" check box if you want any time' +
+      'd out application to be forcibly terminated.'#13#10'Now click the "Exe' +
+      'cute Timed.exe" button to run Timed.exe for 5 seconds. If time e' +
+      'xpires before Timed.exe has completed a message will be displaye' +
+      'd in the memo control.'#13#10'You will see a read out of the elapsed t' +
+      'ime and remaining time to live for the application in the memo c' +
+      'ontrol.'
+    Width = 454.000000000000000000
+  end
+  object Label2: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 158.000000000000000000
+    Text = 'Enter max execution time (in ms):'
+    Width = 165.000000000000000000
+    WordWrap = False
+  end
+  object Button1: TButton
+    DisableFocusEffect = False
+    Height = 31.000000000000000000
+    Position.X = 169.000000000000000000
+    Position.Y = 187.000000000000000000
+    Text = 'Execute Timed.exe'
+    Width = 139.000000000000000000
+    OnClick = Button1Click
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [igPan]
+    Height = 189.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 226.000000000000000000
+    Width = 454.000000000000000000
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+  end
+  object Edit1: TEdit
+    TabOrder = 0
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    Password = False
+    Text = '3000'
+    Position.X = 207.000000000000000000
+    Position.Y = 158.000000000000000000
+    Width = 70.000000000000000000
+    Height = 23.000000000000000000
+  end
+  object CheckBox1: TCheckBox
+    DisableFocusEffect = False
+    Height = 20.000000000000000000
+    Position.X = 305.000000000000000000
+    Position.Y = 158.000000000000000000
+    TabOrder = 1
+    Text = 'Kill timed out app'
+    Width = 159.000000000000000000
+  end
+end
