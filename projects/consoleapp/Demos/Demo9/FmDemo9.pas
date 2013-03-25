@@ -1,6 +1,4 @@
 {
- * FmDemo9.pas
- *
  * Main form for DelphiDabbler Console Application Runner Classes demo program
  * #9: Subclassing TPJConsoleApp.
  *

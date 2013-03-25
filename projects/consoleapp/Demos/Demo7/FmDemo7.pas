@@ -1,6 +1,4 @@
 {
- * FmDemo7.pas
- *
  * Main form for DelphiDabbler Console Application Runner Classes demo program
  * #7: Redirecting standard i/o using pipes.
  *

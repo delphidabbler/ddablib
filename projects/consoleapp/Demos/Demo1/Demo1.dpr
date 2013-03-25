@@ -1,6 +1,4 @@
 {
- * Demo1.dpr
- *
  * Project file for DelphiDabbler Console Application Runner Classes demo
  * program #1: ExecAndWait.
  *

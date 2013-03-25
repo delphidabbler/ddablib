@@ -1,6 +1,4 @@
 {
- * Demo11.dpr
- *
  * Project file for DelphiDabbler Console Application Runner Classes demo
  * program #12: Handling Unicode output from console applications.
  *

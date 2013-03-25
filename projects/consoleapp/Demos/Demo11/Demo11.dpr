@@ -1,6 +1,4 @@
 {
- * Demo11.dpr
- *
  * Project file for DelphiDabbler Console Application Runner Classes demo
  * program #11: Customising the appearance of the console.
  *

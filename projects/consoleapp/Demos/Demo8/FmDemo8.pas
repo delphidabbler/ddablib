@@ -1,6 +1,4 @@
 {
- * FmDemo8.pas
- *
  * Main form for DelphiDabbler Console Application Runner Classes demo program
  * #8: Echoing console output to a GUI.
  *

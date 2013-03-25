@@ -1,6 +1,4 @@
 {
- * Demo6.dpr
- *
  * Project file for DelphiDabbler Console Application Runner Classes demo
  * program #6: Redirecting standard i/o using files.
  *

@@ -1,6 +1,4 @@
 {
- * FmDemo11FMX.pas
- *
  * Main form for DelphiDabbler Console Application Runner Classes demo program
  * #11: Customising the appearance of the console (FireMonkey 2 version).
  *

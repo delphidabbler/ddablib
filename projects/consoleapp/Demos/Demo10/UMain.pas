@@ -1,6 +1,4 @@
 {
- * UMain.pas
- *
  * Class implementing main program functionality for DelphiDabbler Console
  * Application Runner Classes demo program #10: TPJConsoleApp from console
  * applications.

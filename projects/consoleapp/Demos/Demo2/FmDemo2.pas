@@ -1,6 +1,4 @@
 {
- * FmDemo2.pas
- *
  * Main form for DelphiDabbler Console Application Runner Classes demo program
  * #2: A better ExecAndWait.
  *

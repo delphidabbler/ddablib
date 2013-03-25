@@ -1,6 +1,4 @@
 {
- * Demo3.dpr
- *
  * Project file for DelphiDabbler Console Application Runner Classes demo
  * program #3: Indicating Progress.
  *

@@ -1,6 +1,4 @@
 {
- * Demo8.dpr
- *
  * Project file for DelphiDabbler Console Application Runner Classes demo
  * program #8: Echoing console output to a GUI.
  *

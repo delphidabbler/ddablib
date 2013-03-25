@@ -1,6 +1,4 @@
 {
- * FmDemo11.pas
- *
  * Main form for DelphiDabbler Console Application Runner Classes demo program
  * #12: Handling Unicode output from console applications.
  *

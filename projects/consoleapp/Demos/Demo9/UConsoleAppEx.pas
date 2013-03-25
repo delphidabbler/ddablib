@@ -1,6 +1,4 @@
 {
- * UConsoleAppEx.pas
- *
  * Unit that implements the class that extends TPJCustomConsoleApp for
  * DelphiDabbler Console Application Runner Classes demo program #9: Subclassing
  * TPJConsoleApp.

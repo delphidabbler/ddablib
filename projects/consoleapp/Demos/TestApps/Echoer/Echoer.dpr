@@ -1,6 +1,4 @@
 {
- * Echoer.dpr
- *
  * Whole source code for Echoer.exe helper program for DelphiDabbler Console
  * Application Runner Classes Demos. Echoes text from standard input onto
  * standard output with a given prefix to each line.

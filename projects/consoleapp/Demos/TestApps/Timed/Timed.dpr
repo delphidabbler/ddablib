@@ -1,6 +1,4 @@
 {
- * Timed.dpr
- *
  * Whole source code for Timed.exe helper program for DelphiDabbler Console
  * Application Runner Classes Demos. Program runs for a specified number of
  * seconds.
