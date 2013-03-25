@@ -132,12 +132,15 @@ for the demos you want to build.
    .proj.2007 files. To run this batch file, open a command window and make the
    Demos directory current. Now simply run the batch file by typing its name.
 
-From your Delphi IDE open Demos\PJConsoleAppDemos.bpg. The demo projects and the
-example console application projects should all be listed in the IDE's Project
-Manager window.
+From your Delphi IDE open Demos\PJConsoleAppDemos.bpg. The VCL demo projects and
+the example console application projects should all be listed in the IDE's
+Project Manager window.
 
 You can now build selected demos or compile them all in one go using the
 Projects | Build All Projects menu option.
+
+To build the FireMonkey 2 demos you must open their .dproj files one at a time
+and build them.
 
 Delphi may update the project or project group files. If this happens you may
 need to restore the original files from before re-compiling with a different
