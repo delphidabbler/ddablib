@@ -1,0 +1,211 @@
+object Demo11FMXForm: TDemo11FMXForm
+  Left = 595
+  Top = 116
+  Caption = 'TPJConsoleApp Demo 11'
+  ClientHeight = 426
+  ClientWidth = 428
+  Position = poDesktopCenter
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  OnCreate = FormCreate
+  Left = 595
+  Top = 116
+  object lblTitle: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 10.000000000000000000
+    Text = 'Console Windows Title:'
+    Width = 117.000000000000000000
+    WordWrap = False
+  end
+  object btnRun: TButton
+    DisableFocusEffect = False
+    Height = 31.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 384.000000000000000000
+    Text = 'Run Console App'
+    Width = 405.000000000000000000
+    OnClick = btnRunClick
+  end
+  object gbConsoleColours: TGroupBox
+    Height = 90.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 69.000000000000000000
+    Text = 'Console colours'
+    Width = 405.000000000000000000
+    object lblForeground: TLabel
+      AutoSize = True
+      Height = 19.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 25.000000000000000000
+      Text = 'Foreground:'
+      Width = 63.000000000000000000
+      WordWrap = False
+    end
+    object lblBackground: TLabel
+      AutoSize = True
+      Height = 19.000000000000000000
+      Position.X = 217.000000000000000000
+      Position.Y = 25.000000000000000000
+      Text = 'Background:'
+      Width = 65.000000000000000000
+      WordWrap = False
+    end
+    object cbForeground: TColorComboBox
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      ItemIndex = 143
+      ListBoxResource = 'transparentlistboxstyle'
+      Position.X = 8.000000000000000000
+      Position.Y = 48.000000000000000000
+      Width = 145.000000000000000000
+      Color = claWhite
+    end
+    object cbBackground: TColorComboBox
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      ItemIndex = 7
+      ListBoxResource = 'transparentlistboxstyle'
+      Position.X = 216.000000000000000000
+      Position.Y = 48.000000000000000000
+      Width = 145.000000000000000000
+      Color = claBlack
+    end
+  end
+  object edTitle: TEdit
+    TabOrder = 0
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    Password = False
+    Position.X = 10.000000000000000000
+    Position.Y = 30.000000000000000000
+    Width = 405.000000000000000000
+    Height = 23.000000000000000000
+  end
+  object gbWindowSize: TGroupBox
+    Height = 100.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 167.000000000000000000
+    Text = 'Window Size'
+    Width = 405.000000000000000000
+    object lblWindowWidth: TLabel
+      AutoSize = True
+      Enabled = False
+      Height = 19.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 59.000000000000000000
+      Text = 'Width:'
+      Width = 36.000000000000000000
+      WordWrap = False
+    end
+    object lblWindowHeight: TLabel
+      AutoSize = True
+      Enabled = False
+      Height = 19.000000000000000000
+      Position.X = 128.000000000000000000
+      Position.Y = 59.000000000000000000
+      Text = 'Height:'
+      Width = 39.000000000000000000
+      WordWrap = False
+    end
+    object cbDefWindowSize: TCheckBox
+      DisableFocusEffect = False
+      Height = 21.000000000000000000
+      IsChecked = True
+      Position.X = 10.000000000000000000
+      Position.Y = 20.000000000000000000
+      TabOrder = 0
+      Text = 'Use default'
+      Width = 296.000000000000000000
+      OnChange = cbDefWindowSizeChange
+    end
+    object edWindowWidth: TEdit
+      TabOrder = 1
+      DisableFocusEffect = False
+      KeyboardType = vktDefault
+      Password = False
+      Text = '640'
+      Position.X = 59.000000000000000000
+      Position.Y = 54.000000000000000000
+      Width = 60.000000000000000000
+      Height = 23.000000000000000000
+      Enabled = False
+    end
+    object edWindowHeight: TEdit
+      TabOrder = 2
+      DisableFocusEffect = False
+      KeyboardType = vktDefault
+      Password = False
+      Text = '480'
+      Position.X = 177.000000000000000000
+      Position.Y = 54.000000000000000000
+      Width = 61.000000000000000000
+      Height = 23.000000000000000000
+      Enabled = False
+    end
+  end
+  object gbWindowPos: TGroupBox
+    Height = 99.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 276.000000000000000000
+    Text = 'Window Position'
+    Width = 405.000000000000000000
+    object lblWindowLeft: TLabel
+      AutoSize = True
+      Enabled = False
+      Height = 19.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 59.000000000000000000
+      Text = 'Left:'
+      Width = 24.000000000000000000
+      WordWrap = False
+    end
+    object lblWindowTop: TLabel
+      AutoSize = True
+      Enabled = False
+      Height = 19.000000000000000000
+      Position.X = 128.000000000000000000
+      Position.Y = 59.000000000000000000
+      Text = 'Top:'
+      Width = 25.000000000000000000
+      WordWrap = False
+    end
+    object cbDefWindowPos: TCheckBox
+      DisableFocusEffect = False
+      Height = 21.000000000000000000
+      IsChecked = True
+      Position.X = 10.000000000000000000
+      Position.Y = 20.000000000000000000
+      TabOrder = 0
+      Text = 'Use default'
+      Width = 296.000000000000000000
+      OnChange = cbDefWindowPosChange
+    end
+    object edWindowLeft: TEdit
+      TabOrder = 1
+      DisableFocusEffect = False
+      KeyboardType = vktDefault
+      Password = False
+      Text = '0'
+      Position.X = 59.000000000000000000
+      Position.Y = 54.000000000000000000
+      Width = 60.000000000000000000
+      Height = 23.000000000000000000
+      Enabled = False
+    end
+    object edWindowTop: TEdit
+      TabOrder = 2
+      DisableFocusEffect = False
+      KeyboardType = vktDefault
+      Password = False
+      Text = '0'
+      Position.X = 177.000000000000000000
+      Position.Y = 54.000000000000000000
+      Width = 61.000000000000000000
+      Height = 23.000000000000000000
+      Enabled = False
+    end
+  end
+end
