@@ -14,15 +14,20 @@ Contents of Demos diretory
 The Demos directory and its sub-directories contain twelve small programs that
 demonstrate how to use the PJConsoleApp unit.
 
-Each demo program is in its own sub-directory - Demos\Demo1 through to
-Demos\Demo12
+A VCL based version of each demo program is in its own sub-directory -
+Demos\Demo1 through to Demos\Demo12.
+
+Demo 11 is also available in a version that uses the FireMonkey 2 framework
+instead of the VCL. This project is in the Demos\Demo11\FMX2 directory.
 
 In addition there are two example console applications that the demos use. They
 are supplied in source form and need to be built. The project files are in
 Demos\TestApps\Echoer and Demos\TestApps\Timed.
 
-The Demos directory itself contains .bpg format that includes all the demo
-projects and the example console applications in a single project group.
+The Demos directory itself contains .bpg format project group file that includes
+all the VCL demo projects and the example console applications in a single
+project group. The FireMonkey version of Demo 11 is NOT included in the project
+group and must be opened separately.
 
 Finally there's an Demos\IOUtils sub-directory (explained in Dependencies below)
 and a Demos\TestData directory which stores any data files required by the demo
