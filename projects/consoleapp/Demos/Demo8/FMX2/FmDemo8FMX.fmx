@@ -1,0 +1,74 @@
+object Demo8FMXForm: TDemo8FMXForm
+  Left = 257
+  Top = 159
+  Caption = 'TPJConsoleApp Demo 8'
+  ClientHeight = 357
+  ClientWidth = 582
+  Position = poDesktopCenter
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  Left = 257
+  Top = 159
+  object Label1: TLabel
+    Height = 60.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 10.000000000000000000
+    Text = 
+      'Click the "Execute Echoer.exe" button to pass a file of text thr' +
+      'ough Echoer.exe. The program'#39's standard output text is displayed' +
+      ' in the left hand memo, while text the program writes to standar' +
+      'd error is displayed in the right hand memo.'
+    Width = 562.000000000000000000
+  end
+  object Label2: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 128.000000000000000000
+    Text = 'Std Output'
+    Width = 58.000000000000000000
+    WordWrap = False
+  end
+  object Label3: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 295.000000000000000000
+    Position.Y = 128.000000000000000000
+    Text = 'Std Error'
+    Width = 47.000000000000000000
+    WordWrap = False
+  end
+  object Button1: TButton
+    DisableFocusEffect = False
+    Height = 30.000000000000000000
+    Position.X = 222.000000000000000000
+    Position.Y = 89.000000000000000000
+    TabOrder = 0
+    Text = 'Execute Echoer.exe'
+    Width = 139.000000000000000000
+    OnClick = Button1Click
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [igPan]
+    Height = 198.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 148.000000000000000000
+    TabOrder = 1
+    Width = 277.000000000000000000
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    ReadOnly = True
+  end
+  object Memo2: TMemo
+    Touch.InteractiveGestures = [igPan]
+    Height = 198.000000000000000000
+    Position.X = 295.000000000000000000
+    Position.Y = 148.000000000000000000
+    TabOrder = 2
+    Width = 277.000000000000000000
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    ReadOnly = True
+  end
+end
