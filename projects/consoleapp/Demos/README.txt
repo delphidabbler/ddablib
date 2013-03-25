@@ -17,8 +17,9 @@ demonstrate how to use the PJConsoleApp unit.
 A VCL based version of each demo program is in its own sub-directory -
 Demos\Demo1 through to Demos\Demo12.
 
-Demo 11 is also available in a version that uses the FireMonkey 2 framework
-instead of the VCL. This project is in the Demos\Demo11\FMX2 directory.
+Demos 4, 8 and 11 are also available in versions that uses the FireMonkey 2
+framework instead of the VCL. These projects are in the Demos\Demo4\FMX2,
+Demos\Demo8\FMX2 and Demos\Demo11\FMX2 directories respectively.
 
 In addition there are two example console applications that the demos use. They
 are supplied in source form and need to be built. The project files are in
@@ -26,8 +27,8 @@ Demos\TestApps\Echoer and Demos\TestApps\Timed.
 
 The Demos directory itself contains .bpg format project group file that includes
 all the VCL demo projects and the example console applications in a single
-project group. The FireMonkey version of Demo 11 is NOT included in the project
-group and must be opened separately.
+project group. FireMonkey versions of any demo project are NOT included in the
+project group and must be opened separately.
 
 Finally there's an Demos\IOUtils sub-directory (explained in Dependencies below)
 and a Demos\TestData directory which stores any data files required by the demo
@@ -95,10 +96,11 @@ to the number of the associated demo project.
 Compatibility
 --------------------------------------------------------------------------------
 
-Delphi 7 or later are required to build the demo projects  as 32 bit Windows
-applications.
+Delphi 7 or later are required to build the VCL based demo projects as 32 bit
+Windows applications. To build 64 bit versions of the demos, Delphi XE2 or
+later is required.
 
-To build 64 bit versions of the demos, Delphi XE2 or later is required.
+The FireMonkey 2 based demos require Delphi XE3 or later.
 
 --------------------------------------------------------------------------------
 Dependencies
