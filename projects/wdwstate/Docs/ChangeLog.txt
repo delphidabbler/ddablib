@@ -11,6 +11,9 @@
 ; Change Log for Window State Components
 ; ------------------------------------------------------------------------------
 
+Release v5.4.2 of 24 April 2013
++ Fixed bug #26 (http://code.google.com/p/ddab-lib/issues/detail?id=26) where the window position was not restored correctly for main windows that touched or overlapped the taskbar when it was located at the top or left of the screen.
+
 Release v5.4.1 of 08 January 2013
 + Component source modified to compile without warnings on Delphi XE3
 + Unit names are now qualified with namespace on Delphi XE2 and later.
