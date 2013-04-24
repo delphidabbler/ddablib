@@ -17,30 +17,30 @@ unit PJWdwState;
 // Conditional defines
 
 // Assume all required facilities available
-{$DEFINE WARNDIRS}    // $WARN compiler directives available
+{$DEFINE WarnDirs}          // $WARN compiler directives available
+{$UNDEF RTLNameSpaces}      // Qualify RTL units names with namespaces
+{$UNDEF TScrollStyleMoved}  // TScrollStyle has moved to System.UITypes units
 
 // Undefine facilities not available in earlier compilers
 // Note: Delphi 1/2 not included since code will not compile on these compilers
 {$IFDEF VER100} // Delphi 3
-  {$UNDEF WARNDIRS}
+  {$UNDEF WarnDirs}
 {$ENDIF}
 {$IFDEF VER120} // Delphi 4
-  {$UNDEF WARNDIRS}
+  {$UNDEF WarnDirs}
 {$ENDIF}
 {$IFDEF VER130} // Delphi 5
-  {$UNDEF WARNDIRS}
+  {$UNDEF WarnDirs}
 {$ENDIF}
 {$IFDEF VER140} // Delphi 6
-  {$UNDEF WARNDIRS}
+  {$UNDEF WarnDirs}
 {$ENDIF}
-{$UNDEF RTLNAMESPACES}
-{$UNDEF TSCROLLSTYLEMOVED}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 23.0} // Delphi XE2
-    {$DEFINE RTLNAMESPACES}
+    {$DEFINE RTLNameSpaces}
   {$IFEND}
   {$IF CompilerVersion >= 24.0} // Delphi XE3
-    {$DEFINE TSCROLLSTYLEMOVED}
+    {$DEFINE TScrollStyleMoved}
   {$IFEND}
 {$ENDIF}
 
@@ -50,7 +50,7 @@ interface
 
 uses
   // Delphi
-  {$IFDEF RTLNAMESPACES}
+  {$IFDEF RTLNameSpaces}
   System.Classes, Vcl.Controls, Winapi.Messages, Winapi.Windows, Vcl.Forms,
   System.SysUtils, System.Win.Registry;
   {$ELSE}
@@ -684,9 +684,9 @@ implementation
 
 uses
   // Delphi
-  {$IFDEF RTLNAMESPACES}
+  {$IFDEF RTLNameSpaces}
   System.IniFiles, Winapi.MultiMon, Vcl.StdCtrls
-  {$IFDEF TSCROLLSTYLEMOVED}
+  {$IFDEF TScrollStyleMoved}
   , System.UITypes
   {$ENDIF}
   ;
@@ -1215,13 +1215,13 @@ begin
       // This code provided by CS
       // First get bounds rectangle of restored window
       SetRect(WorkArea, Left, Top, Left + Width, Top + Height);
-      {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE OFF}{$ENDIF}
+      {$IFDEF WarnDirs}{$WARN UNSAFE_CODE OFF}{$ENDIF}
       // Next find out which monitor window is on
       AMonitor := MonitorFromRect(@WorkArea, MONITOR_DEFAULTTONEAREST);
       // Finally, get work area of relevant monitor
       MonitorInfo.cbSize := SizeOf(MonitorInfo);
       GetMonitorInfo(AMonitor, @MonitorInfo);
-      {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE ON}{$ENDIF}
+      {$IFDEF WarnDirs}{$WARN UNSAFE_CODE ON}{$ENDIF}
       WorkArea:= MonitorInfo.rcWork;
       // offset work area so it has top left of (0,0): fix re issue#26
       OffsetRect(WorkArea, -WorkArea.Left, -WorkArea.Top);
@@ -1260,9 +1260,9 @@ begin
   Pl.rcNormalPosition.Bottom := Top + Height;
   Pl.showCmd := SW_SHOW;      // needed when restore called late in start-up
   // Finally, set the actual size. This call allows for task bar etc.
-  {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE OFF}{$ENDIF}
+  {$IFDEF WarnDirs}{$WARN UNSAFE_CODE OFF}{$ENDIF}
   SetWindowPlacement(fWindow.Handle, @Pl);
-  {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE ON}{$ENDIF}
+  {$IFDEF WarnDirs}{$WARN UNSAFE_CODE ON}{$ENDIF}
   // Trigger event to inform that window has been sized
   if Assigned(fOnAfterWindowSized) then
     fOnAfterWindowSized(Self);
@@ -1292,9 +1292,9 @@ begin
   // form's Width, Height, Top and Left properties will give actual window size
   // if form is maximised, which is not what we want here
   Pl.Length := SizeOf(TWindowPlacement);
-  {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE OFF}{$ENDIF}
+  {$IFDEF WarnDirs}{$WARN UNSAFE_CODE OFF}{$ENDIF}
   GetWindowPlacement(fWindow.Handle, @Pl);
-  {$IFDEF WARNDIRS}{$WARN UNSAFE_CODE ON}{$ENDIF}
+  {$IFDEF WarnDirs}{$WARN UNSAFE_CODE ON}{$ENDIF}
   R := Pl.rcNormalPosition;
 
   // Record window state (maximised, minimised or normal)
