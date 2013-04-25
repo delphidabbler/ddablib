@@ -472,6 +472,13 @@ type
   }
   TPJWdwStateGetIniData = procedure(var IniFilename, Section: string) of object;
 
+  TPJWdwStateIniRootDir = (
+    rdWindowsDir,
+    rdExeDir,
+    rdAppDataDir,
+    rdProgramDataDir
+  );
+
   {
   TPJWdwState:
     Implements a component that records a window's size, position and state
@@ -483,6 +490,8 @@ type
       {Value of Section property}
     fIniFileName: string;
       {Value in IniFileName property}
+    fIniRootDir: TPJWdwStateIniRootDir;
+      {Value of IniRootDir property}
     fOnGetIniData: TPJWdwStateGetIniData;
       {Event handler for OnGetIniData event}
     procedure SetSection(const Value: string);
@@ -495,6 +504,8 @@ type
         @param Value [in] New property value. If Value = '' then an ini file
         name based on the name of the application is used.
       }
+    function BuildIniFileName: string;
+    function IniRootPath: string;
   protected
     procedure GetIniInfo(var AIniFileName, ASection: string);
       {Triggers OnGetIniData event to get ini file and section names to be used
@@ -552,6 +563,8 @@ type
       {The name of the section in ini file in which to save window information.
       Uses "Window_<Form Name>" (eg 'Window_Form1') if set to empty string
       (default)}
+    property IniRootDir: TPJWdwStateIniRootDir
+      read fIniRootDir write fIniRootDir default rdAppDataDir;
     property OnGetIniData: TPJWdwStateGetIniData
       read fOnGetIniData write fOnGetIniData;
       {Event triggered just before ini file is read when restoring and saving
@@ -691,7 +704,7 @@ uses
   {$ENDIF}
   ;
   {$ELSE}
-  IniFiles, MultiMon, StdCtrls;
+  IniFiles, MultiMon, StdCtrls, ActiveX, ShlObj;
   {$ENDIF}
 
 
@@ -1354,6 +1367,28 @@ end;
 
 { TPJWdwState }
 
+function TPJWdwState.BuildIniFileName: string;
+var
+  SubDir: string; // any sub directory to be inserted in relative paths
+begin
+  if ExtractFileDrive(fIniFileName) = '' then
+  begin
+    // relative file path
+    if (AnsiPos(PathDelim, fIniFileName) = 0)
+      and (fIniRootDir in [rdAppDataDir, rdProgramDataDir]) then
+      // fIniFileName is a simple file name with no path. Since it's not good
+      // practise to write a file in the root of %AppData% or %ProgramData% we
+      // interpose a suitable subdirectory for the ini file
+      SubDir := 'DelphiDabbler\WindowStateStore\'
+    else
+      SubDir := '';
+    Result := IniRootPath + SubDir + fIniFileName;
+  end
+  else
+    // fully specified file name
+    Result := fIniFileName;
+end;
+
 constructor TPJWdwState.Create(AOwner: TComponent);
   {Class constructor. Sets default property values.
     @param AOwner [in] Owning component. Must be a TForm.
@@ -1365,6 +1400,7 @@ begin
   inherited Create(AOwner);
   SetIniFileName('');
   SetSection('');
+  fIniRootDir := rdAppDataDir;
 end;
 
 procedure TPJWdwState.GetIniInfo(var AIniFileName, ASection: string);
@@ -1377,11 +1413,76 @@ procedure TPJWdwState.GetIniInfo(var AIniFileName, ASection: string);
   }
 begin
   // Use IniFileName and Section properties as default values
-  AIniFileName := IniFileName;
+  AIniFileName := BuildIniFileName;
+  outputdebugstring(pchar('INIFILE: ' + AIniFileName));
   ASection := Section;
   // Allow user to change these by handling OnGetIniData event
   if Assigned(fOnGetIniData) then
     fOnGetIniData(AIniFileName, ASection);
+end;
+
+function TPJWdwState.IniRootPath: string;
+
+  function WindowsFolder: string;
+  begin
+    SetLength(Result, Windows.MAX_PATH);
+    SetLength(
+      Result, Windows.GetWindowsDirectory(PChar(Result), Windows.MAX_PATH)
+    );
+  end;
+
+//  procedure FreePIDL(PIDL: PItemIDList);
+//  var
+//    Malloc: IMalloc;  // shell's allocator
+//  begin
+//    // Try to get shell allocator
+//    if Succeeded(SHGetMalloc(Malloc)) then
+//      // Use allocator to free PIDL: Malloc is freed by Delphi
+//      Free(PIDL);
+//  end;
+//
+//  function PIDLToFolderPath(PIDL: ShlObj.PItemIDList): string;
+//  begin
+//    // Set max length of return string
+//    SetLength(Result, MAX_PATH);
+//    // Get the path
+//    if SHGetPathFromIDList(PIDL, PChar(Result)) then
+//      Result := PChar(Result)
+//    else
+//      Result := '';
+//  end;
+
+  function SpecialFolderPath(CSIDL: Integer): string;
+  var
+    PIDL: PItemIDList; // PIDL of the special folder
+  begin
+    Result := '';
+    if Succeeded(SHGetSpecialFolderLocation(0, CSIDL, PIDL)) then
+    begin
+      try
+        SetLength(Result, MAX_PATH);
+        if SHGetPathFromIDList(PIDL, PChar(Result)) then
+          Result := PChar(Result)
+        else
+          Result := '';
+      finally
+        CoTaskMemFree(PIDL);
+      end;
+    end
+  end;
+
+begin
+  case fIniRootDir of
+    rdWindowsDir:
+      Result := WindowsFolder;
+    rdExeDir:
+      Result := ExtractFileDir(ParamStr(0));
+    rdAppDataDir:
+      Result := SpecialFolderPath(CSIDL_APPDATA);
+    rdProgramDataDir:
+      Result := SpecialFolderPath(CSIDL_COMMON_APPDATA);
+  end;
+  Result := IncludeTrailingPathDelimiter(Result);
 end;
 
 procedure TPJWdwState.ReadWdwState(var Left, Top, Width, Height,
@@ -1433,9 +1534,14 @@ var
   Ini: TIniFile;        // instance of ini file class used to write info
   AIniFileName: string; // name of ini file in which to save window state
   ASection: string;     // section of ini file in which to save window state
+  ADir: string;         // directory containing ini file
 begin
   // Get name of ini file name and section to save window state to
   GetIniInfo(AIniFileName, ASection);
+  // Ensure path to ini file exists
+  ADir := ExtractFileDir(AIniFileName);
+  if ADir <> '' then
+    ForceDirectories(ADir);
   // Open ini file and write window info to it
   Ini := TIniFile.Create(AIniFileName);
   try
@@ -1456,10 +1562,7 @@ procedure TPJWdwState.SetIniFileName(const Value: string);
   }
 begin
   if (Value = '') and not (csDesigning in ComponentState) then
-    // WARNING: This behaviour is deprecated since the program will write a file
-    // to the same directory as the program file. This can problematic in later
-    // versions of Windows
-    fIniFileName := ChangeFileExt(ParamStr(0), '.ini')
+    fIniFileName := ChangeFileExt(ExtractFileName(ParamStr(0)), '.ini')
   else
     fIniFileName := Value;
 end;
