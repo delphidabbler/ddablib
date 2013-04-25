@@ -472,11 +472,16 @@ type
   }
   TPJWdwStateGetIniData = procedure(var IniFilename, Section: string) of object;
 
+  {
+  TPJWdwStateIniRootDir:
+    Identifiers of the directories supported in the TPJWdwState.IniRootDir
+    property.
+  }
   TPJWdwStateIniRootDir = (
-    rdWindowsDir,
-    rdExeDir,
-    rdAppDataDir,
-    rdProgramDataDir
+    rdWindowsDir,       // Windows system directory: not recommended
+    rdExeDir,           // Program directory: use for portable programs only
+    rdAppDataDir,       // Per-user application data directory
+    rdProgramDataDir    // Common application data directory
   );
 
   {
@@ -505,7 +510,14 @@ type
         name based on the name of the application is used.
       }
     function BuildIniFileName: string;
+      {Constructs the ini file name to be used depending on the IniRootDir and
+      IniFileName properties.
+        @return Required file name. This will always be a rooted file spec.
+      }
     function IniRootPath: string;
+      {Returns the root path specified by the IniRootDir property.
+        @return Required path. This is always a rooted path.
+      }
   protected
     procedure GetIniInfo(var AIniFileName, ASection: string);
       {Triggers OnGetIniData event to get ini file and section names to be used
@@ -552,24 +564,35 @@ type
     // Published inherited property
     property OnReadWdwState;
     // New properties
+    property IniRootDir: TPJWdwStateIniRootDir
+      read fIniRootDir write fIniRootDir default rdAppDataDir;
+      {An identifier that specifies the root directory to be used for any
+      relative ini file name specified in the IniFileName property. If
+      IniFileName contains no path information, and IniRootDir is either
+      rdAppData or rdProgramData then the "DelphiDabbler\WindowStateStore\"
+      sub-directory of rdAppData or rdProgramData is used.}
     property IniFileName: string read fIniFileName write SetIniFileName;
-      {The name of the ini file in which to save window information. Uses path
-      and name of executable with extension replaced by .ini if set to empty
-      string (default).
-      WARNING: This default behaviour is deprecated since it writes a file in
-      the same directory as the program, which can cause problems with later
-      versions of Windows}
+      {The name of the ini file in which to save window information. If this
+      file name is a fully specified file path it is used as-is. If the file
+      name is relative it is stored in the root directory specified by the
+      IniRootDir parameter. If IniFileName is the empty string then the ini file
+      is has the same name as the program file, with the extension changed to
+      .ini}
     property Section: string read fSection write SetSection;
       {The name of the section in ini file in which to save window information.
       Uses "Window_<Form Name>" (eg 'Window_Form1') if set to empty string
       (default)}
-    property IniRootDir: TPJWdwStateIniRootDir
-      read fIniRootDir write fIniRootDir default rdAppDataDir;
     property OnGetIniData: TPJWdwStateGetIniData
       read fOnGetIniData write fOnGetIniData;
       {Event triggered just before ini file is read when restoring and saving
-      window state. Allows handler to change ini file name and section name. If
-      this event is handled then IniFileName and Section properties are ignored}
+      window state. Allows handler to change the ini file name and section name.
+      If this event is handled then the IniRootDir, IniFileName and Section
+      properties are ignored.
+      WARNING: File names and section names changed in the event handler are not
+      checked for errors, so make sure that the names are valid and not empty.
+      If a relative path is used for the file name this will be taken as
+      relative to the Windows directory.
+      }
   end;
 
   {
@@ -1368,6 +1391,10 @@ end;
 { TPJWdwState }
 
 function TPJWdwState.BuildIniFileName: string;
+  {Constructs the ini file name to be used depending on the IniRootDir and
+  IniFileName properties.
+    @return Required file name. This will always be a rooted file spec.
+  }
 var
   SubDir: string; // any sub directory to be inserted in relative paths
 begin
@@ -1422,8 +1449,14 @@ begin
 end;
 
 function TPJWdwState.IniRootPath: string;
+  {Returns the root path specified by the IniRootDir property.
+    @return Required path. This is always a rooted path.
+  }
 
   function WindowsFolder: string;
+    {Gets the Windows installation directory.
+      @return Required directory.
+    }
   begin
     SetLength(Result, Windows.MAX_PATH);
     SetLength(
@@ -1431,28 +1464,11 @@ function TPJWdwState.IniRootPath: string;
     );
   end;
 
-//  procedure FreePIDL(PIDL: PItemIDList);
-//  var
-//    Malloc: IMalloc;  // shell's allocator
-//  begin
-//    // Try to get shell allocator
-//    if Succeeded(SHGetMalloc(Malloc)) then
-//      // Use allocator to free PIDL: Malloc is freed by Delphi
-//      Free(PIDL);
-//  end;
-//
-//  function PIDLToFolderPath(PIDL: ShlObj.PItemIDList): string;
-//  begin
-//    // Set max length of return string
-//    SetLength(Result, MAX_PATH);
-//    // Get the path
-//    if SHGetPathFromIDList(PIDL, PChar(Result)) then
-//      Result := PChar(Result)
-//    else
-//      Result := '';
-//  end;
-
   function SpecialFolderPath(CSIDL: Integer): string;
+    {Gets a specified special folder path.
+      @param CSIDL [in] CSDIL_* identifier of required special folder.
+      @return Required path.
+    }
   var
     PIDL: PItemIDList; // PIDL of the special folder
   begin
