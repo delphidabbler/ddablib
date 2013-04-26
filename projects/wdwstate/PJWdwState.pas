@@ -1554,6 +1554,9 @@ function TPJWdwState.IniRootPath(const AIniRootDir: TPJWdwStateIniRootDir):
     end
   end;
 
+const
+  CSIDL_APPDATA = $001a;
+  CSIDL_COMMON_APPDATA = $0023;
 begin
   case AIniRootDir of
     rdWindowsDir:
