@@ -1494,8 +1494,6 @@ begin
   AIniFileName := BuildIniFileName(RootDir, FileName);
   if (ASection = '') then
     ASection := 'Window_' + fWindow.Name;
-outputdebugstring(pchar('FILE: ' + AIniFileName));
-outputdebugstring(pchar('SECTION: ' + ASection));
 end;
 
 function TPJWdwState.IniRootPath(const AIniRootDir: TPJWdwStateIniRootDir):
