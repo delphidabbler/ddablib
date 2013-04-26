@@ -46,15 +46,15 @@ begin
   
   // Create stand-alone window state component
   // DO NOT use TPJWdwState.Create() constructor for this
-  // Can use TPJRegWdwState instead of TPJWdwState here
   fWdwState := TPJWdwState.CreateStandAlone(Self);
 
   // Set up component properties: all have default values
 
-  // we'll specify ini file and section in it
+  // specify ini file, its root directory, and section in it
   // we will also use the same ini file to store whether we want to keep
   // window in work space: see IsInWorkArea and SetInWorkArea methods below
-  fWdwState.IniFileName := ExtractFilePath(ParamStr(0)) + 'Custom.ini';
+  fWdwState.IniRootDir := rdAppDataDir;
+  fWdwState.IniFileName := 'DelphiDabbler\Lib\PJWdwState\StandAloneDemo.ini';
   fWdwState.Section := 'Window';
 
   // we want component to work automatically
@@ -83,7 +83,11 @@ function TForm1.IsInWorkArea: Boolean;
 var
   Ini: TIniFile;
 begin
-  Ini := TIniFile.Create(fWdwState.IniFileName);
+  // make sure the required directory exists
+  // NOTE: use IniFilePath function instead IniFileName here since IniFileName
+  // may not be found if it is a relative file name that is not on the path
+  ForceDirectories(ExtractFileDir(fWdwState.IniFilePath));
+  Ini := TIniFile.Create(fWdwState.IniFilePath);
   try
     Result := Ini.ReadBool('Options', 'WorkArea', False);
   finally
@@ -98,7 +102,9 @@ procedure TForm1.SetInWorkArea(Flag: Boolean);
 var
   Ini: TIniFile;
 begin
-  Ini := TIniFile.Create(fWdwState.IniFileName);
+  // NOTE: use IniFilePath function instead IniFileName here since IniFileName
+  // may not be found if it is a relative file name that is not on the path
+  Ini := TIniFile.Create(fWdwState.IniFilePath);
   try
     Ini.WriteBool('Options', 'WorkArea', Flag);
   finally
