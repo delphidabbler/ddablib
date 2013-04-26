@@ -462,17 +462,6 @@ type
   end;
 
   {
-  TPJWdwStateGetIniData:
-    Type of event that is triggered just before ini file is accessed. It allows
-    handler to change the ini file name and section to be used.
-      @param IniFileName [in/out] Default ini file name passed in. Handler can
-        change this value.
-      @param Section [in/out] Default ini section name passed in. Handler can
-        change this value.
-  }
-  TPJWdwStateGetIniData = procedure(var IniFilename, Section: string) of object;
-
-  {
   TPJWdwStateIniRootDir:
     Identifiers of the directories supported in the TPJWdwState.IniRootDir
     property.
@@ -483,6 +472,38 @@ type
     rdAppDataDir,       // Per-user application data directory
     rdProgramDataDir    // Common application data directory
   );
+
+  {
+  TPJWdwStateGetIniData:
+    Type of event that is triggered just before ini file is accessed. It allows
+    the handler to change the ini file name and section to be used.
+      @param AIniFileName [in/out] Value of IniFileName property passed in.
+        Handler can change this value. If the value passed out is a relative
+        path the file will be relative to the folder specified by the IniRootDir
+        property.
+      @param ASection [in/out] Default ini section name passed in. Handler can
+        change this value.
+  }
+  TPJWdwStateGetIniData = procedure(var AIniFilename, ASection: string)
+    of object;
+
+  {
+  TPJWdwStateGetIniDataEx:
+    Type of event that is triggered just before ini file is accessed. It allows
+    handler to change the ini root folder, file name and section to be used.
+      @param AIniRootDir [in/out] Value of IniRootDir property passed in.
+        Hander can change this value. If the value passed out in AIniFileName is
+        a relative path then AIniRootDir will be used to determine the folder
+        used to store the file.
+      @param AIniFileName [in/out] Value of IniFileName property passed in.
+        Handler can change this value. If the value passed out is a relative
+        path the file will be relative to the folder specified by the
+        AIniRootDir parameter.
+      @param ASection [in/out] Default ini section name passed in. Handler can
+        change this value.
+  }
+  TPJWdwStateGetIniDataEx = procedure(var AIniRootDir: TPJWdwStateIniRootDir;
+    var AIniFilename, ASection: string) of object;
 
   {
   TPJWdwState:
@@ -499,23 +520,21 @@ type
       {Value of IniRootDir property}
     fOnGetIniData: TPJWdwStateGetIniData;
       {Event handler for OnGetIniData event}
-    procedure SetSection(const Value: string);
-      {Write accessor for Section property.
-        @param Value [in] New property value. If Value = '' then a section name
-          of 'Window_<Form Name>' is used.
-      }
-    procedure SetIniFileName(const Value: string);
-      {Write accessor for IniFileName property.
-        @param Value [in] New property value. If Value = '' then an ini file
-        name based on the name of the application is used.
-      }
-    function BuildIniFileName: string;
-      {Constructs the ini file name to be used depending on the IniRootDir and
-      IniFileName properties.
+    fOnGetIniDataEx: TPJWdwStateGetIniDataEx;
+      {Event handler for OnGetIniDataEx event}
+    function BuildIniFileName(AIniRootDir: TPJWdwStateIniRootDir;
+      AIniFileName: string): string;
+      {Constructs the ini file name to be used.
+        @param AIniRootDir [in] ID of ini file root directory use for relative
+          ini file names.
+        @param AIniFileName [in] Name of ini file. If this is a relative path
+          it will have a directory specified by AIniRootDir prepended.
         @return Required file name. This will always be a rooted file spec.
       }
-    function IniRootPath: string;
-      {Returns the root path specified by the IniRootDir property.
+    function IniRootPath(const AIniRootDir: TPJWdwStateIniRootDir): string;
+      {Returns the root path specified by the given root directory ID. This root
+      directory is used for any ini file names that are relative paths.
+        @param AIniRootDir [in] ID of require root directory.
         @return Required path. This is always a rooted path.
       }
   protected
@@ -570,29 +589,44 @@ type
       relative ini file name specified in the IniFileName property. If
       IniFileName contains no path information, and IniRootDir is either
       rdAppData or rdProgramData then the "DelphiDabbler\WindowStateStore\"
-      sub-directory of rdAppData or rdProgramData is used.}
-    property IniFileName: string read fIniFileName write SetIniFileName;
+      sub-directory of rdAppData or rdProgramData is used. The actual value used
+      to generate the file name can be changed in the OnGetIniDataEx event
+      handler.}
+    property IniFileName: string read fIniFileName write fIniFileName;
       {The name of the ini file in which to save window information. If this
       file name is a fully specified file path it is used as-is. If the file
       name is relative it is stored in the root directory specified by the
       IniRootDir parameter. If IniFileName is the empty string then the ini file
       is has the same name as the program file, with the extension changed to
-      .ini}
-    property Section: string read fSection write SetSection;
+      .ini. The actual value used to generate the file name can be changed in
+      the OnGetIniData or OnGetIniDataEx event handlers.}
+    property Section: string read fSection write fSection;
       {The name of the section in ini file in which to save window information.
       Uses "Window_<Form Name>" (eg 'Window_Form1') if set to empty string
-      (default)}
+      (default). The actual section name used can be changed in the OnGetIniData
+      or OnGetIniDataEx event handlers.}
     property OnGetIniData: TPJWdwStateGetIniData
       read fOnGetIniData write fOnGetIniData;
       {Event triggered just before ini file is read when restoring and saving
-      window state. Allows handler to change the ini file name and section name.
-      If this event is handled then the IniRootDir, IniFileName and Section
-      properties are ignored.
-      WARNING: File names and section names changed in the event handler are not
-      checked for errors, so make sure that the names are valid and not empty.
-      If a relative path is used for the file name this will be taken as
-      relative to the Windows directory.
-      }
+      window state. By handling this event you can change the ini file name and
+      section from those specified in the IniFileName and Section properties.
+      NOTE 1: If a relative path is specified for the file name it will be
+      appended to the sub-folder specified by the IniRootDir property.
+      NOTE 2: The IniFileName and Section properties are not modified.
+      NOTE 3: This event is not triggered if OnGetIniDataEx is handled.}
+    property OnGetIniDataEx: TPJWdwStateGetIniDataEx
+      read fOnGetIniDataEx write fOnGetIniDataEx;
+      {Event triggered just before ini file is read when restoring and saving
+      window state. By handling this event you can change the default ini root
+      directory file name and section from those specified in the IniRootDir,
+      IniFileName and Section properties.
+      NOTE 1: If a relative path is specified for the file name it will be
+      appended to the sub-folder specified by the value returned in the event
+      handler's AIniRootDir parameter.
+      NOTE 2: The IniRootDir, IniFileName and Section properties are not
+      modified.
+      NOTE 3: If this event is handled then the OnGetIniData event is not
+      triggered.}
   end;
 
   {
@@ -1390,30 +1424,36 @@ end;
 
 { TPJWdwState }
 
-function TPJWdwState.BuildIniFileName: string;
-  {Constructs the ini file name to be used depending on the IniRootDir and
-  IniFileName properties.
+function TPJWdwState.BuildIniFileName(AIniRootDir: TPJWdwStateIniRootDir;
+  AIniFileName: string): string;
+  {Constructs the ini file name to be used.
+    @param AIniRootDir [in] ID of ini file root directory use for relative ini
+      file names.
+    @param AIniFileName [in] Name of ini file. If this is a relative path it
+      will have a directory specified by AIniRootDir prepended.
     @return Required file name. This will always be a rooted file spec.
   }
 var
   SubDir: string; // any sub directory to be inserted in relative paths
 begin
-  if ExtractFileDrive(fIniFileName) = '' then
+  if AIniFileName = '' then
+    AIniFileName := ChangeFileExt(ExtractFileName(ParamStr(0)), '.ini');
+  if ExtractFileDrive(AIniFileName) = '' then
   begin
     // relative file path
-    if (AnsiPos(PathDelim, fIniFileName) = 0)
-      and (fIniRootDir in [rdAppDataDir, rdProgramDataDir]) then
+    if (AnsiPos(PathDelim, AIniFileName) = 0)
+      and (AIniRootDir in [rdAppDataDir, rdProgramDataDir]) then
       // fIniFileName is a simple file name with no path. Since it's not good
       // practise to write a file in the root of %AppData% or %ProgramData% we
       // interpose a suitable subdirectory for the ini file
       SubDir := 'DelphiDabbler\WindowStateStore\'
     else
       SubDir := '';
-    Result := IniRootPath + SubDir + fIniFileName;
+    Result := IniRootPath(AIniRootDir) + SubDir + AIniFileName;
   end
   else
     // fully specified file name
-    Result := fIniFileName;
+    Result := AIniFileName;
 end;
 
 constructor TPJWdwState.Create(AOwner: TComponent);
@@ -1425,8 +1465,8 @@ constructor TPJWdwState.Create(AOwner: TComponent);
   }
 begin
   inherited Create(AOwner);
-  SetIniFileName('');
-  SetSection('');
+  fIniFileName := '';
+  fSection := '';
   fIniRootDir := rdAppDataDir;
 end;
 
@@ -1438,18 +1478,31 @@ procedure TPJWdwState.GetIniInfo(var AIniFileName, ASection: string);
     @param ASection [in/out] Required section name. Set to value of Section
       property when called. Can be changed by event handler.
   }
+var
+  RootDir: TPJWdwStateIniRootDir;
+  FileName: string;
 begin
   // Use IniFileName and Section properties as default values
-  AIniFileName := BuildIniFileName;
-  outputdebugstring(pchar('INIFILE: ' + AIniFileName));
-  ASection := Section;
+  RootDir := fIniRootDir;
+  FileName := fIniFileName;
+  ASection := fSection;
   // Allow user to change these by handling OnGetIniData event
-  if Assigned(fOnGetIniData) then
-    fOnGetIniData(AIniFileName, ASection);
+  if Assigned(fOnGetIniDataEx) then
+    fOnGetIniDataEx(RootDir, FileName, ASection)
+  else if Assigned(fOnGetIniData) then
+    fOnGetIniData(FileName, ASection);
+  AIniFileName := BuildIniFileName(RootDir, FileName);
+  if (ASection = '') then
+    ASection := 'Window_' + fWindow.Name;
+outputdebugstring(pchar('FILE: ' + AIniFileName));
+outputdebugstring(pchar('SECTION: ' + ASection));
 end;
 
-function TPJWdwState.IniRootPath: string;
-  {Returns the root path specified by the IniRootDir property.
+function TPJWdwState.IniRootPath(const AIniRootDir: TPJWdwStateIniRootDir):
+  string;
+  {Returns the root path specified by the given root directory ID. This root
+  directory is used for any ini file names that are relative paths.
+    @param AIniRootDir [in] ID of require root directory.
     @return Required path. This is always a rooted path.
   }
 
@@ -1488,7 +1541,7 @@ function TPJWdwState.IniRootPath: string;
   end;
 
 begin
-  case fIniRootDir of
+  case AIniRootDir of
     rdWindowsDir:
       Result := WindowsFolder;
     rdExeDir:
@@ -1569,30 +1622,6 @@ begin
   finally
     Ini.Free;
   end;
-end;
-
-procedure TPJWdwState.SetIniFileName(const Value: string);
-  {Write accessor for IniFileName property.
-    @param Value [in] New property value. If Value = '' then an ini file name
-      based on the name of the application is used.
-  }
-begin
-  if (Value = '') and not (csDesigning in ComponentState) then
-    fIniFileName := ChangeFileExt(ExtractFileName(ParamStr(0)), '.ini')
-  else
-    fIniFileName := Value;
-end;
-
-procedure TPJWdwState.SetSection(const Value: string);
-  {Write accessor for Section property.
-    @param Value [in] New property value. If Value = '' then a section name of
-      'Window_<Form Name>' is used.
-  }
-begin
-  if (Value = '') and not (csDesigning in ComponentState) then
-    fSection := 'Window_' + fWindow.Name
-  else
-    fSection := Value;
 end;
 
 { TPJRegWdwState }
