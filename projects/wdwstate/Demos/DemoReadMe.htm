@@ -243,9 +243,13 @@
 
 <p>
   The program uses the <var>TPJWdwState</var> component's
-  <var>IniFileName</var> and <var>Section</var> properties to require that
-  window information is stored in the <code>[Window]</code> section of an ini
-  file named <code>Custom.ini</code> in the demo application's directory.
+  <var>IniRootDir</var>, <var>IniFileName</var> and <var>Section</var>
+  properties to require that window information is stored in the
+  <code>[Window]</code> section of an ini file named
+  <code>StandAloneDemo.ini</code> in the
+  <code>%AppData%\DelphiDabbler\Lib\PJWdwState</code> directory. It also shows
+  how to use the <var>IniFilePath</var> method to get the full file spec of
+  the ini file.
 </p>
 
 <h2>
