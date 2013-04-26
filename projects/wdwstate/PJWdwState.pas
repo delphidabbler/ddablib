@@ -755,7 +755,7 @@ implementation
 uses
   // Delphi
   {$IFDEF RTLNameSpaces}
-  System.IniFiles, Winapi.MultiMon, Vcl.StdCtrls
+  System.IniFiles, Winapi.MultiMon, Vcl.StdCtrls  Winapi.ActiveX, Winapi.ShlObj
   {$IFDEF TScrollStyleMoved}
   , System.UITypes
   {$ENDIF}
