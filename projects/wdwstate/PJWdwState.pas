@@ -579,6 +579,11 @@ type
         @except EPJCustomWdwState raised if there is already a TPJCustomWdwState
           component on the form.
       }
+    function IniFilePath: string;
+      {Returns the fully specified file to the ini file used to store window
+      state information.
+      NOTE: This method will trigger the OnGetIniData and OnGetIniDataEx events.
+      }
   published
     // Published inherited property
     property OnReadWdwState;
@@ -1494,6 +1499,17 @@ begin
   AIniFileName := BuildIniFileName(RootDir, FileName);
   if (ASection = '') then
     ASection := 'Window_' + fWindow.Name;
+end;
+
+function TPJWdwState.IniFilePath: string;
+  {Returns the fully specified file to the ini file used to store window state
+  information.
+  NOTE: This method will trigger the OnGetIniData and OnGetIniDataEx events.
+  }
+var
+  DummySection: string; // section name returned from GetIniInfo (ignored)
+begin
+  GetIniInfo(Result, DummySection);
 end;
 
 function TPJWdwState.IniRootPath(const AIniRootDir: TPJWdwStateIniRootDir):
