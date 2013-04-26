@@ -153,7 +153,6 @@
   <span class="subtitle">ReadMe</span>
 </h1>
 
-
 <h2 id="contents">
   Contents
 </h2>
@@ -167,7 +166,6 @@
   <li><a href="#bugs">Bugs and Feature Requests</a></li>
   <li><a href="#author">About the Author</a></li>
 </ul>
-
 
 <p class="gototop">
   &raquo; <a href="#contents">Contents</a>
@@ -189,12 +187,13 @@
   <li>
     <span class="highlight">TPJWdwState</span><br />
     This component records window information in an ini file. The user has
-    control over the ini file name (via the <var>IniFileName</var> property)
-    and the name of the section of the file where window information is
-    recorded (using the <var>Section</var> property). Alternatively the ini
-    and section names can be configured by handling the
-    <var>OnGetIniData</var> event that is triggered immediately before the
-    ini file is read or written.
+    control over the ini file name (via the <var>IniFileName</var> property),
+    the root path used when the specified file name is relative (via the
+    <var>IniRootPath</var> and the name of the section of the file where window
+    information is recorded (using the <var>Section</var> property).
+    Alternatively the ini file name and section names can be configured by
+    handling the <var>OnGetIniData</var> and <var>OnGetIniDataEx</var> events
+    that are triggered immediately before the ini file is read or written.
   </li>
 
   <li>
@@ -221,8 +220,8 @@
 </ul>
 
 <p>
-  All components implement the same functionality, controlled by some
-  common properties and events, as follows:
+  All components implement the same core functionality that is controlled by
+  some common properties and events:
 </p>
 
 <ul class="spaced">
@@ -241,7 +240,7 @@
 
     <ul class="unspaced">
 
-      <li class="first">
+      <li>
         The components can be instructed to ignore the saved window
         state &ndash; the window is then displayed in the normal state.
       </li>
@@ -283,9 +282,6 @@
   <var>OnReadData</var> event.
 </p>
 
-</ul>
-
-
 <p class="gototop">
   &raquo; <a href="#contents">Contents</a>
 </p>
@@ -295,14 +291,19 @@
 </h3>
 
 <p>
-  The components should be compatible with Delphi 4 to XE3 for Windows 32 and
-  64 bit targets, but has only been tested for Delphi 7 and later.
+  The components have been tested on Delphi 7 and later 32 bit Windows compiler
+  and the Delphi XE2 and later 64 bit compiler. The components <em>may</em>
+  compile on older compilers, but that is not guaranteed.
 </p>
 
 <p>
-  .NET is not supported.
+  The components are for use with the VCL only: they are not compatible with
+  FireMonkey.
 </p>
 
+<p>
+  .NET and non-Windows platforms are not supported.
+</p>
 
 <p class="gototop">
   &raquo; <a href="#contents">Contents</a>
@@ -319,7 +320,7 @@
 </p>
 
 <ul>
-  <li class="first">
+  <li>
     <strong><code>PJWdwState.pas</code></strong> &ndash; component source
     code.
   </li>
@@ -345,7 +346,7 @@
     <code>ChangeLog.txt</code> &ndash; component's change log.
   </li>
   <li>
-    <code>DocumentationWiki.URL</code> &ndash; Shortcut to online Wiki
+    <code>Documentation.URL</code> &ndash; Shortcut to the component's online
     documentation.
   </li>
 </ul>
@@ -370,12 +371,20 @@
     href="http://www.delphidabbler.com/articles?article=15"
   >this article</a>. Users of other versions of Delphi can either use the help
   file as a stand-alone file (in which case some links won't work) or you can
-  use the <a
-    href="http://www.delphidabbler.com//url/wdwstate-wiki"
-  >Window State Components Wiki</a> that can be accessed via the provided
-  <code>DocumentationWiki</code> shortcut.
+  use the Window State Components <a
+    href="http://www.delphidabbler.com//url/wdwstate-docs"
+  >online documentation</a> that can be accessed via the provided Internet
+  shortcut.
 </p>
 
+<p class="pullout">
+  <strong>NOTE:</strong> The help file is deprecated and is no longer being
+  updated. The last update was in the v5.4.1 release. Changes and new features
+  added since then have not been included in the help file. For up to date
+  documentation please refer to the <a
+    href="http://www.delphidabbler.com//url/wdwstate-docs"
+  >online documentation</a>.
+</p>
 
 <p class="gototop">
   &raquo; <a href="#contents">Contents</a>
@@ -404,22 +413,19 @@
   </li>
   <li>
     <code>UserDemo.dpr</code><br />
-
     Demonstrates how to use <var>TPJUserWdwState</var> and load and save
     data in the <var>OnReadData</var> and <var>OnSaveData</var> events.
   </li>
   <li>
     <code>MDIDemo.dpr</code><br />
-
     Demonstrates the use of <var>TPJWdwState</var> with MDI applications.
   </li>
 </ol>
 
 <p>
-  Further information about the demo programs can be found in file
+  Further information about the demo programs can be found in the file
   <code>Demos\DemoReadMe.htm</code> that is included in the download.
 </p>
-
 
 <p class="gototop">
   &raquo; <a href="#contents">Contents</a>
@@ -433,7 +439,6 @@
   A complete change log is provided in a text file that is included in the
   download.
 </p>
-
 
 <p class="gototop">
   &raquo; <a href="#contents">Contents</a>
@@ -464,7 +469,6 @@
   All relevant trademarks are acknowledged.
 </p>
 
-
 <p class="gototop">
   &raquo; <a href="#contents">Contents</a>
 </p>
@@ -489,7 +493,6 @@
   &raquo; <a href="#contents">Contents</a>
 </p>
 
-
 <p class="gototop">
   &raquo; <a href="#contents">Contents</a>
 </p>
@@ -509,7 +512,6 @@
   I can be <a href="http://www.delphidabbler.com/contact">contacted via the
   website.</a>
 </p>
-
 
 <div class="endnotes">
 
