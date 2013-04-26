@@ -70,6 +70,7 @@ object Form1: TForm1
   object PJWdwState1: TPJWdwState
     AutoSaveRestore = True
     Options = [woFitWorkArea]
+    IniRootDir = rdExeDir
     Section = 'MainForm'
     Left = 120
     Top = 112
