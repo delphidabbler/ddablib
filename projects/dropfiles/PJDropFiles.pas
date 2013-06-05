@@ -1,4 +1,4 @@
-{ 
+{
  * PJDropFiles.pas
  *
  * Components that enable files dragged and dropped from explorer to be
@@ -24,7 +24,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1998-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1998-2013 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -279,8 +279,8 @@ type
   TPJDropFilesHelper = class(TPJAbstractDropFilesHelper)
   protected
     function GetContainer: TWinControl; override;
-      {Returns return reference to the component's related windowed control:
-      this is the control itself in this class}
+      {Returns reference to the component's related windowed control: this is
+      the control itself in this class}
   end;
 
   {
@@ -290,8 +290,8 @@ type
   TPJFormDropFilesHelper = class(TPJAbstractDropFilesHelper)
   protected
     function GetContainer: TWinControl; override;
-      {Returns return reference to the component's related windowed control:
-      this is the form on which owns the component}
+      {Returns reference to the component's related windowed control: this is
+      the form on which owns the component}
   end;
 
   {
@@ -301,7 +301,7 @@ type
   TPJCtrlDropFilesHelper = class(TPJAbstractDropFilesHelper)
   protected
     function GetContainer: TWinControl; override;
-      {Returns return reference to the control managed by the related component}
+      {Returns reference to the control managed by the related component}
   end;
 
   {
@@ -615,6 +615,46 @@ var
   // Id of private, unique, PJ_DROPFILES message
   pvtPJDropFilesMsg: UINT;
 
+function SetWndProc(HWnd: THandle; NewWndProc: Pointer): Pointer;
+  {Sets the window procedure of a given window in a a 32 and 64 bit safe way.
+    @param HWnd [in] Handle of window to receive new window procedure.
+    @param NewWndProc [in] Pointer to new window procedure.
+    @returns Pointer to former window procedure.
+  }
+begin
+  {$IFDEF WIN64}
+  Result := Pointer(
+    SetWindowLongPtr(HWnd, GWLP_WNDPROC, LONG_PTR(NewWndProc))
+  );
+  {$ELSE}
+  Result := Pointer(
+    SetWindowLong(HWnd, GWL_WNDPROC, Integer(NewWndProc))
+  );
+  {$ENDIF}
+end;
+
+procedure SendPJDropFilesMsg(const HWnd: THandle; const HDrop: THandle;
+  const Pos: TPoint);
+  {Sends a PJDropFiles custom message in a 32 and 64 bit safe way.
+    @param HWnd [in] Handle of window receiving message.
+    @param HDrop [in] Drop file handle.
+    @param Pos [in] Position of file drop.
+  }
+{$IFDEF WIN64}
+begin
+  // LPARAM cast requires SizeOf(Pos) = SizeOf(LPARAM)
+  SendMessage(HWnd, pvtPJDropFilesMsg, WPARAM(HDrop), LPARAM(Pos));
+end;
+{$ELSE}
+var
+  SmallPos: TSmallPoint;  // Pos converted to a TSmallPoint
+begin
+  SmallPos := PointToSmallPoint(Pos);
+  // LPARAM cast requires SizeOf(SmallPos) = SizeOf(LPARAM)
+  SendMessage(HWnd, pvtPJDropFilesMsg, WPARAM(HDrop), LPARAM(SmallPos));
+end;
+{$ENDIF}
+
 { TPJDropFiles }
 
 procedure TPJDropFiles.CMEnabledChanged(var Msg : TMessage);
@@ -662,7 +702,7 @@ procedure TPJDropFiles.DoPassThrough(hDrop: THandle);
 var
   OwnerCtrl: TWinControl; // control that owns this component
   ScreenPos: TPoint;      // screen position of drop point
-  OwnerPos: TSmallPoint;  // position of drop point relative to owner control
+  OwnerPos: TPoint;       // position of drop point relative to owner control
 begin
   if fPassThrough
     and Visible
@@ -676,9 +716,9 @@ begin
       OwnerCtrl := OwnerCtrl.Owner as TWinControl;
     // Calculate drop position relative to owner control's window
     ScreenPos := ClientToScreen(fHelper.fDropPoint);
-    OwnerPos := PointToSmallPoint(OwnerCtrl.ScreenToClient(ScreenPos));
+    OwnerPos := OwnerCtrl.ScreenToClient(ScreenPos);
     // Send the custom message to owner form containing new drop position
-    SendMessage(OwnerCtrl.Handle, pvtPJDropFilesMsg, hDrop, Integer(OwnerPos));
+    SendPJDropFilesMsg(OwnerCtrl.Handle, hDrop, OwnerPos);
   end;
 end;
 
@@ -1027,10 +1067,7 @@ begin
     {$ELSE}
     fNewWndProc := Forms.MakeObjectInstance(NewWndProc);
     {$ENDIF}
-    fOldWndProc := Pointer(SetWindowLong(
-      FormHandle,
-      GWL_WNDPROC,
-      Integer(fNewWndProc)));
+    fOldWndProc := SetWndProc(FormHandle, fNewWndProc);
     // if enabled, notify that we can accept files
     Helper.AcceptFiles(Enabled);
   end
@@ -1055,7 +1092,7 @@ begin
   begin
     Helper.AcceptFiles(False);
     if FormHandle <> 0 then
-      SetWindowLong(FormHandle, GWL_WNDPROC, Integer(fOldWndProc));
+      SetWndProc(FormHandle, fOldWndProc);
     {$IFDEF DELPHI6ANDUP}
     Classes.FreeObjectInstance(fNewWndProc);
     {$ELSE}
@@ -1092,7 +1129,11 @@ begin
         Helper.FilesDropped(Msg.WParam);
         if Msg.Msg = pvtPJDropFilesMsg then
           // msg passed thru: change drop point to be relative to this window
+          {$IFDEF WIN64}
+          Helper.fDropPoint := TPoint(Msg.LParam);
+          {$ELSE}
           Helper.fDropPoint := SmallPointToPoint(TSmallPoint(Msg.LParam));
+          {$ENDIF}
         // trigger OnDropFiles event
         Helper.DropFiles;
       end;
@@ -1166,7 +1207,7 @@ procedure TPJCtrlDropFiles.DoPassThrough(hDrop: THandle);
 var
   OwnerCtrl: TWinControl; // control that owns this component
   ScreenPos: TPoint;      // screen position of drop point
-  OwnerPos: TSmallPoint;  // position of drop point relative to owner control
+  OwnerPos: TPoint;       // position of drop point relative to owner control
 begin
   // Only pass the event through if required by PassThrough property
   if fPassThrough
@@ -1182,9 +1223,9 @@ begin
       OwnerCtrl := OwnerCtrl.Owner as TWinControl;
     // Calculate drop position relative to managed control's window
     ScreenPos := ClientToScreen(Helper.fDropPoint);
-    OwnerPos := PointToSmallPoint(OwnerCtrl.ScreenToClient(ScreenPos));
+    OwnerPos := OwnerCtrl.ScreenToClient(ScreenPos);
     // Send the custom message to owner control containing new drop position
-    SendMessage(OwnerCtrl.Handle, pvtPJDropFilesMsg, hDrop, Integer(OwnerPos));
+    SendPJDropFilesMsg(OwnerCtrl.Handle, hDrop, OwnerPos);
   end;
 end;
 
@@ -1245,7 +1286,7 @@ begin
   begin
     Helper.AcceptFiles(False);
     if ManagedControlHandle <> 0 then
-      SetWindowLong(ManagedControlHandle, GWL_WNDPROC, Integer(fOldWndProc));
+      SetWndProc(ManagedControlHandle, fOldWndProc);
   end;
   fManagedControl := nil;
 end;
@@ -1259,11 +1300,7 @@ begin
   // Subclass the managed control and set up for drag drop (run time only)
   if not (csDesigning in ComponentState) then
   begin
-    fOldWndProc := Pointer(SetWindowLong(
-      ManagedControlHandle,
-      GWL_WNDPROC,
-      Integer(fNewWndProc))
-    );
+    fOldWndProc := SetWndProc(ManagedControlHandle, fNewWndProc);
     Helper.AcceptFiles(Enabled);
   end;
 end;
@@ -1323,7 +1360,7 @@ var
   FileName: string; // name of a dropped file
   NameLen: Word;    // length of buffer required for name of dropped file
   NumDropped: Word; // number of files dropped
-  Idx: Integer;     // loops through all dropped files
+  Idx: Cardinal;    // loops through all dropped files
 begin
   try
     // Clear file list
@@ -1438,7 +1475,7 @@ procedure TPJAbstractDropFilesHelper.HandleFile(const FileName: string);
 
   // ---------------------------------------------------------------------------
   function MakePath(FolderName: string): string;
-    {Esnures the given folder name ends with a '\'}
+    {Ensures the given folder name ends with a '\'}
   begin
     Result := FolderName;
     if (Length(Result) > 0) and (Result[Length(Result)] <> '\') then
@@ -1524,8 +1561,8 @@ end;
 { TPJDropFilesHelper }
 
 function TPJDropFilesHelper.GetContainer: TWinControl;
-  {Returns return reference to the component's related windowed control: this is
-  the control itself in this class}
+  {Returns reference to the component's related windowed control: this is the
+  control itself in this class}
 begin
   Result := fComp as TWinControl;
 end;
@@ -1533,8 +1570,8 @@ end;
 { TPJFormDropFilesHelper }
 
 function TPJFormDropFilesHelper.GetContainer: TWinControl;
-  {Returns return reference to the component's related windowed control: this is
-  the form on which owns the component}
+  {Returns reference to the component's related windowed control: this is the
+  form on which owns the component}
 var
   Owner: TComponent;  // owning control (a form)
 begin
@@ -1550,7 +1587,7 @@ end;
 { TPJCtrlDropFilesHelper }
 
 function TPJCtrlDropFilesHelper.GetContainer: TWinControl;
-  {Returns return reference to the control managed by the related component}
+  {Returns reference to the control managed by the related component}
 begin
   Result := (fComp as TPJCtrlDropFiles).ManagedControl;
 end;
