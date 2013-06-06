@@ -11,6 +11,22 @@
 ; Change Log for Window State Components
 ; ------------------------------------------------------------------------------
 
+Release v5.5.0 of 06 June 2013
++ Changed how TPJWdwState determines the name of the ini file it uses to store window state data.
+  - Introduced new IniRootDir property that specifies whether relative ini file names are to be relative to %appdata%, %programdata%, windows directory or program executable file directory. Fixes issue #15 (http://bit.ly/ZQ1OPc).
+  - Default behaviour changed to use %appdata% instead of windows directory for relative ini files.
+  - Added new OnGetIniDataEx event to permit IniRootDir property value to be overridden.
+  - Behaviour of OnGetIniData has been changed to add default folders to relative file names set in the event handler.
+  - Added new IniFilePath method to return the fully specified name of the ini file.
++ If ini file directories do not exist they are now created instead of causing errors.
++ Any empty section names set in TPJWdwState.OnGetIniData event handlers are now replaced with a default section name.
++ Updated demos:
+  - Modified demo #2 to demonstrate TPJWdwState's use of the IniRootDir and IniFilePath properties and to write that window state ini file to %appdata%.
+  - Fixed demo #4 to preserve its pre-v5.5 behaviour of writing the ini file to the program's executable directory.
++ Tidied up some code.
++ Revised documentation (help file not updated - it is now deprecated).
++ Renamed link to online documentation and changed the URL.
+
 Release v5.4.2 of 24 April 2013
 + Fixed bug #26 (http://code.google.com/p/ddab-lib/issues/detail?id=26) where the window position was not restored correctly for main windows that touched or overlapped the taskbar when it was located at the top or left of the screen.
 
