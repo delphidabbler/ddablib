@@ -44,6 +44,7 @@ interface
 {$UNDEF DELPHI4ANDUP}
 {$UNDEF DELPHI6ANDUP}
 {$UNDEF DELPHI2005ANDUP}
+{$UNDEF DELPHIXE2ANDUP}
 {$IFDEF VER120} // Delphi 4
   {$DEFINE DELPHI4ANDUP}
 {$ENDIF}
@@ -65,12 +66,19 @@ interface
   {$IF CompilerVersion >= 17.0} // Delphi 2005 and later
     {$DEFINE DELPHI2005ANDUP}
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE DELPHIXE2ANDUP}
+  {$IFEND}
 {$ENDIF}
 
 
 uses
   // Delphi
+  {$IFNDEF DELPHIXE2ANDUP}
   Windows, Messages, Classes, Controls;
+  {$ELSE}
+  Winapi.Windows, Winapi.Messages, System.Classes, Vcl.Controls;
+  {$ENDIF}
 
 
 type
@@ -655,6 +663,40 @@ begin
 end;
 {$ENDIF}
 
+procedure FreeObjectInst(AObjectInstance: Pointer);
+  {Wrapper function that frees the given object instance.
+  NOTE: Provided to centralise the conditional compilation needed to access
+  the VCL's FreeObjectInstance routine}
+begin
+  {$IFDEF DELPHI6ANDUP}
+  {$IFDEF DELPHIXE2ANDUP}
+  System.
+  {$ENDIF}
+  Classes
+  {$ELSE}
+  Forms
+  {$ENDIF}
+  .FreeObjectInstance(AObjectInstance);
+end;
+
+function MakeObjectInst(AMethod: TWndMethod): Pointer;
+  {Wrapper function that allocates a block of memory to be used by an instance
+  of a class.
+  NOTE: Provided to centralise the conditional compilation needed to access
+  the VCL's MakeObjectInstance routine}
+begin
+  Result :=
+    {$IFDEF DELPHI6ANDUP}
+    {$IFDEF DELPHIXE2ANDUP}
+    System.
+    {$ENDIF}
+    Classes
+    {$ELSE}
+    Forms
+    {$ENDIF}
+    .MakeObjectInstance(AMethod);
+end;
+
 { TPJDropFiles }
 
 procedure TPJDropFiles.CMEnabledChanged(var Msg : TMessage);
@@ -1062,11 +1104,7 @@ begin
   if not (csDesigning in ComponentState) then
   begin
     // install new window procedure and record previous one
-    {$IFDEF DELPHI6ANDUP}
-    fNewWndProc := Classes.MakeObjectInstance(NewWndProc);
-    {$ELSE}
-    fNewWndProc := Forms.MakeObjectInstance(NewWndProc);
-    {$ENDIF}
+    fNewWndProc := MakeObjectInst(NewWndProc);
     fOldWndProc := SetWndProc(FormHandle, fNewWndProc);
     // if enabled, notify that we can accept files
     Helper.AcceptFiles(Enabled);
@@ -1093,11 +1131,7 @@ begin
     Helper.AcceptFiles(False);
     if FormHandle <> 0 then
       SetWndProc(FormHandle, fOldWndProc);
-    {$IFDEF DELPHI6ANDUP}
-    Classes.FreeObjectInstance(fNewWndProc);
-    {$ELSE}
-    Forms.FreeObjectInstance(fNewWndProc);
-    {$ENDIF}
+    FreeObjectInst(fNewWndProc);
   end;
   inherited Destroy;
 end;
@@ -1161,6 +1195,9 @@ function TPJCtrlDropFiles.ClientToScreen(ClientPos: TPoint): TPoint;
   co-ordinates}
 begin
   Result := ClientPos;
+  {$IFDEF DELPHIXE2ANDUP}
+  WinApi.
+  {$ENDIF}
   Windows.ClientToScreen(ManagedControlHandle, Result);
 end;
 
@@ -1169,14 +1206,8 @@ constructor TPJCtrlDropFiles.Create(AOwner: TComponent);
 begin
   inherited;
   if not (csDesigning in ComponentState) then
-  begin
-    // install new window procedure and record previous one
-    {$IFDEF DELPHI6ANDUP}
-    fNewWndProc := Classes.MakeObjectInstance(NewWndProc);
-    {$ELSE}
-    fNewWndProc := Forms.MakeObjectInstance(NewWndProc);
-    {$ENDIF}
-  end;
+    // install new window procedure
+    fNewWndProc := MakeObjectInst(NewWndProc);
 end;
 
 function TPJCtrlDropFiles.CreateAndInitHelper: TPJAbstractDropFilesHelper;
@@ -1191,13 +1222,7 @@ destructor TPJCtrlDropFiles.Destroy;
   {Class destructor. Tears down component}
 begin
   if Assigned(fNewWndProc) then
-  begin
-    {$IFDEF DELPHI6ANDUP}
-    Classes.FreeObjectInstance(fNewWndProc);
-    {$ELSE}
-    Forms.FreeObjectInstance(fNewWndProc);
-    {$ENDIF}
-  end;
+    FreeObjectInst(fNewWndProc);
   inherited;
 end;
 
