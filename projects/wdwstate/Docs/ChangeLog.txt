@@ -11,6 +11,9 @@
 ; Change Log for Window State Components
 ; ------------------------------------------------------------------------------
 
+Release v5.5.1 of 07 June 2013
++ Fixed issue 27: "Window State Components release 5.5.0 does not compile on Delphi XE2 or later" (http://code.google.com/p/ddab-lib/issues/detail?id=27).
+
 Release v5.5.0 of 06 June 2013
 + Changed how TPJWdwState determines the name of the ini file it uses to store window state data.
   - Introduced new IniRootDir property that specifies whether relative ini file names are to be relative to %appdata%, %programdata%, windows directory or program executable file directory. Fixes issue #15 (http://bit.ly/ZQ1OPc).
