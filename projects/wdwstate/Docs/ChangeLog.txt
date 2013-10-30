@@ -11,6 +11,11 @@
 ; Change Log for Window State Components
 ; ------------------------------------------------------------------------------
 
+Release v5.5.2 of 30 October 2013
++ Fixed registry access code in TPJRegWdwState to use 64 bit registry view when running on 64 bit Windows. Note that this fix doesn't work when compiled with Delphi 5 and earlier.
++ Updated font in the "StandardDemo" demo program to conform to other demo forms.
++ Updated documentation.
+
 Release v5.5.1 of 07 June 2013
 + Fixed issue 27: "Window State Components release 5.5.0 does not compile on Delphi XE2 or later" (http://code.google.com/p/ddab-lib/issues/detail?id=27).
 
