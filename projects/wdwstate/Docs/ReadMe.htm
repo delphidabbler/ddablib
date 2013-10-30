@@ -205,7 +205,11 @@
     triggered just before the registry is accessed. Additional application
     defined data can be read from or written to the registry by handling the
     <var>OnGettingRegData</var> and <var>OnPuttingRegData</var> events that
-    are triggered after the component reads or writes the registry.
+    are triggered after the component reads or writes the registry.<br />
+    <strong>Important Note:</strong> You are discouraged from using
+    <var>TPJRegWdwState</var> for programs compiled with Delphi 5 and earlier
+    that may be run on 64 bit Windows, because the component may not be able
+    to access the 64 bit registry view correctly and window state may be lost.
   </li>
 
   <li>
