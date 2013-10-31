@@ -48,7 +48,7 @@ uses
 type
 
   ///  <summary>
-  ///  Dialog box used to edit multi-line string properties.
+  ///  Dialogue box used to edit multi-line string properties.
   ///  </summary>
   ///  <remarks>
   ///  Instantiated by TPJStringPE.
@@ -128,6 +128,9 @@ type
     ///  <remarks>Updates word-wrap setting and locates window.</remarks>
     procedure FormShow(Sender: TObject);
   private
+    ///  <summary>Adjusts given registry access flags to include or exclude
+    ///  64 bit regsitry access flag depending on operating system.</summary>
+    function AdjustRegAccessFlags(const Flags: LongWord): LongWord;
     ///  <summary>Saves a setting as binary data in registry.</summary>
     ///  <param name="ID">string [in] Name of registry value.</param>
     ///  <param name="Value">Untyped [in] Value to be stored.</param>
@@ -138,7 +141,7 @@ type
       const Size: Integer): Boolean;
     ///  <summary>Reads binary data for a given setting.</summary>
     ///  <param name="ID">string [in] Name of registry value.</param>
-    ///  <param name="Value">Untypes [in/out] Untyped value that receives
+    ///  <param name="Value">Untyped [in/out] Untyped value that receives
     ///  setting data. Any existing value is overwritten.</param>
     ///  <param name="Size">Integer [in] Size of Value in bytes.</param>
     ///  <returns>Boolean. True if setting is read successfully or False on
@@ -311,6 +314,20 @@ begin
   actUndo.Enabled := edText.Perform(EM_CANUNDO, 0, 0) <> 0;
 end;
 
+function TPJStringPEDlg.AdjustRegAccessFlags(const Flags: LongWord): LongWord;
+const
+  // 64 bit view registry access flag: not defined by all supported Delphis
+  KEY_WOW64_64KEY = $0100;
+begin
+  if (Win32MajorVersion > 5) or
+    ((Win32MajorVersion = 5) and (Win32MinorVersion >= 1)) then
+    // Windows XP or later: include 64 bit flag
+    Result := Flags or KEY_WOW64_64KEY
+  else
+    // Windows 2000 or earlier, including Win9x: exclude 64 bit flag
+    Result := Flags and not KEY_WOW64_64KEY;
+end;
+
 procedure TPJStringPEDlg.cbWordWrapClick(Sender: TObject);
 begin
   UpdateWordWrap(cbWordWrap.Checked);
@@ -355,12 +372,12 @@ begin
   case Key of
     VK_ESCAPE:
       if Shift * cShiftKeys = [] then
-        // unmodified ESC key - cancel dialog
+        // unmodified ESC key - cancel dialogue
         ModalResult := mrCancel;
     VK_RETURN:
     begin
       if Shift * cShiftKeys = [ssCtrl] then
-        // CTRL+RETURN - OK the dialog
+        // CTRL+RETURN - OK the dialogue
         ModalResult := mrOK;
     end;
   end;
@@ -389,7 +406,7 @@ begin
   end
   else
   begin
-    // we have no settings: centre window on Windows workarea
+    // we have no settings: centre window on Windows work area
     if SystemParametersInfo(SPI_GETWORKAREA, 0, @WorkArea, 0) then
     begin
       Left := WorkArea.Left + (WorkArea.Right - WorkArea.Left - Width) div 2;
@@ -405,10 +422,10 @@ end;
 function TPJStringPEDlg.ReadSetting(const ID: string; var Value;
   const Size: Integer): Boolean;
 begin
-  with TRegistry.Create do
+  with TRegistry.Create(AdjustRegAccessFlags(KEY_READ)) do
     try
       try
-        Result := OpenKeyReadOnly(cRegKey) and ValueExists(ID);
+        Result := OpenKey(cRegKey, False) and ValueExists(ID);
         if Result then
           Result := ReadBinaryData(ID, Value, Size) = Size;
       except
@@ -422,7 +439,7 @@ end;
 function TPJStringPEDlg.SaveSetting(const ID: string; var Value;
   const Size: Integer): Boolean;
 begin
-  with TRegistry.Create do
+  with TRegistry.Create(AdjustRegAccessFlags(KEY_ALL_ACCESS)) do
     try
       try
         Result := OpenKey(cRegKey, True);
