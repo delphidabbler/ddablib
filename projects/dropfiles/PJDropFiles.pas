@@ -156,7 +156,7 @@ type
     fWildCardChanged: Boolean;
       {Used to detect if wild card has changed since last call to Accept}
     fMatchingFiles: TStringList;
-      {List of files in current folder that match wildcard}
+      {List of files in current folder that match wild-card}
     fCurrentFolder: string;
       {Current folder that list of matching files comes from}
   public
@@ -170,8 +170,8 @@ type
       given file matches wild card in current folder}
   published
     property WildCard: string read fWildCard write SetWildCard;
-      {Files in a folder that match the given wildcard pass through the filter,
-      while those that don't match the wild card do not. Wildcard is in usual
+      {Files in a folder that match the given wild-card pass through the filter,
+      while those that don't match the wild card do not. Wild-card is in usual
       DOS format - '?' and '*' are supported}
   end;
 
@@ -204,7 +204,7 @@ type
   {
   TPJAbstractDropFilesHelper:
     Helper class that implements interface to windows drag drop events and other
-    common functionality for twp drop files classes. This can't be done in
+    common functionality for two drop files classes. This can't be done in
     common base class for drop files classes since classes inherit from
     different components.
   }
@@ -222,9 +222,9 @@ type
     procedure HandleFile(const FileName: string);
       {Processes the given file and updates file list according to
       RecurseFolders and ExcludeFolders properties. If ExcludeFolders is true
-      then any folder names encoutnered are exlcuded from file list. If
+      then any folder names encountered are excluded from file list. If
       RecurseFolders is true then any folders and examined and the files in the
-      folder are added to list (taking note of ExcludeFolders). Any subfolders
+      folder are added to list (taking note of ExcludeFolders). Any sub-folders
       are also searched recursively}
   public
     fForeGroundOnDrop: Boolean;
@@ -235,7 +235,7 @@ type
       files dropped and after they have been processed}
     fOnBeforeDrop: TNotifyEvent;
       {Value of related control's OnBeforeDrop property: triggered when files
-      droped but before they are processed. Files property has no defined value
+      dropped but before they are processed. Files property has no defined value
       when this event is triggered}
     fOnAfterDrop: procedure(hDrop: THandle) of object;
       {Event triggered after drop is complete but before drop handle is
@@ -251,7 +251,7 @@ type
       {Reference to component used to filter the list of dropped files. This is
       used before the OnFileFilter event is triggered}
     fDropPoint: TPoint;
-      {Point at which drop occured: can be changed by related components if
+      {Point at which drop occurred: can be changed by related components if
       necessary}
     fFileList: TStringList;
       {List of files dropped}
@@ -433,7 +433,7 @@ type
   {
   TPJSubClassedDropFiles:
     Base class for drop files components handle drop files for an associated
-    TWinControl by subclassing the associated control's window.
+    TWinControl by sub-classing the associated control's window.
   }
   TPJSubClassedDropFiles = class(TComponent)
   private // properties
@@ -469,7 +469,7 @@ type
       {Helper class that undertakes most of drag drop handling}
   public
     constructor Create(AOwner: TComponent); override;
-      {Class constructor. Creates and intializes component}
+      {Class constructor. Creates and initialises component}
     destructor Destroy; override;
       {Class destructor. Tears down component}
     { Run time properties }
@@ -897,7 +897,7 @@ begin
 end;
 
 procedure TPJDropFiles.SetOnFileFilter(const Value: TPJDroppedFileFilter);
-  {Write access methof for OnFileFilter event property}
+  {Write access method for OnFileFilter event property}
 begin
   fHelper.fOnFileFilter := Value;
 end;
@@ -924,7 +924,7 @@ end;
 { TPJSubClassedDropFiles }
 
 constructor TPJSubClassedDropFiles.Create(AOwner: TComponent);
-  {Class constructor. Creates and intializes component}
+  {Class constructor. Creates and initialises component}
 begin
   inherited;
   fHelper := CreateAndInitHelper;
@@ -1394,7 +1394,7 @@ begin
     NumDropped := DragQueryFile(hDrop, Cardinal(-1), nil, 0);
     for Idx := 0 to Pred(NumDropped) do
     begin
-      // Find size required for filename buffer (without terminal #0)
+      // Find size required for file name buffer (without terminal #0)
       NameLen := DragQueryFile(hDrop, Idx, nil, 0);
       // Get name of dropped file
       SetLength(FileName, NameLen);   // Delphi adds space for terminal #0
@@ -1409,7 +1409,7 @@ begin
     if Assigned(fOnAfterDrop) then
       fOnAfterDrop(hDrop);
   finally
-    // Release handle assoc. with drag/drop
+    // Release handle associated with drag/drop
     DragFinish(hDrop);
   end;
 end;
@@ -1494,9 +1494,9 @@ end;
 procedure TPJAbstractDropFilesHelper.HandleFile(const FileName: string);
   {Processes the given file and updates file list according to RecurseFolders
   and ExcludeFolders properties. If ExcludeFolders is true then any folder names
-  encoutnered are exlcuded from file list. If RecurseFolders is true then any
+  encountered are excluded from file list. If RecurseFolders is true then any
   folders and examined and the files in the folder are added to list (taking
-  note of ExcludeFolders). Any subfolders are also searched recursively}
+  note of ExcludeFolders). Any sub-folders are also searched recursively}
 
   // ---------------------------------------------------------------------------
   function MakePath(FolderName: string): string;
@@ -1761,13 +1761,13 @@ var
 begin
   if fWildCard <> '' then
   begin
-    // We have wildcard: check for match
-    // check if we've changed folder or wildcard since last file processed
+    // We have wild-card: check for match
+    // check if we've changed folder or wild-card since last file processed
     Folder := ExtractFilePath(FilePath);
     if (Folder <> fCurrentFolder) or fWildCardChanged then
     begin
-      // folder or wildcard has changed:
-      // get files matching wildcard in current folder
+      // folder or wild-card has changed:
+      // get files matching wild-card in current folder
       fMatchingFiles.Clear;
       Res := SysUtils.FindFirst(Folder + fWildCard, faAnyFile, SR);
       try
@@ -1791,7 +1791,7 @@ begin
   else
     // No wild card: return True (all match)
     Result := True;
-  // Note that we've used the current wildcard
+  // Note that we've used the current wild-card
   fWildCardChanged := False;
 end;
 
@@ -1799,7 +1799,7 @@ constructor TPJWildCardFileFilter.Create(AOwner: TComponent);
   {Class constructor: creates component and owned object}
 begin
   inherited;
-  // Create list to hold files that match widlcard in current folder
+  // Create list to hold files that match wild-card in current folder
   fMatchingFiles := TStringList.Create;
 end;
 

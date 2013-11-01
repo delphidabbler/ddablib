@@ -24,7 +24,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1998-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1998-2013 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -61,7 +61,8 @@ uses
 type
   {
   TPJExtFileFilterExtPEDlg:
-    Implements the dialog box used by the TPJExtFileFilterExtPE property editor.
+    Implements the dialogue box used by the TPJExtFileFilterExtPE property
+    editor.
   }
   TPJExtFileFilterExtPEDlg = class(TForm)
     edExtension: TEdit;
@@ -73,7 +74,7 @@ type
     procedure edExtensionChange(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure lbExtensionsClick(Sender: TObject);
-    procedure btnDeleteClick(Sender: TObject); 
+    procedure btnDeleteClick(Sender: TObject);
   private
     function GetExtensions: string;
       {Return ; separated list of extensions from list box.
@@ -81,7 +82,7 @@ type
       }
     procedure SetExtensions(const Value: string);
       {Store extensions in list box from given ; separated list.
-        @param Value is a ; separated list of extensions.
+        @param Value is a ';' separated list of extensions.
       }
   public
     property Extensions: string read GetExtensions write SetExtensions;
@@ -91,18 +92,18 @@ type
   {
   TPJExtFileFilterExtPE:
     Property editor for the Extensions property of the TPJExtFileFilter
-    component that displays a dialog box where extensions can be added and
+    component that displays a dialogue box where extensions can be added and
     removed and saved in the correct ; delimited format.
   }
   TPJExtFileFilterExtPE = class(TStringProperty)
   public
     function GetAttributes: TPropertyAttributes; override;
-      {Tell object inspector that editor displays a dialog box in addition to
+      {Tell object inspector that editor displays a dialogue box in addition to
       other attributes of a standard string property editor.
         @return a set of values describing attributes of property editor.
       }
     procedure Edit; override;
-      {Display property editor dialog box to edit the property.}
+      {Display property editor dialogue box to edit the property.}
   end;
 
   {
@@ -124,7 +125,7 @@ type
       ); override;
       {Gets called (indirectly) by component Edit method for each property
       editor of the component. Ignores all but OnDropFiles property editor which
-      is passed to inherited method to record as the default proptery editor to
+      is passed to inherited method to record as the default property editor to
       be used when the component is double clicked.
         @param PropertyEditor represents a property editor for a component
         property or event to be checked.
@@ -150,17 +151,17 @@ uses
 
 {$R *.DFM}
 
-{ Helper routines: from the CodeSnip database at www.delphidabbler.com }
+{ Helper routines: from the CodeSnip database at snippets.delphidabbler.com }
 
 function SplitStr(const S: string; Delim: Char; out S1, S2: string): Boolean;
-  {Splits the string S at the first occurence of delimiter character Delim and
-  sets S1 to the sub-string before Delim and S2 to substring following Delim.
+  {Splits the string S at the first occurrence of delimiter character Delim and
+  sets S1 to the sub-string before Delim and S2 to sub-string following Delim.
   If Delim is found in string True is returned, while if Delim is not in string
   False is returned, S1 is set to S and S2 is set to ''.}
 var
   DelimPos: Integer;  // position of delimiter in source string
 begin
-  // Find position of first occurence of delimter in string
+  // Find position of first occurrence of delimiter in string
   DelimPos := SysUtils.AnsiPos(Delim, S);
   if DelimPos > 0 then
   begin
@@ -171,7 +172,7 @@ begin
   end
   else
   begin
-    // Delimeter not found: return false and set S1 to whole string
+    // Delimiter not found: return false and set S1 to whole string
     S1 := S;
     S2 := '';
     Result := False;
@@ -185,7 +186,7 @@ function ExplodeStr(S: string; const Delim: Char; const List: Classes.TStrings;
   strings are added to the list, while they are ignored if AllowEmpty is
   false.}
 var
-  Item: string;       // current delimted text
+  Item: string;       // current delimited text
   Remainder: string;  // remaining unconsumed part of string
 begin
   // Clear the list
@@ -236,7 +237,7 @@ procedure TPJExtFileFilterExtPEDlg.btnAddClick(Sender: TObject);
 var
   Ext: string;  // an extension
 begin
-  // Get new extension from edit box and "normalise" ie
+  // Get new extension from edit box and "normalise" it
   Ext := edExtension.Text;
   if AnsiPos('.', Ext) <> 1 then
     Ext := '.' + Ext;
@@ -312,14 +313,14 @@ end;
 { TPJExtFileFilterExtPE }
 
 procedure TPJExtFileFilterExtPE.Edit;
-  {Display property editor dialog box to edit the property.}
+  {Display property editor dialogue box to edit the property.}
 begin
   // Create property editor form
   with TPJExtFileFilterExtPEDlg.Create(Application) do
     try
-      // Copy current property value to editor dialog
+      // Copy current property value to editor dialogue
       Extensions := GetStrValue;
-      // Display dialog and update property if user OKs
+      // Display dialogue and update property if user OKs
       if ShowModal = mrOK then
         SetStrValue(Extensions);
     finally
@@ -328,7 +329,7 @@ begin
 end;
 
 function TPJExtFileFilterExtPE.GetAttributes: TPropertyAttributes;
-  {Tell object inspector that editor displays a dialog box in addition to
+  {Tell object inspector that editor displays a dialogue box in addition to
   other attributes of a standard string property editor}
 begin
   Result := inherited GetAttributes + [paDialog];
@@ -345,7 +346,7 @@ procedure TPJDropFilesCE.EditProperty(
   );
   {Gets called (indirectly) by component Edit method for each property editor
   of the component. Ignores all but OnDropFiles property editor which is passed
-  to inherited method to record as the default proptery editor to be used when
+  to inherited method to record as the default property editor to be used when
   the component is double clicked}
 begin
   if CompareText(PropertyEditor.GetName, 'OnDropFiles') = 0 then
