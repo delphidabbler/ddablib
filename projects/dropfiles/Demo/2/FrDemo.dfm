@@ -4,7 +4,13 @@ object Frame1: TFrame1
   Width = 320
   Height = 240
   Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Arial'
+  Font.Style = []
   ParentColor = False
+  ParentFont = False
   TabOrder = 0
   object Label1: TLabel
     Left = 0
@@ -18,8 +24,8 @@ object Frame1: TFrame1
     Color = clActiveCaption
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clCaptionText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
+    Font.Height = -15
+    Font.Name = 'Arial'
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
@@ -52,15 +58,15 @@ object Frame1: TFrame1
     object Label2: TLabel
       Left = 8
       Top = 10
-      Width = 54
-      Height = 13
+      Width = 64
+      Height = 15
       Caption = 'Extensions:'
     end
     object Edit1: TEdit
-      Left = 67
+      Left = 83
       Top = 6
       Width = 137
-      Height = 21
+      Height = 23
       TabOrder = 0
       OnChange = Edit1Change
     end

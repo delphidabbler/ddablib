@@ -7,63 +7,106 @@ object FmMain: TFmMain
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Height = -12
+  Font.Name = 'Arial'
   Font.Style = []
   OldCreateOrder = False
+  Scaled = False
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Panel1: TPanel
     Left = 0
-    Top = 211
-    Width = 735
-    Height = 301
+    Top = 260
+    Width = 727
+    Height = 242
     Align = alClient
     TabOrder = 0
     inline frmLeft: TFrame1
       Left = 1
       Top = 1
-      Width = 360
-      Height = 299
+      Width = 443
+      Height = 240
       Align = alLeft
       Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = []
       ParentColor = False
+      ParentFont = False
       TabOrder = 0
       inherited Label1: TLabel
-        Width = 360
+        Width = 443
+        Height = 18
       end
       inherited Memo1: TMemo
-        Width = 360
-        Height = 251
+        Top = 18
+        Width = 443
+        Height = 181
       end
       inherited Panel1: TPanel
-        Top = 266
-        Width = 360
+        Top = 199
+        Width = 443
+        Height = 41
+        inherited Label2: TLabel
+          Left = 10
+          Top = 12
+          Width = 76
+          Height = 17
+        end
+        inherited Edit1: TEdit
+          Left = 102
+          Top = 7
+          Width = 169
+          Height = 25
+        end
       end
       inherited PJCtrlDropFiles1: TPJCtrlDropFiles
         ManagedControl = frmLeft
       end
     end
     inline frmRight: TFrame1
-      Left = 361
+      Left = 444
       Top = 1
-      Width = 373
-      Height = 299
+      Width = 282
+      Height = 240
       Align = alClient
       Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = []
       ParentColor = False
+      ParentFont = False
       TabOrder = 1
       inherited Label1: TLabel
-        Width = 373
+        Width = 282
+        Height = 18
       end
       inherited Memo1: TMemo
-        Width = 373
-        Height = 251
+        Top = 18
+        Width = 282
+        Height = 181
       end
       inherited Panel1: TPanel
-        Top = 266
-        Width = 373
+        Top = 199
+        Width = 282
+        Height = 41
+        inherited Label2: TLabel
+          Left = 10
+          Top = 12
+          Width = 76
+          Height = 17
+        end
+        inherited Edit1: TEdit
+          Left = 102
+          Top = 7
+          Width = 169
+          Height = 25
+        end
       end
       inherited PJCtrlDropFiles1: TPJCtrlDropFiles
         ManagedControl = frmRight
@@ -73,15 +116,15 @@ object FmMain: TFmMain
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 735
-    Height = 211
+    Width = 727
+    Height = 260
     Align = alTop
     TabOrder = 1
     object Label1: TLabel
       Left = 1
       Top = 1
-      Width = 733
-      Height = 15
+      Width = 725
+      Height = 19
       Align = alTop
       Alignment = taCenter
       AutoSize = False
@@ -89,17 +132,17 @@ object FmMain: TFmMain
       Color = clActiveCaption
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clCaptionText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
+      Font.Height = -15
+      Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
     end
     object Memo1: TMemo
       Left = 1
-      Top = 16
-      Width = 733
-      Height = 194
+      Top = 20
+      Width = 725
+      Height = 239
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -115,9 +158,9 @@ object FmMain: TFmMain
   end
   object Panel3: TPanel
     Left = 0
-    Top = 512
-    Width = 735
-    Height = 25
+    Top = 502
+    Width = 727
+    Height = 31
     Align = alBottom
     TabOrder = 2
   end
