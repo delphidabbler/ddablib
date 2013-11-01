@@ -22,20 +22,20 @@ interface
 
 // Requires Delphi 6 or later
 
-{$IF CompilerVersion >= 15.0} // Delphi 7 and higher
+{$IF CompilerVersion >= 15.0} // Delphi 7 and later
   {$WARN UNSAFE_CODE OFF}
 {$IFEND}
 {$IF CompilerVersion >= 23.0} // Delphi XE2
-  {$DEFINE RTLNAMESPACES}
+  {$DEFINE RTLNameSpaces}
 {$IFEND}
 {$IF CompilerVersion >= 24.0} // Delphi XE3
-  {$DEFINE TSCROLLSTYLEMOVED}
+  {$DEFINE TScrollStyleMoved}
 {$IFEND}
 
 
 uses
   // Delphi
-  {$IFDEF RTLNAMESPACES}
+  {$IFDEF RTLNameSpaces}
   Vcl.StdCtrls, Vcl.Controls, Vcl.ExtCtrls, System.Classes, Vcl.Dialogs,
   Vcl.Forms, Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Vcl.ActnList,
   {$ELSE}
@@ -129,7 +129,7 @@ type
     procedure FormShow(Sender: TObject);
   private
     ///  <summary>Adjusts given registry access flags to include or exclude
-    ///  64 bit regsitry access flag depending on operating system.</summary>
+    ///  64 bit registry access flag depending on operating system.</summary>
     function AdjustRegAccessFlags(const Flags: LongWord): LongWord;
     ///  <summary>Saves a setting as binary data in registry.</summary>
     ///  <param name="ID">string [in] Name of registry value.</param>
@@ -160,10 +160,10 @@ type
   TPJStringPE = class(TStringProperty)
   public
     ///  <summary>Called by IDE to get attributes of property editor.</summary>
-    ///  <remarks>Informs IDE that property editor displays a dialog box in
+    ///  <remarks>Informs IDE that property editor displays a dialogue box in
     ///  addition to standard string property editor.</remarks>
     function GetAttributes: TPropertyAttributes; override;
-    ///  <summary>Called by IDE when property editor dialog box is to be
+    ///  <summary>Called by IDE when property editor dialogue box is to be
     ///  displayed.</summary>
     procedure Edit; override;
   end;
@@ -179,13 +179,13 @@ implementation
 
 uses
   // Delphi
-  {$IFDEF RTLNAMESPACES}
+  {$IFDEF RTLNameSpaces}
   System.SysUtils, Winapi.Windows, System.Win.Registry, Vcl.ClipBrd,
   Winapi.Messages, Winapi.ShellAPI
   {$ELSE}
   SysUtils, Windows, Registry, ClipBrd, Messages, ShellAPI
   {$ENDIF}
-  {$IFDEF TSCROLLSTYLEMOVED}
+  {$IFDEF TScrollStyleMoved}
   , System.UITypes
   {$ENDIF}
   ;
