@@ -35,7 +35,7 @@ zip -j -9 %OutFile% %HelpDir%\PJDropFiles.hlp
 zip -j -9 %OutFile% %HelpDir%\PJDropFiles.als
 
 zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
-zip -j -9 %OutFile% %DocsDir%\MPL.txt
+zip -j -9 %OutFile% %DocsDir%\MPL-2.txt
 zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
 zip -j -9 %OutFile% %DocsDir%\Wiki.URL
 
