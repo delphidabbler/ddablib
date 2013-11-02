@@ -193,7 +193,7 @@
 		<span class="highlight">TPFormDropFiles</span><br />
 		Non-visual component that catches files dragged and dropped from
 		Explorer onto the form that contains the component.
-	<li>
+	</li>
 	<li>
 		<span class="highlight">TPJCtrlDropFiles</span><br />
 		Non-visual component that catches files dragged and dropped from
@@ -281,11 +281,19 @@
 </h3>
 
 <p>
-	The Drop Files Components compile with Delphi 3 and later. They have been
-	tested with Delphi 3, 4, 6, 7, 2006 and 2010 and are assumed to work with
-	other versions.
+  The components have been tested on Delphi 7 to XE4 Windows compilers (except
+  Delphi 2005) and the Delphi XE2 to XE4 64 bit compilers. The components are
+  thought to compile on compilers back to Delphi 3, but that is not guaranteed.
 </p>
 
+<p>
+  The components are for use with the VCL only: they are not compatible with
+  FireMonkey.
+</p>
+
+<p>
+  .NET and non-Windows platforms are not supported.
+</p>
 
 <p class="gototop">
 	&raquo; <a href="#contents">Contents</a>
@@ -304,40 +312,41 @@
 
 <ul>
 	<li class="first">
-		<strong><code>PJDropFiles.pas</code></strong> &ndash; Component source
+		<strong><code>PJDropFiles.pas</code></strong> &ndash; component source
 		code.
 	</li>
 	<li>
-		<strong><code>PJDropFiles.dcr</code></strong> &ndash; Component palette
+		<strong><code>PJDropFiles.dcr</code></strong> &ndash; component palette
 		glyphs.
 	</li>
 	<li>
-		<strong><code>PJDropFilesDsgn.pas</code></strong> &ndash; Component
-		property editors and component registration source code.
+		<strong><code>PJDropFilesDsgn.pas</code></strong> &ndash; property editors
+    and component registration source code.
 	</li>
 	<li>
-		<strong><code>PJDropFilesDsgn.dfm</code></strong> &ndash; Property
-		editor form.
+		<strong><code>PJDropFilesDsgn.dfm</code></strong> &ndash; property editor
+    form.
 	</li>
 	<li>
-		<code>PJDropFiles.hlp</code> &ndash; Help file that integrates with the
-		Delphi 3-7 IDE.
+		<code>PJDropFiles.hlp</code> &ndash; component help file that integrates
+    with the Delphi 3-7 OpenHelp system.
 	</li>
 	<li>
-		<code>PJDropFiles.als</code> &ndash; Keyword file required when
-		integrating the help file with Delphi 6 and 7.
+		<code>PJDropFiles.als</code> &ndash; – a-link keyword file for integration
+    with the Delphi 6 or 7 OpenHelp system.
 	</li>
 	<li>
-		<code>ReadMe.htm</code> &ndash; this read-me file.
+		<code>ReadMe.htm</code> &ndash; this file.
 	</li>
 	<li>
-		<code>ChangeLog.txt</code> &ndash; Change log.
+		<code>ChangeLog.txt</code> &ndash; component's change log.
 	</li>
 	<li>
-		<code>MPL.txt</code> &ndash; Mozilla Public License.
+		<code>MPL-2.txt</code> &ndash; the Mozilla Public License v2.0.
 	</li>
 	<li>
-		<code>Wiki.URL</code> &ndash; Short-cut to online component Wiki.
+		<code>Wiki.URL</code> &ndash; short-cut to the component's online
+    documentation.
 	</li>
 </ul>
 
@@ -363,9 +372,18 @@
 		href="http://www.delphidabbler.com/articles?article=15"
 	>this article</a>. Users of other versions of Delphi can either use the help
 	file as a stand-alone file (in which case some links won't work) or you can
-	use the <a
+	use the Drop Files Components <a
 		href="http://www.delphidabbler.com/url/dropfiles-wiki"
-	>Drop Files Components Wiki</a>.
+	>online documentation</a>.
+</p>
+
+<p class="pullout">
+  <strong>NOTE:</strong> The help file is deprecated and is no longer being
+  updated. The last update was in the v5.0.3 release. Any changes and new
+  features added since then have not been included in the help file. For up to
+  date documentation please refer to the <a
+		href="http://www.delphidabbler.com/url/dropfiles-wiki"
+	>online documentation</a>..
 </p>
 
 
@@ -384,15 +402,17 @@
 <ol class="spaced">
 	<li>
 		The main demo program exercises all three drop files components and the
-		filter components. This demo compiles with all the compilers supported
-		by the components.
+		filter components.
 	</li>
 	<li>
 		A program that demonstrates how to use <var>TPJCtrlDropFiles</var> with
-		frames. This demo requires Delphi 5 or later to compile, since frames
-		are not supported in Delphi 3 or 4.
+		frames.
 	</li>
 </ol>
+
+<p>
+  Both demo programs require Delphi 7 as a minimum.
+</p>
 
 
 <p class="gototop">
@@ -418,25 +438,9 @@
 </h2>
 
 <p>
-	This product, <em>Drop Files Components</em>,  is subject to the Mozilla
-	Public License Version 1.1 (the &quot;License&quot;). You may not use this
-	Product except in compliance with the License. You may obtain a copy of the
-	License at <a
-		href="http://www.mozilla.org/MPL/MPL-1.1"
-	>http://www.mozilla.org/MPL/MPL-1.1</a>.
-</p>
-
-<p>
-	Software distributed under the License is distributed on an &quot;AS
-	IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
-	the License for the specific language governing rights and limitations under
-	the License.
-</p>
-
-<p>
-	The Initial Developer of <em>Drop Files Components</em> is Peter D Johnson.
-	Portions created by the Initial Developer are Copyright &copy; 1998-2010
-	Peter D Johnson (www.delphidabbler.com). All Rights Reserved.
+  These components are released under the terms of the <a
+    href="http://www.mozilla.org/MPL/2.0/"
+  >Mozilla Public License v2.0</a>.
 </p>
 
 <p>
@@ -497,7 +501,7 @@
 		features.
 	</div>
 	<div class="copyright">
-		This document is copyright &copy; 2005-2010, P D Johnson, <a
+		This document is copyright &copy; 2005-2013, P D Johnson, <a
 			href="http://www.delphidabbler.com/"
 		>www.delphidabbler.com</a>
 	</div>
