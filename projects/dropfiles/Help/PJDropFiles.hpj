@@ -22,7 +22,7 @@
 ; The Initial Developer of the Original Code is Peter Johnson
 ; (http://www.delphidabbler.com/).
 ;
-; Portions created by the Initial Developer are Copyright (C) 1997-2010 Peter
+; Portions created by the Initial Developer are Copyright (C) 1997-2013 Peter
 ; Johnson. All Rights Reserved.
 ;
 ; Contributors:
@@ -36,7 +36,7 @@ HCW=0
 LCID=0x809 0x0 0x0 ;English (United Kingdom)
 REPORT=Yes
 TITLE=DelphiDabbler Drop Files Component Help
-COPYRIGHT=DelphiDabbler Drop File Components - copyright © PD Johnson 1998-2010
+COPYRIGHT=DelphiDabbler Drop File Components - copyright © PD Johnson 1998-2013
 HLP=.\PJDropFiles.hlp
 
 [FILES]
