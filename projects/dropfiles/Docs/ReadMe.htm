@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
  * This Source Code Form is subject to the terms of the Mozilla Public License,
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
@@ -16,264 +16,262 @@
 
 <head>
 
-	<title>
-		DelphiDabbler.com Drop Files Components ReadMe
-	</title>
+  <title>
+    DelphiDabbler.com Drop Files Components ReadMe
+  </title>
 
-	<style type="text/css">
-		body {
-			margin: 1em;
-			padding: 0;
-			font-family: Verdana, Arial, sans-serif;
-			font-size: 9pt;
-			line-height: 150%;
-		}
-		h1 {
-			margin: 0 0 1em 0;
-			padding: 0.5em;
-			border: 1px silver solid;
-			background-color: #eee;
-			font-size: 13pt;
-			font-weight: bold;
-			text-align: center;
-		}
-		h1 .subtitle {
-			font-style: italic;
-			color: #336;
-		}
-		h2 {
-			margin: 1em 0 0 0;
-			padding: 0;
-			padding-bottom: 6px;
-			border-bottom: 1px silver solid;
-			font-size: 11pt;
-			font-weight: bold;
-		}
-		h3 {
-			margin: 0.5em 0 0 0;
-			padding: 0;
-			font-size: 9pt;
-			font-weight: bold;
-		}
-		p {
-			margin: 0.5em 0 0 0;
-			padding: 0;
-		}
-		ul, ol {
-			margin: 0.5em 0 0 3em;
-			padding: 0;
-		}
-		ul {
-			list-style-type: square;
-		}
-		ul.spaced li,
-		ol.spaced li {
-			margin-top: 0.5em;
-		}
-		ul.spaced li,
-		ol.spaced li {
-			margin-top: 0.5em;
-		}
-		ul.unspaced li,
-		ol.unspaced li {
-			margin-top: 0;
-		}
-		ul.unspaced li.first,
-		ol.unspaced li.first {
-			margin-top: 0.5em;
-		}
-		code {
-			font-family: "Courier New", Courier, monospace;
-		}
-		a:link {
-			color: #336;
-			text-decoration: underline;
-		}
-		a:visited {
-			color: #669;
-			text-decoration: underline;
-		}
-		a:active {
-			color: #336;
-			text-decoration: underline;
-		}
-		a:hover {
-			text-decoration: underline;
-		}
-		.gototop {
-			margin: 1em 0 0 0;
-			padding: 0.3em 0 0 0;
-			text-align: center;
-			position: relative;
-			float: right;
-			font-weight: bold;
-		}
-		.pullout {
-			border-left: 8px silver solid;
-			xborder-bottom: 2px silver solid;
-			xborder-top: 2px silver solid;
-			background-color: #eee;
-			margin: 0.5em 0 0 0;
-			padding: 0.25em 0.5em;
-			font-style: italic;
-		}
-		.indent {
-			margin-left: 3em;
-		}
-		.highlight {
-			color: #336;
-			font-style: italic;
-			font-weight: bold;
-		}
-		.endnotes {
-			margin: 1.5em 0 0 0;
-			padding: 1em 0 0 0;
-			border-top: 1px silver solid;
-		}
-		.comments {
-			font-style: italic;
-		}
-		.copyright,
-		.copyright a:link,
-		.copyright a:visited,
-		.copyright a:active {
-			margin: 1em 0 0 0;
-			color: gray;
-			font-size: 8pt;
-			text-align: right;
-		}
-	</style>
+  <style type="text/css">
+    body {
+      margin: 1em;
+      padding: 0;
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 9pt;
+      line-height: 150%;
+    }
+    h1 {
+      margin: 0 0 1em 0;
+      padding: 0.5em;
+      border: 1px silver solid;
+      background-color: #eee;
+      font-size: 13pt;
+      font-weight: bold;
+      text-align: center;
+    }
+    h1 .subtitle {
+      font-style: italic;
+      color: #336;
+    }
+    h2 {
+      margin: 1em 0 0 0;
+      padding: 0;
+      padding-bottom: 6px;
+      border-bottom: 1px silver solid;
+      font-size: 11pt;
+      font-weight: bold;
+    }
+    h3 {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+      font-size: 9pt;
+      font-weight: bold;
+    }
+    p {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+    }
+    ul, ol {
+      margin: 0.5em 0 0 3em;
+      padding: 0;
+    }
+    ul {
+      list-style-type: square;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.unspaced li,
+    ol.unspaced li {
+      margin-top: 0;
+    }
+    ul.unspaced li.first,
+    ol.unspaced li.first {
+      margin-top: 0.5em;
+    }
+    code {
+      font-family: "Courier New", Courier, monospace;
+    }
+    a:link {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #669;
+      text-decoration: underline;
+    }
+    a:active {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .gototop {
+      margin: 1em 0 0 0;
+      padding: 0.3em 0 0 0;
+      text-align: center;
+      position: relative;
+      float: right;
+      font-weight: bold;
+    }
+    .pullout {
+      border-left: 8px silver solid;
+      xborder-bottom: 2px silver solid;
+      xborder-top: 2px silver solid;
+      background-color: #eee;
+      margin: 0.5em 0 0 0;
+      padding: 0.25em 0.5em;
+      font-style: italic;
+    }
+    .indent {
+      margin-left: 3em;
+    }
+    .highlight {
+      color: #336;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .endnotes {
+      margin: 1.5em 0 0 0;
+      padding: 1em 0 0 0;
+      border-top: 1px silver solid;
+    }
+    .comments {
+      font-style: italic;
+    }
+    .copyright,
+    .copyright a:link,
+    .copyright a:visited,
+    .copyright a:active {
+      margin: 1em 0 0 0;
+      color: gray;
+      font-size: 8pt;
+      text-align: right;
+    }
+  </style>
 
 </head>
 
 <body>
 
 <h1>
-	Drop Files Components<br />
-	<span class="subtitle">ReadMe</span>
+  Drop Files Components<br />
+  <span class="subtitle">ReadMe</span>
 </h1>
 
 
 <h2 id="contents">
-	Contents
+  Contents
 </h2>
 
 <ul>
-	<li><a href="#desc">Description</a></li>
-	<li><a href="#installation">Installation</a></li>
-	<li><a href="#demos">Demo Programs</a></li>
-	<li><a href="#update">Update History</a></li>
-	<li><a href="#license">License and Disclaimer</a></li>
-	<li><a href="#bugs">Bugs and Feature Requests</a></li>
-	<li><a href="#author">About the Author</a></li>
+  <li><a href="#desc">Description</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#demos">Demo Programs</a></li>
+  <li><a href="#update">Update History</a></li>
+  <li><a href="#license">License and Disclaimer</a></li>
+  <li><a href="#bugs">Bugs and Feature Requests</a></li>
+  <li><a href="#author">About the Author</a></li>
 </ul>
 
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="desc">
-	Description
+  Description
 </h2>
 
 <p>
-	Three components are supplied that support drag and drop from Windows
-	Explorer along with subsidiary components that can filter dropped files. The
-	components are:
+  Three components are supplied that support drag and drop from Windows Explorer
+  along with subsidiary components that can filter dropped files. The components
+  are:
 </p>
 
 <ul class="spaced">
-	<li>
-		<span class="highlight">TPJDropFiles</span><br />
-		Container control that catches files dragged and dropped onto its client
-		area or the client area of child controls.
-	</li>
-	<li>
-		<span class="highlight">TPFormDropFiles</span><br />
-		Non-visual component that catches files dragged and dropped from
-		Explorer onto the form that contains the component.
-	</li>
-	<li>
-		<span class="highlight">TPJCtrlDropFiles</span><br />
-		Non-visual component that catches files dragged and dropped from
-		Explorer onto an associated control.
-	</li>
-	<li>
-		<span class="highlight">TPJExtFileFilter</span><br />
-		File filter component that filters files according to their extension.
-	</li>
-	<li>
-		<span class="highlight">TPJWildCardFileFilter</span><br />
-		File filter component that filters files according to a DOS-style wild
-		card.
-	</li>
-	<li>
-		<span class="highlight">TPJFileFilter</span><br />
-		An abstract base class for file filter components.
-	</li>
+  <li>
+    <span class="highlight">TPJDropFiles</span><br />
+    Container control that catches files dragged and dropped onto its client
+    area or the client area of child controls.
+  </li>
+  <li>
+    <span class="highlight">TPFormDropFiles</span><br />
+    Non-visual component that catches files dragged and dropped from Explorer
+    onto the form that contains the component.
+  </li>
+  <li>
+    <span class="highlight">TPJCtrlDropFiles</span><br />
+    Non-visual component that catches files dragged and dropped from Explorer
+    onto an associated control.
+  </li>
+  <li>
+    <span class="highlight">TPJExtFileFilter</span><br />
+    File filter component that filters files according to their extension.
+  </li>
+  <li>
+    <span class="highlight">TPJWildCardFileFilter</span><br />
+    File filter component that filters files according to a DOS-style wild card.
+  </li>
+  <li>
+    <span class="highlight">TPJFileFilter</span><br />
+    An abstract base class for file filter components.
+  </li>
 </ul>
 
 <p>
-	Some design time assistance is provided by component and property editors.
+  Some design time assistance is provided by component and property editors.
 </p>
 
 <p>
-	Key features of the drop files components are:
+  Key features of the drop files components are:
 </p>
 
 <ul class="spaced">
-	<li>
-		An <var>OnDropFiles</var> event is triggered when files are dropped.
-	</li>
-	<li>
-		The names of dropped files are made available through the
-		<var>Files[]</var> array property. For convenience, the name of the
-		first file is also stored in the <var>FileName</var> property.
-	</li>
-	<li>
-		The list of dropped files can be configured to include only files, only
-		folders or all files and folders.
-	</li>
-	<li>
-		Dropped folders can be recursed so that all the files and sub-folders in
-		each of the dropped folders are listed.
-	</li>
-	<li>
-		Filters can be applied to the dropped files and folders. This is done in
-		one of two ways:
-		<ul class="unspaced">
-			<li class="first">
-				By handling the <var>OnFileFilter</var> event and deciding which
-				files and folders to pass through the filter.
-			</li>
-			<li>
-				By linking the drop file component to a special file filter
-				component, derived from the abstract <var>TPJFileFilter</var>.
-				In this case the dropped files are automatically filtered by the
-				filter component. Two filter components are provided:
-				<var>TPJExtFileFilter</var> that filters according to file
-				extensions and <var>TPJWildCardFileFilter</var> that filters
-				using DOS-style wild-cards. Developers can create further filter
-				components by deriving from <var>TPJFileFilter</var>.
-			</li>
-		</ul>
-	</li>
-	<li>
-		The mouse co-ordinates where the files were dropped can be retrieved, as
-		can a reference to any control under the mouse cursor at the time.
-	</li>
-	<li>
-		The <var>OnBeforeDrop</var> event can be used to do pre-processing
-		before the files are actually dropped.
-	</li>
-	<li>
-		The <var>IsFolder[]</var> array property informs if an equivalent item
-		in the <var>Files[]</var> property is a file or a folder.
-	</li>
-	<li>
-		The owning window can be brought to the front when files are dropped.
-	</li>
+  <li>
+    An <var>OnDropFiles</var> event is triggered when files are dropped.
+  </li>
+  <li>
+    The names of dropped files are made available through the <var>Files[]</var>
+    array property. For convenience, the name of the first file is also stored
+    in the <var>FileName</var> property.
+  </li>
+  <li>
+    The list of dropped files can be configured to include only files, only
+    folders or all files and folders.
+  </li>
+  <li>
+    Dropped folders can be recursed so that all the files and sub-folders in
+    each of the dropped folders are listed.
+  </li>
+  <li>
+    Filters can be applied to the dropped files and folders. This is done in one
+    of two ways:
+    <ul class="unspaced">
+      <li class="first">
+        By handling the <var>OnFileFilter</var> event and deciding which files
+        and folders to pass through the filter.
+      </li>
+      <li>
+        By linking the drop file component to a special file filter component,
+        derived from the abstract <var>TPJFileFilter</var>. In this case the
+        dropped files are automatically filtered by the filter component. Two
+        filter components are provided: <var>TPJExtFileFilter</var> that filters
+        according to file extensions and <var>TPJWildCardFileFilter</var> that
+        filters using DOS-style wild-cards. Developers can create further filter
+        components by deriving from <var>TPJFileFilter</var>.
+      </li>
+    </ul>
+  </li>
+  <li>
+    The mouse co-ordinates where the files were dropped can be retrieved, as can
+    a reference to any control under the mouse cursor at the time.
+  </li>
+  <li>
+    The <var>OnBeforeDrop</var> event can be used to do pre-processing before
+    the files are actually dropped.
+  </li>
+  <li>
+    The <var>IsFolder[]</var> array property informs if an equivalent item in
+    the <var>Files[]</var> property is a file or a folder.
+  </li>
+  <li>
+    The owning window can be brought to the front when files are dropped.
+  </li>
 </ul>
 
 <h3>
@@ -296,85 +294,84 @@
 </p>
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="installation">
-	Installation
+  Installation
 </h2>
 
 <p>
-	The Drop Files Components, their documentation and the demo program are
-	supplied in a zip file. Before installing you need to extract all the files
-	from the zip file, preserving the directory structure. The following files
-	will be extracted:
+  The Drop Files Components, their documentation and the demo program are
+  supplied in a zip file. Before installing you need to extract all the files
+  from the zip file, preserving the directory structure. The following files
+  will be extracted:
 </p>
 
 <ul>
-	<li class="first">
-		<strong><code>PJDropFiles.pas</code></strong> &ndash; component source
-		code.
-	</li>
-	<li>
-		<strong><code>PJDropFiles.dcr</code></strong> &ndash; component palette
-		glyphs.
-	</li>
-	<li>
-		<strong><code>PJDropFilesDsgn.pas</code></strong> &ndash; property editors
+  <li class="first">
+    <strong><code>PJDropFiles.pas</code></strong> &ndash; component source code.
+  </li>
+  <li>
+    <strong><code>PJDropFiles.dcr</code></strong> &ndash; component palette
+    glyphs.
+  </li>
+  <li>
+    <strong><code>PJDropFilesDsgn.pas</code></strong> &ndash; property editors
     and component registration source code.
-	</li>
-	<li>
-		<strong><code>PJDropFilesDsgn.dfm</code></strong> &ndash; property editor
+  </li>
+  <li>
+    <strong><code>PJDropFilesDsgn.dfm</code></strong> &ndash; property editor
     form.
-	</li>
-	<li>
-		<code>PJDropFiles.hlp</code> &ndash; component help file that integrates
+  </li>
+  <li>
+    <code>PJDropFiles.hlp</code> &ndash; component help file that integrates
     with the Delphi 3-7 OpenHelp system.
-	</li>
-	<li>
-		<code>PJDropFiles.als</code> &ndash; – a-link keyword file for integration
+  </li>
+  <li>
+    <code>PJDropFiles.als</code> &ndash; – a-link keyword file for integration
     with the Delphi 6 or 7 OpenHelp system.
-	</li>
-	<li>
-		<code>ReadMe.htm</code> &ndash; this file.
-	</li>
-	<li>
-		<code>ChangeLog.txt</code> &ndash; component's change log.
-	</li>
-	<li>
-		<code>MPL-2.txt</code> &ndash; the Mozilla Public License v2.0.
-	</li>
-	<li>
-		<code>Documentation.URL</code> &ndash; short-cut to the component's online
+  </li>
+  <li>
+    <code>ReadMe.htm</code> &ndash; this file.
+  </li>
+  <li>
+    <code>ChangeLog.txt</code> &ndash; component's change log.
+  </li>
+  <li>
+    <code>MPL-2.txt</code> &ndash; the Mozilla Public License v2.0.
+  </li>
+  <li>
+    <code>Documentation.URL</code> &ndash; short-cut to the component's online
     documentation.
-	</li>
+  </li>
 </ul>
 
 <p>
-	In addition to the above files you will find the source code of <a
-		href="#demos"
-	>two demo projects</a> the <code>Demo\1</code> and <code>Demo\2</code>
-	sub-directories.
+  In addition to the above files you will find the source code of <a
+    href="#demos"
+  >two demo projects</a> the <code>Demo\1</code> and <code>Demo\2</code>
+  sub-directories.
 </p>
 
 <p>
-	You can now install the components into the Delphi IDE. To do this, the
-	files <code>PJDropFiles.pas</code>, <code>PJDropFiles.dcr</code>,
-	<code>PJDropFilesDsgn.pas</code> and <code>PJDropFilesDsgn.dfm</code> should
-	be added to a design time package. If you need help doing this <a
-		href="http://www.delphidabbler.com/url/install-comp"
-	>see here</a>.
+  You can now install the components into the Delphi IDE. To do this, the files
+  <code>PJDropFiles.pas</code>, <code>PJDropFiles.dcr</code>,
+  <code>PJDropFilesDsgn.pas</code> and <code>PJDropFilesDsgn.dfm</code> should
+  be added to a design time package. If you need help doing this <a
+    href="http://www.delphidabbler.com/url/install-comp"
+  >see here</a>.
 </p>
 
 <p>
-	Note that the help file included in the download can only integrate with the
-	IDE in Delphi 3-7. For information on how to do this, see <a
-		href="http://www.delphidabbler.com/articles?article=15"
-	>this article</a>. Users of other versions of Delphi can either use the help
-	file as a stand-alone file (in which case some links won't work) or you can
-	use the Drop Files Components <a
-		href="http://www.delphidabbler.com/url/dropfiles-docs"
-	>online documentation</a>.
+  Note that the help file included in the download can only integrate with the
+  IDE in Delphi 3-7. For information on how to do this, see <a
+    href="http://www.delphidabbler.com/articles?article=15"
+  >this article</a>. Users of other versions of Delphi can either use the help
+  file as a stand-alone file (in which case some links won't work) or you can
+  use the Drop Files Components <a
+    href="http://www.delphidabbler.com/url/dropfiles-docs"
+  >online documentation</a>.
 </p>
 
 <p class="pullout">
@@ -382,32 +379,32 @@
   updated. The last update was in the v5.0.3 release. Any changes and new
   features added since then have not been included in the help file. For up to
   date documentation please refer to the <a
-		href="http://www.delphidabbler.com/url/dropfiles-docs"
-	>online documentation</a>.
+    href="http://www.delphidabbler.com/url/dropfiles-docs"
+  >online documentation</a>.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="demos">
-	Demo programs
+  Demo programs
 </h2>
 
 <p>
-	The source code for two demo programs is included in the download:
+  The source code for two demo programs is included in the download:
 </p>
 
 <ol class="spaced">
-	<li>
-		The main demo program exercises all three drop files components and the
-		filter components.
-	</li>
-	<li>
-		A program that demonstrates how to use <var>TPJCtrlDropFiles</var> with
-		frames.
-	</li>
+  <li>
+    The main demo program exercises all three drop files components and the
+    filter components.
+  </li>
+  <li>
+    A program that demonstrates how to use <var>TPJCtrlDropFiles</var> with
+    frames.
+  </li>
 </ol>
 
 <p>
@@ -416,25 +413,25 @@
 
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="update">
-	Update History
+  Update History
 </h2>
 
 <p>
-	A complete change log is provided in a text file that is included in the
-	download.
+  A complete change log is provided in a text file that is included in the
+  download.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="license">
-	License and Disclaimer
+  License and Disclaimer
 </h2>
 
 <p>
@@ -444,67 +441,66 @@
 </p>
 
 <p>
-	All relevant trademarks are acknowledged.
+  All relevant trademarks are acknowledged.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="bugs">
-	Bugs and Feature Requests
+  Bugs and Feature Requests
 </h2>
 
 <p>
-	Bugs can be reported or new features requested via the <a
-		href="http://www.delphidabbler.com/url/ddlib-issues"
-	>Issue Tracker</a>.
+  Bugs can be reported or new features requested via the <a
+    href="http://www.delphidabbler.com/url/ddlib-issues"
+  >Issue Tracker</a>.
 </p>
 
 <p>
-	If no similar report or request has been recorded already, use the <em>New
-	Issue</em> link to add a new issue. Please select the most appropriate
-	template from the <em>Templates</em> drop down list.
+  If no similar report or request has been recorded already, use the <em>New
+  Issue</em> link to add a new issue. Please select the most appropriate
+  template from the <em>Templates</em> drop down list.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#contents">Contents</a>
+  &raquo; <a href="#contents">Contents</a>
 </p>
 
 <h2 id="author">
-	About the Author
+  About the Author
 </h2>
 
 <p>
-	I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-	Wales, UK, writing write mainly in Delphi. My programs and code are available
-	from <a
-		href="http://www.delphidabbler.com/"
-	>http://www.delphidabbler.com/</a>.
+  I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
+  Wales, UK, writing write mainly in Delphi. My programs and code are available
+  from <a
+    href="http://www.delphidabbler.com/"
+  >http://www.delphidabbler.com/</a>.
 </p>
 
 <p>
-	I can be <a
-		href="http://www.delphidabbler.com/contact"
-	>contacted via the website</a>.
+  I can be <a
+    href="http://www.delphidabbler.com/contact"
+  >contacted via the website</a>.
 </p>
 
 
 <div class="endnotes">
-	<div class="comments">
-		Please <a
-			href="http://www.delphidabbler.com/contact"
-		>let me know</a> if you have any comments about the component, but
-		please use the Issue Tracker noted above to report bugs and request new
-		features.
-	</div>
-	<div class="copyright">
-		This document is copyright &copy; 2005-2013, P D Johnson, <a
-			href="http://www.delphidabbler.com/"
-		>www.delphidabbler.com</a>
-	</div>
+  <div class="comments">
+    Please <a
+      href="http://www.delphidabbler.com/contact"
+    >let me know</a> if you have any comments about the component, but please
+    use the Issue Tracker noted above to report bugs and request new features.
+  </div>
+  <div class="copyright">
+    This document is copyright &copy; 2005-2013, P D Johnson, <a
+      href="http://www.delphidabbler.com/"
+    >www.delphidabbler.com</a>
+  </div>
 </div>
 
 </body>
