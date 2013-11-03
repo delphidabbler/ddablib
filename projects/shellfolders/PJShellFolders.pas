@@ -23,7 +23,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2001-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2001-2013 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -43,6 +43,7 @@ interface
 // Determine compiler
 {$UNDEF DELPHI6ANDUP}
 {$UNDEF DELPHI7ANDUP}
+{$UNDEF RTLNameSpaces}      // Don't qualify RTL units names with namespaces
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
     {$DEFINE DELPHI6ANDUP}
@@ -52,10 +53,14 @@ interface
     {$WARN UNSAFE_CODE OFF}
     {$WARN UNSAFE_CAST OFF}
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE RTLNameSpaces}
+  {$IFEND}
 {$ENDIF}
 
 
 uses
+  {$IFNDEF RTLNameSpaces}
   // Delphi
   SysUtils, Windows, Classes, Controls, Messages, ShlObj
   {$IFDEF DELPHI6ANDUP}
@@ -63,6 +68,10 @@ uses
   , SHFolder
   {$ENDIF}
   ;
+  {$ELSE}
+  System.SysUtils, Winapi.Windows, System.Classes, Vcl.Controls,
+  Winapi.Messages, Winapi.ShlObj, Winapi.SHFolder;
+  {$ENDIF}
 
 
 {$IFNDEF DELPHI6ANDUP}
@@ -583,8 +592,12 @@ implementation
 
 
 uses
+  {$IFNDEF RTLNameSpaces}
   // Delphi
   ActiveX, Forms, ShellAPI;
+  {$ELSE}
+  Winapi.ActiveX, Vcl.Forms, Winapi.ShellAPI;
+  {$ENDIF}
 
 
 { Error handling }
@@ -1057,10 +1070,14 @@ begin
   // Create window procedure to be used for sub classing browse dlg box
   if not (csDesigning in ComponentState) then
     // call MakeObjectInstance from appropriate unit for compiler
+    {$IFDEF RTLNameSpaces}
+    fNewBrowseWndProc := System.Classes.MakeObjectInstance(BrowseWndProc);
+    {$ELSE}
     {$IFDEF DELPHI6ANDUP}
     fNewBrowseWndProc := Classes.MakeObjectInstance(BrowseWndProc);
     {$ELSE}
     fNewBrowseWndProc := Forms.MakeObjectInstance(BrowseWndProc);
+    {$ENDIF}
     {$ENDIF}
 end;
 
@@ -1071,10 +1088,14 @@ destructor TPJBrowseDialog.Destroy;
 begin
   if Assigned(fNewBrowseWndProc) then
     // call FreeObjectInstance from appropriate unit for compiler
+    {$IFDEF RTLNameSpaces}
+    System.Classes.FreeObjectInstance(fNewBrowseWndProc);
+    {$ELSE}
     {$IFDEF DELPHI6ANDUP}
     Classes.FreeObjectInstance(fNewBrowseWndProc);
     {$ELSE}
     Forms.FreeObjectInstance(fNewBrowseWndProc);
+    {$ENDIF}
     {$ENDIF}
   inherited Destroy;
 end;
@@ -1242,6 +1263,9 @@ procedure TPJBrowseDialog.IncludeHelpButton;
     GetWindowRect(Hwnd, ScreenRect);
     // Get top left corner of window in (parent's coordinates)
     TopLeft := ScreenRect.TopLeft;
+    {$IFDEF RTLNameSpaces}
+    Winapi.
+    {$ENDIF}
     Windows.ScreenToClient(HParentWnd, TopLeft);
     // Calculate the required value for Left, Top, Width and Height
     if Assigned(PTop) then PTop^ := TopLeft.Y;

@@ -24,7 +24,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2003-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2003-2013 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -43,16 +43,24 @@ interface
 
 // Determine compiler
 {$UNDEF DELPHI6ANDUP}
+{$UNDEF RTLNameSpaces}      // Don't qualify RTL units names with namespaces
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
     {$DEFINE DELPHI6ANDUP}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE RTLNameSpaces}
   {$IFEND}
 {$ENDIF}
 
 
 uses
+  {$IFNDEF RTLNameSpaces}
   // Delphi
   Classes,
+  {$ELSE}
+  System.Classes,
+  {$ENDIF}
   {$IFDEF DELPHI6ANDUP}
   DesignIntf, DesignEditors;
   {$ELSE}
@@ -89,8 +97,12 @@ implementation
 
 
 uses
+  {$IFNDEF RTLNameSpaces}
   // Delphi
   SysUtils, ShlObj,
+  {$ELSE}
+  System.SysUtils, Winapi.ShlObj,
+  {$ENDIF}
   // Project
   PJShellFolders;
 
