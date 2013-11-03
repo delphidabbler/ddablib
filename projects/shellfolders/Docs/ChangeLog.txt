@@ -16,10 +16,10 @@ Release v2.3 of 29 January 2010
   - New display options for hiding "make new folder" button, displaying UA hints and including edit box to use to enter folder names.
   - New events: OnValidationFailed, for when entry in edit box is not valid and OnHelp triggered when help requested to provide custom help handling.
   - New HelpType and HelpKeywords properties (compiled in for Delphi 6 and later only).
-  - Modified dialog initialisation to ensure OnSelectChangeXXX events triggered for default selection.
+  - Modified dialogue initialisation to ensure OnSelectChangeXXX events triggered for default selection.
 + Updated demo program to demonstrate new options and and OnValidationFailed event.
 + Improved checks for valid special folder IDs to allow for use of CSIDL_FLAG_CREATE mask.
-+ Refactored code that frees PIDLs
++ Re-factored code that frees PIDLs
 + Added new CSIDL_FLAG_ and BIF_ constants.
 + Updated help file and other documentation.
 
@@ -32,17 +32,17 @@ Release v2.2.5 of 27 January 2010
 + Included copy of MPL in release.
 
 Release v2.2.4 of 03 July 2007
-+ Removed CSIDL_ constants that were provisioanally slated for Windows Vista but were removed from MSDN documentation.
++ Removed CSIDL_ constants that were provisionally slated for Windows Vista but were removed from MSDN documentation.
 + Changed tests for valid folder ids to ignore any CSIDL_FLAG_ values that may have been included with the folder id.
 + Added various additional CSIDL_FLAG_ constants.
 + Changed TPJBrowseDialog.Options property to permit any combination of values. Certain options are now ignored when used in combination with others.
 + Added TPJBrowseDlgOption enumeration that provides basis of TPJBrowseDlgOptions set. Previously enumeration was defined in set declaration.
 + Changed to always initialise COM regardless of whether code used to display new style browser for folder. Previous code that selectively initialised COM was buggy.
-+ Refactored some duplicated code.
-+ Fixed code that enables / disables browser dialog box OK button to work with new style dialog.
-+ Made help button caption localisable.
++ Re-factored some duplicated code.
++ Fixed code that enables / disables browser dialogue box OK button to work with new style dialogue.
++ Made help button caption able to be localised.
 + Updated help file re changes to TPJBrowseDialog.Options property.
-+ Updated demo program, simplifying browse dialog customisation and giving access to all browse dialog options.
++ Updated demo program, simplifying browse dialogue customisation and giving access to all browse dialogue options.
 
 Release v2.2.3 of 12 April 2006
 + Added new CSIDL_ special folder and folder creation constants.
@@ -56,13 +56,13 @@ Release v2.2.1 of 09 January 2005
 + Fixed bug in shell folder ID property editor that was preventing user from changing the value of properties at design time.
 
 Release v2.2 of 22 August 2004
-+ Added support for new dialog style enabled via the Options property.
++ Added support for new dialogue style enabled via the Options property.
 + Provided default specifier of 0 for HelpContext property.
 + Added further special folder identifiers.
-+ Updated help file re new TPJBrowseFolder new dialog style option and added additional "A" keywords to improve Delphi help integration.
++ Updated help file re new TPJBrowseFolder new dialogue style option and added additional "A" keywords to improve Delphi help integration.
 + Updated text of Help about box.
 + Added new .als file for integrating with Delphi 6 and 7 OpenHelp system.
-+ Added code to exercise new style dialog box to demo program.
++ Added code to exercise new style dialogue box to demo program.
 + Changed to Mozilla public license.
 
 Release v2.1 of 29 July 2003
