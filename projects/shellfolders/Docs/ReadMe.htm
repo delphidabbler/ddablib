@@ -166,7 +166,7 @@
     <a href="#installation">Installation</a>
   </li>
   <li>
-    <a href="#demo">Demo Programs</a>
+    <a href="#demo">Demo Program</a>
   </li>
   <li>
     <a href="#update">Update History</a>
@@ -222,13 +222,23 @@
 </h3>
 
 <p>
-  The Shell Folders Unit compiles with Delphi 4 and later. Various versions have
-  been tested with Delphi 4, 6, 7, 2006 and 2010.
+   The <em>Shell Folders Unit</em> has been tested on Delphi 7 to XE4 Windows
+   compilers (except Delphi 2005) and the Delphi XE2 to XE4 64 bit compilers.
+   The unit is thought to compile on compilers back to Delphi 4, but that is not
+   guaranteed.
+</p>
+
+<p>
+  The unit is use with the VCL only: it is not compatible with FireMonkey.
+</p>
+
+</p>
+  .NET and non-Windows platforms are not supported.
 </p>
 
 <p>
   Some features require Delphi 6 and later and are not implemented when compiled
-  with Delphi 4 and 5.
+  with earlier compilers.
 </p>
 
 
@@ -241,44 +251,45 @@
 </h2>
 
 <p>
-  The Shell Folders Unit and components, the property editors, documentation and
-  demo program are supplied in a zip file. Before installing you need to extract
-  all the files from the zip file, preserving the directory structure. The
-  following files will be extracted:
+  The Shell Folders Unit, its components and associated property editors,
+  documentation and demo program are supplied in a zip file. Before installing
+  you need to extract all the files from the zip file, preserving the directory
+  structure. The following files will be extracted:
 </p>
 
 <ul>
   <li>
-    <strong><code>PJShellFolders.pas</code></strong> &ndash; Classes, routines
+    <strong><code>PJShellFolders.pas</code></strong> &ndash; classes, routines
     and component source code.
   </li>
   <li>
-    <strong><code>PJShellFolders.dcr</code></strong> &ndash; Component palette
+    <strong><code>PJShellFolders.dcr</code></strong> &ndash; component palette
     glyphs.
   </li>
   <li>
-    <strong><code>PJShellFoldersDsgn.pas</code></strong> &ndash; Component
-    registration and property editors source code.
+    <strong><code>PJShellFoldersDsgn.pas</code></strong> &ndash; property
+    editors and component registration source code.
   </li>
   <li>
-    <code>PJShellFolders.hlp</code> &ndash; Help file that integrates with the
-    Delphi 3 to 7 IDE.
+    <code>PJShellFolders.hlp</code> &ndash; component help file that integrates
+    with the Delphi 3-7 OpenHelp system.
   </li>
   <li>
-    <code>PJShellFolders.als</code> &ndash; Keyword file required when
-    integrating the help file with Delphi 6 and 7.
+    <code>PJShellFolders.als</code> &ndash; a-link keyword file for integration
+    with the Delphi 3-7 OpenHelp system.
   </li>
   <li>
-    <code>ReadMe.htm</code> &ndash; This read-me file.
+    <code>ReadMe.htm</code> &ndash; this file.
   </li>
   <li>
-    <code>ChangeLog.txt</code> &ndash; Change log.
+    <code>ChangeLog.txt</code> &ndash; change log.
   </li>
   <li>
-    <code>MPL.txt</code> &ndash; Mozilla Public License.
+    <code>MPL-2.txt</code> &ndash; the Mozilla Public License v2.0.
   </li>
   <li>
-    <code>Wiki.URL</code> &ndash; Short-cut to online component Wiki.
+    <code>Documentation.URL</code> &ndash; short-cut to the Shell Folders Unit's
+    online documentation.
   </li>
 </ul>
 
@@ -298,14 +309,23 @@
 </p>
 
 <p>
-  Note that the help file included in the download can only integrate with the
-  IDE in Delphi 3-7. For information on how to do this, see <a
+  The help file included in the download can only integrate with the IDE in
+  Delphi 3-7. For information on how to do this, see <a
     href="http://www.delphidabbler.com/articles?article=15"
   >this article</a>. Users of other versions of Delphi can either use the help
   file as a stand-alone file (in which case some links won't work) or you can
-  use the <a
-    href="http://www.delphidabbler.com/url/shellfolders-wiki"
-  >Shell Folders Unit Wiki</a>.
+  use the Shell Folders Unit <a
+    href="http://www.delphidabbler.com/url/shellfolders-docs"
+  >online documentation</a>.
+</p>
+
+<p class="pullout">
+  <strong>NOTE:</strong> The help file is deprecated and is no longer being
+  updated. The last update was in the v2.3.1 release. Any changes and new
+  features added since then have not been included in the help file. For up to
+  date documentation please refer to the <a
+		href="http://www.delphidabbler.com/url/dropfiles-docs"
+	>online documentation</a>.
 </p>
 
 
@@ -321,6 +341,10 @@
   A demo program with associated explanatory notes is included in the download.
   The demo lists and provides information about all the special shell folders
   supported by the unit.
+</p>
+
+<p>
+  Delphi 7 or later is required to compile the demo, which is 64 bit compatible.
 </p>
 
 
@@ -347,29 +371,13 @@
 </h2>
 
 <p>
-  This product, <em>Shell Folders Unit</em>, is subject to the Mozilla Public
-  License Version 1.1 (the &quot;License&quot;). You may not use this Product
-  except in compliance with the License. You may obtain a copy of the License at
-  <a
-    href="http://www.mozilla.org/MPL/MPL-1.1"
-  >http://www.mozilla.org/MPL/MPL-1.1</a>.
+  The <em>Shell Folders Unit</em> is released under the terms of the <a
+    href="http://www.mozilla.org/MPL/2.0/"
+  >Mozilla Public License v2.0</a>.
 </p>
 
 <p>
-  Software distributed under the License is distributed on an &quot;AS IS&quot;
-  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
-  License for the specific language governing rights and limitations under the
-  License.
-</p>
-
-<p>
-  The Initial Developer of <em>Shell Folders Unit</em> is Peter D Johnson.
-  Portions created by the Initial Developer are Copyright &copy; 2001-2010 Peter
-  D Johnson (www.delphidabbler.com). All Rights  Reserved.
-</p>
-
-<p>
-  Contributor(s) to this project:
+  Thanks to the following who have contributed to this project:
 </p>
 
 <p class="indent">
@@ -434,7 +442,7 @@
     use the Issue Tracker noted above to report bugs and request new features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2005-2010, P D Johnson, <a
+    This document is copyright &copy; 2005-2013, P D Johnson, <a
       href="http://www.delphidabbler.com/"
     >www.delphidabbler.com</a>
   </div>
