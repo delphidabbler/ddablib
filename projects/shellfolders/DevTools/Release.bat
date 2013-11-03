@@ -1,7 +1,8 @@
 @rem ---------------------------------------------------------------------------
 @rem Script used to create zip file containing Shell Folders Unit release
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2007-2010
+@rem Any copyright in this file is dedicated to the Public Domain.
+@rem http://creativecommons.org/publicdomain/zero/1.0/
 @rem
 @rem $Rev$
 @rem $Date$
