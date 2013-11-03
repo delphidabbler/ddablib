@@ -159,8 +159,10 @@
 </p>
 
 <p>
-	The program should compile with all Win32 Ansi and Unicode Delphis from v4
-	and has been tested on Delphi 4, 6, 7, 2006 and 2010.
+	The project requires Delphi 7 as a minimum and should compile on all later
+  compilers. Both 32 bit and 64 bit Windows targets are supported when compiling
+  with Delphi XE2 or later. The project has been tested with Delphi 7, 2006,
+  2007, 2009, 2010, XE, XE2, XE3 and XE4.
 </p>
 
 
@@ -170,10 +172,21 @@
 
 <p>
 	The demo project is provided in the same zip file as the <em>Shell Folders
-	Unit</em>. Ensure the unit's components are installed before trying to
-	compile this demo. Copy the code from the <code>Demo</code> subfolder of
-	the zip file to some suitable location on your hard drive then open the
-	<code>ShellFolderDemo.dpr</code> project in Delphi.
+	Unit</em>.
+</p>
+
+<p>
+  The Shell Folder components must be installed before trying to compile this
+  demo. If compiling for a 64 bit Windows target ensure that the components have
+  been built into a 64 bit package.
+</p>
+
+<p>
+  Copy the code from the <code>Demo</code> sub-folder of the zip file to some
+  suitable location on your hard drive then open the
+  <code>ShellFolderDemo.dpr</code> project in Delphi. If the compiler can't
+  find the component's .dcu file place the directory where you installed the
+  components on your compiler's search path.
 </p>
 
 
@@ -210,66 +223,67 @@
 <ul class="spaced">
 	<li>
 		<em>Browse selected folder</em> button:<br />
-		Clicking this button displays the <em>Browse for Folder</em> dialog box
+		Clicking this button displays the <em>Browse for Folder</em> dialogue box
 		with the selected special folder as the root in the display. Click the
-		button to experiment with the dialog, the behaviour of which changes
+		button to experiment with the dialogue, the behaviour of which changes
 		according to the state of other control. If the selected folder is not
-		supported by the operating system the button is disabled. The dialog can
-		also be displayed by double clicking the folder's entry in the display. 
+		supported by the operating system the button is disabled. The dialogue can
+		also be displayed by double clicking the folder's entry in the display.
 	</li>
 	<li>
 		<em>Dialog Box Options</em> group box:<br />
 		This group box contains check boxes that enable and disable associated
-		options in the browse dialog box's <var>Options</var> properties, as
+		options in the browse dialogue box's <var>Options</var> properties, as
 		follows:
 		<ul>
 			<li>
 				<em>Show Help</em>:<br />
-				Displays a help button in the dialog box. The button will be
-				disabled because no help context is assigned to the dialog box
+				Displays a help button in the dialogue box. The button will be
+				disabled because no help context is assigned to the dialogue box
 				&ndash; assigning a non-zero help context would enable the
 				button. No help button is displayed if <em>New Style Dialog</em>
 				is checked.
 			</li>
 			<li>
 				<em>Context Help</em>:<br />
-				Displays a &quot;<strong>?</strong>&quot; button in the dialog
+				Displays a &quot;<strong>?</strong>&quot; button in the dialogue
 				box title and enables context sensitive help.
-				<strong>Note:</strong> only works on some operating systems.
+				<strong>Note:</strong> this only works on some operating systems.
 			</li>
 			<li>
 				<em>Status Text</em>:<br />
-				Displays status text in the dialog box. The status text is set
-				in the demo's OnSelChange and OnSelChangeEx event handlers.
-				Status text is not displayed if <em>New Style Dialog</em> is
+				Displays status text in the dialogue box. The status text is set
+				in the demo's <var>OnSelChange</var> and <var>OnSelChangeEx</var> event
+        handlers. Status text is not displayed if <em>New Style Dialog</em> is
 				checked.
 			</li>
 			<li>
 				<em>Directories Only</em>:<br />
-				Displays only folders from the file system in the dialog box.
+				Displays only folders from the file system in the dialogue box. Virtual
+        folders are not displayed.
 			</li>
 			<li>
 				<em>New Style Dialog</em>:<br />
-				Displays the dialog in the new style. It is resizeable and
-				displays a <em>Make New Folder</em> button.
+				Displays the dialogue in the new style. It is resizeable and
+				displays a <em>Make New Folder</em> button by default.
 			</li>
 			<li>
 				<em>Hide &quot;Make Folder&quot; Button</em>:<br />
 				Hides the <em>Make New Folder</em> button that appears by
-				default on the new style dialog. This option is ignored if
+				default on the new style dialogue. This option is ignored if
 				<em>New Style Dialog</em> is not checked.
 			</li>
 			<li>
 				<em>Display Edit Box</em><br />
-				Displays an edit control in the dialog box. Enter a path in this
+				Displays an edit control in the dialogue box. Enter a path in this
 				control. A valid path will be used as the selected folder when
-				the dialog box is closed. If the entered path is not valid it
-				will be ignored and the <em>OnValidationFailed</em> event will
+				the dialogue box is closed. If the entered path is not valid it
+				will be ignored and the <var>OnValidationFailed</var> event will
 				be triggered, if assigned.
 			</li>
 			<li>
 				<em>Display Usage Hint</em><br />
-				Causes a usage hint to appear in the dialog box when checked.
+				Causes a usage hint to appear in the dialogue box when checked.
 				<em>New Style Dialog</em> must be checked and <em>Display Edit
 				Box</em> must be cleared for this to take effect. Furthermore
 				<code>shlobj.dll</code> v6.0 or later is also required for this
@@ -279,37 +293,36 @@
 	</li>
 	<li>
 		<em>Bold Headline Text</em> check box:<br />
-		When checked the <em>Browse for folder</em> dialog box will display 
-		its headline text in bold. This customisation is carried out in the
-		demo program's <var>OnInitialize</var> event handler.
+		When checked the <em>Browse for folder</em> dialogue box will display
+		its headline text in bold, using the main form's font. This customisation is
+    carried out in the demo program's <var>OnInitialize</var> event handler.
 	</li>
 	<li>
 		<em>Use OnSelChange</em> radio button:<br />
-		When this button is checked the browse dialog box component uses the
+		When this button is checked the browse dialogue box component uses the
 		demo's <var>OnSelChange</var> event handler when the selected folder
 		changes. The event handler displays the name of the selected folder in
-		the dialog's status text and ensures the <em>OK</em> button is always
+		the dialogue's status text and ensures the <em>OK</em> button is always
 		enabled. This event handler does not display status text when <em>New
-		Style Dialog</em> check box is checked since the new style dialog box
+		Style Dialog</em> check box is checked since the new style dialogue box
 		does not support status text.
 	</li>
 	<li>
 		<em>Use OnSelChangeEx</em> radio button:<br />
-		When this button is checked the browse dialog box component uses the
+		When this button is checked the browse dialogue box component uses the
 		demo's <var>OnSelChangeEx</var> event handler when the selected folder
-		changes. The event handler displays the set's the dialogs's status text
-		to indicate the name of the selected folder, along with information
-		about whether the folder is virtual. The path to the folder and its
-		small and large icons are displayed in the main window. This event
-		handler does not display status text when the <em>New Style Dialog</em>
-		is check box is checked.
+		changes. The event handler sets the dialogue's status text to indicate the
+    name of the selected folder, along with information about whether the folder
+    is virtual. The path to the folder and its small and large icons are
+    displayed in the main window. This event handler does not display status
+    text when the <em>New Style Dialog</em> check box is checked.
 	</li>
 	<li>
 		<em>Use OnValidationFailed</em> check box:<br />
-		When this check box is checked the browse dialog component uses the
+		When this check box is checked the browse dialogue component uses the
 		demo's <em>OnValidationFailed</em> event handler when an invalid path is
-		entered in any edit control in the dialog box. The invalid path is
-		displayed and the user is asked to decide whether the dialog box is
+		entered in any edit control in the dialogue box. The invalid path is
+		displayed and the user is asked to decide whether the dialogue box is
 		closed.
 	</li>
 </ul>
@@ -342,19 +355,19 @@
 	<li>
 		The <var>BrowseButtonClick</var> event handler sets up the
 		<var>TPJBrowseDialog</var> component to display the <em>Browse for
-		Folders</em> dialog using the selected special folder as its root node.
+		Folders</em> dialogue using the selected special folder as its root node.
 		The <var>TPJBrowseDialog.Execute</var> method is called to display the
-		dialog box. This causes the component's OnInitialise event to fire
+		dialogue box. This causes the component's OnInitialise event to fire
 		&ndash; how this is handled is described below.
 	</li>
 	<li>
 		The <var>BrowseDialogInitialise</var> method handles the
-		<var>TPJBrowseDialog.OnInitialise</var> event and makes the headline
-		control display its headline text in bold if the <em>Bold Headline
-		Text</em> check box is checked.
+		<var>TPJBrowseDialog.OnInitialise</var> event and makes the dialogue box
+		headline text in bold if the <em>Bold Headline Text</em> check box is
+    checked.
 	</li>
 	<li>
-		As folders are selected in the the browse dialog either the
+		As folders are selected in the the browse dialogue either the
 		<var>TPJBrowseDialog.OnSelChange</var> or
 		<var>TPJBrowseDialog.OnSelChangeEx</var> events are handled by the
 		<var>BrowseDlgSelChange</var> or <var>BrowseDlgSelChangeEx</var> methods
@@ -364,19 +377,18 @@
 		<ul class="spaced">
 			<li>
 				<var>BrowseDlgSelChange</var>: This event handler simply
-				displays the selected folder's display name in the dialog's
-				status text and ensures the dialog's <em>OK</em> button is
-				always enabled. Status text is ignored if the dialog box has the
+				displays the selected folder's display name in the dialogue's
+				status text and ensures the dialogue's <em>OK</em> button is
+				always enabled. Status text is ignored if the dialogue box has the
 				new style.
 			</li>
 			<li>
 				<var>BrowseDlgSelChangeEx</var>: This event handler gets the
 				display name and path from the PIDL passed to the handler and
-				displays folder information according to whether the folder is
-				virtual in the dialog's status text. It then gets the handleS of
-				the small and large icons associated with the folder, along with
-				the folder's path and displays them in the main form. Status
-				text is ignored if the dialog has the new style.
+				displays folder information in the dialogue's status text. It
+        then gets the handle of the small and large icons associated with the
+        folder, along with the folder's path and displays them in the main form.
+        Status text is ignored if the dialogue has the new style.
 			</li>
 		</ul>
 	</li>
@@ -384,13 +396,13 @@
 		The <var>BrowseDlgValidationFailed</var> event handler handles any
 		<var>TPJBrowseDialog.OnValidationFailed</var> events if the
 		<em>Use OnValidationFailed</em> check box is checked. It reports the
-		name of the invalid folder entered into the browse dialog's edit control
-		then asks the user if the dialog box is to be closed. The <em>Display
+		name of the invalid folder entered into the browse dialogue's edit control
+		then asks the user if the dialogue box is to be closed. The <em>Display
 		Edit Box</em> option check boxes must be checked to include the required
-		edit control in the dialog box.
+		edit control in the dialogue box.
 	</li>
 	<li>
-		When the browse dialog is closed, the <var>TPJBrowseDialog.OnClose</var>
+		When the browse dialogue is closed, the <var>TPJBrowseDialog.OnClose</var>
 		event is triggered and handled by the <var>BrowseDlgClose</var> event
 		handler. This simply ensures that any icons and path displayed in the
 		main window are cleared.
@@ -413,7 +425,7 @@
 		>Issue Tracker</a> to report bugs and request new features.
 	</div>
 	<div class="copyright">
-		This document is copyright &copy; 2005-2010, P D Johnson, <a
+		This document is copyright &copy; 2005-2013, P D Johnson, <a
 			href="http://www.delphidabbler.com/"
 		>www.delphidabbler.com</a>
 	</div>
