@@ -6,7 +6,7 @@
  * $Rev$
  * $Date$
  *
- * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2003-2010.
+ * This file is copyright (C) P D Johnson (www.delphidabbler.com), 2003-2013.
  * It may be used without restriction. This code distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
 }
@@ -17,11 +17,20 @@ unit ShellFolderDemoForm;
 
 interface
 
+// Minimum compiler for this project is Delphi 7.
+{$UNDEF RTLNameSpaces}
+{$IF CompilerVersion >= 23.0} // Delphi XE2
+  {$DEFINE RTLNameSpaces}
+{$IFEND}
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ComCtrls, StdCtrls, ShlObj, ExtCtrls, ImgList,
-
+  {$IFNDEF RTLNameSpaces}
+  ImgList, Controls, StdCtrls, ComCtrls, Classes, ExtCtrls, Forms, ShlObj,
+  Windows, Graphics,
+  {$ELSE}
+  Vcl.ImgList, Vcl.Controls, Vcl.StdCtrls, Vcl.ComCtrls, System.Classes,
+  Vcl.ExtCtrls, Vcl.Forms, Winapi.ShlObj, Winapi.Windows, Vcl.Graphics,
+  {$ENDIF}
   PJShellFolders;
 
 type
@@ -82,7 +91,11 @@ implementation
 
 
 uses
-  ShellAPI;
+  {$IFNDEF RTLNameSpaces}
+  SysUtils, Messages, ShellAPI, Dialogs;
+  {$ELSE}
+  System.SysUtils, Winapi.Messages, Winapi.ShellAPI, Vcl.Dialogs;
+  {$ENDIF}
 
 
 {$R *.DFM}

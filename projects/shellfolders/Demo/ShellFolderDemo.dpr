@@ -15,7 +15,11 @@
 program ShellFolderDemo;
 
 uses
+  {$IFNDEF RTLNameSpaces}
   Forms,
+  {$ELSE}
+  Vcl.Forms,
+  {$ENDIF}
   ShellFolderDemoForm in 'ShellFolderDemoForm.pas' {Form1};
 
 {$R *.RES}
