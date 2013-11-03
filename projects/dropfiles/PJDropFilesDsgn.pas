@@ -21,20 +21,28 @@ interface
 
 // Find if we have a Delphi 6 or higher compiler
 {$UNDEF DELPHI4ANDUP}
+{$UNDEF DELPHIXE2ANDUP}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
     {$DEFINE DELPHI6ANDUP}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE DELPHIXE2ANDUP}
   {$IFEND}
 {$ENDIF}
 
 
 uses
   {$IFDEF DELPHI6ANDUP}
-  DesignIntf, DesignEditors, TopLevels,
+  DesignIntf, DesignEditors,
   {$ELSE}
   DsgnIntf,
   {$ENDIF}
+  {$IFNDEF DELPHIXE2ANDUP}
   Forms, StdCtrls, Classes, Controls;
+  {$ELSE}
+  Vcl.Forms, Vcl.StdCtrls, System.Classes, Vcl.Controls;
+  {$ENDIF}
 
 
 type
@@ -158,7 +166,7 @@ begin
   end;
 end;
 
-function ExplodeStr(S: string; const Delim: Char; const List: Classes.TStrings;
+function ExplodeStr(S: string; const Delim: Char; const List: TStrings;
   const AllowEmpty: Boolean): Integer;
   {Splits the string S into a list of strings, separated by Delim, and returns
   the number of strings in the list. If AllowEmpty is true then any empty
@@ -190,7 +198,7 @@ begin
   Result := List.Count;
 end;
 
-function JoinStr(const SL: Classes.TStrings; const Delim: Char;
+function JoinStr(const SL: TStrings; const Delim: Char;
   const AllowEmpty: Boolean): string;
   {Joins all strings in given string list together into single string separated
   by given delimiter. If AllowEmpty is true then any empty strings are included
