@@ -1,13 +1,12 @@
 @rem ---------------------------------------------------------------------------
-@rem DelphiDabbler Code Library
-@rem
 @rem Script used to delete temporary files and directories in either a single
-@rem project or all projects.
+@rem project or all projects in the DelphiDabbler Code Library.
 @rem
 @rem Takes a single parameter which is either the id of the project to be tidied
 @rem or "all", without the quotes, to tidy the complete project directory.
 @rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2010
+@rem Any copyright in this file is dedicated to the Public Domain.
+@rem http://creativecommons.org/publicdomain/zero/1.0/
 @rem
 @rem $Rev$
 @rem $Date$
@@ -39,13 +38,13 @@ goto error
 
 :start
 echo Deleting temporary files from %InfoMsg%
-del /S %RootDir%\*.~* 
+del /S %RootDir%\*.~*
 del /S %RootDir%\*.bak
-del /S %RootDir%\*.dcu 
-del /S %RootDir%\*.ddp 
-del /S %RootDir%\*.dsk 
-del /S %RootDir%\*.exe 
-del /S /AH %RootDir%\*.GID 
+del /S %RootDir%\*.dcu
+del /S %RootDir%\*.ddp
+del /S %RootDir%\*.dsk
+del /S %RootDir%\*.exe
+del /S /AH %RootDir%\*.GID
 del /S %RootDir%\*.identcache
 del /S %RootDir%\*.ini
 del /S %RootDir%\*.local
