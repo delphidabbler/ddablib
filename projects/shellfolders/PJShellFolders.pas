@@ -19,11 +19,16 @@ interface
 
 
 // Determine compiler
+{$UNDEF DELPHI5ANDUP}
 {$UNDEF DELPHI6ANDUP}
 {$UNDEF DELPHI7ANDUP}
 {$UNDEF RTLNameSpaces}      // Don't qualify RTL units names with namespaces
+{$IFDEF VER130}
+  {$DEFINE DELPHI5ANDUP}
+{$ENDIF}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
+    {$DEFINE DELPHI5ANDUP}
     {$DEFINE DELPHI6ANDUP}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
@@ -607,6 +612,51 @@ end;
 
 { PIDL information routines }
 
+type
+  // Signature of SHGetFolderLocation API function.
+  TSHGetFolderLocation = function (hwnd: HWND; csidl: Integer; hToken: THandle;
+    dwFlags: DWORD; var ppidl: PItemIDList): HResult; stdcall;
+
+var
+  // Handle to shell32.dll.
+  Shell32Handle: THandle = 0;
+  // Reference to SHGetFolderLocation API function if supported by OS. Nil if
+  // function not supported.
+  SHGetFolderLocation: TSHGetFolderLocation = nil;
+
+procedure InitSHGetFolderLocation;
+  {Loads the SHGetFolderLocation API function if available on the underlying OS.
+  }
+begin
+  {$IFDEF DELPHI5ANDUP}
+  Shell32Handle := SafeLoadLibrary('shell32.dll');
+  {$ELSE}
+  Shell32Handle := LoadLibrary('shell32.dll');
+  {$ENDIF}
+  if Shell32Handle = 0 then
+    Exit;
+  SHGetFolderLocation := GetProcAddress(Shell32Handle, 'SHGetFolderLocation');
+end;
+
+function GetSpecialFolderLocation(FolderID: Integer; var PIDL: PItemIDList):
+  HResult;
+  {Gets a specified special folder location as a PIDL.
+  NOTE: This is provided as a wrapper to SHGetFolderLocation or, if that is not
+  supported, to SHGetSpecialFolderLocation which is deprecated in later Windows
+  OSs and may be removed at some point. The code in this unit calls this
+  function wherever it would have previously called SHGetSpecialFolderLocation.
+    @param FolderID [in] A CSIDL value that identifies the folder of interest.
+    @param PIDL [out] A PIDL specifying the folder's location relative to the
+      desktop. The caller must free PIDL by using CoTaskMemFree.
+    @return S_OK on success or an HResult error code on failure.
+  }
+begin
+  if Assigned(SHGetFolderLocation) then
+    Result := SHGetFolderLocation(0, FolderID, 0, 0, PIDL)
+  else
+    Result := SHGetSpecialFolderLocation(0, FolderID, PIDL);
+end;
+
 function PIDLToFolderPath(PIDL: PItemIDList): string;
   {Gets the path of a folder from a PIDL.
     @param PIDL [in] PIDL containing path.
@@ -855,8 +905,7 @@ var
   PIDL: PItemIDList;  // PIDL to special folder
 begin
   // Get special folder's PIDL
-  // TODO: replace following deprecated API call with SHGetFolderLocation
-  fIsSupported := Succeeded(SHGetSpecialFolderLocation(0, fFolderID, PIDL));
+  fIsSupported := Succeeded(GetSpecialFolderLocation(fFolderID, PIDL));
   if fIsSupported then
   begin
     try
@@ -1125,8 +1174,7 @@ begin
     pidlRootFolder := nil
   else
     if not Succeeded(
-      // TODO: replace following deprecated API call with SHGetFolderLocation
-      SHGetSpecialFolderLocation(0, fRootFolderID, pidlRootFolder)
+      GetSpecialFolderLocation(fRootFolderID, pidlRootFolder)
     ) then
       Error(sNoRootFolder);
   try
@@ -1349,10 +1397,7 @@ begin
   // this to disable new style dlg OK button if error triggered when displayed.
   if fRootFolderID <> CSIDL_DESKTOP then
   begin
-    if Succeeded(
-      // TODO: replace following deprecated API call with SHGetFolderLocation
-      SHGetSpecialFolderLocation(0, fRootFolderID, pidlRootFolder)
-    ) then
+    if Succeeded(GetSpecialFolderLocation(fRootFolderID, pidlRootFolder)) then
       SelectionChanged(pidlRootFolder);
   end;
 end;
@@ -1459,12 +1504,13 @@ end;
 
 initialization
 
-// Initialize COM: required per MS documentation
-OleInitialize(nil);
+OleInitialize(nil); // COM initialisation: required per MS documentation
+InitSHGetFolderLocation;
 
 finalization
 
-// Uninitialize OLE
+if Shell32Handle <> 0 then
+  FreeLibrary(Shell32Handle);
 OleUninitialize;
 
 end.
