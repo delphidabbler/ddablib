@@ -13,7 +13,7 @@
 
 Release v5.0.3 of 02 November 2013
 + Modified components to compile and function correctly with 64 bit Delphi compilers.
-+ Unit names are now qualified with namespace on Delphi XE2 and later.
++ Unit names in the component source file are now qualified with namespace on Delphi XE2 and later.
 + Changes to demo projects:
   - Font and appearance of some controls changed.
   - All form files now in text format.
