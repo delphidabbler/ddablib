@@ -11,11 +11,24 @@
 ; Change Log for Drop Files Components
 ; ------------------------------------------------------------------------------
 
+Release v5.0.4 of 04 November 2013
++ Changed form used for TPJExtFileFilter.Extensions property editor:
+  - Form is no longer scaled.
+  - Form font changed to Arial 9pt.
++ Unit names in the component design source file and in all demo source files are now qualified with namespace on Delphi XE2 and later.
++ Updated demos:
+  - Provided project files in different formats for different versions of Delphi, including dual 32 and 64 bit targets for Delphi XE2 and later.
+  - Updated project resource file to include a manifest along with main icon.
+  - Provided an icon file for each demo project.
+  - Fixed a colour related bug in main window of DropFilesDemo.
++ Updated documentation including new read-me for demo projects.
+
 Release v5.0.3 of 02 November 2013
 + Modified components to compile and function correctly with 64 bit Delphi compilers.
 + Unit names in the component source file are now qualified with namespace on Delphi XE2 and later.
 + Changes to demo projects:
-  - Font and appearance of some controls changed.
+  - Font changed to Arial 9pt
+  - Appearance of some controls changed.
   - All form files now in text format.
   - Forms no longer scaled.
   - All demos now need Delphi 7 as a minimum.
