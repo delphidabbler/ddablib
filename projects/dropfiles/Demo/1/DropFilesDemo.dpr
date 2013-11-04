@@ -14,8 +14,19 @@
 
 program DropFilesDemo;
 
+{$UNDEF DELPHIXE2ANDUP}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE DELPHIXE2ANDUP}
+  {$IFEND}
+{$ENDIF}
+
 uses
+  {$IFNDEF DELPHIXE2ANDUP}
   Forms,
+  {$ELSE}
+  Vcl.Forms,
+  {$ENDIF}
   FmDropFilesDemo in 'FmDropFilesDemo.pas' {DropFilesDemoForm};
 
 {$R *.RES}

@@ -14,8 +14,19 @@
 
 program FrameDemo;
 
+{$UNDEF DELPHIXE2ANDUP}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE DELPHIXE2ANDUP}
+  {$IFEND}
+{$ENDIF}
+
 uses
+  {$IFNDEF DELPHIXE2ANDUP}
   Forms,
+  {$ELSE}
+  Vcl.Forms,
+  {$ENDIF}
   FmFrameDemo in 'FmFrameDemo.pas' {FmMain},
   FrDemo in 'FrDemo.pas' {Frame1: TFrame};
 

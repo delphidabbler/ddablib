@@ -1,4 +1,4 @@
-{ 
+{
  * FrDemo.pas
  *
  * Implements frame that catches dropped files for demo program that
@@ -16,9 +16,20 @@ unit FrDemo;
 
 interface
 
+{$UNDEF DELPHIXE2ANDUP}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE DELPHIXE2ANDUP}
+  {$IFEND}
+{$ENDIF}
+
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, PJDropFiles, ExtCtrls, StdCtrls;
+  {$IFNDEF DELPHIXE2ANDUP}
+  Classes, StdCtrls, Controls, ExtCtrls, Forms,
+  {$ELSE}
+  System.Classes, Vcl.StdCtrls, Vcl.Controls, Vcl.ExtCtrls, Vcl.Forms,
+  {$ENDIF}
+  PJDropFiles;
 
 type
   TFrame1 = class(TFrame)
@@ -34,6 +45,13 @@ type
   end;
 
 implementation
+
+uses
+  {$IFNDEF DELPHIXE2ANDUP}
+  SysUtils;
+  {$ELSE}
+  System.SysUtils;
+  {$ENDIF}
 
 {$R *.dfm}
 

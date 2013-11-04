@@ -1,4 +1,4 @@
-{ 
+{
  * FmFrameDemo.pas
  *
  * Main form file for demo program that demonstrates use of Drop Files
@@ -16,9 +16,20 @@ unit FmFrameDemo;
 
 interface
 
+{$UNDEF DELPHIXE2ANDUP}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE DELPHIXE2ANDUP}
+  {$IFEND}
+{$ENDIF}
+
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, FrDemo, ExtCtrls, StdCtrls, PJDropFiles;
+  {$IFNDEF DELPHIXE2ANDUP}
+  Classes, StdCtrls, Controls, Forms, ExtCtrls,
+  {$ELSE}
+  System.Classes, Vcl.StdCtrls, Vcl.Controls, Vcl.Forms, Vcl.ExtCtrls,
+  {$ENDIF}
+  PJDropFiles, FrDemo;
 
 type
   TFmMain = class(TForm)

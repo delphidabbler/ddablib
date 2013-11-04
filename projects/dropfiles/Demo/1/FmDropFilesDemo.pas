@@ -16,15 +16,24 @@ unit FmDropFilesDemo;
 
 interface
 
+{$UNDEF DELPHIXE2ANDUP}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN SYMBOL_DEPRECATED OFF}
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2
+    {$DEFINE DELPHIXE2ANDUP}
+  {$IFEND}
 {$ENDIF}
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, PJDropFiles, ExtCtrls;
+  {$IFNDEF DELPHIXE2ANDUP}
+  Classes, Windows, ExtCtrls, ComCtrls, StdCtrls, Controls, Forms, Graphics,
+  {$ELSE}
+  System.Classes, Winapi.Windows, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.Controls, Vcl.Forms, Vcl.Graphics,
+  {$ENDIF}
+  PJDropFiles;
 
 type
   TDropFilesDemoForm = class(TForm)
@@ -105,6 +114,13 @@ var
   DropFilesDemoForm: TDropFilesDemoForm;
 
 implementation
+
+uses
+  {$IFNDEF DELPHIXE2ANDUP}
+  SysUtils;
+  {$ELSE}
+  System.SysUtils;
+  {$ENDIF}
 
 {$R *.DFM}
 
