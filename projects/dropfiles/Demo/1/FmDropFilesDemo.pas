@@ -1,4 +1,4 @@
-{ 
+{
  * FmDropFilesDemo.pas
  *
  * Main form file for demo program that demonstrates use of Drop Files
@@ -148,6 +148,10 @@ begin
   chkPanelEnableFilter.Checked := Assigned(dfPanel.Filter);
   chkRTFEnableFilter.Checked := Assigned(dfRTF.Filter);
   chkFormShowRejections.Checked := False;
+  // TPanel's ParentBackground seems to default to False in earlier Delphis and
+  // True in later Delphis if there's no property defined in form file. So, we
+  // set it to the required value here.
+  Panel1.ParentBackground := False;
 end;
 
 procedure TDropFilesDemoForm.FormOptionsClick(Sender: TObject);
