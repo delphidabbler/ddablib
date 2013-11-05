@@ -7,7 +7,7 @@
 Release v1.0.1 of 18 March 2010
 + Inhibited unwanted compiler warnings on Delphi 7 and later.
 + Improved resource id string comparison code. Provided workaround for Delphi 4 (and 5?) which don't support these changes.
-+ Refactored some code.
++ Re-factored some code.
 + Updated documentation and corrected some sample code to work with Unicode Delphis.
 
 Release v1.0 of 17 September 2004

@@ -36,7 +36,7 @@ Release v5.5.0 of 06 June 2013
 + Renamed link to online documentation and changed the URL.
 
 Release v5.4.2 of 24 April 2013
-+ Fixed bug #26 (http://code.google.com/p/ddab-lib/issues/detail?id=26) where the window position was not restored correctly for main windows that touched or overlapped the taskbar when it was located at the top or left of the screen.
++ Fixed bug #26 (http://code.google.com/p/ddab-lib/issues/detail?id=26) where the window position was not restored correctly for main windows that touched or overlapped the task-bar when it was located at the top or left of the screen.
 
 Release v5.4.1 of 08 January 2013
 + Component source modified to compile without warnings on Delphi XE3
@@ -47,7 +47,7 @@ Release v5.4.1 of 08 January 2013
   - Forms no longer scaled.
   - All demos now need Delphi 7 as a minimum.
 + Component source license changed to Mozilla Public License v2.0. (Demos now placed in public domain).
-+ MPL text file and documentation wiki shortcut have had names changed.
++ MPL text file and documentation wiki short-cut have had names changed.
 + WinHelp help file regenerated with updated copyright date.
 + Documentation revised.
 
@@ -63,7 +63,7 @@ Release v5.3.1 of 15 November 2009
   - Removed form properties that are not supported on earlier versions of Delphi and changed form format from text to binary where necessary.
 + Rebuilt help file.
 + Removed HKEY property editor from release.
-+ Revised documentation and included shortcut file that links to component Wiki.
++ Revised documentation and included short-cut file that links to component Wiki.
 
 Release v5.3 of 27 September 2007
 + Completely re-implemented code that supports fitting MDI child form in parent client workspace. Original code was broken.
@@ -92,7 +92,7 @@ Release v4.3.1 of 18 December 2005
 + Removed from demo applications some form properties and unit clauses not available in earlier versions of Delphi.
 
 Release v4.3 of 04 September 2005
-+ Added new CreateStandAlone constructor to enable window state component instances to be constructed dynamlically at run time.
++ Added new CreateStandAlone constructor to enable window state component instances to be constructed dynamically at run time.
 + Updated help file with details of new constructor.
 + Added two new demo programs.
 
@@ -105,7 +105,7 @@ Release v4.2 of 30 October 2003
 
 Release v4.1 of 07 August 2002
 + Added new OnReadWdwState event in which user can override window placement, size and state read from registry or ini file.
-+ Added new Options property which contains a set of values that govern the behavoiur of the component. The options are to ignore the stored window state and ensure window is displayed normally or ignore the stored window size and use the form's size as designed.
++ Added new Options property which contains a set of values that govern the behaviour of the component. The options are to ignore the stored window state and ensure window is displayed normally or ignore the stored window size and use the form's size as designed.
 
 Release v4.0 of 17 March 2002
 + Made use ParamStr(0) for default name of ini file and registry key.

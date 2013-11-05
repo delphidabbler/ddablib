@@ -13,7 +13,7 @@ Release v3.1.1 of 28 January 2013
   - Project group files removed.
   - New FireMonkey 2 demo project that demonstrates PJIStreams unit.
 + Project source license changed to Mozilla Public License v2.0. (Demos and test project now placed in public domain).
-+ MPL text file and documentation wiki shortcut have had names changed.
++ MPL text file and documentation wiki short-cut have had names changed.
 + Updated documentation.
 
 Release v3.1 of 08 October 2011
@@ -24,7 +24,7 @@ Release v3.1 of 08 October 2011
 + Reinstated DUnit tests. They were revised, extended and corrected and made compatible with Unicode Delphis.
 + Demo projects now explicitly import project units so that they will work when the required units are not installed.
 + New project and project group files for later versions of Delphi added to demo and unit test projects.
-+ Documentated units using XMLDoc comments.
++ Documented units using XMLDoc comments.
 + Updated documentation.
 
 Release v3.0 of 07 October 2009

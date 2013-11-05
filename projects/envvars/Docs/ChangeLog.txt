@@ -20,7 +20,7 @@ Release v1.3.2 of 22 October 2010
 Release v1.3.1 of 20 February 2010
 + Fixed bug in GetAllEnvVars routine (issue #3: http://code.google.com/p/ddab-lib/issues/detail?id=3).
 + Fixed bug in ExpandEnvironmentStrings (issue #4: http://code.google.com/p/ddab-lib/issues/detail?id=4).
-+ Updated help file and example code document for compatibility when unicode Delphis. Example code stripped from help file.
++ Updated help file and example code document for compatibility when Unicode Delphis. Example code stripped from help file.
 + Updated documentation.
 
 Release v1.3 of 17 August 2008
@@ -35,7 +35,7 @@ Release v1.3 of 17 August 2008
 Release v1.2 of 10 August 2003
 + Fixed bug causing error when attempting to access an environment variable that does not exist.
 
-Un-released v1.1 of 31 July 2003
+Unreleased v1.1 of 31 July 2003
 + Updated component palette from "PJ Stuff" to "DelphiDabbler".
 + Changed references to EWin32Error exception to EOSError in components compiled with Delphi 6 and later.
 + Updated copyright date and owner in help file.

@@ -16,5 +16,5 @@ See Console Application Runner Classes change log up to release 2.0 for details 
 + Moved Pascal source files PJFileHandle.pas, PJPipe.pas and PJPipeFilters.pas from Console Application Runner Classes project as at Release 2.0 of that project (revision 967).
 + Updated source files to so that RTL/VCL unit references are now qualified with their namespace names when compiled with Delphi XE2 and later.
 + Some minor source code tweaks.
-+ Relicensed source code using MPL 2.0 (except for minor code files which are now public domain).
-+ New documentation, including an Internet shortcut to the online documentation.
++ Re-licensed source code using MPL 2.0 (except for minor code files which are now public domain).
++ New documentation, including an Internet short-cut to the online documentation.

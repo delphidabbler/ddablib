@@ -45,7 +45,7 @@ Release 2.0 of 03 May 2011
   - Some changes to organisation and configuration of demo projects' config and project files.
   - New test ANSI text file (extract from "Moby Dick").
 + User guide removed from project since documentation now in online wiki at http://www.delphidabbler.com/url/consoleapp-wiki
-+ Internet shortcut to documentation wiki renamed.
++ Internet short-cut to documentation wiki renamed.
 + Updated other documentation files.
 
 Release 1.0.2 of 20 July 2010

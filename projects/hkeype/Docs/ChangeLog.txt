@@ -18,5 +18,5 @@ Release v1.0.2 of 30 October 2003
 Release v1.0.1 of 08 October 2000
 + Fixed bug that was allowing invalid or empty values for an HKEY. An exception is now raised and existing value is retained.
 
-Un-released v1.0 of 28 September 2000
+Unreleased v1.0 of 28 September 2000
 + Original version.
