@@ -11,6 +11,25 @@
 ; Change Log for Shell Folders Unit
 ; ------------------------------------------------------------------------------
 
+Release v2.3.1 of 05 November 2013
++ Modified components to compile and function correctly with 64 bit Delphi compilers.
++ Changed type of TPJBrowseDialog.Handle property from THandle to HWND.
++ Unit names in all Pascal source files are now qualified with their name-spaces on Delphi XE2 and later.
++ Changes to avoid use of a deprecated Windows API function on later versions of Windows.
++ Changes to demo projects:
+  - Font changed to Arial 9pt
+  - Size of form and some controls changed.
+  - Form file is now in text format.
+  - Form is no longer scaled.
+  - The demo now needs Delphi 7 as a minimum.
++ Some refactoring.
++ License changes:
+  - Component source license changed to Mozilla Public License v2.0
+  - Demo source code placed in public domain (Creative Commons CC0 1.0 Universal).
++ MPL text file and documentation wiki short-cut have had names changed.
++ WinHelp help file regenerated with updated copyright date.
++ Updated documentation.
+
 Release v2.3 of 29 January 2010
 + Changes to TPJBrowseDialg:
   - New display options for hiding "make new folder" button, displaying UA hints and including edit box to use to enter folder names.
