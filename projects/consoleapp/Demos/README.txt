@@ -8,7 +8,7 @@ Console Application Runner Demo Programs Read Me
 projects.
 
 --------------------------------------------------------------------------------
-Contents of Demos diretory
+Contents of Demos directory
 --------------------------------------------------------------------------------
 
 The Demos directory and its sub-directories contain twelve small programs that
@@ -54,7 +54,7 @@ The 12 demos are:
 
 4: Timing out.
     How to set a maximum time for a child console application to run and how to
-    handle timeouts.
+    handle time-outs.
 
 5: Terminating an application.
     Shows how to forcible terminate a child console application.
@@ -71,13 +71,13 @@ The 12 demos are:
     Demonstrates how to capture a child console application's output and display
     it in a GUI in "real time".
 
-9: Subclassing TPJConsoleApp.
+9: Sub-classing TPJConsoleApp.
     Show how to write your own sub class of TPJCustomConsoleApp to specialise
-    its behavour.
+    its behaviour.
 
 10: Using TPJConsoleApp from console applications.
-    Demonstrates how to use TPJConsoleApp to enable a console app to spawn
-    child processes.
+    Demonstrates how to use TPJConsoleApp to enable a console application to
+    spawn child processes.
 
 11: Customising the appearance of the console.
     Shows how to customise the appearance of any console that is used to display
@@ -152,7 +152,7 @@ later, but you will need to manually add 64 bit targets to each project
 individually.
 
 Note: some versions of Delphi may generate hints, or possibly warning, depending
-on your setup. These should not cause a problem.
+on your set-up. These should not cause a problem.
 
 --------------------------------------------------------------------------------
 Disclaimer
