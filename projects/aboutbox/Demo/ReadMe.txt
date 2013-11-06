@@ -23,7 +23,7 @@ binaries to the project options.
 Note 3:
 
 The About Box Component is 64 bit compatible. To compile the demo as a 64 bit
-program add a Windows 64 bit target to the project options and set the path to 
+program add a Windows 64 bit target to the project options and set the path to
 the 64 bit package containing the About Box component.
 
 Also in project options make sure that Delphi does not generate version
