@@ -97,8 +97,8 @@ Compatibility
 --------------------------------------------------------------------------------
 
 Delphi 7 or later are required to build the VCL based demo projects as 32 bit
-Windows applications. To build 64 bit versions of the demos, Delphi XE2 or
-later is required.
+Windows applications. To build 64 bit versions of the demos, Delphi XE2 or later
+is required.
 
 The FireMonkey 2 based demos require Delphi XE3 or later.
 
