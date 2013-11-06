@@ -158,8 +158,8 @@
 <ol class="spaced">
   <li>
     <strong><code>StandardDemo.dpr</code></strong><br />
-    Demonstrates how to use the components in the standard way, i.e.
-    dropped on a form from the component palette.
+    Demonstrates how to use the components in the standard way, i.e. dropped on
+    a form from the component palette.
   </li>
   <li>
     <strong><code>StandAloneDemo.dpr</code></strong><br />
@@ -167,14 +167,14 @@
   </li>
   <li>
     <strong><code>UserDemo.dpr</code></strong><br />
-    Demonstrates how to use <var>TPJUserWdwState</var> and load and save
-    data in the <var>OnReadData</var> and <var>OnSaveData</var> events.
+    Demonstrates how to use <var>TPJUserWdwState</var> and load and save data
+    in the <var>OnReadData</var> and <var>OnSaveData</var> events.
   </li>
   <li>
     <strong><code>MDIDemo.dpr</code></strong><br />
-    Demonstrates how to use the components with MDI applications. This demo
-    uses <var>TPJWdwState</var> components with the <var>woFitWorkArea</var>
-    option to keep MDI child forms within the main form's client area.
+    Demonstrates how to use the components with MDI applications. This demo uses
+    <var>TPJWdwState</var> components with the <var>woFitWorkArea</var> option
+    to keep MDI child forms within the main form's client area.
   </li>
 </ol>
 
@@ -214,8 +214,8 @@
   displays a modal dialogue box. Both the main window and the dialogue contain a
   <var>TPJRegWdwState</var> component. The component in the main window is
   configured to persist window size, state and position. The dialogue's
-  component only persists window position. Window positions are not adjusted
-  to remain within the work space.
+  component only persists window position. Window positions are not adjusted to
+  remain within the work space.
 </p>
 
 <p>
@@ -242,11 +242,10 @@
 </p>
 
 <p>
-  The program uses the <var>TPJWdwState</var> component's
-  <var>IniRootDir</var>, <var>IniFileName</var> and <var>Section</var>
-  properties to require that window information is stored in the
-  <code>[Window]</code> section of an ini file named
-  <code>StandAloneDemo.ini</code> in the
+  The program uses the <var>TPJWdwState</var> component's <var>IniRootDir</var>,
+  <var>IniFileName</var> and <var>Section</var> properties to require that
+  window information is stored in the <code>[Window]</code> section of an ini
+  file named <code>StandAloneDemo.ini</code> in the
   <code>%AppData%\DelphiDabbler\Lib\PJWdwState</code> directory. It also shows
   how to use the <var>IniFilePath</var> method to get the full file spec. of
   the ini file.
@@ -269,10 +268,10 @@
 
 <p>
   The main form has event handler's for <var>TPJUserWdwState</var>'s
-  <var>OnReadData</var> and <var>OnSaveData</var> events.
-  <var>OnSaveData</var> is used to write the content of the <var>Data</var>
-  record passed to the event handler to a file as binary data.
-  <var>OnReadData</var> reads any stored data back into the record.
+  <var>OnReadData</var> and <var>OnSaveData</var> events. <var>OnSaveData</var>
+  is used to write the content of the <var>Data</var> record passed to the event
+  handler to a file as binary data. <var>OnReadData</var> reads any stored data
+  back into the record.
 </p>
 
 <h2>
@@ -284,22 +283,22 @@
 </p>
 
 <p>
-  This simple demo simply shows how to use the window state components with
-  MDI applications. There are two forms in the project &ndash; a main form and
-  a child form. Neither form has any code, but both forms have a
-  <var>TPJWdwState</var> component set up to write to different sections of
-  the same ini file. The main form has a toolbar, a menu bar and a status bar.
-  These controls have been added to show that the window state components can
-  make allowances for furniture in the main when keeping child forms within
-  the available work area.
+  This simple demo simply shows how to use the window state components with MDI
+  applications. There are two forms in the project &ndash; a main form and a
+  child form. Neither form has any code, but both forms have a
+  <var>TPJWdwState</var> component set up to write to different sections of the
+  same ini file. The main form has a toolbar, a menu bar and a status bar. These
+  controls have been added to show that the window state components can make
+  allowances for furniture in the main when keeping child forms within the
+  available work area.
 </p>
 
 <p>
   Experiment by removing or adding the main form's furniture controls to check
   how this affects the placing of the child form. Also try changing the
   properties of each  window state component and seeing what difference this
-  makes. You may also want to try removing the component from the main form
-  and once again seeing what effect this has on the result.
+  makes. You may also want to try removing the component from the main form and
+  once again seeing what effect this has on the result.
 </p>
 
 <p>
@@ -308,9 +307,8 @@
 <div class="endnotes">
 
   <div class="comments">
-    If you have any comments on the components or this demo code or if you
-    have found a bug, please let me know. Bugs should be reported via the
-    <a
+    If you have any comments on the components or this demo code or if you have
+    found a bug, please let me know. Bugs should be reported via the <a
       href="http://www.delphidabbler.com/url/ddlib-issues"
     >Issue Tracker</a>. Other comments can be made via my website <a
       href="http://www.delphidabbler.com/contact"

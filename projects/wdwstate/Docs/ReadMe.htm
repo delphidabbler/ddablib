@@ -198,27 +198,27 @@
 
   <li>
     <span class="highlight">TPJRegWdwState</span><br />
-    This component uses the registry to record window information. The
-    registry root key and sub key where the information is stored are
-    controlled by the <var>RootKey</var> and <var>SubKey</var> properties,
-    or by handling the <var>OnGetRegData</var> event. This event is
-    triggered just before the registry is accessed. Additional application
-    defined data can be read from or written to the registry by handling the
-    <var>OnGettingRegData</var> and <var>OnPuttingRegData</var> events that
-    are triggered after the component reads or writes the registry.<br />
+    This component uses the registry to record window information. The registry
+    root key and sub key where the information is stored are controlled by the
+    <var>RootKey</var> and <var>SubKey</var> properties, or by handling the
+    <var>OnGetRegData</var> event. This event is triggered just before the
+    registry is accessed. Additional application defined data can be read from
+    or written to the registry by handling the <var>OnGettingRegData</var> and
+    <var>OnPuttingRegData</var> events that are triggered after the component
+    reads or writes the registry.<br />
     <strong>Important Note:</strong> You are discouraged from using
     <var>TPJRegWdwState</var> for programs compiled with Delphi 5 and earlier
-    that may be run on 64 bit Windows, because the component may not be able
-    to access the 64 bit registry view correctly and window state may be lost.
+    that may be run on 64 bit Windows, because the component may not be able to
+    access the 64 bit registry view correctly and window state may be lost.
   </li>
 
   <li>
     <span class="highlight">TPJUserWdwState</span><br />
-    This component relies on the user to handle saving and reading the
-    window state data to or from persistent storage. The component gives the
-    most flexibility of all the components at the expense of placing the
-    storage burden on the user. The component triggers <var>OnReadData</var>
-    and <var>OnSaveData</var> events when ready to read or save data.
+    This component relies on the user to handle saving and reading the window
+    state data to or from persistent storage. The component gives the most
+    flexibility of all the components at the expense of placing the storage
+    burden on the user. The component triggers <var>OnReadData</var> and
+    <var>OnSaveData</var> events when ready to read or save data.
   </li>
 
 </ul>
@@ -231,36 +231,34 @@
 <ul class="spaced">
 
   <li>
-    The components can automatically restore and save windows when the
-    program starts up and closes down (using the <var>AutoSaveRestore</var>
-    property). If <var>AutoSaveRestore</var> is set to False then the
-    <var>Restore</var> and <var>Save</var> methods must be called from the host
-    application.
+    The components can automatically restore and save windows when the program
+    starts up and closes down (using the <var>AutoSaveRestore</var> property).
+    If <var>AutoSaveRestore</var> is set to False then the <var>Restore</var>
+    and <var>Save</var> methods must be called from the host application.
   </li>
 
   <li>
-    The <var>Options</var> property can be used to customise the way the
-    window is restored as follows:
+    The <var>Options</var> property can be used to customise the way the window
+    is restored as follows:
 
     <ul class="unspaced">
 
       <li>
-        The components can be instructed to ignore the saved window
-        state &ndash; the window is then displayed in the normal state.
+        The components can be instructed to ignore the saved window state
+        &ndash; the window is then displayed in the normal state.
       </li>
 
       <li>
-        The window's saved size can be ignored and the default size of
-        the form used instead. This is useful for dialogue boxes and fixed
-        size windows.
+        The window's saved size can be ignored and the default size of the form
+        used instead. This is useful for dialogue boxes and fixed size windows.
       </li>
 
       <li>
-        The window can be kept within the current work area of the
-        desktop. This option works with multiple monitors. If the form
-        containing the window state component is a MDI child form this
-        option keeps the window within the parent form's client area,
-        after allowing for any menu, tool-bars or status bar etc.
+        The window can be kept within the current work area of the desktop. This
+        option works with multiple monitors. If the form containing the window
+        state component is a MDI child form this option keeps the window within
+        the parent form's client area, after allowing for any menu, tool-bars or
+        status bar etc.
       </li>
 
     </ul>
@@ -268,8 +266,8 @@
   </li>
 
   <li>
-    When the form is to be restored in a minimized state it briefly appears
-    on screen in the normal state before being minimized. The
+    When the form is to be restored in a minimized state it briefly appears on
+    screen in the normal state before being minimized. The
     <var>MinimizeDelay</var> property controls the delay between the window
     appearing and being minimized.
   </li>
@@ -291,7 +289,7 @@
 </p>
 
 <h3>
-   Compatibility
+  Compatibility
 </h3>
 
 <p>
@@ -319,26 +317,25 @@
 
 <p>
   The <em>Window State Components</em> are supplied in a zip file. Before
-  installing you need to extract all the files from the zip file, preserving
-  the directory structure. The following files will be extracted:
+  installing you need to extract all the files from the zip file, preserving the
+  directory structure. The following files will be extracted:
 </p>
 
 <ul>
   <li>
-    <strong><code>PJWdwState.pas</code></strong> &ndash; component source
-    code.
+    <strong><code>PJWdwState.pas</code></strong> &ndash; component source code.
   </li>
   <li>
     <strong><code>PJWdwState.dcr</code></strong> &ndash; resource file
     containing component palette glyphs.
   </li>
   <li>
-    <code>PJWdwState.hlp</code> &ndash; component help file that integrates
-    with the Delphi 4 to 7 OpenHelp system.
+    <code>PJWdwState.hlp</code> &ndash; component help file that integrates with
+    the Delphi 4 to 7 OpenHelp system.
   </li>
   <li>
-    <code>PJWdwState.als</code> &ndash; a-link keyword file for integration
-    with the Delphi 6 or 7 OpenHelp system.
+    <code>PJWdwState.als</code> &ndash; a-link keyword file for integration with
+    the Delphi 6 or 7 OpenHelp system.
   </li>
   <li>
     <code>ReadMe.htm</code> &ndash; this file.
@@ -356,9 +353,9 @@
 </ul>
 
 <p>
-  In addition to the above files you will find the the source code of four
-  demo projects along with read-me files in the <code>Demos</code> directory
-  and its <code>1</code>, <code>2</code>, <code>3</code> and <code>4</code>
+  In addition to the above files you will find the the source code of four demo
+  projects along with read-me files in the <code>Demos</code> directory and its
+  <code>1</code>, <code>2</code>, <code>3</code> and <code>4</code>
   sub-directories.
 </p>
 
@@ -405,9 +402,8 @@
 <ol class="spaced">
   <li>
     <code>StandardDemo.dpr</code><br />
-    Demonstrates how to use the components in the standard way, i.e.
-    dropped on a form from the component palette. This demo uses
-    <var>TPJRegWdwState</var>.
+    Demonstrates how to use the components in the standard way, i.e. dropped on
+    a form from the component palette. This demo uses <var>TPJRegWdwState</var>.
   </li>
   <li>
     <code>StandAloneDemo.dpr</code><br />
@@ -417,8 +413,8 @@
   </li>
   <li>
     <code>UserDemo.dpr</code><br />
-    Demonstrates how to use <var>TPJUserWdwState</var> and load and save
-    data in the <var>OnReadData</var> and <var>OnSaveData</var> events.
+    Demonstrates how to use <var>TPJUserWdwState</var> and load and save data in
+    the <var>OnReadData</var> and <var>OnSaveData</var> events.
   </li>
   <li>
     <code>MDIDemo.dpr</code><br />
@@ -507,30 +503,31 @@
 
 <p>
   I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-  Wales,  UK, writing write mainly in Delphi. My programs and code are
-  available from:
-  <a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+  Wales, UK, writing write mainly in Delphi. My programs and code are available
+  from: <a
+    href="http://www.delphidabbler.com/"
+  >http://www.delphidabbler.com/</a>.
 </p>
 
 <p>
-  I can be <a href="http://www.delphidabbler.com/contact">contacted via the
-  website.</a>
+  I can be <a
+    href="http://www.delphidabbler.com/contact"
+  >contacted via the website</a>.
 </p>
 
 <div class="endnotes">
 
   <div class="comments">
-    Please
-    <a href="http://www.delphidabbler.com/contact">
-    let me know</a> if you have any comments about the component, but please
-    use the Issue Tracker noted above to report bugs and request new
-    features.
+    Please <a
+      href="http://www.delphidabbler.com/contact"
+    > let me know</a> if you have any comments about the component, but please
+    use the Issue Tracker noted above to report bugs and request new features.
   </div>
 
   <div class="copyright">
-    This document is copyright &copy; 2005-2013, P D Johnson,
-    <a href="http://www.delphidabbler.com/">
-    www.delphidabbler.com</a>
+    This document is copyright &copy; 2005-2013, P D Johnson, <a
+      href="http://www.delphidabbler.com/"
+    >www.delphidabbler.com</a>
   </div>
 
 </div>

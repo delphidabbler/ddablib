@@ -153,8 +153,8 @@
 </h2>
 
 <ul>
-  <li><a href="#description">
-    Description</a>
+  <li>
+    <a href="#description">Description</a>
   </li>
   <li>
     <a href="#installation">Installation</a>
@@ -193,40 +193,38 @@
 <ul class="spaced">
   <li>
     <span class="highlight">TPJWinMsgDlg</span><br />
-    This component wraps the Windows <em>MessageBoxIndirect</em> API call
-    and displays a message box based on that provided by Windows. This
-    component will be suitable for most purposes and has the lighter
-    footprint.
+    This component wraps the Windows <em>MessageBoxIndirect</em> API call and
+    displays a message box based on that provided by Windows. This component
+    will be suitable for most purposes and has the lighter footprint.
   </li>
 
   <li>
     <span class="highlight">TPJVCLMsgDlg</span><br />
-    This component uses the Delphi VCL <var>CreateMessageDialog</var>
-    function to create a form based message box.
-    (<var>CreateMessageDialog</var> is used by the standard Delphi
-    <var>MessageDlgXXX</var> functions). The component provides more
-    flexibility than either the Delphi functions or <var>TPJWinMsgDlg</var>.
-    It should be used when it is necessary to display buttons or
-    combinations of buttons that are not supported by the Windows API
+    This component uses the Delphi VCL <var>CreateMessageDialog</var> function
+    to create a form based message box. (<var>CreateMessageDialog</var> is used
+    by the standard Delphi <var>MessageDlgXXX</var> functions). The component
+    provides more flexibility than either the Delphi functions or
+    <var>TPJWinMsgDlg</var>. It should be used when it is necessary to display
+    buttons or combinations of buttons that are not supported by the Windows API
     message box or when a finer degree of control over the appearance and
-    behaviour of the message box is required. <var>TPJVCLMsgDlg</var>
-    supports all the features of <var>TPJWinMsgDlg</var> and extends
-    them. The dialogue box component's form can been customised by handling
-    the <var>OnShow</var> and <var>OnHide</var> events.
+    behaviour of the message box is required. <var>TPJVCLMsgDlg</var> supports
+    all the features of <var>TPJWinMsgDlg</var> and extends them. The dialogue
+    box component's form can been customised by handling the <var>OnShow</var>
+    and <var>OnHide</var> events.
   </li>
 
   <li>
     <span class="highlight">TPJMessageDialog</span>
     <strong>(deprecated)</strong><br />
-    This is an updated version of the component supplied in release 1 of
-    this unit. Various bugs have been fixed and the handling of user icons
-    improved. This component is only provided for backwards compatibility
-    with existing projects that use the old version. It exposes the same
-    properties as the old component. Some of these properties vary from
-    those common to <var>TPJWinMsgDlg</var> and <var>TPJVCLMsgDlg</var>. It
-    is recommended that <var>TPJWinMsgDlg</var> or <var>TPJVCLMsgDlg</var>
-    are used in new projects. <strong><em>This component may be dropped from
-    future releases.</em></strong>
+    This is an updated version of the component supplied in release 1 of this
+    unit. Various bugs have been fixed and the handling of user icons improved.
+    This component is only provided for backwards compatibility with existing
+    projects that use the old version. It exposes the same properties as the old
+    component. Some of these properties vary from those common to
+    <var>TPJWinMsgDlg</var> and <var>TPJVCLMsgDlg</var>. It is recommended that
+    <var>TPJWinMsgDlg</var> or <var>TPJVCLMsgDlg</var> are used in new projects.
+    <strong><em>This component may be dropped from future
+    releases.</em></strong>
   </li>
 </ul>
 
@@ -238,9 +236,8 @@
 <p>
   A OpenHelp compatible help file is supplied that provides help on all the
   components. The help file integrates with the help system of Delphi 4 to 7.
-  The help file can be used stand-alone with later Delphis, but it does
-  require WinHelp which is not provided by default with Windows Vista and
-  later.
+  The help file can be used stand-alone with later Delphis, but it does require
+  WinHelp which is not provided by default with Windows Vista and later.
 </p>
 
 <p>
@@ -277,16 +274,16 @@
 
 <ul>
   <li class="first">
-    <strong><code>PJMessageDialog.pas</code></strong> &ndash; Classes,
-    routines and component source code.
+    <strong><code>PJMessageDialog.pas</code></strong> &ndash; Classes, routines
+    and component source code.
   </li>
   <li>
-    <strong><code>PJMessageDialog.dcr</code></strong> &ndash; Component
-    palette glyphs.
+    <strong><code>PJMessageDialog.dcr</code></strong> &ndash; Component palette
+    glyphs.
   </li>
   <li>
-    <code>PJMessageDialog.hlp</code> &ndash; Help file that integrates with
-    the Delphi 3 to 7 IDE.
+    <code>PJMessageDialog.hlp</code> &ndash; Help file that integrates with the
+    Delphi 3 to 7 IDE.
   </li>
   <li>
     <code>PJMessageDialog.als</code> &ndash; Keyword file required when
@@ -313,9 +310,9 @@
 </p>
 
 <p>
-  You can now install the components into the Delphi IDE. To do this, the
-  files <code>PJMessageDialog.pas</code> and <code>PJMessageDialog.dcr</code>
-  should be added to a design time package. If you need help doing this <a
+  You can now install the components into the Delphi IDE. To do this, the files
+  <code>PJMessageDialog.pas</code> and <code>PJMessageDialog.dcr</code> should
+  be added to a design time package. If you need help doing this <a
     href="http://www.delphidabbler.com/url/install-comp"
   >see here</a>.
 </p>
@@ -380,10 +377,10 @@
 </p>
 
 <p>
-  Software distributed under the License is distributed on an &quot;AS
-  IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
-  the License for the specific language governing rights and limitations under
-  the License.
+  Software distributed under the License is distributed on an &quot;AS IS&quot;
+  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+  License for the specific language governing rights and limitations under the
+  License.
 </p>
 
 <p>
@@ -414,10 +411,10 @@
 </p>
 
 <p>
-  Please note that the <var>OnHelp</var> event introduced in v2.2 does not
-  work correctly with <var>TPJVCLMsgDlg</var> on Delphi 6 in that it does not
-  always inhibit help from being automatically displayed. The event works
-  correctly on all other tested compiler versions.
+  Please note that the <var>OnHelp</var> event introduced in v2.2 does not work
+  correctly with <var>TPJVCLMsgDlg</var> on Delphi 6 in that it does not always
+  inhibit help from being automatically displayed. The event works correctly on
+  all other tested compiler versions.
 </p>
 
 

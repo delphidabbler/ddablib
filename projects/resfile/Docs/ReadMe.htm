@@ -152,31 +152,30 @@
 </h2>
 
 <p>
-   This unit contains classes that encapsulate Windows 32 bit binary resource
-   files and the resources contained in them. The main functionality is
-   provided by two classes:
+  This unit contains classes that encapsulate Windows 32 bit binary resource
+  files and the resources contained in them. The main functionality is provided
+  by two classes:
 </p>
 
 <ul>
   <li>
     <var>TPJResourceFile</var> &ndash; encapsulates the contents of a whole
     resource file and provides methods and properties for reading, finding,
-    editing, adding and deleting resources. Resource files can be read from
-    and written to files or streams.
+    editing, adding and deleting resources. Resource files can be read from and
+    written to files or streams.
   </li>
   <li>
     <div>
-      <var>TPJResourceEntry</var> &ndash; encapsulates a single resource
-      within the file and provides properties to access its header record
-      and its raw data. The class also has methods to check the identity
-      of the resource. The resource's raw data is made available as a
-      <var>TStream</var> and so is easily read and written using familiar
-      <var>TStream</var> methods.
+      <var>TPJResourceEntry</var> &ndash; encapsulates a single resource within
+      the file and provides properties to access its header record and its raw
+      data. The class also has methods to check the identity of the resource.
+      The resource's raw data is made available as a <var>TStream</var> and so
+      is easily read and written using familiar <var>TStream</var> methods.
     </div>
     <div class="pullout">
-      This class has no knowledge of resource data formats and sees the
-      data simply as a raw sequence of bytes. It is for the user of the
-      class to interpret the data correctly.
+      This class has no knowledge of resource data formats and sees the data
+      simply as a raw sequence of bytes. It is for the user of the class to
+      interpret the data correctly.
     </div>
   </li>
 </ul>
@@ -197,8 +196,8 @@
 </h2>
 
 <p>
-  The unit works with Delphi 4 and later. It has been tested on both Unicode
-  and non-Unicode Delphi compilers.
+  The unit works with Delphi 4 and later. It has been tested on both Unicode and
+  non-Unicode Delphi compilers.
 </p>
 
 <h2 id="installation">
@@ -207,8 +206,8 @@
 
 <p>
   The Resource File Unit and documentation are supplied in a zip file. Before
-  installing you need to extract all the files from the zip file, preserving
-  the directory structure. The following files will be extracted:
+  installing you need to extract all the files from the zip file, preserving the
+  directory structure. The following files will be extracted:
 </p>
 
 <ul>
@@ -236,14 +235,14 @@
 
 <ol class="spaced">
   <li>
-    The simplest way is to add <code>PJResFile.pas</code> to your projects
-    as you need it.
+    The simplest way is to add <code>PJResFile.pas</code> to your projects as
+    you need it.
   </li>
   <li>
-    To make the unit easier to re-use you can either copy it to a folder
-    on your Delphi search path, or add the folder where you extracted the
-    unit to the Delphi Search path. You then simply use the unit as
-    required without needing to add it to your project.
+    To make the unit easier to re-use you can either copy it to a folder on your
+    Delphi search path, or add the folder where you extracted the unit to the
+    Delphi Search path. You then simply use the unit as required without needing
+    to add it to your project.
   </li>
   <li>
     For maximum portability you can add the unit to a Delphi design time
@@ -258,8 +257,8 @@
 </h2>
 
 <p>
-   A complete change log is provided in the file <code>ChangeLog.txt</code>
-   that is included in the download.
+   A complete change log is provided in the file <code>ChangeLog.txt</code> that
+   is included in the download.
 </p>
 
 <h2 id="license">
@@ -269,26 +268,28 @@
 <p>
   This product, <em>Resource File Unit</em>, is subject to the Mozilla Public
   License Version 1.1 (the &quot;License&quot;). You may not use this Product
-  except in compliance with the License. You may obtain a copy of the License
-  at <a
+  except in compliance with the License. You may obtain a copy of the License at
+  <a
     href="http://www.mozilla.org/MPL/MPL-1.1"
   >http://www.mozilla.org/MPL/MPL-1.1</a>.
 </p>
 
 <p>
-  Software distributed under the License is distributed on an &quot;AS
-  IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
-  the License for the specific language governing rights and limitations under
-  the License.
+  Software distributed under the License is distributed on an &quot;AS IS&quot;
+  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+  License for the specific language governing rights and limitations under the
+  License.
 </p>
 
 <p>
   The Initial Developer of <em>Resource File Unit</em> is Peter D Johnson.
-  Portions created by the Initial Developer are Copyright &copy; 2004-2010
-  Peter D Johnson (www.delphidabbler.com). All Rights  Reserved.
+  Portions created by the Initial Developer are Copyright &copy; 2004-2010 Peter
+  D Johnson (www.delphidabbler.com). All Rights  Reserved.
 </p>
 
-<p>All relevant trademarks are acknowledged.</p>
+<p>
+  All relevant trademarks are acknowledged.
+</p>
 
 <h2 id="bugs">
   Bugs and Feature Requests
@@ -317,27 +318,29 @@
 
 <p>
   I'm Peter Johnson &ndash; a hobbyist programmer living in Ceredigion in West
-  Wales,  UK, writing write mainly in Delphi. My programs and code are
-  available from:
-  <a href="http://www.delphidabbler.com/">http://www.delphidabbler.com/</a>.
+  Wales, UK, writing write mainly in Delphi. My programs and code are available
+  from: <a
+    href="http://www.delphidabbler.com/"
+  >http://www.delphidabbler.com/</a>.
 </p>
 
 <p>
-  I can be <a href="http://www.delphidabbler.com/contact">contacted via the
-  website.</a>
+  I can be <a
+    href="http://www.delphidabbler.com/contact"
+  >contacted via the website</a>.
 </p>
 
 <div class="endnotes">
   <div class="comments">
-    Please
-    <a href="http://www.delphidabbler.com/contact">
-    let me know</a> if you have any comments about the classes, but please
-    use the Issue Tracker above to report bugs and request new features.
+    Please <a
+      href="http://www.delphidabbler.com/contact"
+    > let me know</a> if you have any comments about the classes, but please use
+    the Issue Tracker above to report bugs and request new features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2010, P D Johnson,
-    <a href="http://www.delphidabbler.com/">
-    www.delphidabbler.com</a>
+    This document is copyright &copy; 2010, P D Johnson, <a
+      href="http://www.delphidabbler.com/"
+    >www.delphidabbler.com</a>.
   </div>
 </div>
 
