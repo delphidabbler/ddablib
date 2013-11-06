@@ -88,9 +88,9 @@ The 12 demos are:
     text instead of ANSI or ASCII text.
 
 For further information go to
-http://wiki.delphidabbler.com/index.php/Docs/ConsoleAppExamples where you find
-a set of examples based on the demo programs. The number of each example relates
-to the number of the associated demo project.
+http://wiki.delphidabbler.com/index.php/Docs/ConsoleAppExamples where you will
+find a set of examples based on the demo programs. The number of each example
+relates to the number of the associated demo project.
 
 --------------------------------------------------------------------------------
 Compatibility
