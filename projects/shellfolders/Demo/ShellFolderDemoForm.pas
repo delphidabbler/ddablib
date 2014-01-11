@@ -32,6 +32,7 @@ uses
   {$ELSE}
   Vcl.ImgList, Vcl.Controls, Vcl.StdCtrls, Vcl.ComCtrls, System.Classes,
   Vcl.ExtCtrls, Vcl.Forms, Winapi.ShlObj, Winapi.Windows, Vcl.Graphics,
+  System.UITypes,
   {$ENDIF}
   PJShellFolders;
 
