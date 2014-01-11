@@ -10,17 +10,11 @@
 
 unit FmStreamWrap;
 
-interface
-
-uses
-  // Delphi
-  StdCtrls, Controls, Classes, Forms,
-  // delphiDabbler Stream Library
-  PJStreamWrapper;
-
+{$UNDEF REQUIRES_TYPES_UNIT}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+    {$DEFINE REQUIRES_TYPES_UNIT}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_CODE OFF}
@@ -28,6 +22,20 @@ uses
     {$WARN UNSAFE_TYPE OFF}
   {$IFEND}
 {$ENDIF}
+
+interface
+
+uses
+  // Delphi
+  {$IFDEF REQUIRES_TYPES_UNIT}
+  System.UITypes,
+  {$ENDIF}
+  StdCtrls,
+  Controls,
+  Classes,
+  Forms,
+  // delphiDabbler Stream Library
+  PJStreamWrapper;
 
 type
   {
