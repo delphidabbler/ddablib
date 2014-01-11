@@ -113,7 +113,9 @@ Demos 6, 7, 8, 9 and 12 also require one or more units from the I/O Utility
 Classes project. You will need to download this project and place the
 PJPipe.pas, PJFileHandle.pas and PJPipeFilters.pas files in the Demos\IOUtils
 directory. A zip file containing the I/O Utility Classes project can be
-downloaded from http://delphidabbler.com/software/ioutils/download.
+downloaded from http://delphidabbler.com/software/ioutils/download. If you are
+using Delphi XE5 or later ensure that you use I/O Utility Classes v1.0.1 or
+later.
 
 The example console applications have no external dependencies.
 
@@ -151,8 +153,8 @@ will all compile successfully as 64 bit Windows applications with Delphi XE2 and
 later, but you will need to manually add 64 bit targets to each project
 individually.
 
-Note: some versions of Delphi may generate hints, or possibly warning, depending
-on your set-up. These should not cause a problem.
+Note: some versions of Delphi may generate hints, or possibly warnings,
+depending on your set-up. These should not cause a problem.
 
 --------------------------------------------------------------------------------
 Disclaimer
