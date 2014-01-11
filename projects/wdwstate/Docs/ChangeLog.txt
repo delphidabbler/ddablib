@@ -11,7 +11,7 @@
 ; Change Log for Window State Components
 ; ------------------------------------------------------------------------------
 
-Release v5.5.3 of 11 January 2013
+Release v5.5.3 of 11 January 2014
 + Fixed problem with compiler directives in Window State Components unit that was causing compilation to fail on Delphi XE5.
 
 Release v5.5.2 of 30 October 2013
