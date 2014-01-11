@@ -5,7 +5,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/
  *
- * Copyright (C) 2005-2013, Peter Johnson (www.delphidabbler.com).
+ * Copyright (C) 2005-2014, Peter Johnson (www.delphidabbler.com).
  *
  * $Rev$
  * $Date$
@@ -238,9 +238,9 @@
   <var>TPJAboutBoxDlg</var> is believed to compile on all Win32 versions of
   Delphi. Earlier versions were tested with Delphi 2, 3, 4, 6 and 7 but,
   although every effort has been made to retain backward compatibility, this has
-  not been tested for v3.6. The latest version has been tested with Delphi 7,
-  2007, 2009, 2010, XE, XE2 and XE3. <strong>Note:</strong> Delphi 1 support was
-  dropped at v3.5.
+  not been tested for v3.6 and later. The latest version has been tested with
+  Delphi 7, 2007, 2009, 2010, XE, and XE2 to XE4. <strong>Note:</strong> Delphi
+  1 support was dropped at v3.5.
 </p>
 
 <p>
@@ -263,11 +263,20 @@
 </h2>
 
 <div class="pullout">
-  <strong>Important Note:</strong> Please ensure that you have installed the
-  <var><a
-    href="http://www.delphidabbler.com/software?id=verinfo"
-  >TPJVersionInfo</a></var> component v3.0 or later (v3.3.1 or later preferred)
-  <strong>before</strong> installing the about box component.
+  <div class="content">
+    <strong>Important Note:</strong> If you use any Delphi compiler up to XE4,
+    please ensure that you have installed the
+    <var><a
+      href="http://www.delphidabbler.com/software?id=verinfo"
+    >TPJVersionInfo</a></var> component v3.0 or later (v3.3.2 or later
+    preferred) <strong>before</strong> installing the about box component.
+  </div>
+  <div class="content">
+    If you are using Delphi XE5 or later you need <var><a
+      href="http://www.delphidabbler.com/software?id=verinfo"
+    >TPJVersionInfo</a></var> v3.3.2 as a minimum, otherwise the code will not
+    compile.
+  </div>
 </div>
 
 <p>
@@ -442,7 +451,7 @@
     use the Issue Tracker noted above to report bugs and request new features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2005-2013, P D Johnson, <a
+    This document is copyright &copy; 2005-2014, P D Johnson, <a
       href="http://www.delphidabbler.com/"
     >www.delphidabbler.com</a>.
   </div>
