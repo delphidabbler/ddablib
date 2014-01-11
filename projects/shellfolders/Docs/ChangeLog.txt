@@ -3,13 +3,18 @@
 ; v. 2.0. If a copy of the MPL was not distributed with this file, You can
 ; obtain one at http://mozilla.org/MPL/2.0/
 ;
-; Copyright (C) 2013, Peter Johnson (www.delphidabbler.com).
+; Copyright (C) 2013-2014, Peter Johnson (www.delphidabbler.com).
 ;
 ; $Rev$
 ; $Date$
 ;
 ; Change Log for Shell Folders Unit
 ; ------------------------------------------------------------------------------
+
+Release v2.3.2 of 11 January 2014
++ Fixed problem with compiler directives in component and demo source files that was causing compilation to fail on Delphi XE5.
++ Fixed further conditional compilation problem in demo source where wrong unit uses clause was being compiled in Delphi XE2 and later.
++ Minor documentation tweaks and corrections.
 
 Release v2.3.1 of 05 November 2013
 + Modified components to compile and function correctly with 64 bit Delphi compilers.
