@@ -6,9 +6,11 @@
 unit TestPJStreamWrapper;
 
 {$UNDEF SUPPORTS_TSTREAM64}
+{$UNDEF REQUIRES_TYPES_UNIT}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+    {$DEFINE REQUIRES_TYPES_UNIT}
   {$IFEND}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
     {$DEFINE SUPPORTS_TSTREAM64}
@@ -22,6 +24,9 @@ uses
   TestFrameWork,
   // Delphi
   Classes,
+  {$IFDEF REQUIRES_TYPES_UNIT}
+  Types,
+  {$ENDIF}
   // Project
   PJStreamWrapper;
 
