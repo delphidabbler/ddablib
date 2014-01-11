@@ -1,4 +1,4 @@
-{ 
+{
  * ShellFolderDemo.dpr
  *
  * Project file for Shell Folders Unit demo program.
@@ -12,6 +12,15 @@
 
 
 program ShellFolderDemo;
+
+// Minimum compiler for this project is Delphi 7.
+{$UNDEF RTLNameSpaces}
+{$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+  {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+{$IFEND}
+{$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+  {$DEFINE RTLNameSpaces}
+{$IFEND}
 
 uses
   {$IFNDEF RTLNameSpaces}
