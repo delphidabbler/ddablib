@@ -15,11 +15,14 @@ unit FmEg2;
 
 {$UNDEF Supports_RTLNameSpaces}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
-    {$WARN UNSAFE_CODE OFF}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
-  {$IF CompilerVersion >= 23.0}   // Delphi XE2
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
     {$DEFINE Supports_RTLNameSpaces}
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
+    {$WARN UNSAFE_CODE OFF}
   {$IFEND}
 {$ENDIF}
 

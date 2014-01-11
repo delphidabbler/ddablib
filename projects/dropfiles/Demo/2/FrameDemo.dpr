@@ -16,7 +16,10 @@ program FrameDemo;
 
 {$UNDEF DELPHIXE2ANDUP}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 23.0} // Delphi XE2
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
     {$DEFINE DELPHIXE2ANDUP}
   {$IFEND}
 {$ENDIF}

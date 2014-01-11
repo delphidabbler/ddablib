@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/
  *
- * Copyright (C) 2001-2013, Peter Johnson (www.delphidabbler.com).
+ * Copyright (C) 2001-2014, Peter Johnson (www.delphidabbler.com).
  *
  * $Rev$
  * $Date$
@@ -27,17 +27,20 @@ interface
   {$DEFINE DELPHI5ANDUP}
 {$ENDIF}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
-    {$DEFINE DELPHI5ANDUP}
-    {$DEFINE DELPHI6ANDUP}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE RTLNameSpaces}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$DEFINE DELPHI7ANDUP}
     {$WARN UNSAFE_CODE OFF}
     {$WARN UNSAFE_CAST OFF}
   {$IFEND}
-  {$IF CompilerVersion >= 23.0} // Delphi XE2
-    {$DEFINE RTLNameSpaces}
+  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
+    {$DEFINE DELPHI5ANDUP}
+    {$DEFINE DELPHI6ANDUP}
   {$IFEND}
 {$ENDIF}
 

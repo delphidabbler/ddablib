@@ -24,7 +24,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1999-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1999-2014 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -57,7 +57,10 @@ interface
 
 // Switch off warnings where this is supported
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_CODE OFF}
   {$IFEND}
 {$ENDIF}

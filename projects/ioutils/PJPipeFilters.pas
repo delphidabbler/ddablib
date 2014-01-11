@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/
  *
- * Copyright (C) 2011-2013, Peter Johnson (www.delphidabbler.com).
+ * Copyright (C) 2011-2014, Peter Johnson (www.delphidabbler.com).
  *
  * $Rev$
  * $Date$
@@ -18,17 +18,20 @@ unit PJPipeFilters;
 {$UNDEF STRICT}
 {$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
-    {$DEFINE COMPILERSUPPORTED}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
-  {$IF CompilerVersion >= 17.0}   // >= Delphi 2005
-    {$DEFINE STRICT}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE RTLNAMESPACES}
   {$IFEND}
-  {$IF CompilerVersion >= 18.0}   // >= Delphi 2006
+  {$IF CompilerVersion >= 18.0} // Delphi 2006 and later
     {$DEFINE ABSTRACTCLASSES}
   {$IFEND}
-  {$IF CompilerVersion >= 23.0}   // >= Delphi XE2
-    {$DEFINE RTLNAMESPACES}
+  {$IF CompilerVersion >= 17.0} // Delphi 2005 and later
+    {$DEFINE STRICT}
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
+    {$DEFINE COMPILERSUPPORTED}
   {$IFEND}
 {$ENDIF}
 

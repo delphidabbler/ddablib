@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/
  *
- * Copyright (C) 1999-2013, Peter Johnson (www.delphidabbler.com).
+ * Copyright (C) 1999-2014, Peter Johnson (www.delphidabbler.com).
  *
  * $Rev$
  * $Date$
@@ -15,7 +15,8 @@
 unit PJWdwState;
 
 // Conditional defines
-// Note: Delphi 1/2 not included since code will not compile on these compilers
+// Note: There is no version checking for Delphi 1 and 2 not since this unit
+// will not compile with those compilers.
 {$DEFINE WarnDirs}          // $WARN compiler directives available
 {$DEFINE RegAccessFlags}    // TRegistry access flags available
 {$UNDEF RTLNameSpaces}      // Don't qualify RTL units names with namespaces
@@ -36,11 +37,12 @@ unit PJWdwState;
   {$UNDEF WarnDirs}
 {$ENDIF}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 23.0} // Delphi XE2
-    {$DEFINE RTLNameSpaces}
-  {$IFEND}
-  {$IF CompilerVersion >= 24.0} // Delphi XE3
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
     {$DEFINE TScrollStyleMoved}
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE RTLNameSpaces}
   {$IFEND}
 {$ENDIF}
 

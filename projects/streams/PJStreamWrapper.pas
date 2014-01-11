@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/
  *
- * Copyright (C) 2000-2013, Peter Johnson (www.delphidabbler.com).
+ * Copyright (C) 2000-2014, Peter Johnson (www.delphidabbler.com).
  *
  * $Rev$
  * $Date$
@@ -22,14 +22,17 @@ unit PJStreamWrapper;
 {$UNDEF SUPPORTS_TSTREAM64}
 {$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 14.0} // >= Delphi 6
-    {$DEFINE SUPPORTS_TSTREAM64}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
-  {$IF CompilerVersion >= 18.0} // >= Delphi 2006
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE RTLNAMESPACES}
+  {$IFEND}
+  {$IF CompilerVersion >= 18.0} // Delphi 2006 and later
     {$DEFINE SUPPORTS_STRICT}
   {$IFEND}
-  {$IF CompilerVersion >= 23.0} // >= Delphi XE2
-    {$DEFINE RTLNAMESPACES}
+  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
+    {$DEFINE SUPPORTS_TSTREAM64}
   {$IFEND}
 {$ENDIF}
 

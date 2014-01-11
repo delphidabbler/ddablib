@@ -3,12 +3,12 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/
  *
- * Copyright (C) 2007-2013, Peter Johnson (www.delphidabbler.com).
+ * Copyright (C) 2007-2014, Peter Johnson (www.delphidabbler.com).
  *
  * $Rev$
  * $Date$
  *
- * Class that encapsulates an unamed pipe and can read and write the pipe.
+ * Class that encapsulates an unnamed pipe and can read and write the pipe.
 }
 
 unit PJPipe;
@@ -17,25 +17,20 @@ unit PJPipe;
 {$UNDEF STRICT}
 {$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0}   // >= Delphi 7
-    {$DEFINE COMPILERSUPPORTED}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
-  {$IF CompilerVersion >= 17.0}   // >= Delphi 2005
-    {$DEFINE STRICT}
-  {$IFEND}
-  {$IF CompilerVersion >= 23.0}   // >= Delphi XE2
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 ad later
     {$DEFINE RTLNAMESPACES}
+  {$IFEND}
+  {$IF CompilerVersion >= 17.0} // Delphi 2005 and later
+    {$DEFINE STRICT}
   {$IFEND}
 {$ENDIF}
 
 {$IFNDEF COMPILERSUPPORTED}
   {$MESSAGE FATAL 'Minimum compiler version is Delphi 7'}
 {$ENDIF}
-
-{$UNDEF RTLNAMESPACES}
-{$IF CompilerVersion >= 23.0} // >= Delphi XE2
-  {$DEFINE RTLNAMESPACES}
-{$IFEND}
 
 {$WARN UNSAFE_CODE OFF}
 

@@ -25,7 +25,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 1999-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 1999-2014 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -45,7 +45,10 @@ interface
 // Delphi 2 to 5 use the Forms unit while Delphi 6 and later use Classes
 {$DEFINE ALLOCATEHWNDINFORMS}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 14.0} // >= Delphi 6
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
     {$UNDEF ALLOCATEHWNDINFORMS}
   {$IFEND}
 {$ENDIF}

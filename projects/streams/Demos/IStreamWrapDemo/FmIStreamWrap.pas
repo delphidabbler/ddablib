@@ -17,7 +17,10 @@ uses
   ComCtrls, Menus, Buttons, StdCtrls, Controls, Classes, Forms, ActiveX;
 
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_CODE OFF}
     {$WARN UNSAFE_CAST OFF}
     {$WARN UNSAFE_TYPE OFF}

@@ -35,7 +35,10 @@ program Echoer;
 
 {$UNDEF COMPILERSUPPORTED}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0}   // Delphi 7
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$DEFINE COMPILERSUPPORTED}
   {$IFEND}
 {$ENDIF}

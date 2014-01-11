@@ -30,7 +30,10 @@ interface
 // anonymous methods
 {$UNDEF CANCOMPILE}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 20.0}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 20.0} // Delphi 2009 and later
     {$DEFINE CANCOMPILE}
   {$IFEND}
 {$ENDIF}

@@ -10,7 +10,7 @@
  * $Rev$
  * $Date$
  *
- * ***** BEGIN LICENSE BLOCK *****                           
+ * ***** BEGIN LICENSE BLOCK *****
  *
  * Version: MPL 1.1
  *
@@ -27,7 +27,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2001-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2001-2014 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s):
@@ -44,14 +44,17 @@ unit PJEnvVars;
 {$UNDEF SUPPORTS_EOSERROR}
 {$UNDEF HAS_TYPES_UNIT}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 14.0} // >= Delphi 6
-    {$DEFINE SUPPORTS_EOSERROR} // SysUtils defines EOSError
-    {$DEFINE HAS_TYPES_UNIT}    // Types unit is available
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
-  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     // Switch off unsafe warnings
     {$WARN UNSAFE_TYPE OFF}
     {$WARN UNSAFE_CODE OFF}
+  {$IFEND}
+  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
+    {$DEFINE SUPPORTS_EOSERROR} // SysUtils defines EOSError
+    {$DEFINE HAS_TYPES_UNIT}    // Types unit is available
   {$IFEND}
 {$ENDIF}
 

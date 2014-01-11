@@ -25,7 +25,7 @@
  * The Initial Developer of the Original Code is Peter Johnson
  * (http://www.delphidabbler.com/).
  *
- * Portions created by the Initial Developer are Copyright (C) 2001-2010 Peter
+ * Portions created by the Initial Developer are Copyright (C) 2001-2014 Peter
  * Johnson. All Rights Reserved.
  *
  * Contributor(s)
@@ -40,7 +40,10 @@ unit PJMessageDialog;
 
 // Switch off unsafe warnings if supported
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 15.0} // >= Delphi 7
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_CAST OFF}
   {$IFEND}
 {$ENDIF}
