@@ -7,5 +7,8 @@ if any, of the I/O Utility Classes units are used by which demos.
 You can download a zip file containing the I/O Utility Classes project from
 http://delphidabbler.com/software/ioutils/download
 
+Users of Delphi XE5 and later must use v1.0.1 or later of the I/O Utility
+Classes.
+
 Once you have downloaded the project, copy the required units from the zip file
 into this directory.
