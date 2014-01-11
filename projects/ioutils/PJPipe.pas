@@ -26,6 +26,9 @@ unit PJPipe;
   {$IF CompilerVersion >= 17.0} // Delphi 2005 and later
     {$DEFINE STRICT}
   {$IFEND}
+  {$IF CompilerVersion >= 15.0} // Delphi 7 and later
+    {$DEFINE COMPILERSUPPORTED}
+  {$IFEND}
 {$ENDIF}
 
 {$IFNDEF COMPILERSUPPORTED}
