@@ -49,6 +49,7 @@ del /S %RootDir%\*.identcache
 del /S %RootDir%\*.ini
 del /S %RootDir%\*.local
 del /S %RootDir%\*.tmp
+del /S %RootDir%\*.rsm
 echo.
 
 echo Deleting temporary sub-directories from %InfoMsg%
