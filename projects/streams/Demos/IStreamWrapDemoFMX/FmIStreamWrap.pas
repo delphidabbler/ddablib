@@ -16,7 +16,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Win.ComObj,
   FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.Menus, FMX.Memo, FMX.Types,
-  FMX.Layouts,
+  FMX.Layouts, FMX.StdCtrls,
   Winapi.ActiveX, Winapi.Windows;
 
 type
