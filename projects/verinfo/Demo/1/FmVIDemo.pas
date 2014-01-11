@@ -32,6 +32,7 @@ uses
   {$IFDEF Supports_RTLNameSpaces}
   Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Buttons, Vcl.Dialogs, Vcl.Controls,
   System.Classes, Vcl.Forms, Winapi.Windows, Winapi.Messages, Vcl.ExtCtrls,
+  System.UITypes,
   {$ELSE}
   ComCtrls, StdCtrls, Buttons, Dialogs, Controls, Classes, Forms, Windows,
   Messages, ExtCtrls,
