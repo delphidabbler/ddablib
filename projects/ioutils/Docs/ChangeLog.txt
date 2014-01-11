@@ -3,13 +3,17 @@
 ; v. 2.0. If a copy of the MPL was not distributed with this file, You can
 ; obtain one at http://mozilla.org/MPL/2.0/
 ;
-; Copyright (C) 2013, Peter Johnson (www.delphidabbler.com).
+; Copyright (C) 2013-2014, Peter Johnson (www.delphidabbler.com).
 ;
 ; $Rev$
 ; $Date$
 ;
 ; Change Log for I/O Utility Classes
 ; ------------------------------------------------------------------------------
+
+Release v1.0.1 of 11 January 2014
++ Fixed problems with compiler directives in all I/O Utility Classes units that were causing compilation to fail on Delphi XE5.
++ Minor documentation tweaks and corrections.
 
 Release v1.0.0 of 21 March 2013
 See Console Application Runner Classes change log up to release 2.0 for details of earlier changes to these files.
