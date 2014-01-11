@@ -3,13 +3,16 @@
 ; v. 2.0. If a copy of the MPL was not distributed with this file, You can
 ; obtain one at http://mozilla.org/MPL/2.0/
 ;
-; Copyright (C) 2013, Peter Johnson (www.delphidabbler.com).
+; Copyright (C) 2013-2014, Peter Johnson (www.delphidabbler.com).
 ;
 ; $Rev$
 ; $Date$
 ;
 ; Change Log for Drop Files Components
 ; ------------------------------------------------------------------------------
+
+Release v5.0.5 of 14 January 2014
++ Fixed problem with compiler directives in component and demo source files that was causing compilation to fail on Delphi XE5.
 
 Release v5.0.4 of 04 November 2013
 + Changed form used for TPJExtFileFilter.Extensions property editor:
