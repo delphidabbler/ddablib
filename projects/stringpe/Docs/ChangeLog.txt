@@ -3,13 +3,17 @@
 ; v. 2.0. If a copy of the MPL was not distributed with this file, You can
 ; obtain one at http://mozilla.org/MPL/2.0/
 ;
-; Copyright (C) 2013, Peter Johnson (www.delphidabbler.com).
+; Copyright (C) 2013-2014, Peter Johnson (www.delphidabbler.com).
 ;
 ; $Rev$
 ; $Date$
 ;
 ; Change Log for Extended String Property Editor
 ; ------------------------------------------------------------------------------
+
+Release v2.0.3 of 12 January 2014
++ Fixed problem with compiler directives in property editor unit that was causing compilation to fail on Delphi XE5.
++ Minor corrections to read-me file.
 
 Release v2.0.2 of 01 November 2013
 + Fixed issue #28 where window settings were not persistent (registry read code was in error).
