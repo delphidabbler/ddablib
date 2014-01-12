@@ -5,7 +5,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/
  *
- * Copyright (C) 2005-2013, Peter Johnson (www.delphidabbler.com).
+ * Copyright (C) 2005-2014, Peter Johnson (www.delphidabbler.com).
  *
  * $Rev$
  * $Date$
@@ -71,7 +71,9 @@
       margin-top: 0.5em;
     }
     ul.spaced li,
-    ol.spaced li {
+    ul.spaced li div,
+    ol.spaced li,
+    ol.spaced li div {
       margin-top: 0.5em;
     }
     ul.unspaced li,
@@ -183,40 +185,64 @@
 <ul class="spaced">
 
   <li>
-    <span class="highlight">TPJWdwState</span><br />
-    This component records window information in an ini file. The user has
-    control over the ini file name (via the <var>IniFileName</var> property),
-    the root path used when the specified file name is relative (via the
-    <var>IniRootPath</var> and the name of the section of the file where window
-    information is recorded (using the <var>Section</var> property).
-    Alternatively the ini file name and section names can be configured by
-    handling the <var>OnGetIniData</var> and <var>OnGetIniDataEx</var> events
-    that are triggered immediately before the ini file is read or written.
+    <div class="highlight">
+      TPJWdwState
+    </div>
+    <div>
+      This component records window information in an ini file. The user has
+      control over the ini file name (via the <var>IniFileName</var> property),
+      the root path used when the specified file name is relative (via the
+      <var>IniRootPath</var> and the name of the section of the file where
+      window information is recorded (using the <var>Section</var> property).
+      Alternatively the ini file name and section names can be configured by
+      handling the <var>OnGetIniData</var> and <var>OnGetIniDataEx</var> events
+      that are triggered immediately before the ini file is read or written.
+    </div>
   </li>
 
   <li>
-    <span class="highlight">TPJRegWdwState</span><br />
-    This component uses the registry to record window information. The registry
-    root key and sub key where the information is stored are controlled by the
-    <var>RootKey</var> and <var>SubKey</var> properties, or by handling the
-    <var>OnGetRegData</var> event. This event is triggered just before the
-    registry is accessed. Additional application defined data can be read from
-    or written to the registry by handling the <var>OnGettingRegData</var> and
-    <var>OnPuttingRegData</var> events that are triggered after the component
-    reads or writes the registry.<br />
-    <strong>Important Note:</strong> You are discouraged from using
-    <var>TPJRegWdwState</var> for programs compiled with Delphi 5 and earlier
-    that may be run on 64 bit Windows, because the component may not be able to
-    access the 64 bit registry view correctly and window state may be lost.
+    <div class="highlight">
+      TPJRegWdwState&dagger;
+    </div>
+    <div>
+      This component uses the registry to record window information. The
+      registry root key and sub key where the information is stored are
+      controlled by the <var>RootKeyEx</var>&dagger;&dagger; and
+      <var>SubKey</var> properties, or by handling the <var>OnGetRegData</var>
+      event. This event is triggered just before the registry is accessed.
+      Additional application defined data can be read from or written to the
+      registry by handling the <var>OnGettingRegData</var> and
+      <var>OnPuttingRegData</var> events that are triggered after the component
+      reads or writes the registry.
+    </div>
+    <div>
+      &dagger; You are discouraged from using <var>TPJRegWdwState</var> for
+      programs compiled with Delphi 5 and earlier that may be run on 64 bit
+      Windows, because the component may not be able to access the 64 bit
+      registry view correctly and window state may be lost.
+    </div>
+    <div>
+      &dagger;&dagger; As of v5.6.0 the <var>RootKeyEx</var> property superseded
+      <var>RootKey</var>. The new property takes an enumerated value to set the
+      required root key instead of the numerical value used for
+      <var>RootKey</var>. This makes <var>RootKeyEx</var> much easier to use in
+      the Delphi Object Inspector because the use selects between user friendly
+      value names instead of having to enter an integer value. Note that the
+      <var>RootKey</var> property has been retained for backward compatibility.
+    </div>
   </li>
 
   <li>
-    <span class="highlight">TPJUserWdwState</span><br />
-    This component relies on the user to handle saving and reading the window
-    state data to or from persistent storage. The component gives the most
-    flexibility of all the components at the expense of placing the storage
-    burden on the user. The component triggers <var>OnReadData</var> and
-    <var>OnSaveData</var> events when ready to read or save data.
+    <div class="highlight">
+      TPJUserWdwState
+    </div>
+    <div>
+      This component relies on the user to handle saving and reading the window
+      state data to or from persistent storage. The component gives the most
+      flexibility of all the components at the expense of placing the storage
+      burden on the user. The component triggers <var>OnReadData</var> and
+      <var>OnSaveData</var> events when ready to read or save data.
+    </div>
   </li>
 
 </ul>
@@ -291,9 +317,10 @@
 </h3>
 
 <p>
-  The components have been tested on Delphi 7 and later 32 bit Windows compiler
-  and the Delphi XE2 and later 64 bit compiler. The components <em>may</em>
-  compile on older compilers, but that is not guaranteed.
+  The components are compatible with the Delphi Windows 32 bit and 64 bit
+  compiler. They have been tested using Delphi 7 and Delphi 2006 through to
+  Delphi XE4. The components <em>may</em> compile on older compilers, but that
+  has not been tested.
 </p>
 
 <p>
@@ -523,7 +550,7 @@
   </div>
 
   <div class="copyright">
-    This document is copyright &copy; 2005-2013, P D Johnson, <a
+    This document is copyright &copy; 2005-2014, P D Johnson, <a
       href="http://www.delphidabbler.com/"
     >www.delphidabbler.com</a>
   </div>
