@@ -14,7 +14,6 @@ unit FmIStreamWrap;
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
-    {$DEFINE REQUIRES_TYPES_UNIT}
   {$IFEND}
   {$IF CompilerVersion >= 25.0} // Delphi XE4 and later
     {$DEFINE REQUIRES_FMX_STDCTRLS}
