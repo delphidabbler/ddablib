@@ -659,6 +659,21 @@ type
   }
   TPJWdwStateRegAccessEvent = procedure(const Reg: TRegistry) of object;
 
+  {TPJRegRootKey:
+    Enumeration of values that represent the registry root keys supported by
+    TPJRegWdwState. Each value represents and maps to the similarly named
+    HKEY_* constant, as shown in the comments.
+  }
+  TPJRegRootKey = (
+    hkClassesRoot,      // HKEY_CLASSES_ROOT
+    hkCurrentUser,      // HKEY_CURRENT_USER
+    hkLocalMachine,     // HKEY_LOCAL_MACHINE
+    hkUsers,            // HKEY_USERS
+    hkPerformanceData,  // HKEY_PERFORMANCE_DATA
+    hkCurrentConfig,    // HKEY_CURRENT_CONFIG
+    hkDynData           // HKEY_DYN_DATA
+  );
+
   {
   TPJRegWdwState:
     Implements a component that records a window's size, position and state
@@ -670,8 +685,8 @@ type
   }
   TPJRegWdwState = class(TPJCustomWdwState)
   private // properties
-    fRootKey: HKEY;
-      {Value of RootKey property}
+    fRootKeyEx: TPJRegRootKey;
+      {Value of RootKeyEx property}
     fSubKey: string;
       {Value of SubKey property}
     fOnGetRegData: TPJWdwStateGetRegData;
@@ -680,6 +695,15 @@ type
       {Event handler for OnGettingRegData event}
     fOnPuttingRegData: TPJWdwStateRegAccessEvent; // Added by BJM
       {Event handler for OnPuttingRegData event}
+    function GetRootKey: HKEY;
+      {Read accessor for RootKey property.
+        @return Required property value.
+      }
+    procedure SetRootKey(const Value: HKEY);
+      {Write accessor for RootKey property.
+        @param Value [in] New property value.
+        @exception ERangeError raised if value is not a recognised HKEY_* value.
+      }
     procedure SetSubKey(const Value: string);
       {Write accessor method for SubKey property.
         @param Value [in] New property value. If Value='' then the property is
@@ -731,9 +755,17 @@ type
     // Published inherited property
     property OnReadWdwState;
     // New properties
-    property RootKey: HKEY read fRootKey write fRootKey
+    property RootKey: HKEY read GetRootKey write SetRootKey
       default HKEY_CURRENT_USER;
-      {Registry root key to use. Must be set to a valid HKEY value}
+      {Registry root key to use. Must be set to a valid HKEY value. Setting this
+      property also sets RootKeyEx to a corresponding value}
+    property RootKeyEx: TPJRegRootKey read fRootKeyEx write fRootKeyEx
+      stored False default hkCurrentUser;
+      {Registry root key to use as specified by a value from the TPJRegRootKey
+      enumeration. Setting this property also sets RootKey to a corresponding
+      value.
+      NOTE: This property is provided to make it easier to set root keys at
+      design time to avoid remembering the root key value as an integer}
     property SubKey: string read fSubKey write SetSubKey;
       {The sub-key below root key where window state is to be stored. If set to
       empty string the value of '/Software/<Program Name>/Window/<Form Name>'
@@ -1649,6 +1681,43 @@ end;
 
 { TPJRegWdwState }
 
+resourcestring
+  // Error messages
+  sErrBadHKEY = '%d is not a valid HKEY value.';
+
+const
+  // Map of supported HKEY_ constants onto corresponding TPJRegRootKey values.
+  RegRootKeyMap: array[TPJRegRootKey] of HKEY = (
+    HKEY_CLASSES_ROOT,          // hkClassesRoot
+    HKEY_CURRENT_USER,          // hkCurrentUser
+    HKEY_LOCAL_MACHINE,         // hkLocalMachine
+    HKEY_USERS,                 // hkUsers
+    HKEY_PERFORMANCE_DATA,      // hkPerformanceData
+    HKEY_CURRENT_CONFIG,        // hkCurrentConfig
+    HKEY_DYN_DATA               // hkDynData
+  );
+
+function TryHKEYToCode(const RootKey: HKEY; var Value: TPJRegRootKey): Boolean;
+  {Attempts to convert a HKEY value into the corresponding TPJRegRootKey value.
+    @param RootKey [in] HKEY value to convert.
+    @param Value [in/out] Set to TPJRegRootKey value corresponding to RootKey.
+      Value is undefined if RootKey has no corresponding TPJRegRootKey value.
+    @return True if RootKey is valid and has corresponding TPJRegRootKey value
+      or False of not.
+  }
+var
+  Code: TPJRegRootKey;
+begin
+  Result := True;
+  for Code := Low(TPJRegRootKey) to High(TPJRegRootKey) do
+    if RegRootKeyMap[Code] = RootKey then
+    begin
+      Value := Code;
+      Exit;
+    end;
+  Result := False;
+end;
+
 function ReadRegInt(const Reg: TRegistry; const AName: string;
   const ADefault: Integer): Integer;
   {Reads integer value from current sub key in registry, using a default value
@@ -1711,7 +1780,7 @@ constructor TPJRegWdwState.Create(AOwner: TComponent);
   }
 begin
   inherited Create(AOwner);
-  fRootKey := HKEY_CURRENT_USER;
+  fRootKeyEx := hkCurrentUser;
   SetSubKey('');
 end;
 
@@ -1731,6 +1800,14 @@ begin
   // Allow user to change these by handling OnGetRegData event
   if Assigned(fOnGetRegData) then
     fOnGetRegData(ARootKey, ASubKey);
+end;
+
+function TPJRegWdwState.GetRootKey: HKEY;
+  {Read accessor for RootKey property.
+    @return Required property value.
+  }
+begin
+  Result := RegRootKeyMap[fRootKeyEx];
 end;
 
 procedure TPJRegWdwState.ReadWdwState(var Left, Top, Width, Height,
@@ -1812,6 +1889,22 @@ begin
   finally
     Reg.Free;
   end;
+end;
+
+procedure TPJRegWdwState.SetRootKey(const Value: HKEY);
+  {Write accessor for RootKey property.
+    @param Value [in] New property value.
+    @exception ERangeError raised if value is not a recognised HKEY_* value.
+  }
+//var
+//  NewRootKeyEx: TPJRegRootKey;
+begin
+  if not TryHKEYToCode(Value, fRootKeyEx) then
+  begin
+    fRootKeyEx := hkCurrentUser;
+    raise ERangeError.CreateFmt(sErrBadHKEY, [Value]);
+  end;
+//  fRootKeyEx := NewRootKeyEx;
 end;
 
 procedure TPJRegWdwState.SetSubKey(const Value: string);
