@@ -11,6 +11,13 @@
 ; Change Log for Window State Components
 ; ------------------------------------------------------------------------------
 
+Release v5.6.0 of 12 January 2014
++ Added new RootKeyEx property to TPJRegWdwState that acts as an alias for the existing RootKey property with the difference that it exposes friendly names for supported registry hives. This make setting the registry root key in Delphi's object inspector more intuitive.
++ Added new OnGetRegDataEx that enables the registry root key to be set using same symbols used by the RootKeyEx property. The event takes precedence over the older OnGetRegData event that operates directly on HKEY values.
++ Changed demo 1 (StandardDemo) to demonstrate how to handle the new OnGetRegDataEx event instead of OnGetRegData. Revised and corrected the instructions that appear in the demo's main window and dialogue box.
++ Updated documentation re the changes.
++ Fixed some errors in change log.
+
 Release v5.5.3 of 11 January 2014
 + Fixed problem with compiler directives in Window State Components unit that was causing compilation to fail on Delphi XE5.
 + Minor documentation tweaks and corrections.
