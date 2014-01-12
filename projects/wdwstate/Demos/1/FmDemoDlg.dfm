@@ -18,30 +18,30 @@ object DemoDlg: TDemoDlg
     298
     226)
   PixelsPerInch = 96
-  TextHeight = 16
+  TextHeight = 15
   object Label1: TLabel
-    Left = 10
+    Left = 9
     Top = 7
-    Width = 277
-    Height = 43
+    Width = 260
+    Height = 40
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     Caption = 'Label1'
     WordWrap = True
   end
   object Label2: TLabel
-    Left = 10
-    Top = 59
-    Width = 277
-    Height = 149
+    Left = 9
+    Top = 55
+    Width = 260
+    Height = 140
     Anchors = [akLeft, akTop, akRight, akBottom]
     AutoSize = False
     Caption = 
-      'Try moving and changing the size, or maximising, this dialog. Th' +
-      'en close the dialog. Re-open by clicking the button on the main ' +
-      'form. You will find that the position is remembered but the size' +
-      ' and state are not.'#13#10#13#10'This is because the TPJRegWdwState woIgno' +
-      'reSize and woIgnoreState options are specified.'
+      'Try moving and changing the size of, or maximising, this dialogu' +
+      'e box. Then close the dialogue. Re-open by clicking the button o' +
+      'n the main form. You will find that the position is remembered b' +
+      'ut the size and state are not.'#13#10#13#10'This is because the TPJRegWdwS' +
+      'tate woIgnoreSize and woIgnoreState options are specified.'
     WordWrap = True
   end
   object PJRegWdwState1: TPJRegWdwState
