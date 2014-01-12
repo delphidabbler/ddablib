@@ -11,11 +11,32 @@
 
 unit FmDemo8FMX;
 
+{$UNDEF REQUIRES_FMX_STDCTRLS}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 25.0} // Delphi XE4 and later
+    {$DEFINE REQUIRES_FMX_STDCTRLS}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
-  System.Classes, FMX.Layouts, FMX.Types, FMX.Controls, FMX.Forms, FMX.Memo,
-  PJPipe, PJConsoleApp, PJPipeFilters, PJFileHandle;
+  System.Classes,
+  FMX.Layouts,
+  FMX.Types,
+  FMX.Controls,
+  {$IFDEF REQUIRES_FMX_STDCTRLS}
+  FMX.StdCtrls,
+  {$ENDIF}
+  FMX.Forms,
+  FMX.Memo,
+  PJPipe,
+  PJConsoleApp,
+  PJPipeFilters,
+  PJFileHandle;
 
 type
   TDemo8FMXForm = class(TForm)

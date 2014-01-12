@@ -11,10 +11,28 @@
 
 unit FmDemo11FXM;
 
+{$UNDEF REQUIRES_FMX_STDCTRLS}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 25.0} // Delphi XE4 and later
+    {$DEFINE REQUIRES_FMX_STDCTRLS}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
-  System.Classes, FMX.Types, FMX.ListBox, FMX.Controls, FMX.Colors, FMX.Forms,
+  System.Classes, 
+  FMX.Types, 
+  FMX.ListBox, 
+  FMX.Controls, 
+  {$IFDEF REQUIRES_FMX_STDCTRLS}
+  FMX.StdCtrls,
+  {$ENDIF}
+  FMX.Colors, 
+  FMX.Forms,
   FMX.Edit;
 
 type
