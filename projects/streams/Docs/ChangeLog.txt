@@ -1,7 +1,14 @@
 ; ------------------------------------------------------------------------------
-; Change Log for Stream Extension Classes
+; This Source Code Form is subject to the terms of the Mozilla Public License,
+; v. 2.0. If a copy of the MPL was not distributed with this file, You can
+; obtain one at http://mozilla.org/MPL/2.0/
+;
+; Copyright (C) 2014, Peter Johnson (www.delphidabbler.com).
+;
 ; $Rev$
 ; $Date$
+;
+; Change Log for Stream Extension Classes
 ; ------------------------------------------------------------------------------
 
 Release v3.1.2 of 11 January 2014
@@ -9,6 +16,7 @@ Release v3.1.2 of 11 January 2014
 + Made change to test units and to VCL demo programs to enable method inlining to work correctly with Delphi XE3 and later.
 + Fixed bug in IStreamWrapDemoFMX demo program where program failed to compile on Delphi XE4 because several of the form's controls could not be found.
 + Minor documentation tweaks and corrections.
++ Licensed change log under Mozilla Public License v2.0.
 
 Release v3.1.1 of 28 January 2013
 + Unit names references in project source files are now qualified with namespace name on Delphi XE2 and later.
