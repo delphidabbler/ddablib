@@ -639,25 +639,14 @@ type
   {
   TPJWdwStateGetRegData:
     Type of event that is triggered just before registry is accessed. It allows
-    handler to change the registry HKEY and sub key to be used.
-      @param RootKey [in/out] Registry root key. Default value passed in. May be
-        changed in event handler.
+    handler to change the registry root key and sub key to be used.
+      @param RootKey [in/out] Registry root key. Default HKEY value passed in.
+        May be changed in event handler.
       @param SubKey [in/out] Registry sub key. Default value passed in. May be
         changed in event handler.
   }
   TPJWdwStateGetRegData = procedure(var RootKey: HKEY;
     var SubKey: string) of object;
-
-  {
-  TPJWdwStateRegAccessEvent:
-    Type of event that is triggered after registry is opened, ready for access.
-    Permits handler to read / write additional data to sub key.
-    Added by BJM.
-      @param Reg [in] Reference to registry object that allows registry to be
-        read. Reg is set to the registry sub key where window state data is
-        stored and can be used to read / write additional data.
-  }
-  TPJWdwStateRegAccessEvent = procedure(const Reg: TRegistry) of object;
 
   {TPJRegRootKey:
     Enumeration of values that represent the registry root keys supported by
@@ -673,6 +662,29 @@ type
     hkCurrentConfig,    // HKEY_CURRENT_CONFIG
     hkDynData           // HKEY_DYN_DATA
   );
+
+  {
+  TPJWdwStateGetRegDataEx:
+    Type of event that is triggered just before registry is accessed. It allows
+    handler to change the registry root key and sub key to be used.
+      @param RootKeyEx [in/out] Registry root key. Default TPJRegRootKey value
+        passed in. May be changed in event handler.
+      @param SubKey [in/out] Registry sub key. Default value passed in. May be
+        changed in event handler.
+  }
+  TPJWdwStateGetRegDataEx = procedure(var RootKeyEx: TPJRegRootKey;
+    var SubKey: string) of object;
+
+  {
+  TPJWdwStateRegAccessEvent:
+    Type of event that is triggered after registry is opened, ready for access.
+    Permits handler to read / write additional data to sub key.
+    Added by BJM.
+      @param Reg [in] Reference to registry object that allows registry to be
+        read. Reg is set to the registry sub key where window state data is
+        stored and can be used to read / write additional data.
+  }
+  TPJWdwStateRegAccessEvent = procedure(const Reg: TRegistry) of object;
 
   {
   TPJRegWdwState:
@@ -691,6 +703,8 @@ type
       {Value of SubKey property}
     fOnGetRegData: TPJWdwStateGetRegData;
       {Event handler for OnGetRegData event}
+    fOnGetRegDataEx: TPJWdwStateGetRegDataEx;
+      {Event handler for OnGetRegDataEx event}
     fOnGettingRegData: TPJWdwStateRegAccessEvent; // Added by BJM
       {Event handler for OnGettingRegData event}
     fOnPuttingRegData: TPJWdwStateRegAccessEvent; // Added by BJM
@@ -710,7 +724,7 @@ type
           set to \Software\<App File Name>\Window\<Form Name>.
       }
   protected
-    procedure GetRegInfo(var ARootKey: HKEY; var ASubKey: string);
+    procedure GetRegInfo(var ARootKey: TPJRegRootKey; var ASubKey: string);
       {Triggers OnGetRegData event to get registry root key and sub key to be
       used when restoring / saving window state.
         @param ARootKey [in/out] Required root key value. Set to value of
@@ -773,9 +787,17 @@ type
     property OnGetRegData: TPJWdwStateGetRegData
       read fOnGetRegData write fOnGetRegData;
       {Event triggered just before registry is read when restoring and saving
-      window state. Allows handler to change registry HKEY and subkey to be used
-      to store window state. If this event is handled then RootKey and SubKey
-      properties are ignored}
+      window state. Allows handler to change root key and subkey to be used to
+      store window state. Root key is specified via its HKEY value. If this
+      event is handled then RootKey, RootKeyEx and SubKey properties are all
+      ignored}
+    property OnGetRegDataEx: TPJWdwStateGetRegDataEx
+      read fOnGetRegDataEx write fOnGetRegDataEx;
+      {Event triggered just before registry is read when restoring and saving
+      window state. Allows handler to change root key and subkey to be used to
+      store window state. Root key is specified via its TPJRegRootKey value. If
+      this event is handled then RootKey, RootKeyEx and SubKey properties are
+      all ignored}
     property OnGettingRegData: TPJWdwStateRegAccessEvent  // Added by BJM
       read fOnGettingRegData write fOnGettingRegData;
       {Event triggered when component is reading window state data from
@@ -1784,22 +1806,33 @@ begin
   SetSubKey('');
 end;
 
-procedure TPJRegWdwState.GetRegInfo(var ARootKey: HKEY;
+procedure TPJRegWdwState.GetRegInfo(var ARootKey: TPJRegRootKey;
   var ASubKey: string);
-  {Triggers OnGetRegData event to get registry root key and sub key to be used
-  when restoring / saving window state.
+  {Triggers the OnGetRegDateEx event or, if that is not assigned, the
+  OnGetRegData event, to get registry root key and sub key to be used when
+  restoring / saving window state.
     @param ARootKey [in/out] Required root key value. Set to value of RootKey
       property by default. May be changed in event handler.
     @param ASubKey [in/ou] Required sub key. Set to value of SubKey property
       when called. May be changed in event handler.
   }
+var
+  RootHKey: HKEY; // used to get root key via its HKEY value
 begin
-  // Use RootKey and SubKey property values by default
-  ARootKey := RootKey;
+  // Use RootKeyEx and SubKey property values by default
+  ARootKey := RootKeyEx;
   ASubKey := SubKey;
-  // Allow user to change these by handling OnGetRegData event
-  if Assigned(fOnGetRegData) then
-    fOnGetRegData(ARootKey, ASubKey);
+  // Allow user to change these by handling either OnGetRegDataEx or
+  // OnGetRegData event
+  if Assigned(fOnGetRegDataEx) then
+    fOnGetRegDataEx(ARootKey, ASubKey)
+  else if Assigned(fOnGetRegData) then
+  begin
+    RootHKey := RegRootKeyMap[ARootKey];
+    fOnGetRegData(RootHKey, ASubKey);
+    if not TryHKEYToCode(RootHKey, ARootKey) then
+      raise ERangeError.CreateFmt(sErrBadHKEY, [RootHKey]);
+  end;
 end;
 
 function TPJRegWdwState.GetRootKey: HKEY;
@@ -1826,16 +1859,16 @@ procedure TPJRegWdwState.ReadWdwState(var Left, Top, Width, Height,
       value is the ordinal value of a TWindowState value.
   }
 var
-  Reg: TRegistry;   // instance of registry object used to read info
-  ARootKey: HKEY;   // registry root key where window state is stored
-  ASubKey: string;  // sub key of registry from which to read window state
+  Reg: TRegistry;           // instance of registry object used to read info
+  ARootKey: TPJRegRootKey;  // registry root key where window state is stored
+  ASubKey: string;          // registry sub key from which to read window state
 begin
   // Get registry keys from which to read window state
   GetRegInfo(ARootKey, ASubKey);
   // Open registry at required key
   Reg := SafeCreateReg;
   try
-    Reg.RootKey := ARootKey;
+    Reg.RootKey := RegRootKeyMap[ARootKey];
     if Reg.OpenKey(ASubKey, False) then
     begin
       // Read position, size and state of window
@@ -1864,16 +1897,16 @@ procedure TPJRegWdwState.SaveWdwState(const Left, Top, Width, Height,
       value of a TWindowState value.
   }
 var
-  Reg: TRegistry;   // instance of registry object class used to write info
-  ARootKey: HKEY;   // registry root key where window state is stored
-  ASubKey: string;  // sub key of registry in which to save window state
+  Reg: TRegistry;           // instance of registry object used to write info
+  ARootKey: TPJRegRootKey;  // registry root key where window state is stored
+  ASubKey: string;          // sub key of registry in which to save window state
 begin
   // Get registry keys in which to save window state
   GetRegInfo(ARootKey, ASubKey);
   // Open registry at required key
   Reg := SafeCreateReg;
   try
-    Reg.RootKey := ARootKey;
+    Reg.RootKey := RegRootKeyMap[ARootKey];
     if Reg.OpenKey(ASubKey, True) then
     begin
       // Write window size, position and state from registry
@@ -1896,15 +1929,12 @@ procedure TPJRegWdwState.SetRootKey(const Value: HKEY);
     @param Value [in] New property value.
     @exception ERangeError raised if value is not a recognised HKEY_* value.
   }
-//var
-//  NewRootKeyEx: TPJRegRootKey;
 begin
   if not TryHKEYToCode(Value, fRootKeyEx) then
   begin
     fRootKeyEx := hkCurrentUser;
     raise ERangeError.CreateFmt(sErrBadHKEY, [Value]);
   end;
-//  fRootKeyEx := NewRootKeyEx;
 end;
 
 procedure TPJRegWdwState.SetSubKey(const Value: string);
