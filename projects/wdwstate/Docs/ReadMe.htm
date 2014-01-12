@@ -208,12 +208,12 @@
       This component uses the registry to record window information. The
       registry root key and sub key where the information is stored are
       controlled by the <var>RootKeyEx</var>&dagger;&dagger; and
-      <var>SubKey</var> properties, or by handling the <var>OnGetRegData</var>
-      event. This event is triggered just before the registry is accessed.
-      Additional application defined data can be read from or written to the
-      registry by handling the <var>OnGettingRegData</var> and
-      <var>OnPuttingRegData</var> events that are triggered after the component
-      reads or writes the registry.
+      <var>SubKey</var> properties, or by handling the
+      <var>OnGetRegDataEx</var>&dagger;&dagger;&dagger; event. This event is
+      triggered just before the registry is accessed. Additional application
+      defined data can be read from or written to the registry by handling the
+      <var>OnGettingRegData</var> and <var>OnPuttingRegData</var> events that
+      are triggered after the component reads or writes the registry.
     </div>
     <div>
       &dagger; You are discouraged from using <var>TPJRegWdwState</var> for
@@ -229,6 +229,14 @@
       the Delphi Object Inspector because the use selects between user friendly
       value names instead of having to enter an integer value. Note that the
       <var>RootKey</var> property has been retained for backward compatibility.
+    </div>
+    <div>
+      &dagger;&dagger;&dagger; As of v5.6.0 the <var>OnGetRegDataEx</var> event
+      superseded <var>OnGetRegData</var>. Like <var>RootKeyEx</var>,
+      <var>OnGetRegDataEx</var> takes an enumerated root key value instead of
+      the numerical value passed to <var>OnGetRegData</var>. The older event is
+      still present, but any event handler is only called if
+      <var>OnGetRegDataEx</var> does not have a handler.
     </div>
   </li>
 
