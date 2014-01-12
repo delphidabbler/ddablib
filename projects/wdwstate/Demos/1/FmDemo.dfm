@@ -83,25 +83,25 @@ object DemoForm: TDemoForm
           'arted it should appear with the same shape and size.'
         ''
         
-          'Next try minimizing and maximising the form then closing. When r' +
-          'estarted the state should be remembered.'
+          'Next try minimizing and maximising the form then closing it. Whe' +
+          'n restarted the state should be remembered.'
         ''
         
-          'Now click the button to display a fixed size dialog box. Move th' +
-          'e dialog and then close it. Click the button again and the dialo' +
-          'g should appear in the same place.'
+          'Now click the button to display a dialogue box. Move the dialogu' +
+          'e and then close it. Click the button again and the dialogue box' +
+          ' should appear in the same place.'
         ''
         
-          'The window settings for the main form and dialog are stored in t' +
-          'he registry under the keys: HKCU\Software\DelphiDabbler\Demos\Wi' +
-          'ndowState\Main and HKCU\Software\DelphiDabbler\Demos\WindowState' +
-          '\Dlg respectively. The main form sets this in the OnGetRegData e' +
-          'vent handler while the dialog sets the SubKey property at run ti' +
-          'me.'
+          'The window settings for the main form and dialogue box are store' +
+          'd in the registry under the keys: HKCU\Software\DelphiDabbler\De' +
+          'mos\WindowState\Main and HKCU\Software\DelphiDabbler\Demos\Windo' +
+          'wState\Dlg respectively. The main form sets this in the OnGetReg' +
+          'DataEx event handler while the dialogue sets the RootKeyEx and S' +
+          'ubKey properties at run time.'
         ''
         
           'Note that window position and size read from the registry are di' +
-          'splayed in both the main form and the dialog box.')
+          'splayed in both the main form and the dialogue box.')
       ParentColor = True
       ReadOnly = True
       ScrollBars = ssVertical
@@ -112,7 +112,7 @@ object DemoForm: TDemoForm
   object PJRegWdwState1: TPJRegWdwState
     AutoSaveRestore = True
     OnReadWdwState = PJRegWdwState1ReadWdwState
-    OnGetRegData = PJRegWdwState1GetRegData
+    OnGetRegDataEx = PJRegWdwState1GetRegDataEx
     OnGettingRegData = PJRegWdwState1GettingRegData
     OnPuttingRegData = PJRegWdwState1PuttingRegData
     Left = 24

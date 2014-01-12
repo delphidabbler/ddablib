@@ -31,10 +31,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure PJRegWdwState1ReadWdwState(Sender: TObject; var Left, Top,
       Width, Height, State: Integer);
-    procedure PJRegWdwState1GetRegData(var RootKey: HKEY;
-      var SubKey: String);
     procedure PJRegWdwState1GettingRegData(const Reg: TRegistry);
     procedure PJRegWdwState1PuttingRegData(const Reg: TRegistry);
+    procedure PJRegWdwState1GetRegDataEx(var RootKeyEx: TPJRegRootKey;
+      var SubKey: String);
   end;
 
 var
@@ -89,14 +89,17 @@ begin
   // demo however.
 end;
 
-procedure TDemoForm.PJRegWdwState1GetRegData(var RootKey: HKEY;
+procedure TDemoForm.PJRegWdwState1GetRegDataEx(var RootKeyEx: TPJRegRootKey;
   var SubKey: String);
 begin
-  // Use following registry key for window data
-  // if we know key at design time we can set TPJRegWdwState.SubKey property
+  // Use following registry key for window data.
+  // If we know key at design time we can set TPJRegWdwState.SubKey property
   // instead, but we sometimes don't know key until run time, so we can also
   // handle this event
   SubKey := 'Software\DelphiDabbler\Demos\WindowState\Main';
+  // Ensure we're using HKEY_CURRENT_USER, regardless of what root key is set at
+  // design time
+  RootKeyEx := hkCurrentUser;
 end;
 
 procedure TDemoForm.PJRegWdwState1GettingRegData(const Reg: TRegistry);
