@@ -21,25 +21,33 @@ interface
 
 
 // Find if we have a Delphi 6 or higher compiler
-{$UNDEF DELPHI6ANDUP}
+{$UNDEF NewDesignUnits}
+{$UNDEF RTLNameSpaces}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE RTLNameSpaces}
+  {$IFEND}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
-    {$DEFINE DELPHI6ANDUP}
+    {$DEFINE NewDesignUnits}
   {$IFEND}
 {$ENDIF}
 
 
 uses
   // Delphi
-  {$IFDEF DELPHI6ANDUP}
+  {$IFDEF NewDesignUnits}
     DesignIntf, DesignEditors,
   {$ELSE}
     DsgnIntf,
   {$ENDIF}
+  {$IFNDEF RTLNameSpaces}
   Classes;
+  {$ELSE}
+  System.Classes;
+  {$ENDIF}
 
 
 type
@@ -61,7 +69,6 @@ type
       {Returns the symbolic value for the currently selected value}
   end;
 
-
 procedure Register;
   {Delphi registration routine}
 
@@ -71,8 +78,11 @@ implementation
 
 uses
   // Delphi
+  {$IFNDEF RTLNameSpaces}
   Windows;
-
+  {$ELSE}
+  Winapi.Windows;
+  {$ENDIF}
 
 { Delphi registration routine }
 
@@ -85,7 +95,6 @@ begin
     '',                           // properties can have any name
     TPJHKEYPropEditor);           // property editor class
 end;
-
 
 { Helper functions and lookup table }
 
@@ -134,7 +143,6 @@ begin
       Break;
     end;
 end;
-
 
 { TPJHKEYPropEditor }
 
