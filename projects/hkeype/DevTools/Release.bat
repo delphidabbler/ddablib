@@ -25,7 +25,7 @@ mkdir %ReleaseDir%
 zip %OutFile% -j -9 PJHKEYPropEdit.pas
 
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
-zip %OutFile% -j -9 %DocsDir%\MPL.txt
+zip %OutFile% -j -9 %DocsDir%\MPL-2.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
 
 endlocal
