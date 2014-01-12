@@ -115,6 +115,9 @@
     padding: 0.25em 0.5em;
     font-style: italic;
   }
+  .pullout p {
+    margin: 0.25em 0;
+  }
   .indent {
     margin-left: 3em;
   }
@@ -154,6 +157,24 @@
 <h2 id="description">
   Description
 </h2>
+
+<div class="pullout">
+  <p>
+    <strong>IMPORTANT WARNING</strong>
+  </p>
+  <p>
+    This property editor is deprecated and will no longer be developed.
+  </p>
+  <p>
+    This is because it behaves erratically: on some Delphi installations it
+    works fine, on others it does not work at all and is not recognised by the
+    object inspector for properties of type HKEY. The reason for the problem is
+    not clear and it has not proved possible to find a fix.
+  </p>
+  <p>
+    <strong>You are strongly advised not to use this property editor.</strong>
+  </p>
+</div>
 
 <p>
   <code>PJHKEYPropEdit.pas</code> defines a property editor named
