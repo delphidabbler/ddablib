@@ -10,14 +10,37 @@
 
 unit FmIStreamWrap;
 
+{$UNDEF REQUIRES_FMX_STDCTRLS}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+    {$DEFINE REQUIRES_TYPES_UNIT}
+  {$IFEND}
+  {$IF CompilerVersion >= 25.0} // Delphi XE4 and later
+    {$DEFINE REQUIRES_FMX_STDCTRLS}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.SysUtils,
+  System.Types,
+  System.UITypes,
+  System.Classes,
   System.Win.ComObj,
-  FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.Menus, FMX.Memo, FMX.Types,
-  FMX.Layouts, FMX.StdCtrls,
-  Winapi.ActiveX, Winapi.Windows;
+  FMX.Controls,
+  FMX.Forms,
+  FMX.Dialogs,
+  FMX.Menus,
+  FMX.Memo,
+  FMX.Types,
+  FMX.Layouts,
+  {$IFDEF REQUIRES_FMX_STDCTRLS}
+  FMX.StdCtrls,
+  {$ENDIF}
+  Winapi.ActiveX,
+  Winapi.Windows;
 
 type
   TIStreamWrapForm = class(TForm)
