@@ -1,11 +1,12 @@
 HKEY Property Editor
 --------------------
 
-This directory contains zip files containing HKEY Property Editor releases from
-the present release back to v1.0.4.
+**WARNING** This property editor is deprecated. You are strongly advised NOT to
+use it.
 
-The zip files are all of the form dd-hkeype-x.x.x.zip where x.x.x is the
-version number of the release.
+The property editor works erratically. On some Delphi installations it works
+fine while on others the object inspector does not recognise the editor. The
+problem has proved to be intractable, so it has been decided not to continue to
+maintain the code.
 
-Unless you have good reasons not to, you should always download the latest
-version.
+There will be no further releases.
