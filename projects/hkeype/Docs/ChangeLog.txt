@@ -11,6 +11,16 @@
 ; Change Log for HKEY Property Editor
 ; ------------------------------------------------------------------------------
 
+Release v1.0.5 of 12 January 2014
+This is the final release of the property editor. Due to its erratic behaviour on some Delphi installations the editor has been deprecated.
++ Unit names in the property editor source file are now qualified with their namespace on Delphi XE2 and later.
++ Fixed problem with compiler directives in component and demo source files that was causing compilation to fail on Delphi XE5.
++ Property editor source code license changed to Mozilla Public License v2.0. Some documentation files were given this license also.
++ Updated documentation:
+  - Minor changes and corrections to several documents.
+  - Read-me file updated re license and file name changes and to note the project is deprecated.
+  - MPL text file has been renamed and content changed to v2.0 of license.
+
 Release v1.0.4 of 09 October 2009
 + Simplified conditional compilation code that checks for Delphi 6 and above.
 + Updated documentation and included a copy of the Mozilla Public License.
