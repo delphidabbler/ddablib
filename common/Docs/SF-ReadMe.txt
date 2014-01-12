@@ -1,5 +1,5 @@
 DelphiDabbler Code Library Downloads
-------------------------------------
+====================================
 
 This library contains numerous separate projects, each of which has its
 sub-directory containing the project's download zip files.
@@ -12,7 +12,6 @@ The sub-directories are:
   dropfiles     Drop Files Components
   envvars       Environment Variables Unit
   fractions     Fractions Unit
-  hkeype        HKEY Property Editor
   hotlabel      Hot Label Component
   ioutils       I/O Utility Classes
   md5           MD5 Message Digest Unit
@@ -27,3 +26,11 @@ The sub-directories are:
 
 Details about the available versions are included in each sub-directory's
 read-me file.
+
+Deprecated Code
+---------------
+
+In addition to the above there is an "hkeype" directory. This contains download
+zip files for each release of the HKEY Property Editor. This project is
+deprecated and is no longer being developed and should not be used. Do not link
+to this folder because it may be deleted in future.
