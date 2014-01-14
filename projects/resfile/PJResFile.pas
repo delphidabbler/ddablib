@@ -122,9 +122,13 @@ unit PJResFile;
 
 
 {$UNDEF UseAnsiStrIComp}
+{$UNDEF UseRTLNameSpaces}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE UseRTLNameSpaces}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_TYPE OFF}
@@ -142,7 +146,11 @@ interface
 
 uses
   // Delphi
+  {$IFNDEF UseRTLNameSpaces}
   SysUtils, Classes, Windows;
+  {$ELSE}
+  System.SysUtils, System.Classes, Winapi.Windows;
+  {$ENDIF}
 
 
 const
