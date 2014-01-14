@@ -124,12 +124,16 @@ unit PJResFile;
 {$UNDEF UseAnsiStrIComp}
 {$UNDEF UseRTLNameSpaces}
 {$UNDEF SupportsEnumerators}
+{$UNDEF SupportsTBytes}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
   {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
     {$DEFINE UseRTLNameSpaces}
+  {$IFEND}
+  {$IF CompilerVersion >= 18.5} // Delphi 2007 and later
+    {$DEFINE SupportsTBytes}
   {$IFEND}
   {$IF CompilerVersion >= 17.0} // Delphi 2005 and later
     {$DEFINE SupportsEnumerators}
@@ -177,6 +181,10 @@ const
 
 
 type
+
+  {$IFNDEF SupportsTBytes}
+  TBytes = array of Byte;
+  {$ENDIF}
 
   TPJResourceEntry = class;
 
@@ -355,6 +363,8 @@ type
     function GetResType: PChar; virtual; abstract;
     function GetVersion: DWORD; virtual; abstract;
     procedure SetVersion(const Value: DWORD); virtual; abstract;
+    function GetDataBytes: TBytes; virtual; abstract;
+    procedure SetDataBytes(const Value: TBytes); virtual; abstract;
   public
     function IsMatching(const ResType, ResName: PChar;
       const LangID: Word = $FFFF): Boolean; overload; virtual; abstract;
@@ -403,6 +413,12 @@ type
     property Data: TStream
       read GetData;
       {Stream containing raw resource data (excludes padding)}
+    property DataBytes: TBytes
+      read GetDataBytes write SetDataBytes;
+      {The raw resource data as a byte array. When the property is read a copy
+      of the raw data is returned. When the property is written the entry's raw
+      data is replaced by a copy of byte array assigned to the property and the
+      Data stream position is set to the start of the stream}
   end;
 
 
@@ -555,6 +571,15 @@ type
     procedure SetVersion(const Value: DWORD); override;
       {Sets value of Version field of resource header.
         @param Value the new Version number.
+      }
+    function GetDataBytes: TBytes; override;
+      {Copies resource entry data from Data property into a byte array.
+        @return Required byte array.
+      }
+    procedure SetDataBytes(const Value: TBytes); override;
+      {Replaces current entry data with a copy of the contents of the given byte
+      array.
+        @param Array of bytes to be copied into entry's data.
       }
   public
     constructor Create(const Owner: TPJResourceFile;
@@ -806,6 +831,18 @@ begin
   Result := fDataStream;
 end;
 
+function TInternalResEntry.GetDataBytes: TBytes;
+var
+  SavedStreamPos: Int64;
+begin
+  SavedStreamPos := fDataStream.Position;
+  fDataStream.Position := 0;
+  SetLength(Result, fDataStream.Size);
+  if fDataStream.Size > 0 then
+    fDataStream.ReadBuffer(Pointer(Result)^, Length(Result));
+  fDataStream.Position := SavedStreamPos;
+end;
+
 function TInternalResEntry.GetDataSize: DWORD;
 begin
   Result := fDataStream.Size;
@@ -905,6 +942,14 @@ end;
 procedure TInternalResEntry.SetCharacteristics(const Value: DWORD);
 begin
   fHdrSuffix.Characteristics := Value;
+end;
+
+procedure TInternalResEntry.SetDataBytes(const Value: TBytes);
+begin
+  fDataStream.Size := 0;
+  if Length(Value) > 0 then
+    fDataStream.WriteBuffer(Pointer(Value)^, Length(Value));
+  fDataStream.Position := 0;
 end;
 
 procedure TInternalResEntry.SetDataVersion(const Value: DWORD);
