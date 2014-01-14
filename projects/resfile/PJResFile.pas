@@ -123,7 +123,6 @@ unit PJResFile;
 
 {$UNDEF UseAnsiStrIComp}
 {$UNDEF UseRTLNameSpaces}
-{$UNDEF SupportsEnumerators}
 {$UNDEF SupportsTBytes}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
@@ -134,9 +133,6 @@ unit PJResFile;
   {$IFEND}
   {$IF CompilerVersion >= 18.5} // Delphi 2007 and later
     {$DEFINE SupportsTBytes}
-  {$IFEND}
-  {$IF CompilerVersion >= 17.0} // Delphi 2005 and later
-    {$DEFINE SupportsEnumerators}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_TYPE OFF}
@@ -188,18 +184,51 @@ type
 
   TPJResourceEntry = class;
 
-  {$IFDEF SupportsEnumerators}
+  ///  <summary>Enumerator for the resource entries contained in a
+  ///  TPJResourceFile object.</summary>
+  ///  <remarks>
+  ///  <para>For Delphi 2005 and later, this enumerator, along with
+  ///  TPJResourceFile's GetEnumerator method, enables use of the for..in loops
+  ///  to enumerate resource entries.</para>
+  ///  <para>For Delphi 7 and earlier the enumerator can still be used, but must
+  ///  be created by calling the TPJResourceFile.GetEnumerator method. A while
+  ///  loop is used to perform the enumeration, calling the enumerator's
+  ///  MoveNext and GetCurrent methods. The enumerator object must be freed when
+  ///  the enumeration is completed.</para>
+  ///  </remarks>
   TPJResourceFileEnumerator = class(TObject)
   private
     fIndex: Integer;
     fEntries: TList;
   public
+    ///  <summary>Constructs a new instance of the enumerator for the given
+    ///  list of resource entries.</summary>
+    ///  <remarks>This constructor is not designed to be called directly by
+    ///  users. It is for internal use by TPJResourceFile instances. To create
+    ///  an enumerator users should instead call TPJResourceFile.GetEnumerator.
+    ///  </remarks>
     constructor Create(const Entries: TList);
+    ///  <summary>Moves to the next entry in the enumeration if possible.
+    ///  Returns True if there is a "next" entry or False if the enumeration has
+    ///  completed and no more entries are available.</summary>
+    ///  <remarks>The first call to this method in a new enumeration makes the
+    ///  first item in the enumeration available.</remarks>
     function MoveNext: Boolean;
+    ///  <summary>Returns a reference to the current entry in the enumeration.
+    ///  </summary>
+    ///  <exception>An exception will be raised if MoveNext has not been called
+    ///  at least once before calling GetCurrent.</exception>
+    ///  <remarks>This method must not be called after the enumeration has
+    ///  completed. Check the value returned by MoveNext before calling this
+    ///  method.</remarks>
     function GetCurrent: TPJResourceEntry;
+    ///  <summary>Returns a reference to the current entry in the enumeration.
+    ///  </summary>
+    ///  <exception>An exception will be raised if MoveNext has not been called
+    ///  at least once before calling Current.</exception>
+    ///  <remarks>This property is an alias of the GetCurrent method.</remarks>
     property Current: TPJResourceEntry read GetCurrent;
   end;
-  {$ENDIF SupportsEnumerators}
 
   {
   TPJResourceFile:
@@ -226,7 +255,6 @@ type
     destructor Destroy; override;
       {Destroys resource file object.
       }
-    {$IFDEF SupportsEnumerators}
     function GetEnumerator: TPJResourceFileEnumerator;
       {Creates and returns a new enumerator for the resource entries.
       NOTE: Designed for internal use to enabled for..in enumerations on
@@ -234,7 +262,6 @@ type
             freeing the enumerator object.
         @return Required enumerator.
       }
-    {$ENDIF SupportsEnumerators}
     procedure Clear;
       {Clears all resources from file object.
       }
@@ -1183,12 +1210,10 @@ begin
   Result := fEntries.Count;
 end;
 
-{$IFDEF SupportsEnumerators}
 function TPJResourceFile.GetEnumerator: TPJResourceFileEnumerator;
 begin
   Result := TPJResourceFileEnumerator.Create(fEntries);
 end;
-{$ENDIF SupportsEnumerators}
 
 function TPJResourceFile.IndexOfEntry(const Entry: TPJResourceEntry): Integer;
 begin
@@ -1265,7 +1290,6 @@ begin
     (Entries[Idx] as TInternalResEntry).WriteToStream(Stm);
 end;
 
-{$IFDEF SupportsEnumerators}
 { TPJResourceFileEnumerator }
 
 constructor TPJResourceFileEnumerator.Create(const Entries: TList);
@@ -1286,7 +1310,6 @@ begin
   if Result then
     Inc(fIndex);
 end;
-{$ENDIF SupportsEnumerators}
 
 end.
 
