@@ -55,7 +55,7 @@ unit PJResFile;
 
   A resource file header is made up of the following fields:
 
-    DataSize: DWORD;            // size of resource data (excl end padding)
+    DataSize: DWORD;            // size of resource data (excluding end padding)
     HeaderSize: DWORD;          // size of resource data header
     Type: Unicode or Ordinal;   // type of resource
     Name: Unicode or Ordinal;   // name of resource
@@ -67,7 +67,7 @@ unit PJResFile;
     Characteristics: DWORD;     // user defined info about resource
 
   The resource name and type can either be a #0#0 terminated Unicode string or
-  can be an ordinal word value (preceeded by a $FFFF word). If Type or Name is a
+  can be an ordinal word value (preceded by a $FFFF word). If Type or Name is a
   Unicode string then an additional padding word may be needed after the Name
   "field" to ensure the following field start on a DWORD boundary. (The name
   field doesn't have to be DWORD aligned so there is no padding between the Type
@@ -106,10 +106,10 @@ unit PJResFile;
   a standard Pascal record to represent a resource header. Instead we use two
   fixed length packed records:
     TResEntryHdrPefix:  the DataSize and HeaderSize fields.
-    TResEntryHdrSuffix: the DataVersion thru to Characteristics fields.
+    TResEntryHdrSuffix: the DataVersion through to Characteristics fields.
   We handle the resource type and name "fields" (and any padding) separately.
 
-  When interogating or accessing Windows resources using the Windows API
+  When interrogating or accessing Windows resources using the Windows API
   resource types and names are specified either as #0 terminated strings
   or as ordinal values as returned from the MakeIntResource "macro". This
   convention is also used by the TPJResourceFile and TPJResourceEntry classes -
@@ -147,13 +147,13 @@ uses
 
 const
   // Memory flags constants - used in MemoryFlags field of resource header
-  // These flags can be ORd together as a bitmask
-  RES_MF_MOVEABLE     = $0010;                // can move res in memory
-  RES_MF_PURE         = $0020;                // res data is DWORD aligned
+  // These flags can be ORd together as a bit-mask
+  RES_MF_MOVEABLE     = $0010;                // can move resource in memory
+  RES_MF_PURE         = $0020;                // resource data is DWORD aligned
   RES_MF_PRELOAD      = $0040;                // must load after app loads
-  RES_MF_DISCARDABLE  = $1000;                // can be unloaded if mem low
-  // These flags can be ANDed with bitmask to remove complementary flag
-  RES_MF_FIXED        = not RES_MF_MOVEABLE;  // can't move res in memory
+  RES_MF_DISCARDABLE  = $1000;                // can be unloaded if memory low
+  // These flags can be ANDed with bit-mask to remove complementary flag
+  RES_MF_FIXED        = not RES_MF_MOVEABLE;  // can't move resource in memory
   RES_MF_IMPURE       = not RES_MF_PURE;      // data not aligned: needs padding
   RES_MF_LOADONCALL   = not RES_MF_PRELOAD;   // load only when app accesses
   // NOTE: RES_MF_MOVEABLE, RES_MF_IMPURE and RES_MF_PRELOAD ignored by Win NT
@@ -237,7 +237,7 @@ type
       and language and returns reference to it.
         @param ResType [in] Resource type (ordinal or string).
         @param ResName [in] Resource name (ordinal or string).
-        @param LangID [in] Pptional language ID - 0 (language neutral) used by
+        @param LangID [in] Optional language ID - 0 (language neutral) used by
           default.
         @return Reference to new entry.
         @except Raised if an entry already exists with same type, name and
@@ -275,7 +275,7 @@ type
         @param ResType [in] Resource type (ordinal or string) - required.
         @param ResName [in] Resource name (ordinal or string) - if ResName is
           nil it is not used in match.
-        @param LangID [in] Pptional language ID of entry to find - if not
+        @param LangID [in] Optional language ID of entry to find - if not
           supplied (or is $FFFF) it is not used in match.
         @return Index of entry in Entries[] or -1 if no matching entry.
       }
@@ -335,7 +335,7 @@ type
     function IsMatching(const Entry: TPJResourceEntry): Boolean; overload;
       virtual; abstract;
       {Returns true if the resource entry has the same resource type, name and
-      language Id as the given enrty.
+      language Id as the given entry.
         @param Entry [in] Resource entry to match
         @return True if the entries match, False otherwise.
       }
@@ -350,7 +350,7 @@ type
       {Predefined data resource version information}
     property MemoryFlags: Word
       read GetMemoryFlags write SetMemoryFlags;
-      {Attribute bitmask specifying state of resource}
+      {Attribute bit-mask specifying state of resource}
     property LanguageID: Word
       read GetLanguageID;
       {Language of resource (0 => language neutral)}
@@ -397,7 +397,7 @@ function ResIDToStr(const ResID: PChar): string;
   {Converts a resource ID into its string representation.
     @param ResID [in] Resource ID to be converted.
     @return String representation of ResID - if resource id is an ordinal the
-      ordinal number preceeded by '#' is returned, otherwise the string itself
+      ordinal number preceded by '#' is returned, otherwise the string itself
       is returned.
   }
 
@@ -408,7 +408,7 @@ implementation
 type
   {
   TResEntryHdrPrefix:
-    Record that stores the fixed length fields that preceed the variable length
+    Record that stores the fixed length fields that precede the variable length
     type and name records in a resource header.
   }
   TResEntryHdrPrefix = packed record
@@ -499,12 +499,12 @@ type
         @return Value of LanguageID field of resource header.
       }
     function GetMemoryFlags: Word; override;
-      {Gets bitmask of attributes giving state of resource.
+      {Gets bit-mask of attributes giving state of resource.
         @return MemoryFlags field of resource header.
       }
     procedure SetMemoryFlags(const Value: Word); override;
       {Sets value MemoryFlags field of resource header.
-        @param Value the new MemoryFlags bitmask.
+        @param Value the new MemoryFlags bit-mask.
       }
     function GetResName: PChar; override;
       {Gets resource name.
@@ -1025,7 +1025,7 @@ end;
 
 procedure TPJResourceFile.Clear;
 var
-  Idx: Integer; // loops thru all entries
+  Idx: Integer; // loops through all entries
 begin
   // Free all resource entry instances
   for Idx := Pred(EntryCount) downto 0 do
@@ -1067,9 +1067,9 @@ end;
 function TPJResourceFile.FindEntry(const ResType,
   ResName: PChar; const LangID: Word = $FFFF): TPJResourceEntry;
 var
-  Idx: Integer; // loops thru all resource entries in file
+  Idx: Integer; // loops through all resource entries in file
 begin
-  // Loop thru entries checking if they match type, name and language id
+  // Loop through entries checking if they match type, name and language id
   Result := nil;
   for Idx := 0 to Pred(EntryCount) do
     if Entries[Idx].IsMatching(ResType, ResName, LangID) then
@@ -1163,7 +1163,7 @@ end;
 
 procedure TPJResourceFile.SaveToStream(const Stm: TStream);
 var
-  Idx: Integer; // loops thru all entries in resource
+  Idx: Integer; // loops through all entries in resource
 begin
   // Write header record to stream
   with TInternalResEntry.Create(
