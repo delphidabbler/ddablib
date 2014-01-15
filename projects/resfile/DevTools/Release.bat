@@ -25,7 +25,7 @@ zip %OutFile% -j -9 PJResFile.pas
 
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
-zip %OutFile% -j -9 %DocsDir%\MPL-1.1.txt
+zip %OutFile% -j -9 %DocsDir%\MPL-2.txt
 zip %OutFile% -j -9 %DocsDir%\Documentation.url
 
 endlocal
