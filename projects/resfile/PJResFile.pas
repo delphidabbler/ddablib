@@ -1006,7 +1006,7 @@ begin
   try
     if not Append then
       fDataStream.Size := 0;
-    fDataStream.Position := fDataStream.Size;
+    fDataStream.Seek(0, soFromEnd);
     fDataStream.CopyFrom(SrcStm, 0);
     fDataStream.Position := 0;
   finally
