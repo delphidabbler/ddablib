@@ -173,8 +173,8 @@
       <var>TPJResourceEntry</var> &ndash; encapsulates a single resource within
       the file and provides properties to access its header record and its raw
       data. The class also has methods to check the identity of the resource.
-      The resource's raw data is made available as a <var>TStream</var> and so
-      is easily read and written using familiar <var>TStream</var> methods.
+      The resource's raw data is accessible both as an array of bytes and via a
+      <var>TStream</var> interface.
     </div>
     <div class="pullout">
       This class has no knowledge of resource data formats and sees the data
@@ -200,8 +200,20 @@
 </h2>
 
 <p>
-  The unit works with Delphi 4 and later. It has been tested on both Unicode and
-  non-Unicode Delphi compilers.
+  The unit has been tested on Delphi 7, 2006 to 2010 and XE to XE4. It is
+  believed to work with compilers back to Delphi 4, but this has not been tested
+  in the current release.
+</p>
+
+<p>
+  The unit is compatible with the Delphi 32 bit and 64 bit Windows compilers.
+  Because resource files are Windows specific the unit is not compatible with
+  non-Windows platforms.
+</p>
+
+<p>
+  The unit is not dependent on the VCL or on FireMonkey, so can be used with
+  or without either library.
 </p>
 
 <h2 id="installation">
@@ -270,25 +282,11 @@
 </h2>
 
 <p>
-  This product, <em>Resource File Unit</em>, is subject to the Mozilla Public
-  License Version 1.1 (the &quot;License&quot;). You may not use this Product
-  except in compliance with the License. You may obtain a copy of the License at
+  The Resource File Unit (<code>PJResFile.pas</code>) is released under the
+  terms of the .
   <a
-    href="http://www.mozilla.org/MPL/MPL-1.1"
-  >http://www.mozilla.org/MPL/MPL-1.1</a>.
-</p>
-
-<p>
-  Software distributed under the License is distributed on an &quot;AS IS&quot;
-  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
-  License for the specific language governing rights and limitations under the
-  License.
-</p>
-
-<p>
-  The Initial Developer of <em>Resource File Unit</em> is Peter D Johnson.
-  Portions created by the Initial Developer are Copyright &copy; 2004-2010 Peter
-  D Johnson (www.delphidabbler.com). All Rights  Reserved.
+    href="http://www.mozilla.org/MPL/2.0/"
+  >Mozilla Public License v2.0</a>.
 </p>
 
 <p>
@@ -308,12 +306,8 @@
 <p>
   If no similar report or request has been recorded already, use the <em>New
   Issue</em> link to add a new issue. Please select the most appropriate
-  template from the <em>Templates</em> drop down list.
-</p>
-
-<p>
-  Please change the <code>Project-unspecified</code> label to
-  <code>Project-resfile</code>.
+  template from the <em>Templates</em> drop down list and change the
+  <code>Project-unspecified</code> label to <code>Project-resfile</code>.
 </p>
 
 <h2 id="author">
