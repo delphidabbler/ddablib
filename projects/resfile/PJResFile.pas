@@ -419,6 +419,10 @@ type
         @param Append [in] Indicates whether file contents should be appended to
           the existing data (True) or whether it should overwrite it (False).
       }
+    procedure ClearData; virtual; abstract;
+      {Deletes all the resource's raw data. After calling this method the value
+      of DataSize is zero.
+      }
     property DataSize: DWORD
       read GetDataSize;
       {Size of resource data, excluding padding}
@@ -665,6 +669,10 @@ type
         @param Append [in] Indicates whether file contents should be appended to
           the existing data (True) or whether it should overwrite it (False).
       }
+    procedure ClearData; override;
+      {Deletes all the resource's raw data. After calling this method the value
+      of DataSize is zero.
+      }
   end;
 
 resourcestring
@@ -706,6 +714,11 @@ end;
 
 
 { TInternalResEntry }
+
+procedure TInternalResEntry.ClearData;
+begin
+  fDataStream.Size := 0;
+end;
 
 procedure TInternalResEntry.CopyResID(var Dest: PChar; const Src: PChar);
 begin
