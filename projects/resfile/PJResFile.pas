@@ -179,6 +179,7 @@ const
 type
 
   {$IFNDEF SupportsTBytes}
+  // Byte array used as type of TPJResourceEntry.DataBytes property.
   TBytes = array of Byte;
   {$ENDIF}
 
@@ -409,6 +410,14 @@ type
       language Id as the given entry.
         @param Entry [in] Resource entry to match
         @return True if the entries match, False otherwise.
+      }
+    procedure LoadDataFromFile(const SrcFileName: string;
+      const Append: Boolean); virtual; abstract;
+      {Loads the contents of a file into the resource's raw data. The data
+      stream pointer is reset to 0 on completion.
+        @param SrcFileName [in] Name of file containing data.
+        @param Append [in] Indicates whether file contents should be appended to
+          the existing data (True) or whether it should overwrite it (False).
       }
     property DataSize: DWORD
       read GetDataSize;
@@ -647,6 +656,14 @@ type
       Id as another entry.
         @param Entry [in] Resource entry to match
         @return True if the entries match, False otherwise.
+      }
+    procedure LoadDataFromFile(const SrcFileName: string;
+      const Append: Boolean); override;
+      {Loads the contents of a file into the resource's raw data. The data
+      stream pointer is reset to 0 on completion.
+        @param SrcFileName [in] Name of file containing data.
+        @param Append [in] Indicates whether file contents should be appended to
+          the existing data (True) or whether it should overwrite it (False).
       }
   end;
 
@@ -964,6 +981,24 @@ function TInternalResEntry.IsMatching(const Entry: TPJResourceEntry): Boolean;
 begin
   // Check that entry's resource type & name and language matches ours
   Result := IsMatching(Entry.ResType, Entry.ResName, Entry.LanguageID);
+end;
+
+procedure TInternalResEntry.LoadDataFromFile(const SrcFileName: string;
+  const Append: Boolean);
+var
+  SrcStm: TFileStream;  // stream onto source file
+begin
+  // Copy source file into resource data
+  SrcStm := TFileStream.Create(SrcFileName, fmOpenRead or fmShareDenyWrite);
+  try
+    if not Append then
+      fDataStream.Size := 0;
+    fDataStream.Position := fDataStream.Size;
+    fDataStream.CopyFrom(SrcStm, 0);
+    fDataStream.Position := 0;
+  finally
+    SrcStm.Free;
+  end;
 end;
 
 procedure TInternalResEntry.SetCharacteristics(const Value: DWORD);
