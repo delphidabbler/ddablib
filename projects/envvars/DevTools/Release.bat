@@ -30,9 +30,9 @@ zip -j -9 %OutFile% %HelpDir%\PJEnvVars.als
 zip -j -9 %OutFile% %HelpDir%\PJEnvVars.hlp
 
 zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
-zip -j -9 %OutFile% %DocsDir%\MPL.txt
+zip -j -9 %OutFile% %DocsDir%\MPL-2.txt
 zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
 zip -j -9 %OutFile% %DocsDir%\DemoCode.htm
-zip -j -9 %OutFile% %DocsDir%\Wiki.URL
+zip -j -9 %OutFile% %DocsDir%\Documentation.url
 
 endlocal
