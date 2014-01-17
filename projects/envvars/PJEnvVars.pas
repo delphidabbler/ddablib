@@ -25,15 +25,17 @@ unit PJEnvVars;
 
 
 // Set conditional symbols & switch off unsafe warnings where supported
-{$UNDEF Supports_EOSError}
 {$UNDEF Has_Types_Unit}
 {$UNDEF Supports_ENoConstructException}
+{$UNDEF Supports_EOSError}
+{$UNDEF Supports_Closures}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
   {$IF CompilerVersion >= 20.0} // Delphi 2009 and later
     {$DEFINE Supports_ENoConstructException}
+    {$DEFINE Supports_Closures}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     // Switch off unsafe warnings
@@ -155,10 +157,19 @@ type
       @param VarName [in] Name of an environment variable.
       @param Data [in] User-specified pointer as passed to TPJEnvVars.EnumNames.
   }
-  TPJEnvVarsEnum = procedure(const VarName: string; Data: Pointer) of object;
+  TPJEnvVarsEnum =
+    {$IFNDEF Supports_Closures}
+    procedure(const VarName: string; Data: Pointer) of object;
+    {$ELSE}
+    reference to procedure(const VarName: string; Data: Pointer);
+    {$ENDIF}
 
-  TPJEnvVarsEnumEx = procedure(const EnvVar: TPJEnvironmentVar; Data: Pointer)
-    of object;
+  TPJEnvVarsEnumEx =
+    {$IFNDEF Supports_Closures}
+    procedure(const EnvVar: TPJEnvironmentVar; Data: Pointer) of object;
+    {$ELSE}
+    reference to procedure(const EnvVar: TPJEnvironmentVar; Data: Pointer);
+    {$ENDIF}
 
   ///  <summary>Static class providing class methods for interogating,
   ///  manipulating and modifying the environment variables available to the
