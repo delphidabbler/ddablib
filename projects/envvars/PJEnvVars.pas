@@ -25,8 +25,8 @@ unit PJEnvVars;
 
 
 // Set conditional symbols & switch off unsafe warnings where supported
-{$UNDEF SUPPORTS_EOSERROR}
-{$UNDEF HAS_TYPES_UNIT}
+{$UNDEF Supports_EOSError}
+{$UNDEF Has_Types_Unit}
 {$UNDEF Supports_ENoConstructException}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
@@ -41,8 +41,8 @@ unit PJEnvVars;
     {$WARN UNSAFE_CODE OFF}
   {$IFEND}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
-    {$DEFINE SUPPORTS_EOSERROR} // SysUtils defines EOSError
-    {$DEFINE HAS_TYPES_UNIT}    // Types unit is available
+    {$DEFINE Supports_EOSError} // SysUtils defines EOSError
+    {$DEFINE Has_Types_Unit}    // Types unit is available
   {$IFEND}
 {$ENDIF}
 
@@ -52,9 +52,9 @@ interface
 
 uses
   // Delphi
-  SysUtils, Classes  {$IFDEF HAS_TYPES_UNIT}, Types {$ENDIF};
+  SysUtils, Classes  {$IFDEF Has_Types_Unit}, Types {$ENDIF};
 
-{$IFNDEF HAS_TYPES_UNIT}
+{$IFNDEF Has_Types_Unit}
 type
   {
   TStringDynArray:
@@ -368,7 +368,7 @@ type
     encountered. Class derives from either EOSError if defined in SysUtils or
     EWin32Error otherwise.
   }
-  {$IFDEF SUPPORTS_EOSERROR}
+  {$IFDEF Supports_EOSError}
   EPJEnvVars = class(EOSError);
   {$ELSE}
   EPJEnvVars = class(EWin32Error);
