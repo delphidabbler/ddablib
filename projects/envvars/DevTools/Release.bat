@@ -26,9 +26,6 @@ mkdir Release
 zip -j -9 %OutFile% PJEnvVars.pas
 zip -j -9 %OutFile% PJEnvVars.dcr
 
-zip -j -9 %OutFile% %HelpDir%\PJEnvVars.als
-zip -j -9 %OutFile% %HelpDir%\PJEnvVars.hlp
-
 zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
 zip -j -9 %OutFile% %DocsDir%\MPL-2.txt
 zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
