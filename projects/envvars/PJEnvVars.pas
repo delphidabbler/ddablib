@@ -58,105 +58,96 @@ uses
 
 {$IFNDEF Has_Types_Unit}
 type
-  {
-  TStringDynArray:
-    Dynamic array of strings. Defined here if Types unit not available: Types
-    unit defines this type.
-  }
+  // Dynamic array of strings. Defined in Types unit when compiled with versions
+  // of Delphi that have it.
   TStringDynArray = array of string;
 {$ENDIF}
 
-{$IFNDEF Supports_ENoConstructException}
-type
-  ENoConstructException = class(Exception);
-{$ENDIF}
-
+///  <summary>Gets the value of an environment variable.</summary>
+///  <remarks>This is an alias for
+///  <see cref="PJEnvVars|TPJEnvironmentVars.GetValue"/> which should be used in
+///  preference.</remarks>
 function GetEnvVarValue(const VarName: string): string;
-  {Gets the value of an environment variable.
-    @param VarName [in] Name of environment variable.
-    @return Environment variable or '' if the variable does not exist.
-  }
 
+///  <summary>Sets the value of an environment variable.</summary>
+///  <remarks>This is an alias for
+///  <see cref="PJEnvVars|TPJEnvironmentVars.SetValue"/> which should be used in
+///  preference.</remarks>
 function SetEnvVarValue(const VarName, VarValue: string): Integer;
-  {Sets the value of an environment variable.
-    @param VarName [in] Name of environment variable.
-    @param VarValue [in] New value of environment variable. Passing '' deletes
-      the environment variable.
-    @return 0 on success or a Windows error code on error.
-  }
 
+///  <summary>Deletes an environment variable.</summary>
+///  <remarks>This is an alias for
+///  <see cref="PJEnvVars|TPJEnvironmentVars.Delete"/> which should be used in
+///  preference.</remarks>
 function DeleteEnvVar(const VarName: string): Integer;
-  {Deletes an environment variable.
-    @param VarName [in] Name of environment variable.
-    @return 0 on success or a Windows error code on error.
-  }
 
+///  <summary>Creates a new custom environment block.</summary>
+///  <remarks>This is an alias for
+///  <see cref="PJEnvVars|TPJEnvironmentVars.CreateBlock"/> which should be used
+///  in preference.</remarks>
 function CreateEnvBlock(const NewEnv: TStrings; const IncludeCurrent: Boolean;
   const Buffer: Pointer; const BufSize: Integer): Integer;
-  {Creates a new custom environment block.
-    @param NewEnv [in] List of environment variables in Name=Value format to
-      include in new environment block. If nil then no new environment variables
-      are included.
-    @param IncludeCurrent [in] Flag indicating whether environment variables
-      from current process are included in the new environment block.
-    @param Buffer [in] Buffer that receives new environment block. Pass nil to
-      to find required buffer size without creating a block.
-    @param BufSize [in] Size of Buffer in characters. Pass 0 if Buffer is nil.
-    @return Size (or required size) of environment block in characters. Multiply
-      by SizeOf(Char) to get buffer size in bytes.
-  }
 
-function ExpandEnvVars(const Str: string): string;
-  {Replaces any environment variables in a string with their values. Environment
-  variables should be delimited by % characters thus: %ENVVAR%.
-    @param Str [in] String containing environment variables to be replaced.
-    @return Converted string.
-  }
+///  <summary>Replaces any environment variable names in a string with their
+///  values.</summary>
+///  <remarks>This is an alias for
+///  <see cref="PJEnvVars|TPJEnvironmentVars.Expand"/> which should be used in
+///  preference.</remarks>
+function ExpandEnvVars(const Str: string): string; deprecated;
 
+///  <summary>Gets a list of all the environment variables available to the
+///  current process in <c>Name=Value</c> format.</summary>
+///  <remarks>This is an alias for
+///  <see cref="PJEnvVars|TPJEnvironmentVars.GetAll"/> which should be used in
+///  preference.</remarks>
 function GetAllEnvVars(const Vars: TStrings): Integer;
-  {Gets all the environment variables available to the current process.
-    @param Vars [in] String list that receives all environment variables in
-      Name=Value format. Set to nil if all you need is the size of the
-      environment block.
-    @return Size of environment block that contains all environment variables
-      in characters. Multiply by SizeOf(Char) to get size in bytes.
-  }
 
+///  <summary>Gets a list of names of all environment variables in the current
+///  process.</summary>
+///  <remarks>This is an alias for
+///  <see cref="PJEnvVars|TPJEnvironmentVars.GetAllNames"/> which should be used
+///  in preference.</remarks>
 procedure GetAllEnvVarNames(const Names: TStrings); overload;
-  {Stores all environment variable names in a string list. Empty names are
-  ignored.
-    @param Names [in] String list to receive names. Any previous contents are
-      discarded.
-  }
 
+///  <remarks>This is an alias for the <c>TStringDynArray</c> overload of
+///  <see cref="PJEnvVars|TPJEnvironmentVars.GetAllNames"/> which should be used
+///  in preference.</remarks>
 function GetAllEnvVarNames: TStringDynArray; overload;
-  {Creates a string array containing all environment variables. Empty names are
-  ignored.
-    @return Array of environment variable names.
-  }
 
+///  <summary>Calculates the size of the current process' environment block.
+///  </summary>
+///  <remarks>This is an alias for
+///  <see cref="PJEnvVars|TPJEnvironmentVars.BlockSize"/> which should be used
+///  in preference.</remarks>
 function EnvBlockSize: Integer;
-  {Calculates size of environment block in characters.
-    @return Size of environment block in characters. Multiply by SizeOf(Char) to
-      get size in bytes.
-  }
 
 type
 
+  ///  <summary>Record encasulating the name and value of an environment
+  ///  variable.</summary>
   TPJEnvironmentVar = record
+    ///  <summary>Environment variable name.</summary>
     Name: string;
+    ///  <summary>Environment variable value.</summary>
     Value: string;
   end;
 
+  ///  <summary>Dynamic array of <see cref="PJEnvVars|TPJEnvironmentVar"/>
+  ///  records.</summary>
   TPJEnvironmentVarArray = array of TPJEnvironmentVar;
 
-  {
-  TPJEnvVarsEnum:
-    Callback method type used in TPJEnvVars.EnumNames method: called for
-    each environment variable by name, passing user-supplied data.
-      @param VarName [in] Name of an environment variable.
-      @param Data [in] User-specified pointer as passed to TPJEnvVars.EnumNames.
-  }
+  ///  <summary>Type of callback method passed to the
+  ///  <see cref="PJEnvVars|TPJEnvironmentVars.EnumNames"/> method, to be called
+  ///  for each enumerated environment variable.</summary>
+  ///  <param name="VarName">string [in] Name of the current environment
+  ///  variable in the enumeration.</param>
+  ///  <param name="Data">Pointer [in] User-specified value that was passed to
+  ///  <see cref="PJEnvVars|TPJEnvironmentVars.EnumNames"/></param>
+  ///  <remarks>When compiled with a compiler that supports anonymous methods
+  ///  <c>TPJEnvVarsEnum</c> is an anonymous method type, otherwise it is a
+  ///  normal method type. NOTE: normal methods can be assigned to
+  ///  <c>TPJEnvVarsEnum</c> even when it is compiled as an anonymous type.
+  ///  </remarks>
   TPJEnvVarsEnum =
     {$IFNDEF Supports_Closures}
     procedure(const VarName: string; Data: Pointer) of object;
@@ -164,6 +155,19 @@ type
     reference to procedure(const VarName: string; Data: Pointer);
     {$ENDIF}
 
+  ///  <summary>Type of callback method passed to the
+  ///  <see cref="PJEnvVars|TPJEnvironmentVars.EnumVars"/> method, to be called
+  ///  for each enumerated environment variable.</summary>
+  ///  <param name="EnvVar"><see cref="PJEnvVars|TPJEnvironmentVar"/> [in]
+  ///  Information about the current environment variable in the enumeration.
+  ///  </param>
+  ///  <param name="Data">Pointer [in] User-specified value that was passed to
+  ///  <see cref="PJEnvVars|TPJEnvironmentVars.EnumVars"/></param>
+  ///  <remarks>When compiled with a compiler that supports anonymous methods
+  ///  <c>TPJEnvVarsEnumEx</c> is an anonymous method type, otherwise it is a
+  ///  normal method type. NOTE: normal methods can be assigned to
+  ///  <c>TPJEnvVarsEnumEx</c> even when it is compiled as an anonymous type.
+  ///  </remarks>
   TPJEnvVarsEnumEx =
     {$IFNDEF Supports_Closures}
     procedure(const EnvVar: TPJEnvironmentVar; Data: Pointer) of object;
@@ -179,7 +183,7 @@ type
   public
     ///  <summary>Prevents construction of instances of this static class.
     ///  </summary>
-    ///  <exception>Always raises ENoConstructException when called.</exception>
+    ///  <exception cref="ENoConstructException">Always raised.</exception>
     constructor Create;
     ///  <summary>Returns the number of environment variables in the current
     ///  process.</summary>
@@ -189,75 +193,79 @@ type
     class function GetValue(const VarName: string): string;
     ///  <summary>Sets the value of the environment variable with the given name
     ///  to the given value.</summary>
-    ///  <remarks>Returns 0 on success or a Windows error code on failure.
-    ///  </remarks>
+    ///  <remarks>Returns <c>0</c> on success or a Windows error code on
+    ///  failure.</remarks>
     class function SetValue(const VarName, VarValue: string): Integer;
     ///  <summary>Deletes the environment variable with the given name.
     ///  </summary>
-    ///  <remarks>Returns 0 on success or a Windows error code on failure.
-    ///  </remarks>
+    ///  <remarks>Returns <c>0</c> on success or a Windows error code on
+    ///  failure.</remarks>
     class function Delete(const VarName: string): Integer;
     ///  <summary>Creates a new custom environment block.</summary>
     ///  <param name="NewEnv">TStrings [in] List of environment variables in
-    ///  Name=Value format to be included in the new environment block. If nil
-    ///  then no new environment variables are included in the block.</param>
+    ///  <c>Name=Value</c> format to be included in the new environment block.
+    ///  If <c>nil</c> then no new environment variables are included in the
+    ///  block.</param>
     ///  <param name="IncludeCurrent">Boolean [in] Flag indicating whether the
     ///  environment variables from the current process are included in the new
     ///  environment block.</param>
     ///  <param name="Buffer">Pointer [in] Pointer to a memory block that
-    ///  receives the new environment block. If nil then no block is created. If
-    ///  none-nil the buffer must be at least BufSize * SizeOf(Char) bytes.
-    ///  </param>
-    ///  <param name="BufSize"> [in] The number of characters that can be stored
-    ///  in the memory pointed to by Buffer or if Buffer is nil.</param>
+    ///  receives the new environment block. If <c>nil</c> then no block is
+    ///  created. If none-<c>nil</c> the buffer must be at least <c>BufSize *
+    ///  SizeOf(Char)</c> bytes.</param>
+    ///  <param name="BufSize">Integer [in] The number of characters that can be
+    ///  stored in the memory pointed to by <c>Buffer</c> or if <c>Buffer</c> is
+    ///  nil.</param>
     ///  <returns>Integer. The size of the environment block in characters. If
-    ///  Buffer is nil this is the required size of the buffer, in characters.
-    ///  Multiply this value by SizeOf(Char) to find the required buffer size in
-    ///  bytes.</returns>
+    ///  <c>Buffer</c> is <c>nil</c> this is the required size of the buffer, in
+    ///  characters. Multiply this value by <c>SizeOf(Char)</c> to find the
+    ///  required buffer size in bytes.</returns>
     ///  <remarks>
-    ///  <para>To find the required buffer size call this method with Buffer =
-    ///  nil and it will return the required block size, in characters. Now
-    ///  allocate a buffer large enough to hold the required number of
+    ///  <para>To find the required buffer size call this method with <c>Buffer
+    ///  = nil</c> and it will return the required block size, in characters.
+    ///  Now allocate a buffer large enough to hold the required number of
     ///  characters and call this method again, this time passing the buffer and
     ///  its size in characters.</para>
     ///  <para>The environment blocks created by this method are suitable for
-    ///  passing to processes created with the CreateProcess API function. How
-    ///  this is done depends on whether the block is Unicode (as created with
-    ///  Unicode Delphis) or ANSI (as created by non-Unicode Delphis). To see
-    ///  how see http://delphidabbler.com/articles?article=6#createenvblock
-    ///  </para>
+    ///  passing to processes created with the <c>CreateProcess</c> API
+    ///  function. How this is done depends on whether the block is Unicode (as
+    ///  created with Unicode Delphis) or ANSI (as created by non-Unicode
+    ///  Delphis). To see how see
+    ///  http://delphidabbler.com/articles?article=6#createenvblock</para>
     ///  </remarks>
     class function CreateBlock(const NewEnv: TStrings;
       const IncludeCurrent: Boolean; const Buffer: Pointer;
       const BufSize: Integer): Integer;
     ///  <summary>Calculates and returns the size of the current process'
     ///  environment block in characters.</summary>
-    ///  <remarks>Multiply the returned size by SizeOf(Char) to get the block
-    ///  size in Bytes.</remarks>
+    ///  <remarks>Multiply the returned size by <c>SizeOf(Char)</c> to get the
+    ///  block size in bytes.</remarks>
     class function BlockSize: Integer;
     ///  <summary>Expands a string containing environment variables by replacing
     ///  each environment variable name with its value.</summary>
     ///  <param name="Str">string [in] String containing environment variables
     ///  to be expanded. Each environment variable name must be enclosed by
-    ///  single % characters, e.g. %FOO%.</param>
+    ///  single <c>%</c> characters, e.g. <c>%FOO%</c>.</param>
     ///  <returns>string. The expanded string.</returns>
     class function Expand(const Str: string): string;
     ///  <summary>Gets all the environment variables available to the current
     ///  process and returns the size of the environment block.</summary>
     ///  <param name="Vars">TStrings [in] Receives all environment variables in
-    ///  Name=Value format. Any previous contents are discarded. If nil is
-    ///  passed to this parameter no environment variables are fetched.</param>
+    ///  Name=Value format. Any previous contents are discarded. If <c>nil</c>
+    ///  is passed to this parameter no environment variables are fetched.
+    ///  </param>
     ///  <returns>Integer. The minimum size of a environment block that contains
-    ///  all the environment variables, in characters. Multiply by SizeOf(Char)
-    ///  to get the size in bytes.</returns>
+    ///  all the environment variables, in characters. Multiply by
+    ///  <c>SizeOf(Char)</c> to get the size in bytes.</returns>
     ///  <remarks>If you need to find the block size without fetching any
     ///  environment variables just call the method and pass nil as the
     ///  parameter.</remarks>
     class function GetAll(const Vars: TStrings): Integer; overload;
     ///  <summary>Gets all the environment variables available to the current
     ///  process.</summary>
-    ///  <returns>TPJEnvironmentVarArray. A dynamic array of records containing
-    ///  the names and values of each environment variable.</returns>
+    ///  <returns><see cref="PJEnvVars|TPJEnvironmentVarArray"/>. A dynamic
+    ///  array of records containing the names and values of each environment
+    ///  variable.</returns>
     class function GetAll: TPJEnvironmentVarArray; overload;
     ///  <summary>Gets the names of all environment variables available to the
     ///  current process.</summary>
@@ -271,124 +279,144 @@ type
     class function GetAllNames: TStringDynArray; overload;
     ///  <summary>Enumerates the names of all environment variables in the
     ///  current process.</summary>
-    ///  <param name="Callback">TPJEnvVarsEnum [in] Callback method called once
-    ///  for each environment variable, passing its name and the value of the
-    ///  Data pointer as parameters.</param>
-    ///  <param name="Data">Pointer [in] Data to be passed to Callback function
-    ///  each time it is called.</param>
+    ///  <param name="Callback"><see cref="PJEnvVars|TPJEnvVarsEnum"/> [in]
+    ///  Callback method called once for each environment variable, passing its
+    ///  name and the value of the <c>Data</c> pointer as parameters.</param>
+    ///  <param name="Data">Pointer [in] Data to be passed to <c>Callback</c>
+    ///  method each time it is called.</param>
     class procedure EnumNames(Callback: TPJEnvVarsEnum; Data: Pointer);
     ///  <summary>Enumerates all the environment variables available to the
     ///  current process.</summary>
-    ///  <param name="Callback">TPJEnvVarsEnumEx [in] Callback method called
-    ///  once for each environment variable, passing a record containing its
-    ///  name and value along with the the value of the Data pointer as
-    ///  parameters.</param>
-    ///  <param name="Data">Pointer [in] Data to be passed to Callback function
-    ///  each time it is called.</param>
+    ///  <param name="Callback"><see cref="PJEnvVars|TPJEnvVarsEnumEx"/> [in]
+    ///  Callback method called once for each environment variable, passing a
+    ///  record containing its name and value along with the the value of the
+    ///  <c>Data</c> pointer as parameters.</param>
+    ///  <param name="Data">Pointer [in] Data to be passed to <c>Callback</c>
+    ///  method each time it is called.</param>
     class procedure EnumVars(Callback: TPJEnvVarsEnumEx; Data: Pointer);
   end;
 
-  {
-  TPJEnvVarsEnumerator:
-    Class of enumerator used to enumerator all environment names in TPJEnvVars.
-    Provided as an alternative to the EnumNames method of TPJENvVars that
-    supports the for..in construct in Delphi 2005 and later.
-  }
+  ///  <summary>Enumerator for all environment names in the current process.
+  ///  </summary>
+  ///  <remarks>This class may be used on its own. Instances of this type are
+  ///  returned by <see cref="PJEnvVars|TPJEnvVars.GetEnumerator"/>.</remarks>
   TPJEnvVarsEnumerator = class(TObject)
   private
-    fEnvVarNames: TStrings; // List of names of env vars being enumerated
-    fIndex: Integer;        // Index of current env var in list
+    ///  <summary>List of environment variable names being enumerated.</summary>
+    fEnvVarNames: TStrings;
+    ///  <summary>Index of current name in enumeration.</summary>
+    fIndex: Integer;
   public
+    ///  <summary>Constructs and initialises and new enumeration object.
+    ///  </summary>
     constructor Create;
-      {Object constructor. Initialises enumeration.
-      }
+    ///  <summary>Destroys enumerator instance.</summary>
     destructor Destroy; override;
-      {Object destructor. Tidies up enumeration, freeing resources.
-      }
+    ///  <summary>Returns name of current environment variable in enumeration.
+    ///  </summary>
     function GetCurrent: string;
-      {Gets name of current environment variable name.
-        @return Required name.
-      }
+    ///  <summary>Moves to next environment variable name in enumeration if
+    ///  present.</summary>
+    ///  <returns>Boolean. <c>True</c> if there is a next item or <c>False</c>
+    ///  there are no more items in the enumeration.</returns>
     function MoveNext: Boolean;
-      {Moves to next environment variable name in enumeration.
-        @return True if there is a next item, False if beyond last item.
-      }
+    ///  <summary>Name of current environment variable in enumeration.</summary>
     property Current: string read GetCurrent;
-      {Name of current environment variable}
   end;
 
-  {
-  TPJEnvVars:
-    Component that encapsulates environment variables available to a program,
-    permitting access to, and modification of, the variables. Only one instance
-    of the component can be placed on a form or owned by another control.
-  }
+  ///  <summary>Component that encapsulates environment variables available to
+  ///  the current process and enables them to be queried and modified.
+  ///  </summary>
+  ///  <remarks>
+  ///  <para>WARNING: Only one instance of the component can be placed on a form
+  ///  or owned by another control.</para>
+  ///  <para>NOTE: This component is deprecated. The
+  ///  <see cref="PJEnvVars|TPJEnvironmentVars"/> static class should be used
+  ///  instead.</para>
+  ///  </remarks>
   TPJEnvVars = class(TComponent)
   private
+    ///  <summary>Read accessor for the <c>Count</c> property.</summary>
     function GetCount: Integer;
-      {Read access method for Count property.
-        @return Number of environment variables in current process.
-      }
+    ///  <summary>Read accessor for the <c>Values[]</c> property.</summary>
     function GetValue(Name: string): string;
-      {Read access method for Values property.
-        @param Name [in] Name of environment variable.
-        @return Value of environment variable specified by Name.
-      }
+    ///  <summary>Write accessor for the <c>Values[]</c> property.</summary>
+    ///  <exception cref="PJEnvVars|EPJEnvVars">Raised if the named environment
+    ///  variable can't be set.</exception>
     procedure SetValue(Name: string; const Value: string);
-      {Write access method for Values property.
-        @param Name [in] Name of environment variable.
-        @param Value [in] Value of environment variable.
-        @raise EPJEnvVars if environment variable can't be set.
-      }
   public
+    ///  <summary>Creates a new instance of the component.</summary>
+    ///  <param name="AOwner">TComponent [in] Owning component. May be
+    ///  <c>nil</c> if no owner.</param>
+    ///  <exception cref="Exception">Raised if a <c>TPJEnvVars</c> component is
+    ///  already has the same owner.</exception>
     constructor Create(AOwner: TComponent); override;
-      {Object contructor. Ensures only one instance of the component is placed
-      on a form or owned by another component.
-        @param AOwner [in] Owning component. May be nil if no owner.
-      }
+    ///  <summary>Enumerates names of all environment variables in current
+    ///  process.</summary>
+    ///  <param name="Callback"><see cref="PJEnvVars|TPJEnvVarsEnum"/> [in]
+    ///  Method called once for each environment variable, passing it the
+    ///  environment variable's name and the value of the <c>Data</c> parameter.
+    ///  </param>
+    ///  <param name="Data">Pointer [in] User defined value passed to every call
+    ///  to the <c>Callback</c> method.</param>
+    ///  <remarks>Deprecated. Use
+    ///  <see cref="PJEnvVars|TPJEnvironmentVars.EnumNames"/> instead.</remarks>
     procedure EnumNames(Callback: TPJEnvVarsEnum; Data: Pointer);
-      {Enumerates names of all environment variables in current process.
-        @param Callback [in] Callback function called once for each environment
-          variable, passing name and value of Data parameter.
-        @param Data [in] User specified data passed to callback function.
-      }
+    ///  <summary>Creates and returns a new enumerator of all environment
+    ///  variable names in the current process.</summary>
+    ///  <returns><see cref="PJEnvVars|TPJEnvVarsEnumerator"/>. Required
+    ///  enumerator.</returns>
+    ///  <remarks>
+    ///  <para>Caller is responsible for freeing the enumerator.</para>
+    ///  <para>Deprecated. Create instances of
+    ///  <see cref="PJEnvVars|TPJEnvVarsEnumerator"/> directly or use
+    ///  <see cref="PJEnvVars|TPJEnvironmentVars.EnumNames"/> instead.</para>
+    ///  </remarks>
     function GetEnumerator: TPJEnvVarsEnumerator;
-      {Creates and returns a new enumerator for all environment variable names.
-        @return Required enumerator. Caller is responsible for freeing the
-          enumerator instance.
-          NOTE: If used by for..in loop (Delphi 2005 and later) compiler takes
-          care of freeing the enumerator.
-      }
+    ///  <summary>Deletes the environment variable with the given name.
+    ///  </summary>
+    ///  <exception cref="PJEnvVars|EPJEnvVars">Raised if the named environment
+    ///  variable can't be deleted.</exception>
+    ///  <remarks>Deprecated. Use
+    ///  <see cref="PJEnvVars|TPJEnvironmentVars.Delete"/> instead.</remarks>
     procedure DeleteVar(const Name: string);
-      {Deletes an environment variable.
-        @param Name [in] Name of environment variable to delete.
-        @except EPJEnvVars raised if environment variable can't be deleted.
-      }
+    ///  <summary>Count of the number of environment variables in the current
+    ///  process.</summary>
+    ///  <remarks>Deprecated. Use
+    ///  <see cref="PJEnvVars|TPJEnvironmentVars.Count"/> instead.</remarks>
     property Count: Integer read GetCount;
-      {Count of number of environment variables in current process}
+    ///  <summary>Array of values of each environment variable in the current
+    ///  process, indexed by its name.</summary>
+    ///  <exception cref="PJEnvVars|EPJEnvVars">Raised when writing to
+    ///  <c>Values[]</c> if the named environment variable can't be set.
+    ///  </exception>
+    ///  <remarks>
+    ///  <para>Getting the value of an unknown environment variable returns
+    ///  the empty string. Setting the value of an unknown environment variable
+    ///  creates it.</para>
+    ///  <para>Deprecated. Use
+    ///  <see cref="PJEnvVars|TPJEnvironmentVars.GetValue"/> and
+    ///  <see cref="PJEnvVars|TPJEnvironmentVars.SetValue"/> instead.</para>
+    ///  </remarks>
     property Values[Name: string]: string read GetValue write SetValue;
-      {Array of values of each environment variable, referenced by the
-      variable's name. Referencing an unknown variable returns the empty string.
-      Setting a value for an unknown variable creates it. If it is not possible
-      to set a variable value then an exception is raised}
   end;
 
-  {
-  EPJEnvVars:
-    Exception raised by TPJEnvVars when an environment variable error is
-    encountered. Class derives from either EOSError if defined in SysUtils or
-    EWin32Error otherwise.
-  }
+  ///  <summary>Exception raised by <see cref="PJEnvVars|TPJEnvVars"/> when an
+  ///  error is encountered.</summary>
   {$IFDEF Supports_EOSError}
   EPJEnvVars = class(EOSError);
   {$ELSE}
   EPJEnvVars = class(EWin32Error);
   {$ENDIF}
 
+  {$IFNDEF Supports_ENoConstructException}
+  // Exception class for use with versions of Delphi that don't define the
+  // class in SysUtils
+  ENoConstructException = class(Exception);
+  {$ENDIF}
 
+// Registers the component with the Delphi IDE.
 procedure Register;
-  {Registers component with Delphi.
-  }
 
 
 implementation
@@ -407,55 +435,27 @@ resourcestring
 {$ENDIF}
 
 procedure Register;
-  {Registers component with Delphi.
-  }
 begin
   RegisterComponents('DelphiDabbler', [TPJEnvVars]);
 end;
 
 function GetEnvVarValue(const VarName: string): string;
-  {Gets the value of an environment variable
-    @param VarName [in] Name of environment variable
-    @return Environment variable or '' if the variable does not exist.
-  }
 begin
   Result := TPJEnvironmentVars.GetValue(VarName);
 end;
 
 function SetEnvVarValue(const VarName, VarValue: string): Integer;
-  {Sets the value of an environment variable.
-    @param VarName [in] Name of environment variable.
-    @param VarValue [in] New value of environment variable. Passing '' deletes
-      the environment variable.
-    @return 0 on success or a Windows error code on error.
-  }
 begin
   Result := TPJEnvironmentVars.SetValue(VarName, VarValue);
 end;
 
 function DeleteEnvVar(const VarName: string): Integer;
-  {Deletes an environment variable.
-    @param VarName [in] Name of environment variable.
-    @return 0 on success or a Windows error code on error.
-  }
 begin
   Result := TPJEnvironmentVars.Delete(VarName);
 end;
 
 function CreateEnvBlock(const NewEnv: TStrings; const IncludeCurrent: Boolean;
   const Buffer: Pointer; const BufSize: Integer): Integer;
-  {Creates a new custom environment block.
-    @param NewEnv [in] List of environment variables in Name=Value format to
-      include in new environment block. If nil then no new environment variables
-      are included.
-    @param IncludeCurrent [in] Flag indicating whether environment variables
-      from current process are included in the new environment block.
-    @param Buffer [in] Buffer that receives new environment block. Pass nil to
-      to find required buffer size without creating a block.
-    @param BufSize [in] Size of Buffer in bytes. Pass 0 if Buffer is nil.
-    @return Size (or required size) of environment block in characters. Multiply
-      by SizeOf(Char) to get buffer size in bytes.
-  }
 begin
   Result := TPJEnvironmentVars.CreateBlock(
     NewEnv, IncludeCurrent, Buffer, BufSize
@@ -463,63 +463,37 @@ begin
 end;
 
 function ExpandEnvVars(const Str: string): string;
-  {Replaces any environment variables in a string with their values. Environment
-  variables should be delimited by % characters thus: %ENVVAR%.
-    @param Str [in] String containing environment variables to be replaced.
-    @return Converted string.
-  }
 begin
   Result := TPJEnvironmentVars.Expand(Str);
 end;
 
 function GetAllEnvVars(const Vars: TStrings): Integer;
-  {Gets all the environment variables available to the current process.
-    @param Vars [in] String list that receives all environment variables in
-      Name=Value format. Set to nil if all you need is the size of the
-      environment block.
-    @return Size of environment block that contains all environment variables
-      in characters. Multiply by SizeOf(Char) to get size in bytes.
-  }
 begin
   Result := TPJEnvironmentVars.GetAll(Vars);
 end;
 
 procedure GetAllEnvVarNames(const Names: TStrings); overload;
-  {Stores all environment variable names in a string list. Empty names are
-  ignored.
-    @param Names [in] String list to receive names. Any previous contents are
-      discarded.
-  }
 begin
   TPJEnvironmentVars.GetAllNames(Names);
 end;
 
 function GetAllEnvVarNames: TStringDynArray; overload;
-  {Creates a string array containing all environment variables. Empty names are
-  ignored.
-    @return Array of environment variable names.
-  }
 begin
   Result := TPJEnvironmentVars.GetAllNames;
 end;
 
 function EnvBlockSize: Integer;
-  {Calculates size of environment block in characters.
-    @return Size of environment block in characters. Multiply by SizeOf(Char) to
-      get size in bytes.
-  }
 begin
   Result := TPJEnvironmentVars.BlockSize;
 end;
 
+///  <summary>Checks the given OS error code, and if it is non-zero, raises an
+///  exception.</summary>
+///  <exception cref="PJEnvVars|EPJEnvVars">Raise if <c>Code</c> is not zero.
+///  Exception <c>Code</c> property is set to the given code and its
+///  <c>Message</c> property is the corresponding error message obtained from
+///  the operating system.</exception>
 procedure ErrorCheck(Code: Integer);
-  {Checks a return value from one of TPJEnvVars methods that return Windows
-  error codes.
-    @param Code [in] Code to check. Does nothing if 0. If <> 0 exception is
-      raised.
-    @except EPJEnvVars raised if Code is none-zero and Code stored in exception
-      object.
-  }
 var
   Err: EPJEnvVars;  // reference to exception beinbg raised
 begin
@@ -534,15 +508,10 @@ end;
 { TPJEnvVars }
 
 resourcestring
-  // Error messages
   sSingleInstanceErr = 'Only one %s component is permitted on a form: ' +
     '%0:s is already present on %1:s';
 
 constructor TPJEnvVars.Create(AOwner: TComponent);
-  {Object contructor. Ensures only one instance of the component is placed on a
-  form, or owned by another component.
-    @param AOwner [in] Owning component. May be nil if no owner.
-  }
 var
   Idx: Integer; // loops thru components on Owner form
 begin
@@ -559,58 +528,31 @@ begin
 end;
 
 procedure TPJEnvVars.DeleteVar(const Name: string);
-  {Deletes an environment variable.
-    @param Name [in] Name of environment variable to delete.
-    @except EPJEnvVars raised if environment variable can't be deleted.
-  }
 begin
   ErrorCheck(TPJEnvironmentVars.Delete(Name));
 end;
 
 procedure TPJEnvVars.EnumNames(Callback: TPJEnvVarsEnum; Data: Pointer);
-  {Enumerates names of all environment variables in current process.
-    @param Callback [in] Callback function called once for each environment
-      variable, passing name and value of Data parameter.
-    @param Data [in] User specified data passed to callback function.
-  }
 begin
   TPJEnvironmentVars.EnumNames(Callback, Data);
 end;
 
 function TPJEnvVars.GetCount: Integer;
-  {Read access method for Count property.
-    @return Number of environment variables in current process.
-  }
 begin
   Result := TPJEnvironmentVars.Count;
 end;
 
 function TPJEnvVars.GetEnumerator: TPJEnvVarsEnumerator;
-  {Creates and returns a new enumerator for all environment variable names.
-    @return Required enumerator. Caller is responsible for freeing the
-      enumerator instance.
-      NOTE: If used by for..in loop (Delphi 2005 and later) compiler takes care
-      of freeing the enumerator.
-  }
 begin
   Result := TPJEnvVarsEnumerator.Create;
 end;
 
 function TPJEnvVars.GetValue(Name: string): string;
-  {Read access method for Values property.
-    @param Name [in] Name of environment variable.
-    @return Value of environment variable specified by Name.
-  }
 begin
   Result := TPJEnvironmentVars.GetValue(Name);
 end;
 
 procedure TPJEnvVars.SetValue(Name: string; const Value: string);
-  {Write access method for Values property.
-    @param Name [in] Name of environment variable.
-    @param Value [in] Value of environment variable.
-    @raise EPJEnvVars if environment variable can't be set.
-  }
 begin
   ErrorCheck(TPJEnvironmentVars.SetValue(Name, Value));
 end;
@@ -618,8 +560,6 @@ end;
 { TPJEnvVarsEnumerator }
 
 constructor TPJEnvVarsEnumerator.Create;
-  {Object constructor. Initialises enumeration.
-  }
 begin
   fEnvVarNames := TStringList.Create;
   TPJEnvironmentVars.GetAllNames(fEnvVarNames);
@@ -627,25 +567,17 @@ begin
 end;
 
 destructor TPJEnvVarsEnumerator.Destroy;
-  {Object destructor. Tidies up enumeration, freeing resources.
-  }
 begin
   fEnvVarNames.Free;
   inherited;
 end;
 
 function TPJEnvVarsEnumerator.GetCurrent: string;
-  {Gets name of current environment variable name.
-    @return Required name.
-  }
 begin
   Result := fEnvVarNames[fIndex];
 end;
 
 function TPJEnvVarsEnumerator.MoveNext: Boolean;
-  {Moves to next environment variable name in enumeration.
-    @return True if there is a next item, False if beyond last item.
-  }
 begin
   Result := fIndex < Pred(fEnvVarNames.Count);
   if Result then
