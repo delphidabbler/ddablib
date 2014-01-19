@@ -344,6 +344,13 @@ type
     ///  <exception cref="PJEnvVars|EPJEnvVars">Raised if the named environment
     ///  variable can't be set.</exception>
     procedure SetValue(Name: string; const Value: string);
+    ///  <summary>Checks the given OS error code, and if it is non-zero, raises
+    ///  an exception.</summary>
+    ///  <exception cref="PJEnvVars|EPJEnvVars">Raise if <c>Code</c> is not
+    ///  zero. Exception <c>Code</c> property is set to the given code and its
+    ///  <c>Message</c> property is the corresponding error message obtained
+    ///  from the operating system.</exception>
+    procedure ErrorCheck(Code: Integer);
   public
     ///  <summary>Creates a new instance of the component.</summary>
     ///  <param name="AOwner">TComponent [in] Owning component. May be
@@ -487,24 +494,6 @@ begin
   Result := TPJEnvironmentVars.BlockSize;
 end;
 
-///  <summary>Checks the given OS error code, and if it is non-zero, raises an
-///  exception.</summary>
-///  <exception cref="PJEnvVars|EPJEnvVars">Raise if <c>Code</c> is not zero.
-///  Exception <c>Code</c> property is set to the given code and its
-///  <c>Message</c> property is the corresponding error message obtained from
-///  the operating system.</exception>
-procedure ErrorCheck(Code: Integer);
-var
-  Err: EPJEnvVars;  // reference to exception beinbg raised
-begin
-  if Code <> 0 then
-  begin
-    Err := EPJEnvVars.Create(SysErrorMessage(Code));
-    Err.ErrorCode := Code;
-    raise Err;
-  end;
-end;
-
 { TPJEnvVars }
 
 resourcestring
@@ -535,6 +524,18 @@ end;
 procedure TPJEnvVars.EnumNames(Callback: TPJEnvVarsEnum; Data: Pointer);
 begin
   TPJEnvironmentVars.EnumNames(Callback, Data);
+end;
+
+procedure TPJEnvVars.ErrorCheck(Code: Integer);
+var
+  Err: EPJEnvVars;  // reference to exception beinbg raised
+begin
+  if Code <> 0 then
+  begin
+    Err := EPJEnvVars.Create(SysErrorMessage(Code));
+    Err.ErrorCode := Code;
+    raise Err;
+  end;
 end;
 
 function TPJEnvVars.GetCount: Integer;
