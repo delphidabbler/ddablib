@@ -31,9 +31,14 @@ unit PJEnvVars;
 {$UNDEF Supports_Closures}
 {$UNDEF Supports_Deprecated}
 {$UNDEF Supports_Deprecated_Hints}
+{$UNDEF Supports_Inlining}
+{$UNDEF Supports_RTLNamespaces}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 ad later
+    {$DEFINE Supports_RTLNamespaces}
   {$IFEND}
   {$IF CompilerVersion >= 20.0} // Delphi 2009 and later
     {$DEFINE Supports_ENoConstructException}
@@ -58,7 +63,11 @@ interface
 
 uses
   // Delphi
-  SysUtils, Classes  {$IFDEF Has_Types_Unit}, Types {$ENDIF};
+  {$IFNDEF Supports_RTLNamespaces}
+  SysUtils, Classes {$IFDEF Has_Types_Unit}, Types{$ENDIF};
+  {$ELSE}
+  System.SysUtils, System.Classes, System.Types;
+  {$ENDIF}
 
 {$IFNDEF Has_Types_Unit}
 type
@@ -495,10 +504,11 @@ implementation
 
 uses
   // Delphi
-  {$IFDEF Supports_ENoConstructException}
-  RTLConsts,
+  {$IFNDEF Supports_RTLNamespaces}
+  {$IFDEF Supports_ENoConstructException}RTLConsts,{$ENDIF} Windows;
+  {$ELSE}
+  SysUtils.RTLConsts, Winapi.Windows;
   {$ENDIF}
-  Windows;
 
 {$IFNDEF Supports_ENoConstructException}
 resourcestring
