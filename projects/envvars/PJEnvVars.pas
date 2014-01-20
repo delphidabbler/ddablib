@@ -8,8 +8,13 @@
  * $Rev$
  * $Date$
  *
- * DelphiDabbler Environment Variables unit. Contains a component and several
- * routines and component for processing and managing environment variables.
+ * DelphiDabbler Environment Variables unit. Contains static class for
+ * interogating and modifying environment variables.
+ *
+ * This unit also contains a component and deprecated stand-alone that used for
+ * the same purpose. These all all deprecated and are provided for backward
+ * compatibility reasons. Note that the component is not longer installed into
+ * the IDE by default. To do that include PJEnvVarsDsgn.pas in a design package.
  *
  * Documented at http://www.delphidabbler.com/url/envvars-docs
  *
