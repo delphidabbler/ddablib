@@ -31,7 +31,6 @@ unit PJEnvVars;
 {$UNDEF Supports_Closures}
 {$UNDEF Supports_Deprecated}
 {$UNDEF Supports_Deprecated_Hints}
-{$UNDEF Supports_Inlining}
 {$UNDEF Supports_RTLNamespaces}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
@@ -571,12 +570,12 @@ end;
 { TPJEnvVars }
 
 resourcestring
-  sSingleInstanceErr = 'Only one %s component is permitted on a form: ' +
-    '%0:s is already present on %1:s';
+  sSingleInstanceErr = 'Only one %1:s component is permitted for any owner: ' +
+    '%1:s is already owned by %2:s';
 
 constructor TPJEnvVars.Create(AOwner: TComponent);
 var
-  Idx: Integer; // loops thru components on Owner form
+  Idx: Integer; // loops thru components of AOwner
 begin
   if Assigned(AOwner) then
   begin
