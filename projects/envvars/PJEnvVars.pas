@@ -494,9 +494,6 @@ type
   ENoConstructException = class(Exception);
   {$ENDIF}
 
-// Registers the component with the Delphi IDE.
-procedure Register;
-
 
 implementation
 
@@ -513,11 +510,6 @@ uses
 resourcestring
   sNoConstruct = 'Class %s is not intended to be constructed';
 {$ENDIF}
-
-procedure Register;
-begin
-  RegisterComponents('DelphiDabbler', [TPJEnvVars]);
-end;
 
 function GetEnvVarValue(const VarName: string): string;
 begin
