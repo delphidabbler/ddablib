@@ -111,8 +111,6 @@
     }
     .pullout {
       border-left: 8px silver solid;
-      xborder-bottom: 2px silver solid;
-      xborder-top: 2px silver solid;
       background-color: #eee;
       margin: 0.5em 0 0 0;
       padding: 0.25em 0.5em;
@@ -390,7 +388,10 @@ end;</pre>
 
 <pre class="source">{$UNDEF FORINSUPPORTED}
 {$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 17.0} // >= Delphi 2005
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 17.0} // Delphi 2005 and later
     {$DEFINE FORINSUPPORTED}
   {$IFEND}
 {$ENDIF}</pre>
