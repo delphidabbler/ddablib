@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
  * Sample demo code for Environment Variables Unit
  *
@@ -10,140 +10,140 @@
 
 <head>
 
-	<title>
-		DelphiDabbler Environment Variables Unit Demo Code
-	</title>
+  <title>
+    DelphiDabbler Environment Variables Unit Demo Code
+  </title>
 
-	<style type="text/css">
-		body {
-			margin: 1em;
-			padding: 0;
-			font-family: Verdana, Arial, sans-serif;
-			font-size: 9pt;
-			line-height: 150%;
-		}
-		h1 {
-			margin: 0 0 1em 0;
-			padding: 0.5em;
-			border: 1px silver solid;
-			background-color: #eee;
-			font-size: 13pt;
-			font-weight: bold;
-			text-align: center;
-		}
-		h1 .subtitle {
-			font-style: italic;
-			color: #336;
-		}
-		h2 {
-			margin: 1em 0 0 0;
-			padding: 0;
-			padding-bottom: 6px;
-			border-bottom: 1px silver solid;
-			font-size: 11pt;
-			font-weight: bold;
-		}
-		h3 {
-			margin: 0.5em 0 0 0;
-			padding: 0;
-			font-size: 9pt;
-			font-weight: bold;
-		}
-		p {
-			margin: 0.5em 0 0 0;
-			padding: 0;
-		}
-		ul, ol {
-			margin: 0.5em 0 0 3em;
-			padding: 0;
-		}
-		ul {
-			list-style-type: square;
-		}
-		ul.spaced li,
-		ol.spaced li {
-			margin-top: 0.5em;
-		}
-		ul.spaced li,
-		ol.spaced li {
-			margin-top: 0.5em;
-		}
-		ul.unspaced li,
-		ol.unspaced li {
-			margin-top: 0;
-		}
-		ul.unspaced li.first,
-		ol.unspaced li.first {
-			margin-top: 0.5em;
-		}
-		code,
-		kbd {
-			font-family: "Courier New", Courier, monospace;
-		}
-		pre.source {
-			font-family: "Courier New", Courier, monospace;
-			background-color: #ffc;
-			border: 1px silver dotted;
-			padding: 0.25em;
-		}
-		a:link {
-			color: #336;
-			text-decoration: underline;
-		}
-		a:visited {
-			color: #669;
-			text-decoration: underline;
-		}
-		a:active {
-			color: #336;
-			text-decoration: underline;
-		}
-		a:hover {
-			text-decoration: underline;
-		}
-		.gototop {
-			margin: 1em 0 0 0;
-			padding: 0.3em 0 0 0;
-			text-align: center;
-			position: relative;
-			float: right;
-			font-weight: bold;
-		}
-		.pullout {
-			border-left: 8px silver solid;
-			xborder-bottom: 2px silver solid;
-			xborder-top: 2px silver solid;
-			background-color: #eee;
-			margin: 0.5em 0 0 0;
-			padding: 0.25em 0.5em;
-			font-style: italic;
-		}
-		.indent {
-			margin-left: 3em;
-		}
-		.highlight {
-			color: #336;
-			font-style: italic;
-			font-weight: bold;
-		}
-		.endnotes {
-			margin: 1.5em 0 0 0;
-			padding: 1em 0 0 0;
-			border-top: 1px silver solid;
-		}
-		.comments {
-			font-style: italic;
-		}
-		.copyright,
-		.copyright a:link,
-		.copyright a:visited,
-		.copyright a:active {
-			margin: 1em 0 0 0;
-			color: gray;
-			font-size: 8pt;
-			text-align: right;
-		}
-	</style>
+  <style type="text/css">
+    body {
+      margin: 1em;
+      padding: 0;
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 9pt;
+      line-height: 150%;
+    }
+    h1 {
+      margin: 0 0 1em 0;
+      padding: 0.5em;
+      border: 1px silver solid;
+      background-color: #eee;
+      font-size: 13pt;
+      font-weight: bold;
+      text-align: center;
+    }
+    h1 .subtitle {
+      font-style: italic;
+      color: #336;
+    }
+    h2 {
+      margin: 1em 0 0 0;
+      padding: 0;
+      padding-bottom: 6px;
+      border-bottom: 1px silver solid;
+      font-size: 11pt;
+      font-weight: bold;
+    }
+    h3 {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+      font-size: 9pt;
+      font-weight: bold;
+    }
+    p {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+    }
+    ul, ol {
+      margin: 0.5em 0 0 3em;
+      padding: 0;
+    }
+    ul {
+      list-style-type: square;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.spaced li,
+    ol.spaced li {
+      margin-top: 0.5em;
+    }
+    ul.unspaced li,
+    ol.unspaced li {
+      margin-top: 0;
+    }
+    ul.unspaced li.first,
+    ol.unspaced li.first {
+      margin-top: 0.5em;
+    }
+    code,
+    kbd {
+      font-family: "Courier New", Courier, monospace;
+    }
+    pre.source {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #ffc;
+      border: 1px silver dotted;
+      padding: 0.25em;
+    }
+    a:link {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #669;
+      text-decoration: underline;
+    }
+    a:active {
+      color: #336;
+      text-decoration: underline;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .gototop {
+      margin: 1em 0 0 0;
+      padding: 0.3em 0 0 0;
+      text-align: center;
+      position: relative;
+      float: right;
+      font-weight: bold;
+    }
+    .pullout {
+      border-left: 8px silver solid;
+      xborder-bottom: 2px silver solid;
+      xborder-top: 2px silver solid;
+      background-color: #eee;
+      margin: 0.5em 0 0 0;
+      padding: 0.25em 0.5em;
+      font-style: italic;
+    }
+    .indent {
+      margin-left: 3em;
+    }
+    .highlight {
+      color: #336;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .endnotes {
+      margin: 1.5em 0 0 0;
+      padding: 1em 0 0 0;
+      border-top: 1px silver solid;
+    }
+    .comments {
+      font-style: italic;
+    }
+    .copyright,
+    .copyright a:link,
+    .copyright a:visited,
+    .copyright a:active {
+      margin: 1em 0 0 0;
+      color: gray;
+      font-size: 8pt;
+      text-align: right;
+    }
+  </style>
 
 </head>
 
@@ -151,70 +151,70 @@
 <body>
 
 <h1 id="top">
-	<div>Environment Variables Unit</div>
-	<div class="subtitle">Demo Code</div>
+  <div>Environment Variables Unit</div>
+  <div class="subtitle">Demo Code</div>
 </h1>
 
 <p>
-	This document contains several examples of how to use the code in the
-	Environment Variables Unit. They are:
+  This document contains several examples of how to use the code in the
+  Environment Variables Unit. They are:
 </p>
 
 <ol>
-	<li>
-		<a href="#eg1a">Example 1a</a>: using the <var>TPJEnvVars</var> component
-		with the old enumerator obtained from the <var>EnumNames</var> method.
-	</li>
-	<li>
-		<a href="#eg1b">Example 1b</a>: using the <var>TPJEnvVars</var> component
-		with its new enumerator obtained from the <var>GetEnumerator</var>
-		method.
-	</li>
-	<li>
-		<a href="#eg2">Example 2</a>: using the <var>GetEnvVarValue</var>,
-		<var>SetEnvVarValue</var>, <var>DeleteEnvVar</var> and
-		<var>GetAllEnvVars</var> routines.
-	</li>
-	<li>
-		<a href="#eg3">Example 3</a>: using the <var>ExpandEnvVars</var>
-		function.
-	</li>
-	<li>
-		<a href="#eg4">Example 4</a>: using the <var>CreateEnvBlock</var>
-		function.
-	</li>
-	<li>
-		<a href="#eg5">Example 5</a>: using the <var>GetAllEnvVarNames</var> and
-		<var>EnvBlockSize</var> routines.
-	</li>
+  <li>
+    <a href="#eg1a">Example 1a</a>: using the <var>TPJEnvVars</var> component
+    with the old enumerator obtained from the <var>EnumNames</var> method.
+  </li>
+  <li>
+    <a href="#eg1b">Example 1b</a>: using the <var>TPJEnvVars</var> component
+    with its new enumerator obtained from the <var>GetEnumerator</var>
+    method.
+  </li>
+  <li>
+    <a href="#eg2">Example 2</a>: using the <var>GetEnvVarValue</var>,
+    <var>SetEnvVarValue</var>, <var>DeleteEnvVar</var> and
+    <var>GetAllEnvVars</var> routines.
+  </li>
+  <li>
+    <a href="#eg3">Example 3</a>: using the <var>ExpandEnvVars</var>
+    function.
+  </li>
+  <li>
+    <a href="#eg4">Example 4</a>: using the <var>CreateEnvBlock</var>
+    function.
+  </li>
+  <li>
+    <a href="#eg5">Example 5</a>: using the <var>GetAllEnvVarNames</var> and
+    <var>EnvBlockSize</var> routines.
+  </li>
 </ol>
 
 <p>
-	Demo projects that implement these examples are available from the
-	<code>EnvVarsDemo</code> directory of the <a
-		href="http://www.delphidabbler.com/url/doodlings-repo"
-	>DelphiDabbler Doodlings Repository</a>.
+  Demo projects that implement these examples are available from the
+  <code>EnvVarsDemo</code> directory of the <a
+    href="http://www.delphidabbler.com/url/doodlings-repo"
+  >DelphiDabbler Doodlings Repository</a>.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#top">Go to top</a>
+  &raquo; <a href="#top">Go to top</a>
 </p>
 
 <h2 id="eg1a">
-	Example 1a
+  Example 1a
 </h2>
 
 <p>
-	This example demonstrates the use of the <var>TPJEnvVars</var> component.
-	The example uses the old <var>EnumNames</var> methods and its callback
-	method in order to enumerate all the environment variable names.
+  This example demonstrates the use of the <var>TPJEnvVars</var> component.
+  The example uses the old <var>EnumNames</var> methods and its callback
+  method in order to enumerate all the environment variable names.
 </p>
 
 <p>
-	Drop a <var>TPJEnvVars</var> component, a list box, a label, two edit boxes
-	and two buttons on a form. Add the following private methods and event
-	handlers:
+  Drop a <var>TPJEnvVars</var> component, a list box, a label, two edit boxes
+  and two buttons on a form. Add the following private methods and event
+  handlers:
 </p>
 
 <pre class="source">procedure TForm1.EnvNamesEnum(const VarName: string; Data: Pointer);
@@ -269,82 +269,82 @@ begin
 end;</pre>
 
 <p>
-	The program behaves as follows:
+  The program behaves as follows:
 </p>
 
 <ul>
-	<li>
-		On startup the list box is populated with all the available environment
-		variable names and the number of evironment variables is displayed in
-		the label.
-	</li>
-	<li>
-		Selecting a variable name from the list displays it in <var>Edit1</var>
-		and places its value in <var>Edit2</var>.
-	</li>
-	<li>
-		Entering or editing a name in <var>Edit1</var> and a value in
-		<var>Edit2</var> then clicking <var>Button1</var> causes the environment
-		variable named in <var>Edit1</var> to be updated with the new value
-		contained in <var>Edit2</var>. If the environment variable does not
-		exist then it is created. If no text is entered in <var>Edit2</var> then
-		the environment variable is deleted. The list is updated after this
-		change.
-	</li>
-	<li>
-		Clicking <var>Button2</var> deletes the environment variable named in
-		<var>Edit1</var> and updates the list.
-	</li>
+  <li>
+    On startup the list box is populated with all the available environment
+    variable names and the number of evironment variables is displayed in
+    the label.
+  </li>
+  <li>
+    Selecting a variable name from the list displays it in <var>Edit1</var>
+    and places its value in <var>Edit2</var>.
+  </li>
+  <li>
+    Entering or editing a name in <var>Edit1</var> and a value in
+    <var>Edit2</var> then clicking <var>Button1</var> causes the environment
+    variable named in <var>Edit1</var> to be updated with the new value
+    contained in <var>Edit2</var>. If the environment variable does not
+    exist then it is created. If no text is entered in <var>Edit2</var> then
+    the environment variable is deleted. The list is updated after this
+    change.
+  </li>
+  <li>
+    Clicking <var>Button2</var> deletes the environment variable named in
+    <var>Edit1</var> and updates the list.
+  </li>
 </ul>
 
 <p>
-	<strong>Note:</strong>  This example is similar to <a href="#eg2">Example
-	2</a> which accomplishes the same task using the environment variable
-	manipulation routines instead of the component.
+  <strong>Note:</strong>  This example is similar to <a href="#eg2">Example
+  2</a> which accomplishes the same task using the environment variable
+  manipulation routines instead of the component.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#top">Go to top</a>
+  &raquo; <a href="#top">Go to top</a>
 </p>
 
 <h2 id="eg1b">
-	Example 1b
+  Example 1b
 </h2>
 
 <p>
-	This example also demonstrates the use of the <var>TPJEnvVars</var>
-	component, but this time uses the newer <var>TPJEnvVarsEnumerator</var>
-	class to enumerate the environment variable names. This enumerator is
-	created by calling the <var>GetEnumerator</var> method. From Delphi 2005
-	onwards this enumerator enables the use of the <var>for .. in</var> loop
-	construct. <strong>Warning:</strong> If <var>GetEnumerator</var> is called
-	directly from code then the caller must free the enumerator instance.
+  This example also demonstrates the use of the <var>TPJEnvVars</var>
+  component, but this time uses the newer <var>TPJEnvVarsEnumerator</var>
+  class to enumerate the environment variable names. This enumerator is
+  created by calling the <var>GetEnumerator</var> method. From Delphi 2005
+  onwards this enumerator enables the use of the <var>for .. in</var> loop
+  construct. <strong>Warning:</strong> If <var>GetEnumerator</var> is called
+  directly from code then the caller must free the enumerator instance.
 </p>
 
 <p>
-	Drop a <var>TPJEnvVars</var> component and a list view on a form. Add two
-	columns named &quot;Name&quot; and &quot;Value&quot; to the list view and
-	set the list view's properties as follows:
+  Drop a <var>TPJEnvVars</var> component and a list view on a form. Add two
+  columns named &quot;Name&quot; and &quot;Value&quot; to the list view and
+  set the list view's properties as follows:
 </p>
 
 <ul>
-	<li>
-		<var>Align<var> - <code>alClient</code>
-	</li>
-	<li>
-		<var>ColumnClick<var> - <code>False</code>
-	</li>
-	<li>
-		<var>ReadOnly<var> - <code>True</code>
-	</li>
-	<li>
-		<var>ViewStyle<var> - <code>vsReport</code>
-	</li>
+  <li>
+    <var>Align<var> - <code>alClient</code>
+  </li>
+  <li>
+    <var>ColumnClick<var> - <code>False</code>
+  </li>
+  <li>
+    <var>ReadOnly<var> - <code>True</code>
+  </li>
+  <li>
+    <var>ViewStyle<var> - <code>vsReport</code>
+  </li>
 </ul>
 
 <p>
-	Now an <var>OnCreate</var> event handler for the form as follows:
+  Now an <var>OnCreate</var> event handler for the form as follows:
 </p>
 
 <pre class="source">procedure TForm1.FormCreate(Sender: TObject);
@@ -382,10 +382,10 @@ begin
 end;</pre>
 
 <p>
-	This code detects whether <var>for .. in</var> loops are supported using
-	conditional compilation and uses the construct if available. Therefore, add
-	the following compiler directives to the unit before the definition of
-	<var>FormCreate</var>:
+  This code detects whether <var>for .. in</var> loops are supported using
+  conditional compilation and uses the construct if available. Therefore, add
+  the following compiler directives to the unit before the definition of
+  <var>FormCreate</var>:
 </p>
 
 <pre class="source">{$UNDEF FORINSUPPORTED}
@@ -396,31 +396,31 @@ end;</pre>
 {$ENDIF}</pre>
 
 <p>
-	The demo is quite simple. It merely adds the names and values of all the
-	environment variables to the list view on start up. It uses the
-	<var>TPJEnvVarsEnumerator</var> enumerator to get all the environment
-	variable names. Note that any environment variables that have no name are
-	ignored by this enumerator.
+  The demo is quite simple. It merely adds the names and values of all the
+  environment variables to the list view on start up. It uses the
+  <var>TPJEnvVarsEnumerator</var> enumerator to get all the environment
+  variable names. Note that any environment variables that have no name are
+  ignored by this enumerator.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#top">Go to top</a>
+  &raquo; <a href="#top">Go to top</a>
 </p>
 
 <h2 id="eg2">
-	Example 2
+  Example 2
 </h2>
 
 <p>
-	This example demonstrates the use of the <var>GetEnvVarValue</var>,
-	<var>SetEnvVarValue</var>, <var>DeleteEnvVar</var> and
-	<var>GetAllEnvVars</var> routines.
+  This example demonstrates the use of the <var>GetEnvVarValue</var>,
+  <var>SetEnvVarValue</var>, <var>DeleteEnvVar</var> and
+  <var>GetAllEnvVars</var> routines.
 </p>
 
 <p>
-	Drop a list box, two edit boxes and two buttons on a form and add
-	<code>PJEnvVars</code> to your uses clause. Now enter the following code:
+  Drop a list box, two edit boxes and two buttons on a form and add
+  <code>PJEnvVars</code> to your uses clause. Now enter the following code:
 </p>
 
 <pre class="source">procedure TForm1.UpdateList;
@@ -477,27 +477,27 @@ begin
 end;</pre>
 
 <p>
-	The program behaves identically to <a href="#eg1a">Example 1a</a> which
-	accomplishes a similar task using the <var>TPJEnvVars</var> component.
+  The program behaves identically to <a href="#eg1a">Example 1a</a> which
+  accomplishes a similar task using the <var>TPJEnvVars</var> component.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#top">Go to top</a>
+  &raquo; <a href="#top">Go to top</a>
 </p>
 
 <h2 id="eg3">
-	Example 3
+  Example 3
 </h2>
 
 <p>
-	This example demonstrates the use of the <var>ExpandEnvVars</var> function.
+  This example demonstrates the use of the <var>ExpandEnvVars</var> function.
 </p>
 
 <p>
-	Drop two memo controls and one button on a form and add
-	<code>PJEnvVars</code> to your uses clause. Now add the event handlers
-	listed below:
+  Drop two memo controls and one button on a form and add
+  <code>PJEnvVars</code> to your uses clause. Now add the event handlers
+  listed below:
 </p>
 
 <pre class="source">procedure TForm1.FormCreate(Sender: TObject);
@@ -511,46 +511,46 @@ begin
 end;</pre>
 
 <p>
-	Enter some text, including environment variable references (such as
-	<kbd>%TEMP%</kbd>), in the first memo. Clicking the button replaces the
-	environment variable names with their values and displays the expanded
-	string in the second memo.
+  Enter some text, including environment variable references (such as
+  <kbd>%TEMP%</kbd>), in the first memo. Clicking the button replaces the
+  environment variable names with their values and displays the expanded
+  string in the second memo.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#top">Go to top</a>
+  &raquo; <a href="#top">Go to top</a>
 </p>
 
 <h2 id="eg4">
-	Example 4
+  Example 4
 </h2>
 
 <p>
-	This example demonstrates the use of the <var>CreateEnvBlock</var> function.
-	It involves creating two programs:
+  This example demonstrates the use of the <var>CreateEnvBlock</var> function.
+  It involves creating two programs:
 </p>
 
 <ol>
-	<li>
-		A slave program that simply displays its environment variables.
-	</li>
-	<li>
-		A master program that sets up an environment block and spawns a child
-		process that uses the new block.
-	</li>
+  <li>
+    A slave program that simply displays its environment variables.
+  </li>
+  <li>
+    A master program that sets up an environment block and spawns a child
+    process that uses the new block.
+  </li>
 </ol>
 
 <h3>
-	Slave program
+  Slave program
 </h3>
 
 <p>
-	Create a new application with a main form named <var>SlaveForm</var>. Drop
-	a memo control onto the form, and set its <var>Align</var> property to
-	<var>alClient</var> and clear the <var>Lines</var> property. Make sure the
-	<code>PJEnvVars</code> unit is in your uses clause. Give the form the
-	following <var>OnCreate</var> handler:
+  Create a new application with a main form named <var>SlaveForm</var>. Drop
+  a memo control onto the form, and set its <var>Align</var> property to
+  <var>alClient</var> and clear the <var>Lines</var> property. Make sure the
+  <code>PJEnvVars</code> unit is in your uses clause. Give the form the
+  following <var>OnCreate</var> handler:
 </p>
 
 <pre class="source">procedure TSlaveForm.FormCreate(Sender: TObject);
@@ -559,21 +559,21 @@ begin
 end;</pre>
 
 <p>
-	Save the project as <code>SlaveApp</code> and compile. The memo will display
-	all of <code>SlaveApp</code>'s environment variables when the program is
-	executed.
+  Save the project as <code>SlaveApp</code> and compile. The memo will display
+  all of <code>SlaveApp</code>'s environment variables when the program is
+  executed.
 </p>
 
 <h3>
-	Master program
+  Master program
 </h3>
 
 <p>
-	Create a new application with a main form named <var>MasterForm</var>. Drop
-	a memo control onto the form and clear its text. Add a button and a check
-	box below the memo. Ensure the <code>PJEnvVars</code> unit is referenced in
-	the uses clause. Add the following helper procedure and button event
-	handler:
+  Create a new application with a main form named <var>MasterForm</var>. Drop
+  a memo control onto the form and clear its text. Add a button and a check
+  box below the memo. Ensure the <code>PJEnvVars</code> unit is referenced in
+  the uses clause. Add the following helper procedure and button event
+  handler:
 </p>
 
 <pre class="source">procedure ExecProg(const ProgName: string; EnvBlock: Pointer);
@@ -622,94 +622,94 @@ begin
 end;</pre>
 
 <p>
-	Save the project as <code>MasterApp</code> in the same folder as
-	<code>SlaveApp</code> and compile.
+  Save the project as <code>MasterApp</code> in the same folder as
+  <code>SlaveApp</code> and compile.
 </p>
 
 <div class="pullout">
-	There is some interesting code in both <var>ExecProg</var> and
-	<var>Button1Click</var> to watch out for.
-	<ul>
-		<li>
-			<strong>Important:</strong> notice the <var>GetMem</var> call in
-			<var>Button1Click</var>. The block size has been multiplied by the
-			character size. This is because <var>CreateEnvBlock</var> returns
-			the size of the environment in characters, not in bytes. And for
-			Unicode Delphis these are not the same. Miss this and you'll get an
-			access violation at some point.
-		</li>
-		<li>
-			In <var>ExecProg</var> I've used <var>UniqueString</var> to get
-			round a peculiarity of <var>CreateProcessW</var> from the Windows
-			Unicode API. This is best explained by <a
-				href="http://bit.ly/bTRc7D"
-			>this post</a> on the Embarcadero forums.
-		</li>
-		<li>
-			Also in <var>ExecProg</var> note the use of the
-			<var>CREATE_UNICODE_ENVIRONMENT</var> flag. I have discussed this on
-			<a
-				href="http://bit.ly/cWgjXH"
-			>my blog</a>.
-		</li>
-	</ul>
+  There is some interesting code in both <var>ExecProg</var> and
+  <var>Button1Click</var> to watch out for.
+  <ul>
+    <li>
+      <strong>Important:</strong> notice the <var>GetMem</var> call in
+      <var>Button1Click</var>. The block size has been multiplied by the
+      character size. This is because <var>CreateEnvBlock</var> returns
+      the size of the environment in characters, not in bytes. And for
+      Unicode Delphis these are not the same. Miss this and you'll get an
+      access violation at some point.
+    </li>
+    <li>
+      In <var>ExecProg</var> I've used <var>UniqueString</var> to get
+      round a peculiarity of <var>CreateProcessW</var> from the Windows
+      Unicode API. This is best explained by <a
+        href="http://bit.ly/bTRc7D"
+      >this post</a> on the Embarcadero forums.
+    </li>
+    <li>
+      Also in <var>ExecProg</var> note the use of the
+      <var>CREATE_UNICODE_ENVIRONMENT</var> flag. I have discussed this on
+      <a
+        href="http://bit.ly/cWgjXH"
+      >my blog</a>.
+    </li>
+  </ul>
 </div>
 
 <p>
-	When <code>MasterApp</code> is run, enter some environment variables in
-	<kbd>NAME=VALUE</kbd> format in the memo control. Place each
-	<kbd>NAME=VALUE</kbd> pair on a different line.
+  When <code>MasterApp</code> is run, enter some environment variables in
+  <kbd>NAME=VALUE</kbd> format in the memo control. Place each
+  <kbd>NAME=VALUE</kbd> pair on a different line.
 </p>
 
 <p>
-	Now click the button. A copy of <code>SlaveApp</code> should run, displaying
-	just the environment variables you entered.
+  Now click the button. A copy of <code>SlaveApp</code> should run, displaying
+  just the environment variables you entered.
 </p>
 
 <p>
-	Return to <code>MasterApp</code> and check the check box. Click the button
-	again to spawn another instance of <code>SlaveApp</code>. This new instance
-	will have a copy of <code>MasterApp</code>'s environment variables along
-	with the new ones you entered in <code>MasterApp</code>'s memo control.
+  Return to <code>MasterApp</code> and check the check box. Click the button
+  again to spawn another instance of <code>SlaveApp</code>. This new instance
+  will have a copy of <code>MasterApp</code>'s environment variables along
+  with the new ones you entered in <code>MasterApp</code>'s memo control.
 </p>
 
 
 <p class="gototop">
-	&raquo; <a href="#top">Go to top</a>
+  &raquo; <a href="#top">Go to top</a>
 </p>
 
 <h2 id="eg5">
-	Example 5
+  Example 5
 </h2>
 
 <p>
-	This example demonstrates the use of both overloaded versions of
-	<var>GetAllEnvVarNames</var> and <var>EnvBlockSize</var>.
+  This example demonstrates the use of both overloaded versions of
+  <var>GetAllEnvVarNames</var> and <var>EnvBlockSize</var>.
 </p>
 
 <p>
-	Drop three labels, two edit controls, two list boxes, one button and a
-	<var>TPJEnvVars</var> component on a form. Set the following properties:
+  Drop three labels, two edit controls, two list boxes, one button and a
+  <var>TPJEnvVars</var> component on a form. Set the following properties:
 </p>
 
 <ul>
-	<li>
-		<var>Label1.Caption</var> := <code>'Name'</code>.
-	</li>
-	<li>
-		<var>Label2.Caption</var> := <code>'Value'</code>.
-	</li>
-	<li>
-		<var>Button1.Caption</var> := <code>'Update'</code>.
-	</li>
+  <li>
+    <var>Label1.Caption</var> := <code>'Name'</code>.
+  </li>
+  <li>
+    <var>Label2.Caption</var> := <code>'Value'</code>.
+  </li>
+  <li>
+    <var>Button1.Caption</var> := <code>'Update'</code>.
+  </li>
 </ul>
 
 <p>
-	Create an <var>OnCreate</var> event handler for the form, an
-	<var>OnClick</var> event handler for the button and an <var>OnClick</var>
-	event handler that is attached to both list boxes. Also create a private
-	method of the form class named <var>UpdateListsEtc</var>. Code the methods
-	as follows:
+  Create an <var>OnCreate</var> event handler for the form, an
+  <var>OnClick</var> event handler for the button and an <var>OnClick</var>
+  event handler that is attached to both list boxes. Also create a private
+  method of the form class named <var>UpdateListsEtc</var>. Code the methods
+  as follows:
 </p>
 
 <pre class="source">procedure TForm1.UpdateListsEtc;
@@ -743,41 +743,41 @@ begin
 end;</pre>
 
 <p>
-	If the <var>Types</var> unit is provided in your version of Delphi, add it
-	to the uses clause.
+  If the <var>Types</var> unit is provided in your version of Delphi, add it
+  to the uses clause.
 </p>
 
 <p>
-	<var>UpdateListsEtc</var> populates the list boxes and displays the
-	environment block size in <var>Label3</var>. <var>ListBox1</var> is
-	populated with all environment variable names using the <var>TStrings</var>
-	overload of <var>GetAllEnvVarNames</var> while <var>ListBox2</var> is
-	populated by using <var>GetAllEnvVarNames</var>'s string array overload.
-	Both list boxes should contain exactly the same information.
+  <var>UpdateListsEtc</var> populates the list boxes and displays the
+  environment block size in <var>Label3</var>. <var>ListBox1</var> is
+  populated with all environment variable names using the <var>TStrings</var>
+  overload of <var>GetAllEnvVarNames</var> while <var>ListBox2</var> is
+  populated by using <var>GetAllEnvVarNames</var>'s string array overload.
+  Both list boxes should contain exactly the same information.
 </p>
 
 <p>
-	Selecting a name in either list box copies the name into the first edit
-	control and the environment variable's value in the second edit control.
-	Entering a new name or value and clicking the <em>Update</em> button updates
-	the environment variable, repopulates the lists and updates the environment
-	block size.
+  Selecting a name in either list box copies the name into the first edit
+  control and the environment variable's value in the second edit control.
+  Entering a new name or value and clicking the <em>Update</em> button updates
+  the environment variable, repopulates the lists and updates the environment
+  block size.
 </p>
 
 
 <div class="endnotes">
 
-	<div class="comments">
-		Please
-		<a href="http://www.delphidabbler.com/contact">let me know</a> if you
-		have any comments about this demo code, if you have found a bug, or you
-		want to suggest any updates.
-	</div>
+  <div class="comments">
+    Please
+    <a href="http://www.delphidabbler.com/contact">let me know</a> if you
+    have any comments about this demo code, if you have found a bug, or you
+    want to suggest any updates.
+  </div>
 
-	<div class="copyright">
-		This document is copyright &copy; 2008-2010, P D Johnson,
-		<a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>
-	</div>
+  <div class="copyright">
+    This document is copyright &copy; 2008-2010, P D Johnson,
+    <a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>
+  </div>
 
 </div>
 
