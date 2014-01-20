@@ -151,7 +151,6 @@
 
 </head>
 
-
 <body>
 
 <h1 id="top">
@@ -180,12 +179,10 @@
     <var>GetAllEnvVars</var> routines.
   </li>
   <li>
-    <a href="#eg3">Example 3</a>: using the <var>ExpandEnvVars</var>
-    function.
+    <a href="#eg3">Example 3</a>: using the <var>ExpandEnvVars</var> function.
   </li>
   <li>
-    <a href="#eg4">Example 4</a>: using the <var>CreateEnvBlock</var>
-    function.
+    <a href="#eg4">Example 4</a>: using the <var>CreateEnvBlock</var> function.
   </li>
   <li>
     <a href="#eg5">Example 5</a>: using the <var>GetAllEnvVarNames</var> and
@@ -200,7 +197,6 @@
   >DelphiDabbler Doodlings Repository</a>.
 </p>
 
-
 <p class="gototop">
   &raquo; <a href="#top">Go to top</a>
 </p>
@@ -210,9 +206,9 @@
 </h2>
 
 <p>
-  This example demonstrates the use of the <var>TPJEnvVars</var> component.
-  The example uses the old <var>EnumNames</var> methods and its callback
-  method in order to enumerate all the environment variable names.
+  This example demonstrates the use of the <var>TPJEnvVars</var> component. The
+  example uses the old <var>EnumNames</var> methods and its callback method in
+  order to enumerate all the environment variable names.
 </p>
 
 <p>
@@ -279,21 +275,20 @@ end;</pre>
 <ul>
   <li>
     On startup the list box is populated with all the available environment
-    variable names and the number of evironment variables is displayed in
-    the label.
+    variable names and the number of evironment variables is displayed in the
+    label.
   </li>
   <li>
-    Selecting a variable name from the list displays it in <var>Edit1</var>
-    and places its value in <var>Edit2</var>.
+    Selecting a variable name from the list displays it in <var>Edit1</var> and
+    places its value in <var>Edit2</var>.
   </li>
   <li>
     Entering or editing a name in <var>Edit1</var> and a value in
     <var>Edit2</var> then clicking <var>Button1</var> causes the environment
     variable named in <var>Edit1</var> to be updated with the new value
     contained in <var>Edit2</var>. If the environment variable does not
-    exist then it is created. If no text is entered in <var>Edit2</var> then
-    the environment variable is deleted. The list is updated after this
-    change.
+    exist then it is created. If no text is entered in <var>Edit2</var> then the
+    environment variable is deleted. The list is updated after this change.
   </li>
   <li>
     Clicking <var>Button2</var> deletes the environment variable named in
@@ -307,7 +302,6 @@ end;</pre>
   manipulation routines instead of the component.
 </p>
 
-
 <p class="gototop">
   &raquo; <a href="#top">Go to top</a>
 </p>
@@ -317,19 +311,19 @@ end;</pre>
 </h2>
 
 <p>
-  This example also demonstrates the use of the <var>TPJEnvVars</var>
-  component, but this time uses the newer <var>TPJEnvVarsEnumerator</var>
-  class to enumerate the environment variable names. This enumerator is
-  created by calling the <var>GetEnumerator</var> method. From Delphi 2005
-  onwards this enumerator enables the use of the <var>for .. in</var> loop
-  construct. <strong>Warning:</strong> If <var>GetEnumerator</var> is called
-  directly from code then the caller must free the enumerator instance.
+  This example also demonstrates the use of the <var>TPJEnvVars</var> component,
+  but this time uses the newer <var>TPJEnvVarsEnumerator</var> class to
+  enumerate the environment variable names. This enumerator is created by
+  calling the <var>GetEnumerator</var> method. From Delphi 2005 onwards this
+  enumerator enables the use of the <var>for .. in</var> loop construct.
+  <strong>Warning:</strong> If <var>GetEnumerator</var> is called directly from
+  code then the caller must free the enumerator instance.
 </p>
 
 <p>
   Drop a <var>TPJEnvVars</var> component and a list view on a form. Add two
-  columns named &quot;Name&quot; and &quot;Value&quot; to the list view and
-  set the list view's properties as follows:
+  columns named &quot;Name&quot; and &quot;Value&quot; to the list view and set
+  the list view's properties as follows:
 </p>
 
 <ul>
@@ -405,11 +399,10 @@ end;</pre>
 <p>
   The demo is quite simple. It merely adds the names and values of all the
   environment variables to the list view on start up. It uses the
-  <var>TPJEnvVarsEnumerator</var> enumerator to get all the environment
-  variable names. Note that any environment variables that have no name are
-  ignored by this enumerator.
+  <var>TPJEnvVarsEnumerator</var> enumerator to get all the environment variable
+  names. Note that any environment variables that have no name are ignored by
+  this enumerator.
 </p>
-
 
 <p class="gototop">
   &raquo; <a href="#top">Go to top</a>
@@ -488,7 +481,6 @@ end;</pre>
   accomplishes a similar task using the <var>TPJEnvVars</var> component.
 </p>
 
-
 <p class="gototop">
   &raquo; <a href="#top">Go to top</a>
 </p>
@@ -502,9 +494,8 @@ end;</pre>
 </p>
 
 <p>
-  Drop two memo controls and one button on a form and add
-  <code>PJEnvVars</code> to your uses clause. Now add the event handlers
-  listed below:
+  Drop two memo controls and one button on a form and add <code>PJEnvVars</code>
+  to your uses clause. Now add the event handlers listed below:
 </p>
 
 <pre class="source">procedure TForm1.FormCreate(Sender: TObject);
@@ -520,10 +511,9 @@ end;</pre>
 <p>
   Enter some text, including environment variable references (such as
   <kbd>%TEMP%</kbd>), in the first memo. Clicking the button replaces the
-  environment variable names with their values and displays the expanded
-  string in the second memo.
+  environment variable names with their values and displays the expanded string
+  in the second memo.
 </p>
-
 
 <p class="gototop">
   &raquo; <a href="#top">Go to top</a>
@@ -553,8 +543,8 @@ end;</pre>
 </h3>
 
 <p>
-  Create a new application with a main form named <var>SlaveForm</var>. Drop
-  a memo control onto the form, and set its <var>Align</var> property to
+  Create a new application with a main form named <var>SlaveForm</var>. Drop a
+  memo control onto the form, and set its <var>Align</var> property to
   <var>alClient</var> and clear the <var>Lines</var> property. Make sure the
   <code>PJEnvVars</code> unit is in your uses clause. Give the form the
   following <var>OnCreate</var> handler:
@@ -576,11 +566,10 @@ end;</pre>
 </h3>
 
 <p>
-  Create a new application with a main form named <var>MasterForm</var>. Drop
-  a memo control onto the form and clear its text. Add a button and a check
-  box below the memo. Ensure the <code>PJEnvVars</code> unit is referenced in
-  the uses clause. Add the following helper procedure and button event
-  handler:
+  Create a new application with a main form named <var>MasterForm</var>. Drop a
+  memo control onto the form and clear its text. Add a button and a check box
+  below the memo. Ensure the <code>PJEnvVars</code> unit is referenced in the
+  uses clause. Add the following helper procedure and button event handler:
 </p>
 
 <pre class="source">procedure ExecProg(const ProgName: string; EnvBlock: Pointer);
@@ -640,22 +629,21 @@ end;</pre>
     <li>
       <strong>Important:</strong> notice the <var>GetMem</var> call in
       <var>Button1Click</var>. The block size has been multiplied by the
-      character size. This is because <var>CreateEnvBlock</var> returns
-      the size of the environment in characters, not in bytes. And for
-      Unicode Delphis these are not the same. Miss this and you'll get an
-      access violation at some point.
+      character size. This is because <var>CreateEnvBlock</var> returns the size
+      of the environment in characters, not in bytes. And for Unicode Delphis
+      these are not the same. Miss this and you'll get an access violation at
+      some point.
     </li>
     <li>
-      In <var>ExecProg</var> I've used <var>UniqueString</var> to get
-      round a peculiarity of <var>CreateProcessW</var> from the Windows
-      Unicode API. This is best explained by <a
+      In <var>ExecProg</var> I've used <var>UniqueString</var> to get round a
+      peculiarity of <var>CreateProcessW</var> from the Windows Unicode API.
+      This is best explained by <a
         href="http://bit.ly/bTRc7D"
       >this post</a> on the Embarcadero forums.
     </li>
     <li>
       Also in <var>ExecProg</var> note the use of the
-      <var>CREATE_UNICODE_ENVIRONMENT</var> flag. I have discussed this on
-      <a
+      <var>CREATE_UNICODE_ENVIRONMENT</var> flag. I have discussed this on <a
         href="http://bit.ly/cWgjXH"
       >my blog</a>.
     </li>
@@ -676,10 +664,9 @@ end;</pre>
 <p>
   Return to <code>MasterApp</code> and check the check box. Click the button
   again to spawn another instance of <code>SlaveApp</code>. This new instance
-  will have a copy of <code>MasterApp</code>'s environment variables along
-  with the new ones you entered in <code>MasterApp</code>'s memo control.
+  will have a copy of <code>MasterApp</code>'s environment variables along with
+  the new ones you entered in <code>MasterApp</code>'s memo control.
 </p>
-
 
 <p class="gototop">
   &raquo; <a href="#top">Go to top</a>
@@ -715,8 +702,8 @@ end;</pre>
   Create an <var>OnCreate</var> event handler for the form, an
   <var>OnClick</var> event handler for the button and an <var>OnClick</var>
   event handler that is attached to both list boxes. Also create a private
-  method of the form class named <var>UpdateListsEtc</var>. Code the methods
-  as follows:
+  method of the form class named <var>UpdateListsEtc</var>. Code the methods as
+  follows:
 </p>
 
 <pre class="source">procedure TForm1.UpdateListsEtc;
@@ -750,17 +737,17 @@ begin
 end;</pre>
 
 <p>
-  If the <var>Types</var> unit is provided in your version of Delphi, add it
-  to the uses clause.
+  If the <var>Types</var> unit is provided in your version of Delphi, add it to
+  the uses clause.
 </p>
 
 <p>
   <var>UpdateListsEtc</var> populates the list boxes and displays the
-  environment block size in <var>Label3</var>. <var>ListBox1</var> is
-  populated with all environment variable names using the <var>TStrings</var>
-  overload of <var>GetAllEnvVarNames</var> while <var>ListBox2</var> is
-  populated by using <var>GetAllEnvVarNames</var>'s string array overload.
-  Both list boxes should contain exactly the same information.
+  environment block size in <var>Label3</var>. <var>ListBox1</var> is populated
+  with all environment variable names using the <var>TStrings</var> overload of
+  <var>GetAllEnvVarNames</var> while <var>ListBox2</var> is populated by using
+  <var>GetAllEnvVarNames</var>'s string array overload. Both list boxes should
+  contain exactly the same information.
 </p>
 
 <p>
@@ -771,19 +758,19 @@ end;</pre>
   block size.
 </p>
 
-
 <div class="endnotes">
 
   <div class="comments">
-    Please
-    <a href="http://www.delphidabbler.com/contact">let me know</a> if you
-    have any comments about this demo code, if you have found a bug, or you
-    want to suggest any updates.
+    Please <a
+      href="http://www.delphidabbler.com/contact"
+    >let me know</a> if you have any comments about this demo code, if you have
+    found a bug, or you want to suggest any updates.
   </div>
 
   <div class="copyright">
-    This document is copyright &copy; 2008-2010, P D Johnson,
-    <a href="http://www.delphidabbler.com/">www.delphidabbler.com</a>
+    This document is copyright &copy; 2008-2014, P D Johnson, <a
+      href="http://www.delphidabbler.com/"
+    >www.delphidabbler.com</a>
   </div>
 
 </div>
