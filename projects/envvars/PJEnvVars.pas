@@ -29,6 +29,8 @@ unit PJEnvVars;
 {$UNDEF Supports_ENoConstructException}
 {$UNDEF Supports_EOSError}
 {$UNDEF Supports_Closures}
+{$UNDEF Supports_Deprecated}
+{$UNDEF Supports_Deprecated_Hints}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
@@ -36,6 +38,7 @@ unit PJEnvVars;
   {$IF CompilerVersion >= 20.0} // Delphi 2009 and later
     {$DEFINE Supports_ENoConstructException}
     {$DEFINE Supports_Closures}
+    {$DEFINE Supports_Deprecated_Hints}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     // Switch off unsafe warnings
@@ -43,8 +46,9 @@ unit PJEnvVars;
     {$WARN UNSAFE_CODE OFF}
   {$IFEND}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
-    {$DEFINE Supports_EOSError} // SysUtils defines EOSError
-    {$DEFINE Has_Types_Unit}    // Types unit is available
+    {$DEFINE Supports_EOSError}
+    {$DEFINE Has_Types_Unit}
+    {$DEFINE Supports_Deprecated}
   {$IFEND}
 {$ENDIF}
 
@@ -68,18 +72,36 @@ type
 ///  <see cref="PJEnvVars|TPJEnvironmentVars.GetValue"/> which should be used in
 ///  preference.</remarks>
 function GetEnvVarValue(const VarName: string): string;
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars.GetValue instead'
+  {$ENDIF}
+  {$ENDIF};
 
 ///  <summary>Sets the value of an environment variable.</summary>
 ///  <remarks>This is an alias for
 ///  <see cref="PJEnvVars|TPJEnvironmentVars.SetValue"/> which should be used in
 ///  preference.</remarks>
 function SetEnvVarValue(const VarName, VarValue: string): Integer;
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars.SetValue instead'
+  {$ENDIF}
+  {$ENDIF};
 
 ///  <summary>Deletes an environment variable.</summary>
 ///  <remarks>This is an alias for
 ///  <see cref="PJEnvVars|TPJEnvironmentVars.Delete"/> which should be used in
 ///  preference.</remarks>
 function DeleteEnvVar(const VarName: string): Integer;
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars.Delete instead'
+  {$ENDIF}
+  {$ENDIF};
 
 ///  <summary>Creates a new custom environment block.</summary>
 ///  <remarks>This is an alias for
@@ -87,13 +109,25 @@ function DeleteEnvVar(const VarName: string): Integer;
 ///  in preference.</remarks>
 function CreateEnvBlock(const NewEnv: TStrings; const IncludeCurrent: Boolean;
   const Buffer: Pointer; const BufSize: Integer): Integer;
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars.CreateBlock instead'
+  {$ENDIF}
+  {$ENDIF};
 
 ///  <summary>Replaces any environment variable names in a string with their
 ///  values.</summary>
 ///  <remarks>This is an alias for
 ///  <see cref="PJEnvVars|TPJEnvironmentVars.Expand"/> which should be used in
 ///  preference.</remarks>
-function ExpandEnvVars(const Str: string): string; deprecated;
+function ExpandEnvVars(const Str: string): string;
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars.Expand instead'
+  {$ENDIF}
+  {$ENDIF};
 
 ///  <summary>Gets a list of all the environment variables available to the
 ///  current process in <c>Name=Value</c> format.</summary>
@@ -101,6 +135,12 @@ function ExpandEnvVars(const Str: string): string; deprecated;
 ///  <see cref="PJEnvVars|TPJEnvironmentVars.GetAll"/> which should be used in
 ///  preference.</remarks>
 function GetAllEnvVars(const Vars: TStrings): Integer;
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars.GetAll instead'
+  {$ENDIF}
+  {$ENDIF};
 
 ///  <summary>Gets a list of names of all environment variables in the current
 ///  process.</summary>
@@ -108,11 +148,23 @@ function GetAllEnvVars(const Vars: TStrings): Integer;
 ///  <see cref="PJEnvVars|TPJEnvironmentVars.GetAllNames"/> which should be used
 ///  in preference.</remarks>
 procedure GetAllEnvVarNames(const Names: TStrings); overload;
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars.GetAllNames instead'
+  {$ENDIF}
+  {$ENDIF};
 
 ///  <remarks>This is an alias for the <c>TStringDynArray</c> overload of
 ///  <see cref="PJEnvVars|TPJEnvironmentVars.GetAllNames"/> which should be used
 ///  in preference.</remarks>
 function GetAllEnvVarNames: TStringDynArray; overload;
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars.GetAllNames instead'
+  {$ENDIF}
+  {$ENDIF};
 
 ///  <summary>Calculates the size of the current process' environment block.
 ///  </summary>
@@ -120,6 +172,12 @@ function GetAllEnvVarNames: TStringDynArray; overload;
 ///  <see cref="PJEnvVars|TPJEnvironmentVars.BlockSize"/> which should be used
 ///  in preference.</remarks>
 function EnvBlockSize: Integer;
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars.BlockSize instead'
+  {$ENDIF}
+  {$ENDIF};
 
 type
 
@@ -406,7 +464,13 @@ type
     ///  <see cref="PJEnvVars|TPJEnvironmentVars.SetValue"/> instead.</para>
     ///  </remarks>
     property Values[Name: string]: string read GetValue write SetValue;
-  end;
+  end
+  {$IFDEF Supports_Deprecated}
+  deprecated
+  {$IFDEF Supports_Deprecated_Hints}
+  'Use TPJEnvironmentVars static class instead'
+  {$ENDIF}
+  {$ENDIF};
 
   ///  <summary>Exception raised by <see cref="PJEnvVars|TPJEnvVars"/> when an
   ///  error is encountered.</summary>
