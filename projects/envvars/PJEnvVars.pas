@@ -260,7 +260,7 @@ type
     ///  process.</summary>
     class function Count: Integer;
     ///  <summary>Returns the value of the environment variable with the given
-    ///  name.</summary>
+    ///  name or the empty string if the variable does not exist.</summary>
     class function GetValue(const VarName: string): string;
     ///  <summary>Sets the value of the environment variable with the given name
     ///  to the given value.</summary>
