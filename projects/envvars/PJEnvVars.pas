@@ -285,8 +285,8 @@ type
     ///  created. If none-<c>nil</c> the buffer must be at least <c>BufSize *
     ///  SizeOf(Char)</c> bytes.</param>
     ///  <param name="BufSize">Integer [in] The number of characters that can be
-    ///  stored in the memory pointed to by <c>Buffer</c> or if <c>Buffer</c> is
-    ///  nil.</param>
+    ///  stored in the memory pointed to by <c>Buffer</c> or <c>0</c> if
+    ///  <c>Buffer</c> is <c>nil</c>.</param>
     ///  <returns>Integer. The size of the environment block in characters. If
     ///  <c>Buffer</c> is <c>nil</c> this is the required size of the buffer, in
     ///  characters. Multiply this value by <c>SizeOf(Char)</c> to find the
@@ -367,8 +367,8 @@ type
     class procedure EnumVars(Callback: TPJEnvVarsEnumEx; Data: Pointer);
   end;
 
-  ///  <summary>Enumerator for all environment names in the current process.
-  ///  </summary>
+  ///  <summary>Enumerator for all environment variables names in the current
+  ///  process.</summary>
   ///  <remarks>This class may be used on its own. Instances of this type are
   ///  returned by <see cref="PJEnvVars|TPJEnvVars.GetEnumerator"/>.</remarks>
   TPJEnvVarsEnumerator = class(TObject)
@@ -378,7 +378,7 @@ type
     ///  <summary>Index of current name in enumeration.</summary>
     fIndex: Integer;
   public
-    ///  <summary>Constructs and initialises and new enumeration object.
+    ///  <summary>Constructs and initialises a new enumeration object.
     ///  </summary>
     constructor Create;
     ///  <summary>Destroys enumerator instance.</summary>
