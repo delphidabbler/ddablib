@@ -775,7 +775,7 @@ var
 begin
   // Get required buffer size (including terminal #0)
   BufSize := ExpandEnvironmentStrings(PChar(Str), nil, 0);
-  if BufSize > 0 then
+  if BufSize > 1 then
   begin
     SetLength(Result, BufSize - 1); // space for terminal #0 automatically added
     ExpandEnvironmentStrings(PChar(Str), PChar(Result), BufSize);
