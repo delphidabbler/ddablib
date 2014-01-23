@@ -259,6 +259,9 @@ type
     ///  <summary>Returns the number of environment variables in the current
     ///  process.</summary>
     class function Count: Integer;
+    ///  <summary>Checks if an environment variable with the given name exists.
+    ///  </summary>
+    class function Exists(const VarName: string): Boolean;
     ///  <summary>Returns the value of the environment variable with the given
     ///  name or the empty string if the variable does not exist.</summary>
     class function GetValue(const VarName: string): string;
@@ -508,7 +511,7 @@ uses
   {$IFNDEF Supports_RTLNamespaces}
   {$IFDEF Supports_ENoConstructException}RTLConsts,{$ENDIF} Windows;
   {$ELSE}
-  SysUtils.RTLConsts, Winapi.Windows;
+  System.RTLConsts, Winapi.Windows;
   {$ENDIF}
 
 {$IFNDEF Supports_ENoConstructException}
@@ -761,6 +764,11 @@ begin
     Callback(AllEnvVars[Idx], Data);
 end;
 
+class function TPJEnvironmentVars.Exists(const VarName: string): Boolean;
+begin
+  Result := GetEnvironmentVariable(PChar(VarName), nil, 0) > 0;
+end;
+
 class function TPJEnvironmentVars.Expand(const Str: string): string;
 var
   BufSize: Integer;
@@ -870,14 +878,13 @@ var
 begin
   // Get required buffer size (including terminal #0)
   BufSize := GetEnvironmentVariable(PChar(VarName), nil, 0);
-  if BufSize > 0 then
+  if BufSize > 1 then
   begin
-    // Env var exists: read value into result string
+    // Env var exists and is non-empty: read value into result string
     SetLength(Result, BufSize - 1); // space for terminal #0 automatically added
     GetEnvironmentVariable(PChar(VarName), PChar(Result), BufSize);
   end
   else
-    // Env var does not exist
     Result := '';
 end;
 
