@@ -1,0 +1,254 @@
+object FMXDemo1Form: TFMXDemo1Form
+  Left = 0
+  Top = 0
+  Caption = 'FMX Demo 1'
+  ClientHeight = 559
+  ClientWidth = 798
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  object Label1: TLabel
+    Height = 15.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 16.000000000000000000
+    Text = 'Name:'
+    Width = 120.000000000000000000
+  end
+  object Label2: TLabel
+    Height = 15.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 64.000000000000000000
+    Text = 'Value:'
+    Width = 120.000000000000000000
+  end
+  object edName: TEdit
+    TabOrder = 0
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    Password = False
+    Position.X = 8.000000000000000000
+    Position.Y = 32.000000000000000000
+    Width = 345.000000000000000000
+    Height = 22.000000000000000000
+  end
+  object edValue: TEdit
+    TabOrder = 1
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    Password = False
+    Position.X = 8.000000000000000000
+    Position.Y = 88.000000000000000000
+    Width = 345.000000000000000000
+    Height = 22.000000000000000000
+  end
+  object btnGetValue: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 120.000000000000000000
+    TabOrder = 2
+    Text = 'GetValue()'
+    Width = 80.000000000000000000
+    OnClick = btnGetValueClick
+  end
+  object btnSetValue: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 96.000000000000000000
+    Position.Y = 120.000000000000000000
+    TabOrder = 3
+    Text = 'SetValue()'
+    Width = 80.000000000000000000
+    OnClick = btnSetValueClick
+  end
+  object btnExists: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 152.000000000000000000
+    Text = 'Exists()'
+    Width = 80.000000000000000000
+    OnClick = btnExistsClick
+  end
+  object btnDelete: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 184.000000000000000000
+    Position.Y = 120.000000000000000000
+    TabOrder = 4
+    Text = 'Delete()'
+    Width = 80.000000000000000000
+    OnClick = btnDeleteClick
+  end
+  object btnCount: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 96.000000000000000000
+    Position.Y = 152.000000000000000000
+    TabOrder = 7
+    Text = 'Count()'
+    Width = 80.000000000000000000
+    OnClick = btnCountClick
+  end
+  object btnBlockSize: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 184.000000000000000000
+    Position.Y = 152.000000000000000000
+    TabOrder = 8
+    Text = 'BlockSize()'
+    Width = 80.000000000000000000
+    OnClick = btnBlockSizeClick
+  end
+  object btnExpand: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 272.000000000000000000
+    Position.Y = 120.000000000000000000
+    TabOrder = 5
+    Text = 'Expand()'
+    Width = 80.000000000000000000
+    OnClick = btnExpandClick
+  end
+  object lbEnvVars: TListBox
+    Touch.InteractiveGestures = [igPan]
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Height = 522.000000000000000000
+    Position.X = 360.000000000000000000
+    Position.Y = 32.000000000000000000
+    Width = 433.000000000000000000
+    AlternatingRowBackground = True
+  end
+  object Panel1: TPanel
+    Height = 161.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 333.000000000000000000
+    Width = 345.000000000000000000
+    object lbNewEnv: TListBox
+      Touch.InteractiveGestures = [igPan]
+      Height = 65.000000000000000000
+      Position.X = 24.000000000000000000
+      Position.Y = 56.000000000000000000
+      Width = 225.000000000000000000
+      object TListBoxItem
+        Height = 19.000000000000000000
+        Text = 'Foo=Lorem'
+        Width = 221.000000000000000000
+      end
+      object TListBoxItem
+        Height = 19.000000000000000000
+        Position.Y = 19.000000000000000000
+        Text = 'Bar=Ipsum'
+        Width = 221.000000000000000000
+      end
+      object TListBoxItem
+        Height = 19.000000000000000000
+        Position.Y = 38.000000000000000000
+        Text = 'Baroff=Delorum'
+        Width = 221.000000000000000000
+      end
+    end
+    object btnCreateBlock: TButton
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Text = 'CreateBlock()'
+      Width = 113.000000000000000000
+      OnClick = btnCreateBlockClick
+    end
+    object Label3: TLabel
+      Height = 15.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 34.000000000000000000
+      Text = 'New block will include the following new environment variables:'
+      Width = 321.000000000000000000
+    end
+    object chkIncludeCurrent: TCheckBox
+      DisableFocusEffect = False
+      Height = 19.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 128.000000000000000000
+      Text = 'Include current environment in new block'
+      Width = 321.000000000000000000
+    end
+  end
+  object Panel2: TPanel
+    Height = 137.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 184.000000000000000000
+    Width = 345.000000000000000000
+    object btnGetAllNames1: TButton
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 9.000000000000000000
+      Text = 'GetAllNames(TStrings)'
+      Width = 153.000000000000000000
+      OnClick = btnGetAllNames1Click
+    end
+    object btnGetAllNames2: TButton
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 41.000000000000000000
+      Text = 'GetAllNames: array'
+      Width = 153.000000000000000000
+      OnClick = btnGetAllNames2Click
+    end
+    object btnEnumNames1: TButton
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 73.000000000000000000
+      Text = 'EnumNames() - method'
+      Width = 153.000000000000000000
+      OnClick = btnEnumNames1Click
+    end
+    object btnEnumNames2: TButton
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 105.000000000000000000
+      Text = 'EnumNames() - closure'
+      Width = 153.000000000000000000
+      OnClick = btnEnumNames2Click
+    end
+    object btnGetAll1: TButton
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 184.000000000000000000
+      Position.Y = 9.000000000000000000
+      Text = 'GetAll(TStrings)'
+      Width = 153.000000000000000000
+      OnClick = btnGetAll1Click
+    end
+    object btnGetAll2: TButton
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 184.000000000000000000
+      Position.Y = 41.000000000000000000
+      Text = 'GetAll: array'
+      Width = 153.000000000000000000
+      OnClick = btnGetAll2Click
+    end
+    object btnEnumVars1: TButton
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 184.000000000000000000
+      Position.Y = 73.000000000000000000
+      Text = 'EnumVars() - method'
+      Width = 153.000000000000000000
+      OnClick = btnEnumVars1Click
+    end
+    object btnEnumVars2: TButton
+      DisableFocusEffect = False
+      Height = 22.000000000000000000
+      Position.X = 184.000000000000000000
+      Position.Y = 105.000000000000000000
+      Text = 'EnumVars() - closure'
+      Width = 153.000000000000000000
+      OnClick = btnEnumVars2Click
+    end
+  end
+end
