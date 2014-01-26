@@ -10,10 +10,6 @@ type
   TSlaveForm = class(TForm)
     edEnvVars: TMemo;
     procedure FormCreate(Sender: TObject);
-  private
-    { Private declarations }
-  public
-    { Public declarations }
   end;
 
 var
@@ -32,3 +28,4 @@ begin
 end;
 
 end.
+
