@@ -1,4 +1,4 @@
-object SlaveForm: TSlaveForm
+object ChildForm: TChildForm
   Left = 200
   Top = 118
   Width = 729

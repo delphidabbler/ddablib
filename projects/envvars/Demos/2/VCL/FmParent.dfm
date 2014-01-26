@@ -1,4 +1,4 @@
-object MasterForm: TMasterForm
+object ParentForm: TParentForm
   Left = 200
   Top = 118
   Width = 455
@@ -27,7 +27,7 @@ object MasterForm: TMasterForm
     Height = 14
     Caption = 'Enter some environment variables in Name=Value format below'
   end
-  object btnExecSlave: TButton
+  object btnExecChild: TButton
     Left = 11
     Top = 545
     Width = 414
@@ -35,7 +35,7 @@ object MasterForm: TMasterForm
     Anchors = [akLeft, akRight, akBottom]
     Caption = 'Execute child process'
     TabOrder = 0
-    OnClick = btnExecSlaveClick
+    OnClick = btnExecChildClick
   end
   object edNewEnvVars: TMemo
     Left = 10

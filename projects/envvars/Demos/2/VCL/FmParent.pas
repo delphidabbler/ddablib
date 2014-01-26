@@ -1,6 +1,6 @@
 {
- * Main form for Master application of the DelphiDabbler Environment Variables
- * Unit demo program #2, VCL version.
+ * Main form for the Parent application of the DelphiDabbler Environment
+ * Variables Unit demo program #2, VCL version.
  *
  * $Rev$
  * $Date$
@@ -9,7 +9,7 @@
  * http://creativecommons.org/publicdomain/zero/1.0/
 }
 
-unit FmMaster;
+unit FmParent;
 
 {$UNDEF Supports_RTLNamespaces}
 {$IFDEF CONDITIONALEXPRESSIONS}
@@ -37,16 +37,16 @@ uses
   {$ENDIF}
 
 type
-  TMasterForm = class(TForm)
-    btnExecSlave: TButton;
+  TParentForm = class(TForm)
+    btnExecChild: TButton;
     edNewEnvVars: TMemo;
     chkIncludeCurrentBlock: TCheckBox;
     lblPrompt: TLabel;
-    procedure btnExecSlaveClick(Sender: TObject);
+    procedure btnExecChildClick(Sender: TObject);
   end;
 
 var
-  MasterForm: TMasterForm;
+  ParentForm: TParentForm;
 
 implementation
 
@@ -98,7 +98,7 @@ begin
     ShowMessageFmt('Can''t execute "%s"', [ProgName]);
 end;
 
-procedure TMasterForm.btnExecSlaveClick(Sender: TObject);
+procedure TParentForm.btnExecChildClick(Sender: TObject);
 var
   EnvBlock: Pointer;
   BlockSize: Integer;
@@ -112,8 +112,8 @@ begin
     TPJEnvironmentVars.CreateBlock(
       edNewEnvVars.Lines, chkIncludeCurrentBlock.Checked, EnvBlock, BlockSize
     );
-    // Execute the slave app
-    ExecProg('SlaveApp.exe', EnvBlock);
+    // Execute a child process
+    ExecProg('Child.exe', EnvBlock);
   finally
     FreeMem(EnvBlock);
   end;

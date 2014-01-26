@@ -1,6 +1,6 @@
 {
- * Project file for Slave application of the DelphiDabbler Environment Variables
- * Unit demo program #2, VCL version.
+ * Project file for the Child application of the DelphiDabbler Environment
+ * Variables Unit demo program #2, VCL version.
  *
  * $Rev$
  * $Date$
@@ -9,7 +9,7 @@
  * http://creativecommons.org/publicdomain/zero/1.0/
 }
 
-program SlaveApp;
+program Child;
 
 {$UNDEF Supports_MainFormOnTaskbar}
 {$UNDEF Supports_RTLNamespaces}
@@ -31,7 +31,7 @@ uses
   {$ELSE}
   Vcl.Forms,
   {$ENDIF}
-  FmSlave in 'FmSlave.pas' {SlaveForm},
+  FmChild in 'FmChild.pas' {ChildForm},
   PJEnvVars in '..\..\..\PJEnvVars.pas';
 
 {$R *.RES}
@@ -41,7 +41,7 @@ begin
   {$IFDEF Supports_MainFormOnTaskbar}
   Application.MainFormOnTaskbar := True;
   {$ENDIF}
-  Application.CreateForm(TSlaveForm, SlaveForm);
+  Application.CreateForm(TChildForm, ChildForm);
   Application.Run;
 end.
 

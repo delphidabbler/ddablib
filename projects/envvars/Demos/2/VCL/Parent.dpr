@@ -1,6 +1,6 @@
 {
- * Project filefor Master application of the DelphiDabbler Environment Variables
- * Unit demo program #2, VCL version.
+ * Project file for the Parent application of the DelphiDabbler Environment
+ * Variables Unit demo program #2, VCL version.
  *
  * $Rev$
  * $Date$
@@ -9,7 +9,7 @@
  * http://creativecommons.org/publicdomain/zero/1.0/
 }
 
-program MasterApp;
+program Parent;
 
 {$UNDEF Supports_MainFormOnTaskbar}
 {$UNDEF Supports_RTLNamespaces}
@@ -31,7 +31,7 @@ uses
   {$ELSE}
   Vcl.Forms,
   {$ENDIF}
-  FmMaster in 'FmMaster.pas' {MasterForm},
+  FmParent in 'FmParent.pas' {ParentForm},
   PJEnvVars in '..\..\..\PJEnvVars.pas';
 
 {$R *.RES}
@@ -41,6 +41,7 @@ begin
   {$IFDEF Supports_MainFormOnTaskbar}
   Application.MainFormOnTaskbar := True;
   {$ENDIF}
-  Application.CreateForm(TMasterForm, MasterForm);
+  Application.CreateForm(TParentForm, ParentForm);
   Application.Run;
 end.
+

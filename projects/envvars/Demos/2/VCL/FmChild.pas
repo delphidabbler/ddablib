@@ -1,6 +1,6 @@
 {
- * Main form for Slave application of the DelphiDabbler Environment Variables
- * Unit demo program #2, VCL version.
+ * Main form for the Child application of the DelphiDabbler Environment
+ * Variables Unit demo program #2, VCL version.
  *
  * $Rev$
  * $Date$
@@ -9,7 +9,7 @@
  * http://creativecommons.org/publicdomain/zero/1.0/
 }
 
-unit FmSlave;
+unit FmChild;
 
 {$UNDEF Supports_RTLNamespaces}
 {$IFDEF CONDITIONALEXPRESSIONS}
@@ -37,13 +37,13 @@ uses
   {$ENDIF}
 
 type
-  TSlaveForm = class(TForm)
+  TChildForm = class(TForm)
     edEnvVars: TMemo;
     procedure FormCreate(Sender: TObject);
   end;
 
 var
-  SlaveForm: TSlaveForm;
+  ChildForm: TChildForm;
 
 implementation
 
@@ -52,7 +52,7 @@ uses
 
 {$R *.DFM}
 
-procedure TSlaveForm.FormCreate(Sender: TObject);
+procedure TChildForm.FormCreate(Sender: TObject);
 begin
   TPJEnvironmentVars.GetAll(edEnvVars.Lines);
 end;
