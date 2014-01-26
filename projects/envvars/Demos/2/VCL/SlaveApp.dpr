@@ -11,8 +11,26 @@
 
 program SlaveApp;
 
+{$UNDEF Supports_MainFormOnTaskbar}
+{$UNDEF Supports_RTLNamespaces}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 ad later
+    {$DEFINE Supports_RTLNamespaces}
+  {$IFEND}
+  {$IF CompilerVersion >= 18.5} // Delphi 2007 and later
+    {$DEFINE Supports_MainFormOnTaskbar}
+  {$IFEND}
+{$ENDIF}
+
 uses
+  {$IFNDEF Supports_RTLNamespaces}
   Forms,
+  {$ELSE}
+  Vcl.Forms,
+  {$ENDIF}
   FmSlave in 'FmSlave.pas' {SlaveForm},
   PJEnvVars in '..\..\..\PJEnvVars.pas';
 
@@ -20,6 +38,10 @@ uses
 
 begin
   Application.Initialize;
+  {$IFDEF Supports_MainFormOnTaskbar}
+  Application.MainFormOnTaskbar := True;
+  {$ENDIF}
   Application.CreateForm(TSlaveForm, SlaveForm);
   Application.Run;
 end.
+

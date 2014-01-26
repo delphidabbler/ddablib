@@ -11,11 +11,30 @@
 
 unit FmSlave;
 
+{$UNDEF Supports_RTLNamespaces}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 ad later
+    {$DEFINE Supports_RTLNamespaces}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls;
+  {$IFNDEF Supports_RTLNamespaces}
+  Classes,
+  Controls,
+  StdCtrls,
+  Forms;
+  {$ELSE}
+  System.Classes,
+  Vcl.Controls,
+  Vcl.StdCtrls,
+  Vcl.Forms;
+  {$ENDIF}
 
 type
   TSlaveForm = class(TForm)
