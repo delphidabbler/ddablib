@@ -1,0 +1,22 @@
+object ChildForm: TChildForm
+  Left = 200
+  Top = 118
+  Caption = 'FireMonkey Demo 2: Child Process'
+  ClientHeight = 507
+  ClientWidth = 634
+  Position = poDesktopCenter
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  OnCreate = FormCreate
+  Left = 200
+  Top = 118
+  object edEnvVars: TMemo
+    Touch.InteractiveGestures = [igPan]
+    Align = alClient
+    Height = 507.000000000000000000
+    Width = 634.000000000000000000
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+  end
+end

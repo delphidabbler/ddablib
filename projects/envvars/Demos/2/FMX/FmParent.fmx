@@ -1,0 +1,59 @@
+object ParentForm: TParentForm
+  Left = 200
+  Top = 118
+  Caption = 'FireMonkey Demo 2: Parent Process'
+  ClientHeight = 531
+  ClientWidth = 441
+  Position = poDesktopCenter
+  FormFactor.Width = 1920
+  FormFactor.Height = 1080
+  FormFactor.Devices = [dkDesktop]
+  OnCreate = FormCreate
+  Left = 200
+  Top = 118
+  object lblPrompt: TLabel
+    AutoSize = True
+    Height = 19.000000000000000000
+    Position.X = 12.000000000000000000
+    Position.Y = 16.000000000000000000
+    Text = 'Enter some environment variables in Name=Value format below'
+    Width = 315.000000000000000000
+    WordWrap = False
+  end
+  object btnExecChild: TButton
+    Anchors = [akLeft, akRight, akBottom]
+    DisableFocusEffect = False
+    Height = 60.000000000000000000
+    Position.X = 11.000000000000000000
+    Position.Y = 463.000000000000000000
+    TabOrder = 0
+    Text = 'Execute child process'
+    Width = 414.000000000000000000
+    OnClick = btnExecChildClick
+  end
+  object edNewEnvVars: TMemo
+    Touch.InteractiveGestures = [igPan]
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Height = 388.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 40.000000000000000000
+    TabOrder = 1
+    Width = 420.000000000000000000
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    Lines.Strings = (
+      'Foo=Lorem'
+      'Bar=Dipsum'
+      'Raboof=Delorum')
+  end
+  object chkIncludeCurrentBlock: TCheckBox
+    Anchors = [akLeft, akRight, akBottom]
+    DisableFocusEffect = False
+    Height = 25.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 433.000000000000000000
+    TabOrder = 2
+    Text = 'Include current environment block'
+    Width = 401.000000000000000000
+  end
+end
