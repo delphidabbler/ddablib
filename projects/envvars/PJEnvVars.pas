@@ -688,6 +688,7 @@ class function TPJEnvironmentVars.CreateBlock(const NewEnv: TStrings;
   const BufSize: Integer): Integer;
 var
   EnvVars: TStringList; // list of env vars in new block
+  EnvVar: string;       // a single environment variable
   Idx: Integer;         // loops through all env vars in new block
   PBuf: PChar;          // points to start of each env var entry in block
 begin
@@ -699,7 +700,14 @@ begin
       GetAll(EnvVars);
     // add any additional environment strings
     if Assigned(NewEnv) then
-      EnvVars.AddStrings(NewEnv);
+    begin
+      for Idx := 0 to Pred(NewEnv.Count) do
+      begin
+        EnvVar := NewEnv[Idx];
+        if AnsiPos('=', EnvVar) > 0 then
+          EnvVars.Add(EnvVar);
+      end;
+    end;
     // Calculate size of new environment block: block consists of #0 separated
     // list of environment variables terminated by #0#0, e.g.
     // Foo=Lorem#0Bar=Ipsum#0Raboof=Dolore#0#0
