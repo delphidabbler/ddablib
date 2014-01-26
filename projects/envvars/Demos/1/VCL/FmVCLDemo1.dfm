@@ -1,10 +1,12 @@
 object VCLDemo1Form: TVCLDemo1Form
   Left = 449
   Top = 177
-  Width = 849
-  Height = 590
+  Width = 700
+  Height = 545
   Caption = 'VCL Demo 1'
   Color = clBtnFace
+  Constraints.MinHeight = 545
+  Constraints.MinWidth = 700
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -12,10 +14,11 @@ object VCLDemo1Form: TVCLDemo1Form
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  Scaled = False
   OnCreate = FormCreate
   DesignSize = (
-    833
-    552)
+    684
+    507)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -49,8 +52,8 @@ object VCLDemo1Form: TVCLDemo1Form
   object lbEnvVars: TListBox
     Left = 360
     Top = 8
-    Width = 466
-    Height = 536
+    Width = 317
+    Height = 491
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 13
