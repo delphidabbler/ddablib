@@ -688,24 +688,38 @@ class function TPJEnvironmentVars.CreateBlock(const NewEnv: TStrings;
   const BufSize: Integer): Integer;
 var
   EnvVars: TStringList; // list of env vars in new block
-  EnvVar: string;       // a single environment variable
+  EnvName: string;      //
+  EnvValue: string;
+  EnvNameIdx: Integer;
   Idx: Integer;         // loops through all env vars in new block
   PBuf: PChar;          // points to start of each env var entry in block
 begin
-  // Create string list to hold all new environment vars
   EnvVars := TStringList.Create;
   try
-    // include copy of current environment block if required
+    // Include copy of current environment block if required: current block is
+    // assumed not to have duplicates.
     if IncludeCurrent then
       GetAll(EnvVars);
-    // add any additional environment strings
+    // Include any additional environment variables in NewEnv. If there any
+    // duplicate names in NewEnv only the entry with the greatest index is used.
+    // If the current environment block is included and an environment variable
+    // in NewEnv has the same name as one in the current block, then the value
+    // from NewEnv is used.
     if Assigned(NewEnv) then
     begin
       for Idx := 0 to Pred(NewEnv.Count) do
       begin
-        EnvVar := NewEnv[Idx];
-        if AnsiPos('=', EnvVar) > 0 then
-          EnvVars.Add(EnvVar);
+        if AnsiPos('=', NewEnv[Idx]) = 0 then
+          Continue; // not a valid environment variable - skip it
+        EnvValue := NewEnv.ValueFromIndex[Idx];
+        EnvName := NewEnv.Names[Idx];
+        EnvNameIdx := EnvVars.IndexOfName(EnvName);
+        if EnvNameIdx >= 0 then
+          // environment variable with this name already exists: overwrite value
+          EnvVars.ValueFromIndex[EnvNameIdx] := EnvValue
+        else
+          // environment variable with this name doesn't exist: add it
+          EnvVars.Add(EnvName + '=' + EnvValue);
       end;
     end;
     // Calculate size of new environment block: block consists of #0 separated
