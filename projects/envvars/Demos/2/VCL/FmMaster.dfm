@@ -3,7 +3,7 @@ object MasterForm: TMasterForm
   Top = 118
   Width = 455
   Height = 652
-  Caption = 'MasterForm'
+  Caption = 'VCL Demo 2: Parent Process'
   Color = clBtnFace
   Constraints.MinHeight = 300
   Constraints.MinWidth = 390
@@ -33,7 +33,7 @@ object MasterForm: TMasterForm
     Width = 414
     Height = 60
     Anchors = [akLeft, akRight, akBottom]
-    Caption = 'Execute slave program'
+    Caption = 'Execute child process'
     TabOrder = 0
     OnClick = btnExecSlaveClick
   end

@@ -3,7 +3,7 @@ object SlaveForm: TSlaveForm
   Top = 118
   Width = 729
   Height = 559
-  Caption = 'SlaveForm'
+  Caption = 'VCL Demo 2: Child Process'
   Color = clBtnFace
   Constraints.MinHeight = 300
   Constraints.MinWidth = 400
