@@ -16,9 +16,8 @@ setlocal
 cd .\..
 
 set OutFile=Release\dd-envvars.zip
-set SrcDir=
 set DocsDir=Docs
-set HelpDir=Help
+set DemosDir=Demos
 
 if exist Release rmdir /S /Q Release
 mkdir Release
@@ -29,7 +28,10 @@ zip -j -9 %OutFile% PJEnvVars.dcr
 zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
 zip -j -9 %OutFile% %DocsDir%\MPL-2.txt
 zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
-zip -j -9 %OutFile% %DocsDir%\DemoCode.htm
 zip -j -9 %OutFile% %DocsDir%\Documentation.url
+
+zip %OutFile% -r -9 %DemosDir%\*.* -x *.svn\*
+
+
 
 endlocal
