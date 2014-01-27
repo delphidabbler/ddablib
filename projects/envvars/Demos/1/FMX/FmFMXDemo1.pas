@@ -65,6 +65,7 @@ type
     btnGetAll2: TButton;
     btnEnumVars1: TButton;
     btnEnumVars2: TButton;
+    btnEnumerator: TButton;
     procedure btnGetValueClick(Sender: TObject);
     procedure btnSetValueClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
@@ -81,6 +82,7 @@ type
     procedure btnEnumNames2Click(Sender: TObject);
     procedure btnEnumVars2Click(Sender: TObject);
     procedure btnCreateBlockClick(Sender: TObject);
+    procedure btnEnumeratorClick(Sender: TObject);
   private
     procedure EnvNameCallback(const Name: string; Data: Pointer);
     procedure EnvVarCallback(const EnvVar: TPJEnvironmentVar; Data: Pointer);
@@ -149,6 +151,20 @@ end;
 procedure TFMXDemo1Form.btnDeleteClick(Sender: TObject);
 begin
   CheckOSError(TPJEnvironmentVars.Delete(edName.Text));
+end;
+
+procedure TFMXDemo1Form.btnEnumeratorClick(Sender: TObject);
+var
+  Enum: TPJEnvVarsEnumerator;
+begin
+  lbEnvVars.Clear;
+  Enum := TPJEnvVarsEnumerator.Create;
+  try
+    while Enum.MoveNext do
+      lbEnvVars.Items.Add(Format('[%s]', [Enum.Current]));
+  finally
+    Enum.Free;
+  end;
 end;
 
 procedure TFMXDemo1Form.btnEnumNames1Click(Sender: TObject);

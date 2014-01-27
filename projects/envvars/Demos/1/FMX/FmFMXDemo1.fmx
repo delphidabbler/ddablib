@@ -2,7 +2,7 @@ object FMXDemo1Form: TFMXDemo1Form
   Left = 0
   Top = 0
   Caption = 'FMX Demo 1'
-  ClientHeight = 559
+  ClientHeight = 545
   ClientWidth = 798
   FormFactor.Width = 1920
   FormFactor.Height = 1080
@@ -113,7 +113,7 @@ object FMXDemo1Form: TFMXDemo1Form
   object lbEnvVars: TListBox
     Touch.InteractiveGestures = [igPan]
     Anchors = [akLeft, akTop, akRight, akBottom]
-    Height = 522.000000000000000000
+    Height = 505.000000000000000000
     Position.X = 360.000000000000000000
     Position.Y = 32.000000000000000000
     Width = 433.000000000000000000
@@ -250,5 +250,14 @@ object FMXDemo1Form: TFMXDemo1Form
       Width = 153.000000000000000000
       OnClick = btnEnumVars2Click
     end
+  end
+  object btnEnumerator: TButton
+    DisableFocusEffect = False
+    Height = 33.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 504.000000000000000000
+    Text = 'Enumerate names using TPJEnvVarsEnumerator'
+    Width = 345.000000000000000000
+    OnClick = btnEnumeratorClick
   end
 end

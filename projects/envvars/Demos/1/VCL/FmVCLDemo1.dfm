@@ -203,20 +203,20 @@ object VCLDemo1Form: TVCLDemo1Form
   end
   object Panel2: TPanel
     Left = 8
-    Top = 317
+    Top = 320
     Width = 338
-    Height = 181
+    Height = 137
     TabOrder = 11
     object Label3: TLabel
       Left = 11
-      Top = 47
+      Top = 39
       Width = 301
       Height = 13
       Caption = 'New block will include the following new environment variables:'
     end
     object btnCreateBlock: TButton
       Left = 11
-      Top = 16
+      Top = 8
       Width = 113
       Height = 25
       Caption = 'CreateBlock()'
@@ -225,7 +225,7 @@ object VCLDemo1Form: TVCLDemo1Form
     end
     object lbNewEnv: TListBox
       Left = 24
-      Top = 66
+      Top = 58
       Width = 299
       Height = 47
       ItemHeight = 13
@@ -237,11 +237,20 @@ object VCLDemo1Form: TVCLDemo1Form
     end
     object chkIncludeCurrent: TCheckBox
       Left = 11
-      Top = 127
+      Top = 111
       Width = 312
       Height = 17
       Caption = 'Include current environment in new block'
       TabOrder = 2
     end
+  end
+  object btnEnumerator: TButton
+    Left = 8
+    Top = 468
+    Width = 338
+    Height = 29
+    Caption = 'Enumerate names using TPJEnvVarsEnumerator'
+    TabOrder = 12
+    OnClick = btnEnumeratorClick
   end
 end

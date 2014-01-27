@@ -71,6 +71,7 @@ type
     Label3: TLabel;
     lbNewEnv: TListBox;
     chkIncludeCurrent: TCheckBox;
+    btnEnumerator: TButton;
     procedure btnBlockSizeClick(Sender: TObject);
     procedure btnCountClick(Sender: TObject);
     procedure btnCreateBlockClick(Sender: TObject);
@@ -88,6 +89,7 @@ type
     procedure btnGetValueClick(Sender: TObject);
     procedure btnSetValueClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnEnumeratorClick(Sender: TObject);
   private
     procedure EnvNameCallback(const Name: string; Data: Pointer);
     procedure EnvVarCallback(const EnvVar: TPJEnvironmentVar; Data: Pointer);
@@ -169,6 +171,20 @@ end;
 procedure TVCLDemo1Form.btnDeleteClick(Sender: TObject);
 begin
   OSErrorCheck(TPJEnvironmentVars.Delete(edName.Text));
+end;
+
+procedure TVCLDemo1Form.btnEnumeratorClick(Sender: TObject);
+var
+  Enum: TPJEnvVarsEnumerator;
+begin
+  lbEnvVars.Clear;
+  Enum := TPJEnvVarsEnumerator.Create;
+  try
+    while Enum.MoveNext do
+      lbEnvVars.Items.Add(Format('[%s]', [Enum.Current]));
+  finally
+    Enum.Free;
+  end;
 end;
 
 procedure TVCLDemo1Form.btnEnumNames1Click(Sender: TObject);
