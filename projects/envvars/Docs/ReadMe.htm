@@ -148,34 +148,45 @@
 </h2>
 
 <p>
-  This unit provides a static class, a component and a set of routines for
-  managing and manipulating environment variables. Full details can be found in
-  the following locations:
+  This unit provides a static class for reading and modifying environment
+  variables available to the current process, along with a class that can be
+  used to enumerate environment variable names.
 </p>
-
-<ul>
-  <li>
-    Environment Variables Unit <a
-      href="http://www.delphidabbler.com/software/envvars"
-    >Home Page</a>.
-  </li>
-  <li>
-    The project's <a
-      href="http://www.delphidabbler.com/url/envvars-docs"
-    >online documentation</a>.
-  </li>
-</ul>
 
 <p>
-  In addition there is an article, <a
-    href="http://www.delphidabbler.com/articles?article=6"
-  >How to access environment variables</a>, that discusses interaction with
-  environment variables on Windows.
+  The unit also contains a component and a set of routines that duplicate some
+  of the features provided by the static class. These are now deprecated and
+  are provided for backward compatibility reasons only and should no longer be
+  used in new code.
 </p>
 
+<p>
+  More information is available on the Environment Variables Unit <a
+    href="http://www.delphidabbler.com/software/envvars"
+  >Home Page</a>.
+</p>
 <p>
   The unit is believed to be compatible with all Win32 editions of Delphi from
   Delphi 4 onwards. It has been tested with Delphi 4, 6 and 7, 2006 and 2010.
+</p>
+
+<h3>
+  Compatibility
+</h3>
+
+<p>
+  The Environment Variables Unit has been tested on all Delphi versions from 7
+  to XE4 (excluding Delphi 2005). The unit is thought to be compilable with
+  versions of Delphi back to version 4, but this has not been tested.
+</p>
+
+<p>
+  The unit is compatible with both the Windows 32- and 64-bit Delphi compilers
+  and the VCL or FireMonkey frameworks (tested with FireMonkey 2 only).
+</p>
+
+<p>
+  .NET and non-Windows platforms are not supported.
 </p>
 
 <h2 id="installation">
@@ -190,44 +201,68 @@
 
 <ul>
   <li class="first">
-    <strong><code>PJEnvVars.pas</code></strong> &ndash; component and routine
-    source code.
+    <strong><code>PJEnvVars.pas</code></strong> &ndash; The Environment
+    Variables Unit. Contains all source code including the deprecated component,
+    but not the component registration code.
   </li>
   <li>
-    <strong><code>PJEnvVars.dcr</code></strong> &ndash; component palette glyph.
+    <code>PJEnvVars.dcr</code> &ndash; Component palette glyph for the
+    deprecated component.
   </li>
   <li>
-    <code>ReadMe.htm</code> &ndash; this read-me file.
+    <code>PJEnvVarsDsgn.pas</code> &ndash; Registration code for the deprecated
+    component.
   </li>
   <li>
-    <code>DemoCode.htm</code> &ndash; examples of how to use the Environment
-    Variables Unit.
+    <code>ReadMe.htm</code> &ndash; This read-me file.
   </li>
   <li>
-    <code>ChangeLog.txt</code> &ndash; the project change log.
+    <code>ChangeLog.txt</code> &ndash; The project change log.
   </li>
   <li>
-    <code>MPL-2.txt</code> &ndash; the Mozilla Public License v2.0.
+    <code>MPL-2.txt</code> &ndash; The Mozilla Public License v2.0.
   </li>
   <li>
-    <code>Documentation.url</code> &ndash; short-cut to the unit's online
+    <code>Documentation.url</code> &ndash; Short-cut to the unit's online
     documentation.
   </li>
 </ul>
 
 <p>
-  You can now install the component into the Delphi IDE. To do this, the files
-  <code>PJEnvVars.pas</code> and <code>PJEnvVars.dcr</code> should be added to a
-  design time package. If you need help doing this <a
-    href="http://www.delphidabbler.com/url/install-comp"
-  >see here</a>.
+  In addition to the above files you will find the source code for various <a
+    href="#demos"
+  >demo projects</a> in the <code>Demos</code> directory.
 </p>
 
 <p>
-  Should you just want to use the routines, or create the component dynamically
-  at run time you don't need to install the unit into the IDE and can simply
-  either places it somewhere on your library path or include it in your
-  projects.
+  There are three possible ways to use the unit, providing:
+</p>
+
+<ol>
+  <li>
+    The simplest way is the add a copy of <code>PJEnvVas.pas</code> to your
+    projects whenever the unit is needed.
+  </li>
+  <li>
+    To make the unit easier to re-use you can either copy it to a folder on
+    your Delphi search path, or add the folder containing the unit to the Delphi
+    Search path. You then simply use the unit as required without needing to add
+    it to your project.
+  </li>
+  <li>
+    For maximum portability you can add the unit to a Delphi package.
+  </li>
+</ol>
+
+<p class="pullout">
+  <strong>NOTE:</strong> None of the above methods will install the deprecated
+  component into the Delphi IDE. To do this you need to add
+  <code>PJEnvVars.pas</code>, <code>PJEnvVars.dcr</code> and
+  <code>PJEnvVarsDsgn.pas</code> to a design time package. If you need help
+  doing this <a
+    href="http://www.delphidabbler.com/url/install-comp"
+  >see here</a>. This is not recommended other than for reasons of backwards
+  compatibility.
 </p>
 
 <h2 id="docs">
@@ -238,6 +273,28 @@
   The Environment Variables Unit has comprehensive <a
     href="http://www.delphidabbler.com/url/envvars-docs"
   >online documentation.</a>
+</p>
+
+<p>
+  In addition there is an article, <a
+    href="http://www.delphidabbler.com/articles?article=6"
+  >How to access environment variables</a>, that discusses interaction with
+  environment variables on Windows.
+</p>
+
+<h2 id="demos">
+  Demo Programs
+</h2>
+
+<p>
+  Two different demo programs are includes in the <code>Demos\1</code> and
+  <code>Demos\2</code> sub-directories. There are VCL and FireMonkey 2 versions
+  of each demo.
+</p>
+
+<p>
+  The demo programs are documented in the file <code>DemosReadMe.htm</code> that
+  can be found in the <code>Demos</code> directory.
 </p>
 
 <h2 id="update">
