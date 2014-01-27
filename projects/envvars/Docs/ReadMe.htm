@@ -148,26 +148,22 @@
 </h2>
 
 <p>
-  This unit provides a static class for reading and modifying environment
+  This unit provides a static class for reading and modifying the environment
   variables available to the current process, along with a class that can be
   used to enumerate environment variable names.
 </p>
 
 <p>
   The unit also contains a component and a set of routines that duplicate some
-  of the features provided by the static class. These are now deprecated and
-  are provided for backward compatibility reasons only and should no longer be
-  used in new code.
+  of the features provided by the static class. These are now
+  <strong>deprecated</strong> and are provided for backward compatibility
+  reasons only: they should no longer be used in new code.
 </p>
 
 <p>
   More information is available on the Environment Variables Unit <a
     href="http://www.delphidabbler.com/software/envvars"
   >Home Page</a>.
-</p>
-<p>
-  The unit is believed to be compatible with all Win32 editions of Delphi from
-  Delphi 4 onwards. It has been tested with Delphi 4, 6 and 7, 2006 and 2010.
 </p>
 
 <h3>
@@ -176,13 +172,13 @@
 
 <p>
   The Environment Variables Unit has been tested on all Delphi versions from 7
-  to XE4 (excluding Delphi 2005). The unit is thought to be compilable with
+  to XE4, excluding Delphi 2005. The unit is thought to be compilable with
   versions of Delphi back to version 4, but this has not been tested.
 </p>
 
 <p>
   The unit is compatible with both the Windows 32- and 64-bit Delphi compilers
-  and the VCL or FireMonkey frameworks (tested with FireMonkey 2 only).
+  and the VCL and FireMonkey frameworks (tested with FireMonkey 2 only).
 </p>
 
 <p>
@@ -202,8 +198,8 @@
 <ul>
   <li class="first">
     <strong><code>PJEnvVars.pas</code></strong> &ndash; The Environment
-    Variables Unit. Contains all source code including the deprecated component,
-    but not the component registration code.
+    Variables Unit. Contains all source code, including the deprecated
+    component, but excluding the component registration code.
   </li>
   <li>
     <code>PJEnvVars.dcr</code> &ndash; Component palette glyph for the
@@ -235,7 +231,7 @@
 </p>
 
 <p>
-  There are three possible ways to use the unit, providing:
+  There are three possible ways to use the unit:
 </p>
 
 <ol>
@@ -250,7 +246,8 @@
     it to your project.
   </li>
   <li>
-    For maximum portability you can add the unit to a Delphi package.
+    For maximum portability you can add <code>PJEnvVars.pas</code> to a Delphi
+    package.
   </li>
 </ol>
 
@@ -355,8 +352,8 @@
   <div class="comments">
     Please <a
       href="http://www.delphidabbler.com/contact"
-    >let me know</a> if you have any comments about the component, but please
-    use the Issue Tracker noted above to report bugs and request new features.
+    >let me know</a> if you have any comments about the unit, but please use the
+    Issue Tracker noted above to report bugs and request new features.
   </div>
   <div class="copyright">
     This document is copyright &copy; 2008-2014, P D Johnson, <a
