@@ -24,6 +24,7 @@ mkdir Release
 
 zip -j -9 %OutFile% PJEnvVars.pas
 zip -j -9 %OutFile% PJEnvVars.dcr
+zip -j -9 %OutFile% PJEnvVarsDsgn.pas
 
 zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
 zip -j -9 %OutFile% %DocsDir%\MPL-2.txt
