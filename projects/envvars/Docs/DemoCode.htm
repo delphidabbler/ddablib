@@ -5,7 +5,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/
  *
- * Copyright (C) 2008-2014, Peter Johnson (www.delphidabbler.com).
+ * Copyright (C) 2014, Peter Johnson (www.delphidabbler.com).
  *
  * $Rev$
  * $Date$
@@ -158,604 +158,433 @@
   <div class="subtitle">Demo Code</div>
 </h1>
 
-<p>
-  This document contains several examples of how to use the code in the
-  Environment Variables Unit. They are:
-</p>
-
-<ol>
-  <li>
-    <a href="#eg1a">Example 1a</a>: using the <var>TPJEnvVars</var> component
-    with the old enumerator obtained from the <var>EnumNames</var> method.
-  </li>
-  <li>
-    <a href="#eg1b">Example 1b</a>: using the <var>TPJEnvVars</var> component
-    with its new enumerator obtained from the <var>GetEnumerator</var>
-    method.
-  </li>
-  <li>
-    <a href="#eg2">Example 2</a>: using the <var>GetEnvVarValue</var>,
-    <var>SetEnvVarValue</var>, <var>DeleteEnvVar</var> and
-    <var>GetAllEnvVars</var> routines.
-  </li>
-  <li>
-    <a href="#eg3">Example 3</a>: using the <var>ExpandEnvVars</var> function.
-  </li>
-  <li>
-    <a href="#eg4">Example 4</a>: using the <var>CreateEnvBlock</var> function.
-  </li>
-  <li>
-    <a href="#eg5">Example 5</a>: using the <var>GetAllEnvVarNames</var> and
-    <var>EnvBlockSize</var> routines.
-  </li>
-</ol>
-
-<p>
-  Demo projects that implement these examples are available from the
-  <code>EnvVarsDemo</code> directory of the <a
-    href="http://www.delphidabbler.com/url/doodlings-repo"
-  >DelphiDabbler Doodlings Repository</a>.
-</p>
-
-<p class="gototop">
-  &raquo; <a href="#top">Go to top</a>
-</p>
-
-<h2 id="eg1a">
-  Example 1a
+<h2>
+  Introduction
 </h2>
 
 <p>
-  This example demonstrates the use of the <var>TPJEnvVars</var> component. The
-  example uses the old <var>EnumNames</var> methods and its callback method in
-  order to enumerate all the environment variable names.
+  Two demo projects are distributed with the <em>Environment Variables
+  Unit</em>. Each demo is available in both VCL and FireMonkey 2 versions.
 </p>
 
 <p>
-  Drop a <var>TPJEnvVars</var> component, a list box, a label, two edit boxes
-  and two buttons on a form. Add the following private methods and event
-  handlers:
+  The VCL versions require Delphi 7 or later, while the FireMonkey 2 versions
+  require Delphi XE3 or later.
 </p>
-
-<pre class="source">procedure TForm1.EnvNamesEnum(const VarName: string; Data: Pointer);
-  // Private callback method of type TPJEnvVarsEnum adds env var names to
-  // list box
-begin
-  TStrings(Data).Add(VarName);
-end;
-
-procedure TForm1.UpdateList;
-  // Displays all environment vars in list box
-begin
-  ListBox1.Clear;
-  PJEnvVars1.EnumNames(EnvNamesEnum, ListBox1.Items);
-  Label1.Caption := Format('%d environment variables', [PJEnvVars1.Count]);
-  Edit1.Text := '';
-  Edit2.Text := '';
-end;
-
-procedure TForm1.FormCreate(Sender: TObject);
-  // Display program's environment vars in list
-begin
-  UpdateList;
-end;
-
-procedure TForm1.ListBox1Click(Sender: TObject);
-  // Display selected env var name and value
-begin
-  Edit1.Text := ListBox1.Items[ListBox1.ItemIndex];
-  Edit2.Text := PJEnvVars1.Values[Edit1.Text];
-end;
-
-procedure TForm1.Button1Click(Sender: TObject);
-  // Update or create env var named in Edit1 with new  value per Edit2 (empty
-  // string in Edit2 deletes var)
-begin
-  if Edit1.Text &lt;&gt; '' then
-  begin
-    PJEnvVars1.Values[Edit1.Text] := Edit2.Text;
-    UpdateList;
-  end;
-end;
-
-procedure TForm1.Button2Click(Sender: TObject);
-  // Delete env var named in Edit1
-begin
-  if Edit1.Text &lt;&gt; '' then
-  begin
-    PJEnvVars1.DeleteVar(Edit1.Text);
-    UpdateList;
-  end;
-end;</pre>
 
 <p>
-  The program behaves as follows:
+  All demos are compatible with the 32- and 64-bit Windows compilers.
 </p>
-
-<ul>
-  <li>
-    On startup the list box is populated with all the available environment
-    variable names and the number of evironment variables is displayed in the
-    label.
-  </li>
-  <li>
-    Selecting a variable name from the list displays it in <var>Edit1</var> and
-    places its value in <var>Edit2</var>.
-  </li>
-  <li>
-    Entering or editing a name in <var>Edit1</var> and a value in
-    <var>Edit2</var> then clicking <var>Button1</var> causes the environment
-    variable named in <var>Edit1</var> to be updated with the new value
-    contained in <var>Edit2</var>. If the environment variable does not
-    exist then it is created. If no text is entered in <var>Edit2</var> then the
-    environment variable is deleted. The list is updated after this change.
-  </li>
-  <li>
-    Clicking <var>Button2</var> deletes the environment variable named in
-    <var>Edit1</var> and updates the list.
-  </li>
-</ul>
 
 <p>
-  <strong>Note:</strong>  This example is similar to <a href="#eg2">Example
-  2</a> which accomplishes the same task using the environment variable
-  manipulation routines instead of the component.
+  Each demo project includes the <var>PJEnvVars</var> unit explicitly so there
+  is no need to install it before using the demos.
 </p>
 
-<p class="gototop">
-  &raquo; <a href="#top">Go to top</a>
-</p>
-
-<h2 id="eg1b">
-  Example 1b
+<h2>
+  Demo 1
 </h2>
 
 <p>
-  This example also demonstrates the use of the <var>TPJEnvVars</var> component,
-  but this time uses the newer <var>TPJEnvVarsEnumerator</var> class to
-  enumerate the environment variable names. This enumerator is created by
-  calling the <var>GetEnumerator</var> method. From Delphi 2005 onwards this
-  enumerator enables the use of the <var>for .. in</var> loop construct.
-  <strong>Warning:</strong> If <var>GetEnumerator</var> is called directly from
-  code then the caller must free the enumerator instance.
+  Demo #1 can be found in the <kbd>Demos\1</kbd> directory, with the VCL and
+  FireMonkey 2 versions being in the <kbd>VCL</kbd> and <kbd>FMX</kbd>
+  sub-directories respectively.
 </p>
 
 <p>
-  Drop a <var>TPJEnvVars</var> component and a list view on a form. Add two
-  columns named &quot;Name&quot; and &quot;Value&quot; to the list view and set
-  the list view's properties as follows:
-</p>
-
-<ul>
-  <li>
-    <var>Align<var> - <code>alClient</code>
-  </li>
-  <li>
-    <var>ColumnClick<var> - <code>False</code>
-  </li>
-  <li>
-    <var>ReadOnly<var> - <code>True</code>
-  </li>
-  <li>
-    <var>ViewStyle<var> - <code>vsReport</code>
-  </li>
-</ul>
-
-<p>
-  Now an <var>OnCreate</var> event handler for the form as follows:
-</p>
-
-<pre class="source">procedure TForm1.FormCreate(Sender: TObject);
-
-  procedure AddListItem(Name: string);
-  var
-    LI: TListItem;
-  begin
-    LI := ListView1.Items.Add;
-    LI.Caption := Name;
-    LI.SubItems.Add(PJEnvVars1.Values[Name]);
-  end;
-
-var
-  Name: string;
-  {$IFNDEF FORINSUPPORTED}
-  Enum: TPJEnvVarsEnumerator;
-  {$ENDIF}
-begin
-  {$IFDEF FORINSUPPORTED}
-  for Name in PJEnvVars1 do
-    AddListItem(Name);
-  {$ELSE}
-  Enum := PJEnvVars1.GetEnumerator;
-  try
-    while Enum.MoveNext do
-    begin
-      Name := Enum.Current;
-      AddListItem(Name);
-    end;
-  finally
-    Enum.Free;
-  end;
-  {$ENDIF}
-end;</pre>
-
-<p>
-  This code detects whether <var>for .. in</var> loops are supported using
-  conditional compilation and uses the construct if available. Therefore, add
-  the following compiler directives to the unit before the definition of
-  <var>FormCreate</var>:
-</p>
-
-<pre class="source">{$UNDEF FORINSUPPORTED}
-{$IFDEF CONDITIONALEXPRESSIONS}
-  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
-    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
-  {$IFEND}
-  {$IF CompilerVersion >= 17.0} // Delphi 2005 and later
-    {$DEFINE FORINSUPPORTED}
-  {$IFEND}
-{$ENDIF}</pre>
-
-<p>
-  The demo is quite simple. It merely adds the names and values of all the
-  environment variables to the list view on start up. It uses the
-  <var>TPJEnvVarsEnumerator</var> enumerator to get all the environment variable
-  names. Note that any environment variables that have no name are ignored by
-  this enumerator.
-</p>
-
-<p class="gototop">
-  &raquo; <a href="#top">Go to top</a>
-</p>
-
-<h2 id="eg2">
-  Example 2
-</h2>
-
-<p>
-  This example demonstrates the use of the <var>GetEnvVarValue</var>,
-  <var>SetEnvVarValue</var>, <var>DeleteEnvVar</var> and
-  <var>GetAllEnvVars</var> routines.
+  Both versions present a similar interface. They demonstrate every method of
+  the <var>TPJEnvironmentVars</var> static class and show how to use the
+  <var>TPJEnvVarsEnumerator</var> enumerator class.
 </p>
 
 <p>
-  Drop a list box, two edit boxes and two buttons on a form and add
-  <code>PJEnvVars</code> to your uses clause. Now enter the following code:
+  When run the program displays a set of controls on the left and an empty list
+  box on the right of its window. The following buttons exercise the methods of
+  <var>TPJEnvironmentVars</var>.
 </p>
 
-<pre class="source">procedure TForm1.UpdateList;
-  // Displays all environment vars in list box
-var
-  SL: TStringList;
-  Idx: Integer;
-begin
-  ListBox1.Clear;
-  SL := TStringList.Create;
-  try
-    GetAllEnvVars(SL);
-    for Idx := 0 to Pred(SL.Count) do
-      ListBox1.Items.Add(SL.Names[Idx]);
-    Edit1.Text := '';
-    Edit2.Text := '';
-  finally
-    SL.Free;
-  end;
-end;
-
-procedure TForm1.FormCreate(Sender: TObject);
-  // Display program's environment vars in list
-begin
-  UpdateList;
-end;
-
-procedure TForm1.ListBox1Click(Sender: TObject);
-  // Display selected env var name and value
-begin
-  Edit1.Text := ListBox1.Items[ListBox1.ItemIndex];
-  Edit2.Text := GetEnvVarValue(Edit1.Text);
-end;
-
-procedure TForm1.Button1Click(Sender: TObject);
-  // Update or create env var named in Edit1 with new  value per Edit2 (empty
-  // string in Edit2 deletes var)
-begin
-  if Edit1.Text &lt;&gt; '' then
-  begin
-    SetEnvVarValue(Edit1.Text, Edit2.Text);
-    UpdateList;
-  end;
-end;
-
-procedure TForm1.Button2Click(Sender: TObject);
-  // Delete env var named in Edit1
-begin
-  if Edit1.Text &lt;&gt; '' then
-  begin
-    DeleteEnvVar(Edit1.Text);
-    UpdateList;
-  end;
-end;</pre>
+<dl class="indent">
+  <dt>
+    <em>GetValue()</em>
+  </dt>
+  <dd>
+    Gets the value of the environment variable whose name is in the
+    <em>Name</em> edit box and displays it in the <em>Value</em> edit box. If
+    the name is blank, or doesn't exist, or exists but has no value, the
+    <em>Value</em> edit box is cleared.
+  </dd>
+  <dt>
+    <em>SetValue()</em>
+  </dt>
+  <dd>
+    Sets the value of the environment variable named in the <em>Name</em> edit
+    box to the value entered in the <em>Value</em> edit box. If the environment
+    variable doesn't exist it is created. If it does exist its value is updated.
+    If the <em>Value</em> edit box is empty the environment variables value is
+    cleared, but the variable still exists. If the <em>Name</em> edit box is
+    empty an error message is displayed.
+  </dd>
+  <dt>
+    <em>Delete()</em>
+  </dt>
+  <dd>
+    Deletes the environment variable named in the <em>Name</em> edit box from
+    the environment block. If the environment variable didn't already exist
+    nothing happens. If the <em>Name</em> edit box is empty an error message is
+    displayed.
+  </dd>
+  <dt>
+    <em>Expand()</em>
+  </dt>
+  <dd>
+    Expands the string value entered in the <em>Name</em> edit box and displays
+    the result in the <em>Value</em> edit box. The entered string can contain
+    any text. Environment variable names enclosed between two <kbd>%</kbd>
+    characters are replaced with their values. Other text and invalid variable
+    names are left unchanged.
+  </dd>
+  <dt>
+    <em>Exists()</em>
+  </dt>
+  <dd>
+    Displays a dialogue box informing if the environment variable named in the
+    <em>Name</em> edit control exists in the environment block. Blank names are
+    always treated as non-existent, event if there are actually some unnamed
+    values in the environment block.
+  </dd>
+  <dt>
+    <em>Count()</em>
+  </dt>
+  <dd>
+    Displays a dialogue box that shows of the number of environment variables in
+    the current environment block.
+  </dd>
+  <dt>
+    <em>BlockSize()</em>
+  </dt>
+  <dd>
+    Displays a dialogue box that shows the size of the current environment block
+    <em>in characters</em>.
+  </dd>
+  <dt>
+    <em>GetAllNames(TStrings)</em>
+  </dt>
+  <dd>
+    Gets the names of all environment variables in the current environment
+    block in <var>TStrings</var> format. The code behind the button updates the
+    list box's <var>Items</var> property directly in the method call.
+  </dd>
+  <dt>
+    <em>GetAllNames: array</em>
+  </dt>
+  <dd>
+    Gets the names of all environment variables in the current environment block
+    and returns them as a dynamic string array. The underlying code iterates the
+    array and displays each name, enclosed between <kbd>[</kbd> and <kbd>]</kbd>
+    characters, in the list box.
+  </dd>
+  <dt>
+    <em>EnumNames() - method</em>
+  </dt>
+  <dd>
+    Calls the <var>EnumNames</var> method, passing a form method as the
+    callback. The callback method adds each enumerated environment variable name
+    to the list box, with the name enclosed between <kbd>[</kbd> and
+    <kbd>]</kbd> characters.
+  </dd>
+  <dt>
+    <em>EnumNames() - closure</em>
+  </dt>
+  <dd>
+    Calls the <var>EnumNames</var> method, passing an anonymous method (or
+    closure) as the callback. This anonymous method adds each enumerated
+    environment variable name to the list box, with each name enclosed between
+    <kbd>&lt;</kbd> and <kbd>&gt;</kbd> characters.<br />
+    <strong>Note:</strong> this button is disabled when the demo is compiled
+    with a version of Delphi that does not support anonymous methods.
+  </dd>
+  <dt>
+    <em>GetAll(TStrings)</em>
+  </dt>
+  <dd>
+    Gets the names and values of all environment variables in the current
+    environment block in <var>TStrings</var> format. The code behind the button
+    updates the list box's <var>Items</var> property directly in the method call
+    and displays the environment variables exactly as they are stored in the
+    environment block.
+  </dd>
+  <dt>
+    <em>GetAll: array</em>
+  </dt>
+  <dd>
+    Gets the names and values of all environment variables in the current
+    environment block and returns them as a dynamic array of
+    <var>TPJEnvironmentVar</var> records. The underlying code iterates this
+    array and displays each environment variable's name and value in the list
+    box. Variable names are enclosed by <kbd>[</kbd> and <kbd>]</kbd> and are
+    followed by the associated value enclosed in double quotes.
+  </dd>
+  <dt>
+    <em>EnumVars() - method</em>
+  </dt>
+  <dd>
+    Calls the <var>EnumVars</var> method, passing a form method as the callback.
+    The callback method adds each enumerated environment variable name and value
+    to the list box, with names enclosed between <kbd>[</kbd> and <kbd>]</kbd>
+    characters and values enclosed by double quotes.
+  </dd>
+  <dt>
+    <em>EnumNames() - closure</em>
+  </dt>
+  <dd>
+    Calls the <var>EnumVars</var> method, passing an anonymous method (or
+    closure) as the callback. This anonymous method adds the name and value of
+    each enumerated environment variable to the list box, with each name
+    enclosed between <kbd>&lt;</kbd> and <kbd>&gt;</kbd> characters and values
+    enclosed by double quotes.<br />
+    <strong>Note:</strong> this button is disabled when the demo is compiled
+    with a version of Delphi that does not support anonymous methods.
+  </dd>
+  <dt>
+    <em>CreateBlock()</em>
+  </dt>
+  <dd>
+    Creates a new environment block containing the three environment variables
+    listed below the button, and displays it in the list box. If the <em>Include
+    current environment in new block</em> check box is ticked then the
+    environment variables in the current block are included in the new block.
+  </dd>
+</dl>
 
 <p>
-  The program behaves identically to <a href="#eg1a">Example 1a</a> which
-  accomplishes a similar task using the <var>TPJEnvVars</var> component.
-</p>
-
-<p class="gototop">
-  &raquo; <a href="#top">Go to top</a>
-</p>
-
-<h2 id="eg3">
-  Example 3
-</h2>
-
-<p>
-  This example demonstrates the use of the <var>ExpandEnvVars</var> function.
-</p>
-
-<p>
-  Drop two memo controls and one button on a form and add <code>PJEnvVars</code>
-  to your uses clause. Now add the event handlers listed below:
-</p>
-
-<pre class="source">procedure TForm1.FormCreate(Sender: TObject);
-begin
-  Memo1.Text := 'This is my temp folder: &quot;%TEMP%&quot;';
-end;
-
-procedure TForm1.Button1Click(Sender: TObject);
-begin
-  Memo2.Text := ExpandEnvVars(Memo1.Text);
-end;</pre>
-
-<p>
-  Enter some text, including environment variable references (such as
-  <kbd>%TEMP%</kbd>), in the first memo. Clicking the button replaces the
-  environment variable names with their values and displays the expanded string
-  in the second memo.
-</p>
-
-<p class="gototop">
-  &raquo; <a href="#top">Go to top</a>
-</p>
-
-<h2 id="eg4">
-  Example 4
-</h2>
-
-<p>
-  This example demonstrates the use of the <var>CreateEnvBlock</var> function.
-  It involves creating two programs:
-</p>
-
-<ol>
-  <li>
-    A slave program that simply displays its environment variables.
-  </li>
-  <li>
-    A master program that sets up an environment block and spawns a child
-    process that uses the new block.
-  </li>
-</ol>
-
-<h3>
-  Slave program
-</h3>
-
-<p>
-  Create a new application with a main form named <var>SlaveForm</var>. Drop a
-  memo control onto the form, and set its <var>Align</var> property to
-  <var>alClient</var> and clear the <var>Lines</var> property. Make sure the
-  <code>PJEnvVars</code> unit is in your uses clause. Give the form the
-  following <var>OnCreate</var> handler:
-</p>
-
-<pre class="source">procedure TSlaveForm.FormCreate(Sender: TObject);
-begin
-  GetAllEnvVars(Memo1.Lines);
-end;</pre>
-
-<p>
-  Save the project as <code>SlaveApp</code> and compile. The memo will display
-  all of <code>SlaveApp</code>'s environment variables when the program is
-  executed.
+  Finally, the <em>Enumerate names using TPJEnvVarsEnumerator</em> button
+  demonstrates the use of the <var>TPJEnvVarsEnumerator</var> class. Clicking it
+  creates a <var>TPJEnvVarsEnumerator</var> instance and uses it to enumerate
+  the names of all the environment variable in the current block. Each name is
+  enclosed between <kbd>[</kbd> and <kbd>]</kbd> characters and added to the
+  list box.
 </p>
 
 <h3>
-  Master program
+  Compilation notes
 </h3>
 
 <p>
-  Create a new application with a main form named <var>MasterForm</var>. Drop a
-  memo control onto the form and clear its text. Add a button and a check box
-  below the memo. Ensure the <code>PJEnvVars</code> unit is referenced in the
-  uses clause. Add the following helper procedure and button event handler:
-</p>
-
-<pre class="source">procedure ExecProg(const ProgName: string; EnvBlock: Pointer);
-  // Creates a new process for given program passing any given environment block
-var
-  SI: TStartupInfo;
-  PI: TProcessInformation;
-  CreateFlags: DWORD;
-  SafeProgName: string;
-begin
-  // ensure ProgName has ref count of 1: its memory is writeable
-  // re issue with CreateProcessW: see http://bit.ly/bTRc7D
-  SafeProgName := ProgName;
-  UniqueString(SafeProgName);
-  // set up for CreateProcess
-  FillChar(SI, SizeOf(SI), 0);
-  SI.cb := SizeOf(SI);
-  // set flags according to if unicode environment block
-  {$IFDEF UNICODE}
-  CreateFlags := CREATE_UNICODE_ENVIRONMENT;
-  {$ELSE}
-  CreateFlags := 0;
-  {$ENDIF}
-  CreateProcess(
-    nil, PChar(SafeProgName), nil, nil, True,
-    CreateFlags, EnvBlock, nil, SI, PI
-  );
-end;
-
-procedure TMasterForm.Button1Click(Sender: TObject);
-var
-  EnvBlock: Pointer;
-  BlockSize: Integer;
-begin
-  // Create the environment block
-  BlockSize := CreateEnvBlock(Memo1.Lines, CheckBox1.Checked, nil, 0);
-  // BlockSize is in Characters, not bytes: so needs converting to bytes
-  GetMem(EnvBlock, BlockSize * SizeOf(Char));
-  try
-    CreateEnvBlock(Memo1.Lines, CheckBox1.Checked, EnvBlock, BlockSize);
-    // Execute the slave app
-    ExecProg('SlaveApp.exe', EnvBlock);
-  finally
-    FreeMem(EnvBlock);
-  end;
-end;</pre>
-
-<p>
-  Save the project as <code>MasterApp</code> in the same folder as
-  <code>SlaveApp</code> and compile.
-</p>
-
-<div class="pullout">
-  There is some interesting code in both <var>ExecProg</var> and
-  <var>Button1Click</var> to watch out for.
-  <ul>
-    <li>
-      <strong>Important:</strong> notice the <var>GetMem</var> call in
-      <var>Button1Click</var>. The block size has been multiplied by the
-      character size. This is because <var>CreateEnvBlock</var> returns the size
-      of the environment in characters, not in bytes. And for Unicode Delphis
-      these are not the same. Miss this and you'll get an access violation at
-      some point.
-    </li>
-    <li>
-      In <var>ExecProg</var> I've used <var>UniqueString</var> to get round a
-      peculiarity of <var>CreateProcessW</var> from the Windows Unicode API.
-      This is best explained by <a
-        href="http://bit.ly/bTRc7D"
-      >this post</a> on the Embarcadero forums.
-    </li>
-    <li>
-      Also in <var>ExecProg</var> note the use of the
-      <var>CREATE_UNICODE_ENVIRONMENT</var> flag. I have discussed this on <a
-        href="http://bit.ly/cWgjXH"
-      >my blog</a>.
-    </li>
-  </ul>
-</div>
-
-<p>
-  When <code>MasterApp</code> is run, enter some environment variables in
-  <kbd>NAME=VALUE</kbd> format in the memo control. Place each
-  <kbd>NAME=VALUE</kbd> pair on a different line.
-</p>
-
-<p>
-  Now click the button. A copy of <code>SlaveApp</code> should run, displaying
-  just the environment variables you entered.
-</p>
-
-<p>
-  Return to <code>MasterApp</code> and check the check box. Click the button
-  again to spawn another instance of <code>SlaveApp</code>. This new instance
-  will have a copy of <code>MasterApp</code>'s environment variables along with
-  the new ones you entered in <code>MasterApp</code>'s memo control.
-</p>
-
-<p class="gototop">
-  &raquo; <a href="#top">Go to top</a>
-</p>
-
-<h2 id="eg5">
-  Example 5
-</h2>
-
-<p>
-  This example demonstrates the use of both overloaded versions of
-  <var>GetAllEnvVarNames</var> and <var>EnvBlockSize</var>.
-</p>
-
-<p>
-  Drop three labels, two edit controls, two list boxes, one button and a
-  <var>TPJEnvVars</var> component on a form. Set the following properties:
-</p>
-
-<ul>
-  <li>
-    <var>Label1.Caption</var> := <code>'Name'</code>.
-  </li>
-  <li>
-    <var>Label2.Caption</var> := <code>'Value'</code>.
-  </li>
-  <li>
-    <var>Button1.Caption</var> := <code>'Update'</code>.
-  </li>
-</ul>
-
-<p>
-  Create an <var>OnCreate</var> event handler for the form, an
-  <var>OnClick</var> event handler for the button and an <var>OnClick</var>
-  event handler that is attached to both list boxes. Also create a private
-  method of the form class named <var>UpdateListsEtc</var>. Code the methods as
+  How the projects are compiled depends on the version of Delphi in use, as
   follows:
 </p>
 
-<pre class="source">procedure TForm1.UpdateListsEtc;
-var
-  Idx: Integer;
-  Names: TStringDynArray;
-begin
-  GetAllEnvVarNames(ListBox1.Items);
-  Names := GetAllEnvVarNames;
-  ListBox2.Clear;
-  for Idx := 0 to High(Names) do
-    ListBox2.Items.Add(Names[Idx]);
-  Label3.Caption := Format('Environment block size: %d', [EnvBlockSize]);
-end;
+<dl>
+  <dt>
+    Delphi 7
+  </dt>
+  <dd>
+    Open and compile <code>Demos\1\VCL\VCLDemo1.dpr</code>.
+  </dd>
+  <dt>
+    Delphi 2005 and 2006
+  </dt>
+  <dd>
+    Open and compile <code>Demos\1\VCL\VCLDemo1.bdsproj</code>.
+  </dd>
+  <dt>
+    Delphi 2007
+  </dt>
+  <dd>
+    Rename <code>Demos\1\VCL\VCLDemo1.dproj.2007</code> as
+    <code>Demos\1\VCL\VCLDemo1.dproj</code>, overwriting the original version.
+    Now open and compile the renamed project.
+  </dd>
+  <dt>
+    Delphi 2009 to XE
+  </dt>
+  <dd>
+    Open and compile <code>Demos\1\VCL\VCLDemo1.dproj</code>.
+  </dd>
+  <dt>
+    Delphi XE2
+  </dt>
+  <dd>
+    To compile the demo as a 32 bit project just open and compile
+    <code>Demos\1\VCL\VCLDemo1.dproj</code>. To compile as a 64 bit project add
+    a Windows 64 bit target to the project and re-build.
+  </dd>
+  <dt>
+    Delphi XE3 and later
+  </dt>
+  <dd>
+    To compile the demo as a 32 bit project just open and compile
+    <code>Demos\1\VCL\VCLDemo1.dproj</code> or
+    <code>Demos\1\FMX\FMXDemo1.dproj</code> depending on whether you want the
+    VCL or FireMonkey 2 version. To compile either version as a 64 bit project
+    add a Windows 64 bit target to the open project and re-build.
+  </dd>
+</dl>
 
-procedure TForm1.FormCreate(Sender: TObject);
-begin
-  UpdateListsEtc;
-end;
-
-procedure TForm1.ListBoxClick(Sender: TObject);
-begin
-  Edit1.Text := (Sender as TListBox).Items[(Sender as TListBox).ItemIndex];
-  Edit2.Text := PJEnvVars1.Values[Edit1.Text];
-end;
-
-procedure TForm1.Button1Click(Sender: TObject);
-begin
-  PJEnvVars1.Values[Trim(Edit1.Text)] := Trim(Edit2.Text);
-  UpdateListsEtc;
-end;</pre>
+<h2>
+  Demo 2
+</h2>
 
 <p>
-  If the <var>Types</var> unit is provided in your version of Delphi, add it to
-  the uses clause.
+  Demo #2 can be found in the <kbd>Demos\2</kbd> directory, with the VCL and
+  FireMonkey 2 versions being in the <kbd>VCL</kbd> and <kbd>FMX</kbd>
+  sub-directories respectively.
 </p>
 
 <p>
-  <var>UpdateListsEtc</var> populates the list boxes and displays the
-  environment block size in <var>Label3</var>. <var>ListBox1</var> is populated
-  with all environment variable names using the <var>TStrings</var> overload of
-  <var>GetAllEnvVarNames</var> while <var>ListBox2</var> is populated by using
-  <var>GetAllEnvVarNames</var>'s string array overload. Both list boxes should
-  contain exactly the same information.
+  Both versions demonstrate how to create child processes that have custom
+  environment blocks that have been created by using the
+  <var>TPJEnvironmentVars.CreateBlock</var> method.
 </p>
 
 <p>
-  Selecting a name in either list box copies the name into the first edit
-  control and the environment variable's value in the second edit control.
-  Entering a new name or value and clicking the <em>Update</em> button updates
-  the environment variable, repopulates the lists and updates the environment
-  block size.
+  Each version of the demo consists of a project group containing two projects.
+  The first, <kbd>Parent.dpr</kbd> compiles into a program that lets the user
+  specify some custom environment variables that can be passed to a child
+  process. More than one child process can be started. The second project is
+  <kbd>Child.dpr</kbd> which implements the child processes that are started
+  from <kbd>Parent.exe</kbd>. All the child process does is to display its
+  environment block in its main window.
+</p>
+
+<p>
+  To use the demo programs, proceed as follows:
+</p>
+
+<ol class="spaced">
+  <li>
+    Open either <kbd>VCLDemo2</kbd> or <kbd>FMXDemo2</kbd> project groups, using
+    whichever file extension suits your compiler.
+  </li>
+  <li>
+    Compile both the <kbd>Parent</kbd> and <kbd>Child</kbd> projects.
+  </li>
+  <li>
+    Run <kbd>Parent.exe</kbd>
+  </li>
+  <li>
+    Edit, or add to, the suggested environment variable names listed in the
+    large multi-line edit control. Enter each new environment variable in
+    <kbd>Name=Value</kbd> format, one per line. If you enter duplicate values
+    for the same environment variable then the value listed last is used.
+  </li>
+  <li>
+    Tick the <em>Include current environment block</em> check box if you want to
+    pass the current environment block, as well as the custom environment
+    variables, to the child process. If this is done, and if there is a name
+    clash between any variable in the current block and any of the new variables
+    you entered in the edit control, the inherited value will be discarded and
+    the new value from the edit control will be used.
+  </li>
+  <li>
+    Click the large button to start a child process.
+  </li>
+  <li>
+    Review the environment variables displayed by the child process.
+  </li>
+  <li>
+    Repeat from step 4 as required.
+  </li>
+</ol>
+
+<div class="pullout">
+  <p>
+    <strong>Warning:</strong> Some child processes require that certain
+    environment variables are set to enable them to operate properly. Therefore,
+    if you are not passing the current environment block to the child process,
+    you may occasionally see unexpected behaviour.
+  </p>
+  <p>
+    An example of this is in the FireMonkey 2 version of the project. The child
+    application seems to require that the <kbd>SystemRoot</kbd> environment
+    variable is set correctly. Failure to pass this environment variable to the
+    child process can result in the process displaying a console window instead
+    of its GUI. For this reason <kbd>SystemRoot</kbd> is displayed in the
+    multi-line edit control as one of the suggested environment variables in the
+    FireMonkey version.
+  </p>
+</div>
+
+<h3>
+  Compilation notes
+</h3>
+
+<p>
+  How the projects are compiled depends on the version of Delphi in use, as
+  follows:
+</p>
+
+<dl>
+  <dt>
+    Delphi 7
+  </dt>
+  <dd>
+    Open the <code>Demos\2\VCL\VCLDemo2.bpg</code> project group and build both
+    projects.
+  </dd>
+  <dt>
+    Delphi 2005 and 2006
+  </dt>
+  <dd>
+    Open the <code>Demos\2\VCL\VCLDemo2.bdsgroup</code> project group and build
+    both projects.
+  </dd>
+  <dt>
+    Delphi 2007
+  </dt>
+  <dd>
+    Rename <code>Demos\2\VCL\Parent.dproj.2007</code> as
+    <code>Demos\2\VCL\Parent.dproj</code> and
+    <code>Demos\2\VCL\Child.dproj.2007</code> as
+    <code>Demos\2\VCL\Child.dproj</code>, overwriting the original versions.
+    Now open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group and
+    build both projects.
+  </dd>
+  <dt>
+    Delphi 2009 to XE
+  </dt>
+  <dd>
+    Open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group and build
+    both projects.
+  </dd>
+  <dt>
+    Delphi XE2
+  </dt>
+  <dd>
+    Open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group. To
+    compile the demos as 32 bit programs just build both projects. To compile
+    the demos as 64 bit programs add Windows 64 bit targets to both projects and
+    re-build.
+  </dd>
+  <dt>
+    Delphi XE3 and later
+  </dt>
+  <dd>
+    Open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> or
+    <code>Demos\2\FMX\FMXDemo2.groupproj</code> project group depending on
+    whether you want the VCL or FireMonkey 2 version. To compile the demos as
+    32 bit programs just build both projects. To compile the demos as 64 bit
+    programs add Windows 64 bit targets to both projects and re-build.
+  </dd>
+</dl>
+
+<h2>
+  Deprecated Code
+</h2>
+
+<p>
+  There are no demos for the deprecated <var>TPJEnvVars</var> component and
+  public routines contained in the unit. Therefore <var>TPJEnvVars</var> does
+  not need to be installed to use the demos.
+</p>
+
+<p>
+  For the time being some demo code still exists in the <kbd>EnvVarsDemo</kbd>
+  directory of the <em>Delphi Doodlings</em> Subversion repository on Assembla.
+  You can see a list of the demo files at <a
+    href="http://bit.ly/1mM1jLt"
+  >http://bit.ly/1mM1jLt</a>. Subversion users can also checkout the files using
+  the same URL. Please note this code is no longer maintained or supported.
 </p>
 
 <div class="endnotes">
@@ -768,7 +597,7 @@ end;</pre>
   </div>
 
   <div class="copyright">
-    This document is copyright &copy; 2008-2014, P D Johnson, <a
+    This document is copyright &copy; 2014, P D Johnson, <a
       href="http://www.delphidabbler.com/"
     >www.delphidabbler.com</a>
   </div>
