@@ -82,6 +82,20 @@
     ol.unspaced li.first {
       margin-top: 0.5em;
     }
+    dl {
+      margin: 0.5em 0 0 0;
+      padding: 0;
+    }
+    dt {
+      margin-top: 0.5em;
+    }
+    dd {
+      margin: 0.25em 0 0 3em;
+    }
+    dd p {
+      margin-top: 0.25em;
+    }
+    }
     code,
     kbd {
       font-family: "Courier New", Courier, monospace;
@@ -173,7 +187,7 @@
 </p>
 
 <p>
-  All demos are compatible with the 32- and 64-bit Windows compilers.
+  The demos may need minor changes in order
 </p>
 
 <p>
@@ -405,19 +419,30 @@
     Delphi XE2
   </dt>
   <dd>
-    To compile the demo as a 32 bit project just open and compile
-    <code>Demos\1\VCL\VCLDemo1.dproj</code>. To compile as a 64 bit project add
-    a Windows 64 bit target to the project and re-build.
+    Open <code>Demos\1\VCL\VCLDemo1.dproj</code>. This project can be built as
+    either a 32- or 64-bit Windows application, but it only defines a 32 bit
+    Windows target by default. So, to compile as a 32 bit application simply
+    build the project as opened. To compile as a 64 bit application you must
+    manually add a Windows 64 bit target to the project and re-build it.
   </dd>
   <dt>
     Delphi XE3 and later
   </dt>
   <dd>
-    To compile the demo as a 32 bit project just open and compile
-    <code>Demos\1\VCL\VCLDemo1.dproj</code> or
-    <code>Demos\1\FMX\FMXDemo1.dproj</code> depending on whether you want the
-    VCL or FireMonkey 2 version. To compile either version as a 64 bit project
-    add a Windows 64 bit target to the open project and re-build.
+    <p>
+      To compile the VCL version of the project open
+      <code>Demos\1\VCL\VCLDemo1.dproj</code>. This project can be built as
+      either a 32- or 64-bit Windows application, but it only defines a 32 bit
+      Windows target by default. So, to compile as a 32 bit application, simply
+      build the project as opened. To compile as a 64 bit application you must
+      manually add a Windows 64 bit target to the project and re-build it.
+    </p>
+    <p>
+      To compile the FireMonkey 2 project open
+      <code>Demos\1\FMX\FMXDemo1.dproj</code>. This project comes with Windows
+      32 bit and 64 bit targets pre-defined, with the 64 bit target as the
+      default. Select the required target and (re)build the project.
+    </p>
   </dd>
 </dl>
 
@@ -551,20 +576,42 @@
     Delphi XE2
   </dt>
   <dd>
-    Open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group. To
-    compile the demos as 32 bit programs just build both projects. To compile
-    the demos as 64 bit programs add Windows 64 bit targets to both projects and
-    re-build.
+    Open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group. The
+    <em>Parent</em> and <em>Child</em> projects can be built as either 32- or
+    64-bit Windows applications, but each defines only a 32 bit Windows target
+    by default. So, to compile both projects as 32 bit applications, simply
+    build all the projects as opened. To compile either or both as a 64 bit
+    applications you must manually add a Windows 64 bit target to one or both
+    projects and re-build the affected project(s).
   </dd>
   <dt>
     Delphi XE3 and later
   </dt>
   <dd>
-    Open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> or
-    <code>Demos\2\FMX\FMXDemo2.groupproj</code> project group depending on
-    whether you want the VCL or FireMonkey 2 version. To compile the demos as
-    32 bit programs just build both projects. To compile the demos as 64 bit
-    programs add Windows 64 bit targets to both projects and re-build.
+    <p>
+      To compile the VCL version of the project open the
+      the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group. The
+      <em>Parent</em> and <em>Child</em> projects can be built as either 32- or
+      64-bit Windows applications, but each defines only a 32 bit Windows target
+      by default. So, to compile both projects as 32 bit applications, simply
+      build all the projects as opened. To compile either or both as a 64 bit
+      applications you must manually add a Windows 64 bit target to one or both
+      projects and re-build the affected project(s).
+    </p>
+    <p>
+      To compile the FireMonkey 2 project open the
+      <code>Demos\2\FMX\FMXDemo2.groupproj</code> project group. Both the
+      <em>Parent</em> and <em>Child</em> projects come with 32 bit and 64 bit
+      targets pre-defined, with the 64 bit target as the default in both cases.
+      Select the required target for each project and (re)build the affected
+      project(s).
+    </p>
+    <p>
+      <strong>Note:</strong> In both the VCL or FireMonkey 2 versions of this
+      demo you will get a compile error if the projects have different targets
+      and you attempt to build the whole project group at once. To get round
+      this problem just build each project separately.
+    </p>
   </dd>
 </dl>
 
