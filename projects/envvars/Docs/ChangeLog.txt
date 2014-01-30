@@ -11,6 +11,27 @@
 ; Change Log for Environment Variables Unit
 ; ------------------------------------------------------------------------------
 
+Release v3.0 of 30 January 2014
++ Major rewrite of Environment Variables Unit:
+  - New TPJEnvironmentVars static class, along with some subsidiary types, that provides methods to interrogate, enumerate and manipulate environment variables. This class supersedes the TPJEnvVar component and the various public routines: it replicates and extends their functionality while also fixing several bugs found in them.
+  - Both the TPJEnvVars component and the public routines are now deprecated and have been flagged as such.
+  - All public routines re-implemented as simple wrappers around calls to TPJEvironmentVas methods.
+  - TPJEnvVars component refactored and heavily revised to call into TPJEnvironmentVars. Some minor bugs fixed.
+  - On compilers that support it, anonymous methods can now be used as callbacks passed to enumerator methods.
+  - Unit names in uses clauses are now qualified with their namespace when compiled with Delphi XE2 and later.
+  - Registration code for the TPJEnvVars component has been removed into a new PJEnvVarsDsgn unit. This new unit is now required only if the deprecated component is to be registered with the Delphi IDE.
+  - Fixed problem with compiler directives that was causing compilation to fail on Delphi XE5.
++ Added two public domain demo projects, with a VCL and FireMonkey 2 version of each, along with a read-me file that explains how to compile and use them.
++ WinHelp help file removed from project.
++ Source code license changed to Mozilla Public License v2.0.
++ Updated documentation:
+  - The unit is now extensively documented in XMLDoc format.
+  - The project read-me file has been completely overhauled re the changes.
+  - The main documentation files are now licensed under the Mozilla Public License v2.0.
+  - The documentation internet short-cut's URL has been changed to reference new online documentation. The short-cut has also been renamed.
+  - The MPL text file's contents have been changed from the Mozilla Public License v1.1 to v2.0 and the file has been renamed accordingly.
+  - HTML file containing demo code has been removed.
+
 Release v2.0 of 23 October 2010
 + Added an enumerator for the environment variables component that supports the Delphi for..in construct (issue #10: http://code.google.com/p/ddab-lib/issues/detail?id=10).
 + Added new EnvBlockSize and two overloaded GetAllEnvVarNames routines.
