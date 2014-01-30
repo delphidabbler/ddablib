@@ -59,27 +59,11 @@
       margin: 0.5em 0 0 0;
       padding: 0;
     }
-    ul, ol {
+    ol {
       margin: 0.5em 0 0 3em;
       padding: 0;
     }
-    ul {
-      list-style-type: square;
-    }
-    ul.spaced li,
-    ol.spaced li {
-      margin-top: 0.5em;
-    }
-    ul.spaced li,
-    ol.spaced li {
-      margin-top: 0.5em;
-    }
-    ul.unspaced li,
-    ol.unspaced li {
-      margin-top: 0;
-    }
-    ul.unspaced li.first,
-    ol.unspaced li.first {
+    ol li {
       margin-top: 0.5em;
     }
     dl {
@@ -96,15 +80,8 @@
       margin-top: 0.25em;
     }
     }
-    code,
     kbd {
       font-family: "Courier New", Courier, monospace;
-    }
-    pre.source {
-      font-family: "Courier New", Courier, monospace;
-      background-color: #ffc;
-      border: 1px silver dotted;
-      padding: 0.25em;
     }
     a:link {
       color: #336;
@@ -121,14 +98,6 @@
     a:hover {
       text-decoration: underline;
     }
-    .gototop {
-      margin: 1em 0 0 0;
-      padding: 0.3em 0 0 0;
-      text-align: center;
-      position: relative;
-      float: right;
-      font-weight: bold;
-    }
     .pullout {
       border-left: 8px silver solid;
       background-color: #eee;
@@ -138,11 +107,6 @@
     }
     .indent {
       margin-left: 3em;
-    }
-    .highlight {
-      color: #336;
-      font-style: italic;
-      font-weight: bold;
     }
     .endnotes {
       margin: 1.5em 0 0 0;
@@ -393,37 +357,37 @@
     Delphi 7
   </dt>
   <dd>
-    Open and compile <code>Demos\1\VCL\VCLDemo1.dpr</code>.
+    Open and compile <kbd>Demos\1\VCL\VCLDemo1.dpr</kbd>.
   </dd>
   <dt>
     Delphi 2005 and 2006
   </dt>
   <dd>
-    Open and compile <code>Demos\1\VCL\VCLDemo1.bdsproj</code>.
+    Open and compile <kbd>Demos\1\VCL\VCLDemo1.bdsproj</kbd>.
   </dd>
   <dt>
     Delphi 2007
   </dt>
   <dd>
-    Rename <code>Demos\1\VCL\VCLDemo1.dproj.2007</code> as
-    <code>Demos\1\VCL\VCLDemo1.dproj</code>, overwriting the original version.
+    Rename <kbd>Demos\1\VCL\VCLDemo1.dproj.2007</kbd> as
+    <kbd>Demos\1\VCL\VCLDemo1.dproj</kbd>, overwriting the original version.
     Now open and compile the renamed project.
   </dd>
   <dt>
     Delphi 2009 to XE
   </dt>
   <dd>
-    Open and compile <code>Demos\1\VCL\VCLDemo1.dproj</code>.
+    Open and compile <kbd>Demos\1\VCL\VCLDemo1.dproj</kbd>.
   </dd>
   <dt>
     Delphi XE2
   </dt>
   <dd>
-    Open <code>Demos\1\VCL\VCLDemo1.dproj</code>. This project can be built as
-    either a 32- or 64-bit Windows application, but it only defines a 32 bit
-    Windows target by default. So, to compile as a 32 bit application simply
-    build the project as opened. To compile as a 64 bit application you must
-    manually add a Windows 64 bit target to the project and re-build it.
+    Open <kbd>Demos\1\VCL\VCLDemo1.dproj</kbd>. This project can be built as
+    either a 32- or 64-bit Windows application, but it only defines a 32-bit
+    Windows target by default. So, to compile as a 32-bit application simply
+    build the project as opened. To compile as a 64-bit application you must
+    manually add a Windows 64-bit target to the project and re-build it.
   </dd>
   <dt>
     Delphi XE3 and later
@@ -431,16 +395,16 @@
   <dd>
     <p>
       To compile the VCL version of the project open
-      <code>Demos\1\VCL\VCLDemo1.dproj</code>. This project can be built as
-      either a 32- or 64-bit Windows application, but it only defines a 32 bit
-      Windows target by default. So, to compile as a 32 bit application, simply
-      build the project as opened. To compile as a 64 bit application you must
-      manually add a Windows 64 bit target to the project and re-build it.
+      <kbd>Demos\1\VCL\VCLDemo1.dproj</kbd>. This project can be built as either
+      a 32- or 64-bit Windows application, but it only defines a 32-bit Windows
+      target by default. So, to compile as a 32-bit application, simply build
+      the project as opened. To compile as a 64-bit application you must
+      manually add a Windows 64-bit target to the project and re-build it.
     </p>
     <p>
       To compile the FireMonkey 2 project open
-      <code>Demos\1\FMX\FMXDemo1.dproj</code>. This project comes with Windows
-      32 bit and 64 bit targets pre-defined, with the 64 bit target as the
+      <kbd>Demos\1\FMX\FMXDemo1.dproj</kbd>. This project comes with Windows
+      32-bit and 64-bit targets pre-defined, with the 64-bit target as the
       default. Select the required target and (re)build the project.
     </p>
   </dd>
@@ -476,7 +440,7 @@
   To use the demo programs, proceed as follows:
 </p>
 
-<ol class="spaced">
+<ol>
   <li>
     Open either <kbd>VCLDemo2</kbd> or <kbd>FMXDemo2</kbd> project groups, using
     whichever file extension suits your compiler.
@@ -544,45 +508,45 @@
     Delphi 7
   </dt>
   <dd>
-    Open the <code>Demos\2\VCL\VCLDemo2.bpg</code> project group and build both
+    Open the <kbd>Demos\2\VCL\VCLDemo2.bpg</kbd> project group and build both
     projects.
   </dd>
   <dt>
     Delphi 2005 and 2006
   </dt>
   <dd>
-    Open the <code>Demos\2\VCL\VCLDemo2.bdsgroup</code> project group and build
+    Open the <kbd>Demos\2\VCL\VCLDemo2.bdsgroup</kbd> project group and build
     both projects.
   </dd>
   <dt>
     Delphi 2007
   </dt>
   <dd>
-    Rename <code>Demos\2\VCL\Parent.dproj.2007</code> as
-    <code>Demos\2\VCL\Parent.dproj</code> and
-    <code>Demos\2\VCL\Child.dproj.2007</code> as
-    <code>Demos\2\VCL\Child.dproj</code>, overwriting the original versions.
-    Now open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group and
-    build both projects.
+    Rename <kbd>Demos\2\VCL\Parent.dproj.2007</kbd> as
+    <kbd>Demos\2\VCL\Parent.dproj</kbd> and
+    <kbd>Demos\2\VCL\Child.dproj.2007</kbd> as
+    <kbd>Demos\2\VCL\Child.dproj</kbd>, overwriting the original versions. Now
+    open the <kbd>Demos\2\VCL\VCLDemo2.groupproj</kbd> project group and build
+    both projects.
   </dd>
   <dt>
     Delphi 2009 to XE
   </dt>
   <dd>
-    Open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group and build
+    Open the <kbd>Demos\2\VCL\VCLDemo2.groupproj</kbd> project group and build
     both projects.
   </dd>
   <dt>
     Delphi XE2
   </dt>
   <dd>
-    Open the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group. The
-    <em>Parent</em> and <em>Child</em> projects can be built as either 32- or
-    64-bit Windows applications, but each defines only a 32 bit Windows target
-    by default. So, to compile both projects as 32 bit applications, simply
-    build all the projects as opened. To compile either or both as a 64 bit
-    applications you must manually add a Windows 64 bit target to one or both
-    projects and re-build the affected project(s).
+    Open the <kbd>Demos\2\VCL\VCLDemo2.groupproj</kbd> project group. The
+    <kbd>Parent</kbd> and <kbd>Child</kbd> projects can be built as either 32-
+    or 64-bit Windows applications, but each defines only a 32-bit Windows
+    target by default. So, to compile both projects as 32-bit applications,
+    simply build all the projects as opened. To compile either or both as a
+    64-bit applications you must manually add a Windows 64-bit target to one or
+    both projects and re-build the affected project(s).
   </dd>
   <dt>
     Delphi XE3 and later
@@ -590,21 +554,21 @@
   <dd>
     <p>
       To compile the VCL version of the project open the
-      the <code>Demos\2\VCL\VCLDemo2.groupproj</code> project group. The
-      <em>Parent</em> and <em>Child</em> projects can be built as either 32- or
-      64-bit Windows applications, but each defines only a 32 bit Windows target
-      by default. So, to compile both projects as 32 bit applications, simply
-      build all the projects as opened. To compile either or both as a 64 bit
-      applications you must manually add a Windows 64 bit target to one or both
-      projects and re-build the affected project(s).
+      the <kbd>Demos\2\VCL\VCLDemo2.groupproj</kbd> project group. The
+      <kbd>Parent</kbd> and <kbd>Child</kbd> projects can be built as either 32-
+      or 64-bit Windows applications, but each defines only a 32-bit Windows
+      target by default. So, to compile both projects as 32-bit applications,
+      simply build all the projects as opened. To compile either or both as a
+      64-bit applications you must manually add a Windows 64-bit target to one
+      or both projects and re-build the affected project(s).
     </p>
     <p>
       To compile the FireMonkey 2 project open the
-      <code>Demos\2\FMX\FMXDemo2.groupproj</code> project group. Both the
-      <em>Parent</em> and <em>Child</em> projects come with 32 bit and 64 bit
-      targets pre-defined, with the 64 bit target as the default in both cases.
-      Select the required target for each project and (re)build the affected
-      project(s).
+      <kbd>Demos\2\FMX\FMXDemo2.groupproj</kbd> project group. Both the
+      <kbd>Parent</kbd> and <kbd>Child</kbd> projects come with 32-bit and
+      64-bit targets pre-defined, with the 64-bit target as the default in both
+      cases. Select the required target for each project and (re)build the
+      affected project(s).
     </p>
     <p>
       <strong>Note:</strong> In both the VCL or FireMonkey 2 versions of this
