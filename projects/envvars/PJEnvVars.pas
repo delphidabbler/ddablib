@@ -8,7 +8,7 @@
  * $Rev$
  * $Date$
  *
- * DelphiDabbler Environment Variables unit. Contains classes for interogating,
+ * DelphiDabbler Environment Variables unit. Contains classes for interrogating,
  * modifying and enumerating the environment variables belonging to the current
  * process.
  *
@@ -194,7 +194,7 @@ function EnvBlockSize: Integer;
 
 type
 
-  ///  <summary>Record encasulating the name and value of an environment
+  ///  <summary>Record encapsulating the name and value of an environment
   ///  variable.</summary>
   TPJEnvironmentVar = record
     ///  <summary>Environment variable name.</summary>
@@ -246,7 +246,7 @@ type
     reference to procedure(const EnvVar: TPJEnvironmentVar; Data: Pointer);
     {$ENDIF}
 
-  ///  <summary>Static class providing class methods for interogating,
+  ///  <summary>Static class providing class methods for interrogating,
   ///  manipulating and modifying the environment variables available to the
   ///  current process.</summary>
   ///  <remarks>This class cannot be constructed.</remarks>
@@ -575,7 +575,7 @@ resourcestring
 
 constructor TPJEnvVars.Create(AOwner: TComponent);
 var
-  Idx: Integer; // loops thru components of AOwner
+  Idx: Integer; // loops through components of AOwner
 begin
   if Assigned(AOwner) then
   begin
@@ -601,7 +601,7 @@ end;
 
 procedure TPJEnvVars.ErrorCheck(Code: Integer);
 var
-  Err: EPJEnvVars;  // reference to exception beinbg raised
+  Err: EPJEnvVars;  // reference to exception being raised
 begin
   if Code <> 0 then
   begin
@@ -687,12 +687,12 @@ class function TPJEnvironmentVars.CreateBlock(const NewEnv: TStrings;
   const IncludeCurrent: Boolean; const Buffer: Pointer;
   const BufSize: Integer): Integer;
 var
-  EnvVars: TStringList; // list of env vars in new block
-  EnvName: string;      //
+  EnvVars: TStringList;
+  EnvName: string;
   EnvValue: string;
   EnvNameIdx: Integer;
-  Idx: Integer;         // loops through all env vars in new block
-  PBuf: PChar;          // points to start of each env var entry in block
+  Idx: Integer;
+  PBuf: PChar;
 begin
   EnvVars := TStringList.Create;
   try
