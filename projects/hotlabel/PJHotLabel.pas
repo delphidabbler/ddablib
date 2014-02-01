@@ -282,7 +282,7 @@ uses
 
 const
   // URL used as default caption property by SetDefaultURL method
-  cDefaultURL = 'http://localhost/';
+  cDefaultURL = 'http://example.com/';
 
 
 // Message strings
