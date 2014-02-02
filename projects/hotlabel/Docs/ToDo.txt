@@ -1,1 +1,0 @@
-+ Add VisitiedFont font and Visited property and with TrackVisited property. When active change font colour to visited font colour when label is clicked.
