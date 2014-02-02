@@ -129,8 +129,14 @@ type
       {Value of Font property}
     fHighlightFont: TFont;
       {Value of HighlightFont property}
+    fVisitedFont: TFont;
+      {Value of VisitedFont property}
     fHighlightURL: Boolean;
       {Value of HighlightURL property}
+    fVisited: Boolean;
+      {Value of Visited property}
+    fTrackVisits: Boolean;
+      {Value of TrackVists property}
     fHintStyle: TPJHLHintStyle;
       {Value of HintStyle property}
     fOnCustomHint: TPJHLCustomHintEvent;
@@ -172,18 +178,31 @@ type
       {Write access method for HighlightFont property.
         @param Value [in] New property value.
       }
+    procedure SetVisitedFont(const Value: TFont);
+      {Write access method for VisitedFont property.
+        @param Value [in] New property value.
+      }
+    procedure SetVisited(const Value: Boolean);
+      {Write access method for Visited property.
+        @param Value new property value.
+      }
     procedure UpdateDisplayFont;
       {Updates font used to display label depending on its state.
       NOTE: Uses inherited Font property for this purpose.
       }
-    procedure FontPropChange(Sender: TObject);
+    procedure FontChange(Sender: TObject);
       {Handles changes to Font property by updating display font if label is in
-      its normal state.
+      its un-highlighted normal state.
         @param Sender [in] Ignored.
       }
     procedure HighlightFontChange(Sender: TObject);
       {Handles changes to HighlightFont property by updating display font if
       label is in its highlighted state.
+        @param Sender [in] Ignored.
+      }
+    procedure VisitedFontChange(Sender: TObject);
+      {Handles changes to VisitedFont property by updating display font if label
+      is in its un-highlighted visited state.
         @param Sender [in] Ignored.
       }
   protected
@@ -240,7 +259,22 @@ type
       {Determines if the Caption displays the URL per the URL property. When
       true the Caption displays the URL and setting either property updates the
       other. When false the Caption and URL are idependent of each other}
-    property HighlightFont: TFont read fHighlightFont write SetHighlightFont;
+    property VisitedFont: TFont
+      read fVisitedFont write SetVisitedFont;
+      {Font used by label when in its visited state and it is not highlighted.
+      }
+    property Visited: Boolean
+      read fVisited write SetVisited default False;
+      {Indicates whether the label is in its "visited" state. Write the value
+      to change the state. When TrackVists is True clicking the label will set
+      this property True, providing the click action completes successfully}
+    property TrackVisits: Boolean
+      read fTrackVisits write fTrackVisits default False;
+      {Specifies whether the label should automatically track visits. When True
+      clicking the label sets the Visited property to True, providing the click
+      action was completed successfully}
+    property HighlightFont: TFont
+      read fHighlightFont write SetHighlightFont;
       {Font used by label when in its highlighted state: i.e. when the mouse
       cursor is over the component and HighlightURL is True}
     property HighlightURL: Boolean
@@ -266,17 +300,18 @@ type
       {Event triggered just before the component's hint is displayed when the
       HintStyle property is hsCustom. Handlers can modified the displayed hint}
     // Overridden inherited properties
-    property Caption: TCaption read GetCaption write SetCaption;
+    property Caption: TCaption
+      read GetCaption write SetCaption;
       {Label's caption. When CaptionIsURL is true, the property has the same
       value and behaviour as the URL property}
     property Cursor default crHandPoint;
       {Cursor property is now a hand pointer by default}
     property Font: TFont
       read GetFont write SetFont;
-      {Font used by label when not in highlighted state}
+      {Font used by label when not in its visited or highlighted state}
     property ParentFont default False;
-      {ParentFont property is set false since the default caption font style is
-      different to the parent font}
+      {ParentFont property is set to False by default since the default caption
+      font style is different to the parent font}
   end;
 
 
@@ -348,6 +383,8 @@ begin
     if ShellExecute(ValidParentForm(Self).Handle, nil, PChar(fURL), nil,
       nil, SW_SHOW) < 32 then
       raise EPJURLError.CreateFmt(sCantAccessURL, [fURL]);
+    if fTrackVisits and not fVisited then
+      SetVisited(True);
   end;
   // Make sure inherited processing happens
   inherited Click;
@@ -404,8 +441,7 @@ procedure TPJHotLabel.CMMouseLeave(var Msg: TMessage);
   }
 begin
   inherited;
-  if HighlightURL and not (csDesigning in ComponentState)
-    and fHighlighted then
+  if HighlightURL and not (csDesigning in ComponentState) and fHighlighted then
   begin
     fHighlighted := False;
     UpdateDisplayFont;
@@ -419,11 +455,13 @@ constructor TPJHotLabel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
-  // Create main and highlight fonts
+  // Create fonts required by Font, HighlightFont and VisitedFont properties
   fFont := TFont.Create;
-  fFont.OnChange := FontPropChange;
+  fFont.OnChange := FontChange;
   fHighlightFont := TFont.Create;
   fHighlightFont.OnChange := HighlightFontChange;
+  fVisitedFont := TFont.Create;
+  fVisitedFont.OnChange := VisitedFontChange;
 
   // Set default values
   // NOTE: various defaults have been chosen to make default behaviour of
@@ -433,6 +471,8 @@ begin
   Font.Style := [fsUnderline];
   HighlightFont := Font;
   HighlightFont.Color := clRed;
+  VisitedFont := Font;
+  VisitedFont.Color := clBlue;
   SetValidateURL(True);
   fCaptionIsURL := True;
   SetDefaultURL;  // sets URL and Caption properties to default URL
@@ -440,6 +480,7 @@ begin
   fHintStyle := hsNormal;
   inherited Caption := fURL;
   fHighlighted := False;
+  fVisited := False;
   UpdateDisplayFont;
 end;
 
@@ -452,10 +493,15 @@ begin
   inherited;
 end;
 
-procedure TPJHotLabel.FontPropChange(Sender: TObject);
+procedure TPJHotLabel.FontChange(Sender: TObject);
 begin
-  if not fHighlighted then
-    UpdateDisplayFont;
+  if not (csDesigning in ComponentState) then
+  begin
+    if not fVisited and not fHighlighted then
+      UpdateDisplayFont;
+  end
+  else
+    inherited Font.Assign(fFont);
 end;
 
 function TPJHotLabel.GetCaption: TCaption;
@@ -476,7 +522,7 @@ end;
 
 procedure TPJHotLabel.HighlightFontChange(Sender: TObject);
 begin
-  if fHighlighted then
+  if fHighlighted and not (csDesigning in ComponentState) then
     UpdateDisplayFont;
 end;
 
@@ -593,15 +639,37 @@ begin
     end;
 end;
 
+procedure TPJHotLabel.SetVisited(const Value: Boolean);
+begin
+  if fVisited = Value then
+    Exit;
+  fVisited := Value;
+  if not (csDesigning in ComponentState) then
+    UpdateDisplayFont;
+end;
+
+procedure TPJHotLabel.SetVisitedFont(const Value: TFont);
+begin
+  fVisitedFont.Assign(Value);
+end;
+
 procedure TPJHotLabel.UpdateDisplayFont;
 var
   DisplayFont: TFont;
 begin
   if fHighlighted then
     DisplayFont := fHighlightFont
+  else if fVisited then
+    DisplayFont := fVisitedFont
   else
     DisplayFont := fFont;
   inherited Font.Assign(DisplayFont);
+end;
+
+procedure TPJHotLabel.VisitedFontChange(Sender: TObject);
+begin
+  if fVisited and not fHighlighted and not (csDesigning in ComponentState) then
+    UpdateDisplayFont;
 end;
 
 end.
