@@ -40,21 +40,6 @@ unit PJHotLabel;
 interface
 
 
-// Check Delphi version is supported
-{$DEFINE DELPHI_VER_SUPPORTED}
-{$IFDEF VER80}    // --- Delphi 1
-  {$UNDEF DELPHI_VER_SUPPORTED}
-{$ENDIF}
-{$IFDEF VER90}    // --- Delphi 2
-  {$UNDEF DELPHI_VER_SUPPORTED}
-{$ENDIF}
-{$IFDEF VER100}   // --- Delphi 3
-  {$UNDEF DELPHI_VER_SUPPORTED}
-{$ENDIF}
-{$IFNDEF DELPHI_VER_SUPPORTED}
-  This version of Delphi is not supported.
-{$ENDIF}
-
 // Switch off warnings where this is supported
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
