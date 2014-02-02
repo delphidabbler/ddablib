@@ -117,17 +117,16 @@ type
   }
   TPJHotLabel = class(TLabel)
   private
-    fBackupFont: TFont;
-      {Font used to store original value of Font property while inherited Font
-      is being used to display highlight font}
-    fBackupFontUsed: Boolean;
-      {Flag set true when backup font is storing font property}
+    fHighlighted: Boolean;
+      {Records whether label is highlighted}
     fValidateURL: Boolean;
       {Value of ValidateURL property}
     fURL: string;
       {Value of URL property}
     fCaptionIsURL: Boolean;
       {Value of CaptionIsURL property}
+    fFont: TFont;
+      {Value of Font property}
     fHighlightFont: TFont;
       {Value of HighlightFont property}
     fHighlightURL: Boolean;
@@ -172,6 +171,20 @@ type
     procedure SetHighlightFont(const Value: TFont);
       {Write access method for HighlightFont property.
         @param Value [in] New property value.
+      }
+    procedure UpdateDisplayFont;
+      {Updates font used to display label depending on its state.
+      NOTE: Uses inherited Font property for this purpose.
+      }
+    procedure FontPropChange(Sender: TObject);
+      {Handles changes to Font property by updating display font if label is in
+      its normal state.
+        @param Sender [in] Ignored.
+      }
+    procedure HighlightFontChange(Sender: TObject);
+      {Handles changes to HighlightFont property by updating display font if
+      label is in its highlighted state.
+        @param Sender [in] Ignored.
       }
   protected
     procedure SetDefaultURL; virtual;
@@ -228,8 +241,8 @@ type
       true the Caption displays the URL and setting either property updates the
       other. When false the Caption and URL are idependent of each other}
     property HighlightFont: TFont read fHighlightFont write SetHighlightFont;
-      {Font displayed by label when the mouse cursor is over the component.
-      Ignored when HighlightURL is false}
+      {Font used by label when in its highlighted state: i.e. when the mouse
+      cursor is over the component and HighlightURL is True}
     property HighlightURL: Boolean
       read fHighlightURL write fHighlightURL default False;
       {Determines whether the label is highlighted using HighlightFont when the
@@ -377,12 +390,11 @@ procedure TPJHotLabel.CMMouseEnter(var Msg: TMessage);
   }
 begin
   inherited;
-  if HighlightURL and not (csDesigning in ComponentState) then
+  if HighlightURL and not (csDesigning in ComponentState)
+    and not fHighlighted then
   begin
-    // Highlight the label by using the highlight font, saving original Font
-    fBackupFont.Assign(Font);
-    fBackupFontUsed := True;
-    inherited Font.Assign(HighlightFont);
+    fHighlighted := True;
+    UpdateDisplayFont;
   end;
 end;
 
@@ -392,11 +404,11 @@ procedure TPJHotLabel.CMMouseLeave(var Msg: TMessage);
   }
 begin
   inherited;
-  if HighlightURL and not (csDesigning in ComponentState) then
+  if HighlightURL and not (csDesigning in ComponentState)
+    and fHighlighted then
   begin
-    // Un-highlight the label by restoring saved Font property
-    inherited Font.Assign(fBackupFont);
-    fBackupFontUsed := False;
+    fHighlighted := False;
+    UpdateDisplayFont;
   end;
 end;
 
@@ -407,9 +419,11 @@ constructor TPJHotLabel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
-  // Create backup and highlight fonts
-  fBackupFont := TFont.Create;
+  // Create main and highlight fonts
+  fFont := TFont.Create;
+  fFont.OnChange := FontPropChange;
   fHighlightFont := TFont.Create;
+  fHighlightFont.OnChange := HighlightFontChange;
 
   // Set default values
   // NOTE: various defaults have been chosen to make default behaviour of
@@ -425,6 +439,8 @@ begin
   fHighlightURL := False;
   fHintStyle := hsNormal;
   inherited Caption := fURL;
+  fHighlighted := False;
+  UpdateDisplayFont;
 end;
 
 destructor TPJHotLabel.Destroy;
@@ -432,8 +448,14 @@ destructor TPJHotLabel.Destroy;
   }
 begin
   fHighlightFont.Free;
-  fBackupFont.Free;
+  fFont.Free;
   inherited;
+end;
+
+procedure TPJHotLabel.FontPropChange(Sender: TObject);
+begin
+  if not fHighlighted then
+    UpdateDisplayFont;
 end;
 
 function TPJHotLabel.GetCaption: TCaption;
@@ -449,12 +471,13 @@ function TPJHotLabel.GetFont: TFont;
     @return Value of Font property.
   }
 begin
-  // When label is highlighted inherited Font property contains highlight font
-  // and true value of Font property is stored in backup font object
-  if fBackupFontUsed then
-    Result := fBackupFont
-  else
-    Result := inherited Font;
+  Result := fFont;
+end;
+
+procedure TPJHotLabel.HighlightFontChange(Sender: TObject);
+begin
+  if fHighlighted then
+    UpdateDisplayFont;
 end;
 
 procedure TPJHotLabel.Loaded;
@@ -517,12 +540,7 @@ procedure TPJHotLabel.SetFont(const Value: TFont);
     @param Value [in] New property value.
   }
 begin
-  // When label is highlighted inherited Font property contains highlight font
-  // so the new value of the Font property is stored in backup font object
-  if fBackupFontUsed then
-    fBackupFont.Assign(Value)
-  else
-    inherited Font := Value;
+  fFont.Assign(Value);
 end;
 
 procedure TPJHotLabel.SetHighlightFont(const Value: TFont);
@@ -573,6 +591,17 @@ begin
         raise;
       end;
     end;
+end;
+
+procedure TPJHotLabel.UpdateDisplayFont;
+var
+  DisplayFont: TFont;
+begin
+  if fHighlighted then
+    DisplayFont := fHighlightFont
+  else
+    DisplayFont := fFont;
+  inherited Font.Assign(DisplayFont);
 end;
 
 end.
