@@ -68,9 +68,7 @@ interface
 
 uses
   // Delphi
-  // It is important that the Forms unit is declared before the Controls unit to
-  // avoid a deprecated warning on some compilers
-  SysUtils, Classes, Graphics, Messages, Forms, Controls, StdCtrls;
+  SysUtils, Classes, Graphics, Messages, Controls, StdCtrls;
 
 
 const
@@ -380,8 +378,7 @@ procedure TPJHotLabel.Click;
 begin
   if Enabled and (fURL <> '')then
   begin
-    if ShellExecute(ValidParentForm(Self).Handle, nil, PChar(fURL), nil,
-      nil, SW_SHOW) < 32 then
+    if ShellExecute(0, nil, PChar(fURL), nil, nil, SW_SHOW) <= 32 then
       raise EPJURLError.CreateFmt(sCantAccessURL, [fURL]);
     if fTrackVisits and not fVisited then
       SetVisited(True);
