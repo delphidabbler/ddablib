@@ -26,9 +26,6 @@ mkdir %ReleaseDir%
 zip %OutFile% -j -9 PJHotLabel.pas
 zip %OutFile% -j -9 PJHotLabel.dcr
 
-zip %OutFile% -j -9 %HelpDir%\PJHotLabel.hlp
-zip %OutFile% -j -9 %HelpDir%\PJHotLabel.als
-
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
 zip %OutFile% -j -9 %DocsDir%\MPL.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
