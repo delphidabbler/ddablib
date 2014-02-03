@@ -1,7 +1,7 @@
 {
  * PJMessageDialog.pas
  *
- * Components that provide customisable message dialog boxes that wrap the
+ * Components that provide customisable message dialogue boxes that wrap the
  * Windows MessageBoxIndirect API call and the Delphi VCL CreateMessageDialog
  * function.
  *
@@ -58,7 +58,7 @@ uses
 
 
 const
-  // Windows message dialog flag missing from Windows unit
+  // Windows message dialogue flag missing from Windows unit
   {$EXTERNALSYM MB_CANCELTRYCONTINUE}
   MB_CANCELTRYCONTINUE = $00000006;
 
@@ -66,10 +66,10 @@ const
   // supported by API constants and cannot be displayed natively by MessageBox
   // family of functions.
   UNKNOWN_BUTTONGROUP = $0000000F;
-    // No API const for button group. Test for this using
+    // No API constant for button group. Test for this using
     //   if DlgType and MB_TYPEMASK = UNKNOWN_BUTTONGROUP then ...
   UNKNOWN_ICON = $000000F0;
-    // No API const for dialog kind. Test for this using
+    // No API constant for dialogue kind. Test for this using
     //   if DlgType and MB_ICONMASK = UNKNOWN_ICON then ...
 
 type
@@ -94,8 +94,8 @@ type
 
   {
   TPJMsgDlgKind:
-    Kinds of dialog boxes (icons, sounds, titles) that can be displayed by
-    message dialog components that export the Kind property. Note that the
+    Kinds of dialogue boxes (icons, sounds, titles) that can be displayed by
+    message dialogue components that export the Kind property. Note that the
     appearance of the icons depends on the underlying OS. For example, on
     Windows XP mkApplication and mkWinLogo display the same icon.
   }
@@ -107,14 +107,14 @@ type
     mkUser,             // user-defined Application.Title MB_OK
     mkApplication,      // application  Application.Title MB_OK
     mkWinLogo,          // Windows logo Application.Title MB_OK
-    mkUnknown           // An unknown or unsupported dialog type
+    mkUnknown           // An unknown or unsupported dialogue type
   );
 
   {
   TPJMsgDlgBase:
     Abstract base class for all message box components in this unit. Provides
     a framework and common functionality and defines some abstract methods to be
-    overridden by descendant classes to implement the actual dialog box using
+    overridden by descendant classes to implement the actual dialogue box using
     different underlying APIs.
   }
   TPJMsgDlgBase = class(TComponent)
@@ -142,11 +142,11 @@ type
   protected // properties
     property ButtonGroup: TPJMsgDlgButtonGroup
       read fButtonGroup write SetButtonGroup default bgOK;
-      {Determines group of buttons displayed in dialog box}
+      {Determines group of buttons displayed in dialogue box}
     property DlgType: LongWord
       read GetDlgType write SetDlgType stored False;
-      {Dialog type in terms of a bitmask approximating to the flags passed to
-      the Windows MessageBox API function to create a similar dialog box}
+      {Dialogue type in terms of a bit-mask approximating to the flags passed to
+      the Windows MessageBox API function to create a similar dialogue box}
     property HelpContext: THelpContext
       read fHelpContext write fHelpContext default 0;
       {ID of help topic accessed when Help button clicked or F1 pressed}
@@ -160,26 +160,26 @@ type
       {Resource ID of icon displayed when Kind = mkUser}
     property Kind: TPJMsgDlgKind
       read fKind write fKind default mkInformation;
-      {Kind of dialog box: determines the icon to be displayed, any sound played
-      and the default title of the dialog}
+      {Kind of dialogue box: determines the icon to be displayed, any sound
+      played and the default title of the dialogue}
     property MakeSound: Boolean
       read fMakeSound write fMakeSound default False;
-      {Determines whether a sound is played when the dialog appears. Actual
+      {Determines whether a sound is played when the dialogue appears. Actual
       sound depends on value of Kind property}
     property Text: string
       read fText write fText;
-      {Text displayed in dialog box body}
+      {Text displayed in dialogue box body}
     property Title: TCaption
       read fTitle write fTitle;
       {Text displayed in window caption. If no text is supplied a default title
       is used that depends on the Kind property}
     property OnHelp: TNotifyEvent
       read fOnHelp write fOnHelp;
-      {Event triggered when dialog box's help button is pressed. If this event
+      {Event triggered when dialogue box's help button is pressed. If this event
       is assigned the component's default help handling is inhibited}
   protected
     function GetDefaultTitle: string;
-      {Returns default title for window based on kind of dialog}
+      {Returns default title for window based on kind of dialogue}
     function GetWindowTitle: string;
       {Returns window tile: either value of Title property or default title if
       Title is ''}
@@ -202,28 +202,28 @@ type
     procedure Help;
       {Calls help topic specified by HelpContext property in required help file}
     function Show: Integer; virtual; abstract;
-      {Abstract method to be overridden to configure and display dialog box and
-      return code representing button pressed by user}
+      {Abstract method to be overridden to configure and display dialogue box
+      and return code representing button pressed by user}
   public
     constructor Create(AOwner: TComponent); override;
       {Constructor. Sets default property values}
     function Execute: Integer;
       {Plays any required sound then displays the message box and returns a
-      value relating to the button pressed to close the dialog box}
+      value relating to the button pressed to close the dialogue box}
   end;
 
   {
   TPJWinMsgDlgCustom:
-    Base class for components that create a message dialog using the Windows
+    Base class for components that create a message dialogue using the Windows
     MessageBoxIndirect API.
   }
   TPJWinMsgDlgCustom = class(TPJMsgDlgBase)
   protected
     function GetDlgType: LongWord; override;
       {Override of read accessor for DlgType property. Includes MB_HELP in
-      bitmask if help button displayed}
+      bit-mask if help button displayed}
     function Show: Integer; override;
-      {Configures and displays dialog box and returns code representing button
+      {Configures and displays dialogue box and returns code representing button
       pressed by user}
     function GetIconResNameFromStr(const Str: string): PChar; override;
       {Returns a pointer to given string resource name in the format expected by
@@ -232,7 +232,7 @@ type
 
   {
   TPJWinMsgDlg:
-    Implements a dialog box that is created and displayed by the Windows
+    Implements a dialogue box that is created and displayed by the Windows
     MessageBoxIndirect API call. The exposed properties are a subset of those
     exposed by TPJVCLMsgDlg. This class simply publishes protected properties
     implemented in parent classes.
@@ -254,8 +254,8 @@ type
 
   {
   TPJMsgDlgIconKind:
-    The kinds of icons that can be displayed in TPJMessageDialog dialog boxes.
-    Also determines default dialog title and sound played. NOTE: provided for
+    The kinds of icons that can be displayed in TPJMessageDialog dialogue boxes.
+    Also determines default dialogue title and sound played. NOTE: provided for
     backwards compatibility.
   }
   TPJMsgDlgIconKind = ( // Icon         Default Title     Sound
@@ -268,7 +268,7 @@ type
 
   {
   TPJMessageDialog:
-    Implements a dialog box that is created and displayed by the Windows
+    Implements a dialogue box that is created and displayed by the Windows
     MessageBoxIndirect API call. Properties are exposed that are compatible with
     those of the equivalent component in release 1 of this unit, although the
     implementation is different.
@@ -292,14 +292,14 @@ type
     { New property }
     property IconKind: TPJMsgDlgIconKind
       read GetIconKind write SetIconKind default miWarning;
-      {Kind of icon displayed in dialog box: also determines any sound played
-      and the default title of the dialog}
+      {Kind of icon displayed in dialogue box: also determines any sound played
+      and the default title of the dialogue}
   end;
 
   {
   TPJMsgDlgAlign:
-    Permitted values for TPJVCLMsgDlg.Align property that specifies where dialog
-    is displayed.
+    Permitted values for TPJVCLMsgDlg.Align property that specifies where
+    dialogue is displayed.
   }
   TPJMsgDlgAlign = (
     mdaScreenCentre,  // centred on screen
@@ -313,10 +313,10 @@ type
     Permitted values for inclusion in TPJMsgDlgOptions set.
   }
   TPJMsgDlgOption = (
-    mdoInhibitCancel,   // dialog can't cancel: no close & cancel btn or ESC key
+    mdoInhibitCancel,   // dialogue can't cancel
     mdoAutoHelpBtn,     // help button displayed if HelpContext is non zero
     mdoShowCustomIcon,  // program icon is displayed when Kind=mtCustom
-    mdoGroupIgnoresHelp // help btn in Buttons has no effect on ButtonGroup
+    mdoGroupIgnoresHelp // help button in Buttons has no effect on ButtonGroup
   );
 
   {
@@ -328,13 +328,13 @@ type
   {
   TPJVCLMsgDlgFormEvent:
     Type of event triggered when TPJVCLMsgDlg is shown. Provides access to
-    dialog box form object.
+    dialogue box form object.
   }
   TPJVCLMsgDlgFormEvent = procedure(Sender: TObject; Dlg: TForm) of object;
 
   {
   TPJVCLMsgDlg:
-    Implements a customisable dialog that is created using the VCL's
+    Implements a customisable dialogue that is created using the VCL's
     CreateMessageDialog function. The properties of the component are a superset
     of those exposed by TPJWinMsgDlg.
   }
@@ -358,7 +358,7 @@ type
   protected // properties
     function GetDlgType: LongWord; override;
       {Override of read accessor for DlgType property. Includes MB_HELP in
-      bitmask if help button displayed}
+      bit-mask if help button displayed}
     procedure SetDlgType(const Value: LongWord); override;
       {Write accessor for DlgType property. Adds support for MB_HELP which
       includes help button in Buttons property}
@@ -369,47 +369,48 @@ type
   private
     fOldAppHelpHandler: THelpEvent;
       {Records reference to any existing Application.OnHelp event handler to
-      enable it to be restored when dialog box form is hidden: we replace
-      Application.OnHelp with custom version for life of form diaolog}
+      enable it to be restored when dialogue box form is hidden: we replace
+      Application.OnHelp with custom version for life of form dialogue}
   protected
     function Show: Integer; override;
-      {Configure and display dialog box and return code representing button
+      {Configure and display dialogue box and return code representing button
       pressed by user}
     function GetIconResNameFromStr(const Str: string): PChar; override;
       {Returns a pointer to given string resource name}
     procedure PreventCloseOnCancel(Sender: TObject; var CanClose: Boolean);
-      {OnCloseQuery event handler for dialog form used when we wish to prevent
-      dialog from being closed on pressing cancel or clicking close button on
-      dialog}
+      {OnCloseQuery event handler for dialogue form used when we wish to prevent
+      dialogue from being closed on pressing cancel or clicking close button on
+      dialogue}
     procedure FocusDefaultButton(const Dlg: TForm);
-      {Sets focus to dialog box's default button as specified by DefButton
+      {Sets focus to dialogue box's default button as specified by DefButton
       property, if valid}
     procedure FormShowHandler(Sender: TObject); virtual;
-      {OnShow handler for dialog box form. Sets any required default button and
-      triggers component's OnShow event, passing reference to dialog box form}
+      {OnShow handler for dialogue box form. Sets any required default button
+      and triggers component's OnShow event, passing reference to dialogue box
+      form}
     procedure FormHideHandler(Sender: TObject); virtual;
-      {OnHide event handler for dialog box form. Triggers component's OnHide
-      event, passing reference to dialog box form}
+      {OnHide event handler for dialogue box form. Triggers component's OnHide
+      event, passing reference to dialogue box form}
     procedure FormKeyDownHandler(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-      {OnKeyDown event handler for dialog box form. Triggers help if key is F1
-      and dialog box contains a help button}
+      {OnKeyDown event handler for dialogue box form. Triggers help if key is F1
+      and dialogue box contains a help button}
     procedure HelpClickHandler(Sender: TObject); virtual;
       {OnClick handler for Help button. Overrides VCL message box's own help
       handling to enable us to handle display of help}
     function FindHelpBtn(const Dlg: TForm): TButton;
-      {Finds reference to dialog box form's help button}
+      {Finds reference to dialogue box form's help button}
     function AppHelpHandler(Command: Word; Data: Longint;
       var CallHelp: Boolean): Boolean;
       {Event handler for Application.OnHelp event that prevents default help
-      system being used while dialog is displayed, to enable us to handle help
+      system being used while dialogue is displayed, to enable us to handle help
       ourselves}
   public
     constructor Create(AOwner: TComponent); override;
       {Constructor. Sets default property values}
     function CreateDialog: TForm;
-      {Creates instance of dialog and returns it: caller is responsible for
-      displaying and freeing dialog instance}
+      {Creates instance of dialogue and returns it: caller is responsible for
+      displaying and freeing dialogue instance}
   published
     { Publishing inherited protected properties }
     property ButtonGroup; // property interacts with new Buttons property
@@ -425,24 +426,26 @@ type
     { New properties }
     property Align: TPJMsgDlgAlign
       read fAlign write fAlign default mdaScreenCentre;
-      {Determines alignment of dialog box in relation to owner form or screen}
+      {Determines alignment of dialogue box in relation to owner form or screen}
     property Buttons: TMsgDlgButtons
       read fButtons write SetButtons default [mbOK];
-      {Determines the buttons displayed in the dialog box - works in association
-      with ButtonGroup property - i.e. making changes to one updates the other}
+      {Determines the buttons displayed in the dialogue box - works in
+      association with ButtonGroup property - i.e. making changes to one updates
+      the other}
     property DefButton: TMsgDlgBtn
       read fDefButton write fDefButton default mbOK;
       {ID of default button: if the specified button is not in buttons list then
       this setting doesn't effect default button}
     property OffsetLeft: Integer
       read fOffsetLeft write fOffsetLeft default 0;
-      {Horizontal offset of dialog box relative to screen or owner form,
+      {Horizontal offset of dialogue box relative to screen or owner form,
       depending on Align property. Ignored if Align is mdaFormCentre or
       mdaScreenCentre}
     property OffsetTop: Integer
       read fOffsetTop write fOffsetTop default 0;
-      {Vertical offset of dialog box relative to screen or owner form, depending
-      on Align property. Ignored if Align is mdaFormCentre or mdaScreenCentre}
+      {Vertical offset of dialogue box relative to screen or owner form,
+      depending on Align property. Ignored if Align is mdaFormCentre or
+      mdaScreenCentre}
     property Options: TPJMsgDlgOptions
       read fOptions write SetOptions
       default [mdoAutoHelpBtn, mdoShowCustomIcon];
@@ -450,13 +453,13 @@ type
       above}
     property OnShow: TPJVCLMsgDlgFormEvent
       read fOnShow write fOnShow;
-      {Event triggered when component's dialog box is shown. Provides access to
-      the dialog box's form to enable dialog to be further customised. Form
-      reference is valid only until OnHide event is triggered}
+      {Event triggered when component's dialogue box is shown. Provides access
+      to the dialogue box's form to enable dialogue to be further customised.
+      Form reference is valid only until OnHide event is triggered}
     property OnHide: TPJVCLMsgDlgFormEvent
       read fOnHide write fOnHide;
-      {Event triggered when component's dialog box is hidden before being
-      destroyed. Provides reference to dialog box's form. This form reference
+      {Event triggered when component's dialogue box is hidden before being
+      destroyed. Provides reference to dialogue box's form. This form reference
       is invalid after this event completes}
   end;
 
@@ -497,9 +500,9 @@ end;
 
 function TPJMsgDlgBase.Execute: Integer;
   {Plays any required sound then displays the message box and returns a value
-  relating to the button pressed to close the dialog box}
+  relating to the button pressed to close the dialogue box}
 const
-  // Table mapping dialog box kinds to API flags for sound to be played
+  // Table mapping dialogue box kinds to API flags for sound to be played
   cSounds: array[TPJMsgDlgKind] of Integer = (
     MB_ICONEXCLAMATION, MB_ICONASTERISK, MB_ICONQUESTION, MB_ICONHAND,
     MB_OK, MB_OK, MB_OK, MB_OK);
@@ -510,9 +513,9 @@ begin
 end;
 
 function TPJMsgDlgBase.GetDefaultTitle: string;
-  {Returns default title for window based on kind of dialog}
+  {Returns default title for window based on kind of dialogue}
 const
-  // Table mapping dialog box kinds to default window titles
+  // Table mapping dialogue box kinds to default window titles
   cDefTitles: array[TPJMsgDlgKind] of string = (
     sMsgDlgWarning, sMsgDlgInformation, sMsgDlgConfirm, sMsgDlgError,
     '', '', '', '');
@@ -643,7 +646,7 @@ begin
     MB_CANCELTRYCONTINUE: ButtonGroup := bgCancelTryContinue;
     else ButtonGroup := bgUnknown;
   end;
-  // Set dialog kind
+  // Set dialogue kind
   case Value and MB_ICONMASK of
     MB_ICONEXCLAMATION {= MB_ICONWARNING}: Kind := mkWarning;
     MB_ICONINFORMATION {= MB_ICONASTERISK}: Kind := mkInformation;
@@ -659,7 +662,7 @@ end;
 
 procedure HelpCallback(var HelpInfo: THelpInfo); stdcall;
   {Callback procedure for Execute method procedure. Starts win help with help
-  context passed in HelpInfo param}
+  context passed in HelpInfo parameter}
 var
   Cmp: TPJMsgDlgBase; // reference to component that called this callback
 begin
@@ -671,7 +674,7 @@ begin
 end;
 
 function TPJWinMsgDlgCustom.GetDlgType: LongWord;
-  {Override of read accessor for DlgType property. Includes MB_HELP in bitmask
+  {Override of read accessor for DlgType property. Includes MB_HELP in bit-mask
   if help button displayed}
 begin
   Result := inherited GetDlgType;
@@ -694,7 +697,7 @@ begin
 end;
 
 function TPJWinMsgDlgCustom.Show: Integer;
-  {Configures and displays dialog box and returns code representing button
+  {Configures and displays dialogue box and returns code representing button
   pressed by user}
 const
   // Table mapping TPJMsgDlgButtonGroup to API flags
@@ -703,7 +706,7 @@ const
     MB_YESNO, MB_YESNOCANCEL, 0, MB_CANCELTRYCONTINUE
   );
 var
-  MsgBoxParams: TMsgBoxParams;  // params passed to MessageBoxIndirect fn
+  MsgBoxParams: TMsgBoxParams;  // parameters passed to MessageBoxIndirect
 begin
   // Set up TMsgBoxParams structure
   FillChar(MsgBoxParams, SizeOf(MsgBoxParams), 0);
@@ -736,7 +739,7 @@ begin
       lpfnMsgBoxCallback := @HelpCallback;
     end;
   end;
-  // Display dlg and return result
+  // Display dialogue and return result
   Result := Integer(MessageBoxIndirect(MsgBoxParams));
 end;
 
@@ -771,7 +774,7 @@ end;
 function TPJVCLMsgDlg.AppHelpHandler(Command: Word; Data: Integer;
   var CallHelp: Boolean): Boolean;
   {Event handler for Application.OnHelp event that prevents default help system
-  being used while dialog is displayed, to enable us to handle help ourselves}
+  being used while dialogue is displayed, to enable us to handle help ourselves}
 begin
   CallHelp := False;
   Result := True;
@@ -790,14 +793,14 @@ begin
 end;
 
 function TPJVCLMsgDlg.CreateDialog: TForm;
-  {Creates instance of dialog and returns it: caller is responsible for
-  displaying and freeing dialog instance}
+  {Creates instance of dialogue and returns it: caller is responsible for
+  displaying and freeing dialogue instance}
 
   // ---------------------------------------------------------------------------
   function FindImage(const Dlg: TForm): TImage;
-    {Finds reference to dialog box form's image control}
+    {Finds reference to dialogue box form's image control}
   var
-    Idx: Integer; // loops thru all components on form
+    Idx: Integer; // loops through all components on form
   begin
     Result := nil;
     for Idx := 0 to Pred(Dlg.ComponentCount) do
@@ -811,9 +814,9 @@ function TPJVCLMsgDlg.CreateDialog: TForm;
   end;
 
   procedure InhibitCancelButtons(const Dlg: TForm);
-    {Ensures no buttons on dialog respond to escape key press}
+    {Ensures no buttons on dialogue respond to escape key press}
   var
-    Idx: Integer; // loops thru all components on form
+    Idx: Integer; // loops through all components on form
   begin
     // Switch off cancel property on all buttons
     for Idx := 0 to Pred(Dlg.ComponentCount) do
@@ -823,9 +826,9 @@ function TPJVCLMsgDlg.CreateDialog: TForm;
 
   procedure AlignToScreen(const Dlg: TForm; UseOffset: Boolean;
     Left, Top: Integer);
-    {Aligns given dialog box to screen. If UseOffset is true then dialog is set
-    to given Left and Top position on screen. If UseOffset is false then dialog
-    is centred on screen}
+    {Aligns given dialogue box to screen. If UseOffset is true then dialogue is
+    set to given Left and Top position on screen. If UseOffset is false then
+    dialogue is centred on screen}
   begin
     if UseOffset then
     begin
@@ -841,9 +844,9 @@ function TPJVCLMsgDlg.CreateDialog: TForm;
 
   procedure AlignToForm(const Owner, Dlg: TForm; UseOffset: Boolean;
     Left, Top: Integer);
-    {Aligns given dialog box over given owner form. If UseOffset is true then
-    dialog is set to given Left and Top position relative to form. If UseOffset
-    is false then dialog is centred over form}
+    {Aligns given dialogue box over given owner form. If UseOffset is true then
+    dialogue is set to given Left and Top position relative to form. If
+    UseOffset is false then dialogue is centred over form}
   begin
     if UseOffset then
     begin
@@ -871,28 +874,28 @@ function TPJVCLMsgDlg.CreateDialog: TForm;
   // ---------------------------------------------------------------------------
 
 const
-  // Maps dialog Kind property to dialog types
+  // Maps dialogue Kind property to dialogue types
   cDlgType: array[TPJMsgDlgKind] of TMsgDlgType = (
-    mtWarning,        // dialog has warning icon
-    mtInformation,    // dialog has information icon
-    mtConfirmation,   // dialog has query icon
-    mtError,          // dialog has error icon
-    mtCustom,         // dialog has user defined icon
-    mtCustom,         // dialog has Windows application icon
-    mtCustom,         // dialog has Windows logo
-    mtCustom          // dialog has user defined icon
+    mtWarning,        // dialogue has warning icon
+    mtInformation,    // dialogue has information icon
+    mtConfirmation,   // dialogue has query icon
+    mtError,          // dialogue has error icon
+    mtCustom,         // dialogue has user defined icon
+    mtCustom,         // dialogue has Windows application icon
+    mtCustom,         // dialogue has Windows logo
+    mtCustom          // dialogue has user defined icon
   );
 
 var
-  Img: TImage;            // reference to dialog's image that contains icon
-  HelpBtn: TButton;       // reference to dialog's help button
+  Img: TImage;            // reference to dialogue's image that contains icon
+  HelpBtn: TButton;       // reference to dialogue's help button
   Btns: TMsgDlgButtons;   // set of buttons to be displayed
 
 begin
 
   // Set up buttons
   Btns := fButtons;
-  // remove cancel button if we're inhibiting cancelation of dialog
+  // remove cancel button if we're inhibiting cancellation of dialogue
   if mdoInhibitCancel in Options then
     Exclude(Btns, mbCancel);
   // add or remove help button per help context if we're auto-detecting
@@ -901,17 +904,17 @@ begin
       Exclude(Btns, mbHelp)
     else
       Include(Btns, mbHelp);
-  // check we have at least one button capable of closing dlg: use mbOK if not
+  // check if at least one button can close dialogue: use mbOK if not
   if (Btns = []) or (Btns = [mbHelp]) then
     Include(Btns, mbOK);
 
-  // Create dialog of required type
+  // Create dialogue of required type
   if ((Kind = mkUser) and (mdoShowCustomIcon in Options))
     or (Kind in [mkApplication, mkWinLogo]) then
   begin
-    // we need to display an icon not directly supported by VCL:
-    // create dlg with kind that has icon (mtCustom doesn't) then fetch icon
-    // from resources and assign to the dialog's image component to it
+    // we need to display an icon not directly supported by VCL: create dialogue
+    // with kind that has icon (mtCustom doesn't) then fetch icon from resources
+    // and assign to the dialogue's image component to it
     Result := CreateMessageDialog(Text, mtInformation, Btns);
     Img := FindImage(Result);
     if Assigned(Img) then
@@ -924,7 +927,7 @@ begin
     // we create with standard icon (or no icon if mtCustom and no icon needed)
     Result := CreateMessageDialog(Text, cDlgType[Kind], Btns);
 
-  // Set caption of dialog if required
+  // Set caption of dialogue if required
   Result.Caption := GetWindowTitle;
 
   // Set help file and context
@@ -939,7 +942,7 @@ begin
       HelpBtn.OnClick := HelpClickHandler;
   end;
 
-  // Arrange dialog per align property and whether or not we have owner
+  // Arrange dialogue per align property and whether or not we have owner
   if Assigned(Owner) and (Owner is TForm)then
   begin
     // we have owner form: act per Align property
@@ -965,10 +968,10 @@ begin
     end;
   end;
 
-  // Ensure form sees keypresses before controls
+  // Ensure form sees key presses before controls
   Result.KeyPreview := True;
 
-  // Set dialog form's show / hide / key down event handlers
+  // Set dialogue form's show / hide / key down event handlers
   Result.OnShow := FormShowHandler;
   Result.OnHide := FormHideHandler;
   Result.OnKeyDown := FormKeyDownHandler;
@@ -984,9 +987,9 @@ begin
 end;
 
 function TPJVCLMsgDlg.FindHelpBtn(const Dlg: TForm): TButton;
-  {Finds reference to dialog box form's help button}
+  {Finds reference to dialogue box form's help button}
 var
-  Idx: Integer; // loops thru all components on form
+  Idx: Integer; // loops through all components on form
 begin
   Result := nil;
   for Idx := 0 to Pred(Dlg.ComponentCount) do
@@ -1001,10 +1004,10 @@ begin
 end;
 
 procedure TPJVCLMsgDlg.FocusDefaultButton(const Dlg: TForm);
-  {Sets focus to dialog box's default button as specified by DefButton property,
-  if valid}
+  {Sets focus to dialogue box's default button as specified by DefButton
+  property, if valid}
 var
-  Idx: Integer; // loops thru all components on form
+  Idx: Integer; // loops through all components on form
   Btn: TButton; // reference to button on form
 const
   // Captions used for buttons of various kinds. Captions from Consts.pas
@@ -1023,7 +1026,7 @@ begin
     // No valid default button specified: do nothing (this means that default
     // button is decided by VCL's CreateMessageDialog function)
     Exit;
-  // Loop thru all controls, searching for default button
+  // Loop through all controls, searching for default button
   for Idx := 0 to Pred(Dlg.ComponentCount) do
   begin
     if Dlg.Components[Idx] is TButton then
@@ -1044,8 +1047,8 @@ begin
 end;
 
 procedure TPJVCLMsgDlg.FormHideHandler(Sender: TObject);
-  {OnHide event handler for dialog box form. Triggers component's OnHide event,
-  passing reference to dialog box form}
+  {OnHide event handler for dialogue box form. Triggers component's OnHide
+  event, passing reference to dialogue box form}
 begin
   // Trigger component's OnHide event
   if Assigned(fOnHide) then
@@ -1057,8 +1060,8 @@ end;
 
 procedure TPJVCLMsgDlg.FormKeyDownHandler(Sender: TObject; var Key: Word;
   Shift: TShiftState);
-  {OnKeyDown event handler for dialog box form. Triggers help if key is F1 and
-  dialog box contains a help button}
+  {OnKeyDown event handler for dialogue box form. Triggers help if key is F1 and
+  dialogue box contains a help button}
 begin
   if (Key = VK_F1) and (Shift = []) then
   begin
@@ -1069,8 +1072,8 @@ begin
 end;
 
 procedure TPJVCLMsgDlg.FormShowHandler(Sender: TObject);
-  {OnShow handler for dialog box form. Sets any required default button and
-  triggers component's OnShow event, passing reference to dialog box form}
+  {OnShow handler for dialogue box form. Sets any required default button and
+  triggers component's OnShow event, passing reference to dialogue box form}
 begin
   // Disable application's default help processing: required for later Delphis
   // we use our own help event handler (restored when form hidden)
@@ -1084,7 +1087,7 @@ begin
 end;
 
 function TPJVCLMsgDlg.GetDlgType: LongWord;
-  {Override of read accessor for DlgType property. Includes MB_HELP in bitmask
+  {Override of read accessor for DlgType property. Includes MB_HELP in bit-mask
   if help button displayed}
 begin
   Result := inherited GetDlgType;
@@ -1121,9 +1124,9 @@ end;
 
 procedure TPJVCLMsgDlg.PreventCloseOnCancel(Sender: TObject;
   var CanClose: Boolean);
-  {OnCloseQuery event handler for dialog form used when we wish to prevent
-  dialog from being closed on pressing cancel or clicking close button on
-  dialog}
+  {OnCloseQuery event handler for dialogue form used when we wish to prevent
+  dialogue from being closed on pressing cancel or clicking close button on
+  dialogue}
 begin
   case (Sender as TForm).ModalResult of
     mrCancel: CanClose := False;
@@ -1216,8 +1219,8 @@ begin
 end;
 
 function TPJVCLMsgDlg.Show: Integer;
-  {Configure and display dialog box and return code representing button pressed
-  by user}
+  {Configure and display dialogue box and return code representing button
+  pressed by user}
 begin
   with CreateDialog do
     try
