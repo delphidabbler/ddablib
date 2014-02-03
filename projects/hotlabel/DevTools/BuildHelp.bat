@@ -1,17 +1,15 @@
 @rem ---------------------------------------------------------------------------
-@rem Hot Label Component.
-@rem
-@rem Script used to create help file.
-@rem
-@rem Copyright (C) Peter Johnson (www.delphidabbler.com), 2010
+@rem Script used to create help file for Hot Label Component.
 @rem
 @rem Requires environment variable HC set to full file path to MS WinHelp
 @rem compiler (HCRTF.exe).
 @rem
+@rem Any copyright in this file is dedicated to the Public Domain.
+@rem http://creativecommons.org/publicdomain/zero/1.0/
+@rem
 @rem $Rev$
 @rem $Date$
 @rem ---------------------------------------------------------------------------
-
 
 @echo off
 
