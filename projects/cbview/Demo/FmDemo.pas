@@ -10,11 +10,41 @@
 
 unit FmDemo;
 
+{$UNDEF RTLNAMESPACES}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE RTLNAMESPACES}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, PJCBView;
+  {$IFNDEF RTLNAMESPACES}
+  Windows,
+  Messages,
+  SysUtils,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  StdCtrls,
+  {$ELSE}
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.StdCtrls,
+  {$ENDIF}
+  PJCBView;
 
 type
   TDemoForm = class(TForm)
@@ -31,7 +61,11 @@ var
 implementation
 
 uses
+  {$IFNDEF RTLNAMESPACES}
   Clipbrd;
+  {$ELSE}
+  Vcl.Clipbrd;
+  {$ENDIF}
 
 {$R *.dfm}
 
