@@ -1,7 +1,14 @@
 ; ------------------------------------------------------------------------------
-; Change Log for Clipboard Viewer Component
+; This Source Code Form is subject to the terms of the Mozilla Public License,
+; v. 2.0. If a copy of the MPL was not distributed with this file, You can
+; obtain one at http://mozilla.org/MPL/2.0/
+;
+; Copyright (C) 2014, Peter Johnson (www.delphidabbler.com).
+;
 ; $Rev$
 ; $Date$
+;
+; Change Log for Clipboard Viewer Component
 ; ------------------------------------------------------------------------------
 
 Release v1.4 of 13 October 2010
