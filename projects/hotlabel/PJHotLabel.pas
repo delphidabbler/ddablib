@@ -236,11 +236,12 @@ type
       }
   public
     constructor Create(AOwner: TComponent); override;
-      {Class constructor. Initialises object and sets default property values.
+      {Constructs a new component instance and initialises default property
+      values.
         @param AOwner [in] Reference to owning component or nil if no owner.
       }
     destructor Destroy; override;
-      {Class destructor. Tears down object.
+      {Destroys the object instance.
       }
   published
     // New properties
@@ -346,11 +347,6 @@ end;
 { TPJHotLabel }
 
 procedure TPJHotLabel.CheckURL(const URL: string);
-  {Checks that a URL has one of the supported protocols. Override this method to
-  add additional protocols in a descendant component.
-    @param URL [in] URL to be checked.
-    @except EPJURLError raised if URL does not have a supported protocol.
-  }
 const
   // List of recognised URLs
   cValidURLS: array[1..5] of string
@@ -369,10 +365,6 @@ begin
 end;
 
 procedure TPJHotLabel.Click;
-  {Starts default browser or e-mail client using URL property when label
-  clicked, providing URL is not empty and label is enabled.
-    @except EPJURLError raised if Windows can't access URL.
-  }
 begin
   if Enabled and (fURL <> '')then
   begin
@@ -386,12 +378,6 @@ begin
 end;
 
 procedure TPJHotLabel.CMHintShow(var Msg: TMessage);
-  {Message handler that intercepts hints before they are displayed and sets hint
-  as required by the HintStyle property. Triggers OnCustomHint event when
-  HintStyle = hsCustom.
-    @param Msg [in/out] Message parameters. Hint info structure pointed to by
-      LParam parameter may be changed.
-  }
 var
   HintStr: string;  // the hint to be displayed when custom hints being used
 begin
@@ -417,9 +403,6 @@ begin
 end;
 
 procedure TPJHotLabel.CMMouseEnter(var Msg: TMessage);
-  {Handles mouse enter event. Highlights label text if required.
-    @param Msg [in/out] Not used.
-  }
 begin
   inherited;
   if HighlightURL and not (csDesigning in ComponentState)
@@ -431,9 +414,6 @@ begin
 end;
 
 procedure TPJHotLabel.CMMouseLeave(var Msg: TMessage);
-  {Handles mouse leave event. Un-highlight label text if it was highlighted.
-    @param Msg [in/out] Not used.
-  }
 begin
   inherited;
   if HighlightURL and not (csDesigning in ComponentState) and fHighlighted then
@@ -444,9 +424,6 @@ begin
 end;
 
 constructor TPJHotLabel.Create(AOwner: TComponent);
-  {Class constructor. Initialises object and sets default property values.
-    @param AOwner [in] Reference to owning component or nil if no owner.
-  }
 begin
   inherited Create(AOwner);
 
@@ -480,8 +457,6 @@ begin
 end;
 
 destructor TPJHotLabel.Destroy;
-  {Class destructor. Tears down object.
-  }
 begin
   fHighlightFont.Free;
   fFont.Free;
@@ -500,17 +475,11 @@ begin
 end;
 
 function TPJHotLabel.GetCaption: TCaption;
-  {"Overridden" read access method for Caption property.
-    @return Value of inherited Caption property.
-  }
 begin
   Result := inherited Caption;
 end;
 
 function TPJHotLabel.GetFont: TFont;
-  {"Overridden" read access method for Font property.
-    @return Value of Font property.
-  }
 begin
   Result := fFont;
 end;
@@ -522,9 +491,6 @@ begin
 end;
 
 procedure TPJHotLabel.Loaded;
-  {Ensures Caption matches URL property if CaptionIsURL property is true when
-  component is loaded from resources.
-  }
 begin
   inherited;
   if fCaptionIsURL then
@@ -532,12 +498,6 @@ begin
 end;
 
 procedure TPJHotLabel.SetCaption(const Value: TCaption);
-  {"Overridden" write access method for Caption property. Also sets URL property
-  to same value when CaptionIsURL property is true.
-    @param Value [in] New property value.
-    @except EPJURLError raised if CaptionIsURL and ValidateURL are true and
-      Value is not a valid URL.
-  }
 begin
   if fCaptionIsURL then
   begin
@@ -551,10 +511,6 @@ begin
 end;
 
 procedure TPJHotLabel.SetCaptionIsURL(const Value: Boolean);
-  {Write access method for CaptionIsURL property. When set true we set Caption
-  property to same value as URL property.
-    @param Value [in] New property value.
-  }
 begin
   fCaptionIsURL := Value;
   if Value then
@@ -562,9 +518,6 @@ begin
 end;
 
 procedure TPJHotLabel.SetDefaultURL;
-  {Sets the URL to the default value. Override this method in descendant classes
-  to change this default.
-  }
 begin
   try
     // Try to set URL to default
@@ -577,27 +530,16 @@ begin
 end;
 
 procedure TPJHotLabel.SetFont(const Value: TFont);
-  {"Overridden" write access method for Font property.
-    @param Value [in] New property value.
-  }
 begin
   fFont.Assign(Value);
 end;
 
 procedure TPJHotLabel.SetHighlightFont(const Value: TFont);
-  {Write access method for HighlightFont property.
-    @param Value [in] New property value.
-  }
 begin
   fHighlightFont.Assign(Value);
 end;
 
 procedure TPJHotLabel.SetURL(const Value: string);
-  {Write access method for URL property. Sets Caption property to same value if
-  CaptionIsURL property is true.
-    @param Value [in] New property value.
-    @except EPJURLError raised if URL is not valid and ValidateURL is true.
-  }
 begin
   // We only validate URL and set Caption if component isn't loading
   if not (csLoading in ComponentState) then
@@ -611,12 +553,6 @@ begin
 end;
 
 procedure TPJHotLabel.SetValidateURL(const Value: Boolean);
-  {Write access method for ValidateURL property.
-    @param Value [in] New property value. If EPJURLError raised, URL is set to
-      default URL.
-    @except EPJURLError raised if URL does not have a supported protocol and
-      Value is true.
-  }
 begin
   // Record new value
   fValidateURL := Value;
