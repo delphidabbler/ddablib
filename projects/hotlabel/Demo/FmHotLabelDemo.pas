@@ -42,7 +42,6 @@ type
     hlArticle9: TPJHotLabel;
     lblIndex: TLabel;
     procedure HotLabelArticleHint(Sender: TObject; var HintStr: String);
-    procedure HotLabelArticleClick(Sender: TObject);
   private
     fArticleVisited: array[1..9] of Boolean;
       {Records whether each article's link has been visited}
@@ -69,25 +68,6 @@ function GetArticleNumFromURL(const URL: string): Integer;
   }
 begin
   Result := StrToInt(Copy(URL, Length(URL), 1));
-end;
-
-procedure TDemoForm.HotLabelArticleClick(Sender: TObject);
-  {Updates article label when clicked for first time.
-    @param Sender [in] Hot label that was clicked.
-  }
-var
-  ArtNum: Integer;  // article number referenced by label's URL
-  HL: TPJHotLabel;  // reference to clicked hot label
-begin
-  ArtNum := GetArticleNumFromURL((Sender as TPJHotLabel).URL);
-  if not fArticleVisited[ArtNum] then
-  begin
-    // first time visited: record visit and update label colours
-    fArticleVisited[ArtNum] := True;
-    HL := Sender as TPJHotLabel;
-    HL.Font.Color := clMaroon;
-    HL.HighlightFont.Color := HL.Font.Color;
-  end;
 end;
 
 procedure TDemoForm.HotLabelArticleHint(Sender: TObject;
