@@ -152,43 +152,12 @@
 
 <body>
 
-
 <h1>
   <div>Hot Label Component</div>
   <div class="subtitle">ReadMe</div>
 </h1>
 
-
-<h2 id="contents">
-  Contents
-</h2>
-
-<ul>
-  <li>
-    <a href="#description">Description</a>
-  </li>
-  <li>
-    <a href="#installation">Installation</a>
-  </li>
-  <li>
-    <a href="#demo">Demo Program</a>
-  </li>
-  <li>
-    <a href="#update">Update History</a>
-  </li>
-  <li>
-    <a href="#license">License and Disclaimer</a>
-  </li>
-  <li>
-    <a href="#bugs">Bugs and Feature Requests</a>
-  </li>
-  <li>
-    <a href="#author">About the Author</a>
-  </li>
-</ul>
-
-
-<h2 id="description">
+<h2>
   Description
 </h2>
 
@@ -234,6 +203,13 @@
     highlighting is set using the <var>HighlightFont</var> property.
   </li>
   <li>
+    The label can also display in a different style when its &quot;link&quot;
+    has been clicked successfully. The font to be used is specified via the
+    <var>VistedFont</var> property. The user can switch the visited state on and
+    off via the <var>Visited</var> property or the component can be enabled to
+    track visits automatically using the <var>TrackVisits</var> property.
+  </li>
+  <li>
     The label displays the &quot;hand point&quot; cursor by default.
   </li>
   <li>
@@ -260,24 +236,34 @@
 </ul>
 
 <p>
-  A help file is provided that can integrate with the IDE of Delphi 4 to 7.
-</p>
-
-<p>
   <var>TPJHotLabel</var> should work with Delphi versions 4 to 2010. .NET
   versions of Delphi are not supported.
 </p>
 
+<h2>
+  Compatibility
+</h2>
 
-<h2 id="installation">
+<p>
+  The unit has been tested with all native 32 bit Windows Delphi compilers from
+  Delphi 7 through to XE4, excluding Delphi 2005. It has also been tested with
+  the 64 bit compiler of Delphi XE2 through to XE4. The unit may work with
+  Delphi 4, 5 and 6, but this has not been tested.
+</p>
+
+<p>
+  This is a VCL component and so is not compatible with the FireMonkey
+  framework.
+</p>
+
+<h2>
   Installation
 </h2>
 
 <p>
-  The Hot Label Component, its documentation and demo program are supplied in a
-  zip file. Before installing you need to extract all the files from the zip
-  file, preserving the directory structure. The following files will be
-  extracted:
+  The <em>Hot Label Component</em> unit and accompanying files are supplied in a
+  zip file. Before installing you need to extract the files, preserving the
+  directory structure. The following files will be extracted:
 </p>
 
 <ul>
@@ -289,24 +275,17 @@
     glyph.
   </li>
   <li>
-    <code>PJHotLabel.hlp</code> &ndash; Help file that integrates with the
-    Delphi 4-7 IDE.
-  </li>
-  <li>
-    <code>PJHotLabel.als</code> &ndash; Keyword file required when integrating
-    the help file with Delphi 6 and 7.
-  </li>
-  <li>
     <code>ReadMe.htm</code> &ndash; This read-me file.
   </li>
   <li>
-    <code>ChangeLog.txt</code> &ndash; Change log.
+    <code>ChangeLog.txt</code> &ndash; The project change log.
   </li>
   <li>
-    <code>MPL.txt</code> &ndash; Mozilla Public License v1.1.
+    <code>MPL-2.txt</code> &ndash; The Mozilla Public License v2.0.
   </li>
   <li>
-    <code>Wiki.URL</code> &ndash; Short-cut to online component Wiki.
+    <code>Documentation.url</code> &ndash; Short-cut to the component's online
+    documentation.
   </li>
 </ul>
 
@@ -323,29 +302,31 @@
   >see here</a>.
 </p>
 
+<h2>
+  Documentation
+</h2>
+
 <p>
-  Note that the help file included in the download can only integrate with the
-  IDE in Delphi 4-7. For information on how to do this, see <a
-    href="http://www.delphidabbler.com/articles?article=15"
-  >this article</a>. Users of other versions of Delphi can either use the help
-  file as a stand-alone file (in which case some links won't work) or you can
-  use the <a
-    href="http://www.delphidabbler.com/url/hotlabel-wiki"
-  >Hot Label Component Wiki</a>.
+  The component is fully documented <a
+    href="http://delphidabbler.com/url/hotlabel-docs"
+  >online</a>.
 </p>
 
-
-<h2 id="demo">
+<h2>
   Demo Program
 </h2>
 
 <p>
   Source code for a program that demonstrates the component is included in the
-  download.
+  download. Most of the demo's functionality depends on the properties of the
+  various hot label components it uses &ndash; there is very little code.
 </p>
 
+<p>
+  The demo requires Delphi 7 or later.
+</p>
 
-<h2 id="update">
+<h2>
   Update History
 </h2>
 
@@ -354,39 +335,21 @@
   download.
 </p>
 
-
-<h2 id="license">
-  License and Disclaimer
+<h2>
+  License
 </h2>
 
 <p>
-  This product, <em>Hot Label Component</em>, is subject to the Mozilla Public
-  License Version 1.1 (the &quot;License&quot;). You may not use this Product
-  except in compliance with the License. You may obtain a copy of the License
-  at <a
-    href="http://www.mozilla.org/MPL/MPL-1.1"
-  >http://www.mozilla.org/MPL/MPL-1.1</a>.
-</p>
-
-<p>
-  Software distributed under the License is distributed on an &quot;AS IS&quot;
-  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
-  License for the specific language governing rights and limitations under the
-  License.
-</p>
-
-<p>
-  The Initial Developer of <em>Hot Label Component</em> is Peter D Johnson.
-  Portions created by the Initial Developer are Copyright &copy; 1999-2010 Peter
-  D Johnson (www.delphidabbler.com). All Rights Reserved.
+  The <em>Hot Label Component</em> is released under the terms of the <a
+    href="http://www.mozilla.org/MPL/2.0/"
+  >Mozilla Public License v2.0</a>.
 </p>
 
 <p>
   All relevant trademarks are acknowledged.
 </p>
 
-
-<h2 id="bugs">
+<h2>
   Bugs and Feature Requests
 </h2>
 
@@ -402,8 +365,7 @@
   template from the <em>Templates</em> drop down list.
 </p>
 
-
-<h2 id="author">
+<h2>
   About the Author
 </h2>
 
@@ -430,7 +392,7 @@
     use the Issue Tracker noted above to report bugs and request new features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2007-2010, P D Johnson, <a
+    This document is copyright &copy; 2007-2014, P D Johnson, <a
       href="http://www.delphidabbler.com/"
     >www.delphidabbler.com</a>.
   </div>
