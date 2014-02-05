@@ -24,25 +24,15 @@ interface
 
 uses
   {$IFNDEF RTLNAMESPACES}
-  Windows,
-  Messages,
-  SysUtils,
   Classes,
-  Graphics,
   Controls,
-  Forms,
-  Dialogs,
   StdCtrls,
+  Forms,
   {$ELSE}
-  Winapi.Windows,
-  Winapi.Messages,
-  System.SysUtils,
   System.Classes,
-  Vcl.Graphics,
   Vcl.Controls,
-  Vcl.Forms,
-  Vcl.Dialogs,
   Vcl.StdCtrls,
+  Vcl.Forms,
   {$ENDIF}
   PJCBView;
 
@@ -62,8 +52,10 @@ implementation
 
 uses
   {$IFNDEF RTLNAMESPACES}
+  Windows,
   Clipbrd;
   {$ELSE}
+  Winapi.Windows,
   Vcl.Clipbrd;
   {$ENDIF}
 
