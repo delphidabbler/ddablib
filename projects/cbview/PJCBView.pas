@@ -17,15 +17,14 @@
 unit PJCBView;
 
 
-interface
-
-
-// Determine which unit to use for AllocateHWnd and DeallocateHWnd
-// Delphi 2 to 5 use the Forms unit while Delphi 6 and later use Classes
 {$DEFINE ALLOCATEHWNDINFORMS}
+{$UNDEF RTLNAMESPACES}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE RTLNAMESPACES}
   {$IFEND}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
     {$UNDEF ALLOCATEHWNDINFORMS}
@@ -33,9 +32,20 @@ interface
 {$ENDIF}
 
 
+interface
+
+
 uses
   // Delphi
-  Windows, Messages, Classes;
+  {$IFNDEF RTLNAMESPACES}
+  Windows,
+  Messages,
+  Classes;
+  {$ELSE}
+  Winapi.Windows,
+  Winapi.Messages,
+  System.Classes;
+  {$ENDIF}
 
 
 type
@@ -99,7 +109,11 @@ implementation
 
 uses
   // Delphi
+  {$IFNDEF RTLNAMESPACES}
   Forms;
+  {$ELSE}
+  Vcl.Forms;
+  {$ENDIF}
 
 
 procedure Register;
@@ -135,9 +149,13 @@ begin
   inherited;
   // Create hidden clipboard viewer window
   {$IFDEF ALLOCATEHWNDINFORMS}
-    fHWnd := Forms.AllocateHWnd(WndMethod);
+  fHWnd := Forms.AllocateHWnd(WndMethod);
   {$ELSE}
-    fHWnd := Classes.AllocateHWnd(WndMethod);
+  {$IFDEF RTLNAMESPACES}
+  fHWnd := System.Classes.AllocateHWnd(WndMethod);
+  {$ELSE}
+  fHWnd := Classes.AllocateHWnd(WndMethod);
+  {$ENDIF}
   {$ENDIF}
   // Register window as clipboard viewer, storing handle of next window in chain
   fHWndNextViewer := SetClipboardViewer(fHWnd);
@@ -155,9 +173,13 @@ begin
   ChangeClipboardChain(fHWnd, fHWndNextViewer);
   // Destroy window
   {$IFDEF ALLOCATEHWNDINFORMS}
-    Forms.DeallocateHWnd(fHWnd);
+  Forms.DeallocateHWnd(fHWnd);
   {$ELSE}
-    Classes.DeallocateHWnd(fHWnd);
+  {$IFDEF RTLNAMESPACES}
+  System.Classes.DeallocateHWnd(fHWnd);
+  {$ELSE}
+  Classes.DeallocateHWnd(fHWnd);
+  {$ENDIF}
   {$ENDIF}
   inherited;
 end;
