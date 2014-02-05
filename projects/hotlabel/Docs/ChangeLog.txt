@@ -11,6 +11,29 @@
 ; Change Log for Hot Label Component
 ; ------------------------------------------------------------------------------
 
+Release v2.2.0 of 05 February 2014
++ The component can now display the text of "visited" URLs in a different style. Three new properties have been added to support this feature: Visited, VisitedFont and TrackVisits.
++ The default URL used by the component has changed from "http://localhost" to "http://example.com".
++ Fixed some bugs:
+  - Fixed problem with compiler directives that was causing compilation to fail on Delphi XE5.
+  - Changing the highlight font while the label is highlighted now updates the display immediately. Previously the effect of the change was delayed until the label was next highlighted.
+  - An error in detecting one of the possible error codes when executing a URL has been fixed.
+  - The component no longer has to have a parent form. Previously an exception would be raised when the label was clicked if there was no parent form.
++ Unit names in uses clauses are now qualified with their namespace when compiled with Delphi XE2 and later.
++ Changes to demo projects:
+  - Modified to demonstrate component's ability to track and display "visited" URLS.
+  - Form's appearance changed: it is no longer scaled, the font is now "Arial", and the form now appears at the centre of the desktop.
+  - The form file is now stored in text format.
++ WinHelp help files removed from project.
++ Updated documentation:
+  - The project read-me file has updated re the changes.
+  - The documentation internet short-cut's URL has been changed. The short-cut has also been renamed.
+  - The MPL text file's contents have been changed from the Mozilla Public License v1.1 to v2.0 and the file has been renamed accordingly.
++ License changes:
+  - Component source license changed to Mozilla Public License v2.0.
+  - Main documentation files now also licensed under Mozilla Public License v2.0.
+  - Demo source code placed in the public domain (Creative Commons CC0 1.0 Universal).
+
 Release v2.1.1 of 12 October 2010
 + Removed support for Delphi 2 and 3. Unit now generates error when compiled with these compilers.
 + Removed custom hand-point cursor.
