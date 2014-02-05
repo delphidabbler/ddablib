@@ -20,9 +20,6 @@
 unit PJHotLabel;
 
 
-interface
-
-
 {$UNDEF Supports_RTLNamespaces}
 {$DEFINE Requires_Forms_Unit}
 {$IFDEF CONDITIONALEXPRESSIONS}
@@ -39,6 +36,9 @@ interface
     {$WARN UNSAFE_CODE OFF}
   {$IFEND}
 {$ENDIF}
+
+
+interface
 
 
 uses
