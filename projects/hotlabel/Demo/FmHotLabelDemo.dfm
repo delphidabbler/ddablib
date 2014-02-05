@@ -13,6 +13,7 @@ object DemoForm: TDemoForm
   Font.Name = 'Arial'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   ShowHint = True
   PixelsPerInch = 96
   TextHeight = 14
