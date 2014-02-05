@@ -24,12 +24,17 @@ interface
 
 
 // Switch off warnings where this is supported
+{$UNDEF Supports_RTLNamespaces}
+{$DEFINE Requires_Forms_Unit}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
-  {$IF CompilerVersion >= 23.0} // Delphi XE2 ad later
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
     {$DEFINE Supports_RTLNamespaces}
+  {$IFEND}
+  {$IF CompilerVersion >= 20.0} // Delphi 2009 and later
+    {$UNDEF Requires_Forms_Unit}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_CODE OFF}
@@ -43,6 +48,9 @@ uses
   SysUtils,
   Classes,
   Messages,
+  {$IFDEF Requires_Forms_Unit}
+  Forms,
+  {$ENDIF}
   Graphics,
   Controls,
   StdCtrls;
