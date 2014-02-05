@@ -248,7 +248,7 @@ type
       read fCaptionIsURL write SetCaptionIsURL default True;
       {Determines if the Caption displays the URL per the URL property. When
       true the Caption displays the URL and setting either property updates the
-      other. When false the Caption and URL are idependent of each other}
+      other. When false the Caption and URL are independent of each other}
     property VisitedFont: TFont
       read fVisitedFont write SetVisitedFont;
       {Font used by label when in its visited state and it is not highlighted.
@@ -256,7 +256,7 @@ type
     property Visited: Boolean
       read fVisited write SetVisited default False;
       {Indicates whether the label is in its "visited" state. Write the value
-      to change the state. When TrackVists is True clicking the label will set
+      to change the state. When TrackVisits is True clicking the label will set
       this property True, providing the click action completes successfully}
     property TrackVisits: Boolean
       read fTrackVisits write fTrackVisits default False;
