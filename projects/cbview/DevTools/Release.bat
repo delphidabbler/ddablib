@@ -31,9 +31,9 @@ zip %OutFile% -j -9 %HelpDir%\PJCBView.hlp
 zip %OutFile% -j -9 %HelpDir%\PJCBView.als
 
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
-zip %OutFile% -j -9 %DocsDir%\MPL.txt
+zip %OutFile% -j -9 %DocsDir%\MPL-2.txt
 zip %OutFile% -j -9 %DocsDir%\ReadMe.htm
-zip %OutFile% -j -9 %DocsDir%\Wiki.URL
+zip %OutFile% -j -9 %DocsDir%\Documentation.url
 
 zip %OutFile% -r -9 %DemoDir%\*.* -x *.svn\*
 
