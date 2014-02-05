@@ -28,6 +28,9 @@ interface
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 ad later
+    {$DEFINE Supports_RTLNamespaces}
+  {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_CODE OFF}
   {$IFEND}
@@ -36,7 +39,21 @@ interface
 
 uses
   // Delphi
-  SysUtils, Classes, Graphics, Messages, Controls, StdCtrls;
+  {$IFNDEF Supports_RTLNamespaces}
+  SysUtils,
+  Classes,
+  Messages,
+  Graphics,
+  Controls,
+  StdCtrls;
+  {$ELSE}
+  System.SysUtils,
+  System.Classes,
+  Winapi.Messages,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.StdCtrls;
+  {$ENDIF}
 
 
 const
@@ -291,7 +308,13 @@ implementation
 
 uses
   // Delphi
-  Windows, ShellAPI;
+  {$IFNDEF Supports_RTLNamespaces}
+  Windows,
+  ShellAPI;
+  {$ELSE}
+  Winapi.Windows,
+  Winapi.ShellAPI;
+  {$ENDIF}
 
 
 const
