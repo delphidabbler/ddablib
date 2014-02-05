@@ -15,7 +15,7 @@ HCW=0
 LCID=0x809 0x0 0x0 ;English (United Kingdom)
 REPORT=Yes
 TITLE=DelphiDabbler Clipboard Viewer Component
-COPYRIGHT=DelphiDabbler Clipboard Viewer Help - Copyright © 1999-2010 P.D.Johnson
+COPYRIGHT=DelphiDabbler Clipboard Viewer Help - Copyright © 1999-2014 P.D.Johnson
 HLP=.\PJCBView.hlp
 
 [FILES]
