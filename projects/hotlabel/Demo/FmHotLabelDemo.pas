@@ -42,9 +42,6 @@ type
     hlArticle9: TPJHotLabel;
     lblIndex: TLabel;
     procedure HotLabelArticleHint(Sender: TObject; var HintStr: String);
-  private
-    fArticleVisited: array[1..9] of Boolean;
-      {Records whether each article's link has been visited}
   end;
 
 
@@ -81,7 +78,7 @@ var
 begin
   // We set hint differently depending on if link visited or not
   ArtNum := GetArticleNumFromURL((Sender as TPJHotLabel).URL);
-  if not fArticleVisited[ArtNum] then
+  if not (Sender as TPJHotLabel).Visited then
     HintStr := Format('Click to view article #%d', [ArtNum])
   else
     HintStr := Format('Click to revisit article #%d', [ArtNum]);
