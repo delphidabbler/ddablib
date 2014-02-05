@@ -13,12 +13,34 @@
 
 unit FmHotLabelDemo;
 
+
+{$UNDEF Supports_RTLNamespaces}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE Supports_RTLNamespaces}
+  {$IFEND}
+{$ENDIF}
+
+
 interface
 
 
 uses
   // Delphi
-  Classes, Controls, StdCtrls, Forms,
+  {$IFNDEF Supports_RTLNamespaces}
+  Classes,
+  Controls,
+  StdCtrls,
+  Forms,
+  {$ELSE}
+  System.Classes,
+  Vcl.Controls,
+  Vcl.StdCtrls,
+  Vcl.Forms,
+  {$ENDIF}
   // Hot label component
   PJHotLabel;
 
@@ -54,7 +76,11 @@ implementation
 
 uses
   // Delphi
+  {$IFNDEF Supports_RTLNamespaces}
   SysUtils, Graphics;
+  {$ELSE}
+  System.SysUtils, Vcl.Graphics;
+  {$ENDIF}
 
 
 {$R *.DFM}
