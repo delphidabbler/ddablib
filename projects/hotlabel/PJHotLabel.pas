@@ -23,7 +23,6 @@ unit PJHotLabel;
 interface
 
 
-// Switch off warnings where this is supported
 {$UNDEF Supports_RTLNamespaces}
 {$DEFINE Requires_Forms_Unit}
 {$IFDEF CONDITIONALEXPRESSIONS}
