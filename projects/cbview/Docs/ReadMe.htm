@@ -145,37 +145,7 @@
   <div class="subtitle">ReadMe</div>
 </h1>
 
-
-<h2 id="contents">
-  Contents
-</h2>
-
-<ul>
-  <li>
-    <a href="#description" target="_self">Description</a>
-  </li>
-  <li>
-    <a href="#installation" target="_self">Installation</a>
-  </li>
-  <li>
-    <a href="#demo">Demo Program</a>
-  </li>
-  <li>
-    <a href="#update" target="_self">Update History</a>
-  </li>
-  <li>
-    <a href="#license" target="_self">License and Disclaimer</a>
-  </li>
-  <li>
-    <a href="#bugs">Bugs and Feature Requests</a>
-  </li>
-  <li>
-    <a href="#author" target="_self">About the Author</a>
-  </li>
-</ul>
-
-
-<h2 id="description">
+<h2>
   Description
 </h2>
 
@@ -205,48 +175,59 @@
   the clipboard has changed at that time.
 </p>
 
+<h2>
+  Compatibility
+</h2>
+
 <p>
-  The component should work with any 32 bit version of Delphi. .NET versions of
-  Delphi are not supported.
+  The component has been tested with the 32-bit Windows compiler of Delphi 7 and
+  Delphi 2006 to XE4 and the the 64-bit Windows compiler of Delphi XE2 to XE4.
+  It is believed to compile with any version of Delphi from Delphi 2 onwards but
+  this has not been tested with the latest version.
 </p>
 
+<p>
+  The unit has dependencies on the VCL and therefore cannot be used with the
+  FireMonkey framework on with non-Windows targets.
+</p>
 
-<h2 id="installation">
+<h2>
   Installation
 </h2>
 
 <p>
-  The Clipboard Viewer Component and its documentation are supplied in a zip
+  The Clipboard Viewer Component and its associated files are supplied in a zip
   file. Before installing you need to extract all the files from the zip file,
   preserving the directory structure. The following files will be extracted:
 </p>
 
 <ul>
   <li class="first">
-    <strong><code>PJCBView.pas</code></strong> &ndash; Component source code.
+    <strong><code>PJCBView.pas</code></strong> &ndash; component source code.
   </li>
   <li>
-    <strong><code>PJCBView.dcr</code></strong> &ndash; Component palette glyph.
+    <strong><code>PJCBView.dcr</code></strong> &ndash; component palette glyph.
   </li>
   <li>
-    <code>PJCBView.hlp</code> &ndash; Help file that integrates with the Delphi
-    3-7 IDE.
+    <code>PJCBView.hlp</code> &ndash; component help file that integrates with
+    the Delphi 3-7 OpenHelp system.
   </li>
   <li>
-    <code>PJCBView.als</code> &ndash; Keyword file required when integrating the
-    help file with Delphi 6 and 7.
+    <code>PJCBView.als</code> &ndash; a-link keyword file for integration with
+    the Delphi 6 or 7 OpenHelp system.
   </li>
   <li>
-    <code>ReadMe.htm</code> &ndash; This read-me file.
+    <code>ReadMe.htm</code> &ndash; this file.
   </li>
   <li>
-    <code>ChangeLog.txt</code> &ndash; Change log.
+    <code>ChangeLog.txt</code> &ndash; project change log.
   </li>
   <li>
-    <code>MPL.txt</code> &ndash; Mozilla Public License v1.1.
+    <code>MPL-2.txt</code> &ndash; the Mozilla Public License v2.0.
   </li>
   <li>
-    <code>Wiki.URL</code> &ndash; Short-cut to online component Wiki.
+    <code>Documentation.url</code> &ndash; short-cut to the component's online
+    documentation.
   </li>
 </ul>
 
@@ -263,29 +244,48 @@
   >see here</a>.
 </p>
 
+<h2>
+  Documentation
+</h2>
+
 <p>
-  Note that the help file included in the download can only integrate with the
-  IDE in Delphi 4-7. For information on how to do this, see <a
-    href="http://www.delphidabbler.com/articles?article=15"
-  >this article</a>. Users of other versions of Delphi can either use the help
-  file as a stand-alone file (in which case some links won't work) or you can
-  use the <a
-    href="http://www.delphidabbler.com/url/cbview-wiki"
-  >Clipboard Viewer Component Wiki</a>.
+  The component has comprehensive <a
+    href="http://delphidabbler.com/url/cbview-docs"
+  >online documentation</a>.
 </p>
 
+<p>
+  Help files are included in the download for use with the Delphi 3 to 7 IDE.
+  For information on how to integrate the help files with the IDE see <a
+    href="http://www.delphidabbler.com/articles?article=15"
+  >this article</a>.
+</p>
 
-<h2 id="demo">
+<p class="pullout">
+  <strong>NOTE:</strong> The help file is deprecated and is no longer being
+  updated. The last update was in the v1.4 release. Any changes and new features
+  added since v1.4 have not been included in the help file.
+</p>
+
+<h2>
   Demo Program
 </h2>
 
 <p>
-  Source code for a program that demonstrates the component is included in the
-  download.
+  The source code of a program that demonstrates the component is included in
+  the download.
 </p>
 
+<p>
+  This demo requires Delphi 7 as a minimum.
+</p>
 
-<h2 id="update">
+<p>
+  For more information about the demo see the file <code>DemoReadMe.txt</code>
+  in the <code>Demo</code> directory.
+</p>
+
+<h2>
   Update History
 </h2>
 
@@ -294,39 +294,21 @@
   download.
 </p>
 
-
-<h2 id="license">
-  License and Disclaimer
+<h2>
+  License
 </h2>
 
 <p>
-  This product, <em>Clipboard Viewer Component</em>, is subject to the Mozilla
-  Public License Version 1.1 (the &quot;License&quot;). You may not use this
-  Product except in compliance with the License. You may obtain a copy of the
-  License at <a
-    href="http://www.mozilla.org/MPL/MPL-1.1"
-  >http://www.mozilla.org/MPL/MPL-1.1</a>.
-</p>
-
-<p>
-  Software distributed under the License is distributed on an &quot;AS IS&quot;
-  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
-  License for the specific language governing rights and limitations under the
-  License.
-</p>
-
-<p>
-  The Initial Developer of <em>Clipboard Viewer Component</em> is Peter D
-  Johnson. Portions created by the Initial Developer are Copyright &copy;
-  1999-2010 Peter D Johnson (www.delphidabbler.com). All Rights Reserved.
+  The <em>Clipboard Viewer Component</em> is released under the terms of the <a
+    href="http://www.mozilla.org/MPL/2.0/"
+  >Mozilla Public License v2.0</a>.
 </p>
 
 <p>
   All relevant trademarks are acknowledged.
 </p>
 
-
-<h2 id="bugs">
+<h2>
   Bugs and Feature Requests
 </h2>
 
@@ -342,8 +324,7 @@
   template from the <em>Templates</em> drop down list.
 </p>
 
-
-<h2 id="author">
+<h2>
   About the Author
 </h2>
 
@@ -370,7 +351,7 @@
     use the Issue Tracker noted above to report bugs and request new features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2008-2010, P D Johnson, <a
+    This document is copyright &copy; 2008-2014, P D Johnson, <a
       href="http://www.delphidabbler.com/"
     >www.delphidabbler.com</a>.
   </div>
