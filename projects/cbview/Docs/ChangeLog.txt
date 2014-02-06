@@ -11,6 +11,19 @@
 ; Change Log for Clipboard Viewer Component
 ; ------------------------------------------------------------------------------
 
+Release v1.4.1 of 06 February 2014
++ Fixed problem with compiler directives in component and demo source files that was causing compilation to fail on Delphi XE5.
++ References to unit names in the component demo and source files are now qualified with their namespaces when compiled with Delphi XE2 and later.
++ Demo program appearance modified with form scaling switched off, change to Arial font and positioning of the window at desktop centre. Delphi 7 or later is now required to compile the demo.
++ WinHelp help file regenerated with updated copyright date.
++ License changes:
+  - Component source license changed to Mozilla Public License v2.0, which is also now applied to main documentation.
+  - Demo source code and documentation placed in public domain (Creative Commons CC0 1.0 Universal).
++ Documentation revised:
+  - Read-me and demo read-me files revised re changes.
+  - MPL license file renamed and now contains Mozilla Public License v2.0 instead of v1.1.
+  - Online documentation short-cut now renamed and its URL changed.
+
 Release v1.4 of 13 October 2010
 + Updated compiler directives used to detect and act on compiler in use.
 + Added new demo project.
