@@ -1,5 +1,9 @@
 ================================================================================
 Clipboard Viewer Component - Demo Program Notes
+
+Any copyright in this file is dedicated to the Public Domain.
+http://creativecommons.org/publicdomain/zero/1.0/
+
 ================================================================================
 
 The demo program provides an example of how to use the Clipboard Viewer
