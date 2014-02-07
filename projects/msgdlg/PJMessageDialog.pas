@@ -220,11 +220,12 @@ type
   end;
 
   {
-  TPJWinMsgDlgCustom:
-    Base class for components that create a message dialogue using the Windows
-    MessageBoxIndirect API.
+  TPJWinMsgDlg:
+    Implements a dialogue box that is created and displayed by the Windows
+    MessageBoxIndirect API call. The exposed properties are a subset of those
+    exposed by TPJVCLMsgDlg.
   }
-  TPJWinMsgDlgCustom = class(TPJMsgDlgBase)
+  TPJWinMsgDlg = class(TPJMsgDlgBase)
   protected
     function GetDlgType: LongWord; override;
       {Override of read accessor for DlgType property. Includes MB_HELP in
@@ -235,16 +236,6 @@ type
     function GetIconResNameFromStr(const Str: string): PChar; override;
       {Returns a pointer to given string resource name in the format expected by
       the MessageBoxIndirect API call}
-  end;
-
-  {
-  TPJWinMsgDlg:
-    Implements a dialogue box that is created and displayed by the Windows
-    MessageBoxIndirect API call. The exposed properties are a subset of those
-    exposed by TPJVCLMsgDlg. This class simply publishes protected properties
-    implemented in parent classes.
-  }
-  TPJWinMsgDlg = class(TPJWinMsgDlgCustom)
   published
     { Publishing inherited protected properties }
     property ButtonGroup;
@@ -257,50 +248,6 @@ type
     property Text;
     property Title;
     property OnHelp;
-  end;
-
-  {
-  TPJMsgDlgIconKind:
-    The kinds of icons that can be displayed in TPJMessageDialog dialogue boxes.
-    Also determines default dialogue title and sound played. NOTE: provided for
-    backwards compatibility.
-  }
-  TPJMsgDlgIconKind = ( // Icon         Default Title     Sound
-    miWarning,          // warning      "Warning"         MB_ICONEXCLAMATION
-    miInformation,      // information  "Information"     MB_ICONASTERISK
-    miQuery,            // query        "Confirm"         MB_ICONQUESTION
-    miError,            // error        "Error"           MB_ICONHAND
-    miUser              // user-defined Application.Title MB_OK
-  );
-
-  {
-  TPJMessageDialog:
-    Implements a dialogue box that is created and displayed by the Windows
-    MessageBoxIndirect API call. Properties are exposed that are compatible with
-    those of the equivalent component in release 1 of this unit, although the
-    implementation is different.
-  }
-  TPJMessageDialog = class(TPJWinMsgDlgCustom)
-  private // properties
-    function GetIconKind: TPJMsgDlgIconKind;
-      {Read access method for IconKind: we read the corresponding value from the
-      protected Kind property and convert it into the required type}
-    procedure SetIconKind(const Value: TPJMsgDlgIconKind);
-      {Write access method for IconKind property: we write an equivalent value
-      to the protected Kind property after converting to the required type}
-  published
-    { Publishing required inherited protected properties }
-    property ButtonGroup;
-    property HelpContext;
-    property IconResource;
-    property MakeSound;
-    property Text;
-    property Title;
-    { New property }
-    property IconKind: TPJMsgDlgIconKind
-      read GetIconKind write SetIconKind default miWarning;
-      {Kind of icon displayed in dialogue box: also determines any sound played
-      and the default title of the dialogue}
   end;
 
   {
@@ -488,7 +435,7 @@ procedure Register;
 begin
   RegisterComponents(
     'DelphiDabbler',
-    [TPJMessageDialog, TPJWinMsgDlg, TPJVCLMsgDlg]
+    [TPJWinMsgDlg, TPJVCLMsgDlg]
   );
 end;
 
@@ -665,7 +612,7 @@ begin
   // Note: MB_HELP is ignored: help handled specially and differently to API
 end;
 
-{ TPJWinMsgDlgCustom }
+{ TPJWinMsgDlg }
 
 procedure HelpCallback(var HelpInfo: THelpInfo); stdcall;
   {Callback procedure for Execute method procedure. Starts win help with help
@@ -680,7 +627,7 @@ begin
   Cmp.Help;
 end;
 
-function TPJWinMsgDlgCustom.GetDlgType: LongWord;
+function TPJWinMsgDlg.GetDlgType: LongWord;
   {Override of read accessor for DlgType property. Includes MB_HELP in bit-mask
   if help button displayed}
 begin
@@ -689,12 +636,12 @@ begin
     Result := Result or MB_HELP;
 end;
 
-function TPJWinMsgDlgCustom.GetIconResNameFromStr(const Str: string): PChar;
+function TPJWinMsgDlg.GetIconResNameFromStr(const Str: string): PChar;
   {Returns a pointer to given string resource name in the format expected by the
   MessageBoxIndirect API call}
 begin
   {$IFDEF UNICODE}
-  Result := PChar(Str);                      // Pointer to Unicode string
+  Result := PChar(Str);                   // PWideChar pointer to Unicode string
   {$ELSE}
   if SysUtils.Win32Platform = VER_PLATFORM_WIN32_NT then
     Result := PChar(PWChar(WideString(Str))) // PAnsiChar pointer to wide string
@@ -703,7 +650,7 @@ begin
   {$ENDIF}
 end;
 
-function TPJWinMsgDlgCustom.Show: Integer;
+function TPJWinMsgDlg.Show: Integer;
   {Configures and displays dialogue box and returns code representing button
   pressed by user}
 const
@@ -748,32 +695,6 @@ begin
   end;
   // Display dialogue and return result
   Result := Integer(MessageBoxIndirect(MsgBoxParams));
-end;
-
-{ TPJMessageDialog }
-
-function TPJMessageDialog.GetIconKind: TPJMsgDlgIconKind;
-  {Read access method for IconKind: we read the corresponding value from the
-  protected Kind property and convert it into the required type}
-begin
-  // Note: TPJMsgDlgIconKind has equivalent values with same ordinal number as
-  // TPJMsgDlgKind, but TPJMsgDlgKind has some additional values with no
-  // equivalent in TPJMsgDlgIconKind. Because there is no direct access to the
-  // Kind property in this class, the conversion should always be safe
-  Assert(Ord(fKind) <= Ord(High(TPJMsgDlgIconKind)));
-  Result := TPJMsgDlgIconKind(Ord(fKind));
-end;
-
-procedure TPJMessageDialog.SetIconKind(const Value: TPJMsgDlgIconKind);
-  {Write access method for IconKind property: we write an equivalent value to
-  the protected Kind property after converting to the required type}
-begin
-  // Note: TPJMsgDlgIconKind has equivalent values with same ordinal number as
-  // TPJMsgDlgKind, but TPJMsgDlgKind has some additional values with no
-  // equivalent in TPJMsgDlgIconKind. Because of this the new TPJMsgDlgIconKind
-  // value must always be within the range of TPJMsgDlgKind and the conversion
-  // is safe
-  Kind := TPJMsgDlgKind(Ord(Value));
 end;
 
 { TPJVCLMsgDlg }
@@ -1238,3 +1159,4 @@ begin
 end;
 
 end.
+
