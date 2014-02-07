@@ -351,7 +351,6 @@ end;
 
 procedure TDemoForm.FormCreate(Sender: TObject);
 begin
-  Self.HelpFile := ExtractFilePath(ParamStr(0)) + 'MainForm.hlp';
   UpdateControls;
 end;
 
@@ -399,7 +398,7 @@ end;
 
 procedure TDemoForm.lbOptionsClickCheck(Sender: TObject);
 begin
-  lbButtonsClickCheck(lbButtons);      
+  lbButtonsClickCheck(lbButtons);
 end;
 
 procedure TDemoForm.btnHelpFileClick(Sender: TObject);
@@ -498,47 +497,6 @@ begin
       dlgWinMsg.Execute;
     end;
   end;
-end;
-
-const
-  // Maps control names to associated property or event: used to display help
-  // topic for property
-  cHelpMap: array[1..17] of record
-    Ctrl, Prop: string;
-  end =
-  (
-    (Ctrl: 'cbAlign'; Prop: 'Align'),
-    (Ctrl: 'cbButtonGroup'; Prop: 'ButtonGroup'),
-    (Ctrl: 'lbButtons'; Prop: 'Buttons'),
-    (Ctrl: 'cbDefButton'; Prop: 'DefButton'),
-    (Ctrl: 'cbHelpContext'; Prop: 'HelpContext'),
-    (Ctrl: 'cbHelpFile'; Prop: 'HelpFile'),
-    (Ctrl: 'cbIconResource'; Prop: 'IconResource'),
-    (Ctrl: 'cbKind'; Prop: 'Kind'),
-    (Ctrl: 'chkMakeSound'; Prop: 'MakeSound'),
-    (Ctrl: 'edOffsetLeft'; Prop: 'OffsetLeft'),
-    (Ctrl: 'edOffsetTop'; Prop: 'OffsetTop'),
-    (Ctrl: 'lbOptions'; Prop: 'Options'),
-    (Ctrl: 'edText'; Prop: 'Text'),
-    (Ctrl: 'edTitle'; Prop: 'Title'),
-    (Ctrl: 'btnExecute'; Prop: 'Execute'),
-    (Ctrl: 'chkHelpEvent'; Prop: 'OnHelp'),
-    (Ctrl: 'chkCustomise'; Prop: 'OnShow')
-  );
-
-function LookupCtrlProp(const Ctrl: string): string;
-  {Finds name of any property associated with given control: used in displaying
-  help}
-var
-  Idx: Integer;
-begin
-  Result := '';
-  for Idx := Low(cHelpMap) to High(cHelpMap) do
-    if CompareText(Ctrl, cHelpMap[Idx].Ctrl) = 0 then
-    begin
-      Result := cHelpMap[Idx].Prop;
-      Exit;
-    end;
 end;
 
 procedure TDemoForm.HelpEventHandler(Sender: TObject);
