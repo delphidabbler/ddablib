@@ -45,8 +45,6 @@ type
     lblHelpFile: TLabel;
     btnHelpFile: TButton;
     dlgHelpFile: TOpenDialog;
-    lblIconKind: TLabel;
-    cbIconKind: TComboBox;
     lblIconResource: TLabel;
     cbIconResource: TComboBox;
     lblKind: TLabel;
@@ -218,11 +216,6 @@ begin
       // OnHelp event
       chkHelpEvent.Enabled := True;
 
-      // IconKind property
-      lblIconKind.Enabled := False;
-      cbIconKind.Enabled := False;
-      cbIconKind.Clear;
-
       // IconResource property
       if dlgVCLMsg.IconResource <> '' then
         cbIconResource.ItemIndex :=
@@ -308,11 +301,6 @@ begin
 
       // OnHelp event
       chkHelpEvent.Enabled := True;
-
-      // IconKind property
-      lblIconKind.Enabled := False;
-      cbIconKind.Enabled := False;
-      cbIconKind.Clear;
 
       // IconResource property
       if dlgWinMsg.IconResource <> '' then
@@ -527,7 +515,7 @@ end;
 const
   // Maps control names to associated property or event: used to display help
   // topic for property
-  cHelpMap: array[1..18] of record
+  cHelpMap: array[1..17] of record
     Ctrl, Prop: string;
   end =
   (
@@ -537,7 +525,6 @@ const
     (Ctrl: 'cbDefButton'; Prop: 'DefButton'),
     (Ctrl: 'cbHelpContext'; Prop: 'HelpContext'),
     (Ctrl: 'cbHelpFile'; Prop: 'HelpFile'),
-    (Ctrl: 'cbIconKind'; Prop: 'IconKind'),
     (Ctrl: 'cbIconResource'; Prop: 'IconResource'),
     (Ctrl: 'cbKind'; Prop: 'Kind'),
     (Ctrl: 'chkMakeSound'; Prop: 'MakeSound'),
