@@ -14,10 +14,21 @@
 
 unit FmPJMessageDialogDemo;
 
+{$UNDEF Supports_RTLNameSpaces}
+{$IFDEF CONDITIONALEXPRESSIONS}
+  {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
+    {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE Supports_RTLNameSpaces}
+  {$IFEND}
+{$ENDIF}
+
 interface
 
 uses
   // Delphi
+  {$IFNDEF Supports_RTLNameSpaces}
   Classes,
   Dialogs,
   StdCtrls,
@@ -26,6 +37,16 @@ uses
   ExtCtrls,
   ComCtrls,
   Forms,
+  {$ELSE}
+  System.Classes,
+  Vcl.Dialogs,
+  Vcl.StdCtrls,
+  Vcl.Controls,
+  Vcl.CheckLst,
+  Vcl.ExtCtrls,
+  Vcl.ComCtrls,
+  Vcl.Forms,
+  {$ENDIF}
   PJMessageDialog;
 
 type
@@ -93,9 +114,16 @@ var
 implementation
 
 uses
+  {$IFNDEF Supports_RTLNameSpaces}
   SysUtils,
   TypInfo,
   Windows;
+  {$ELSE}
+  System.SysUtils,
+  System.TypInfo,
+  System.UITypes,
+  Winapi.Windows;
+  {$ENDIF}
 
 {$R *.DFM}
 
