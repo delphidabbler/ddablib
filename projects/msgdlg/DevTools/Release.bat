@@ -25,9 +25,6 @@ mkdir Release
 zip -j -9 %OutFile% PJMessageDialog.pas
 zip -j -9 %OutFile% PJMessageDialog.dcr
 
-zip -j -9 %OutFile% %HelpDir%\PJMessageDialog.als
-zip -j -9 %OutFile% %HelpDir%\PJMessageDialog.hlp
-
 zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
 zip -j -9 %OutFile% %DocsDir%\MPL.txt
 zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
