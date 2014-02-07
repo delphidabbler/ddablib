@@ -28,7 +28,7 @@ zip -j -9 %OutFile% PJMessageDialog.dcr
 zip -j -9 %OutFile% %DocsDir%\ChangeLog.txt
 zip -j -9 %OutFile% %DocsDir%\MPL.txt
 zip -j -9 %OutFile% %DocsDir%\ReadMe.htm
-zip -j -9 %OutFile% %DocsDir%\Wiki.URL
+zip -j -9 %OutFile% %DocsDir%\Documentation.url
 
 zip %OutFile% -r -9 %DemoDir%\*.* -x *.svn\*
 
