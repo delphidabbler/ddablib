@@ -223,7 +223,9 @@ type
       {Returns name of help file to be used: this is HelpFile property if set,
       otherwise it is the help file associated with the parent form}
     procedure Help;
-      {Calls help topic specified by HelpContext property in required help file}
+      {Displays help. If OnHelp event handler is assigned then this event is
+      triggered. Otherwise the help topic specified by HelpContext property in
+      required help file is displayed using Delphi's built in help system}
     function Show: Integer; virtual; abstract;
       {Abstract method to be overridden to configure and display dialogue box
       and return code representing button pressed by user}
@@ -373,8 +375,7 @@ type
     function AppHelpHandler(Command: Word; Data: THelpEventData;
       var CallHelp: Boolean): Boolean;
       {Event handler for Application.OnHelp event that prevents default help
-      system being used while dialogue is displayed, to enable us to handle help
-      ourselves}
+      system being used when dialogue's own OnHelp handler is set}
   public
     constructor Create(AOwner: TComponent); override;
       {Constructor. Sets default property values}
@@ -595,12 +596,22 @@ end;
 procedure TPJMsgDlgBase.Help;
   {Displays help. If OnHelp event handler is assigned then this event is
   triggered. Otherwise the help topic specified by HelpContext property in
-  required help file is displayed using WinHelp}
+  required help file is displayed using Delphi's built in help system}
+var
+  SavedAppHelpFile: string;
 begin
   if Assigned(fOnHelp) then
     fOnHelp(Self)
   else
-    WinHelp(GetHWND, PChar(GetHelpFileName), HELP_CONTEXT, HelpContext);
+  begin
+    SavedAppHelpFile := Application.HelpFile;
+    Application.HelpFile := HelpFile;
+    try
+      Application.HelpContext(HelpContext);
+    finally
+      Application.HelpFile := SavedAppHelpFile;
+    end;
+  end;
 end;
 
 procedure TPJMsgDlgBase.SetButtonGroup(const Value: TPJMsgDlgButtonGroup);
@@ -728,10 +739,10 @@ end;
 function TPJVCLMsgDlg.AppHelpHandler(Command: Word; Data: THelpEventData;
   var CallHelp: Boolean): Boolean;
   {Event handler for Application.OnHelp event that prevents default help system
-  being used while dialogue is displayed, to enable us to handle help ourselves}
+  being used when dialogue's own OnHelp handler is set}
 begin
-  CallHelp := False;
-  Result := True;
+  CallHelp := not Assigned(fOnHelp);
+  Result := not CallHelp;
 end;
 
 constructor TPJVCLMsgDlg.Create(AOwner: TComponent);
