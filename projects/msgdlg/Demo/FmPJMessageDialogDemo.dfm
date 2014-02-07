@@ -86,6 +86,7 @@ object DemoForm: TDemoForm
       Width = 70
       Height = 15
       Caption = 'HelpContext:'
+      FocusControl = edHelpContext
     end
     object lblHelpFile: TLabel
       Left = 10
@@ -93,6 +94,7 @@ object DemoForm: TDemoForm
       Width = 49
       Height = 15
       Caption = 'HelpFile:'
+      FocusControl = edHelpFile
     end
     object lblIconResource: TLabel
       Left = 414
@@ -280,29 +282,6 @@ object DemoForm: TDemoForm
       Height = 23
       TabOrder = 15
     end
-    object cbHelpFile: TComboBox
-      Left = 98
-      Top = 354
-      Width = 199
-      Height = 23
-      ItemHeight = 15
-      TabOrder = 7
-      Items.Strings = (
-        'DemoHelp1.hlp'
-        'DemoHelp2.hlp')
-    end
-    object cbHelpContext: TComboBox
-      Left = 98
-      Top = 315
-      Width = 71
-      Height = 23
-      ItemHeight = 15
-      TabOrder = 6
-      OnKeyPress = edNumKeyPress
-      Items.Strings = (
-        '1'
-        '2')
-    end
     object btnHelp: TButton
       Left = 679
       Top = 423
@@ -327,6 +306,21 @@ object DemoForm: TDemoForm
       Height = 21
       Caption = 'Customise dialog using OnShow and OnHide'
       TabOrder = 16
+    end
+    object edHelpContext: TEdit
+      Left = 98
+      Top = 315
+      Width = 71
+      Height = 23
+      TabOrder = 6
+      OnKeyPress = edNumKeyPress
+    end
+    object edHelpFile: TEdit
+      Left = 98
+      Top = 354
+      Width = 197
+      Height = 23
+      TabOrder = 7
     end
   end
   object dlgWinMsg: TPJWinMsgDlg

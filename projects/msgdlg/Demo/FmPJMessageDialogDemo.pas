@@ -58,11 +58,11 @@ type
     lblTitle: TLabel;
     edTitle: TEdit;
     bvlVertical: TBevel;
-    cbHelpFile: TComboBox;
-    cbHelpContext: TComboBox;
     btnHelp: TButton;
     chkHelpEvent: TCheckBox;
     chkCustomise: TCheckBox;
+    edHelpContext: TEdit;
+    edHelpFile: TEdit;
     procedure edNumKeyPress(Sender: TObject; var Key: Char);
     procedure tabCtrlChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -205,13 +205,10 @@ begin
         SLObjToIdx(cbDefButton.Items, Pointer(dlgVCLMsg.DefButton));
 
       // HelpContext property
-      cbHelpContext.Text := IntToStr(dlgVCLMsg.HelpContext);
+      edHelpContext.Text := IntToStr(dlgVCLMsg.HelpContext);
 
       // HelpFile property
-      lblHelpFile.Enabled := True;
-      cbHelpFile.Enabled := True;
-      btnHelpFile.Enabled := True;
-      cbHelpFile.Text := dlgVCLMsg.HelpFile;
+      edHelpFile.Text := dlgVCLMsg.HelpFile;
 
       // OnHelp event
       chkHelpEvent.Enabled := True;
@@ -291,13 +288,10 @@ begin
       cbDefButton.Clear;
 
       // HelpContext property
-      cbHelpContext.Text := IntToStr(dlgWinMsg.HelpContext);
+      edHelpContext.Text := IntToStr(dlgWinMsg.HelpContext);
 
       // HelpFile property
-      lblHelpFile.Enabled := True;
-      cbHelpFile.Enabled := True;
-      btnHelpFile.Enabled := True;
-      cbHelpFile.Text := dlgWinMsg.HelpFile;
+      edHelpFile.Text := dlgWinMsg.HelpFile;
 
       // OnHelp event
       chkHelpEvent.Enabled := True;
@@ -417,9 +411,9 @@ end;
 procedure TDemoForm.btnHelpFileClick(Sender: TObject);
   // Display file open dialog and copy input into text field.
 begin
-  dlgHelpFile.FileName := cbHelpFile.Text;
+  dlgHelpFile.FileName := edHelpFile.Text;
   if dlgHelpFile.Execute then
-    cbHelpFile.Text := dlgHelpFile.FileName;
+    edHelpFile.Text := dlgHelpFile.FileName;
 end;
 
 procedure TDemoForm.btnExecuteClick(Sender: TObject);
@@ -443,12 +437,12 @@ begin
       dlgVCLMsg.DefButton := TMsgDlgBtn(
         cbDefButton.Items.Objects[cbDefButton.ItemIndex]
       );
-      dlgVCLMsg.HelpContext := StrToIntDef(cbHelpContext.Text, 0);
-      if (cbHelpFile.Text <> '')
-        and (ExtractFileName(cbHelpFile.Text) = cbHelpFile.Text) then
-        dlgVCLMsg.HelpFile := ExtractFilePath(ParamStr(0)) + cbHelpFile.Text
+      dlgVCLMsg.HelpContext := StrToIntDef(edHelpContext.Text, 0);
+      if (edHelpFile.Text <> '')
+        and (ExtractFileName(edHelpFile.Text) = edHelpFile.Text) then
+        dlgVCLMsg.HelpFile := ExtractFilePath(ParamStr(0)) + edHelpFile.Text
       else
-        dlgVCLMsg.HelpFile := cbHelpFile.Text;
+        dlgVCLMsg.HelpFile := edHelpFile.Text;
       if chkHelpEvent.Checked then
         dlgVCLMsg.OnHelp := HelpEventHandler
       else
@@ -487,12 +481,12 @@ begin
       dlgWinMsg.ButtonGroup := TPJMsgDlgButtonGroup(
         cbButtonGroup.Items.Objects[cbButtonGroup.ItemIndex]
       );
-      dlgWinMsg.HelpContext := StrToIntDef(cbHelpContext.Text, 0);
-      if (cbHelpFile.Text <> '')
-        and (ExtractFileName(cbHelpFile.Text) = cbHelpFile.Text) then
-        dlgWinMsg.HelpFile := ExtractFilePath(ParamStr(0)) + cbHelpFile.Text
+      dlgWinMsg.HelpContext := StrToIntDef(edHelpContext.Text, 0);
+      if (edHelpFile.Text <> '')
+        and (ExtractFileName(edHelpFile.Text) = edHelpFile.Text) then
+        dlgWinMsg.HelpFile := ExtractFilePath(ParamStr(0)) + edHelpFile.Text
       else
-        dlgWinMsg.HelpFile := cbHelpFile.Text;
+        dlgWinMsg.HelpFile := edHelpFile.Text;
       if chkHelpEvent.Checked then
         dlgWinMsg.OnHelp := HelpEventHandler
       else
