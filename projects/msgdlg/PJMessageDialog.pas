@@ -176,8 +176,7 @@ type
     property HelpFile: string
       read fHelpFile write fHelpFile;
       {Help file to be used to find help topic identified by HelpContext. If
-      this property is '' then owner form help file is used if specified,
-      otherwise application's help file is used}
+      this property is '' then owner form help file is used if specified}
     property IconResource: string
       read fIconResource write fIconResource;
       {Resource ID of icon displayed when Kind = mkUser}
@@ -605,7 +604,7 @@ begin
   else
   begin
     SavedAppHelpFile := Application.HelpFile;
-    Application.HelpFile := HelpFile;
+    Application.HelpFile := GetHelpFileName;
     try
       Application.HelpContext(HelpContext);
     finally
