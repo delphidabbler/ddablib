@@ -38,10 +38,13 @@
 unit PJMessageDialog;
 
 
-// Switch off unsafe warnings if supported
+{$UNDEF Supports_THelpEventData}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
+  {$IFEND}
+  {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
+    {$DEFINE Supports_THelpEventData}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_CAST OFF}
@@ -109,6 +112,10 @@ type
     mkWinLogo,          // Windows logo Application.Title MB_OK
     mkUnknown           // An unknown or unsupported dialogue type
   );
+
+  {$IFNDEF Supports_THelpEventData}
+  THelpEventData = Integer;
+  {$ENDIF}
 
   {
   TPJMsgDlgBase:
@@ -400,7 +407,7 @@ type
       handling to enable us to handle display of help}
     function FindHelpBtn(const Dlg: TForm): TButton;
       {Finds reference to dialogue box form's help button}
-    function AppHelpHandler(Command: Word; Data: Longint;
+    function AppHelpHandler(Command: Word; Data: THelpEventData;
       var CallHelp: Boolean): Boolean;
       {Event handler for Application.OnHelp event that prevents default help
       system being used while dialogue is displayed, to enable us to handle help
@@ -771,7 +778,7 @@ end;
 
 { TPJVCLMsgDlg }
 
-function TPJVCLMsgDlg.AppHelpHandler(Command: Word; Data: Integer;
+function TPJVCLMsgDlg.AppHelpHandler(Command: Word; Data: THelpEventData;
   var CallHelp: Boolean): Boolean;
   {Event handler for Application.OnHelp event that prevents default help system
   being used while dialogue is displayed, to enable us to handle help ourselves}
