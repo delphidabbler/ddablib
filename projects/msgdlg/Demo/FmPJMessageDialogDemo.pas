@@ -24,6 +24,7 @@ uses
 
 type
   TDemoForm = class(TForm)
+    dlgOldStyle: TPJMessageDialog;
     dlgWinMsg: TPJWinMsgDlg;
     dlgVCLMsg: TPJVCLMsgDlg;
     tabCtrl: TTabControl;
@@ -42,6 +43,9 @@ type
     lblDefButton: TLabel;
     cbDefButton: TComboBox;
     lblHelpContext: TLabel;
+    lblHelpFile: TLabel;
+    btnHelpFile: TButton;
+    dlgHelpFile: TOpenDialog;
     lblIconKind: TLabel;
     cbIconKind: TComboBox;
     lblIconResource: TLabel;
@@ -57,6 +61,7 @@ type
     lblTitle: TLabel;
     edTitle: TEdit;
     bvlVertical: TBevel;
+    cbHelpFile: TComboBox;
     cbHelpContext: TComboBox;
     btnHelp: TButton;
     chkHelpEvent: TCheckBox;
@@ -66,6 +71,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure cbButtonGroupChange(Sender: TObject);
     procedure lbButtonsClickCheck(Sender: TObject);
+    procedure btnHelpFileClick(Sender: TObject);
     procedure btnExecuteClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -96,10 +102,11 @@ uses
 
 const
   cPJWinMsgDlgId = 0;
-  cPJVCLMsgDlgId = 1;
+  cPJVCLMsgDlgId = 2;
+  cPJMessageDialogId = 1;
 
-  cCmpNames: array[0..1] of string = (
-    'TPJWinMsgDlg', 'TPJVCLMsgDlg'
+  cCmpNames: array[0..2] of string = (
+    'TPJWinMsgDlg', 'TPJMessageDialog', 'TPJVCLMsgDlg'
   );
 
 function SLObjToIdx(SL: TStrings; Obj: TObject): Integer;
@@ -204,6 +211,12 @@ begin
       // HelpContext property
       cbHelpContext.Text := IntToStr(dlgVCLMsg.HelpContext);
 
+      // HelpFile property
+      lblHelpFile.Enabled := True;
+      cbHelpFile.Enabled := True;
+      btnHelpFile.Enabled := True;
+      cbHelpFile.Text := dlgVCLMsg.HelpFile;
+
       // OnHelp event
       chkHelpEvent.Enabled := True;
 
@@ -289,6 +302,12 @@ begin
       // HelpContext property
       cbHelpContext.Text := IntToStr(dlgWinMsg.HelpContext);
 
+      // HelpFile property
+      lblHelpFile.Enabled := True;
+      cbHelpFile.Enabled := True;
+      btnHelpFile.Enabled := True;
+      cbHelpFile.Text := dlgWinMsg.HelpFile;
+
       // OnHelp event
       chkHelpEvent.Enabled := True;
 
@@ -341,7 +360,91 @@ begin
 
     end;
 
+    cPJMessageDialogId:
+    begin
+      // Align property not supported
+      lblAlign.Enabled := False;
+      cbAlign.Enabled := False;
+      cbAlign.Clear;
+
+      // ButtonGroup property
+      cbButtonGroup.ItemIndex := SLObjToIdx(
+        cbButtonGroup.Items, Pointer(dlgOldStyle.ButtonGroup)
+      );
+
+      // Buttons property
+      lblButtons.Enabled := False;
+      lbButtons.Enabled := False;
+      lbButtons.Clear;
+
+      // DefButton property
+      lblDefButton.Enabled := False;
+      cbDefButton.Enabled := False;
+      cbDefButton.Clear;
+
+      // HelpContext property
+      cbHelpContext.Text := IntToStr(dlgOldStyle.HelpContext);
+
+      // HelpFile property
+      lblHelpFile.Enabled := False;
+      cbHelpFile.Enabled := False;
+      btnHelpFile.Enabled := False;
+      cbHelpFile.Text := '';
+
+      // OnHelp event
+      chkHelpEvent.Enabled := False;
+
+      // IconKind property
+      lblIconKind.Enabled := True;
+      cbIconKind.Enabled := True;
+      TI := TypeInfo(TPJMsgDlgIconKind);
+      TD := GetTypeData(TI);
+      for Idx := TD.MinValue to TD.MaxValue do
+        cbIconKind.Items.AddObject(GetEnumName(TI, Idx), Pointer(Idx));
+      cbIconKind.ItemIndex := SLObjToIdx(
+        cbIconKind.Items, Pointer(dlgOldStyle.IconKind)
+      );
+
+      // IconResource property
+      if dlgOldStyle.IconResource <> '' then
+        cbIconResource.ItemIndex :=
+          cbIconResource.Items.IndexOf(dlgOldStyle.IconResource);
+
+      // Kind property
+      lblKind.Enabled := False;
+      cbKind.Enabled := False;
+      cbKind.Clear;
+
+      // MakeSound property
+      chkMakeSound.Checked := dlgOldStyle.MakeSound;
+
+      // OffsetLeft property not supported
+      lblOffsetLeft.Enabled := False;
+      edOffsetLeft.Enabled := False;
+      edOffsetLeft.Text := '';
+
+      // OffsetTop property not supported
+      lblOffsetTop.Enabled := False;
+      edOffsetTop.Enabled := False;
+      edOffsetTop.Text := '';
+
+      // Options property
+      lblOptions.Enabled := False;
+      lbOptions.Enabled := False;
+      lbOptions.Clear;
+
+      // Text property
+      edText.Text := dlgOldStyle.Text;
+
+      // Title property
+      edTitle.Text := dlgOldStyle.Title;
+
+      // OnShow and OnHide events
+      chkCustomise.Enabled := False;
+
+    end;
   end;
+
 end;
 
 procedure TDemoForm.UpdateOptions;
@@ -408,6 +511,14 @@ begin
   lbButtonsClickCheck(lbButtons);      
 end;
 
+procedure TDemoForm.btnHelpFileClick(Sender: TObject);
+  // Display file open dialog and copy input into text field.
+begin
+  dlgHelpFile.FileName := cbHelpFile.Text;
+  if dlgHelpFile.Execute then
+    cbHelpFile.Text := dlgHelpFile.FileName;
+end;
+
 procedure TDemoForm.btnExecuteClick(Sender: TObject);
 var
   Idx: Integer;
@@ -430,6 +541,11 @@ begin
         cbDefButton.Items.Objects[cbDefButton.ItemIndex]
       );
       dlgVCLMsg.HelpContext := StrToIntDef(cbHelpContext.Text, 0);
+      if (cbHelpFile.Text <> '')
+        and (ExtractFileName(cbHelpFile.Text) = cbHelpFile.Text) then
+        dlgVCLMsg.HelpFile := ExtractFilePath(ParamStr(0)) + cbHelpFile.Text
+      else
+        dlgVCLMsg.HelpFile := cbHelpFile.Text;
       if chkHelpEvent.Checked then
         dlgVCLMsg.OnHelp := HelpEventHandler
       else
@@ -469,6 +585,11 @@ begin
         cbButtonGroup.Items.Objects[cbButtonGroup.ItemIndex]
       );
       dlgWinMsg.HelpContext := StrToIntDef(cbHelpContext.Text, 0);
+      if (cbHelpFile.Text <> '')
+        and (ExtractFileName(cbHelpFile.Text) = cbHelpFile.Text) then
+        dlgWinMsg.HelpFile := ExtractFilePath(ParamStr(0)) + cbHelpFile.Text
+      else
+        dlgWinMsg.HelpFile := cbHelpFile.Text;
       if chkHelpEvent.Checked then
         dlgWinMsg.OnHelp := HelpEventHandler
       else
@@ -484,6 +605,24 @@ begin
       dlgWinMsg.Text := edText.Text;
       dlgWinMsg.Title := edTitle.Text;
       dlgWinMsg.Execute;
+    end;
+    cPJMessageDialogId:
+    begin
+      dlgOldStyle.ButtonGroup := TPJMsgDlgButtonGroup(
+        cbButtonGroup.Items.Objects[cbButtonGroup.ItemIndex]
+      );
+      dlgOldStyle.HelpContext := StrToIntDef(cbHelpContext.Text, 0);
+      dlgOldStyle.IconKind := TPJMsgDlgIconKind(
+        cbIconKind.Items.Objects[cbIconKind.ItemIndex]
+      );
+      if cbIconResource.ItemIndex = 0 then
+        dlgOldStyle.IconResource := ''
+      else
+        dlgOldStyle.IconResource := cbIconResource.Text;
+      dlgOldStyle.MakeSound := chkMakeSound.Checked;
+      dlgOldStyle.Text := edText.Text;
+      dlgOldStyle.Title := edTitle.Text;
+      dlgOldStyle.Execute;
     end;
   end;
 end;
