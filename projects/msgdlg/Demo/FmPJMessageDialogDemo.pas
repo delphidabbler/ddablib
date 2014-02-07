@@ -58,7 +58,6 @@ type
     lblTitle: TLabel;
     edTitle: TEdit;
     bvlVertical: TBevel;
-    btnHelp: TButton;
     chkHelpEvent: TCheckBox;
     chkCustomise: TCheckBox;
     edHelpContext: TEdit;
@@ -70,13 +69,8 @@ type
     procedure lbButtonsClickCheck(Sender: TObject);
     procedure btnHelpFileClick(Sender: TObject);
     procedure btnExecuteClick(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure btnHelpClick(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure lbOptionsClickCheck(Sender: TObject);
   private
-    fLastHelpKW: string;
     fOldKeyDownEvent: TMethod;
     procedure UpdateControls;
     procedure HelpEventHandler(Sender: TObject);
@@ -545,82 +539,6 @@ begin
       Result := cHelpMap[Idx].Prop;
       Exit;
     end;
-end;
-
-procedure TDemoForm.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-  {Checks for F1 key press and displays suitable help depending on active
-  control}
-type
-  // Multi key help record used to search A-keywords in component help file
-  MULTIKEYHELP = record
-    mkSize: DWORD;
-    mkKeyList: AnsiChar;
-    szKeyPhrase: array[0..256] of AnsiChar;
-  end;
-var
-  Ctrl: TControl;
-  Prop: string;
-  KW: string;
-  Cmp: string;
-  MK: MULTIKEYHELP;
-begin
-  // Check for F1 key press
-  if Key = VK_F1 then
-  begin
-    // Get any property associated with active control
-    Ctrl := ActiveControl;
-    if Assigned(Ctrl) and (Ctrl.Enabled) then
-      Prop := LookupCtrlProp(Ctrl.Name)
-    else
-      Prop := '';
-    if Prop <> '' then
-    begin
-      // We have a property to find help for in component help file
-      Cmp := cCmpNames[btnExecute.Tag];
-      // Build A-keyword we need
-      KW := Format('%s_%s', [Cmp, Prop]);
-      if KW <> fLastHelpKW then
-      begin
-        // Keyword different to previous one: record it
-        fLastHelpKW := KW;
-        // Fill in keyword search record & call WinHelp for component help file
-        MK.mkSize := SizeOf(MK);
-        MK.mkKeylist := 'A';
-        FillChar(MK.szKeyPhrase, SizeOf(MK.szKeyPhrase), 0);
-        Move(PChar(KW)^, MK.szKeyPhrase, Length(KW));
-        WinHelp(
-          Handle,
-          'PJMessageDialog.hlp',
-          HELP_MULTIKEY,
-          DWORD(@MK)
-        );
-      end
-      else
-        // Same as last keyword - inform no further info
-        MessageDlg(
-          'No further information on this topic', mtWarning, [mbOK], 0
-        );
-    end
-    else
-    begin
-      // no valid property associated with focussed control: just do main help
-      btnHelp.Click;
-    end;
-  end;
-end;
-
-procedure TDemoForm.btnHelpClick(Sender: TObject);
-  {Display demo program help}
-begin
-  fLastHelpKW := '';
-  WinHelp(Handle, PChar(HelpFile), HELP_CONTENTS, 0);
-end;
-
-procedure TDemoForm.FormDestroy(Sender: TObject);
-  {Close down Windows help if open}
-begin
-  WinHelp(Handle, PChar(HelpFile), HELP_QUIT, 0);
 end;
 
 procedure TDemoForm.HelpEventHandler(Sender: TObject);

@@ -17,7 +17,6 @@ object DemoForm: TDemoForm
   Position = poDesktopCenter
   Scaled = False
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 15
   object tabCtrl: TTabControl
@@ -177,7 +176,7 @@ object DemoForm: TDemoForm
     object btnExecute: TButton
       Left = 20
       Top = 423
-      Width = 641
+      Width = 789
       Height = 41
       Caption = 'Store Properties && Execute'
       Font.Charset = DEFAULT_CHARSET
@@ -281,15 +280,6 @@ object DemoForm: TDemoForm
       Width = 307
       Height = 23
       TabOrder = 15
-    end
-    object btnHelp: TButton
-      Left = 679
-      Top = 423
-      Width = 130
-      Height = 41
-      Caption = 'Help'
-      TabOrder = 18
-      OnClick = btnHelpClick
     end
     object chkHelpEvent: TCheckBox
       Left = 98
