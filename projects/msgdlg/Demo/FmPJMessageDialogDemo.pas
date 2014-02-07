@@ -17,9 +17,15 @@ unit FmPJMessageDialogDemo;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ComCtrls, StdCtrls, CheckLst, ExtCtrls,
-
+  // Delphi
+  Classes,
+  Dialogs,
+  StdCtrls,
+  Controls,
+  CheckLst,
+  ExtCtrls,
+  ComCtrls,
+  Forms,
   PJMessageDialog;
 
 type
@@ -87,7 +93,9 @@ var
 implementation
 
 uses
-  TypInfo;
+  SysUtils,
+  TypInfo,
+  Windows;
 
 {$R *.DFM}
 
