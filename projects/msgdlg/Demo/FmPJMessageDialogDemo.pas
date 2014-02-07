@@ -502,7 +502,15 @@ end;
 procedure TDemoForm.HelpEventHandler(Sender: TObject);
   {Custom help handling for component: just display message}
 begin
-  MessageDlg('Help requested', mtInformation, [mbOK], 0);
+  MessageDlg(
+    Format(
+      'Help requested:'#10'Help file: "%s"'#10'Context: %s',
+      [edHelpFile.Text, edHelpContext.Text]
+    ),
+    mtInformation,
+    [mbOK],
+    0
+  );
 end;
 
 {

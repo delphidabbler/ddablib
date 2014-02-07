@@ -287,6 +287,8 @@ object DemoForm: TDemoForm
       Width = 199
       Height = 21
       Caption = 'Use OnHelp event handler'
+      Checked = True
+      State = cbChecked
       TabOrder = 9
     end
     object chkCustomise: TCheckBox
