@@ -39,12 +39,14 @@ unit PJMessageDialog;
 
 
 {$UNDEF Supports_THelpEventData}
+{$UNDEF Supports_RTLNameSpaces}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
   {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
     {$DEFINE Supports_THelpEventData}
+    {$DEFINE Supports_RTLNameSpaces}
   {$IFEND}
   {$IF CompilerVersion >= 15.0} // Delphi 7 and later
     {$WARN UNSAFE_CAST OFF}
@@ -57,7 +59,21 @@ interface
 
 uses
   // Delphi
-  Windows, Classes, Controls, StdCtrls, Dialogs, Forms;
+  {$IFNDEF Supports_RTLNameSpaces}
+  Classes,
+  Windows,
+  Controls,
+  StdCtrls,
+  Dialogs,
+  Forms;
+  {$ELSE}
+  System.Classes,
+  Winapi.Windows,
+  Vcl.Controls,
+  Vcl.StdCtrls,
+  Vcl.Dialogs,
+  Vcl.Forms;
+  {$ENDIF}
 
 
 const
@@ -427,7 +443,17 @@ implementation
 
 uses
   // Delphi
-  SysUtils, Consts, ExtCtrls, Math;
+  {$IFNDEF Supports_RTLNameSpaces}
+  SysUtils,
+  Math,
+  Consts,
+  ExtCtrls;
+  {$ELSE}
+  System.SysUtils,
+  System.Math,
+  Vcl.Consts,
+  Vcl.ExtCtrls;
+  {$ENDIF}
 
 
 procedure Register;
@@ -574,7 +600,7 @@ begin
   if Assigned(fOnHelp) then
     fOnHelp(Self)
   else
-    Windows.WinHelp(GetHWND, PChar(GetHelpFileName), HELP_CONTEXT, HelpContext);
+    WinHelp(GetHWND, PChar(GetHelpFileName), HELP_CONTEXT, HelpContext);
 end;
 
 procedure TPJMsgDlgBase.SetButtonGroup(const Value: TPJMsgDlgButtonGroup);
@@ -673,8 +699,8 @@ begin
     lpszText := PChar(Text);
     lpszCaption := PChar(GetWindowTitle);
     // Set style flags for window: mapping unsupported flags per OS
-    if ((SysUtils.Win32Platform <> VER_PLATFORM_WIN32_NT) or
-      (SysUtils.Win32MajorVersion < 5)) and
+    if ((Win32Platform <> VER_PLATFORM_WIN32_NT)
+      or (Win32MajorVersion < 5)) and
       (fButtonGroup = bgCancelTryContinue) then
       // CancelTryContinue requires NT system with Win 2K or later. If we don't
       // have it we use AbortRetryIgnore instead
