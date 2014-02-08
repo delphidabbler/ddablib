@@ -11,6 +11,23 @@
 ; Change Log for Message Dialogue Components
 ; ------------------------------------------------------------------------------
 
+Release v3.0.0 of 08 February 2014
++ Deleted the deprecated TPJMessageDialog component and its associated data types. Refactored and flattened class hierarchy as a result.
++ Component help calls are now made via the Application object so that help calls use whichever help system is installed for the host program.
++ Fixed 64 bit data type incompatibility that was causing the unit to fail to compile with Delphi XE2 and later.
++ Fixed problem with compiler directives in component source files that was causing compilation to fail on Delphi XE5.
++ References to unit names in the component and demo source files are now qualified with their namespaces when compiled with Delphi XE2 and later.
++ Removed component and demo project WinHelp help files.
++ Demo project heavily revised re the deletion of the TPJMessageDialog component and the removal of the demo help files. The UI was also updated with a new font, scaling switched off and window location improved. Delphi 7 is now required to compile the demo.
++ License changes:
+  - Component source license changed to Mozilla Public License v2.0, which has also been applied to the main documentation.
+  - Demo source code and documentation placed in public domain (Creative Commons CC0 1.0 Universal).
++ Documentation revised:
+  - Read-me file heavily revised re changes.
+  - New read-me file describing demo program.
+  - MPL license file renamed and now contains Mozilla Public License v2.0 instead of v1.1.
+  - Online documentation short-cut now renamed and its URL changed.
+
 Release v2.3 of 28 August 2010
 + Added new DlgType property to TPJVCLMsgDlg and TPJWinMsgDlg that allows button group and dialogue box type to be specified using same flags that are passed to Windows MessageBox API function. (Issue #9).
 + Added new mkUnknown value to TPJMsgDlgKind to handle dialogue type error conditions in DlgType property.
