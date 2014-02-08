@@ -1,5 +1,21 @@
 This demo exercises the various components provided in PJMessageDialog.pas.
 
+Compiling
+---------
+
+The demo requires Delphi 7 or later to compile. Simply open the .dpr file in any
+supported version of the program and compile to create a 32-bit Windows
+executable. Using Delphi XE2 or later the demo can also be compiled as a 64-bit
+Windows executable simply by adding a Windows 64 bit target and performing a
+full re-build.
+
+Should you want to compile the program in more than one version of Delphi you
+are advised to perform each compilation from a fresh copy of the demo source
+code.
+
+Using
+-----
+
 To use, select the tab for the component you wish to try out and then fill in
 the properties from the controls on the page. The controls for properties that
 are not available for the selected component are disabled. Once all properties
