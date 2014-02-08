@@ -100,14 +100,6 @@
     a:hover {
       text-decoration: underline;
     }
-    .gototop {
-      margin: 1em 0 0 0;
-      padding: 0.3em 0 0 0;
-      text-align: center;
-      position: relative;
-      float: right;
-      font-weight: bold;
-    }
     .pullout {
       border-left: 8px silver solid;
       background-color: #eee;
@@ -151,57 +143,22 @@
   <span class="subtitle">ReadMe</span>
 </h1>
 
-
-<h2 id="contents">
-  Contents
-</h2>
-
-<ul>
-  <li>
-    <a href="#description">Description</a>
-  </li>
-  <li>
-    <a href="#installation">Installation</a>
-  </li>
-  <li>
-    <a href="#demo">Demo Program</a>
-  </li>
-  <li>
-    <a href="#update">Update History</a>
-  </li>
-  <li>
-    <a href="#license">License and Disclaimer</a>
-  </li>
-  <li>
-    <a href="#bugs">Bugs and Feature Requests</a>
-  </li>
-  <li>
-    <a href="#author">About the author</a>
-  </li>
-</ul>
-
-
-<p class="gototop">
-  &raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="description">
+<h2>
   Description
 </h2>
 
 <p>
-  This unit provides various customisable message dialogue box components. Three
-  components are installed on the component palette. They are:
+  This unit implements two customisable message dialogue box components. They
+  are:
 </p>
 
 <ul class="spaced">
   <li>
     <span class="highlight">TPJWinMsgDlg</span><br />
     This component wraps the Windows <em>MessageBoxIndirect</em> API call and
-    displays a message box based on that provided by Windows. This component
-    will be suitable for most purposes and has the lighter footprint.
+    displays a message box based on that provided by Windows. It will be
+    suitable for most purposes and has the lighter footprint.
   </li>
-
   <li>
     <span class="highlight">TPJVCLMsgDlg</span><br />
     This component uses the Delphi VCL <var>CreateMessageDialog</var> function
@@ -213,104 +170,65 @@
     message box or when a finer degree of control over the appearance and
     behaviour of the message box is required. <var>TPJVCLMsgDlg</var> supports
     all the features of <var>TPJWinMsgDlg</var> and extends them. The dialogue
-    box component's form can been customised by handling the <var>OnShow</var>
-    and <var>OnHide</var> events.
-  </li>
-
-  <li>
-    <span class="highlight">TPJMessageDialog</span>
-    <strong>(deprecated)</strong><br />
-    This is an updated version of the component supplied in release 1 of this
-    unit. Various bugs have been fixed and the handling of user icons improved.
-    This component is only provided for backwards compatibility with existing
-    projects that use the old version. It exposes the same properties as the old
-    component. Some of these properties vary from those common to
-    <var>TPJWinMsgDlg</var> and <var>TPJVCLMsgDlg</var>. It is recommended that
-    <var>TPJWinMsgDlg</var> or <var>TPJVCLMsgDlg</var> are used in new projects.
-    <strong><em>This component may be dropped from future
-    releases.</em></strong>
+    box component's form can be customised by handling the <var>OnShow</var> and
+    <var>OnHide</var> events.
   </li>
 </ul>
 
-
-<h3>
-  Documentation
-</h3>
-
-<p>
-  A OpenHelp compatible help file is supplied that provides help on all the
-  components. The help file integrates with the help system of Delphi 4 to 7.
-  The help file can be used stand-alone with later Delphis, but it does require
-  WinHelp which is not provided by default with Windows Vista and later.
-</p>
+<h2>
+  Compatibility
+</h2>
 
 <p>
-  Documentation is also provided in an online <a
-    href="http://www.delphidabbler.com/url/msgdlg-wiki"
-  >Wiki</a>.
+  The components have been tested with the 32-bit Windows compiler of Delphi 7
+  and Delphi 2006 to XE4 and the the 64-bit Windows compiler of Delphi XE2 to
+  XE4. They are believed to compile with any version of Delphi from Delphi 4
+  onwards but this has not been tested.
 </p>
-
-
-<h3>
-   Compatibility
-</h3>
 
 <p>
-  The Message Dialogue Components compile with Delphi 4 and later. They have
-  been tested with Delphi 4, 6, 7, 2006 and 2010.
+  The unit has dependencies on the VCL and therefore cannot be used with the
+  FireMonkey framework or with non-Windows targets.
 </p>
 
-
-<p class="gototop">
-  &raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="installation">
+<h2>
   Installation
 </h2>
 
 <p>
-  The Message Dialogue Components, documentation and demo program are supplied
-  in a zip file. Before installing you need to extract all the files from the
-  zip file, preserving the directory structure. The following files will be
+  The Message Dialogue Components and their associated files are supplied in a
+  zip file. Before installing you need to extract all the files from the zip
+  file, preserving the directory structure. The following files will be
   extracted:
 </p>
 
 <ul>
   <li class="first">
-    <strong><code>PJMessageDialog.pas</code></strong> &ndash; Classes, routines
-    and component source code.
+    <strong><code>PJMessageDialog.pas</code></strong> &ndash; component source
+    code.
   </li>
   <li>
-    <strong><code>PJMessageDialog.dcr</code></strong> &ndash; Component palette
+    <strong><code>PJMessageDialog.dcr</code></strong> &ndash; component palette
     glyphs.
   </li>
   <li>
-    <code>PJMessageDialog.hlp</code> &ndash; Help file that integrates with the
-    Delphi 3 to 7 IDE.
+    <code>ReadMe.htm</code> &ndash; this file.
   </li>
   <li>
-    <code>PJMessageDialog.als</code> &ndash; Keyword file required when
-    integrating the help file with Delphi 6 and 7.
+    <code>ChangeLog.txt</code> &ndash; project change log.
   </li>
   <li>
-    <code>ReadMe.htm</code> &ndash; This read-me file.
+    <code>MPL-2.txt</code> &ndash; the Mozilla Public License v2.0.
   </li>
   <li>
-    <code>ChangeLog.txt</code> &ndash; Change log.
-  </li>
-  <li>
-    <code>MPL.txt</code> &ndash; Mozilla Public License.
-  </li>
-  <li>
-    <code>Wiki.URL</code> &ndash; Short-cut to online component Wiki.
+    <code>Documentation.url</code> &ndash; short-cut to the components' online
+    documentation.
   </li>
 </ul>
 
 <p>
-  In addition to the above files you will find the source code of a <a
-    href="#demo"
-  >demo project</a> in the <code>Demo</code> sub-directory.
+  In addition to the above files you will find the source code of the demo
+  project in the <code>Demo</code> sub-directory.
 </p>
 
 <p>
@@ -321,39 +239,34 @@
   >see here</a>.
 </p>
 
+<h2>
+  Documentation
+</h2>
+
 <p>
-  Note that the help file included in the download can only integrate with the
-  IDE in Delphi 3-7. For information on how to do this, see <a
-    href="http://www.delphidabbler.com/articles?article=15"
-  >this article</a>. Users of other versions of Delphi can either use the help
-  file as a stand-alone file (in which case some links won't work) or you can
-  use the <a
-    href="http://www.delphidabbler.com/url/msgdlg-wiki"
-  >Message Dialogue Components Wiki</a>.
+  Documentation has comprehensive <a
+    href="http://www.delphidabbler.com/url/msgdlg-docs"
+  >online documentation</a>.
 </p>
 
-
-<p class="gototop">
-  &raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="demo">
+<h2>
   Demo Program
 </h2>
 
 <p>
-  A demo program with associated explanatory help file is included in the
-  download. The demo exercises each of the three components. It comes supplied
-  with demo help files to enable experimentation with the components'
-  <var>HelpFile</var> and <var>HelpContext</var> properties.
+  A demo program that exercises the components is included in the download.
 </p>
 
-
-<p class="gototop">
-  &raquo; <a href="#contents">Contents</a>
+<p>
+  This demo requires Delphi 7 as a minimum.
 </p>
 
-<h2 id="update">
+<p>
+  For more information about the demo see the file <code>ReadMe.txt</code> in
+  the <code>Demo</code> directory.
+</p>
+
+<h2>
   Update History
 </h2>
 
@@ -362,43 +275,22 @@
   download.
 </p>
 
-
-<p class="gototop">
-  &raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="license">
-  License and Disclaimer
+<h2>
+  License
 </h2>
 
 <p>
-  This product, <em>Message Dialogue Components</em>, is subject to the Mozilla
-  Public License Version 1.1 (the &quot;License&quot;). You may not use this
-  Product except in compliance with the License. You may obtain a copy of the
-  License at <a
-    href="http://www.mozilla.org/MPL/MPL-1.1"
-  >http://www.mozilla.org/MPL/MPL-1.1</a>.
+  The <em>Message Dialogue Components</em> are released under the terms of the
+  <a
+    href="http://www.mozilla.org/MPL/2.0/"
+  >Mozilla Public License v2.0</a>.
 </p>
 
 <p>
-  Software distributed under the License is distributed on an &quot;AS IS&quot;
-  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
-  License for the specific language governing rights and limitations under the
-  License.
+  All relevant trademarks are acknowledged.
 </p>
 
-<p>
-  The Initial Developer of <em>Message Dialogue Components</em> is Peter D
-  Johnson. Portions created by the Initial Developer are Copyright &copy;
-  2001-2010 Peter D Johnson (www.delphidabbler.com). All Rights Reserved.
-</p>
-
-
-<p class="gototop">
-  &raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="bugs">
+<h2>
   Bugs and Feature Requests
 </h2>
 
@@ -414,19 +306,7 @@
   template from the <em>Templates</em> drop down list.
 </p>
 
-<p>
-  Please note that the <var>OnHelp</var> event introduced in v2.2 does not work
-  correctly with <var>TPJVCLMsgDlg</var> on Delphi 6 in that it does not always
-  inhibit help from being automatically displayed. The event works correctly on
-  all other tested compiler versions.
-</p>
-
-
-<p class="gototop">
-  &raquo; <a href="#contents">Contents</a>
-</p>
-
-<h2 id="author">
+<h2>
   About the author
 </h2>
 
@@ -454,7 +334,7 @@
     features.
   </div>
   <div class="copyright">
-    This document is copyright &copy; 2005-2010, P D Johnson, <a
+    This document is copyright &copy; 2005-2014, P D Johnson, <a
       href="http://www.delphidabbler.com/"
     >www.delphidabbler.com</a>
   </div>
