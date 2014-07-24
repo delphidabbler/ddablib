@@ -19,6 +19,7 @@ unit PJCBView;
 
 {$DEFINE ALLOCATEHWNDINFORMS}
 {$UNDEF RTLNAMESPACES}
+{$UNDEF HASRAISELASTOSERROR}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
@@ -28,6 +29,7 @@ unit PJCBView;
   {$IFEND}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
     {$UNDEF ALLOCATEHWNDINFORMS}
+    {$DEFINE HASRAISELASTOSERROR}
   {$IFEND}
 {$ENDIF}
 
@@ -62,6 +64,15 @@ type
     fEnabled: Boolean;                  // Value of Enabled property
     fHWnd: HWND;                        // Handle of clipboard viewer window
     fHWndNextViewer: HWND;              // Next clipboard viewer handle in chain
+    // New style clipboard API function pointers: nil if not supported by OS
+    fAddClipboardFormatListener: function(hwnd: HWND): BOOL; stdcall;
+    fRemoveClipboardFormatListener: function(hwnd: HWND): BOOL; stdcall;
+    // Old style clipboard API function pointers: nil if new style available
+    fSetClipboardViewer: function (hWndNewViewer: HWND): HWND; stdcall;
+    fChangeClipboardChain: function(hWndRemove, hWndNewNext: HWND): BOOL;
+      stdcall;
+    // Flag indicating if new style API is available
+    fUseNewAPI: Boolean;
   protected
     procedure ClipboardChanged; dynamic;
       {Triggers OnClipboardChanged event if any handler is assigned and
@@ -110,11 +121,18 @@ implementation
 uses
   // Delphi
   {$IFNDEF RTLNAMESPACES}
-  Forms;
+  SysUtils, Forms;
   {$ELSE}
-  Vcl.Forms;
+  System.SysUtils, Vcl.Forms;
   {$ENDIF}
 
+
+resourcestring
+  sAPINotSupported = '*** UNEXPECTED ERROR in Clipboard Viewer Component.'#10#10
+    + 'No clipboard viewer API is not supported by this operating system.'#10#10
+    + 'Please report this error at:'#10
+    + '  https://code.google.com/p/ddab-lib/issues/list'#10
+    + 'stating your operating system version.';
 
 procedure Register;
   {Registers component with Delphi's component palette.
@@ -145,9 +163,35 @@ constructor TPJCBViewer.Create(AOwner: TComponent);
   default property values.
     @param AOwner [in] Reference to owning component.
   }
+const
+  cUserKernelLib = 'user32.dll';
 begin
   inherited;
-  // Create hidden clipboard viewer window
+  // Load required API functions: 1st try to load modern clipboard listener API
+  // functions. If that fails try to load old-style clipboard viewer API
+  // functions. This should never fail, but we raise an exception if the
+  // impossible happens!
+  fAddClipboardFormatListener := GetProcAddress(
+    GetModuleHandle(cUserKernelLib), 'AddClipboardFormatListener'
+  );
+  fRemoveClipboardFormatListener := GetProcAddress(
+    GetModuleHandle(cUserKernelLib), 'RemoveClipboardFormatListener'
+  );
+  fUseNewAPI := Assigned(fAddClipboardFormatListener)
+    and Assigned(fRemoveClipboardFormatListener);
+  if not fUseNewAPI then
+  begin
+    fSetClipboardViewer := GetProcAddress(
+      GetModuleHandle(cUserKernelLib), 'SetClipboardViewer'
+    );
+    fChangeClipboardChain := GetProcAddress(
+      GetModuleHandle(cUserKernelLib), 'ChangeClipboardChain'
+    );
+    if not Assigned(fSetClipboardViewer)
+      or not Assigned(fChangeClipboardChain) then
+      raise Exception.Create(sAPINotSupported);
+  end;
+  // Create hidden clipboard listener window
   {$IFDEF ALLOCATEHWNDINFORMS}
   fHWnd := Forms.AllocateHWnd(WndMethod);
   {$ELSE}
@@ -157,9 +201,22 @@ begin
   fHWnd := Classes.AllocateHWnd(WndMethod);
   {$ENDIF}
   {$ENDIF}
-  // Register window as clipboard viewer, storing handle of next window in chain
-  fHWndNextViewer := SetClipboardViewer(fHWnd);
-
+  if fUseNewAPI then
+  begin
+    // Register window as clipboard listener
+    if not fAddClipboardFormatListener(fHWnd) then
+      {$IFDEF HASRAISELASTOSERROR}
+      RaiseLastOSError;
+      {$ELSE}
+      RaiseLastWin32Error;
+      {$ENDIF}
+  end
+  else
+  begin
+    // Register window as clipboard viewer, storing handle of next window in
+    // chain
+    fHWndNextViewer := fSetClipboardViewer(fHWnd);
+  end;
   // Set default property values
   fTriggerOnCreation := True;
   fEnabled := True;
@@ -169,9 +226,12 @@ destructor TPJCBViewer.Destroy;
   {Object destructor. Unregisters and destroys clipboard viewer window.
   }
 begin
-  // Remove clipboard viewer window from chain
-  ChangeClipboardChain(fHWnd, fHWndNextViewer);
-  // Destroy window
+  // Removed clipboard listener or viewer
+  if fUseNewAPI then
+    fRemoveClipboardFormatListener(fHWnd)
+  else
+    fChangeClipboardChain(fHWnd, fHWndNextViewer);
+  // Destroy listener window
   {$IFDEF ALLOCATEHWNDINFORMS}
   Forms.DeallocateHWnd(fHWnd);
   {$ELSE}
@@ -198,36 +258,57 @@ procedure TPJCBViewer.WndMethod(var Msg: TMessage);
   {Window procedure for clipboard viewer window.
     @param Msg [in/out] Message to be handled. Result field my be altered.
   }
+var
+  MsgHandled: Boolean; // flag showing whether message was handled
 begin
+  MsgHandled := False;
   // Process necessary messages
+  // TODO: eliminate with statement
   with Msg do
   begin
     case Msg of
+      WM_CLIPBOARDUPDATE:
+      begin
+        if fUseNewAPI then
+        begin
+          MsgHandled := True;
+          // Clipboard has changed: trigger event
+          ClipboardChanged;
+        end;
+      end;
       WM_DRAWCLIPBOARD:
       begin
-        // Clipboard has changed: trigger event
-        ClipboardChanged;
-        // Pass on message to any next window in viewer chain
-        if fHWndNextViewer <> 0 then
-          SendMessage(fHWndNextViewer, Msg, WParam, LParam);
+        if not fUseNewAPI then
+        begin
+          MsgHandled := True;
+          // Clipboard has changed: trigger event
+          ClipboardChanged;
+          // Pass on message to any next window in viewer chain
+          if fHWndNextViewer <> 0 then
+            SendMessage(fHWndNextViewer, Msg, WParam, LParam);
+        end;
       end;
       WM_CHANGECBCHAIN:
       begin
-        // NOTE: although API documentation says we should return 0 if this
-        // message is handled, example code on MSDN doesn't do this, so we don't
-        // either.
-        // Windows is detaching a clipboard viewer
-        if HWND(WParam) = fHWndNextViewer then
-          // window being detached is next one: record new "next" window
-          fHWndNextViewer := HWND(LParam)
-        else if fHWndNextViewer <> 0 then
-          // window being detached is not next: pass message along
-          SendMessage(fHWndNextViewer, Msg, WParam, LParam);
+        if not fUseNewAPI then
+        begin
+          MsgHandled := True;
+          // NOTE: although API documentation says we should return 0 if this
+          // message is handled, example code on MSDN doesn't do this, so we
+          // don't either.
+          // Windows is detaching a clipboard viewer
+          if HWND(WParam) = fHWndNextViewer then
+            // window being detached is next one: record new "next" window
+            fHWndNextViewer := HWND(LParam)
+          else if fHWndNextViewer <> 0 then
+            // window being detached is not next: pass message along
+            SendMessage(fHWndNextViewer, Msg, WParam, LParam);
+        end;
       end;
-      else
-        // We're not handling this message: do default processing
-        Result := DefWindowProc(fHWnd, Msg, WParam, LParam);
     end;
+    if not MsgHandled then
+      // We're not handling this message: do default processing
+      Result := DefWindowProc(fHWnd, Msg, WParam, LParam);
   end;
 end;
 
