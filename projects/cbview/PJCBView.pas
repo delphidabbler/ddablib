@@ -263,53 +263,49 @@ var
 begin
   MsgHandled := False;
   // Process necessary messages
-  // TODO: eliminate with statement
-  with Msg do
-  begin
-    case Msg of
-      WM_CLIPBOARDUPDATE:
+  case Msg.Msg of
+    WM_CLIPBOARDUPDATE:
+    begin
+      if fUseNewAPI then
       begin
-        if fUseNewAPI then
-        begin
-          MsgHandled := True;
-          // Clipboard has changed: trigger event
-          ClipboardChanged;
-        end;
-      end;
-      WM_DRAWCLIPBOARD:
-      begin
-        if not fUseNewAPI then
-        begin
-          MsgHandled := True;
-          // Clipboard has changed: trigger event
-          ClipboardChanged;
-          // Pass on message to any next window in viewer chain
-          if fHWndNextViewer <> 0 then
-            SendMessage(fHWndNextViewer, Msg, WParam, LParam);
-        end;
-      end;
-      WM_CHANGECBCHAIN:
-      begin
-        if not fUseNewAPI then
-        begin
-          MsgHandled := True;
-          // NOTE: although API documentation says we should return 0 if this
-          // message is handled, example code on MSDN doesn't do this, so we
-          // don't either.
-          // Windows is detaching a clipboard viewer
-          if HWND(WParam) = fHWndNextViewer then
-            // window being detached is next one: record new "next" window
-            fHWndNextViewer := HWND(LParam)
-          else if fHWndNextViewer <> 0 then
-            // window being detached is not next: pass message along
-            SendMessage(fHWndNextViewer, Msg, WParam, LParam);
-        end;
+        MsgHandled := True;
+        // Clipboard has changed: trigger event
+        ClipboardChanged;
       end;
     end;
-    if not MsgHandled then
-      // We're not handling this message: do default processing
-      Result := DefWindowProc(fHWnd, Msg, WParam, LParam);
+    WM_DRAWCLIPBOARD:
+    begin
+      if not fUseNewAPI then
+      begin
+        MsgHandled := True;
+        // Clipboard has changed: trigger event
+        ClipboardChanged;
+        // Pass on message to any next window in viewer chain
+        if fHWndNextViewer <> 0 then
+          SendMessage(fHWndNextViewer, Msg.Msg, Msg.WParam, Msg.LParam);
+      end;
+    end;
+    WM_CHANGECBCHAIN:
+    begin
+      if not fUseNewAPI then
+      begin
+        MsgHandled := True;
+        // NOTE: although API documentation says we should return 0 if this
+        // message is handled, example code on MSDN doesn't do this, so we
+        // don't either.
+        // Windows is detaching a clipboard viewer
+        if HWND(Msg.WParam) = fHWndNextViewer then
+          // window being detached is next one: record new "next" window
+          fHWndNextViewer := HWND(Msg.LParam)
+        else if fHWndNextViewer <> 0 then
+          // window being detached is not next: pass message along
+          SendMessage(fHWndNextViewer, Msg.Msg, Msg.WParam, Msg.LParam);
+      end;
+    end;
   end;
+  if not MsgHandled then
+    // We're not handling this message: do default processing
+    Msg.Result := DefWindowProc(fHWnd, Msg.Msg, Msg.WParam, Msg.LParam);
 end;
 
 end.
