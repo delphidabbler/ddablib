@@ -67,7 +67,7 @@ const
   ///  <remarks>
   ///  <para>According to Windows API docs, error codes with bit 29 set are
   ///  reserved for application use.</para>
-  ///  <para>Test for an app error code by and-ing the error code with this
+  ///  <para>Test for an app error code by anding the error code with this
   ///  mask.</para>
   ///  </remarks>
   cAppErrorMask = 1 shl 29;
@@ -85,14 +85,14 @@ function IsApplicationError(const ErrCode: LongWord): Boolean;
 
 type
   ///  <summary>
-  ///  Enumeration of possible priorties for a console application.
+  ///  Enumeration of possible priorities for a console application.
   ///  </summary>
   TPJConsoleAppPriority = (
     cpDefault,    // use default priority (see Win API docs for details)
     cpHigh,       // use for time-critical tasks: processor intensive
     cpNormal,     // normal process with no specific scheduling needs
     cpIdle,       // run only when system idle
-    cpRealTime    // highest possible priority: preempts all threads inc OS
+    cpRealTime    // highest possible priority: pre-empts all threads inc. OS
   );
 
 type
@@ -183,7 +183,7 @@ function MakeSize(const ACX, ACY: LongInt): TSize;
 
 type
   ///  <summary>
-  ///  Base class for classe that execute a command line (console) application.
+  ///  Base class for classes that execute a command line (console) application.
   ///  </summary>
   ///  <remarks>
   ///  <para>Many properties are available to customise how the console app is
@@ -216,11 +216,11 @@ type
     fExitCode: LongWord;
     ///  <summary>Maximum execution time of console app (in ms).</summary>
     fMaxExecTime: LongWord;
-    ///  <summary>Description of any error that occured while trying to execute
+    ///  <summary>Description of any error that occurred while trying to execute
     ///  console app.</summary>
     fErrorMessage: string;
-    ///  <summary>Code of any error that occured while trying to execute console
-    ///  app.</summary>
+    ///  <summary>Code of any error that occurred while trying to execute
+    ///  console app.</summary>
     fErrorCode: LongWord;
     ///  <summary>Determines whether console app is to be visible or hidden.
     ///  </summary>
@@ -251,17 +251,20 @@ type
     fConsoleTitle: string;
     ///  <summary>Colours to be used in a console window.</summary>
     fConsoleColors: TPJConsoleColors;
-    ///  <summary>Size of console's screen buffer in character columns and rows.
+    ///  <summary>Size of console screen buffer in character columns and rows.
     ///  </summary>
     fScreenBufferSize: TSize;
-    ///  <summary>Size of console's window in pixels.</summary>
+    ///  <summary>Size of console window in pixels.</summary>
     fWindowSize: TSize;
-    ///  <summary>Position of console's window in pixel co-oridinates relative
-    ///  to the screen.</summary>
+    ///  <summary>Position of console window in pixel coordinates relative to
+    ///  the screen.</summary>
     fWindowPosition: TPoint;
     ///  <summary>Pointer to environment block to be passed to console app.
     ///  </summary>
     fEnvironment: Pointer;
+    ///  <summary>Flag that indicates if the environment block pointed to by
+    ///  fEnvironment is Unicode (True) or ANSI (False).</summary>
+    fUnicodeEnvironment: Boolean;
     ///  <summary>Information about running console app process. All values are
     ///  zero when no process is running.</summary>
     fProcessInfo: TProcessInformation;
@@ -355,8 +358,9 @@ type
     ///  <summary>Determines whether console app's console is to be displayed
     ///  (True) or hidden (False).</summary>
     property Visible: Boolean read fVisible write fVisible default False;
-    ///  <summary>Maximum execution time of console app in ms. Set to INFINITE
-    ///  if no execution time limit is required.</summary>
+    ///  <summary>Maximum execution time of console app in ms.</summary>
+    ///  <remarks>Set to INFINITE if no execution time limit is required.
+    ///  </remarks>
     property MaxExecTime: LongWord read fMaxExecTime write SetMaxExecTime
       default cDefMaxExecTime;
     ///  <summary>Time console app executes between OnWork events, in ms.
@@ -433,11 +437,20 @@ type
       read fWindowSize write fWindowSize;
     ///  <summary>Pointer to the environment block to be used by a console app.
     ///  </summary>
-    ///  <remarks>The caller is responsible for allocating and freeing the
-    ///  memory used for the environment block. This memory must remain
-    ///  allocated while the console app is running.</remarks>
+    ///  <remarks>
+    ///  <para>If the UnicodeEnvironment property is False then the environment
+    ///  block is interpreted as ANSI text but when UnicodeEnvironment is True
+    ///  the block is expected to be in Unicode.</para>
+    ///  <para>The caller is responsible for allocating and freeing the memory
+    ///  used for the environment block. This memory must remain allocated while
+    ///  the console app is running.</para>
+    ///  </remarks>
     property Environment: Pointer
       read fEnvironment write fEnvironment;
+    ///  <summary>Flag that indicates if the environment block pointed to by the
+    ///  Environment property is in Unicode (True) or in ANSI (False).</summary>
+    property UnicodeEnvironment: Boolean
+      read fUnicodeEnvironment write fUnicodeEnvironment default False;
     ///  <summary>Priority with which a console app is executed.</summary>
     property Priority: TPJConsoleAppPriority
       read fPriority write fPriority default cpDefault;
@@ -560,6 +573,7 @@ type
     property WindowPosition;
     property WindowSize;
     property Environment;
+    property UnicodeEnvironment;
     property Priority;
     property TimeToLive;
     property ElapsedTime;
@@ -710,6 +724,7 @@ begin
   fThreadAttrs := nil;
   fUseNewConsole := False;
   fEnvironment := nil;
+  fUnicodeEnvironment := False;
   fPriority := cpDefault;
   fConsoleTitle := '';
   fScreenBufferSize := MakeSize(0, 0);
@@ -896,7 +911,7 @@ end;
 function TPJCustomConsoleApp.StartProcess(const CmdLine, CurrentDir: string;
   out ProcessInfo: TProcessInformation): Boolean;
 const
-  // Maps Visible property to required wondows flags
+  // Maps Visible property to required windows flags
   cShowFlags: array[Boolean] of Integer = (SW_HIDE, SW_SHOW);
   // Maps Priority property to creation flags
   cPriorityFlags: array[TPJConsoleAppPriority] of DWORD = (
@@ -957,6 +972,8 @@ begin
   CreateFlags := cPriorityFlags[fPriority];
   if fUseNewConsole then
     CreateFlags := CreateFlags or CREATE_NEW_CONSOLE;
+  if fUnicodeEnvironment then
+    CreateFlags := CreateFlags or CREATE_UNICODE_ENVIRONMENT;
 
   // Set current directory
   CurDir := nil;
