@@ -11,6 +11,9 @@
  * Clipboard Viewer Component source code. Implements a component that monitors
  * the Windows clipboard and triggers an event whenever the content of the
  * clipboard changes.
+ *
+ * Thanks to Mason Wheeler for providing the clipboard listener code using the
+ * AddClipboardFormatListener and RemoveClipboardFormatListener API functions.
 }
 
 
