@@ -150,29 +150,23 @@
 </h2>
 
 <p>
-  This is a non-visual Delphi component.
+  <var>TPJCBView</var> is a non-visual Delphi component that notifies the user
+  whenever the content of the clipboard changes.
 </p>
 
 <p>
-  It registers a hidden window as a &quot;clipboard viewer&quot; which means
-  that the component is notified by Windows of any changes to the contents of
-  the clipboard. On receipt of these notifications the component triggers an
-  event. By handling the event your application can respond to changes on the
-  clipboard.
+  Notification is by means of an event. By handling the event your application
+  can respond to changes on the clipboard. The component can be used as the
+  heart of a program that displays &quot;live&quot; information about the
+  clipboard. Alternatively it can be used to enable and disable other components
+  whose state depends on the available clipboard formats.
 </p>
 
 <p>
-  The component can be used as the heart of a program that displays
-  &quot;live&quot; information about the clipboard or simply to enable and
-  disable other components that should only be enabled when the clipboard has
-  valid contents.
-</p>
-
-<p>
-  The component provides an <var>Enabled</var> property to switch its event
-  triggering on and off and a <var>TriggerOnCreation</var> property that causes
-  the event to be triggered when the control is created, regardless of whether
-  the clipboard has changed at that time.
+  <var>TPJCBView</var> provides an <var>Enabled</var> property that is used to
+  enable and disable the component and hence it's events. It also has a
+  <var>TriggerOnCreation</var> property that triggers an event when the control
+  is created.
 </p>
 
 <h2>
