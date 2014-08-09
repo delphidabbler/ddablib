@@ -15,7 +15,6 @@ setlocal
 
 set ReleaseDir=Release
 set OutFile=%ReleaseDir%\dd-cbview.zip
-set HelpDir=Help
 set DocsDir=Docs
 set DemoDir=Demo
 
@@ -26,9 +25,6 @@ mkdir %ReleaseDir%
 
 zip %OutFile% -j -9 PJCBView.pas
 zip %OutFile% -j -9 PJCBView.dcr
-
-zip %OutFile% -j -9 %HelpDir%\PJCBView.hlp
-zip %OutFile% -j -9 %HelpDir%\PJCBView.als
 
 zip %OutFile% -j -9 %DocsDir%\ChangeLog.txt
 zip %OutFile% -j -9 %DocsDir%\MPL-2.txt
