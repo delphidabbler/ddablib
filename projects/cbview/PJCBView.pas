@@ -160,6 +160,13 @@ resourcestring
     + '  https://code.google.com/p/ddab-lib/issues/list'#10
     + 'stating your operating system version.';
 
+const
+  // WM_CLIPBOARDUPDATE is not defined in the Messages unit of all supported
+  // versions of Delphi, so we defined it here for safety.
+  {$EXTERNALSYM WM_CLIPBOARDUPDATE}
+  WM_CLIPBOARDUPDATE  = $031D;
+
+
 procedure Register;
 begin
   RegisterComponents('DelphiDabbler', [TPJCBViewer]);
