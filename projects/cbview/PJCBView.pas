@@ -13,7 +13,8 @@
  * clipboard changes.
  *
  * Thanks to Mason Wheeler for providing the clipboard listener code using the
- * AddClipboardFormatListener and RemoveClipboardFormatListener API functions.
+ * more reliable AddClipboardFormatListener and RemoveClipboardFormatListener
+ * API functions.
 }
 
 
@@ -45,7 +46,6 @@ interface
 
 
 uses
-  // Delphi
   {$IFNDEF RequiresRTLNameSpaces}
   Windows,
   Messages,
@@ -58,77 +58,92 @@ uses
 
 
 type
-
-  {
-  TPJCBViewer:
-    Component that monitors the Windows clipboard and triggers an event whenever
-    the clipboard contents change.
-  }
+  ///  <summary>Component that monitors the Windows clipboard and triggers an
+  ///  event whenever the clipboard contents change.</summary>
+  ///  <remarks>On versions of Windows that support it the newer clipboard
+  ///  format listener API is used to monitor the clipboard. On older versions
+  ///  of Windows the older, and less reliable, clipboard viewer API is used
+  ///  instead.</remarks>
   TPJCBViewer = class(TComponent)
   {$IFDEF SupportsStrict}strict{$ENDIF}
   private
-    fOnClipboardChanged: TNotifyEvent;  // OnClipboardChanged event handler
-    fTriggerOnCreation: Boolean;        // Value of TriggerOnCreation property
-    fEnabled: Boolean;                  // Value of Enabled property
-    fHWnd: HWND;                        // Handle of clipboard viewer window
-    fHWndNextViewer: HWND;              // Next clipboard viewer handle in chain
-    // New style clipboard API function pointers: nil if not supported by OS
+    ///  <summary>Reference to any OnClipboardChanged event handler.</summary>
+    fOnClipboardChanged: TNotifyEvent;
+    ///  <summary>Value of TriggerOnCreation property.</summary>
+    fTriggerOnCreation: Boolean;
+    ///  <summary>Value of Enabled property.</summary>
+    fEnabled: Boolean;
+    ///  <summary>Handle of hidden clipboard viewer window.</summary>
+    fHWnd: HWND;
+    ///  <summary>Handle of next clipboard viewer handle in chain.</summary>
+    ///  <remarks>Used only when old clipboard viewer API is in use, i.e. when
+    ///  fUseNewAPI is False.</remarks>
+    fHWndNextViewer: HWND;
+    ///  <summary>Flag indicating if the new style clipboard format listener API
+    ///  is available on the current OS.</summary>
+    fUseNewAPI: Boolean;
+    ///  <summary>Reference to AddClipboardFormatListener API function.
+    ///  </summary>
+    ///  <remarks>This reference is nil if the function is not supported by the
+    ///  OS, i.e. if fUseNewAPI is False.</remarks>
     fAddClipboardFormatListener: function(hwnd: HWND): BOOL; stdcall;
+    ///  <summary>Reference to RemoveClipboardFormatListener API function.
+    ///  </summary>
+    ///  <remarks>This reference is nil if the function is not supported by the
+    ///  OS, i.e. if fUseNewAPI is False.</remarks>
     fRemoveClipboardFormatListener: function(hwnd: HWND): BOOL; stdcall;
-    // Old style clipboard API function pointers: nil if new style available
+    ///  <summary>Reference to SetClipboardViewer API function.</summary>
+    ///  <remarks>This reference is nil if the newer clipboard format listener
+    ///  API is available, i.e. if fUseNewAPI is True.</remarks>
     fSetClipboardViewer: function (hWndNewViewer: HWND): HWND; stdcall;
+    ///  <summary>Reference to ChangeClipboardChain API function.</summary>
+    ///  <remarks>This reference is nil if the newer clipboard format listener
+    ///  API is available, i.e. if fUseNewAPI is True.</remarks>
     fChangeClipboardChain: function(hWndRemove, hWndNewNext: HWND): BOOL;
       stdcall;
-    // Flag indicating if new style API is available
-    fUseNewAPI: Boolean;
   {$IFDEF SupportsStrict}strict{$ENDIF}
   protected
+    ///  <summary>Triggers OnClipboardChanged event iff a handler is assigned
+    ///  and the component is enabled.</summary>
     procedure ClipboardChanged; dynamic;
-      {Triggers OnClipboardChanged event if any handler is assigned and
-      component is enabled.
-      }
+    ///  <summary>Fires OnClipboardChanged on component creation iff
+    ///  TriggerOnCreation is True.</summary>
     procedure Loaded; override;
-      {Fires OnClipboardChanged event if required on component creation.
-      }
+    ///  <summary>Window procedure for hidden clipboard viewer window.</summary>
     procedure WndMethod(var Msg: TMessage); virtual;
-      {Window procedure for clipboard viewer window.
-        @param Msg [in/out] Message to be handled. Result field my be altered.
-      }
   public
+    ///  <summary>Constructs new component instance and creates hidden clipboard
+    ///  viewer window.</summary>
     constructor Create(AOwner: TComponent); override;
-      {Object constructor: Creates and registers clipboard viewer window and
-      sets default property values.
-        @param AOwner [in] Reference to owning component.
-      }
+    ///  <summary>Destroys component instance and its hidden clipboard window.
+    ///  </summary>
     destructor Destroy; override;
-      {Object destructor. Unregisters and destroys clipboard viewer window.
-      }
   published
+    ///  <summary>Event triggered when clipboard contents change.</summary>
+    ///  <remarks>Event will also be triggered on creation of the component iff
+    ///  TriggerOnCreation property is True.</remarks>
     property OnClipboardChanged: TNotifyEvent
       read fOnClipboardChanged write fOnClipboardChanged;
-      {Event triggered when clipboard contents change}
+    ///  <summary>Determines whether an OnClipboardChanged event is triggered
+    ///  when the component is created.</summary>
+    ///  <remarks>This property should only be set at design time. It has no
+    ///  effect if set at run time.</remarks>
     property TriggerOnCreation: Boolean
       read fTriggerOnCreation write fTriggerOnCreation default True;
-      {When true causes OnClipboardChanged event to be triggered as soon as
-      component is created, otherwise OnClipboardChanged event only triggers
-      when clipboard actually changes. NOTE: this property can only be set at
-      design time. It has no effect if set at run time}
+    ///  <summary>Enables and disables the component. When False
+    ///  OnClipboardChanged events are never fired.</summary>
     property Enabled: Boolean read fEnabled write fEnabled default True;
-      {When true component triggers events when clipboard changes, when false
-      these events are not triggered}
   end;
 
 
+///  Registers component with Delphi's component palette at design time.
 procedure Register;
-  {Registers component with Delphi's component palette.
-  }
 
 
 implementation
 
 
 uses
-  // Delphi
   {$IFNDEF RequiresRTLNameSpaces}
   SysUtils, Forms;
   {$ELSE}
@@ -137,6 +152,8 @@ uses
 
 
 resourcestring
+  // Fatal error message displayed if no suitable clipboard monitoring API can
+  // be found. *** This should never happen ***
   sAPINotSupported = '*** UNEXPECTED ERROR in Clipboard Viewer Component.'#10#10
     + 'No clipboard viewer API is not supported by this operating system.'#10#10
     + 'Please report this error at:'#10
@@ -144,8 +161,6 @@ resourcestring
     + 'stating your operating system version.';
 
 procedure Register;
-  {Registers component with Delphi's component palette.
-  }
 begin
   RegisterComponents('DelphiDabbler', [TPJCBViewer]);
 end;
@@ -153,25 +168,17 @@ end;
 { TPJCBViewer }
 
 procedure TPJCBViewer.ClipboardChanged;
-  {Triggers OnClipboardChanged event if any handler is assigned and component is
-  enabled.
-  }
 begin
   try
-    // Fire event if assigned and enabled
+    // Fire event iff assigned and enabled
     if Assigned(fOnClipboardChanged) and fEnabled then
       fOnClipboardChanged(Self);
   except
-    // Ensure any un-caught exception is handled by application
     Application.HandleException(Self);
   end;
 end;
 
 constructor TPJCBViewer.Create(AOwner: TComponent);
-  {Object constructor: Creates and registers clipboard viewer window and sets
-  default property values.
-    @param AOwner [in] Reference to owning component.
-  }
 const
   cUserKernelLib = 'user32.dll';
 begin
@@ -226,16 +233,14 @@ begin
     // chain
     fHWndNextViewer := fSetClipboardViewer(fHWnd);
   end;
-  // Set default property values
+  // Default property values
   fTriggerOnCreation := True;
   fEnabled := True;
 end;
 
 destructor TPJCBViewer.Destroy;
-  {Object destructor. Unregisters and destroys clipboard viewer window.
-  }
 begin
-  // Removed clipboard listener or viewer
+  // Remove clipboard listener or viewer
   if fUseNewAPI then
     fRemoveClipboardFormatListener(fHWnd)
   else
@@ -254,8 +259,6 @@ begin
 end;
 
 procedure TPJCBViewer.Loaded;
-  {Fires OnClipboardChanged event if required on component creation.
-  }
 begin
   inherited Loaded;
   // Trigger OnClipboardChanged event if required
@@ -264,16 +267,13 @@ begin
 end;
 
 procedure TPJCBViewer.WndMethod(var Msg: TMessage);
-  {Window procedure for clipboard viewer window.
-    @param Msg [in/out] Message to be handled. Result field my be altered.
-  }
 var
   MsgHandled: Boolean; // flag showing whether message was handled
 begin
   MsgHandled := False;
   // Process necessary messages
   case Msg.Msg of
-    WM_CLIPBOARDUPDATE:
+    WM_CLIPBOARDUPDATE: // handled only when newer listener API is being used
     begin
       if fUseNewAPI then
       begin
@@ -282,7 +282,7 @@ begin
         ClipboardChanged;
       end;
     end;
-    WM_DRAWCLIPBOARD:
+    WM_DRAWCLIPBOARD: // handled only when old viewer API is being used
     begin
       if not fUseNewAPI then
       begin
@@ -294,7 +294,7 @@ begin
           SendMessage(fHWndNextViewer, Msg.Msg, Msg.WParam, Msg.LParam);
       end;
     end;
-    WM_CHANGECBCHAIN:
+    WM_CHANGECBCHAIN: // handled only when old viewer API is being used
     begin
       if not fUseNewAPI then
       begin
@@ -313,7 +313,7 @@ begin
     end;
   end;
   if not MsgHandled then
-    // We're not handling this message: do default processing
+    // We've not handled this message: do default processing
     Msg.Result := DefWindowProc(fHWnd, Msg.Msg, Msg.WParam, Msg.LParam);
 end;
 
