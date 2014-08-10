@@ -11,6 +11,14 @@
 ; Change Log for Clipboard Viewer Component
 ; ------------------------------------------------------------------------------
 
+Release v2.0.0 of 10 August 2014
++ Updated to use modern Clipboard Format Listener API functions when running on OSs that support them, while still supporting the original Clipboard Viewer API on older OSs. This fixes issue #30 (http://bit.ly/X7tcbG).
++ Removed obsolete WinHelp files from project. Documentation is now online only.
++ "private" and "protected" class sections are now strict on supporting Delphis.
++ A little refactoring.
++ XMLDoc commented unit.
++ Updated documentation re changes.
+
 Release v1.4.1 of 06 February 2014
 + Fixed problem with compiler directives in component and demo source files that was causing compilation to fail on Delphi XE5.
 + References to unit names in the component demo and source files are now qualified with their namespaces when compiled with Delphi XE2 and later.
@@ -32,7 +40,7 @@ Release v1.4 of 13 October 2010
 
 Release v1.3 of 17 August 2008
 + Fixed a conditional compilation bug.
-+ Re-factored main window procedure more line with MSDN clipboard viewer documentation.
++ Re-factored main window procedure in line with MSDN clipboard viewer documentation.
 + Removed 16 bit support.
 + Made minor changes to help file.
 
