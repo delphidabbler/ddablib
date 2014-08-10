@@ -20,23 +20,23 @@
 unit PJCBView;
 
 
-{$DEFINE ALLOCATEHWNDINFORMS}
-{$UNDEF RTLNAMESPACES}
-{$UNDEF HASRAISELASTOSERROR}
-{$UNDEF SUPPORTS_STRICT}
+{$DEFINE AllocateHWndIsInFormsUnit}
+{$UNDEF RequiresRTLNameSpaces}
+{$UNDEF SupportsRaiseLastOSError}
+{$UNDEF SupportsStrict}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
   {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
-    {$DEFINE RTLNAMESPACES}
+    {$DEFINE RequiresRTLNameSpaces}
   {$IFEND}
   {$IF CompilerVersion >= 18.0} // Delphi 2006 and later
-    {$DEFINE SUPPORTS_STRICT}
+    {$DEFINE SupportsStrict}
   {$IFEND}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
-    {$UNDEF ALLOCATEHWNDINFORMS}
-    {$DEFINE HASRAISELASTOSERROR}
+    {$UNDEF AllocateHWndIsInFormsUnit}
+    {$DEFINE SupportsRaiseLastOSError}
   {$IFEND}
 {$ENDIF}
 
@@ -46,7 +46,7 @@ interface
 
 uses
   // Delphi
-  {$IFNDEF RTLNAMESPACES}
+  {$IFNDEF RequiresRTLNameSpaces}
   Windows,
   Messages,
   Classes;
@@ -65,7 +65,7 @@ type
     the clipboard contents change.
   }
   TPJCBViewer = class(TComponent)
-  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
+  {$IFDEF SupportsStrict}strict{$ENDIF}
   private
     fOnClipboardChanged: TNotifyEvent;  // OnClipboardChanged event handler
     fTriggerOnCreation: Boolean;        // Value of TriggerOnCreation property
@@ -81,7 +81,7 @@ type
       stdcall;
     // Flag indicating if new style API is available
     fUseNewAPI: Boolean;
-  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
+  {$IFDEF SupportsStrict}strict{$ENDIF}
   protected
     procedure ClipboardChanged; dynamic;
       {Triggers OnClipboardChanged event if any handler is assigned and
@@ -129,7 +129,7 @@ implementation
 
 uses
   // Delphi
-  {$IFNDEF RTLNAMESPACES}
+  {$IFNDEF RequiresRTLNameSpaces}
   SysUtils, Forms;
   {$ELSE}
   System.SysUtils, Vcl.Forms;
@@ -201,10 +201,10 @@ begin
       raise Exception.Create(sAPINotSupported);
   end;
   // Create hidden clipboard listener window
-  {$IFDEF ALLOCATEHWNDINFORMS}
+  {$IFDEF AllocateHWndIsInFormsUnit}
   fHWnd := Forms.AllocateHWnd(WndMethod);
   {$ELSE}
-  {$IFDEF RTLNAMESPACES}
+  {$IFDEF RequiresRTLNameSpaces}
   fHWnd := System.Classes.AllocateHWnd(WndMethod);
   {$ELSE}
   fHWnd := Classes.AllocateHWnd(WndMethod);
@@ -214,7 +214,7 @@ begin
   begin
     // Register window as clipboard listener
     if not fAddClipboardFormatListener(fHWnd) then
-      {$IFDEF HASRAISELASTOSERROR}
+      {$IFDEF SupportsRaiseLastOSError}
       RaiseLastOSError;
       {$ELSE}
       RaiseLastWin32Error;
@@ -241,10 +241,10 @@ begin
   else
     fChangeClipboardChain(fHWnd, fHWndNextViewer);
   // Destroy listener window
-  {$IFDEF ALLOCATEHWNDINFORMS}
+  {$IFDEF AllocateHWndIsInFormsUnit}
   Forms.DeallocateHWnd(fHWnd);
   {$ELSE}
-  {$IFDEF RTLNAMESPACES}
+  {$IFDEF RequiresRTLNameSpaces}
   System.Classes.DeallocateHWnd(fHWnd);
   {$ELSE}
   Classes.DeallocateHWnd(fHWnd);
