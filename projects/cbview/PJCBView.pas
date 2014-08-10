@@ -23,12 +23,16 @@ unit PJCBView;
 {$DEFINE ALLOCATEHWNDINFORMS}
 {$UNDEF RTLNAMESPACES}
 {$UNDEF HASRAISELASTOSERROR}
+{$UNDEF SUPPORTS_STRICT}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
   {$IFEND}
   {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
     {$DEFINE RTLNAMESPACES}
+  {$IFEND}
+  {$IF CompilerVersion >= 18.0} // Delphi 2006 and later
+    {$DEFINE SUPPORTS_STRICT}
   {$IFEND}
   {$IF CompilerVersion >= 14.0} // Delphi 6 and later
     {$UNDEF ALLOCATEHWNDINFORMS}
@@ -61,6 +65,7 @@ type
     the clipboard contents change.
   }
   TPJCBViewer = class(TComponent)
+  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   private
     fOnClipboardChanged: TNotifyEvent;  // OnClipboardChanged event handler
     fTriggerOnCreation: Boolean;        // Value of TriggerOnCreation property
@@ -76,6 +81,7 @@ type
       stdcall;
     // Flag indicating if new style API is available
     fUseNewAPI: Boolean;
+  {$IFDEF SUPPORTS_STRICT}strict{$ENDIF}
   protected
     procedure ClipboardChanged; dynamic;
       {Triggers OnClipboardChanged event if any handler is assigned and
