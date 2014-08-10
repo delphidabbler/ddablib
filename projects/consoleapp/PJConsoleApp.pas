@@ -153,8 +153,8 @@ function MakeConsoleColors(const AForeground, ABackground: TPJConsoleColor):
 ///  given foreground and background TColor colours.</summary>
 ///  <remarks>
 ///  <para>This function is provided as a convenience to enable normal TColor
-///  values to be used to instantiate a TPJConsoleColours record without having
-///  to manually convert to TPJConsoleColour values.</para>
+///  values to be used to instantiate a TPJConsoleColors record without having
+///  to manually convert to TPJConsoleColor values.</para>
 ///  <para>An exception is raised if either TColor value is not one of the 16
 ///  standard colours.</para>
 ///  </remarks>
@@ -166,8 +166,8 @@ function MakeConsoleColors(const AForeground, ABackground: TColor):
 ///  given foreground and background TAlphaColor colours.</summary>
 ///  <remarks>
 ///  <para>This function is provided as a convenience to enable normal
-///  TAlphaColor values to be used to instantiate a TPJConsoleColours record
-///  without having to manually convert to TPJConsoleColour values.</para>
+///  TAlphaColor values to be used to instantiate a TPJConsoleColous record
+///  without having to manually convert to TPJConsoleColor values.</para>
 ///  <para>An exception is raised if either TAlphaColor value is not one of the
 ///  16 standard colours.</para>
 ///  </remarks>
