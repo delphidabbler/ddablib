@@ -11,15 +11,18 @@ projects.
 Contents of Demos directory
 --------------------------------------------------------------------------------
 
-The Demos directory and its sub-directories contain twelve small programs that
+The Demos directory and its sub-directories contain thirteen small programs that
 demonstrate how to use the PJConsoleApp unit.
 
 A VCL based version of each demo program is in its own sub-directory -
-Demos\Demo1 through to Demos\Demo12.
+Demos\Demo1 through to Demos\Demo*.
 
 Demos 4, 8 and 11 are also available in versions that uses the FireMonkey 2
 framework instead of the VCL. These projects are in the Demos\Demo4\FMX2,
 Demos\Demo8\FMX2 and Demos\Demo11\FMX2 directories respectively.
+
+Demo 13 comprises two projects: both must be compiled in order to run the demo
+successfully.
 
 In addition there are two example console applications that the demos use. They
 are supplied in source form and need to be built. The project files are in
@@ -38,7 +41,7 @@ programs.
 Information about the Demos
 --------------------------------------------------------------------------------
 
-The 12 demos are:
+The 13 demos are:
 
 1: ExecAndWait.
     Implements the traditional "ExecAndWait" routine to run a child console
@@ -72,7 +75,7 @@ The 12 demos are:
     it in a GUI in "real time".
 
 9: Sub-classing TPJConsoleApp.
-    Show how to write your own sub class of TPJCustomConsoleApp to specialise
+    Shows how to write your own sub class of TPJCustomConsoleApp to specialise
     its behaviour.
 
 10: Using TPJConsoleApp from console applications.
@@ -86,6 +89,11 @@ The 12 demos are:
 12: Handling Unicode output from console applications.
     How to handle output from child console applications that output Unicode
     text instead of ANSI or ASCII text.
+
+13: Customising a console app's environment block.
+    Shows how to pass a custom environment block to a console app process. This
+    demo contains two projects: a parent app that configure the environment
+    block that is passed to, and displayed by, a custom console app.
 
 For further information go to
 http://wiki.delphidabbler.com/index.php/Docs/ConsoleAppExamples where you will
@@ -145,8 +153,8 @@ To build the FireMonkey 2 demos you must open their .dproj files one at a time
 and build them.
 
 Delphi may update the project or project group files. If this happens you may
-need to restore the original files from before re-compiling with a different
-version of Delphi.
+need to restore the original files before re-compiling with a different version
+of Delphi.
 
 Each demo project is configured to compile as a 32 bit Windows application. They
 will all compile successfully as 64 bit Windows applications with Delphi XE2 and
