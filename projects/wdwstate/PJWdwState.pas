@@ -19,8 +19,10 @@ unit PJWdwState;
 // will not compile with those compilers.
 {$DEFINE WarnDirs}          // $WARN compiler directives available
 {$DEFINE RegAccessFlags}    // TRegistry access flags available
+{$DEFINE RequiresFileCtrl}  // FileCtrl unit is required for ForceDirectories
 {$UNDEF RTLNameSpaces}      // Don't qualify RTL units names with namespaces
 {$UNDEF TScrollStyleMoved}  // TScrollStyle hasn't moved to System.UITypes units
+{$UNDEF SupportsPathDelim}  // PathDelim and related routine not defined
 {$IFDEF VER100} // Delphi 3
   {$UNDEF WarnDirs}
   {$UNDEF RegAccessFlags}
@@ -33,9 +35,6 @@ unit PJWdwState;
   {$UNDEF WarnDirs}
   {$UNDEF RegAccessFlags}
 {$ENDIF}
-{$IFDEF VER140} // Delphi 6
-  {$UNDEF WarnDirs}
-{$ENDIF}
 {$IFDEF CONDITIONALEXPRESSIONS}
   {$IF CompilerVersion >= 24.0} // Delphi XE3 and later
     {$LEGACYIFEND ON}  // NOTE: this must come before all $IFEND directives
@@ -43,6 +42,11 @@ unit PJWdwState;
   {$IFEND}
   {$IF CompilerVersion >= 23.0} // Delphi XE2 and later
     {$DEFINE RTLNameSpaces}
+  {$IFEND}
+  {$IF CompilerVersion >= 14.0} // Delphi 6 and later
+    {$DEFINE SupportsPathDelim}
+    {$UNDEF WarnDirs}
+    {$UNDEF RequiresFileCtrl}
   {$IFEND}
 {$ENDIF}
 
@@ -56,7 +60,11 @@ uses
   System.Classes, Vcl.Controls, Winapi.Messages, Winapi.Windows, Vcl.Forms,
   System.SysUtils, System.Win.Registry;
   {$ELSE}
-  Classes, Controls, Messages, Windows, Forms, SysUtils, Registry;
+  Classes, Controls, Messages, Windows, Forms, SysUtils, Registry
+  {$IFDEF RequiresFileCtrl}
+  , FileCtrl  // needed for ForceDirectories since it's not in SysUtils yet.
+  {$ENDIF}
+  ;
   {$ENDIF}
 
 
@@ -66,6 +74,7 @@ const
   PJM_SETWDWSTATE = WM_USER + 0;
   // instructs MDI child components they can restore their windows
   PJM_RESTOREMDICHILD = WM_USER + 1;
+
 
 type
 
@@ -841,6 +850,26 @@ begin
     [TPJWdwState, TPJRegWdwState, TPJUserWdwState]
   );
 end;
+
+{$IFNDEF SupportsPathDelim}
+// Definitions used for versions of Delphi that don't implement the following
+// constant and function in SysUtils.
+
+const
+  // File path delimiter
+  PathDelim = '/';
+
+// Ensures that given directory or path ends with exactly one path delimiter.
+function IncludeTrailingPathDelimiter(const PathOrDir: string): string;
+begin
+  Result := PathOrDir;
+  // remove all trailing path delimiters if any, to get rid of any duplicates
+  while (Result <> '') and (Result[Length(Result)] = PathDelim) do
+    Result := Copy(Result, 1, Length(Result) - 1);
+  // add a single trailing delimiter
+  Result := Result + PathDelim;
+end;
+{$ENDIF}
 
 { TPJWdwStateHook }
 
