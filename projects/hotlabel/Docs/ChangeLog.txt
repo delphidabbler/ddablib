@@ -3,13 +3,16 @@
 ; v. 2.0. If a copy of the MPL was not distributed with this file, You can
 ; obtain one at http://mozilla.org/MPL/2.0/
 ;
-; Copyright (C) 2014, Peter Johnson (www.delphidabbler.com).
+; Copyright (C) 2014-2016, Peter Johnson (www.delphidabbler.com).
 ;
 ; $Rev$
 ; $Date$
 ;
 ; Change Log for Hot Label Component
 ; ------------------------------------------------------------------------------
+
+Release v2.2.1 of 14 February 2016
++ Fixed memory leak introduced in v2.2.0 because of a failure to free a font object.
 
 Release v2.2.0 of 05 February 2014
 + The component can now display the text of "visited" URLs in a different style. Three new properties have been added to support this feature: Visited, VisitedFont and TrackVisits.
