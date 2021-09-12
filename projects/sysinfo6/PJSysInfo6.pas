@@ -606,11 +606,13 @@ type
     ///  <remarks>0 is returned in no service pack is installed, if the host OS
     ///  is not on the NT platform.</remarks>
     class function ServicePackMajor: Integer;
+      {$IFDEF INLINEMETHODS}inline;{$ENDIF}
 
     ///  <summary>Returns the minor version number of any NT platform service
     ///  pack.</summary>
-    ///  <remarks>Invalid is ServicePackMinor returns 0.</remarks>
+    ///  <remarks>Invalid if ServicePackMajor returns 0.</remarks>
     class function ServicePackMinor: Integer;
+      {$IFDEF INLINEMETHODS}inline;{$ENDIF}
 
     ///  <summary>Returns the product edition for an NT platform OS.</summary>
     ///  <remarks>The empty string is returned if the OS is not on the NT
@@ -821,6 +823,7 @@ type
 
     ///  <summary>Checks if the host computer has a 64 bit processor.</summary>
     class function Is64Bit: Boolean;
+      {$IFDEF INLINEMETHODS}inline;{$ENDIF}
 
     ///  <summary>Checks if a network is present on host computer.</summary>
     class function IsNetworkPresent: Boolean;
