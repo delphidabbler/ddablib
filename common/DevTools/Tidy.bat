@@ -55,6 +55,7 @@ echo.
 echo Deleting temporary sub-directories from %InfoMsg%
 if exist %RootDir%\Release rmdir /S /Q %RootDir%\Release
 for /F "usebackq" %%i in (`dir /S /B /A:D %RootDir%\__history*`) do rmdir /S /Q %%i
+for /F "usebackq" %%i in (`dir /S /B /A:D %RootDir%\__recovery*`) do rmdir /S /Q %%i
 echo.
 
 goto end
