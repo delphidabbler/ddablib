@@ -2,9 +2,6 @@
  * Project file for DelphiDabbler Console Application Runner Classes demo
  * program #2: A better ExecAndWait.
  *
- * $Rev$
- * $Date$
- *
  * Any copyright in this file is dedicated to the Public Domain.
  * http://creativecommons.org/publicdomain/zero/1.0/
 }

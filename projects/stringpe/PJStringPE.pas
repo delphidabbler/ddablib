@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2004-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Enhanced string property editor for the Delphi IDE that enables multi-line
  * strings to be edited and assigned to any components' string & TCaption
  * properties at design time.

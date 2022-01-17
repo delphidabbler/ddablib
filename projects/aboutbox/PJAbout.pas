@@ -5,9 +5,6 @@
  *
  * Copyright (C) 1998-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * About Dialog Box component. Component that displays an about dialog box that
  * can get displayed information either from properties or from version
  * information.

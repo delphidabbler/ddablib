@@ -172,8 +172,4 @@ All the demo project files are for illustration purposes only. Although you can
 use them as you wish, you should not use any part of them in production code
 without thorough testing. The code distributed on an "AS IS" basis, WITHOUT
 WARRANTY OF ANY KIND, either express or implied.
-
---------------------------------------------------------------------------------
-$Rev$
-$Date$
 --------------------------------------------------------------------------------

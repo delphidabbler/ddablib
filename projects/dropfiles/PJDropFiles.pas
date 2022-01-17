@@ -5,9 +5,6 @@
  *
  * Copyright (C) 1998-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * DelphiDabbler Drop Files Components run time code. Contains components that
  * can "catch" files dragged and dropped from Windows Explorer along with
  * secondary components used to filter dropped files.

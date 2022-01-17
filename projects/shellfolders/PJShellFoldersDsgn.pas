@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2003-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Component registration code and property editor for TPJBrowseDialog and
  * TPJSpecialFolderInfo components defined in PJShellFolders.pas.
 }

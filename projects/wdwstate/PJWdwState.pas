@@ -5,9 +5,6 @@
  *
  * Copyright (C) 1999-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * DelphiDabbler Window state components.
 }
 

@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2011-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Class that can open or create files with specified security and provides
  * access to the file's handle. Enables opening and creation of files with
  * inheritable handles.

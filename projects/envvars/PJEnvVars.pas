@@ -5,9 +5,6 @@
  *
  * Copyright (C) 1998-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * DelphiDabbler Environment Variables unit. Contains classes for interrogating,
  * modifying and enumerating the environment variables belonging to the current
  * process.

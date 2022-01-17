@@ -5,9 +5,6 @@
  *
  * Copyright (C) 1998-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * DelphiDabbler Drop Files Components design time code. Contains component and
  * property editors and component registration.
 }

@@ -6,9 +6,6 @@
 @rem
 @rem Requires evironment variable HC set to full file path to MS WinHelp
 @rem compiler (HCRTF.exe).
-@rem
-@rem $Rev$
-@rem $Date$
 @rem ---------------------------------------------------------------------------
 
 

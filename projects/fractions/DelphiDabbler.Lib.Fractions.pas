@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2013-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Defines an advanced record type that encapsulates fraction and related
  * operations.
  *
