@@ -5,9 +5,6 @@
  *
  * Copyright (C) 1998-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Version Information Component. The component reads version information from
  * executable files.
 }

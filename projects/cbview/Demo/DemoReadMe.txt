@@ -37,8 +37,4 @@ full re-build.
 Should you want to compile the program in more than one version of Delphi you
 are advised to perform each compilation from a fresh copy of the demo source
 code.
-
---------------------------------------------------------------------------------
-$Rev$
-$Date$
 --------------------------------------------------------------------------------

@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2004-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Defines classes that encapsulate 32 bit binary resource files and the
  * individual resources within them. Also provides supporting routines and
  * constants.

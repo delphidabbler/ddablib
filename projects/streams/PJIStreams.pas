@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2001-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Classes which provides various implementations of the IStream interface.
 }
 

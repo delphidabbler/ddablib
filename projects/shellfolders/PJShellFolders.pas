@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2001-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Run time unit that defines shell folders components, classes and routines.
 }
 

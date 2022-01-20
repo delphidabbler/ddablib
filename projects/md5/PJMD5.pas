@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2010-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * This unit is a Delphi Pascal implementation of the MD5 Message-Digest
  * algorithm. See RFC1321 (http://www.faqs.org/rfcs/rfc1321.html).
  *

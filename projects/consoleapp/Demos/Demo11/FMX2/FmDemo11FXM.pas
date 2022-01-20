@@ -2,9 +2,6 @@
  * Main form for DelphiDabbler Console Application Runner Classes demo program
  * #11: Customising the appearance of the console (FireMonkey 2 version).
  *
- * $Rev$
- * $Date$
- *
  * Any copyright in this file is dedicated to the Public Domain.
  * http://creativecommons.org/publicdomain/zero/1.0/
 }

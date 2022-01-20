@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2000-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Defines the TPJStreamWrapper class. This is a base class for descendant
  * classes that "wrap" a TStream class to provide some form of filter or
  * additional functionality. The wrapped TStream is used to do physical i/o.

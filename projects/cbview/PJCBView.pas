@@ -5,9 +5,6 @@
  *
  * Copyright (C) 1999-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Clipboard Viewer Component source code. Implements a component that monitors
  * the Windows clipboard and triggers an event whenever the content of the
  * clipboard changes.

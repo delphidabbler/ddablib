@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Component registration code for TPJEnvVars component from DelphiDabbler
  * Environment Variable Unit.
  *

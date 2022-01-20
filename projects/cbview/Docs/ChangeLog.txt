@@ -5,9 +5,6 @@
 ;
 ; Copyright (C) 2014, Peter Johnson (www.delphidabbler.com).
 ;
-; $Rev$
-; $Date$
-;
 ; Change Log for Clipboard Viewer Component
 ; ------------------------------------------------------------------------------
 

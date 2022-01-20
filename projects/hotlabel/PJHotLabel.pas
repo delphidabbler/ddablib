@@ -5,9 +5,6 @@
  *
  * Copyright (C) 1999-2016, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Source code of the TPJHotLabel component, which is a label that when clicked
  * opens a URL in the default web browser or email client.
  *

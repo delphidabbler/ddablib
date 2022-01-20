@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2011-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Classes that filter or format output from pipes.
 }
 

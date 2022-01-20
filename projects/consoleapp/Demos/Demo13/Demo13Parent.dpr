@@ -3,9 +3,6 @@
  * Application Runner Classes demo program #13: Customising a console app's
  * environment block.
  *
- * $Rev$
- * $Date$
- *
  * Any copyright in this file is dedicated to the Public Domain.
  * http://creativecommons.org/publicdomain/zero/1.0/
 }

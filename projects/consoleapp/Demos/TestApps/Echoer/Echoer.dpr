@@ -3,9 +3,6 @@
  * Application Runner Classes Demos. Echoes text from standard input onto
  * standard output with a given prefix to each line.
  *
- * $Rev$
- * $Date$
- *
  * Any copyright in this file is dedicated to the Public Domain.
  * http://creativecommons.org/publicdomain/zero/1.0/
 }

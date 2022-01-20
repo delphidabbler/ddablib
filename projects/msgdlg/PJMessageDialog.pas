@@ -5,9 +5,6 @@
  *
  * Copyright (C) 2001-2014, Peter Johnson (www.delphidabbler.com).
  *
- * $Rev$
- * $Date$
- *
  * Components that provide customisable message dialogue boxes that wrap the
  * Windows MessageBoxIndirect API call and the Delphi VCL CreateMessageDialog
  * function.

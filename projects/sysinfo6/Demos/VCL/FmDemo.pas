@@ -3,9 +3,6 @@
  *
  * Main form for System Information unit demo program.
  *
- * $Rev: 2022 $
- * $Date: 2020-03-17 04:59:29 +0000 (Tue, 17 Mar 2020) $
- *
  * Any copyright in this file is dedicated to the Public Domain.
  * http://creativecommons.org/publicdomain/zero/1.0/
 }
