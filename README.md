@@ -44,7 +44,25 @@ The practise of making separate releases for each sub-project has its origins in
 
 ## Bugs & Feature Requests
 
-For the time being bug reports and feature requests still use the [DDabLib Issue Tracker](https://sourceforge.net/p/ddablib/tickets/) on SourceForge, so please don't open issues on GitHub.
+Please report any bugs or request new features using this project's [Issues tab](https://github.com/delphidabbler/ddablib/issues).
+
+Before reporting a bug or requesting a feature please make sure you:
+
+* Are using the latest version of the project or sub-project.
+* Have read through existing issues to make sure that no-one has reported / requested the same thing already. If they have then please add a comment if you can provide more information, or to add a +1.
+
+When opening a new issue please:
+
+* State which sub-project you are talking about (**essential**).
+* Be as clear as you can.
+* Provide as much information and context as you can.
+* If reporting a bug please provide some source code that reproduces the bug.
+
+An issue heading on its own, with no further information is unlikely to get much love!
+
+Even better, if you can provide your own fix then open a pull request for it.
+
+> **Note:** The old ticket system on SourceForge has now been closed and is no longer monitored.
 
 ## Documentation
 
