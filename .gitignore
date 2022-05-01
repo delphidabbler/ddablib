@@ -1,0 +1,18 @@
+# .gitignore file for DDabLib project
+
+# Delphi generated temporary files and directories
+
+__recovery
+__history
+*.local
+*.identcache
+*.res
+*.dsk
+*.~*
+
+# Delphi generated binary files
+*.exe
+*.dcu
+
+# Release files
+*.zip
