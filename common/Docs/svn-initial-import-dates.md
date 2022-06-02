@@ -1,4 +1,4 @@
-# DDabLib SVN Import Dates
+# DDabLib SVN Initial Import Dates
 
 The following table lists the dates the various sub-projects of the DelphiDabbler Code Library were first placed under version control in a common Subversion repository.
 
