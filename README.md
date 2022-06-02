@@ -8,7 +8,7 @@ A library of assorted Delphi components, units and IDE extensions by [DelphiDabb
 >
 > The various sub-projects within the library have been split out into their own repositories within a new GitHub organization called [ddablib](https://github.com/ddablib). Active development has transferred to there.
 >
-> Once everything has been transferred out this repository will be retained as a placeholder, but will be archived. There will be several commits to `main` before the project is archived. The start of the archiving process is tagged with the [`begin-arching-process`](https://github.com/delphidabbler/ddablib/commits/begin-archiving-process) tag
+> Once everything has been transferred out this repository will be retained as a placeholder, but will be archived. There will be several commits to `main` before the project is archived. The start of the archiving process is tagged with the [`begin-archiving-process`](https://github.com/delphidabbler/ddablib/commits/begin-archiving-process) tag.
 
 ## Library Contents
 
@@ -44,13 +44,17 @@ Each sub-project is released separately.
 
 The last pre-split release of every (sub-)project and any subsequent releases are available from the relevant GitHub repository pages over at the [ddablib](https://github.com/ddablib) organization.
 
-Furthermore ***All*** releases to date can be found on SourceForge in the [DDabLib Files page](https://sourceforge.net/projects/ddablib/files/), where each (sub-)project has its own folder.
+Furthermore ***all*** †† releases can be found on SourceForge in the [DDabLib Files page](https://sourceforge.net/projects/ddablib/files/), where each (sub-)project has its own folder.
+
+> †† Well, all releases made under version control are available - see [History of the library](#history-of-the-library) below for details.
 
 ## Documentation
 
 Each sub-project of the library is fully documented in the separate [delphidabbler/ddab-lib-docs](https://github.com/delphidabbler/ddab-lib-docs) GitHub project.
 
 Some sub-projects also have an [FAQ page](https://github.com/delphidabbler/ddab-lib-docs/blob/master/FAQs/FAQs.md).
+
+> This documentation _may_ also move into a new [ddablib](https://github.com/ddablib) project in due course.
 
 ## Bugs & Feature Requests
 
@@ -62,24 +66,51 @@ Please report any bugs or request new features on the relevant (sub-)project rep
 
 ## History of the library
 
-This library goes back a long way. When it was started the code was not under version control. It was then moved to a Subversion repository on the long defunct Google Code. When Google Code closed the Subversion repo was transferred over to SourceForge.
+### Pre-history
 
-On 2022/01/16 the library was converted to Git and moved from SourceForge to GitHub.
+This library goes back a long way. When it was started the code was not under version control. However, reasonably complete records if changes and releases were kept, either in individual change logs in source files or in separate documents. A summary of all the documented changes still exists in a file named `PreSVNHistory.txt` in each sub-project's `Docs` directory.
 
-The library has never been released as a single entity - each component of the library has always been maintained as a separate sub-project and receives it's own releases. Therefore, on 2022/05/21, the long overdue decision was taken to split the Git repo into 17 different repositories, one for each sub-project. A new GitHub organization was set up and all the new repositories were created there.
+At this time each (what was to become a) sub-project was separately maintained in its own directory and received its own releases.
 
-### Conversion from Subversion
+### The DDabLib monolith
 
-Until 2022/01/16 this library was maintained in a [Subversion repository](https://sourceforge.net/p/ddablib/code/HEAD/tree/) on SourceForge. On that date the contents of that repository's `trunk` were converted to Git. The Subversion repo's `tags` were not imported, but Git tags were added at the closest commit before each sub-project's release date.
+In 2009 the decision was taken to combine all the different source code library projects into a single monolithic project named `DDabLib`. The intention was to start to release the whole library instead of making individual releases of each sub-project. This never actually happened!
 
-All Subversion commits have been applied to the Git repo's `main` branch. That practise will change with the next release when `main` will begin to contain only the commits that relate to the latest release. All development work will be carried out in the `develop` branch.
+#### Subversion
 
-The last commit that relates to code imported from the Subversion repo is [f25d049](https://github.com/delphidabbler/ddablib/commit/f25d049465a486bd6f70d73e8b061915e4b56e7c).
+A new Subversion repository was created. Gradually, between xsxxx and yyyyy, the sub-projects were imported into the repository, each in its own sub-directory. There was also a common directory for tools and anything else that could be shared amongst all sub-projects.
 
-The Subversion repo remains in place, in read only mode, for historical reasons.
+Originally the repository was maintained locally but was eventually moved to GoogleCode. When Google announced the forthcoming closure of GoogleCode the repository was moved to SourceForge.
 
-### Splitting into separate repositories
+It was then moved to a Subversion repository on the long defunct Google Code. When Google Code closed, the Subversion repo was exported to SourceForge. It remained on SourceForge for many years.
 
-The Git `filter-branch` command was used to split the repositories. This flattened the `develop` branch into the `main` branch so that all changes since the conversion from Subversion on 2022/01/16 that had been made in the `develop` branch now appear in `main`.
+#### Git
+
+By 2022 the library was the last of my projects still maintained in Subversion, everything else was using Git. There had been one or two abortive attempts already to convert the repo to Git, but finally, on 2022-01-16, the move was made.
+
+Only the contents of the Subversion repository's `trunk` were exported. The `tags` were not exported but Git tags were added at the closest commit before each sub-project's release date. There were no Subversion branches to export.
+
+> Because there was _some_ loss of information in the conversion, the [SourceForge repository](https://sourceforge.net/p/ddablib/code/HEAD/tree/) has been retained for archive purposes.
+
+All Subversion commits have been applied to the Git repo's `main` branch. 
+The last commit that relates to code imported from the Subversion repo hss been tagged as [`svn-import`](https://github.com/delphidabbler/ddablib/commits/svn-import).
+
+After the conversion was complete the library was uploaded to GitHub as the [delphidabbler/ddablib](https://github.com/delphidabbler/ddablib) project.
+
+New development on the Git repository was carried out on a new `develop` branch, with `main` being updated only after each release. 
+
+### The monolith shatters
+
+As has been mentioned, the intention to release the library as a whole was never realised. Instead, individual sub-projects continued to be released separately.
+
+Keeping all the sub-projects in one repo meant that GitHub's release system couldn't be used properly and releases were still having to be uploaded to SourceForge. It was clear that it would be more logical to split the library into its component parts.
+
+Therefore, on 2022-05-21, the long overdue decision was taken to split the Git repo into 17 different repositories, one for each sub-project. A new [GitHub organization](https://github.com/ddablib) was set up and all the new repositories were created there. 
+
+The Git `filter-branch` command was used to split the repositories. This flattened the `develop` branch into the `main` branch so that all changes since the conversion from Subversion that had been made in the `develop` branch now appear in `main`.
 
 Tags were preserved (although some errors were corrected). Each release tag was renamed from `<projectname>-v9.9.9` format to `version-9.9.9` format. A replacement `svn-import` tag was added to each repository at the last commit before conversion to Git. Finally, a new `ddablib-split` tag was added at the last commit made before the monolithic Git repository was divided.
+
+Each library project's latest release had a GitHub release created for it.
+
+Following the split, commits to [delphidabbler/ddablib](https://github.com/delphidabbler/ddablib) are once again being made directly to `main`. Such commits are only for the purpose of archiving this repository. The [`begin-archiving-process`](https://github.com/delphidabbler/ddablib/commits/begin-archiving-process) tag marks the start of this process.
