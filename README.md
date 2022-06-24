@@ -80,7 +80,7 @@ This never actually happened!
 
 #### Subversion
 
-A new Subversion repository was created to maintain the library. Gradually the existing sub-project's were imported, starting with the _System Information Unit_ on 2009-07-04 and ending with the _Clipboard Viewer Component_ on 2010-10-13. Each sub-project had its own sub-directory in `trunk/projects`. There was also a `trunk/common` directory for tools and anything else that could be shared amongst all sub-projects.
+A new Subversion repository was created to maintain the library. Gradually the existing sub-projects were imported, starting with the _System Information Unit_ on 2009-07-04 and ending with the _Clipboard Viewer Component_ on 2010-10-13. (Full details of import dates can be found in [`/common/Docs/svn-initial-import-dates.md`](https://github.com/delphidabbler/ddablib/blob/main/common/Docs/svn-initial-import-dates.md)). Each sub-project had its own sub-directory in `trunk/projects`. There was also a `trunk/common` directory for tools and anything else that could be shared amongst all sub-projects.
 
 Originally the repository was maintained locally but eventually it was moved to GoogleCode as the`ddab-lib` project. When the closure of GoogleCode was announced the repository was moved to SourceForge, now named [DDabLib](https://sourceforge.net/p/ddablib/code/HEAD/tree/). Dates when these moves took place are not known.
 
