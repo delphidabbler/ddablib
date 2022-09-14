@@ -60,7 +60,7 @@ Some sub-projects also have an [FAQ page](https://github.com/delphidabbler/ddab-
 
 Please report any bugs or request new features on the relevant (sub-)project repository's _Issues_ page over at the [ddablib](https://github.com/ddablib) organization.
 
-> **DO NOT** open an issue on this repository - the _Issues_ tab has only been retained because there are existing unresolved issues. The tab may be removed at any time.
+> **You can no longer open an issue on this repository** - the _Issues_ tab has been removed.
 >
 > The old ticketing system on SourceForge has been removed.
 
