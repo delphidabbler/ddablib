@@ -12,31 +12,31 @@ A library of assorted Delphi components, units and IDE extensions by [DelphiDabb
 
 ## Library Contents
 
-At the time of the split, the library contained the following (sub-)projects, each of which has its own web page (linked):
+At the time the library was split out of this repository into [ddablib](https://github.com/ddablib), it contained the sub-projects listed in the table below. Links to each sub-project's web page on [delphidabbler.com](https://delphidabbler.com) and its [ddablib](https://github.com/ddablib) GitHub repository are provided.
 
-* [About Box Component](https://delphidabbler.com/software/aboutbox) †
-* [Clipboard Viewer Component](https://delphidabbler.com/software/cbview) ‡
-* [Console Application Runner Classes](https://delphidabbler.com/software/consoleapp)
-* [Drop Files Components](https://delphidabbler.com/software/dropfiles)
-* [Environment Variable Unit](https://delphidabbler.com/software/envvars)
-* [Extended String Property Editor](https://delphidabbler.com/software/stringpe)
-* [Fractions Unit](https://delphidabbler.com/software/fractions)
-* [Hot Label Component](https://delphidabbler.com/software/hotlabel)
-* [I/O Utility Classes](https://delphidabbler.com/software/ioutils)
-* [MD5 Message Digest Class](https://delphidabbler.com/software/md5)
-* [Message Dialogue Box Components](https://delphidabbler.com/software/msgdlg)
-* [Resource File Unit](https://delphidabbler.com/software/resfile)
-* [Shell Folders Unit](https://delphidabbler.com/software/shellfolders)
-* [Stream Extensions Classes](https://delphidabbler.com/software/streams)
-* [System Information Unit](https://delphidabbler.com/software/sysinfo)
-* [Version Information Unit](https://delphidabbler.com/software/verinfo)
-* [Windows State Components](https://delphidabbler.com/software/wdwstate)
+| Project Web Page | GitHub Repository |
+|------------------|-------------------|
+| [About Box Component](https://delphidabbler.com/software/aboutbox) † | [ddablib/about](https://github.com/ddablib/aboutbox) |
+| [Clipboard Viewer Component](https://delphidabbler.com/software/cbview) ‡ | [ddablib/cbview](https://github.com/ddablib/cbview) |
+| [Console Application Runner Classes](https://delphidabbler.com/software/consoleapp) | [ddablib/consoleapp](https://github.com/ddablib/consoleapp) |
+| [Drop Files Components](https://delphidabbler.com/software/dropfiles) | [ddablib/dropfiles](https://github.com/ddablib/dropfiles) |
+| [Environment Variable Unit](https://delphidabbler.com/software/envvars) | [ddablib/envvars](https://github.com/ddablib/envvars) |
+| [Extended String Property Editor](https://delphidabbler.com/software/stringpe) | [ddablib/stringpe](https://github.com/ddablib/stringpe) |
+| [Fractions Unit](https://delphidabbler.com/software/fractions) | [ddablib/factions](https://github.com/ddablib/fractions) |
+| [Hot Label Component](https://delphidabbler.com/software/hotlabel) | [ddablib/hotlabel](https://github.com/ddablib/hotlabel) |
+| [I/O Utility Classes](https://delphidabbler.com/software/ioutils) | [ddablib/ioutils](https://github.com/ddablib/ioutils) |
+| [MD5 Message Digest Class](https://delphidabbler.com/software/md5) | [ddablib/md5](https://github.com/ddablib/md5) |
+| [Message Dialogue Box Components](https://delphidabbler.com/software/msgdlg) | [ddablib/msgdlg](https://github.com/ddablib/msgdlg) |
+| [Resource File Unit](https://delphidabbler.com/software/resfile) | [ddablib/resfile](https://github.com/ddablib/resfile) |
+| [Shell Folders Unit](https://delphidabbler.com/software/shellfolders) | [ddablib/shellfolders](https://github.com/ddablib/shellfolders) |
+| [Stream Extensions Classes](https://delphidabbler.com/software/streams) | [ddablib/streams](https://github.com/ddablib/streams) |
+| [System Information Unit](https://delphidabbler.com/software/sysinfo) | [ddablib/sysinfo](https://github.com/ddablib/sysinfo) |
+| [Version Information Unit](https://delphidabbler.com/software/verinfo) | [ddablib/verinfo](https://github.com/ddablib/verinfo) |
+| [Windows State Components](https://delphidabbler.com/software/wdwstate) | [ddablib/wdwstate](https://github.com/ddablib/wdwstate) |
 
 > † The About Box Component depends on the Version Information Unit, which must be installed first.
 >
-> ‡ Some of the Console Application Runner Classes demo programs make use of code from the I/O Utility Classes.
-
-The linked web pages provide information about where to find the relevant source code repository, releases, issues page and documentation.
+> ‡ Some of the Console Application Runner Classes demo programs make use of code from I/O Utility Classes.
 
 ## Releases
 
