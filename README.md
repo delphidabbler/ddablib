@@ -4,7 +4,7 @@ This is the former home of a library of assorted Delphi components, units and ID
 
 Active development of the library now takes place in a group of repositories in the [ddablib](https://github.com/ddablib) GitHub organisation.
 
- :warning: **WARNING:** This repository is now archived. The code is frozen and out of date.
+> :warning: **WARNING:** This repository is now archived. The code is frozen and out of date.
 
 ## Library Contents
 
