@@ -1,4 +1,4 @@
-# MD5 Message Digest Unit
+# :no_entry: MD5 Message Digest Unit
 
 This project has moved to the [`ddablib/md5`](https://github.com/ddablib/md5) GitHub repository. All development is taking place there.
 
