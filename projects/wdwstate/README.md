@@ -1,7 +1,5 @@
-# Window State Components
+# :no_entry: Window State Components
 
-The source code for these components has moved to the [`ddablib/wdwstate`](https://github.com/ddablib/wdwstate) project. All further development is taking place there.
+This project has moved to the [`ddablib/wdwstate`](https://github.com/ddablib/wdwstate) GitHub repository. All development is taking place there.
 
-Any bugs & feature requests should be reported on the project's own [Issues](https://github.com/ddablib/wdwstate/issues) page. ***Do not report them here.***
-
-> ⚠️ **WARNING:** Source code and the issues page may be removed from this repository at any time.
+> :warning: **WARNING:** Do not depend on the archived code in this repository. It is frozen and out of date.
