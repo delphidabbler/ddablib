@@ -1,4 +1,4 @@
-# Fractions Unit
+# :no_entry: Fractions Unit
 
 This project has moved to the [`ddablib/fractions`](https://github.com/ddablib/fractions) GitHub repository. All development is taking place there.
 
