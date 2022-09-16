@@ -1,18 +1,14 @@
-# ddablib: DelphiDabbler Code Library
+# :no_entry: ddablib: DelphiDabbler Code Library
 
-A library of assorted Delphi components, units and IDE extensions by [DelphiDabbler](https://gravatar.com/delphidabbler).
+This is the former home of a library of assorted Delphi components, units and IDE extensions by [DelphiDabbler](https://gravatar.com/delphidabbler).
 
-> ## IMPORTANT NOTE
->
-> This repository is no longer in use for code development.
->
-> The various sub-projects within the library have been split out into their own repositories within a new GitHub organization called [ddablib](https://github.com/ddablib). Active development has transferred to there.
->
-> Once everything has been transferred out this repository will be retained as a placeholder, but it will be archived. There will be several commits to `main` before the project is archived. The start of the archiving process is tagged with the [`begin-archiving-process`](https://github.com/delphidabbler/ddablib/commits/begin-archiving-process) tag.
+Active development of the library now takes place in a group of repositories in the [ddablib](https://github.com/ddablib) GitHub organisation.
+
+ :warning: **WARNING:** This repository is now archived. The code is frozen and out of date.
 
 ## Library Contents
 
-At the time the library was split out of this repository into [ddablib](https://github.com/ddablib), it contained the sub-projects listed in the table below. Links to each sub-project's web page on [delphidabbler.com](https://delphidabbler.com) and its [ddablib](https://github.com/ddablib) GitHub repository are provided.
+At the time the library was transferred to [ddablib](https://github.com/ddablib), it contained the projects listed in the table below. Links are provided to each project's web page and to its [ddablib](https://github.com/ddablib) GitHub repository.
 
 | Project Web Page | GitHub Repository |
 |------------------|-------------------|
@@ -40,29 +36,19 @@ At the time the library was split out of this repository into [ddablib](https://
 
 ## Releases
 
-Each sub-project is released separately.
+The latest release of each project is available from the relevant [ddablib](https://github.com/ddablib) project page.
 
-The last pre-split release of every (sub-)project, along with any subsequent releases, are available from the relevant GitHub repository pages over at the [ddablib](https://github.com/ddablib) organization.
-
-Furthermore ***all*** †† releases can be found on SourceForge in the [DDabLib Files page](https://sourceforge.net/projects/ddablib/files/), where each (sub-)project has its own folder.
-
-> †† Well, at least all the releases made under version control are available - some earlier releases have been lost.
+Many more releases can be found archived on SourceForge in the [DDabLib Files page](https://sourceforge.net/projects/ddablib/files/), where each project has its own folder.
 
 ## Documentation
 
-Each sub-project of the library is fully documented in the [delphidabbler/ddab-lib-docs](https://github.com/delphidabbler/ddab-lib-docs) GitHub project.
+Each sub-project of the library is fully documented. You can access the latest version of the documentation via: <https://delphidabbler.com/url/ddablib-docs> (:arrow_right: *redirect*).
 
-Some sub-projects also have an [FAQ page](https://github.com/delphidabbler/ddab-lib-docs/blob/master/FAQs/FAQs.md).
-
-> This documentation _may_ be moved into a new [ddablib](https://github.com/ddablib) project in due course.
+Some sub-projects also have an FAQ page that can be accessed via <https://delphidabbler.com/url/ddablib-faqs> (:arrow_right: *redirect*).
 
 ## Bugs & Feature Requests
 
-Please report any bugs or request new features on the relevant (sub-)project repository's _Issues_ page over at the [ddablib](https://github.com/ddablib) organization.
-
-> **You can no longer open an issue on this repository** - the _Issues_ tab has been removed.
->
-> The old ticketing system on SourceForge has been removed.
+Please report any bugs or request new features on the relevant [ddablib](https://github.com/ddablib) repository's _Issues_ page.
 
 ## History of the library
 
