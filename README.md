@@ -16,18 +16,18 @@ At the time the library was transferred to [ddablib](https://github.com/ddablib)
 | [Clipboard Viewer Component](https://delphidabbler.com/software/cbview) ‡ | [ddablib/cbview](https://github.com/ddablib/cbview) |
 | [Console Application Runner Classes](https://delphidabbler.com/software/consoleapp) | [ddablib/consoleapp](https://github.com/ddablib/consoleapp) |
 | [Drop Files Components](https://delphidabbler.com/software/dropfiles) | [ddablib/dropfiles](https://github.com/ddablib/dropfiles) |
-| [Environment Variable Unit](https://delphidabbler.com/software/envvars) | [ddablib/envvars](https://github.com/ddablib/envvars) |
+| [Environment Variables Unit](https://delphidabbler.com/software/envvars) | [ddablib/envvars](https://github.com/ddablib/envvars) |
 | [Extended String Property Editor](https://delphidabbler.com/software/stringpe) | [ddablib/stringpe](https://github.com/ddablib/stringpe) |
 | [Fractions Unit](https://delphidabbler.com/software/fractions) | [ddablib/factions](https://github.com/ddablib/fractions) |
 | [Hot Label Component](https://delphidabbler.com/software/hotlabel) | [ddablib/hotlabel](https://github.com/ddablib/hotlabel) |
 | [I/O Utility Classes](https://delphidabbler.com/software/ioutils) | [ddablib/ioutils](https://github.com/ddablib/ioutils) |
-| [MD5 Message Digest Class](https://delphidabbler.com/software/md5) | [ddablib/md5](https://github.com/ddablib/md5) |
-| [Message Dialogue Box Components](https://delphidabbler.com/software/msgdlg) | [ddablib/msgdlg](https://github.com/ddablib/msgdlg) |
+| [MD5 Message Digest Unit](https://delphidabbler.com/software/md5) | [ddablib/md5](https://github.com/ddablib/md5) |
+| [Message Dialogue Components](https://delphidabbler.com/software/msgdlg) | [ddablib/msgdlg](https://github.com/ddablib/msgdlg) |
 | [Resource File Unit](https://delphidabbler.com/software/resfile) | [ddablib/resfile](https://github.com/ddablib/resfile) |
 | [Shell Folders Unit](https://delphidabbler.com/software/shellfolders) | [ddablib/shellfolders](https://github.com/ddablib/shellfolders) |
 | [Stream Extensions Classes](https://delphidabbler.com/software/streams) | [ddablib/streams](https://github.com/ddablib/streams) |
 | [System Information Unit](https://delphidabbler.com/software/sysinfo) | [ddablib/sysinfo](https://github.com/ddablib/sysinfo) |
-| [Version Information Unit](https://delphidabbler.com/software/verinfo) | [ddablib/verinfo](https://github.com/ddablib/verinfo) |
+| [Version Information Component](https://delphidabbler.com/software/verinfo) | [ddablib/verinfo](https://github.com/ddablib/verinfo) |
 | [Windows State Components](https://delphidabbler.com/software/wdwstate) | [ddablib/wdwstate](https://github.com/ddablib/wdwstate) |
 
 > † The About Box Component depends on the Version Information Unit, which must be installed first.
