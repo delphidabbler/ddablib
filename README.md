@@ -1,9 +1,9 @@
-# :no_entry: ddablib: DelphiDabbler Code Library
+# :no_entry: DelphiDabbler Code Library (Archived)
 
 This is the former home of a library of assorted Delphi components, units and IDE extensions by [DelphiDabbler](https://gravatar.com/delphidabbler).
 
-Active development of the library now takes place in a group of repositories in the [ddablib](https://github.com/ddablib) GitHub organisation.
-
+> :arrow_right: ***Active development of the library now takes place in a group of repositories in the [ddablib](https://github.com/ddablib) GitHub organisation.***
+>
 > :warning: **WARNING:** This repository is now archived. The code is frozen and out of date.
 
 ## Library Contents
