@@ -13,8 +13,8 @@ At the time the library was transferred to [ddablib](https://github.com/ddablib)
 | Project Web Page | GitHub Repository |
 |------------------|-------------------|
 | [About Box Component](https://delphidabbler.com/software/aboutbox) † | [ddablib/about](https://github.com/ddablib/aboutbox) |
-| [Clipboard Viewer Component](https://delphidabbler.com/software/cbview) ‡ | [ddablib/cbview](https://github.com/ddablib/cbview) |
-| [Console Application Runner Classes](https://delphidabbler.com/software/consoleapp) | [ddablib/consoleapp](https://github.com/ddablib/consoleapp) |
+| [Clipboard Viewer Component](https://delphidabbler.com/software/cbview) | [ddablib/cbview](https://github.com/ddablib/cbview) |
+| [Console Application Runner Classes](https://delphidabbler.com/software/consoleapp) ‡ | [ddablib/consoleapp](https://github.com/ddablib/consoleapp) |
 | [Drop Files Components](https://delphidabbler.com/software/dropfiles) | [ddablib/dropfiles](https://github.com/ddablib/dropfiles) |
 | [Environment Variables Unit](https://delphidabbler.com/software/envvars) | [ddablib/envvars](https://github.com/ddablib/envvars) |
 | [Extended String Property Editor](https://delphidabbler.com/software/stringpe) | [ddablib/stringpe](https://github.com/ddablib/stringpe) |
